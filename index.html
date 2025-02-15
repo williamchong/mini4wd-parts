@@ -5,6 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="favicon.png">
+  <link ref="preload" href="images/4wd.png" as="image">
+  <link ref="preload" href="images/4wd.glb" as="model">
+  <link ref="preload" href="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js" as="script">
+  <link rel="preload" href="https://www.googletagmanager.com/gtag/js?id=G-GJ34BG7E3W" as="script">
   <title>迷你四驅新手入門資訊站 Mini 4WD Beginner's Guide - 開發中 Under Development</title>
   <meta name="description" content="迷你四驅新手入門資訊站，即將推出！ Mini 4WD beginner's guide information site, coming soon!">
   <meta property="og:title" content="迷你四驅新手入門資訊站 Mini 4WD Beginner's Guide">
@@ -33,10 +37,14 @@
       color: #333;
     }
 
+    .logo-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
     .logo {
-      max-width: 300px;
-      height: auto;
-      margin-bottom: 2rem;
+      min-height: 300px;
     }
 
     .en {
@@ -45,6 +53,7 @@
       margin-top: 0.5rem;
     }
   </style>
+  <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GJ34BG7E3W"></script>
   <script>
@@ -58,7 +67,26 @@
 
 <body>
   <div class="container">
-    <img src="images/4wd.png" alt="迷你四驅新手入門資訊站 Logo" class="logo">
+    <div class="logo-container">
+      <model-viewer
+        class="logo"
+        alt="迷你四驅新手入門資訊站 Logo"
+        src="images/4wd.glb"
+        poster="images/4wd.png"
+        ar
+        exposure="0.55"
+        interaction-prompt="none"
+        auto-rotate
+        auto-rotate-delay="2000"
+        rotation-per-second="10deg"
+        disable-zoom
+        disable-pan
+        camera-orbit="225deg 70deg 100%"
+        camera-controls
+        shadow-softness="0.7"
+        shadow-intensity="1"
+      />
+    </div>
     <h1>
       迷你四驅新手入門資訊站正在開發中
       <div class="en">Mini 4WD Beginner's Guide Information Site Under Development</div>
