@@ -56,36 +56,15 @@
   <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
   <!-- Google tag (gtag.js) -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-GJ34BG7E3W"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-
-    gtag('config', 'G-GJ34BG7E3W');
-  </script>
 </head>
 
 <body>
   <div class="container">
     <div class="logo-container">
-      <model-viewer
-        class="logo"
-        alt="迷你四驅新手入門資訊站 Logo"
-        src="images/4wd.glb"
-        poster="images/4wd.png"
-        ar
-        exposure="0.55"
-        interaction-prompt="none"
-        auto-rotate
-        auto-rotate-delay="2000"
-        rotation-per-second="10deg"
-        disable-zoom
-        disable-pan
-        camera-orbit="225deg 70deg 100%"
-        camera-controls
-        shadow-softness="0.7"
-        shadow-intensity="1"
-      />
+      <model-viewer id="carModel" class="logo" alt="迷你四驅新手入門資訊站 Logo" src="images/4wd.glb" poster="images/4wd.png" ar
+        exposure="0.55" interaction-prompt="none" auto-rotate auto-rotate-delay="2000" rotation-per-second="10deg"
+        disable-zoom disable-pan camera-orbit="225deg 70deg 100%" camera-controls shadow-softness="0.7"
+        shadow-intensity="1" />
     </div>
     <h1>
       迷你四驅新手入門資訊站正在開發中
@@ -94,6 +73,19 @@
     <p>敬請期待！</p>
     <p class="en">Stay tuned!</p>
   </div>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'G-GJ34BG7E3W');
+    document.getElementById('carModel').addEventListener('click', function () {
+      gtag('event', 'model_click', {
+        'event_category': 'engagement',
+        'event_label': '3D Model Interaction'
+      });
+    });
+  </script>
 </body>
 
 </html>
