@@ -26,7 +26,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Domain Notes
 
-- Race classes: Tamiya **Open** (official regulation), Tamiya **Stock Class** (ストッククラス / 基礎賽, since 2025), and **B-MAX GP** (unified with Stock Class in Dec 2025). "**B-Stock**" has no standard definition; treat it as an alias for Stock/B-MAX until the owner confirms the local meaning. "Box Stock" is a different, stricter shop class.
+- Race classes: Tamiya **Open** (official regulation), Tamiya **Stock Class** (ストッククラス / 基礎賽, since 2025), and **B-MAX GP** (unified with Stock Class in Dec 2025). "**B-Stock**" is local shorthand for Stock Class (owner-confirmed 2026-09-08); model it as an alias of Stock Class, not a separate ruleset. "Box Stock" is a different, stricter shop class.
 - Chassis in v1 scope: MA, MS, ME, AR, FM-A, VZ, Super-II (+ VS). PRO chassis (MS/MA/ME) need double-shaft motors; all others single-shaft.
 - Item numbers: 18xxx / 19xxx kits, 15xxx regular Grade-Up Parts, 95xxx limited/special, 94xxx older limited.
 - Regulation envelope: 105 × 165 × 70 mm, ≥ 90 g with batteries, tires 22–35 mm, 2×AA.

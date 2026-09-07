@@ -74,6 +74,7 @@ Searched in English, Traditional Chinese (B-Stock 迷你四驅 / 香港 / 澳門
 - **"Box Stock"** — common in the Philippines ([Lil's Hobby Center](https://www.lilshobbycenter.com.ph/pages/mini4wd-box-stock-rules-and-regulations-2025): single unmodified kit, white-cap 130 normal motor only, no tune-up parts), the UK ([mini4wd.uk](https://mini4wd.uk/mini-4wd-racing/box-stock-class-rules)) and Malaysia (meaning varies by shop, per monkeemods).
 - **"B-Tuned"** — a US shop class (Downtown Hobby 9): Tune-series motors and plastic rollers only.
 - Regional stock variants: "Stock (Thailand)" and "Stock Pro / xStock / Stock Advance Pro" (Philippines), Vietnam Stock Class 2026 ([tamiyavietnam.vn](https://tamiyavietnam.vn/eng-vie-tamiya-mini4wd-stock-class-regulation-in-vietnam-nam-2026/)).
+- **Confirmed 2026-09-08 by the site owner: "B-Stock" means Stock Class.** The search findings above stand as the reason no external source defines it — it is local shorthand, not a published class name.
 - Recommendation for the site: treat "B-Stock" as an alias entry that redirects to Stock Class / B-MAX, with a note that organizers' PDFs govern. monkeemods' advice: always check "which PDF, which motor list, which battery rule".
 
 ### 1.5 Other classes worth a glossary entry

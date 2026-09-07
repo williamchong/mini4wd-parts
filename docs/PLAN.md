@@ -40,7 +40,7 @@ Nothing like this exists today. Japanese resources are blog/wiki style and stale
 | **Open** (公認競技会規則) | Tamiya official (Japan Cup, TMAC, HK Cup) | 105×165×70 mm, ≥90 g with batteries, tires 22–35 mm, Tamiya parts only, 2×AA Tamiya/FDK. Single-shaft chassis: Tune 2 series, Light-Dash, Hyper-Dash 3, Power-Dash, Sprint-Dash. PRO chassis: PRO motors. Ultra/Plasma-Dash banned. | Baseline ruleset every build is checked against |
 | **Stock Class** (ストッククラス / 基礎賽) | Tamiya official, since Apr 2025, revised 2026-05 | Open rules plus: no chassis cutting, no new holes, no modified parts, plates must not wobble, forbidden zone between axles. Dash motors allowed. | Primary beginner ruleset |
 | **B-MAX GP** | Basic-MAX GP committee (Yokohama), Tamiya cooperates; popular in Taiwan (TMU league), Malaysia, UK | Unified with Stock Class in Dec 2025; ver5.0 effective 2026-06-01 is identical in the modification section. Factory roller combos only, gear pairings per chassis, no 提灯/catcher dampers. | Same ruleset as Stock with a few extra flags |
-| **"B-Stock"** | Not found as a standard name in EN / 繁中 / 日本語 searches | Most likely a colloquial contraction of "Basic Stock" (Tamiya HK calls Stock Class 基礎賽) or B-MAX + Stock now that they are unified. "Box Stock" (unmodified kit, normal motor) is a different, shop-defined class in PH/UK/MY. | Alias page pointing to Stock/B-MAX, with a note that organiser PDFs govern. **Confirm with the owner what local community means by B-Stock.** |
+| **"B-Stock"** | Local shorthand; **confirmed by the site owner (2026-09-08) to mean Stock Class** | Same rules as Tamiya Stock Class, and therefore B-MAX GP as well since the two were unified in Dec 2025. Not to be confused with "Box Stock" (unmodified kit, normal motor), a stricter shop-defined class in PH/UK/MY. | Alias entry redirecting to Stock Class, with a note that organiser PDFs govern |
 | Junior / Family / Trial | Tamiya official, by age | Tune-series motors only | Motor legality flag |
 | GT Advance, Box Stock, regional Stock variants (TH/PH/VN) | Community / shops | Vary | Glossary entries only |
 
@@ -225,7 +225,7 @@ Roughly 4–6 weeks part-time for a one-person MVP asset set. Scaling to hundred
 
 ### Phase 1 — Parts database, guides, 2D builder (4–6 weeks)
 - Prerendered part, chassis, class and guide pages (zh-TW + en), sitemaps, JSON-LD, attribution page.
-- Tutorials: class glossary (Open / Stock / B-MAX / B-Stock alias / Box Stock), chassis picker guide, motor guide, "first upgrade" guide, setup basics.
+- Tutorials: class glossary (Open / Stock / B-MAX / B-Stock → Stock alias / Box Stock), chassis picker guide, motor guide, "first upgrade" guide, setup basics.
 - Builder v0: chassis picker → slot list → part picker per slot with search/filter, rule engine warnings, class toggle, cost and estimated weight totals.
 - Share v0: URL-encoded build, share page with part list and model-viewer chassis preview.
 - Still on GitHub Pages.
@@ -248,9 +248,10 @@ Roughly 4–6 weeks part-time for a one-person MVP asset set. Scaling to hundred
 
 ## 7. Risks and open questions
 
+**Resolved:** *What "B-Stock" means locally* — the site owner confirmed on 2026-09-08 that B-Stock is local shorthand for **Stock Class**. It is modelled as an alias of Stock Class (and thus B-MAX GP), not as a separate ruleset. See §2.1.
+
 | Risk / question | Mitigation |
 |---|---|
-| **What "B-Stock" means locally** — no standard definition found | Ask the local community / owner; ship it as an alias to Stock/B-MAX with a caveat until confirmed |
 | Tamiya IP: names, photos, 3D shapes | Facts + own text, own photos for builder parts, stylised 3D, disclaimer, no GLB downloads |
 | 3D asset effort (150–190 h) dominates the timeline | Data-first ordering; procedural generation; start with one chassis (MA) and ~20 parts to validate UX before full asset production |
 | Image-to-3D quality for thin parts | Only used for body blockouts; procedural/Blender for everything else |
