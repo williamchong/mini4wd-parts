@@ -10,18 +10,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Current State of the Repo
 
-- The committed history (branches `master` and `gh-pages`) is the plain `index.html` landing page.
-- The working tree contains an untracked **Nuxt 3.14 + @nuxt/content 2.x** scaffold (`nuxt.config.ts`, `package.json`, `pages/`, `layouts/`, `components/`, `content/`, `assets/`, `public/`, `.github/workflows/deploy.yml`). Nuxt 3 reached end-of-life in July 2026; the plan upgrades to Nuxt 4 + @nuxt/content v3 in Phase 0 before real content is written.
-- `.github/workflows/deploy.yml` deploys on push to `main`, but no `main` branch exists yet. Settling the branch layout is a Phase 0 task.
+- `main` is the only branch; the hand-managed `gh-pages` and the stale `master` are retired. `.github/workflows/deploy.yml` builds on push to `main` and GitHub Pages serves the Actions artifact (`build_type: workflow`).
+- The site is a committed **Nuxt 4.5 + @nuxt/content v3** scaffold using the `app/` directory, with `@nuxtjs/i18n` on `prefix_except_default`. Routes so far are the landing page and a content catch-all; `/parts/…`, `/kits/…` and `/build` do not exist yet.
+- `content/` holds the generated catalog (382 parts, 8 chassis, 305 kits) plus per-locale prose under `content/zh-Hant/` and `content/en/`.
 - `public/images/4wd.glb` is a single baked hero model (3 meshes, ~66k triangles). It is not part-separated and cannot serve as the 3D builder base.
 
 ## Planned Architecture (see docs/PLAN.md §4)
 
-- **Framework:** Nuxt 4, `nuxt generate` for static pages; server routes only for `/api/*` and `/b/:id` from Phase 2.
+- **Framework:** Nuxt 4, `nuxt generate` for static pages; server routes only for `/api/*` and `/b/:id` from M2.
 - **Content:** @nuxt/content v3 collections with Zod schemas. Catalog data (parts, chassis, rules, guides, wizard profiles) is versioned YAML/Markdown in `content/`, keyed by Tamiya item number. Only user-generated data (builds, votes, view counts) goes to a database.
 - **i18n:** @nuxtjs/i18n, `prefix_except_default`, `zh-Hant` default, `/en/`, later `/ja/`. Traditional Chinese is one page set: Hong Kong and Taiwan wording is a reader toggle (`app/composables/useWording.ts`, `:term{name="…"}` in prose, `resolveName` in `shared/catalog/names.ts`), advertised via `zh-HK`/`zh-TW` hreflang on the same URL. Part names for all locales live inline in each part record; guide bodies are separate Markdown files per locale, one @nuxt/content collection each.
 - **3D:** Google `<model-viewer>` for display (hero, part previews, share pages). TresJS / Three.js for the builder route only, client-only and code-split. Part meshes are one GLB per variant; the chassis GLB carries named socket nodes.
-- **Hosting:** Phase 1 stays on GitHub Pages. Phase 2 moves to Cloudflare Workers with static assets, D1 (builds, votes), R2 (thumbnails), Turnstile (abuse control), nuxt-og-image for share cards.
+- **Hosting:** M1 stays on GitHub Pages. M2 moves to Cloudflare Workers with static assets, D1 (builds, votes), R2 (thumbnails), Turnstile (abuse control), nuxt-og-image for share cards.
 - **Rule engine and wizard:** declarative JSON rules (slot capacity, chassis compat, motor shaft type, class legality, dependencies, numeric limits) evaluated client-side and re-validated server-side; the wizard is a weighted scorer over the same catalog, no ML.
 
 ## Domain Notes
@@ -50,7 +50,6 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Development Notes
 
-- Run Node/npm commands only after the Nuxt scaffold is committed and `package.json` is in place.
 - Commit messages follow the existing gitmoji style (see `git log`).
 - Analytics: GA4 (`G-GJ34BG7E3W`) is live; PostHog is planned for builder and wizard funnels.
 - The site is bilingual today (Traditional Chinese primary, English secondary) and targets Mini 4WD beginners and hobbyists.

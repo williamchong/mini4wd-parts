@@ -1,6 +1,6 @@
 # mini4wd.parts — Product & Technical Plan
 
-Status: draft v2, 2026-09-08. The catalog pipeline is built and 382 parts, 8 chassis and 305 kits are committed; §6 was re-targeted the same day around an MVP builder with a live 3D view, and M1a (kits) closed the same day.
+Status: draft v2, 2026-09-08. The catalog pipeline is built and 382 parts, 8 chassis and 305 kits are committed; §6 was re-targeted the same day around an MVP builder with a live 3D view, and M1a (kits) closed the same day. i18n landed 2026-09-09, leaving PostHog as the only open M0 item.
 Research notes that fed this document (concepts, data sources, 3D assets, tech stack) are summarised inline with source links.
 
 ---
@@ -333,7 +333,7 @@ Re-targeted 2026-09-08. The owner set the MVP as: **start from a bare chassis or
 
 Milestones are renamed M0–M4 to make clear they are not the old Phase 0–4.
 
-### M0 — Foundation (remaining, ~1 week)
+### M0 — Foundation (one item left)
 
 - Add PostHog, so the builder funnel has a baseline from its first day.
 - ~~Push the four local commits (`8f41dbb`…`4d00ff3`)~~ — done 2026-09-08; the catalog is live.
