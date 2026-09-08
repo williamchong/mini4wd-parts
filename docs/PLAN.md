@@ -1,6 +1,6 @@
 # mini4wd.parts — Product & Technical Plan
 
-Status: draft v2, 2026-09-08. The catalog pipeline is built and 382 parts, 8 chassis and 305 kits are committed; §6 was re-targeted the same day around an MVP builder with a live 3D view, and M1a (kits) closed the same day. i18n landed 2026-09-09, leaving PostHog as the only open M0 item. The builder spine — bare-chassis entry, slot list, part picker — landed 2026-09-09 and re-ordered M1b (§6).
+Status: draft v2, 2026-09-08. The catalog pipeline is built and 382 parts, 8 chassis and 305 kits are committed; §6 was re-targeted the same day around an MVP builder with a live 3D view, and M1a (kits) closed the same day. i18n landed 2026-09-09, leaving PostHog as the only open M0 item. The builder spine — bare-chassis entry, slot list, part picker — landed 2026-09-09 and re-ordered M1b (§6). Two owner decisions the same day: the 3D model becomes the selection surface rather than a view of it (§1, §5.4, §6 M1c), and the picker shows Tamiya's official product images rather than only linking to them (§1, §6 M1b).
 Research notes that fed this document (concepts, data sources, 3D assets, tech stack) are summarised inline with source links.
 
 ---
@@ -17,17 +17,17 @@ A Traditional-Chinese-first (English second, Japanese later) site for Mini 4WD b
 | F4 | Shareable builds with part list, permalink and preview image | M1 (URL-encoded) → M2 (short links + OG image) → M3 (3D preview) |
 | F5 | Beginner wizard / recommender (budget, class, course type → suggested build) | M4 |
 | F6 | Ratings and popularity for parts and builds | M2 |
-| F7 | 3D view of the assembled car, re-rendering live as parts change | **M1 (view-only)** → M3 (click the car to select) |
+| F7 | 3D view of the assembled car, re-rendering live as parts change, **and the surface you click to change it** | **M1** (owner moved click-to-select out of M3 on 2026-09-09) |
 | F8 | Accounts, garages, comments, community data contributions | M4 |
 
 Nothing like this exists today. Japanese resources are blog/wiki style and stale, Tamiya's compatibility matrix is a GIF image, the licensed Bandai game (超速グランプリ) shut down in May 2024, and there is no Traditional Chinese item-level database at all. See the prior-art notes in section 8.
 
 ### Guiding decisions
 
-1. **Data first, 3D second — and the data is now paid for.** The builder, wizard, share pages and 3D view all sit on the same slot-graph data model, which landed on 2026-09-08 (382 parts, 8 chassis, a slot profile per chassis family). The ordering was never "3D last", it was "3D not before the data"; that condition is now met, so the 3D **view** moves into the MVP (§6 M1). What stays late is 3D as an *input* surface — clicking the car to select parts — because that is the expensive, risky half and the 2D list already does the job better on mobile.
+1. **Data first, 3D second — and the data is now paid for.** The builder, wizard, share pages and 3D view all sit on the same slot-graph data model, which landed on 2026-09-08 (382 parts, 8 chassis, a slot profile per chassis family). The ordering was never "3D last", it was "3D not before the data"; that condition is now met, so the 3D **view** moves into the MVP (§6 M1). ~~What stays late is 3D as an *input* surface — clicking the car to select parts — because that is the expensive, risky half and the 2D list already does the job better on mobile.~~ **Reversed 2026-09-09 by the owner: the 3D model is the selection surface, not a view of what a list chose.** The cost and the mobile/accessibility arguments are not disputed by this — they are now costs to pay rather than reasons to defer. The 2D list stays, because it is what the seven chassis without a mesh and every part without a generator fall back to (§5.4); it becomes the fallback rather than the primary.
 2. **Catalog in git, user data in a database.** Parts, chassis, rules and guides are versioned YAML/Markdown in the repo. Only builds, votes and view counts live in a database.
 3. **Stay in the Nuxt/Vue toolchain**, at near-zero hosting cost.
-4. **Facts are ours, Tamiya's expression is not.** Store facts (item numbers, prices, dimensions, compatibility) and our own text, photos and simplified 3D shapes. Link out to Tamiya for official descriptions and images.
+4. **Facts are ours, Tamiya's expression is not.** Store facts (item numbers, prices, dimensions, compatibility) and our own text, photos and simplified 3D shapes. Link out to Tamiya for official descriptions. **Amended 2026-09-09 by the owner: official product images are shown in the picker rather than only linked** — a part a beginner cannot recognise by name is not really in the picker at all. The rule that does not move is that we never re-host them: `officialImage` is Tamiya's own CDN URL, stored as a fact and referenced from there. See §7 for what that costs.
 
 ---
 
@@ -323,7 +323,9 @@ Roughly 4–6 weeks part-time for a one-person MVP asset set. Scaling to hundred
 | Shared materials, fallback proxy, socket QA | — | | 6–8 |
 | **M1 total** | | | **~40–50 h** |
 
-**M1's 3D pane is view-only.** Selection stays in the 2D list: it is faster, it works on a phone, it is accessible, and it needs no raycast proxies, no hover outlines and no touch tuning. Click-the-car-to-select is deferred to M3 (§6) with the rest of §5.2's interaction work.
+**M1's 3D pane is the selection surface.** ~~Selection stays in the 2D list: it is faster, it works on a phone, it is accessible, and it needs no raycast proxies, no hover outlines and no touch tuning. Click-the-car-to-select is deferred to M3 (§6) with the rest of §5.2's interaction work.~~ Reversed 2026-09-09 (§1, guiding decision 1). Clicking the car brings §5.2's raycast proxies, hover highlight and touch tuning into M1 — the oversized invisible proxy volumes are what make a 13 mm roller tappable on a phone, so they are not optional once selection moves into the canvas. Budget roughly 15–25 h on top of the ~40–50 h above.
+
+The 2D list does not go away, and cannot: M1 models **one chassis of eight**, and any part without a generator draws a labelled proxy rather than a recognisable shape. A reader on VZ, or on a slot whose parts are all grey boxes, has nothing to click that means anything. The list is therefore the fallback and the accessible path — keyboard reachable, screen-reader legible, and the only surface on the seven unmodelled chassis. Retiring it is not an M1 question; it is a question for whenever 3D coverage reaches every chassis, if ever.
 
 ---
 
@@ -351,17 +353,20 @@ Three workstreams. The catalog and builder ones are independent of the asset one
 **b. Site and builder.** Re-ordered 2026-09-09: the SEO pages moved from the head of this list to the foot of it. The plan's own reason for putting them first was that they are *cheap now that the data exists* — a marginal-cost argument, not a blocker, and nothing in the M1 done-criterion below needs them. The builder drives instead, so the catalog access layer is designed against the part picker's requirements (filter by **slot type**) rather than the browse page's (filter by **category**); the same query serves both, but only one of the two orderings produces a picker without rework.
 
 - ~~`/build` bare-chassis entry point; slot list from the chassis' profile, each row showing its part, `stock` vs `swapped`, and a swap action; part picker per slot, filtered by slot type, chassis compatibility and motor shaft, searchable, showing price and the specs that matter for that slot~~ — done 2026-09-09. A build is stored as a **delta** (`chassis`, optional `kit`, `swaps` keyed by slot id), never as a resolved loadout, mirroring how a kit's `stockLoadout` is a delta over its chassis' `defaultLoadout`. Resolution is pure and unit-tested in `shared/catalog/build.ts`.
+- Official product image on every part row in the picker, and on the kit picker's rows. Every part and every kit carries an `officialImage` (100% coverage, Tamiya's CloudFront); the eight chassis carry none, so the chassis picker stays text. Referenced from Tamiya's CDN, never re-hosted (§1, guiding decision 4), lazy-loaded, and degrading to the current text row when the image is blocked or gone — a hotlink we do not control must not be able to break the picker.
 - `/build` kit entry point: kit picker searching by name or item number, filtered to current kits, overlaying `stockLoadout` on the chassis default.
 - Rule engine (§4.3) inline, three severities. Ship the rules that the committed data can actually answer — slot capacity, chassis compat, motor shaft type, class legality, tire diameter — and leave the ones needing data we do not have (total width, precise weight) as explicit "not checked yet" rather than guessing. Chassis compat and motor shaft already filter the picker, so a build assembled in the UI cannot break them; they stay rules because a build arriving from a URL was not assembled in the UI.
 - Totals: part count, JPY and HKD cost, estimated weight, final gear ratio.
 - Build encoded in the URL (§4.5); reload restores; copy-link shares. The state is already shaped for it: only the delta needs serialising.
 - Part and chassis pages, prerendered per locale, JSON-LD `Product`, sitemap, attribution page. Last rather than first: they are additive, they get cheaper once the builder has settled what a part row must show, and `PartCard` is already the component they will reuse.
 
-**c. 3D view (§5.4).** MA chassis with slot-named sockets, 3 generic bodies, ~12 parametric generators, the fallback proxy, `@tresjs/nuxt` on the `/build` route only, client-only and code-split. View-only: orbit, zoom, reset camera. Other chassis show a still and a notice.
+**c. 3D view and selection (§5.4).** MA chassis with slot-named sockets, 3 generic bodies, ~12 parametric generators, the fallback proxy, `@tresjs/nuxt` on the `/build` route only, client-only and code-split. Orbit, zoom, reset camera — **and click the car to pick a slot**, which pulls §5.2's raycast proxy volumes, hover highlight and mobile touch tuning into M1 (owner's decision, 2026-09-09). Other chassis show a still and a notice, and are built through the list.
+
+This is the milestone's long pole and the one most likely to slip. The fallback that protects the date is the 2D builder, which is already built and already works on all eight chassis: if the meshes or the raycast work run over, M1 ships list-first with the 3D pane view-only, and selection moves into the canvas when it is ready.
 
 **M1 is done when:** a beginner can open `/build`, pick the kit box on their desk, change the motor and rollers, see a warning that the motor is Open-only, see the cost of what they still need to buy, watch the car update in 3D, and send the link to a friend — in Traditional Chinese and en.
 
-**Explicitly not in M1:** the wizard, votes, accounts, short links, OG images, D1, click-to-select in 3D, per-kit body shapes, chassis other than MA in 3D. Still on GitHub Pages, still fully static.
+**Explicitly not in M1:** the wizard, votes, accounts, short links, OG images, D1, per-kit body shapes, chassis other than MA in 3D. Still on GitHub Pages, still fully static. (Click-to-select in 3D was on this list until 2026-09-09 and is now M1c.)
 
 ### M2 — Permalinks, sharing, community signals (4–6 weeks)
 
@@ -369,7 +374,7 @@ Move to Cloudflare Workers with static assets; DNS to Cloudflare; D1 and R2. Sho
 
 ### M3 — Full 3D builder (6–10 weeks)
 
-The remaining chassis, per-kit bodies where they are worth modelling, the rest of the parametric library, and 3D as an *input* surface: raycast slot proxies, click-to-select, hover highlight, swap animation, camera presets, mobile touch tuning (§5.2). 3D preview on share pages; AR via model-viewer on a baked export.
+The remaining seven chassis, per-kit bodies where they are worth modelling, and the rest of the parametric library — which is what actually lets the 2D list stop being the primary surface on anything but MA. Swap animation and camera presets. 3D preview on share pages; AR via model-viewer on a baked export. The raycast proxies, click-to-select, hover highlight and touch tuning that used to live here moved to M1c on 2026-09-09.
 
 ### M4 — Wizard, identity, community (ongoing)
 
@@ -384,8 +389,10 @@ Beginner wizard (F5) seeded from the six archetypes in §2.5 and weighted by the
 | Risk / question | Mitigation |
 |---|---|
 | Tamiya IP: names, photos, 3D shapes | Facts + own text, own photos for builder parts, stylised 3D, disclaimer, no GLB downloads |
+| Selection moved into the 3D canvas (owner, 2026-09-09), so M1 now depends on the milestone's riskiest workstream | The 2D list is already built and covers all eight chassis, so it is a real fallback rather than a promised one: M1 can ship list-first with a view-only pane. What cannot be dropped is the list itself — one chassis is modelled, seven are not, and a canvas of grey proxies is not a picker. Keyboard and screen-reader users stay on the list either way |
+| Hotlinking Tamiya's CDN for product images (owner, 2026-09-09) puts a dependency we do not control on the critical path of the picker, and embedding is a stronger claim than linking | Never re-hosted, so nothing is copied to our origin; `officialImage` stays a stored fact. Attribute on the page, lazy-load, and degrade to the text row on error rather than a broken image. Referer-blocking, URL rot and their bandwidth are theirs to change at any time — treat every image as optional. Own photos still replace them for builder parts as they are taken, which is the standing plan and now has a visible payoff |
 | 3D asset effort (150–190 h) dominates the timeline | M1 buys only ~40–50 h of it: one chassis, 3 generic bodies, ~12 parametric generators, and a labelled fallback proxy so the builder ships independently of mesh coverage (§5.4) |
-| Pulling 3D into the MVP repeats the mistake §1 warned about | The 3D **view** is cheap and bounded; the 3D **input** surface (raycast proxies, click-to-select, touch tuning) is the expensive half and stays in M3. If the MA chassis mesh slips, the fallback proxy means M1 still ships with a recognisable car |
+| Pulling 3D into the MVP repeats the mistake §1 warned about | ~~The 3D **view** is cheap and bounded; the 3D **input** surface (raycast proxies, click-to-select, touch tuning) is the expensive half and stays in M3.~~ Both halves are in M1 as of 2026-09-09, so this mitigation is now only the second sentence: if the MA chassis mesh slips, the fallback proxy means M1 still ships with a recognisable car, and the 2D list means it still ships with a working builder. That is a weaker position than the plan held yesterday, and it is deliberate |
 | ~~Tamiya publishes no bill-of-materials for kits, so "start from my kit" has no source~~ | Resolved 2026-09-08: 305 kits committed, 96% with a `stockLoadout` imported from the wiki's `Technical Info List`, the chassis `defaultLoadout` supplying the rest, and the 13 uncovered kits degrading to it rather than breaking (§4.7) |
 | Wiki kit data is CC-BY-SA and free text, not item numbers | Each kit carries `loadoutSourceTitle` so kit pages attribute on the page itself, not only the attribution page. Free-text values are deliberately **not** forced into item numbers: a loadout entry may carry a label alone, which is correct because most moulded parts were never sold separately. `catalog:report` ranks those labels by frequency so `data/overrides/kits.yml` can name the few that do map. Tamiya stays canonical on any fact the two disagree on |
 | Body shapes are the highest IP risk and the priciest geometry | M1 ships 3 generic stylised archetypes shared across kits, labelled in the UI as representative, not per-kit reproductions (§5.4) |
