@@ -164,7 +164,11 @@ export const partNames = z.object({
   en: z.string().optional(),
   /** Imported from tamiya.hk's Store API short_description. */
   'zh-HK': z.string().optional(),
-  /** Hand-authored later; renderers fall back zh-TW -> zh-HK -> en -> ja. */
+  /**
+   * Hand-authored later. Which of the two Traditional Chinese variants is tried
+   * first is the reader's wording preference, not the locale — see
+   * `resolveName` in ./names.ts, which owns the fallback order.
+   */
   'zh-TW': z.string().optional()
 })
 

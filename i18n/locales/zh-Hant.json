@@ -1,0 +1,25 @@
+{
+  "site": {
+    "title": "迷你四驅新手入門資訊站",
+    "description": "迷你四驅新手入門資訊站，提供完整的迷你四驅相關資訊與新手指南"
+  },
+  "nav": {
+    "home": "首頁",
+    "guides": "指南",
+    "parts": "零件",
+    "about": "關於"
+  },
+  "landing": {
+    "modelAlt": "迷你四驅新手入門資訊站標誌",
+    "heading": "迷你四驅新手入門資訊站正在開發中",
+    "tagline": "敬請期待！"
+  },
+  "error": {
+    "notFound": "找不到頁面"
+  },
+  "wording": {
+    "label": "用語",
+    "hk": "港",
+    "tw": "台"
+  }
+}

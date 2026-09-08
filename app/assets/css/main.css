@@ -31,12 +31,6 @@ body {
   min-height: 300px;
 }
 
-.en {
-  font-size: 0.8em;
-  color: #666;
-  margin-top: 0.5rem;
-}
-
 /* Content pages styling */
 .content-container {
   max-width: 800px;
@@ -81,4 +75,49 @@ body {
 
 .nav a:hover {
   text-decoration: underline;
+}
+
+/* Locale switcher and the Hong Kong / Taiwan wording toggle */
+.locale-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.locale-controls .wording {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+}
+
+.wording-label {
+  font-size: 0.8em;
+  opacity: 0.7;
+}
+
+.locale-controls button {
+  font: inherit;
+  font-size: 0.85em;
+  padding: 0.1rem 0.5rem;
+  color: inherit;
+  background: none;
+  border: 1px solid currentColor;
+  border-radius: 3px;
+  opacity: 0.6;
+  cursor: pointer;
+}
+
+.locale-controls button[aria-pressed='true'] {
+  opacity: 1;
+  font-weight: 600;
+}
+
+/* The landing page has no dark nav bar behind the controls. */
+.wip-content .locale-controls {
+  margin-top: 1.5rem;
+  color: #666;
+}
+
+.wip-content .locale-controls a {
+  color: inherit;
 }

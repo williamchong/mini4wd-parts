@@ -1,8 +1,13 @@
+<script setup lang="ts">
+const localePath = useLocalePath()
+</script>
+
 <template>
   <nav class="nav">
-    <NuxtLink to="/">首頁 Home</NuxtLink>
-    <NuxtLink to="/guides">指南 Guides</NuxtLink>
-    <NuxtLink to="/parts">零件 Parts</NuxtLink>
-    <NuxtLink to="/about">關於 About</NuxtLink>
+    <NuxtLink :to="localePath('/')">{{ $t('nav.home') }}</NuxtLink>
+    <NuxtLink :to="localePath('/guides')">{{ $t('nav.guides') }}</NuxtLink>
+    <NuxtLink :to="localePath('/parts')">{{ $t('nav.parts') }}</NuxtLink>
+    <NuxtLink :to="localePath('/about')">{{ $t('nav.about') }}</NuxtLink>
+    <LocaleControls />
   </nav>
 </template>

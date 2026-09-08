@@ -5,7 +5,7 @@
         <model-viewer
           id="carModel"
           class="logo"
-          alt="迷你四驅新手入門資訊站 Logo"
+          :alt="$t('landing.modelAlt')"
           src="/images/4wd.glb"
           poster="/images/4wd.png"
           ar
@@ -23,12 +23,11 @@
           @click="trackModelClick"
         />
       </div>
-      <h1>
-        迷你四驅新手入門資訊站正在開發中
-        <div class="en">Mini 4WD Beginner's Guide Information Site Under Development</div>
-      </h1>
-      <p>敬請期待！</p>
-      <p class="en">Stay tuned!</p>
+      <h1>{{ $t('landing.heading') }}</h1>
+      <p>{{ $t('landing.tagline') }}</p>
+      <!-- This page renders no Navigation, so without the controls here the
+           English site would have nothing linking to it. -->
+      <LocaleControls />
     </div>
   </div>
 </template>

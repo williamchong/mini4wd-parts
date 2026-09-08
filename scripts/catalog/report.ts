@@ -1,6 +1,7 @@
 import { readYamlDir, readYamlFileIfPresent } from './io.ts'
 import { list, section } from './print.ts'
 import type { Kit, Part, PartOverride } from '../../shared/catalog/schema.ts'
+import { hasTraditionalChineseName } from '../../shared/catalog/names.ts'
 
 /**
  * Coverage and QA report. This is what drives the manual pass: every line it
@@ -51,7 +52,7 @@ list('  Motors without a legality override',
   parts.filter(part => part.category === 'motor' && part.classLegality.source !== 'override').map(label))
 
 list('  No Traditional Chinese name',
-  parts.filter(part => !part.names['zh-HK'] && !part.names['zh-TW']).map(label), 4)
+  parts.filter(part => !hasTraditionalChineseName(part.names)).map(label), 4)
 
 list('  No English name', parts.filter(part => !part.names.en).map(label))
 list('  No price', parts.filter(part => part.priceJpy === undefined).map(label))
@@ -66,7 +67,7 @@ list('  Override entries matching no selected item',
 
 section('Coverage')
 const partPercent = (n: number) => percent(n, parts.length)
-console.log(`  Traditional Chinese names  ${partPercent(parts.filter(p => p.names['zh-HK'] || p.names['zh-TW']).length)}`)
+console.log(`  Traditional Chinese names  ${partPercent(parts.filter(p => hasTraditionalChineseName(p.names)).length)}`)
 console.log(`  HKD prices                 ${partPercent(parts.filter(p => p.priceHkd !== undefined).length)}`)
 console.log(`  Chassis compatibility      ${partPercent(parts.filter(p => p.chassisCompat.include.length > 0).length)}`)
 console.log(`  Categorised                ${partPercent(parts.filter(p => p.category !== 'other').length)}`)
@@ -84,7 +85,7 @@ list('  No per-kit loadout (falls back to the chassis default)',
   kits.filter(kit => kit.loadoutSource === 'chassis').map(label), 4)
 list('  No gear ratio', kits.filter(kit => !kit.gearRatio).map(label), 4)
 list('  No Traditional Chinese name',
-  kits.filter(kit => !kit.names['zh-HK'] && !kit.names['zh-TW']).map(label), 4)
+  kits.filter(kit => !hasTraditionalChineseName(kit.names)).map(label), 4)
 list('  No price', kits.filter(kit => kit.priceJpy === undefined).map(label), 4)
 
 // Every imported loadout entry that is still a bare label is a part we have not
@@ -112,4 +113,4 @@ const kitPercent = (n: number) => percent(n, kits.length)
 console.log(`\n  Per-kit loadout            ${kitPercent(kits.filter(k => k.loadoutSource === 'fandom').length)}`)
 console.log(`  Gear ratio                 ${kitPercent(kits.filter(k => k.gearRatio).length)}`)
 console.log(`  HKD prices                 ${kitPercent(kits.filter(k => k.priceHkd !== undefined).length)}`)
-console.log(`  Traditional Chinese names  ${kitPercent(kits.filter(k => k.names['zh-HK'] || k.names['zh-TW']).length)}`)
+console.log(`  Traditional Chinese names  ${kitPercent(kits.filter(k => hasTraditionalChineseName(k.names)).length)}`)

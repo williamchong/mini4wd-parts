@@ -1,10 +1,30 @@
-const SITE_TITLE = '迷你四驅新手入門資訊站 Mini 4WD Beginner\'s Guide'
+const SITE_URL = 'https://mini4wd.parts'
 const GA_MEASUREMENT_ID = 'G-GJ34BG7E3W'
 
 export default defineNuxtConfig({
   compatibilityDate: '2026-09-08',
   devtools: { enabled: true },
-  modules: ['@nuxt/content'],
+  modules: ['@nuxt/content', '@nuxtjs/i18n'],
+
+  // The site is one set of Traditional Chinese pages at the root plus English
+  // under /en/. zh-Hant rather than zh-TW because every Traditional Chinese
+  // name in the catalog comes from tamiya.hk: labelling the root zh-TW would
+  // serve Hong Kong wording under a Taiwan flag. Hong Kong and Taiwan differ by
+  // a glossary, not by pages, so the two are a reader-level wording toggle
+  // (see app/plugins/wording.client.ts) and both are advertised via hreflang
+  // in app/app.vue.
+  i18n: {
+    strategy: 'prefix_except_default',
+    defaultLocale: 'zh-Hant',
+    locales: [
+      { code: 'zh-Hant', language: 'zh-Hant', name: '繁體中文', file: 'zh-Hant.json' },
+      { code: 'en', language: 'en', name: 'English', file: 'en.json' }
+    ],
+    // GitHub Pages serves static files and cannot redirect, so detection would
+    // only swap the page client-side after the correct one had already painted.
+    detectBrowserLanguage: false,
+    baseUrl: SITE_URL
+  },
 
   // model-viewer is a CDN web component, not a Vue component. Without this Vue
   // refuses to render the tag during SSR, which forces <client-only> and costs
@@ -21,30 +41,29 @@ export default defineNuxtConfig({
   },
 
   // GitHub Pages configuration: every route must be prerendered, there is no
-  // server at runtime. The landing page links nowhere, so the content routes
-  // are seeded explicitly and the crawler picks up anything they link to.
+  // server at runtime. Both locale trees are seeded explicitly — the crawler
+  // would only reach /en/ through the locale switcher, and a switcher that
+  // stops rendering for any reason would silently drop the English site from
+  // the build rather than fail it.
   nitro: {
     prerender: {
       crawlLinks: true,
-      routes: ['/', '/about', '/guides', '/parts']
+      routes: [
+        '/', '/about', '/guides', '/parts',
+        '/en', '/en/about', '/en/guides', '/en/parts'
+      ]
     }
   },
 
+  // The title, description and og:title/og:description are per-locale, so they
+  // live in app/app.vue where the active locale is known. `lang` and the
+  // canonical are @nuxtjs/i18n's to set; a static value here would fight it.
   app: {
     head: {
-      htmlAttrs: { lang: 'zh-TW' },
-      title: SITE_TITLE,
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        {
-          name: 'description',
-          content: '迷你四驅新手入門資訊站，提供完整的迷你四驅相關資訊與新手指南 Mini 4WD beginner\'s guide information site'
-        },
-        { property: 'og:title', content: SITE_TITLE },
-        { property: 'og:description', content: '迷你四驅新手入門資訊站，提供完整的迷你四驅相關資訊與新手指南' },
-        { property: 'og:image', content: 'https://mini4wd.parts/images/4wd.png' },
-        { property: 'og:url', content: 'https://mini4wd.parts/' },
+        { property: 'og:image', content: `${SITE_URL}/images/4wd.png` },
         { property: 'og:type', content: 'website' }
       ],
       link: [

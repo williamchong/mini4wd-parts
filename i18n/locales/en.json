@@ -1,0 +1,25 @@
+{
+  "site": {
+    "title": "Mini 4WD Beginner's Guide",
+    "description": "A Mini 4WD information site for beginners, with a complete parts reference and getting-started guides"
+  },
+  "nav": {
+    "home": "Home",
+    "guides": "Guides",
+    "parts": "Parts",
+    "about": "About"
+  },
+  "landing": {
+    "modelAlt": "Mini 4WD Beginner's Guide Information Site logo",
+    "heading": "Mini 4WD Beginner's Guide Information Site Under Development",
+    "tagline": "Stay tuned!"
+  },
+  "error": {
+    "notFound": "Page not found"
+  },
+  "wording": {
+    "label": "Wording",
+    "hk": "HK",
+    "tw": "TW"
+  }
+}
