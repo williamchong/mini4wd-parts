@@ -1,0 +1,45 @@
+id: "95573"
+names:
+  ja: シューティングプラウドスター クリヤーブルースペシャル (MAシャーシ)
+  en: SHOOTING PROUD STAR CLEAR BLUE SPECIAL (MA CHASSIS)
+  zh-HK: 1/32 迷你四驅車 Shooting Pround Star 透明藍特別版 (MA底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ma
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: シューティングプラウドスター クリヤーブルースペシャル (MAシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Large MS II
+      source: fandom
+  wheel-rear:
+    - label: Large MS II
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Shooting Proud Star
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2020-10-03
+releaseDateRaw: 2020年10月3日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95573/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95573/95573_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95573-jr-shooting-proud-star-blue-sp/
+specsRaw: ●完成時の全長156mm、全幅97mm、全高48mm ●ダブルシャフトモーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

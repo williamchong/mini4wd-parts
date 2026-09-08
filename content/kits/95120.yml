@@ -1,0 +1,43 @@
+id: "95120"
+names:
+  ja: 1/32 バロンビエント ジャパンカップ2019 （FM-Aシャーシ）
+  en: BARON VIENTO (FM-A CHASSIS) JAPAN CUP 2019
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: limited
+seriesLabel: ミニ四駆限定販売商品（マシン）
+chassis: fm-a
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 バロンビエント ジャパンカップ2019 （FM-Aシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Small X Low-Profile
+      source: fandom
+  wheel-rear:
+    - label: Small X Low-Profile
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Baron Viento
+priceJpy: 1210
+priceJpyExTax: 1100
+priceHkd: 110
+releaseDate: 2019-06-29
+releaseDateRaw: 2019年6月29日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95120/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95120/95120_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95120-1-32-baron-biento-japan-cup-2019-fm-chassis/
+specsRaw: ●完成時の全長156mm、全幅97mm、全高48mm ●モーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

@@ -1,0 +1,44 @@
+id: "18091"
+names:
+  ja: 1/32 マッハビュレット (VSシャーシ)
+  en: MACH-BULLET (VS CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: racer
+seriesNumber: 91
+seriesLabel: 1/32 レーサーミニ四駆シリーズ
+chassis: vs
+gearRatio: 5:1
+stockLoadout:
+  body:
+    - label: 1/32 マッハビュレット (VSシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Large Narrow Lightweight
+      source: fandom
+  wheel-rear:
+    - label: Large Narrow Lightweight
+      source: fandom
+  tire-front:
+    - label: Large Arched
+      source: fandom
+  tire-rear:
+    - label: Large Arched
+      source: fandom
+  gear-set:
+    - label: 5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Mach-Bullet
+priceJpy: 1210
+priceJpyExTax: 1100
+priceHkd: 110
+releaseDate: 2018-05-26
+releaseDateRaw: 2018年5月26日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18091/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/18091/18091_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18091-mach-bullet-vs/
+specsRaw: ●完成時の全長145mm ●全幅92mm ●全高54mm ●モーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

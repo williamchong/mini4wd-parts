@@ -1,0 +1,46 @@
+id: "18704"
+names:
+  ja: 1/32 シャドウシャーク(ARシャーシ)
+  en: SHADOW SHARK (AR CHASSIS)
+  zh-HK: 1/32 迷你四驅車 影鯊號 Shadow Shark (AR底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: rev
+seriesNumber: 4
+seriesLabel: 1/32 ミニ四駆REVシリーズ
+chassis: ar
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 シャドウシャーク(ARシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Shadow Shark
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 90
+releaseDate: 2013-10-19
+releaseDateRaw: 2013年10月19日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18704/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18704/18704_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18704-shadow-shark-ar-chassis/
+specsRaw: ●完成時の全長155mm ●全幅97mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

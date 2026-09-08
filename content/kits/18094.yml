@@ -1,0 +1,44 @@
+id: "18094"
+names:
+  ja: ネオVQS (VZシャーシ)
+  en: NEO-VQS (VZ CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: racer
+seriesNumber: 94
+seriesLabel: 1/32 レーサーミニ四駆シリーズ
+chassis: vz
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: ネオVQS (VZシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Neo-VQS
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 110
+releaseDate: 2020-03-28
+releaseDateRaw: 2020年3月28日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18094/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/18094/18094_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18094-neo-vqs-vz-2/
+specsRaw: ●完成時の全長158mm、全幅98mm、全高43mm ●モーターつき ●接着剤を使わずはめ込みとビス止めで組み立てられます
+scrapedAt: 2026-09-08

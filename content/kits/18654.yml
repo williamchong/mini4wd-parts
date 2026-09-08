@@ -1,0 +1,46 @@
+id: "18654"
+names:
+  ja: トヨタ ガズー レーシング WRT/ヤリス WRC （MAシャーシ）
+  en: TOYOTA GAZOO Racing WRT/Yaris WRC (MA CHASSIS)
+  zh-HK: 1/32 Mini 4WD 豐田汽車 GAZOO Racing WRT/雅力士 WRC (MA 底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: pro
+seriesNumber: 54
+seriesLabel: 1/32 ミニ四駆PROシリーズ
+chassis: ma
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: トヨタ ガズー レーシング WRT/ヤリス WRC （MAシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Dish-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Dish-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Toyota Gazoo Racing WRT/Yaris WRC
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 120
+releaseDate: 2019-07-06
+releaseDateRaw: 2019年7月6日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18654/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/18654/18654_1.jpg
+hkStoreUrl: https://tamiya.hk/product/ta18654/
+specsRaw: ●完成時の全長156mm、全幅97mm、全高44mm ●ダブルシャフトモーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

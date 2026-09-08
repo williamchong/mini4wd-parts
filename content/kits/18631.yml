@@ -1,0 +1,44 @@
+id: "18631"
+names:
+  ja: 1/32 スピンアックスMk.II
+  en: SPIN-AXE Mk.II
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: pro
+seriesNumber: 31
+seriesLabel: 1/32 ミニ四駆PROシリーズ
+chassis: ms
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 スピンアックスMk.II
+      source: tamiya
+  wheel-front:
+    - label: Small VS-Type
+      source: fandom
+  wheel-rear:
+    - label: Small VS-Type
+      source: fandom
+  tire-front:
+    - label: Small X Narrow-Type
+      source: fandom
+  tire-rear:
+    - label: Small X Narrow-Type
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Spin-Axe Mk.II
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 100
+releaseDate: 2009-07-18
+releaseDateRaw: 2009年7月18日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18631/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18631/18631_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18631-spin-axe-mk-ii/
+specsRaw: ●全長152mm ●全幅92mm ●ダブルシャフトモーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

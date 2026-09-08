@@ -1,0 +1,41 @@
+id: "95295"
+names:
+  ja: 1/32 エアロ マンタレイ ホワイトスペシャル （ARシャーシ）
+  en: AERO MANTA RAY WHITE SPECIAL (AR CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ar
+gearRatio: 4.2:1
+stockLoadout:
+  body:
+    - label: 1/32 エアロ マンタレイ ホワイトスペシャル （ARシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Large Narrow Lightweight
+      source: fandom
+  wheel-rear:
+    - label: Large Narrow Lightweight
+      source: fandom
+  tire-front:
+    - label: Large Arched
+      source: fandom
+  tire-rear:
+    - label: Large Arched
+      source: fandom
+  gear-set:
+    - label: 4.2:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Aero Manta Ray
+priceJpy: 1100
+priceJpyExTax: 1000
+releaseDate: 2017-01-21
+releaseDateRaw: 2017年1月21日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95295/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95295/95295_1.jpg
+specsRaw: ●完成時の全長155mm ●全幅97mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

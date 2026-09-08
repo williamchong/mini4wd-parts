@@ -1,0 +1,43 @@
+id: "95483"
+names:
+  ja: マッハビュレット メタリックスペシャル(ARシャーシ)
+  en: MACH-BULLET METALLIC SPECIAL (AR CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ar
+gearRatio: 5:1
+stockLoadout:
+  body:
+    - label: マッハビュレット メタリックスペシャル(ARシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Large Mesh-Type
+      source: fandom
+  wheel-rear:
+    - label: Large Mesh-Type
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Mach-Bullet
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2019-05-25
+releaseDateRaw: 2019年5月25日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95483/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95483/95483_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95483-mach-bullet-metallic-special-ar-chassis/
+specsRaw: ●完成時の全長158mm、全幅97mm、全高58mm ●モーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

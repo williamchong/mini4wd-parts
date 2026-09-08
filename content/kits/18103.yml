@@ -1,0 +1,46 @@
+id: "18103"
+names:
+  ja: クロススピアー01 (VZシャーシ)
+  en: CROSS SPEAR 01 (VZ CHASSIS)
+  zh-HK: 1/32 迷你四驅車 Cross Spear 01 (VZ底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: racer
+seriesNumber: 103
+seriesLabel: 1/32 レーサーミニ四駆シリーズ
+chassis: vz
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: クロススピアー01 (VZシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Spiral Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Spiral Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Cross Spear 01
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2024-05-18
+releaseDateRaw: 2024年5月18日(土)ごろ発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18103/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/18103/18103_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18103-1-32-mini-4wd-cross-spear-01-vz-chassis/
+specsRaw: ●完成時の全長158mm、全幅98mm、全高35mm ●モーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

@@ -1,0 +1,45 @@
+id: "18102"
+names:
+  ja: ミニ四駆 オオカミ2 (ARシャーシ)
+  en: Mini 4WD Lupine Racer 2 (AR)
+  zh-HK: 1/32 迷你四驅車 野狼賽車2 (AR底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: racer
+seriesNumber: 102
+seriesLabel: 1/32 レーサーミニ四駆シリーズ
+chassis: ar
+gearRatio: 5:1
+stockLoadout:
+  body:
+    - label: ミニ四駆 オオカミ2 (ARシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Large TZ Fully Cowled Type
+      source: fandom
+  wheel-rear:
+    - label: Large TZ Fully Cowled Type
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Mini 4WD Lupine Racer 2
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2023-12-16
+releaseDateRaw: 2023年12月16日(土)ごろ発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18102/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/18102/18102_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18102-1-32-mini-4wd-lupine-racer-2-ar-chassis/
+scrapedAt: 2026-09-08

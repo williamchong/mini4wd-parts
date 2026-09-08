@@ -1,0 +1,44 @@
+id: "18716"
+names:
+  ja: ジオグライダー （FM-Aシャーシ）
+  en: GEO GLIDER (FM-A CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: rev
+seriesNumber: 16
+seriesLabel: 1/32 ミニ四駆REVシリーズ
+chassis: fm-a
+gearRatio: 4.2:1
+stockLoadout:
+  body:
+    - label: ジオグライダー （FM-Aシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Large V-Spoke
+      source: fandom
+  wheel-rear:
+    - label: Large V-Spoke
+      source: fandom
+  tire-front:
+    - label: Large Arched
+      source: fandom
+  tire-rear:
+    - label: Large Arched
+      source: fandom
+  gear-set:
+    - label: 4.2:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Geo Glider
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 100
+releaseDate: 2018-12-22
+releaseDateRaw: 2018年12月22日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18716/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/18716/18716_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18716-geo-glider-fm-chassis/
+specsRaw: ●完成時の全長156mm、全幅96mm、全高46mm ●モーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

@@ -1,0 +1,41 @@
+id: "95279"
+names:
+  ja: 1/32 アストロブーメラン クリヤーブルースぺシャル(スーパーII)
+  en: ASTRO-BOOMERANG CLEAR BLUE SPECIAL (SUPER-II CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: super-2
+gearRatio: 4.2:1
+stockLoadout:
+  body:
+    - label: 1/32 アストロブーメラン クリヤーブルースぺシャル(スーパーII)
+      source: tamiya
+  wheel-front:
+    - label: Large Narrow Lightweight
+      source: fandom
+  wheel-rear:
+    - label: Large Narrow Lightweight
+      source: fandom
+  tire-front:
+    - label: Large Arched
+      source: fandom
+  tire-rear:
+    - label: Large Arched
+      source: fandom
+  gear-set:
+    - label: 4.2:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Astro-Boomerang
+priceJpy: 1100
+priceJpyExTax: 1000
+releaseDate: 2016-07-23
+releaseDateRaw: 2016年7月23日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95279/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95279/95279_1.jpg
+specsRaw: ●完成時の全長150mm ●全幅97mm ●全高39mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

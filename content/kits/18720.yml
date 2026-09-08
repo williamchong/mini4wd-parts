@@ -1,0 +1,46 @@
+id: "18720"
+names:
+  ja: K4タッシュ (FM-Aシャーシ)
+  en: K4TASCHE (FM-A CHASSIS)
+  zh-HK: 1/32 迷你四驅車 K4袋子 K4Tasche (FM-A底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: rev
+seriesNumber: 20
+seriesLabel: 1/32 ミニ四駆REVシリーズ
+chassis: fm-a
+gearRatio: 5:1
+stockLoadout:
+  body:
+    - label: K4タッシュ (FM-Aシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Dish-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Dish-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: K4Tasche
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2023-07-08
+releaseDateRaw: 2023年7月8日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18720/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/18720/18720_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18720-1-32-mini-4wd-k4tasche-fm-a-chassis/
+specsRaw: ●完成時の全長144mm、全幅97mm、全高64mm ●モーターつき ●接着剤を使わずはめ込みとビス止めで組み立てられます ※硬いタイヤのため、強く押し込んで装着します。
+scrapedAt: 2026-09-08

@@ -1,0 +1,45 @@
+id: "18089"
+names:
+  ja: ミニ四駆ピッグ
+  en: MINI 4WD PIG RACER
+  zh-HK: 1/32 迷你四驅車 小豬跑手 (Super II 底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: racer
+seriesNumber: 89
+seriesLabel: 1/32 レーサーミニ四駆シリーズ
+chassis: super-2
+gearRatio: 5:1
+stockLoadout:
+  body:
+    - label: ミニ四駆ピッグ
+      source: tamiya
+  wheel-front:
+    - label: Large Narrow Lightweight
+      source: fandom
+  wheel-rear:
+    - label: Large Narrow Lightweight
+      source: fandom
+  tire-front:
+    - label: Large Arched
+      source: fandom
+  tire-rear:
+    - label: Large Arched
+      source: fandom
+  gear-set:
+    - label: 5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Mini 4WD Pig Racer
+priceJpy: 1540
+priceJpyExTax: 1400
+priceHkd: 110
+releaseDate: 2018-03-10
+releaseDateRaw: 2018年3月10日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18089/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/18089/18089_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18089-1-32-mini-4wd-pig-racer/
+scrapedAt: 2026-09-08

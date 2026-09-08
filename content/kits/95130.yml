@@ -1,0 +1,45 @@
+id: "95130"
+names:
+  ja: 1/32 ネオVQS ジャパンカップ2020 (ポリカボディ･VZシャーシ)
+  en: NEO-VQS (VZ CHASSIS) JAPAN CUP 2020 (POLYCARBONATE BODY)
+  zh-HK: 1/32 迷你四驅車 Neo VQS Japan Cup 2020 (聚碳酸酯車身 / VZ底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: limited
+seriesLabel: ミニ四駆限定販売商品（マシン）
+chassis: vz
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 ネオVQS ジャパンカップ2020 (ポリカボディ･VZシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Y-Spoke
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Y-Spoke
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Neo-VQS
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 130
+releaseDate: 2020-08-01
+releaseDateRaw: 2020年8月1日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95130/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95130/95130_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95130-1-32-neo-vqs-japan-cup-2020-polycarbonate-body-vz-chassis/
+specsRaw: ●完成時の全長158mm、全幅98mm、全高43mm ●モーターつき ●接着剤を使わずはめ込みとビス止めで組み立てられます
+scrapedAt: 2026-09-08

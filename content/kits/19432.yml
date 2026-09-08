@@ -1,0 +1,46 @@
+id: "19432"
+names:
+  ja: 1/32 ソニックセイバー プレミアム(スーパーIIシャーシ)
+  en: SONIC SABER PREMIUM (SUPER-II CHASSIS)
+  zh-HK: 1/32 迷你四驅車 超音號 Premium (Super-II底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: fully-cowled
+seriesNumber: 32
+seriesLabel: 1/32 フルカウルミニ四駆シリーズ
+chassis: super-2
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 ソニックセイバー プレミアム(スーパーIIシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Sonic Saber
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 100
+releaseDate: 2011-01-22
+releaseDateRaw: 2011年1月22日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/19432/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/19432/19432_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-194321-32-scale-jr-sonic-saber-premium-super-ii-chassis-model-construction-kit/
+specsRaw: ●完成時の全長150mm ●全幅97mm ●モーター付き
+scrapedAt: 2026-09-08

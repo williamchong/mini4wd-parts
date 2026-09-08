@@ -1,0 +1,46 @@
+id: "18100"
+names:
+  ja: エレグリッター (VZシャーシ)
+  en: ELEGLITTER (VZ CHASSIS)
+  zh-HK: 1/32 迷你四驅車 Eleglitter (VZ底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: racer
+seriesNumber: 100
+seriesLabel: 1/32 レーサーミニ四駆シリーズ
+chassis: vz
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: エレグリッター (VZシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Angular-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Angular-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Eleglitter
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2021-08-07
+releaseDateRaw: 2021年8月7日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18100/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/18100/18100_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18100-eleglitter-vz-chassis/
+specsRaw: ●完成時の全長158mm、全幅98mm、全高40mm ●モーターつき ●接着剤を使わずはめ込みとビス止めで組み立てられます
+scrapedAt: 2026-09-08

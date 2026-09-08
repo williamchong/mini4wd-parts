@@ -1,0 +1,46 @@
+id: "18633"
+names:
+  ja: 1/32 ライジング エッジ
+  en: RISING EDGE
+  zh-HK: 1/32 迷你四驅車 Rising Edge (MS底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: pro
+seriesNumber: 33
+seriesLabel: 1/32 ミニ四駆PROシリーズ
+chassis: ms
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 ライジング エッジ
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Rising Edge
+priceJpy: 1210
+priceJpyExTax: 1100
+priceHkd: 110
+releaseDate: 2011-10-29
+releaseDateRaw: 2011年10月29日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18633/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18633/18633_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18633-rising-edge/
+specsRaw: ●完成時の全長152mm ●全幅97mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

@@ -1,0 +1,43 @@
+id: "95226"
+names:
+  ja: 1/32 ミニ四駆･くまモンバージョン（完成車）
+  en: MINI 4WD Kumamon Version (FINISHED MODEL)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: super-2
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: 1/32 ミニ四駆･くまモンバージョン（完成車）
+      source: tamiya
+  wheel-front:
+    - label: Small Fully Cowled-type
+      source: fandom
+  wheel-rear:
+    - label: Small Fully Cowled-type
+      source: fandom
+  tire-front:
+    - label: Small High-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small High-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Mini 4WD Kumamon Version
+priceJpy: 1540
+priceJpyExTax: 1400
+priceHkd: 140
+releaseDate: 2018-09-29
+releaseDateRaw: 2018年9月29日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95226/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95226/95226_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95226-mini-4wd-kumamon-version-finished-model/
+specsRaw: 全長150mm、全幅97mm、全高44mm モーター付き
+scrapedAt: 2026-09-08

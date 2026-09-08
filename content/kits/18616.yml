@@ -1,0 +1,44 @@
+id: "18616"
+names:
+  ja: 1/32 アバンテＸ（エックス）
+  en: AVANTE X
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: pro
+seriesNumber: 16
+seriesLabel: 1/32 ミニ四駆PROシリーズ
+chassis: ms
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: 1/32 アバンテＸ（エックス）
+      source: tamiya
+  wheel-front:
+    - label: Large MS I
+      source: fandom
+  wheel-rear:
+    - label: Large MS I
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Avante X
+priceJpy: 1100
+priceJpyExTax: 1000
+priceHkd: 100
+releaseDate: 2006-12-23
+releaseDateRaw: 2006年12月23日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18616/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/18616/18616_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18616-1-32-avante-x/
+specsRaw: ●全長152mm ●全幅92mm ●ダブルシャフトモーター付き
+scrapedAt: 2026-09-08

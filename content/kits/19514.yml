@@ -1,0 +1,40 @@
+id: "19514"
+names:
+  ja: 1/32 リバティーエンペラー GPA
+  en: LIBERTY EMPEROR GPA
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: super
+seriesNumber: 14
+seriesLabel: 1/32 スーパーミニ四駆シリーズ
+chassis: vs
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: 1/32 リバティーエンペラー GPA
+      source: tamiya
+  wheel-front:
+    - label: Large Lightweight
+      source: fandom
+  wheel-rear:
+    - label: Large Lightweight
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Liberty Emperor
+priceJpy: 770
+priceJpyExTax: 700
+status: current
+officialUrl: https://www.tamiya.com/japan/products/19514/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/19514/19514_1.jpg
+specsRaw: ●完成時の全長145mm ●全幅90mm ●全高50mm
+scrapedAt: 2026-09-08

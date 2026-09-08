@@ -1,0 +1,43 @@
+id: "95224"
+names:
+  ja: 1/32 シャドウシャーク イタリアスペシャル （ARシャーシ）
+  en: SHADOW SHARK ITALIA SPECIAL (AR CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ar
+gearRatio: 4.2:1
+stockLoadout:
+  body:
+    - label: 1/32 シャドウシャーク イタリアスペシャル （ARシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Large MS I
+      source: fandom
+  wheel-rear:
+    - label: Large MS I
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 4.2:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Shadow Shark
+priceJpy: 1100
+priceJpyExTax: 1000
+priceHkd: 100
+releaseDate: 2016-03-26
+releaseDateRaw: 2016年3月26日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95224/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95224/95224_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95224-shadow-shark-italia-special-ar-chassis/
+specsRaw: ●完成時の全長155mm ●全幅97mm ●全高43mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

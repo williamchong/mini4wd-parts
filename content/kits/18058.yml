@@ -1,0 +1,41 @@
+id: "18058"
+names:
+  ja: 1/32 アバンテRS
+  en: AVANTE RS
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: racer
+seriesNumber: 58
+seriesLabel: 1/32 レーサーミニ四駆シリーズ
+chassis: vs
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: 1/32 アバンテRS
+      source: tamiya
+  wheel-front:
+    - label: Large Mesh-Type
+      source: fandom
+  wheel-rear:
+    - label: Large Mesh-Type
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Avante Jr.
+priceJpy: 880
+priceJpyExTax: 800
+releaseDate: 2004-12
+releaseDateRaw: 2004年12月発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18058/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18058/18058_1.jpg
+scrapedAt: 2026-09-08

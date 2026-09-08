@@ -1,0 +1,41 @@
+id: "18061"
+names:
+  ja: 1/32 スーパーセイバーRS
+  en: SUPER SABRE RS
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: racer
+seriesNumber: 61
+seriesLabel: 1/32 レーサーミニ四駆シリーズ
+chassis: vs
+gearRatio: 4.2:1
+stockLoadout:
+  body:
+    - label: 1/32 スーパーセイバーRS
+      source: tamiya
+  wheel-front:
+    - label: Large TZ Fully Cowled Type
+      source: fandom
+  wheel-rear:
+    - label: Large TZ Fully Cowled Type
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 4.2:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Super Sabre Jr.
+priceJpy: 880
+priceJpyExTax: 800
+releaseDate: 2005-06
+releaseDateRaw: 2005年6月発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18061/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18061/18061_1.jpg
+scrapedAt: 2026-09-08

@@ -1,0 +1,42 @@
+id: "95337"
+names:
+  ja: 1/32 ファイヤードラゴン クリヤースペシャル（ポリカボディ）
+  en: FIRE DRAGON CLEAR SPECIAL（POLYCARBONATE BODY）
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: vs
+gearRatio: 4.2:1
+stockLoadout:
+  body:
+    - label: 1/32 ファイヤードラゴン クリヤースペシャル（ポリカボディ）
+      source: tamiya
+  wheel-front:
+    - label: Large V-Spoke
+      source: fandom
+  wheel-rear:
+    - label: Large V-Spoke
+      source: fandom
+  tire-front:
+    - label: Large Arched
+      source: fandom
+  tire-rear:
+    - label: Large Arched
+      source: fandom
+  gear-set:
+    - label: 4.2:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Fire Dragon Jr.
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2017-08-05
+releaseDateRaw: 2017年8月5日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95337/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95337/95337_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95337-jr-fire-dragon-clear-sp-vs-chassis-polycarbonate-body/
+scrapedAt: 2026-09-08

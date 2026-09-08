@@ -1,0 +1,46 @@
+id: "18064"
+names:
+  ja: 1/32 テラスコーチャーＲＳ（スーパーIIシャーシ）
+  en: TERRA SCORCHER RS (SUPER-II CHASSIS)
+  zh-HK: 1/32 迷你四驅車 Terra Scorcher RS 大地燃燒者RS (Super II 底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: racer
+seriesNumber: 64
+seriesLabel: 1/32 レーサーミニ四駆シリーズ
+chassis: super-2
+gearRatio: 4.2:1
+stockLoadout:
+  body:
+    - label: 1/32 テラスコーチャーＲＳ（スーパーIIシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Large FM-Type
+      source: fandom
+  wheel-rear:
+    - label: Large FM-Type
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 4.2:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Terra Scorcher Jr.
+priceJpy: 1100
+priceJpyExTax: 1000
+priceHkd: 100
+releaseDate: 2011-10-29
+releaseDateRaw: 2011年10月29日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18064/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18064/18064_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18064-terra-scorcher-rs-super-ii-chassis/
+specsRaw: ●完成時の全長150mm ●全幅97mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

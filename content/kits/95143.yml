@@ -1,0 +1,43 @@
+id: "95143"
+names:
+  ja: 1/32 デュアルリッジJr. ジャパンカップ2021 (ポリカボディ･VZシャーシ)
+  en: DUAL RIDGE Jr. (VZ CHASSIS) JAPAN CUP 2021 (POLYCARBONATE BODY)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: limited
+seriesLabel: ミニ四駆限定販売商品（マシン）
+chassis: vz
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 デュアルリッジJr. ジャパンカップ2021 (ポリカボディ･VZシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile A-Spoke
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile A-Spoke
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Dual Ridge Jr.
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2021-09-18
+releaseDateRaw: 2021年9月18日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95143/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95143/95143_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95143-dual-ridge-jr-vz-chassis-j-cup-2021-polycarbonate-body/
+specsRaw: ●完成時の全長158mm、全幅98mm、全高50mm ●モーターつき ●接着剤を使わずはめ込みとビス止めで組み立てられます
+scrapedAt: 2026-09-08

@@ -1,0 +1,44 @@
+id: "18075"
+names:
+  ja: 1/32 グレートエンペラー プレミアム（スーパーIIシャーシ）
+  en: DASH-001 GREAT EMPEROR PREMIUM (SUPER-II CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: racer
+seriesNumber: 75
+seriesLabel: 1/32 レーサーミニ四駆シリーズ
+chassis: super-2
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 グレートエンペラー プレミアム（スーパーIIシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Small Fully Cowled Type
+      source: fandom
+  wheel-rear:
+    - label: Small Fully Cowled Type
+      source: fandom
+  tire-front:
+    - label: Small Treaded Radial
+      source: fandom
+  tire-rear:
+    - label: Small Treaded Radial
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Dash-001 Great Emperor
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 130
+releaseDate: 2012-07-07
+releaseDateRaw: 2012年7月7日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18075/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18075/18075_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18075-1-32-dash001-g-emperorpremium-super-ii-chassis/
+specsRaw: ●完成時の全長150mm ●全幅97mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

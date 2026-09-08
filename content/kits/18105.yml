@@ -1,0 +1,46 @@
+id: "18105"
+names:
+  ja: グラスホッパーJr. (VZシャーシ)
+  en: The GRASSHOPPER Jr. (VZ CHASSIS)
+  zh-HK: 1/32 迷你四驅車 The Grasshopper Jr. 草蜢Jr. (VZ底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: racer
+seriesNumber: 105
+seriesLabel: 1/32 レーサーミニ四駆シリーズ
+chassis: vz
+gearRatio: 4.2:1
+stockLoadout:
+  body:
+    - label: グラスホッパーJr. (VZシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Large TZ Fully Cowled Type
+      source: fandom
+  wheel-rear:
+    - label: Large TZ Fully Cowled Type
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 4.2:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Grasshopper Jr.
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2024-12-07
+releaseDateRaw: 2024年12月7日(土)ごろ発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18105/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/18105/18105_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18105-1-32-mini-4wd-the-grasshopper-jr-vz-chassis/
+specsRaw: ●完成時の全長158mm、全幅98mm、全高45mm ●モーターつき ●組み立ては接着剤不要のはめ込み式 ●大径スリックタイヤ(ブラック)を装着
+scrapedAt: 2026-09-08

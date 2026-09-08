@@ -1,0 +1,43 @@
+id: "95574"
+names:
+  ja: ライズエンペラー ブラックスペシャル (MAシャーシ)
+  en: RISE-EMPEROR BLACK SPECIAL (MA CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ma
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: ライズエンペラー ブラックスペシャル (MAシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Large MS II
+      source: fandom
+  wheel-rear:
+    - label: Large MS II
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Rise-Emperor
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2020-11-21
+releaseDateRaw: 2020年11月21日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95574/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95574/95574_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95574-rise-emperor-black-special-ma-chassis/
+specsRaw: ●完成時の全長156mm、全幅97mm、全高48mm ●ダブルシャフトモーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

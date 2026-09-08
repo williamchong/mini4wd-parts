@@ -1,0 +1,45 @@
+id: "95676"
+names:
+  ja: サイクロンマグナム ポリカボディスペシャル(ARシャーシ) -フルカウルミニ四駆30周年記念-
+  en: CYCLONE MAGNUM POLYCARBONATE BODY SPECIAL (AR CHASSIS) FULLY COWLED MINI 4WD 30TH ANNIVERSARY
+  zh-HK: 1/32 迷你四驅車 旋風麥林/旋風衝鋒 PC軟殼特別版 (AR底盤) -Fully Cowled Mini 4WD 30週年紀念-
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ar
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: サイクロンマグナム ポリカボディスペシャル(ARシャーシ) -フルカウルミニ四駆30周年記念-
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Spiral-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Spiral-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Cyclone Magnum
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2024-10-12
+releaseDateRaw: 2024年10月12日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95676/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95676/95676_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95676-1-32-mini-4wd-cyclone-magnum-polycarbonate-body-special-ar-fully-cowled-mini-4wd-30th-anniversary/
+specsRaw: ●完成時の全長156mm、全幅97mm、全高41mm ●モーターつき ●フルカウルミニ四駆30周年を記念するスペシャルステッカーもセット。 ※硬いタイヤのため、強く押し込んで装着します。
+scrapedAt: 2026-09-08

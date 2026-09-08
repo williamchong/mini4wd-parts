@@ -1,0 +1,43 @@
+id: "95110"
+names:
+  ja: 1/32 ダッシュ1号 皇帝(エンペラー) メモリアル(MSシャーシ) -ジャパンカップ開催30年記念-
+  en: DASH-1 EMPEROR MEMORIAL (MS CHASSIS) 30 YEARS OF THE JAPAN CUP
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: limited
+seriesLabel: ミニ四駆限定販売商品（マシン）
+chassis: ms
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: 1/32 ダッシュ1号 皇帝(エンペラー) メモリアル(MSシャーシ) -ジャパンカップ開催30年記念-
+      source: tamiya
+  wheel-front:
+    - label: Large Low-Profile
+      source: fandom
+  wheel-rear:
+    - label: Large Low-Profile
+      source: fandom
+  tire-front:
+    - label: Large Low-Profile
+      source: fandom
+  tire-rear:
+    - label: Large Low-Profile
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Dash-1 Emperor
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2018-06-23
+releaseDateRaw: 2018年6月23日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95110/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95110/95110_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95110-dash-1-emperor-memorial-ms-chassis-30-years-japan-cup/
+specsRaw: ●完成時の全長151mm ●全幅92mm ●全高53mm ●ダブルシャフトモーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

@@ -1,0 +1,39 @@
+id: "18601"
+names:
+  ja: 1/32 ナイトロサンダー・ブルー（完成車）
+  en: NITRO THUNDER BLUE (FINISHED MODEL)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: pro
+seriesNumber: 1
+seriesLabel: 1/32 ミニ四駆PROシリーズ
+chassis: ms
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: 1/32 ナイトロサンダー・ブルー（完成車）
+      source: tamiya
+  wheel-front:
+    - label: Large MS I
+      source: fandom
+  wheel-rear:
+    - label: Large MS I
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Nitro Thunder
+priceJpy: 880
+priceJpyExTax: 800
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18601/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18601/18601_1.jpg
+scrapedAt: 2026-09-08

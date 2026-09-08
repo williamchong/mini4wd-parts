@@ -1,0 +1,23 @@
+id: "19427"
+names:
+  ja: 1/32 ディオスパーダ GPA
+  en: DIOSPADA GPA
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: fully-cowled
+seriesNumber: 27
+seriesLabel: 1/32 フルカウルミニ四駆シリーズ
+chassis: vs
+stockLoadout:
+  body:
+    - label: 1/32 ディオスパーダ GPA
+      source: tamiya
+loadoutSource: chassis
+priceJpy: 770
+priceJpyExTax: 700
+status: current
+officialUrl: https://www.tamiya.com/japan/products/19427/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/19427/19427_1.jpg
+specsRaw: ●完成時の全長145mm ●全幅90mm ●全高44mm
+scrapedAt: 2026-09-08

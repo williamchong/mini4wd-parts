@@ -1,0 +1,42 @@
+id: "18071"
+names:
+  ja: 1/32 セイントドラゴン プレミアム（VSシャーシ）
+  en: SAINT DRAGON PREMIUM (VS CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: racer
+seriesNumber: 71
+seriesLabel: 1/32 レーサーミニ四駆シリーズ
+chassis: vs
+gearRatio: 4.2:1
+stockLoadout:
+  body:
+    - label: 1/32 セイントドラゴン プレミアム（VSシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Large Manta Ray Type
+      source: fandom
+  wheel-rear:
+    - label: Large Manta Ray Type
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Spiked
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Spiked
+      source: fandom
+  gear-set:
+    - label: 4.2:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Saint Dragon Jr.
+priceJpy: 1100
+priceJpyExTax: 1000
+releaseDate: 2012-05-26
+releaseDateRaw: 2012年5月26日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18071/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18071/18071_1.jpg
+specsRaw: ●完成時の全長130mm ●全幅93mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

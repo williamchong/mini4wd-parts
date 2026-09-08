@@ -1,0 +1,43 @@
+id: "95372"
+names:
+  ja: DCR-01 (デクロス-01) パープルスペシャル (MAシャーシ)
+  en: DCR-01 PURPLE SPECIAL (MA CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ma
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: DCR-01 (デクロス-01) パープルスペシャル (MAシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Large Low-Profile 6-Spoke
+      source: fandom
+  wheel-rear:
+    - label: Large Low-Profile 6-Spoke
+      source: fandom
+  tire-front:
+    - label: Large Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Large Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: DCR-01
+priceJpy: 1210
+priceJpyExTax: 1100
+priceHkd: 110
+releaseDate: 2018-01-13
+releaseDateRaw: 2018年1月13日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95372/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95372/95372_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95372-jr-dcr-01-purple-special-ma-chassis/
+specsRaw: ●完成時の全長156mm ●全幅97mm ●全高36mm ●ダブルシャフトモーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

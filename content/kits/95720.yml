@@ -1,0 +1,45 @@
+id: "95720"
+names:
+  ja: グラスホッパーJr. (VZシャーシ) ブラックスペシャル
+  en: The GRASSHOPPER Jr. (VZ CHASSIS) BLACK SPECIAL
+  zh-HK: 1/32 迷你四驅車 The Grasshopper Jr. 草蜢Jr. (VZ底盤) 黑色特別版
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: limited
+seriesLabel: ミニ四駆限定販売商品（マシン）
+chassis: vz
+gearRatio: 4.2:1
+stockLoadout:
+  body:
+    - label: グラスホッパーJr. (VZシャーシ) ブラックスペシャル
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Angular-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Angular-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 4.2:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Grasshopper Jr.
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 130
+releaseDate: 2026-07-04
+releaseDateRaw: 2026年7月4日(土) よりタミヤ・イベント会場にて発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95720/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95720/95720_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95720-1-32-mini-4wd-the-grasshopper-jr-vz-chassis-black-special/
+specsRaw: ●完成時の全長158mm、全幅98mm、全高43mm ●モーターつき ●組み立ては接着剤不要のはめ込み式 ●スーパーハード小径ローハイトタイヤを装着※硬いタイヤのため、強く押し込んで装着します。
+scrapedAt: 2026-09-08

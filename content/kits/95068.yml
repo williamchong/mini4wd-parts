@@ -1,0 +1,43 @@
+id: "95068"
+names:
+  ja: 1/32 ミニ四駆・くまモン バージョン
+  en: MINI 4WD KUMAMON VERSION
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: limited
+seriesLabel: ミニ四駆限定販売商品（マシン）
+chassis: super-2
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: 1/32 ミニ四駆・くまモン バージョン
+      source: tamiya
+  wheel-front:
+    - label: Small Fully Cowled-type
+      source: fandom
+  wheel-rear:
+    - label: Small Fully Cowled-type
+      source: fandom
+  tire-front:
+    - label: Small High-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small High-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Mini 4WD Kumamon Version
+priceJpy: 1210
+priceJpyExTax: 1100
+priceHkd: 110
+releaseDate: 2014-08-13
+releaseDateRaw: 2014年8月13日(水)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95068/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95068/95068_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95068-kumamon-version-limited-edition-super-ii-chassis/
+specsRaw: ●完成時の全長150mm､全幅97mm､全高44mm ●組み立て･塗装済みのくまモン人形つき ●モーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

@@ -17,3 +17,37 @@ treadRearMm: 64
 weightG: 115
 status: current
 notes: Super-1 的現代化版本，仍是每年限定套件常用的底盤，改裝零件選擇多。
+
+# What the bare runner puts in each slot before the user changes anything
+# (docs/PLAN.md §4.7). Most of it is molded into the kit and Tamiya sells no
+# equivalent Grade-Up Part, so those entries carry a label and no item number:
+# you already own them and you cannot buy them separately.
+defaultLoadout:
+  motor:
+    - { partId: '94380', source: chassis }
+  gear-set:
+    - { label: 套件標準齒輪組, source: chassis }
+  counter-gear:
+    - { label: 套件標準中間齒輪, source: chassis }
+  propeller-shaft:
+    - { label: 套件標準傳動軸, source: chassis }
+  terminal:
+    - { label: 套件標準電池金屬片, source: chassis }
+  switch:
+    - { label: 套件標準電源開關, source: chassis }
+  axle:
+    - { label: 套件標準車軸, source: chassis }
+  bearing:
+    - { label: 套件標準塑膠軸襯, source: chassis }
+  wheel-front:
+    - { label: 套件標準輪框, source: chassis }
+  wheel-rear:
+    - { label: 套件標準輪框, source: chassis }
+  tire-front:
+    - { label: 套件標準輪胎, source: chassis }
+  tire-rear:
+    - { label: 套件標準輪胎, source: chassis }
+  roller-front:
+    - { label: 套件標準塑膠導輪, source: chassis }
+  roller-rear:
+    - { label: 套件標準塑膠導輪, source: chassis }

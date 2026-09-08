@@ -1,0 +1,43 @@
+id: "18717"
+names:
+  ja: ジプニー (FM-Aシャーシ)
+  en: DYIPNE (FM-A CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: rev
+seriesLabel: 1/32 ミニ四駆REVシリーズ
+chassis: fm-a
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: ジプニー (FM-Aシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile A-Spoke
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile A-Spoke
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Dyipne
+priceJpy: 1210
+priceJpyExTax: 1100
+priceHkd: 110
+releaseDate: 2025-08-30
+releaseDateRaw: 2025年8月30日(土)ごろ発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18717/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/18717/18717_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18717/
+specsRaw: ●完成時の全長156mm、全幅97mm、全高56mm ●モーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

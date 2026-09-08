@@ -1,0 +1,41 @@
+id: "95212"
+names:
+  ja: 1/32 サンダーショットMk.II レッドスペシャル （MAシャーシ）
+  en: THUNDER SHOT Mk.II RED SPECIAL (MA CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ma
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: 1/32 サンダーショットMk.II レッドスペシャル （MAシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Large Narrow Lightweight
+      source: fandom
+  wheel-rear:
+    - label: Large Narrow Lightweight
+      source: fandom
+  tire-front:
+    - label: Large Arched
+      source: fandom
+  tire-rear:
+    - label: Large Arched
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Thunder Shot Mk.II
+priceJpy: 1100
+priceJpyExTax: 1000
+releaseDate: 2016-02-27
+releaseDateRaw: 2016年2月27日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95212/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95212/95212_1.jpg
+specsRaw: ●完成時の全長156mm ●全幅97mm ●全高43mm ●ダブルシャフトモーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

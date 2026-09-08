@@ -1,0 +1,46 @@
+id: "17902"
+names:
+  ja: ピッグレーサー（ピンク/ライキリ）
+  en: PIG RACER (PINK/RAIKIRI)
+  zh-HK: Beginner’s Mini4WD 雷切(粉紅色) & 小豬車手 (MA底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: beginners
+seriesNumber: 2
+seriesLabel: ビギナーズミニ四駆シリーズ
+chassis: ma
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: ピッグレーサー（ピンク/ライキリ）
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Raikiri
+priceJpy: 1980
+priceJpyExTax: 1800
+priceHkd: 180
+releaseDate: 2022-04-02
+releaseDateRaw: 2022年4月2日(土)ごろ発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/17902/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/17902/17902_1_04.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-17902-beginners-mini4wd-raikiri-pink-pig-racer-ma-chassis/
+specsRaw: ●完成時の全長156mm、全幅97mm、全高43mm ●ダブルシャフトモーターつき ●接着剤を使わず簡単なはめ込みとビス止めで組み立てられます。
+scrapedAt: 2026-09-08

@@ -1,0 +1,43 @@
+id: "95425"
+names:
+  ja: アバンテ Mk.III レッドスペシャル
+  en: AVANTE Mk.III RED SPECIAL
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ms
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: アバンテ Mk.III レッドスペシャル
+      source: tamiya
+  wheel-front:
+    - label: Large Narrow Lightweight
+      source: fandom
+  wheel-rear:
+    - label: Large Narrow Lightweight
+      source: fandom
+  tire-front:
+    - label: Large Arched
+      source: fandom
+  tire-rear:
+    - label: Large Arched
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Avante Mk.III
+priceJpy: 1210
+priceJpyExTax: 1100
+priceHkd: 110
+releaseDate: 2018-12-01
+releaseDateRaw: 2018年12月1日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95425/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95425/95425_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95425/
+specsRaw: ●完成時の全長152mm ●全幅92mm ●ダブルシャフトモーター付き ●組み立ては接着剤不要のはめ込み式。
+scrapedAt: 2026-09-08

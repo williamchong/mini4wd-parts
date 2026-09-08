@@ -1,0 +1,45 @@
+id: "95571"
+names:
+  ja: エクスフローリー ポリカボディスペシャル (パープル) MSシャーシ
+  en: EXFLOWLY POLYCARBONATE BODY SPECIAL (PURPLE) (MS CHASSIS)
+  zh-HK: 1/32 迷你四驅車 Exflowly 聚碳酸酯車身特別版 (紫色) (MS底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ms
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: エクスフローリー ポリカボディスペシャル (パープル) MSシャーシ
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile A-Spoke
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile A-Spoke
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Exflowly
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 130
+releaseDate: 2023-12-09
+releaseDateRaw: 2023年12月9日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95571/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95571/95571_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95571-exflowly-purple-special/
+specsRaw: ●完成時の全長154mm、全幅92mm、全高40mm ●ダブルシャフトモーターつき ●接着剤を使わずはめ込みとビス止めで組み立てられます。
+scrapedAt: 2026-09-08

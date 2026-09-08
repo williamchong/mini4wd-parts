@@ -1,0 +1,43 @@
+id: "95087"
+names:
+  ja: 1/32 アバンテMk.III ジャパンカップ 2015 リミテッド
+  en: AVANTE MK.III JAPAN CUP 2015 LIMITED EDITION
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: limited
+seriesLabel: ミニ四駆限定販売商品（マシン）
+chassis: ma
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 アバンテMk.III ジャパンカップ 2015 リミテッド
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Avante Mk.III
+priceJpy: 1100
+priceJpyExTax: 1000
+priceHkd: 100
+releaseDate: 2015-07-11
+releaseDateRaw: 2015年7月11日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95087/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95087/95087_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95087-1-32-mini-4wd-jr-avante-mk-iii-japan-cup-2015-limited-edition-ma-chassis-kit/
+specsRaw: ●完成時の全長156mm ●全幅97mm ●全高41mm ●ダブルシャフトモーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

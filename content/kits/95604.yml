@@ -1,0 +1,45 @@
+id: "95604"
+names:
+  ja: 1/32 DCR-02 (デクロス-02) クリヤーブラックスペシャル (MAシャーシ)
+  en: DCR-02 CLEAR BLACK SPECIAL (MA CHASSIS)
+  zh-HK: DCR-02 透明黑特別版 (MA底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ma
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 DCR-02 (デクロス-02) クリヤーブラックスペシャル (MAシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Y-Spoke
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Y-Spoke
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: DCR-02
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2022-03-31
+releaseDateRaw: 2022年3月31日(木)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95604/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95604/95604_1_02.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95604-dcr-02-clear-black-special-ma-chassis/
+specsRaw: ●完成時の全長156mm ●全幅97mm ●全高42mm ●ダブルシャフトモーターつき ●組み立ては接着剤不要のはめ込み式。
+scrapedAt: 2026-09-08

@@ -1,0 +1,41 @@
+id: "92425"
+names:
+  ja: リトルライアン ミニ四駆スペシャル (VSシャーシ)
+  en: LITTLE RYAN MINI 4WD SPECIAL EDITION (VS CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: limited
+seriesLabel: ミニ四駆限定販売商品（マシン）
+chassis: vs
+gearRatio: 5:1
+stockLoadout:
+  body:
+    - label: リトルライアン ミニ四駆スペシャル (VSシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Fin-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Fin-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Little Ryan Mini 4WD Special
+priceJpy: 2310
+priceJpyExTax: 2100
+releaseDate: 2022-06-04
+releaseDateRaw: 2022年6月4日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/92425/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/92425/92425_1.jpg
+specsRaw: ●完成時の全長146mm、全幅90mm、全高43mm ●モーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

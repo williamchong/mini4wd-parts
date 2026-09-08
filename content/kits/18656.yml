@@ -1,0 +1,29 @@
+id: "18656"
+names:
+  ja: ロボレース デボット2.0 (MAシャーシ)
+  en: Roborace DevBot 2.0 (MA CHASSIS)
+  zh-HK: 1/32 迷你四驅車 Roborace DevBot 2.0 (MA底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: pro
+seriesNumber: 56
+seriesLabel: 1/32 ミニ四駆PROシリーズ
+chassis: ma
+stockLoadout:
+  body:
+    - label: ロボレース デボット2.0 (MAシャーシ)
+      source: tamiya
+loadoutSource: chassis
+priceJpy: 1210
+priceJpyExTax: 1100
+priceHkd: 110
+releaseDate: 2020-06-27
+releaseDateRaw: 2020年6月27日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18656/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/18656/18656_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18656-robo-race-devot-2-0-ma-chassis/
+specsRaw: ●完成時の全長156mm、全幅97mm、全高43mm ●ダブルシャフトモーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

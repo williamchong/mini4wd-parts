@@ -1,0 +1,44 @@
+id: "18615"
+names:
+  ja: 1/32 マンタレイMk.II
+  en: MANTA RAY Mk.II
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: pro
+seriesNumber: 15
+seriesLabel: 1/32 ミニ四駆PROシリーズ
+chassis: ms
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: 1/32 マンタレイMk.II
+      source: tamiya
+  wheel-front:
+    - label: Large MS I
+      source: fandom
+  wheel-rear:
+    - label: Large MS I
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Manta Ray Mk.II
+priceJpy: 990
+priceJpyExTax: 900
+priceHkd: 90
+releaseDate: 2006-12-09
+releaseDateRaw: 2006年12月9日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18615/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18615/18615_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18615-1-32-mini-4wd-manta-ray-mk-ii-kit/
+specsRaw: ●全長152mm ●全幅92mm ●ダブルシャフトモーター付き
+scrapedAt: 2026-09-08

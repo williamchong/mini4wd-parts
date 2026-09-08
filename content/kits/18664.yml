@@ -1,0 +1,29 @@
+id: "18664"
+names:
+  ja: ティクシヴ（MEシャーシ）
+  en: TYXIV (ME CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: pro
+seriesNumber: 64
+seriesLabel: 1/32 ミニ四駆PROシリーズ
+chassis: me
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: ティクシヴ（MEシャーシ）
+      source: tamiya
+  gear-set:
+    - label: 3.5:1
+      source: tamiya
+loadoutSource: chassis
+priceJpy: 1650
+priceJpyExTax: 1500
+releaseDate: 2026-10-24
+releaseDateRaw: 2026年10月24日(土)ごろ発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18664/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/18664/18664_1.jpg
+specsRaw: ●完成時の全長156mm、全幅97mm、全高33mm(キャノピー装着時)、35mm(ドライバー人形付きコクピット装着時) ●ダブルシャフトモーターつき ●ギヤ比3.5:1 ●接着材を使わずはめ込みとビス止めだけで組み立てられます。 ●スーパーハード小径ローハイトタイヤ(ブラック)を装着 ※硬いタイヤのため、強く押し込んで装着します。
+scrapedAt: 2026-09-08

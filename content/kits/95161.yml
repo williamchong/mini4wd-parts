@@ -1,0 +1,24 @@
+id: "95161"
+names:
+  ja: DCR-01 (デクロス-01) ブルーメッキボディ (MAシャーシ)
+  en: DCR-01 BLUE METALLIC BODY (MA CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: limited
+seriesLabel: ミニ四駆限定販売商品（マシン）
+chassis: ma
+stockLoadout:
+  body:
+    - label: DCR-01 (デクロス-01) ブルーメッキボディ (MAシャーシ)
+      source: tamiya
+loadoutSource: chassis
+priceJpy: 1430
+priceJpyExTax: 1300
+releaseDate: 2023-03
+releaseDateRaw: 2023年3月発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95161/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95161/95161_1.jpg
+specsRaw: ●完成時の全長156mm、全幅97mm、全高36mm ●ダブルシャフトモーターつき ●接着剤を使わずはめ込みとビス止めで組み立てられます
+scrapedAt: 2026-09-08

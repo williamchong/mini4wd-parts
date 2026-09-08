@@ -1,0 +1,45 @@
+id: "95703"
+names:
+  ja: ゼンペラー3 ポリカボディスペシャル （VZシャーシ） -レーサーミニ四駆40周年記念-
+  en: ZENPEROR 3 POLYCARBONATE BODY SPECIAL (VZ CHASSIS) RACING MINI 4WD 40TH ANNIVERSARY
+  zh-HK: 1/32 迷你四驅車 Z皇帝 PC軟殼特別版 (VZ底盤) Racing Mini 4WD 40週年紀念
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: vz
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: ゼンペラー3 ポリカボディスペシャル （VZシャーシ） -レーサーミニ四駆40周年記念-
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Offset
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Offset
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: tamiya
+loadoutSource: fandom
+loadoutSourceTitle: Zenperor 3 Polycarbonate Body Special
+priceJpy: 1650
+priceJpyExTax: 1500
+priceHkd: 150
+releaseDate: 2026-08-08
+releaseDateRaw: 2026年8月8日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95703/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95703/info/95703_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95703-1-32-mini-4wd-zenperor-3-polycarbonate-body-special-vz-chassis-racing-mini-4wd-40th-anniversary/
+specsRaw: ●完成時の全長158mm、全幅98mm、全高47mm ●モーターつき ●組み立ては接着剤不要のはめ込み式 ●ボディはクリヤーのポリカーボネート製 ●スーパーハード小径ローハイトオフセットトレッドタイヤを装着 ●ギヤ比は3.5:1
+scrapedAt: 2026-09-08

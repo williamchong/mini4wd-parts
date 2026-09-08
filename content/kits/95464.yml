@@ -1,0 +1,45 @@
+id: "95464"
+names:
+  ja: アバンテMk.III アズール クリヤースペシャル(ポリカボディ)
+  en: AVANTE Mk.III AZURE CLEAR SPECIAL (POLYCARBONATE BODY)
+  zh-HK: 1/32 迷你四驅車 Avante Mk.III Azure 透明特別版 (PC軟膠車殼) (MS底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ms
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: アバンテMk.III アズール クリヤースペシャル(ポリカボディ)
+      source: tamiya
+  wheel-front:
+    - label: Large Narrow Lightweight
+      source: fandom
+  wheel-rear:
+    - label: Large Narrow Lightweight
+      source: fandom
+  tire-front:
+    - label: Large Arched
+      source: fandom
+  tire-rear:
+    - label: Large Arched
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Avante Mk.III
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2023-11-11
+releaseDateRaw: 2023年11月11日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95464/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95464/95464_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95464-avante-mk-iii-azure-clear-sp/
+specsRaw: ●全長152mm ●全幅92mm ●ダブルシャフトモーター付き ●組み立ては接着剤を使わずはめ込みとビス止めでOK
+scrapedAt: 2026-09-08

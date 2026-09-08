@@ -1,0 +1,44 @@
+id: "18065"
+names:
+  ja: 1/32 スーパーアバンテRS（スーパーIIシャーシ）
+  en: SUPER AVANTE RS (SUPER-II CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: racer
+seriesNumber: 65
+seriesLabel: 1/32 レーサーミニ四駆シリーズ
+chassis: super-2
+gearRatio: 4.2:1
+stockLoadout:
+  body:
+    - label: 1/32 スーパーアバンテRS（スーパーIIシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Large Teardrop-Type
+      source: fandom
+  wheel-rear:
+    - label: Large Teardrop-Type
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 4.2:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Super Avante
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 110
+releaseDate: 2011-12-17
+releaseDateRaw: 2011年12月17日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18065/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18065/18065_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18065-super-avante-rs-super-ii-chassis/
+specsRaw: ●完成時の全長150mm ●全幅97mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

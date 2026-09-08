@@ -1,0 +1,43 @@
+id: "95410"
+names:
+  ja: 1/32 シンクロマスター Z9（ズィーナイン）
+  en: SYNCHRO-MASTER Z9
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: vs
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: 1/32 シンクロマスター Z9（ズィーナイン）
+      source: tamiya
+  wheel-front:
+    - label: Large Flat Dish
+      source: fandom
+  wheel-rear:
+    - label: Large Flat Dish
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Synchro-Master Z9
+priceJpy: 990
+priceJpyExTax: 900
+priceHkd: 90
+releaseDate: 2018-10-13
+releaseDateRaw: 2018年10月13日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95410/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95410/95410_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95410-synchro-master-z9-vs-chassis-95410/
+specsRaw: ●完成時の全長147mm ●全幅90mm ●全高37mm ●組み立ては接着剤不要のはめ込み式。
+scrapedAt: 2026-09-08

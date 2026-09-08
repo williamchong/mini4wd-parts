@@ -1,0 +1,40 @@
+id: "95062"
+names:
+  ja: 1/32 エアロ アバンテ バイオレットSP (クリヤーボディ)(AR)
+  en: AERO AVANTE VIOLET SPECIAL (CLEAR BODY) (AR CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: limited
+seriesLabel: ミニ四駆限定販売商品（マシン）
+chassis: ar
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 エアロ アバンテ バイオレットSP (クリヤーボディ)(AR)
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Aero Avante
+priceJpy: 1320
+priceJpyExTax: 1200
+releaseDateRaw: 2015年 6月6日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95062/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95062/95062_1.jpg
+specsRaw: ●完成時の全長155mm ●全幅97mm ●全高45mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

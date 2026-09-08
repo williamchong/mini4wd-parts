@@ -1,0 +1,41 @@
+id: "18060"
+names:
+  ja: 1/32 ブーメランRS
+  en: The Boomerang RS
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: racer
+seriesNumber: 60
+seriesLabel: 1/32 レーサーミニ四駆シリーズ
+chassis: vs
+gearRatio: 4.2:1
+stockLoadout:
+  body:
+    - label: 1/32 ブーメランRS
+      source: tamiya
+  wheel-front:
+    - label: Large TZ-Type
+      source: fandom
+  wheel-rear:
+    - label: Large TZ-Type
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 4.2:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Boomerang Jr.
+priceJpy: 880
+priceJpyExTax: 800
+releaseDate: 2005-04-29
+releaseDateRaw: 2005年4月29日発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18060/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18060/18060_1.jpg
+scrapedAt: 2026-09-08

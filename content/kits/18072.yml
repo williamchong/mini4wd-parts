@@ -1,0 +1,42 @@
+id: "18072"
+names:
+  ja: 1/32 ファイヤードラゴン プレミアム（VSシャーシ）
+  en: FIRE DRAGON PREMIUM (VS CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: racer
+seriesNumber: 72
+seriesLabel: 1/32 レーサーミニ四駆シリーズ
+chassis: vs
+gearRatio: 4.2:1
+stockLoadout:
+  body:
+    - label: 1/32 ファイヤードラゴン プレミアム（VSシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Large Manta Ray-Type
+      source: fandom
+  wheel-rear:
+    - label: Large Manta Ray-Type
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Spiked
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Spiked
+      source: fandom
+  gear-set:
+    - label: 4.2:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Fire Dragon Jr.
+priceJpy: 1100
+priceJpyExTax: 1000
+releaseDate: 2012-07-07
+releaseDateRaw: 2012年7月7日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18072/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18072/18072_1.jpg
+specsRaw: ●完成時の全長130mm ●全幅93mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

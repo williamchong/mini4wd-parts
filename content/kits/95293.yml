@@ -1,0 +1,41 @@
+id: "95293"
+names:
+  ja: 1/32 フェスタジョーヌ 金メタリック(カーボン強化ホイール)
+  en: FESTA JAUNE GOLD METALLIC (w/CARBON REINFORCED WHEELS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ma
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 フェスタジョーヌ 金メタリック(カーボン強化ホイール)
+      source: tamiya
+  wheel-front:
+    - label: Small (Both) / Low-Profile Fin-Type (1st) / Low-Profile Dish-Type (2nd)
+      source: fandom
+  wheel-rear:
+    - label: Small (Both) / Low-Profile Fin-Type (1st) / Low-Profile Dish-Type (2nd)
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Festa Jaune
+priceJpy: 1320
+priceJpyExTax: 1200
+releaseDate: 2016-11-12
+releaseDateRaw: 2016年11月12日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95293/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95293/95293_1.jpg
+specsRaw: ●完成時の全長156mm ●全幅97mm ●全高41mm ●ダブルシャフトモーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

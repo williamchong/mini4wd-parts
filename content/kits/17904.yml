@@ -1,0 +1,46 @@
+id: "17904"
+names:
+  ja: ピッグレーサー (イエロー/ジルボルフ)
+  en: PIG RACER (YELLOW/SILWOLF)
+  zh-HK: Beginner’s Mini4WD 小豬車手 (黃色/銀狼) (MA底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: beginners
+seriesNumber: 4
+seriesLabel: ビギナーズミニ四駆シリーズ
+chassis: ma
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: ピッグレーサー (イエロー/ジルボルフ)
+      source: tamiya
+  wheel-front:
+    - label: Small Fin-type Low-Profile
+      source: fandom
+  wheel-rear:
+    - label: Small Fin-type Low-Profile
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Silwolf
+priceJpy: 1980
+priceJpyExTax: 1800
+priceHkd: 180
+releaseDate: 2022-01-08
+releaseDateRaw: 2022年1月8日(土)ごろ発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/17904/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/17904/17904_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-17904-beginners-mini4wd-pig-racer-yellow-silwolf-ma-chassis/
+specsRaw: ●完成時の全長156mm、全幅97mm、全高45mm ●ダブルシャフトモーターつき ●接着剤を使わず簡単なはめ込みとビス止めで組み立てられます。
+scrapedAt: 2026-09-08

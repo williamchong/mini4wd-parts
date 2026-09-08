@@ -1,0 +1,46 @@
+id: "18657"
+names:
+  ja: イグニシオン (MAシャーシ)
+  en: IGNICION (MA CHASSIS)
+  zh-HK: 1/32 迷你四驅車 燎原火 Ignicion (MA底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: pro
+seriesNumber: 57
+seriesLabel: 1/32 ミニ四駆PROシリーズ
+chassis: ma
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: イグニシオン (MAシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Fin-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Fin-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Ignicion
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 100
+releaseDate: 2021-09-18
+releaseDateRaw: 2021年9月18日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18657/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/18657/18657_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18657-ignicion-ma-chassis/
+specsRaw: ●完成時の全長156mm、全幅97mm、全高41mm ●ダブルシャフトモーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

@@ -1,0 +1,44 @@
+id: "18708"
+names:
+  ja: ナイトハンター （FM-Aシャーシ）
+  en: NIGHT HUNTER (FM-A CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: rev
+seriesNumber: 8
+seriesLabel: 1/32 ミニ四駆REVシリーズ
+chassis: fm-a
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: ナイトハンター （FM-Aシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile A-Spoke
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile A-Spoke
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Night Hunter
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2018-01-20
+releaseDateRaw: 2018年1月20日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18708/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18708/18708_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18708-jr-night-hunter-fm-a-chassis/
+specsRaw: ●完成時の全長156mm ●全幅97mm、全高41mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

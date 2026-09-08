@@ -1,0 +1,46 @@
+id: "18066"
+names:
+  ja: 1/32 スラッシュ リーパー
+  en: SLASH REAPER
+  zh-HK: 1/32 迷你四驅車 Slash Reaper (VS底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: racer
+seriesNumber: 66
+seriesLabel: 1/32 レーサーミニ四駆シリーズ
+chassis: vs
+gearRatio: 4.2:1
+stockLoadout:
+  body:
+    - label: 1/32 スラッシュ リーパー
+      source: tamiya
+  wheel-front:
+    - label: Large Manta Ray Type
+      source: fandom
+  wheel-rear:
+    - label: Large Manta Ray Type
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 4.2:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Slash Reaper
+priceJpy: 1210
+priceJpyExTax: 1100
+priceHkd: 110
+releaseDate: 2011-11-26
+releaseDateRaw: 2011年11月26日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18066/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18066/18066_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18066-1-32-mini-4wd-slash-reaper-kit/
+specsRaw: ●完成時の全長146mm ●全幅92mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

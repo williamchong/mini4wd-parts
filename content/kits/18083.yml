@@ -1,0 +1,44 @@
+id: "18083"
+names:
+  ja: ミニ四駆・しろくまっこ
+  en: MINI 4WD SHIROKUMAKKO
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: racer
+seriesNumber: 83
+seriesLabel: 1/32 レーサーミニ四駆シリーズ
+chassis: super-2
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: ミニ四駆・しろくまっこ
+      source: tamiya
+  wheel-front:
+    - label: Small Fully Cowled-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Fully Cowled-Type
+      source: fandom
+  tire-front:
+    - label: Small High-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small High-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Mini 4WD Shirokumakko
+priceJpy: 1650
+priceJpyExTax: 1500
+priceHkd: 150
+releaseDate: 2014-11-29
+releaseDateRaw: 2014年11月29日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18083/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18083/18083_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18083-1-32-mini-4wd-shirokumakko-kit/
+specsRaw: ●完成時の全長150mm､全幅97mm､全高46mm ●組み立て･塗装済みのしろくまドライバーつき ●モーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

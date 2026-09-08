@@ -1,0 +1,43 @@
+id: "95463"
+names:
+  ja: サンダーショット Mk.II クリヤースペシャル（ポリカボディ）
+  en: THUNDER SHOT Mk.II CLEAR SPECIAL (POLYCARBONATE BODY)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ms
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: サンダーショット Mk.II クリヤースペシャル（ポリカボディ）
+      source: tamiya
+  wheel-front:
+    - label: Large Narrow Lightweight
+      source: fandom
+  wheel-rear:
+    - label: Large Narrow Lightweight
+      source: fandom
+  tire-front:
+    - label: Large Arched
+      source: fandom
+  tire-rear:
+    - label: Large Arched
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Thunder Shot Mk.II
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2023-09-30
+releaseDateRaw: 2023年9月30日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95463/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95463/95463_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95463-thunder-shot-mk-ii-clear-sp/
+specsRaw: ●全長152mm ●全幅92mm ●ダブルシャフトモーター付き ●組み立ては接着剤を使わずはめ込みとビス止めでOK
+scrapedAt: 2026-09-08

@@ -1,0 +1,43 @@
+id: "95228"
+names:
+  ja: 1/32 ミニ四駆パンダ （完成車）
+  en: MINI 4WD PANDA RACER (FINISHED MODEL)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: super-2
+gearRatio: 5:1
+stockLoadout:
+  body:
+    - label: 1/32 ミニ四駆パンダ （完成車）
+      source: tamiya
+  wheel-front:
+    - label: Large Teardrop-Type
+      source: fandom
+  wheel-rear:
+    - label: Large Teardrop-Type
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Mini 4WD Panda Racer
+priceJpy: 1540
+priceJpyExTax: 1400
+priceHkd: 140
+releaseDate: 2019-03-02
+releaseDateRaw: 2019年3月2日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95228/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95228/95228_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95228-mini-4wd-panda-racer-fin/
+specsRaw: 全長150mm、全幅97mm、全高45mm モーター付き 動力電源：単3形電池2本(別売)
+scrapedAt: 2026-09-08

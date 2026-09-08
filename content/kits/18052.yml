@@ -1,0 +1,40 @@
+id: "18052"
+names:
+  ja: 1/32 アバンテ2001Jr. （VSシャーシ）
+  en: AVANTE 2001 Jr. (VS CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: racer
+seriesNumber: 52
+seriesLabel: 1/32 レーサーミニ四駆シリーズ
+chassis: vs
+gearRatio: 5:1 / 4:1
+stockLoadout:
+  body:
+    - label: 1/32 アバンテ2001Jr. （VSシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Large Teardrop-Type
+      source: fandom
+  wheel-rear:
+    - label: Large Teardrop-Type
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 5:1 / 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Avante 2001 Jr.
+priceJpy: 770
+priceJpyExTax: 700
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18052/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18052/18052_1.jpg
+specsRaw: ●完成時の全長145mm ●全幅90mm ●全高51mm ●モーター付き
+scrapedAt: 2026-09-08

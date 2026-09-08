@@ -1,0 +1,41 @@
+id: "95512"
+names:
+  ja: ブロッケンギガント ブラック プレミアム(FM-Aシャーシ)
+  en: BROCKEN GIGANT BLACK PREMIUM (FM-A CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: fm-a
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: ブロッケンギガント ブラック プレミアム(FM-Aシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Spiral-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Spiral-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Brocken Gigant
+priceJpy: 1430
+priceJpyExTax: 1300
+releaseDate: 2026-12
+releaseDateRaw: 2026年12月発売予定
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95512/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95512/95512_1.jpg
+specsRaw: ●完成時の全長156mm、全幅97mm、全高38mm ●モーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

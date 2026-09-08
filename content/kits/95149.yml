@@ -1,0 +1,43 @@
+id: "95149"
+names:
+  ja: アストラルスター タイガーバージョン (MAシャーシ)
+  en: ASTRALSTER TIGER VERSION (MA CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: limited
+seriesLabel: ミニ四駆限定販売商品（マシン）
+chassis: ma
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: アストラルスター タイガーバージョン (MAシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Astralster
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2022-01-29
+releaseDateRaw: 2022年1月29日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95149/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95149/95149_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95149-mini4wd-astralster-tiger-version-ma-chassis/
+specsRaw: ●完成時の全長156mm、全幅97mm、全高44mm ●ダブルシャフトモーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

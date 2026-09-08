@@ -1,0 +1,44 @@
+id: "18655"
+names:
+  ja: トヨタ GR スープラ (MAシャーシ)
+  en: TOYOTA GR Supra (MA CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: pro
+seriesNumber: 55
+seriesLabel: 1/32 ミニ四駆PROシリーズ
+chassis: ma
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: トヨタ GR スープラ (MAシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Fin-type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Fin-type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Toyota GR Supra
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 110
+releaseDate: 2020-01-11
+releaseDateRaw: 2020年1月11日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18655/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/18655/18655_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18655-toyota-gr-supra-ma-chassis/
+specsRaw: ●完成時の全長156mm、全幅97mm、全高43mm ●ダブルシャフトモーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

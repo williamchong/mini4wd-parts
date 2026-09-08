@@ -1,0 +1,43 @@
+id: "18638"
+names:
+  ja: 1/32 トライゲイル
+  en: TRI GALE (MA CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: pro
+seriesNumber: 38
+seriesLabel: 1/32 ミニ四駆PROシリーズ
+chassis: ma
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 トライゲイル
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Fin-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Fin-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Tri Gale
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDateRaw: 2014年 5月31日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18638/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18638/18638_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18638-1-32-mini-4wd-jr-tri-gale-ma-chassis-model-kit/
+specsRaw: ●完成時の全長156mm ●全幅97mm ●ダブルシャフトモーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

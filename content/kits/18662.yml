@@ -1,0 +1,33 @@
+id: "18662"
+names:
+  ja: アバンテMk.III ネロ アドバンスパック (MSシャーシ)
+  en: AVANTE Mk.III NERO (MS CHASSIS) ADVANCED PACK
+  zh-HK: 1/32 迷你四驅車 Avante Mk.III Nero (MS底盤) 進階套裝
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: pro
+seriesNumber: 62
+seriesLabel: 1/32 ミニ四駆PROシリーズ
+chassis: ms
+gearRatio: 3.7:1
+stockLoadout:
+  body:
+    - label: アバンテMk.III ネロ アドバンスパック (MSシャーシ)
+      source: tamiya
+  gear-set:
+    - label: 3.7:1
+      source: tamiya
+loadoutSource: chassis
+priceJpy: 3300
+priceJpyExTax: 3000
+priceHkd: 300
+releaseDate: 2025-10-11
+releaseDateRaw: 2025年10月11日(土)ごろ発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18662/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/18662/18662_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18662-1-32-mini-4wd-avante-mk-iii-nero-ms-chassis-advanced-pack/
+specsRaw: ●完成時の全長155mm、全幅104mm、全高42mm ●ダブルシャフトモーターつき ●ギヤ比=3.7:1 ●ボディ=ABS樹脂製(スモーク) ●シャーシ本体=ABS樹脂製(レッド)、Aパーツ=ABS樹脂製(ホワイト) ●ホイール=フィンホイール(レッド) ●タイヤ=スーパーハード小径ローハイトタイヤ(ブラック) ●メタリック調の専用ステッカーつき ●接着剤を使わずはめ込みとビス止めで組み立てられます
+scrapedAt: 2026-09-08

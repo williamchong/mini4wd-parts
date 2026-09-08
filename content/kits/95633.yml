@@ -1,0 +1,45 @@
+id: "95633"
+names:
+  ja: 1/32 ネオVQS ポリカボディスペシャル (VSシャーシ)
+  en: NEO-VQS POLYCARBONATE BODY SPECIAL (VS CHASSIS)
+  zh-HK: Neo-VQS 聚碳酸酯車物特別版 (VS底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: vs
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 ネオVQS ポリカボディスペシャル (VSシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Y-Spoke
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Y-Spoke
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Neo-VQS
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2022-03-31
+releaseDateRaw: 2022年3月31日(木)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95633/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95633/95633_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95633-neo-vqs-polycarbonate-body-special-vs-chassis/
+specsRaw: ●完成時の全長146mm ●全幅88mm ●全高54mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

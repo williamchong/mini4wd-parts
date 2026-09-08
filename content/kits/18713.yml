@@ -1,0 +1,46 @@
+id: "18713"
+names:
+  ja: レイザーバック (FM-Aシャーシ)
+  en: RAZORBACK (FM-A CHASSIS)
+  zh-HK: 1/32 迷你四驅車 尖背野豬/剃刀 (FM-A 底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: rev
+seriesNumber: 13
+seriesLabel: 1/32 ミニ四駆REVシリーズ
+chassis: fm-a
+gearRatio: 4.2:1
+stockLoadout:
+  body:
+    - label: レイザーバック (FM-Aシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Large Low-Profile 6-Spoke
+      source: fandom
+  wheel-rear:
+    - label: Large Low-Profile 6-Spoke
+      source: fandom
+  tire-front:
+    - label: Large Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Large Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 4.2:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Razorback
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 110
+releaseDate: 2018-12-08
+releaseDateRaw: 2018年12月8日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18713/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/18713/18713_01.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18713-razorback-fm-chassis/
+specsRaw: ●完成時の全長156mm、全幅97mm、全高46mm ●モーターつき ●組み立ては接着剤不要のはめ込み式 【 別にお求めいただくもの 】 ●単3形電池2本 ⇒ジャパンカップ30年記念企画 ミニ四駆デザインコンテスト 結果発表
+scrapedAt: 2026-09-08

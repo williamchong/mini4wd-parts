@@ -1,0 +1,42 @@
+id: "95564"
+names:
+  ja: ジオグライダー ブラックスペシャル (FM-Aシャーシ)
+  en: GEO GLIDER BLACK SPECIAL (FM-A CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: fm-a
+gearRatio: 4.2:1
+stockLoadout:
+  body:
+    - label: ジオグライダー ブラックスペシャル (FM-Aシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Large V-Spoke
+      source: fandom
+  wheel-rear:
+    - label: Large V-Spoke
+      source: fandom
+  tire-front:
+    - label: Large Arched
+      source: fandom
+  tire-rear:
+    - label: Large Arched
+      source: fandom
+  gear-set:
+    - label: 4.2:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Geo Glider
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2020-08-01
+releaseDateRaw: 2020年8月1日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95564/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95564/95564_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95564-geoglider-black-special-fm-chassis/
+scrapedAt: 2026-09-08

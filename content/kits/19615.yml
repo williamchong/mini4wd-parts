@@ -1,0 +1,42 @@
+id: "19615"
+names:
+  ja: 1/32 ブリッツァーソニック ブラックスペシャル
+  en: BLITZER-SONIC BLACK SPECIAL
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: aero
+seriesNumber: 15
+seriesLabel: 1/32 エアロミニ四駆シリーズ
+chassis: vs
+gearRatio: 4:1 / 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 ブリッツァーソニック ブラックスペシャル
+      source: tamiya
+  wheel-front:
+    - label: Small VS-Type
+      source: fandom
+  wheel-rear:
+    - label: Small VS-Type
+      source: fandom
+  tire-front:
+    - label: Small X Narrow-Type
+      source: fandom
+  tire-rear:
+    - label: Small X Narrow-Type
+      source: fandom
+  gear-set:
+    - label: 4:1 / 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Blitzer-Sonic
+priceJpy: 858
+priceJpyExTax: 780
+priceHkd: 78
+status: current
+officialUrl: https://www.tamiya.com/japan/products/19615/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/19615/19615_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-19615-earomini-four-wheel-drive-series-no-15-blitzer-sonic-black-special-vs-chassis/
+specsRaw: ●完成時の全長145mm ●全幅90mm ●全高35mm
+scrapedAt: 2026-09-08

@@ -1,0 +1,45 @@
+id: "95589"
+names:
+  ja: カッパーファング ブラックスペシャル (FM-Aシャーシ)
+  en: COPPERFANG BLACK SPECIAL (FM-A CHASSIS)
+  zh-HK: 1/32 迷你四驅車 Copper Fang 黑色特別版 (FM-A底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: fm-a
+gearRatio: 4.2:1
+stockLoadout:
+  body:
+    - label: カッパーファング ブラックスペシャル (FM-Aシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Large MS II
+      source: fandom
+  wheel-rear:
+    - label: Large MS II
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 4.2:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Copperfang
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2020-11-14
+releaseDateRaw: 2020年11月14日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95589/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95589/95589_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95589-1-32-copper-fang-black-special-fm-chassis/
+specsRaw: ●完成時の全長156mm、全幅97mm、全高38mm ●モーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

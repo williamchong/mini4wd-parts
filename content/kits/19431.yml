@@ -1,0 +1,46 @@
+id: "19431"
+names:
+  ja: 1/32 マグナムセイバー プレミアム(スーパーIIシャーシ)
+  en: MAGNUM SABER PREMIUM (SUPER-II CHASSIS)
+  zh-HK: 1/32 迷你四驅車 麥林號 Premium (Super-II 底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: fully-cowled
+seriesNumber: 31
+seriesLabel: 1/32 フルカウルミニ四駆シリーズ
+chassis: super-2
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 マグナムセイバー プレミアム(スーパーIIシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Magnum Saber
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 100
+releaseDate: 2010-12-23
+releaseDateRaw: 2010年12月23日(木･祝)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/19431/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/19431/19431_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-19431-jr-magnum-saber-premium-super-ii-chassis/
+specsRaw: ●完成時の全長150mm ●全幅97mm ●モーター付き
+scrapedAt: 2026-09-08

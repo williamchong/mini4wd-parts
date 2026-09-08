@@ -1,0 +1,42 @@
+id: "18619"
+names:
+  ja: 1/32 ナイトレージJr.
+  en: NITRAGE Jr.
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: pro
+seriesNumber: 19
+seriesLabel: 1/32 ミニ四駆PROシリーズ
+chassis: ms
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: 1/32 ナイトレージJr.
+      source: tamiya
+  wheel-front:
+    - label: Large MS II
+      source: fandom
+  wheel-rear:
+    - label: Large MS II
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Nitrage Jr.
+priceJpy: 990
+priceJpyExTax: 900
+releaseDate: 2007-06-30
+releaseDateRaw: 2007年6月30日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18619/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18619/18619_1.jpg
+specsRaw: ●全長152mm ●全幅92mm ●ダブルシャフトモーター付き
+scrapedAt: 2026-09-08

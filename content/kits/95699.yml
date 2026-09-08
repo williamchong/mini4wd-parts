@@ -1,0 +1,45 @@
+id: "95699"
+names:
+  ja: K4タッシュ ビビッドカラー スペシャル （ピンク･グリーン）（FM-Aシャーシ）
+  en: K4TASCHE VIVID SPECIAL (PINK/GREEN) (FM-A CHASSIS)
+  zh-HK: 1/32 迷你四驅車 K4袋子 K4Tasche 鮮艷配色特別版 (FM-A底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: fm-a
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: K4タッシュ ビビッドカラー スペシャル （ピンク･グリーン）（FM-Aシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Dish-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Dish-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: tamiya
+loadoutSource: fandom
+loadoutSourceTitle: K4Tasche
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 130
+releaseDate: 2026-03-07
+releaseDateRaw: 2026年3月7日(土) ミニ四駆GPスプリング 岡山大会より発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95699/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95699/95699_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95699-1-32-mini-4wd-k4tasche-vivid-special-pink-green-fm-a-chassis/
+specsRaw: ●完成時の全長144mm、全幅97mm、全高64mm ●モーターつき ●接着剤を使わずはめ込みとビス止めで組み立てられます ●ギヤ比は超速タイプの3.5:1
+scrapedAt: 2026-09-08

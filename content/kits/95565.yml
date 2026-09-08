@@ -1,0 +1,42 @@
+id: "95565"
+names:
+  ja: ヘキサゴナイト ブラックスぺシャル (MAシャーシ)
+  en: HEXAGONITE BLACK SPECIAL (MA CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ma
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: ヘキサゴナイト ブラックスぺシャル (MAシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Saber Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Saber Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Hexagonite
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2020-08-01
+releaseDateRaw: 2020年8月1日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95565/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95565/95565_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95565-hexagonite-black-special-ma-chassis/
+scrapedAt: 2026-09-08

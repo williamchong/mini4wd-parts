@@ -1,0 +1,46 @@
+id: "18663"
+names:
+  ja: ライザン（MEシャーシ）
+  en: RAIZZAN (ME CHASSIS)
+  zh-HK: 1/32 迷你四驅車 雷斬 Raizzan (ME底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: pro
+seriesNumber: 63
+seriesLabel: 1/32 ミニ四駆PROシリーズ
+chassis: me
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: ライザン（MEシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile T-Spoke
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile T-Spoke
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: tamiya
+loadoutSource: fandom
+loadoutSourceTitle: Raizzan
+priceJpy: 1650
+priceJpyExTax: 1500
+priceHkd: 150
+releaseDate: 2026-01-17
+releaseDateRaw: 【発売日決定】2026年1月17日(土)ごろ発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18663/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/18663/18663_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18663-1-32-mini-4wd-raizzan-me-chassis/
+specsRaw: ●完成時の全長156mm、全幅97mm、全高40mm ●ダブルシャフトモーターつき ●ギヤ比3.5:1 ●接着剤を使わずはめ込みとビス止めだけで組み立てられます
+scrapedAt: 2026-09-08

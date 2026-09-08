@@ -1,0 +1,45 @@
+id: "95648"
+names:
+  ja: スーパーアバンテJr. ブラックスペシャル (VZシャーシ)
+  en: SUPER AVANTE Jr. BLACK SPECIAL (VZ CHASSIS)
+  zh-HK: 1/32 迷你四驅車 Super Avante Jr. 黑色特別版 (VZ底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: vz
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: スーパーアバンテJr. ブラックスペシャル (VZシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Angular-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Angular-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Super Avante Jr. (TD4)
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2023-05
+releaseDateRaw: 2023年5月発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95648/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95648/95648_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95648-1-32-mini-4wd-super-avante-jr-black-special-vz-chassis/
+specsRaw: ●完成時の全長158mm、全幅98mm、全高38mm ●モーターつき ●接着剤を使わずはめ込みとビス止めで組み立てられます。※硬いタイヤのため、強く押し込んで装着します。
+scrapedAt: 2026-09-08

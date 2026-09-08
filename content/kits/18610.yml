@@ -1,0 +1,42 @@
+id: "18610"
+names:
+  ja: 1/32 ベルダーガ
+  en: VELDAGA
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: pro
+seriesNumber: 10
+seriesLabel: 1/32 ミニ四駆PROシリーズ
+chassis: ms
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 ベルダーガ
+      source: tamiya
+  wheel-front:
+    - label: Small VS-Type
+      source: fandom
+  wheel-rear:
+    - label: Small VS-Type
+      source: fandom
+  tire-front:
+    - label: Small X-Type Narrow
+      source: fandom
+  tire-rear:
+    - label: Small X-Type Narrow
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Veldaga
+priceJpy: 792
+priceJpyExTax: 720
+releaseDate: 2005-12
+releaseDateRaw: 2005年12月発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18610/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18610/18610_1.jpg
+specsRaw: ●全長154mm ●全幅92mm ●全高41mm ●ダブルシャフトモーター付き
+scrapedAt: 2026-09-08

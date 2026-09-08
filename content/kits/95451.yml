@@ -1,0 +1,43 @@
+id: "95451"
+names:
+  ja: ブラックセイバー プレミアム （スーパーIIシャーシ）
+  en: BLACK SABER PREMIUM (SUPER-II CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: super-2
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: ブラックセイバー プレミアム （スーパーIIシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Y-Spoke
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Y-Spoke
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Black Saber
+priceJpy: 1100
+priceJpyExTax: 1000
+priceHkd: 100
+releaseDate: 2019-01-26
+releaseDateRaw: 2019年1月26日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95451/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95451/95451_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95451-black-saber-prem-super-ii/
+specsRaw: ●完成時の全長138mm、全幅97mm、全高49mm ●モーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

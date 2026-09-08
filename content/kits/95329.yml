@@ -1,0 +1,43 @@
+id: "95329"
+names:
+  ja: 1/32 スピンバイパー パールブルースペシャル (VSシャーシ）
+  en: SPIN-VIPER PEARL BLUE SPECIAL (VS CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: vs
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: 1/32 スピンバイパー パールブルースペシャル (VSシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Small TZ Fully Cowled Type
+      source: fandom
+  wheel-rear:
+    - label: Small TZ Fully Cowled Type
+      source: fandom
+  tire-front:
+    - label: Small High-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small High-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Spin-Viper
+priceJpy: 1210
+priceJpyExTax: 1100
+priceHkd: 110
+releaseDate: 2017-07-08
+releaseDateRaw: 2017年7月8日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95329/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95329/95329_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95329-jr-spin-viper-ltd-edition-vs-chassis-pearl-blue-special/
+specsRaw: ●完成時の全長145mm ●全幅92mm ●全高39mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

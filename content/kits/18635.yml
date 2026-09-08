@@ -1,0 +1,46 @@
+id: "18635"
+names:
+  ja: 1/32 ブラストアロー
+  en: BLAST ARROW
+  zh-HK: 1/32 迷你四驅車 爆裂箭矢 Blast Arrow (MA底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: pro
+seriesNumber: 35
+seriesLabel: 1/32 ミニ四駆PROシリーズ
+chassis: ma
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 ブラストアロー
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Fin-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Fin-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Blast Arrow
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 100
+releaseDate: 2013-06-29
+releaseDateRaw: 2013年6月29日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18635/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18635/18635_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18635-1-32-mini4wd-blast-arrow/
+specsRaw: ●完成時の全長156mm ●全幅97mm ●ダブルシャフトモーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

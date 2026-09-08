@@ -1,0 +1,46 @@
+id: "95422"
+names:
+  ja: ミニ四駆フクロウGT
+  en: MINI 4WD OWL RACER GT
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ma
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: ミニ四駆フクロウGT
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  motor:
+    - label: Torque-Tuned 2 PRO
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Mini 4WD Owl Racer GT
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2018-11-10
+releaseDateRaw: 2018年11月10日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95422/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95422/95422_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95422-mini-4wd-owl-racer-gt-ma/
+specsRaw: ●完成時の全長156mm ●全幅97mm ●全高44mm ●トルクチューン2モーターPRO付き ●組み立ては接着剤不要のはめ込み式。
+scrapedAt: 2026-09-08

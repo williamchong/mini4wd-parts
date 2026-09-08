@@ -1,0 +1,45 @@
+id: "95302"
+names:
+  ja: 1/32 ミニ四駆 くまモンバージョン GT
+  en: MINI 4WD KUMAMON VERSION GT
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ma
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 ミニ四駆 くまモンバージョン GT
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Fin-type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Fin-type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  motor:
+    - label: Torque-Tuned 2 PRO
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Mini 4WD Kumamon Version GT
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2016-12-24
+releaseDateRaw: 2016年12月24日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95302/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95302/95302_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamita-95302-1-32-mini-4wd-kumamon-version-gt/
+scrapedAt: 2026-09-08

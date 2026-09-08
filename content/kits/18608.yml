@@ -1,0 +1,42 @@
+id: "18608"
+names:
+  ja: 1/32 ナイトロフォース
+  en: NITRO FORCE
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: pro
+seriesNumber: 8
+seriesLabel: 1/32 ミニ四駆PROシリーズ
+chassis: ms
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: 1/32 ナイトロフォース
+      source: tamiya
+  wheel-front:
+    - label: Large MS I
+      source: fandom
+  wheel-rear:
+    - label: Large MS I
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Nitro Force
+priceJpy: 748
+priceJpyExTax: 680
+releaseDate: 2005-11
+releaseDateRaw: 2005年11月発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18608/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18608/18608_1.jpg
+specsRaw: ●全長154mm ●全幅92mm ●全高47mm ●ダブルシャフトモーター付き
+scrapedAt: 2026-09-08

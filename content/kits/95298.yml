@@ -1,0 +1,45 @@
+id: "95298"
+names:
+  ja: 1/32 ジョリージョーカー プレミアム （ARシャーシ）
+  en: 1/32 TRUCKIN' MINI 4WD JOLLY-JOKER PREMIUM (AR CHASSIS)
+  zh-HK: 1/32 迷你四驅車 Jolly-Joker Premium (AR 底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ar
+gearRatio: 4.2:1
+stockLoadout:
+  body:
+    - label: 1/32 ジョリージョーカー プレミアム （ARシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Small Fully Cowled Mesh-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Fully Cowled Mesh-Type
+      source: fandom
+  tire-front:
+    - label: Small High-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small High-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 4.2:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Jolly-Joker
+priceJpy: 1100
+priceJpyExTax: 1000
+priceHkd: 100
+releaseDate: 2021-12-11
+releaseDateRaw: 2021年12月11日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95298/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95298/95298_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95298-jr-jolly-joker-premium-ar-chassis/
+specsRaw: ●完成時の全長155mm ●全幅97mm ●全高55mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

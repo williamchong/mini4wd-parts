@@ -1,0 +1,46 @@
+id: "19447"
+names:
+  ja: 1/32 ビークスティンガーG （ARシャーシ）
+  en: BEAK STINGER G (AR CHASSIS)
+  zh-HK: 1/32 迷你四驅車 喙毒刺G (AR底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: fully-cowled
+seriesNumber: 47
+seriesLabel: 1/32 フルカウルミニ四駆シリーズ
+chassis: ar
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 ビークスティンガーG （ARシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Beak Stinger G
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 100
+releaseDate: 2016-03-26
+releaseDateRaw: 2016年3月26日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/19447/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/19447/19447_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-19447-beak-stinger-g-ar-chassis-19447/
+specsRaw: ●完成時の全長155mm ●全幅97mm ●全高45mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

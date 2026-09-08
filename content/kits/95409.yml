@@ -1,0 +1,45 @@
+id: "95409"
+names:
+  ja: バリアトロン
+  en: VARIATRON
+  zh-HK: 1/32 迷你四驅車 Variatron (VS底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: vs
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: バリアトロン
+      source: tamiya
+  wheel-front:
+    - label: Large Flat Dish
+      source: fandom
+  wheel-rear:
+    - label: Large Flat Dish
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Variatron
+priceJpy: 990
+priceJpyExTax: 900
+priceHkd: 90
+releaseDate: 2018-09-01
+releaseDateRaw: 2018年9月1日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95409/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95409/95409_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95409-variatron/
+specsRaw: ●完成時の全長145mm、全幅90mm、全高39mm ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

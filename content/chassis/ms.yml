@@ -117,6 +117,43 @@ slots:
     maxCount: 8
     mirror: false
     required: false
+defaultLoadout:
+  motor:
+    - label: 套件標準雙軸馬達
+      source: chassis
+  gear-set:
+    - label: 套件標準齒輪組
+      source: chassis
+  terminal:
+    - label: 套件標準電池金屬片
+      source: chassis
+  switch:
+    - label: 套件標準電源開關
+      source: chassis
+  axle:
+    - label: 套件標準車軸
+      source: chassis
+  bearing:
+    - label: 套件標準塑膠軸襯
+      source: chassis
+  wheel-front:
+    - label: 套件標準輪框
+      source: chassis
+  wheel-rear:
+    - label: 套件標準輪框
+      source: chassis
+  tire-front:
+    - label: 套件標準輪胎
+      source: chassis
+  tire-rear:
+    - label: 套件標準輪胎
+      source: chassis
+  roller-front:
+    - label: 套件標準塑膠導輪
+      source: chassis
+  roller-rear:
+    - label: 套件標準塑膠導輪
+      source: chassis
 compatibleParts:
   - "10320"
   - "10321"

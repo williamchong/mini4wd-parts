@@ -1,0 +1,46 @@
+id: "18625"
+names:
+  ja: 1/32 ダッシュ1号・皇帝（エンペラー）（MSシャーシ）
+  en: DASH-1 EMPEROR(MS CHASSIS)
+  zh-HK: 1/32 迷你四驅車 Dash-1 天皇巨星/皇帝號/勝利者 (MS 底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: pro
+seriesNumber: 25
+seriesLabel: 1/32 ミニ四駆PROシリーズ
+chassis: ms
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: 1/32 ダッシュ1号・皇帝（エンペラー）（MSシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Large MS II
+      source: fandom
+  wheel-rear:
+    - label: Large MS II
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Spiked
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Spiked
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Dash-1 Emperor
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 130
+releaseDate: 2008-07-12
+releaseDateRaw: 2008年7月12日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18625/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18625/18625_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18625-1-32-mini-4wd-dash-1-emperor-ms-chassis-kit/
+specsRaw: ●全長152mm ●全幅92mm ●ダブルシャフトモーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

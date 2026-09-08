@@ -1,0 +1,42 @@
+id: "18077"
+names:
+  ja: 1/32 アスチュートRS（スーパーIIシャーシ）
+  en: ASTUTE RS (SUPER-II CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: racer
+seriesNumber: 77
+seriesLabel: 1/32 レーサーミニ四駆シリーズ
+chassis: super-2
+gearRatio: 4.2:1
+stockLoadout:
+  body:
+    - label: 1/32 アスチュートRS（スーパーIIシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Large Manta Ray-Type
+      source: fandom
+  wheel-rear:
+    - label: Large Manta Ray-Type
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 4.2:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Astute Jr.
+priceJpy: 1100
+priceJpyExTax: 1000
+releaseDate: 2013-02-09
+releaseDateRaw: 2013年2月9日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18077/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18077/18077_1.jpg
+specsRaw: ●完成時の全長150mm ●全幅97mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

@@ -1,0 +1,42 @@
+id: "18718"
+names:
+  ja: K4ギャンボー (FM-Aシャーシ)
+  en: K4 GAMBOL (FM-A CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: rev
+seriesNumber: 18
+seriesLabel: 1/32 ミニ四駆REVシリーズ
+chassis: fm-a
+gearRatio: 5:1
+stockLoadout:
+  body:
+    - label: K4ギャンボー (FM-Aシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile A-spoke
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile A-spoke
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: K4 Gambol
+priceJpy: 1210
+priceJpyExTax: 1100
+releaseDate: 2021-12-11
+releaseDateRaw: 2021年12月11日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18718/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/18718/18718_1.jpg
+specsRaw: ●完成時の全長144mm、全幅97mm、全高61mm ●モーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

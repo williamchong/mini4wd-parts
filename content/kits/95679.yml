@@ -1,0 +1,28 @@
+id: "95679"
+names:
+  ja: 2025年 干支ミニ四駆「巳年」
+  en: MINI 4WD NEW YEAR'S EDITION "YEAR OF THE SNAKE 2025"
+  zh-HK: 1/32 迷你四驅車 2025年 干支迷你四驅車 「巳年」 (Super-II底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: super-2
+stockLoadout:
+  body:
+    - label: 2025年 干支ミニ四駆「巳年」
+      source: tamiya
+loadoutSource: chassis
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2024-12-07
+releaseDateRaw: 2024年12月7日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95679/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95679/95679_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95679-1-32-mini-4wd-new-years-edition-year-of-the-snake-2025-super-ii-chassis/
+specsRaw: ●完成時の全長150mm、全幅97mm、全高44mm ●モーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

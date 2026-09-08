@@ -1,0 +1,26 @@
+id: "18709"
+names:
+  ja: バロンビエント （FM-Aシャーシ）
+  en: BARON VIENTO (FM-A CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: rev
+seriesNumber: 9
+seriesLabel: 1/32 ミニ四駆REVシリーズ
+chassis: fm-a
+stockLoadout:
+  body:
+    - label: バロンビエント （FM-Aシャーシ）
+      source: tamiya
+loadoutSource: chassis
+priceJpy: 1210
+priceJpyExTax: 1100
+priceHkd: 110
+releaseDate: 2018-02-24
+releaseDateRaw: 2018年2月24日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18709/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/18709/18709_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18709-baron-viento-fm-a/
+scrapedAt: 2026-09-08

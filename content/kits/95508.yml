@@ -1,0 +1,45 @@
+id: "95508"
+names:
+  ja: ネオトライダガーZMC カーボンスペシャル (スーパーIIシャーシ）
+  en: NEO-TRIDAGGER ZMC CARBON SPECIAL (SUPER-II CHASSIS)
+  zh-HK: 1/32 迷你四驅車 新火鳥ZMC 碳纖維強化特別版 (Super II底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: super-2
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: ネオトライダガーZMC カーボンスペシャル (スーパーIIシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Small Fully Cowled-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Fully Cowled-Type
+      source: fandom
+  tire-front:
+    - label: Small Treaded Radial
+      source: fandom
+  tire-rear:
+    - label: Small Treaded Radial
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Neo-Tridagger ZMC
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 130
+releaseDate: 2023-08-12
+releaseDateRaw: 2023年8月12日(土)発売日指定
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95508/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95508/95508_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95508-jr-neo-tridagger-zmc-carbon-sp/
+specsRaw: ●完成時の全長150mm、全幅97mm、全高46mm ●モーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

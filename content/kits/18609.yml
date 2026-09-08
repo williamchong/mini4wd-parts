@@ -1,0 +1,42 @@
+id: "18609"
+names:
+  ja: 1/32 トルクルーザー
+  en: TORCRUISER
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: pro
+seriesNumber: 9
+seriesLabel: 1/32 ミニ四駆PROシリーズ
+chassis: ms
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 トルクルーザー
+      source: tamiya
+  wheel-front:
+    - label: Small VS-Type
+      source: fandom
+  wheel-rear:
+    - label: Small VS-Type
+      source: fandom
+  tire-front:
+    - label: Small X-Type Narrow
+      source: fandom
+  tire-rear:
+    - label: Small X-Type Narrow
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Torcruiser
+priceJpy: 792
+priceJpyExTax: 720
+releaseDate: 2005-12
+releaseDateRaw: 2005年12月発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18609/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18609/18609_1.jpg
+specsRaw: ●全長154mm ●全幅92mm ●全高42mm ●ダブルシャフトモーター付き
+scrapedAt: 2026-09-08

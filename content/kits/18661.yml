@@ -1,0 +1,46 @@
+id: "18661"
+names:
+  ja: レクサス LBX MORIZO RR (MAシャーシ)
+  en: LEXUS LBX MORIZO RR (MA CHASSIS)
+  zh-HK: 1/32 迷你四驅車 淩志 LBX Morizo RR (MA底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: pro
+seriesNumber: 61
+seriesLabel: 1/32 ミニ四駆PROシリーズ
+chassis: ma
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: レクサス LBX MORIZO RR (MAシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Fin-type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Fin-type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Lexus LBX Morizo RR
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2025-03-08
+releaseDateRaw: 2025年3月8日(土)ごろ発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18661/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/18661/18661_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18661-1-32-mini-4wd-lexus-lbx-morizo-rr-ma-chassis/
+specsRaw: ●完成時の全長156mm、全幅97mm、全高52mm ●ダブルシャフトモーターつき ●接着剤を使わずはめ込みとビス止めで組み立てられます
+scrapedAt: 2026-09-08

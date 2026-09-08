@@ -1,0 +1,44 @@
+id: "95616"
+names:
+  ja: がんばれ!熊本 ミニ四駆 (くまモン版) パステルブルーシャーシ
+  en: KUMAMON MINI 4WD - SUPPORTING KUMAMOTO - PASTEL BLUE CHASSIS
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ma
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: がんばれ!熊本 ミニ四駆 (くまモン版) パステルブルーシャーシ
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Saber-Typ
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Saber-Typ
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  motor:
+    - label: Rev-Tuned 2 PRO
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Kumamon Mini 4WD - Supporting Kumamoto
+priceJpy: 1320
+priceJpyExTax: 1200
+releaseDate: 2020-08-29
+releaseDateRaw: 2020年8月29日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95616/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95616/95616_1.jpg
+specsRaw: ●完成時の全長156mm、全幅97mm、全高43mm ●レブチューン2モーターPROつき ●くまモン人形は組み立て・塗装ずみ ●車体の組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

@@ -1,0 +1,45 @@
+id: "95658"
+names:
+  ja: フェスタジョーヌ L オレンジSP（ポリカボディ/MAシャーシ）
+  en: FESTA JAUNE L ORANGE SPECIAL (MA CHASSIS)
+  zh-HK: 1/32 迷你四驅車 Festa Jaune L 橙色特別版 (MA底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ma
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: フェスタジョーヌ L オレンジSP（ポリカボディ/MAシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Fin-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Fin-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Festa Jaune
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2024-03
+releaseDateRaw: 2024年3月 ミニ四駆GP2024スプリング掛川大会より発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95658/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95658/95658_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95658-1-32-mini-4wd-festa-jaune-l-orange-special-ma-chassis/
+specsRaw: ●完成時の全長153mm、全幅97mm、全高40mm ●ダブルシャフトモーターつき ●接着剤を使わずはめ込みとビス止めで組み立てられます。 ※硬いタイヤのため、強く押し込んで装着します。
+scrapedAt: 2026-09-08

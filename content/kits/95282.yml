@@ -1,0 +1,43 @@
+id: "95282"
+names:
+  ja: 1/32 ビッグ・バン・ゴースト プレミアム （スーパーIIシャーシ）
+  en: BIG BANG GHOST PREMIUM (SUPER-II CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: super-2
+gearRatio: 4.2:1
+stockLoadout:
+  body:
+    - label: 1/32 ビッグ・バン・ゴースト プレミアム （スーパーIIシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Large Narrow Lightweight
+      source: fandom
+  wheel-rear:
+    - label: Large Narrow Lightweight
+      source: fandom
+  tire-front:
+    - label: Large Arched
+      source: fandom
+  tire-rear:
+    - label: Large Arched
+      source: fandom
+  gear-set:
+    - label: 4.2:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Big Bang Ghost
+priceJpy: 1100
+priceJpyExTax: 1000
+priceHkd: 100
+releaseDate: 2016-12-10
+releaseDateRaw: 2016年12月10日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95282/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95282/95282_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95282-big-bang-ghost-premium-super-ii-chassis/
+specsRaw: ●完成時の全長150mm､全幅97mm､全高40mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

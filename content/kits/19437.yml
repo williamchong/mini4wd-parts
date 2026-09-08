@@ -1,0 +1,44 @@
+id: "19437"
+names:
+  ja: 1/32 ベルクカイザー プレミアム (スーパーIIシャーシ)
+  en: BERG KAISER PREMIUM (SUPER-II CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: fully-cowled
+seriesNumber: 37
+seriesLabel: 1/32 フルカウルミニ四駆シリーズ
+chassis: super-2
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 ベルクカイザー プレミアム (スーパーIIシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Bergkaiser
+priceJpy: 1210
+priceJpyExTax: 1100
+priceHkd: 110
+releaseDate: 2013-09-07
+releaseDateRaw: 2013年9月7日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/19437/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/19437/19437_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-19437-berg-kaiser-premium-super-ii/
+specsRaw: ●完成時の全長150mm ●全幅97mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

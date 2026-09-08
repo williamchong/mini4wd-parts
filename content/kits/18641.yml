@@ -1,0 +1,44 @@
+id: "18641"
+names:
+  ja: 1/32 シューティングプラウドスター（MAシャーシ）
+  en: SHOOTING PROUD STAR (MA CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: pro
+seriesNumber: 41
+seriesLabel: 1/32 ミニ四駆PROシリーズ
+chassis: ma
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: 1/32 シューティングプラウドスター（MAシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Large MS II
+      source: fandom
+  wheel-rear:
+    - label: Large MS II
+      source: fandom
+  tire-front:
+    - label: Large Avante-type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-type Slick
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Shooting Proud Star
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 110
+releaseDate: 2015-07-18
+releaseDateRaw: 2015年7月18日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18641/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/18641/18641_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18641-jr-shooting-proud-star-ma-chassis/
+specsRaw: ●完成時の全長156mm､全幅97mm､全高49mm ●ダブルシャフトモーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

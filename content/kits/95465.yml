@@ -1,0 +1,43 @@
+id: "95465"
+names:
+  ja: サンダーショットMk.II ピンクスペシャル
+  en: THUNDER SHOT Mk.II PINK SPECIAL
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ms
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: サンダーショットMk.II ピンクスペシャル
+      source: tamiya
+  wheel-front:
+    - label: Large Narrow Lightweight
+      source: fandom
+  wheel-rear:
+    - label: Large Narrow Lightweight
+      source: fandom
+  tire-front:
+    - label: Large Arched
+      source: fandom
+  tire-rear:
+    - label: Large Arched
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Thunder Shot Mk.II
+priceJpy: 1210
+priceJpyExTax: 1100
+priceHkd: 110
+releaseDate: 2019-03-09
+releaseDateRaw: 2019年3月9日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95465/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95465/95465_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95465-thunder-shot-mk-ii-pink/
+specsRaw: ●全長152mm ●全幅92mm ●ダブルシャフトモーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

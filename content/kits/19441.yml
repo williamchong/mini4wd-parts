@@ -1,0 +1,46 @@
+id: "19441"
+names:
+  ja: 1/32 ハリケーンソニック プレミアム （ARシャーシ）
+  en: HURRICANE SONIC PREMIUM (AR CHASSIS)
+  zh-HK: 1/32 迷你四驅車 暴風超音 Premium (AR 底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: fully-cowled
+seriesNumber: 41
+seriesLabel: 1/32 フルカウルミニ四駆シリーズ
+chassis: ar
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 ハリケーンソニック プレミアム （ARシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Hurricane Sonic
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 110
+releaseDate: 2014-11-21
+releaseDateRaw: 2014年11月21日(金)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/19441/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/19441/19441_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-19441-1-32-mini-4wd-hurricane-sonic-premium-ar-chassis-kit/
+specsRaw: ●完成時の全長155mm ●全幅97mm ●全高40mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

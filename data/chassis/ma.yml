@@ -17,3 +17,37 @@ treadRearMm: 59.5
 weightG: 125.9
 status: current
 notes: 一體式單片車架，剛性高、組裝簡單，原廠即為六導輪設計，是新手最常被推薦的雙軸底盤。
+
+# What the bare runner puts in each slot before the user changes anything
+# (docs/PLAN.md §4.7). Most of it is molded into the kit and Tamiya sells no
+# equivalent Grade-Up Part, so those entries carry a label and no item number:
+# you already own them and you cannot buy them separately.
+#
+# The PRO motor is one of them. Tamiya sells the single-shaft FA-130 as AO-1001
+# but has never catalogued the double-shaft normal motor a PRO kit ships, so
+# there is no item number to name here.
+defaultLoadout:
+  motor:
+    - { label: 套件標準雙軸馬達, source: chassis }
+  gear-set:
+    - { label: 套件標準齒輪組, source: chassis }
+  terminal:
+    - { label: 套件標準電池金屬片, source: chassis }
+  switch:
+    - { label: 套件標準電源開關, source: chassis }
+  axle:
+    - { label: 套件標準車軸, source: chassis }
+  bearing:
+    - { label: 套件標準塑膠軸襯, source: chassis }
+  wheel-front:
+    - { label: 套件標準輪框, source: chassis }
+  wheel-rear:
+    - { label: 套件標準輪框, source: chassis }
+  tire-front:
+    - { label: 套件標準輪胎, source: chassis }
+  tire-rear:
+    - { label: 套件標準輪胎, source: chassis }
+  roller-front:
+    - { label: 套件標準塑膠導輪, source: chassis }
+  roller-rear:
+    - { label: 套件標準塑膠導輪, source: chassis }

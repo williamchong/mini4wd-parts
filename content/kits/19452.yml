@@ -1,0 +1,45 @@
+id: "19452"
+names:
+  ja: ブロッケンギガント プレミアム （FM-Aシャーシ）
+  en: BROCKEN GIGANT PREMIUM (FM-A CHASSIS)
+  zh-HK: 1/32 迷你四驅車 巨霸號/巨無霸 Premium (FM-A 底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: fully-cowled
+seriesNumber: 52
+seriesLabel: 1/32 フルカウルミニ四駆シリーズ
+chassis: fm-a
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: ブロッケンギガント プレミアム （FM-Aシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Spiral-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Spiral-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Brocken Gigant
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 120
+releaseDate: 2018-04-21
+releaseDateRaw: 2018年4月21日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/19452/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/19452/19452_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-19452-fully-cowled-mini-4wd-series-brocken-gigant-premium-fm-a-chassis/
+scrapedAt: 2026-09-08

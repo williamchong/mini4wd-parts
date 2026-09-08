@@ -1,0 +1,40 @@
+id: "19429"
+names:
+  ja: 1/32 スピンバイパー
+  en: SPIN-VIPER
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: fully-cowled
+seriesNumber: 29
+seriesLabel: 1/32 フルカウルミニ四駆シリーズ
+chassis: vs
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: 1/32 スピンバイパー
+      source: tamiya
+  wheel-front:
+    - label: Small TZ Fully Cowled Type
+      source: fandom
+  wheel-rear:
+    - label: Small TZ Fully Cowled Type
+      source: fandom
+  tire-front:
+    - label: Small High-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small High-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Spin-Viper
+priceJpy: 880
+priceJpyExTax: 800
+status: current
+officialUrl: https://www.tamiya.com/japan/products/19429/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/19429/19429_1.jpg
+specsRaw: ●完成時の全長145mm ●全幅90mm ●全高39mm
+scrapedAt: 2026-09-08

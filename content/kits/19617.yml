@@ -1,0 +1,40 @@
+id: "19617"
+names:
+  ja: 1/32 デザートゴーレム GPA
+  en: DESERT-GOLEM GPA
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: aero
+seriesNumber: 17
+seriesLabel: 1/32 エアロミニ四駆シリーズ
+chassis: vs
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 デザートゴーレム GPA
+      source: tamiya
+  wheel-front:
+    - label: Small VS-Type
+      source: fandom
+  wheel-rear:
+    - label: Small VS-Type
+      source: fandom
+  tire-front:
+    - label: Small X Narrow-Type
+      source: fandom
+  tire-rear:
+    - label: Small X Narrow-Type
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Desert-Golem
+priceJpy: 770
+priceJpyExTax: 700
+status: current
+officialUrl: https://www.tamiya.com/japan/products/19617/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/19617/19617_1.jpg
+specsRaw: ●完成時の全長145mm ●全幅90mm ●全高39mm
+scrapedAt: 2026-09-08

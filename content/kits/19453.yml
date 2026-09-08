@@ -1,0 +1,46 @@
+id: "19453"
+names:
+  ja: グレートマグナムR（リボルバー ） （FM-Aシャーシ）
+  en: GREAT MAGNUM R (FM-A CHASSIS)
+  zh-HK: 1/32 迷你四驅車 衝鋒麥林/偉大衝鋒 R (FM-A 底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: fully-cowled
+seriesNumber: 53
+seriesLabel: 1/32 フルカウルミニ四駆シリーズ
+chassis: fm-a
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: グレートマグナムR（リボルバー ） （FM-Aシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile A-spoke
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile A-spoke
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Great Magnum R
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 120
+releaseDate: 2018-09-15
+releaseDateRaw: 2018年9月15日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/19453/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/19453/19453_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-19453-great-magnum-r-fm-chassis-19453/
+specsRaw: ●完成時の全長156mm、全幅97mm、全高42mm ●モーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

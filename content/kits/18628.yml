@@ -1,0 +1,46 @@
+id: "18628"
+names:
+  ja: 1/32 ダッシュ２号・太陽（バーニング・サン）（MSシャーシ）
+  en: DASH-2 BURNING SUN (MS CHASSIS)
+  zh-HK: Dash-2 太陽 (MS 底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: pro
+seriesNumber: 28
+seriesLabel: 1/32 ミニ四駆PROシリーズ
+chassis: ms
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: 1/32 ダッシュ２号・太陽（バーニング・サン）（MSシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Large MS II
+      source: fandom
+  wheel-rear:
+    - label: Large MS II
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Spiked
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Spiked
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Dash-2 Burning Sun
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 100
+releaseDate: 2008-11-01
+releaseDateRaw: 2008年11月1日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18628/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18628/18628_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18628-dash-2-burning-sun-ms-chassis/
+specsRaw: ●全長152mm ●全幅92mm ●ダブルシャフトモーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

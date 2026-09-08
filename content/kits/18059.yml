@@ -1,0 +1,39 @@
+id: "18059"
+names:
+  ja: 1/32 サンダーショットRS
+  en: THUNDER SHOT RS
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: racer
+seriesNumber: 59
+seriesLabel: 1/32 レーサーミニ四駆シリーズ
+chassis: vs
+gearRatio: 4.2:1
+stockLoadout:
+  body:
+    - label: 1/32 サンダーショットRS
+      source: tamiya
+  wheel-front:
+    - label: Large Mesh-Type
+      source: fandom
+  wheel-rear:
+    - label: Large Mesh-Type
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 4.2:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Thunder Shot Jr.
+priceJpy: 880
+priceJpyExTax: 800
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18059/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18059/18059_1.jpg
+scrapedAt: 2026-09-08

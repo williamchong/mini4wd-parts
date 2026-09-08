@@ -1,0 +1,28 @@
+id: "95694"
+names:
+  ja: 2026年 干支ミニ四駆「午年」
+  en: MINI 4WD NEW YEAR'S EDITION "YEAR OF THE HORSE 2026"
+  zh-HK: 1/32 迷你四驅車 2026年 干支迷你四驅車 「午年」 (Super-II底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: super-2
+stockLoadout:
+  body:
+    - label: 2026年 干支ミニ四駆「午年」
+      source: tamiya
+loadoutSource: chassis
+priceJpy: 1540
+priceJpyExTax: 1400
+priceHkd: 140
+releaseDate: 2025-12-13
+releaseDateRaw: 2025年12月13日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95694/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95694/95694_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95694-mini-4wd-new-years-edition-year-of-the-horse-2026/
+specsRaw: ●完成時の全長150mm、全幅97mm、全高52mm ●モーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

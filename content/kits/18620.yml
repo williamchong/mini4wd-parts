@@ -1,0 +1,44 @@
+id: "18620"
+names:
+  ja: 1/32 サンダーショットMk.II
+  en: THUNDER SHOT Mk.II
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: pro
+seriesNumber: 20
+seriesLabel: 1/32 ミニ四駆PROシリーズ
+chassis: ms
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: 1/32 サンダーショットMk.II
+      source: tamiya
+  wheel-front:
+    - label: Large MS II
+      source: fandom
+  wheel-rear:
+    - label: Large MS II
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Thunder Shot Mk.II
+priceJpy: 1100
+priceJpyExTax: 1000
+priceHkd: 100
+releaseDate: 2007-09-15
+releaseDateRaw: 2007年9月15日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18620/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18620/18620_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18620-1-32-mini-4wd-thunder-shot-mk-ii-kit/
+specsRaw: ●全長152mm ●全幅92mm ●ダブルシャフトモーター付き
+scrapedAt: 2026-09-08

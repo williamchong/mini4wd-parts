@@ -1,0 +1,41 @@
+id: "95290"
+names:
+  ja: 1/32 シャドウシャーク 赤メタリック(カーボン強化ホイール)
+  en: SHADOW SHARK RED METALLIC (w/CARBON REINFORCED WHEELS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ar
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 シャドウシャーク 赤メタリック(カーボン強化ホイール)
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Saber-Type (Both set)
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Saber-Type (Both set)
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Shadow Shark
+priceJpy: 1320
+priceJpyExTax: 1200
+releaseDate: 2016-10-01
+releaseDateRaw: 2016年10月1日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95290/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95290/95290_1.jpg
+specsRaw: ●完成時の全長155mm ●全幅97mm ●全高40mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

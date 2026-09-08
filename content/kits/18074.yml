@@ -1,0 +1,46 @@
+id: "18074"
+names:
+  ja: 1/32 プロトエンぺラー プレミアム（スーパーIIシャーシ）
+  en: DASH-X1 PROTO-EMPEROR PREMIUM (SUPER-II CHASSIS)
+  zh-HK: 1/32 迷你四驅車 Dash-X1 原始大帝 Premium (Super II 底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: racer
+seriesNumber: 74
+seriesLabel: 1/32 レーサーミニ四駆シリーズ
+chassis: super-2
+gearRatio: 4.2:1
+stockLoadout:
+  body:
+    - label: 1/32 プロトエンぺラー プレミアム（スーパーIIシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Large Narrow Lightweight
+      source: fandom
+  wheel-rear:
+    - label: Large Narrow Lightweight
+      source: fandom
+  tire-front:
+    - label: Large Arched
+      source: fandom
+  tire-rear:
+    - label: Large Arched
+      source: fandom
+  gear-set:
+    - label: 4.2:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Dash-X1 Proto-Emperor
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 110
+releaseDate: 2013-01-12
+releaseDateRaw: 2013年1月12日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18074/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18074/18074_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18074-dash-x1-proto-emperor-premium-super-ii/
+specsRaw: ●完成時の全長150mm ●全幅97mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

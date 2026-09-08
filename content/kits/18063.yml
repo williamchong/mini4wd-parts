@@ -1,0 +1,44 @@
+id: "18063"
+names:
+  ja: 1/32 イグレスRS
+  en: EGRESS RS
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: racer
+seriesNumber: 63
+seriesLabel: 1/32 レーサーミニ四駆シリーズ
+chassis: vs
+gearRatio: 4.2:1
+stockLoadout:
+  body:
+    - label: 1/32 イグレスRS
+      source: tamiya
+  wheel-front:
+    - label: Large Manta Ray Type
+      source: fandom
+  wheel-rear:
+    - label: Large Manta Ray Type
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 4.2:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Egress Jr.
+priceJpy: 1100
+priceJpyExTax: 1000
+priceHkd: 100
+releaseDate: 2011-08-13
+releaseDateRaw: 2011年8月13日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18063/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18063/18063_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18063-egress-rs-racing-mini-4wd/
+specsRaw: ●全長145mm ●全幅92mm ●全高59mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

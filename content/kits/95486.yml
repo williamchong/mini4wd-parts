@@ -1,0 +1,28 @@
+id: "95486"
+names:
+  ja: ライキリ ピンクスペシャル（ポリカボディ / MSシャーシ）
+  en: RAIKIRI PINK SPECIAL (POLYCARBONATE BODY) (MS CHASSIS)
+  zh-HK: 1/32 迷你四驅車 Raikiri 雷切 粉紅色特別版 (聚碳酸酯車殼/MS底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ms
+stockLoadout:
+  body:
+    - label: ライキリ ピンクスペシャル（ポリカボディ / MSシャーシ）
+      source: tamiya
+loadoutSource: chassis
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 130
+releaseDate: 2025-08-30
+releaseDateRaw: 2025年8月30日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95486/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95486/95486_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95486-raikiri-pink-special-mini-4wd-ms-chassis/
+specsRaw: ●完成時の全長153mm、全幅89mm、全高42mm ●ダブルシャフトモーターつき ●接着剤を使わずはめ込みとビス止めで組み立てられます。
+scrapedAt: 2026-09-08

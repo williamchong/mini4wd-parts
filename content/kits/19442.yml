@@ -1,0 +1,46 @@
+id: "19442"
+names:
+  ja: 1/32 Zウイングマグナム（ARシャーシ）
+  en: Z WINGMAGNUM (AR CHASSIS)
+  zh-HK: 1/32 迷你四驅車 Z飛翼麥林 (AR底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: fully-cowled
+seriesNumber: 42
+seriesLabel: 1/32 フルカウルミニ四駆シリーズ
+chassis: ar
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 Zウイングマグナム（ARシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Z Wing Magnum
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 130
+releaseDate: 2014-11-08
+releaseDateRaw: 2014年11月8日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/19442/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/19442/19442_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-19442-1-32-mini-4wd-z-wingmagnum-kit-ar-chassis/
+specsRaw: ●完成時の全長155mm ●全幅97mm ●全高43mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

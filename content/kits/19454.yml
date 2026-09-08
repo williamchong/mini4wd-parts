@@ -1,0 +1,46 @@
+id: "19454"
+names:
+  ja: コスモソニック (FM-Aシャーシ)
+  en: COSMOSONIC (FM-A CHASSIS)
+  zh-HK: 1/32 迷你四驅車 宇宙超音 (FM-A底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: fully-cowled
+seriesNumber: 54
+seriesLabel: 1/32 フルカウルミニ四駆シリーズ
+chassis: fm-a
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: コスモソニック (FM-Aシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile A-Spoke
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile A-Spoke
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Cosmosonic
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 120
+releaseDate: 2020-03-14
+releaseDateRaw: 2020年3月14日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/19454/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/19454/19454_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-19454-cosmosonic-fm-a/
+specsRaw: ●完成時の全長156mm、全幅97mm、全高43mm ●モーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

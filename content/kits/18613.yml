@@ -1,0 +1,44 @@
+id: "18613"
+names:
+  ja: 1/32 TRFワークスJr.
+  en: TRF-RACER Jr.
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: pro
+seriesNumber: 13
+seriesLabel: 1/32 ミニ四駆PROシリーズ
+chassis: ms
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 TRFワークスJr.
+      source: tamiya
+  wheel-front:
+    - label: Small VS-Type
+      source: fandom
+  wheel-rear:
+    - label: Small VS-Type
+      source: fandom
+  tire-front:
+    - label: Small X-Type Narrow
+      source: fandom
+  tire-rear:
+    - label: Small X-Type Narrow
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: TRF-Racer Jr.
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 100
+releaseDate: 2006-04-29
+releaseDateRaw: 2006年4月29日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18613/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18613/18613_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18613-trf-racer-jr/
+specsRaw: ●全長154mm ●全幅92mm ●全高41mm ●ダブルシャフトモーター付き ●組み立ては接着剤を使わずはめ込みとビス止めでOK
+scrapedAt: 2026-09-08

@@ -1,0 +1,40 @@
+id: "95376"
+names:
+  ja: エアロ アバンテ ブラックスペシャル（ARシャーシ）
+  en: AERO AVANTE BLACK SPECIAL (AR CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ar
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: エアロ アバンテ ブラックスペシャル（ARシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Aero Avante
+priceJpy: 1100
+priceJpyExTax: 1000
+releaseDate: 2018-02-10
+releaseDateRaw: 2018年2月10日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95376/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95376/95376_1.jpg
+scrapedAt: 2026-09-08

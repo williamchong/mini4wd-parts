@@ -1,0 +1,44 @@
+id: "18648"
+names:
+  ja: 1/32 マッドレイザー （MAシャーシ）
+  en: MAD LASER (MA CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: pro
+seriesNumber: 48
+seriesLabel: 1/32 ミニ四駆PROシリーズ
+chassis: ma
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 マッドレイザー （MAシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Fin-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Fin-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Mad Laser
+priceJpy: 1100
+priceJpyExTax: 1000
+priceHkd: 100
+releaseDate: 2017-10-21
+releaseDateRaw: 2017年10月21日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18648/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18648/18648_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18648-mad-laser-ma-chassis/
+specsRaw: ●完成時の全長156mm ●全幅97mm ●全高36mm ●ダブルシャフトモーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

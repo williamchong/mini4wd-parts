@@ -1,0 +1,28 @@
+id: "95698"
+names:
+  ja: ミニ四駆サンタクロース（レッドレーサー）
+  en: MINI 4WD SANTA CLAUS (RED RACER)
+  zh-HK: 1/32 迷你四驅車 聖誕老人賽車 Santa Claus (紅色賽車版)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: vs
+stockLoadout:
+  body:
+    - label: ミニ四駆サンタクロース（レッドレーサー）
+      source: tamiya
+loadoutSource: chassis
+priceJpy: 1540
+priceJpyExTax: 1400
+priceHkd: 140
+releaseDate: 2025-11-15
+releaseDateRaw: 【発売日決定】2025年12月発売から2025年11月15日(土) ごろ発売になりました。
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95698/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95698/95698_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95698-1-32-mini-4wd-santa-claus-red-racer/
+specsRaw: ●完成時の全長147mm、全幅88mm、全高45mm ●モーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

@@ -1,0 +1,43 @@
+id: "95533"
+names:
+  ja: トヨタ ガズーレーシング TS050 HYBRID 2019 (MAシャーシ) (ポリカボディ)
+  en: TOYOTA GAZOO Racing TS050 HYBRID 2019 (MA CHASSIS) (POLYCARBONATE BODY)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ma
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: トヨタ ガズーレーシング TS050 HYBRID 2019 (MAシャーシ) (ポリカボディ)
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Fin-type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Fin-type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Toyota Gazoo Racing TS050 Hybrid
+priceJpy: 1540
+priceJpyExTax: 1400
+priceHkd: 140
+releaseDate: 2019-12-14
+releaseDateRaw: 2019年12月14日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95533/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95533/95533_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95533-toyota-gazoo-racing-ts050-hybrid-2019-ma-chassis-polycarbonate-body/
+specsRaw: ●完成時の全長156mm、全幅97mm、全高41mm ●ダブルシャフトモーターつき ●接着剤を使わずはめ込みとビス止めで組み立てられます
+scrapedAt: 2026-09-08

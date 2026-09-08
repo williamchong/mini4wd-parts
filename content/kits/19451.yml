@@ -1,0 +1,45 @@
+id: "19451"
+names:
+  ja: ガンブラスターXTO プレミアム （FM-Aシャーシ）
+  en: GUN BLUSTER XTO PREMIUM (FM-A CHASSIS)
+  zh-HK: 1/32 迷你四驅車 鋼布拉斯達XTO Premium (FM-A底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: fully-cowled
+seriesNumber: 51
+seriesLabel: 1/32 フルカウルミニ四駆シリーズ
+chassis: fm-a
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: ガンブラスターXTO プレミアム （FM-Aシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Spiral-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Spiral-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Gun Bluster XTO
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 120
+releaseDate: 2018-03-31
+releaseDateRaw: 2018年3月31日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/19451/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/19451/19451_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-19451-1-32-mini4wd-gun-bluster-xto-premium-fm-a-chassis/
+scrapedAt: 2026-09-08

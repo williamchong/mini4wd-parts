@@ -1,0 +1,42 @@
+id: "18082"
+names:
+  ja: ダイハツ コペン XMZ （スーパーIIシャーシ）
+  en: DAIHATSU KOPEN (FUTURE INCLUDED) XMZ (SUPER-II CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: racer
+seriesNumber: 82
+seriesLabel: 1/32 レーサーミニ四駆シリーズ
+chassis: super-2
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: ダイハツ コペン XMZ （スーパーIIシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Daihatsu Kopen XMZ
+priceJpy: 1210
+priceJpyExTax: 1100
+priceHkd: 110
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18082/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18082/18082_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18082-daihatsu-kopen-xmz-super-2-chassis-mini-4wd-car/
+specsRaw: ●完成時の全長150mm ●全幅97mm ●全高49mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

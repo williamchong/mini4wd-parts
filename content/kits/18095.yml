@@ -1,0 +1,45 @@
+id: "18095"
+names:
+  ja: Honda e (VZシャーシ)
+  en: Honda e (VZ CHASSIS)
+  zh-HK: 本田汽車 HONDA E (VZ底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: racer
+seriesNumber: 95
+seriesLabel: 1/32 レーサーミニ四駆シリーズ
+chassis: vz
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: Honda e (VZシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Dish-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Dish-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Honda e
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 110
+releaseDate: 2020-11-14
+releaseDateRaw: 2020年11月14日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18095/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/18095/18095_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18095-honda-e-vz/
+scrapedAt: 2026-09-08

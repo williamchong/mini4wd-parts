@@ -1,0 +1,45 @@
+id: "95603"
+names:
+  ja: ハリケーンソニック ポリカボディスペシャル（ARシャーシ）-フルカウルミニ四駆30周年記念-
+  en: HURRICANE SONIC POLYCARBONATE BODY SPECIAL (AR CHASSIS) FULLY COWLED MINI 4WD 30TH ANNIVERSARY
+  zh-HK: 1/32 迷你四驅車 暴風超音/颶風音速 PC軟殼特別版 (AR底盤) -Fully Cowled Mini 4WD 30週年紀念-
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ar
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: ハリケーンソニック ポリカボディスペシャル（ARシャーシ）-フルカウルミニ四駆30周年記念-
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Spiral-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Spiral-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Hurricane Sonic
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2024-06-22
+releaseDateRaw: 2024年6月22日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95603/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95603/95603_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95603-1-32-mini-4wd-hurricane-sonic-polycarbonate-body-special-ar-chassis-fully-cowled-mini-4wd-30th-anniversary/
+specsRaw: ●完成時の全長155mm、全幅97mm、全高40mm ●モーターつき ●組み立ては接着剤不要のはめ込み式 ●フルカウルミニ四駆30周年を記念する特別ステッカーもセット
+scrapedAt: 2026-09-08

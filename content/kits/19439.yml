@@ -1,0 +1,45 @@
+id: "19439"
+names:
+  ja: 1/32 ビークスパイダー プレミアム （スーパーIIシャーシ）
+  en: BEAK SPIDER PREMIUM (SUPER-II CHASSIS)
+  zh-HK: 1/32 迷你四驅車 黑蜘蛛 Premium (Super II 底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: fully-cowled
+seriesNumber: 39
+seriesLabel: 1/32 フルカウルミニ四駆シリーズ
+chassis: super-2
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 ビークスパイダー プレミアム （スーパーIIシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Small VS-Type
+      source: fandom
+  wheel-rear:
+    - label: Small VS-Type
+      source: fandom
+  tire-front:
+    - label: Small X Narrow-Type
+      source: fandom
+  tire-rear:
+    - label: Small X Narrow-Type
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Beak Spider
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 110
+releaseDateRaw: 2014年 7月12日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/19439/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/19439/19439_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-19439-beak-spider-premium-super-ii/
+specsRaw: ●完成時の全長150mm ●全幅97mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

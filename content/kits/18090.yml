@@ -1,0 +1,46 @@
+id: "18090"
+names:
+  ja: ミニ四駆キャット
+  en: MINI 4WD CAT RACER
+  zh-HK: 1/32 迷你四驅車 小貓賽車 (Super-II 底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: racer
+seriesNumber: 90
+seriesLabel: 1/32 レーサーミニ四駆シリーズ
+chassis: super-2
+gearRatio: 5:1
+stockLoadout:
+  body:
+    - label: ミニ四駆キャット
+      source: tamiya
+  wheel-front:
+    - label: Large V-Spoke
+      source: fandom
+  wheel-rear:
+    - label: Large V-Spoke
+      source: fandom
+  tire-front:
+    - label: Large Arched
+      source: fandom
+  tire-rear:
+    - label: Large Arched
+      source: fandom
+  gear-set:
+    - label: 5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Mini 4WD Cat Racer
+priceJpy: 1540
+priceJpyExTax: 1400
+priceHkd: 110
+releaseDate: 2018-06-16
+releaseDateRaw: 2018年6月16日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18090/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/18090/18090_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18090-mini-4wd-cat-racer-super-ii/
+specsRaw: ●完成時の全長150mm、全幅97mm、全高50mm ●モーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

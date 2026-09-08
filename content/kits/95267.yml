@@ -1,0 +1,42 @@
+id: "95267"
+names:
+  ja: 1/32 エアロ アバンテ ゴールドメタリック （ARシャーシ）
+  en: AERO AVANTE GOLD METALLIC (AR CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ar
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 エアロ アバンテ ゴールドメタリック （ARシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Aero Avante
+priceJpy: 1100
+priceJpyExTax: 1000
+priceHkd: 100
+releaseDate: 2016-01-09
+releaseDateRaw: 2016年1月9日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95267/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95267/95267_1.jpg
+hkStoreUrl: https://tamiya.hk/product/ta-95267-mini-4wd-product-aero-avante-gold-metallic-ar-chassis/
+scrapedAt: 2026-09-08

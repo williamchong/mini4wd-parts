@@ -1,0 +1,42 @@
+id: "18623"
+names:
+  ja: 1/32 サバンナレオ
+  en: SAVANNA LEO
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: pro
+seriesNumber: 23
+seriesLabel: 1/32 ミニ四駆PROシリーズ
+chassis: ms
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: 1/32 サバンナレオ
+      source: tamiya
+  wheel-front:
+    - label: Large MS II
+      source: fandom
+  wheel-rear:
+    - label: Large MS II
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Savanna Leo
+priceJpy: 990
+priceJpyExTax: 900
+releaseDate: 2007-12-08
+releaseDateRaw: 2007年12月8日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18623/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18623/18623_1.jpg
+specsRaw: ●全長152mm ●全幅92mm ●ダブルシャフトモーター付き
+scrapedAt: 2026-09-08

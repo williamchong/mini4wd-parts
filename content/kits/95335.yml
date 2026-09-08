@@ -1,0 +1,43 @@
+id: "95335"
+names:
+  ja: 1/32 プロトエンペラーZX（ジークロス）プレミアム（スーパーIIシャーシ）
+  en: PROTO-EMPEROR ZX PREMIUM (SUPER-II CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: super-2
+gearRatio: 4.2:1
+stockLoadout:
+  body:
+    - label: 1/32 プロトエンペラーZX（ジークロス）プレミアム（スーパーIIシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Large Narrow Lightweight
+      source: fandom
+  wheel-rear:
+    - label: Large Narrow Lightweight
+      source: fandom
+  tire-front:
+    - label: Large Arched
+      source: fandom
+  tire-rear:
+    - label: Large Arched
+      source: fandom
+  gear-set:
+    - label: 4.2:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Proto-Emperor ZX
+priceJpy: 1100
+priceJpyExTax: 1000
+priceHkd: 100
+releaseDate: 2017-07-15
+releaseDateRaw: 2017年7月15日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95335/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95335/95335_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95335-proto-emperor-zx-premium-super-ii-chassis/
+specsRaw: ●完成時の全長150mm、全幅97mm、全高47mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

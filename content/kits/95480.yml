@@ -1,0 +1,46 @@
+id: "95480"
+names:
+  ja: ミニ四駆ピッグGT
+  en: MINI 4WD PIG RACER GT
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ma
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: ミニ四駆ピッグGT
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile A-Spoke
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile A-Spoke
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  motor:
+    - label: Torque-Tuned 2 PRO
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Mini 4WD Pig Racer GT
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2019-04-20
+releaseDateRaw: 2019年4月20日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95480/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95480/95480_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-1-32-mini-4wd-jr-pig-racer-gt/
+specsRaw: ●完成時の全長156mm、全幅97mm、全高45mm ●トルクチューン2モーターPROつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

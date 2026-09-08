@@ -1,0 +1,29 @@
+id: "19438"
+names:
+  ja: 1/32 レイスティンガー プレミアム （スーパーIIシャーシ）
+  en: RAY STINGER PREMIUM (SUPER-II CHASSIS)
+  zh-HK: 1/32 迷你四驅車 銀影號 Premium (Super II底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: fully-cowled
+seriesNumber: 38
+seriesLabel: 1/32 フルカウルミニ四駆シリーズ
+chassis: super-2
+stockLoadout:
+  body:
+    - label: 1/32 レイスティンガー プレミアム （スーパーIIシャーシ）
+      source: tamiya
+loadoutSource: chassis
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 110
+releaseDate: 2014-01-25
+releaseDateRaw: 2014年1月25日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/19438/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/19438/19438_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-19438-ray-stinger-prem-super-ii/
+specsRaw: ●完成時の全長150mm ●全幅97mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

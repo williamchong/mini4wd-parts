@@ -1,0 +1,46 @@
+id: "18630"
+names:
+  ja: 1/32 ダッシュ3号・流星（シューティングスター）（MSシャーシ）
+  en: DASH-3 SHOOTING STAR (MS CHASSIS)
+  zh-HK: 1/32 迷你四驅車 Dash-3 摘星者/衝刺流星 (MS 底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: pro
+seriesNumber: 30
+seriesLabel: 1/32 ミニ四駆PROシリーズ
+chassis: ms
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: 1/32 ダッシュ3号・流星（シューティングスター）（MSシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Large MS II
+      source: fandom
+  wheel-rear:
+    - label: Large MS II
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Dash-3 Shooting Star
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 100
+releaseDate: 2008-12-20
+releaseDateRaw: 2008年12月20日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18630/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18630/18630_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18630-1-32-4wd-mini-pro-series-no-30-dash-3-shooting-star-ms-chassis/
+specsRaw: ●全長152mm ●全幅92mm ●ダブルシャフトモーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

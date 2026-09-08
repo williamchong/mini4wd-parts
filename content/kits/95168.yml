@@ -1,0 +1,45 @@
+id: "95168"
+names:
+  ja: 1/32 イグニシオン ジャパンカップ 2024 (MAシャーシ)
+  en: IGNICION (MA CHASSIS) JAPAN CUP 2024
+  zh-HK: 1/32 迷你四驅車 燎原火 Ignicion (MA底盤) 日本盃2024
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: limited
+seriesLabel: ミニ四駆限定販売商品（マシン）
+chassis: ma
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 イグニシオン ジャパンカップ 2024 (MAシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Fin-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Fin-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Ignicion
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2024-06-15
+releaseDateRaw: 2024年6月15日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95168/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95168/95168_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95168-1-32-mini-4wd-ignicion-ma-chassis-japan-cup-2024/
+specsRaw: ●完成時の全長156mm、全幅97mm、全高42mm ●ダブルシャフトモーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

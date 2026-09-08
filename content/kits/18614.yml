@@ -1,0 +1,44 @@
+id: "18614"
+names:
+  ja: 1/32 アバンテMk.II
+  en: AVANTE MK.II
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: pro
+seriesNumber: 14
+seriesLabel: 1/32 ミニ四駆PROシリーズ
+chassis: ms
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: 1/32 アバンテMk.II
+      source: tamiya
+  wheel-front:
+    - label: Large MS I
+      source: fandom
+  wheel-rear:
+    - label: Large MS I
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Avante Mk.II
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 100
+releaseDate: 2006-06-24
+releaseDateRaw: 2006年6月24日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18614/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18614/18614_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18614-1-32-mini-4wd-avante-mk-ii/
+specsRaw: ●全長154mm ●全幅88mm ●ダブルシャフトモーター付き
+scrapedAt: 2026-09-08

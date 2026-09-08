@@ -1,0 +1,46 @@
+id: "18069"
+names:
+  ja: 1/32 ダッシュ1号エンペラー プレミアム（スーパーIIシャーシ）
+  en: DASH-1 EMPEROR PREMIUM (SUPER-II CHASSIS)
+  zh-HK: 1/32 迷你四驅車 Dash-1 皇帝號 Premium (Super II 底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: racer
+seriesNumber: 69
+seriesLabel: 1/32 レーサーミニ四駆シリーズ
+chassis: super-2
+gearRatio: 4.2:1
+stockLoadout:
+  body:
+    - label: 1/32 ダッシュ1号エンペラー プレミアム（スーパーIIシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Large Manta Ray-Type
+      source: fandom
+  wheel-rear:
+    - label: Large Manta Ray-Type
+      source: fandom
+  tire-front:
+    - label: Large Avante-Type Slick
+      source: fandom
+  tire-rear:
+    - label: Large Avante-Type Slick
+      source: fandom
+  gear-set:
+    - label: 4.2:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Dash-1 Emperor
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 110
+releaseDate: 2012-03-24
+releaseDateRaw: 2012年3月24日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/18069/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/18069/18069_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-18069-jr-dash-1-emperor-premium/
+specsRaw: ●完成時の全長150mm ●全幅97mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

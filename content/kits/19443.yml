@@ -1,0 +1,46 @@
+id: "19443"
+names:
+  ja: 1/32 ディオスパーダ プレミアム （ARシャーシ）
+  en: DIOSPADA PREMIUM (AR CHASSIS)
+  zh-HK: 1/32 迷你四驅車 天馬號/神劍號 Premium (AR 底盤)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: fully-cowled
+seriesNumber: 43
+seriesLabel: 1/32 フルカウルミニ四駆シリーズ
+chassis: ar
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: 1/32 ディオスパーダ プレミアム （ARシャーシ）
+      source: tamiya
+  wheel-front:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  wheel-rear:
+    - label: Small Low-Profile Saber-Type
+      source: fandom
+  tire-front:
+    - label: Small Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Small Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Diospada
+priceJpy: 1430
+priceJpyExTax: 1300
+priceHkd: 110
+releaseDate: 2015-01-31
+releaseDateRaw: 2015年1月31日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/19443/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/19443/19443_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-19443-1-32-mini-4wd-diospada-premium-ar-chassis/
+specsRaw: ●完成時の全長155mm ●全幅97mm ●全高41mm ●モーター付き ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

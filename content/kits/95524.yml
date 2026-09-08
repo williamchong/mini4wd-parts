@@ -1,0 +1,43 @@
+id: "95524"
+names:
+  ja: レイザーバック クリヤーバイオレットスペシャル (FM-Aシャーシ)
+  en: RAZORBACK CLEAR VIOLET SPECIAL(FM-A CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: fm-a
+gearRatio: 3.5:1
+stockLoadout:
+  body:
+    - label: レイザーバック クリヤーバイオレットスペシャル (FM-Aシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Small
+      source: fandom
+  wheel-rear:
+    - label: Small
+      source: fandom
+  tire-front:
+    - label: Small Rally Block
+      source: fandom
+  tire-rear:
+    - label: Small Rally Block
+      source: fandom
+  gear-set:
+    - label: 3.5:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Razorback
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2020-02-22
+releaseDateRaw: 2020年2月22日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95524/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95524/95524_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95524-razorback-clear-violet-special-fm-chassis/
+specsRaw: ●完成時の全長156mm、全幅97mm、全高45mm ●モーターつき ●組み立ては接着剤不要のはめ込み式
+scrapedAt: 2026-09-08

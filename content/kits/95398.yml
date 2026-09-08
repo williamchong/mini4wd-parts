@@ -1,0 +1,43 @@
+id: "95398"
+names:
+  ja: 1/32 ナイトレージJr. クリヤーブルースペシャル (MAシャーシ)
+  en: NITRAGE Jr. CLEAR BLUE SPECIAL (MA CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画（マシン）
+chassis: ma
+gearRatio: 4:1
+stockLoadout:
+  body:
+    - label: 1/32 ナイトレージJr. クリヤーブルースペシャル (MAシャーシ)
+      source: tamiya
+  wheel-front:
+    - label: Large Low-Profile 6-Spoke
+      source: fandom
+  wheel-rear:
+    - label: Large Low-Profile 6-Spoke
+      source: fandom
+  tire-front:
+    - label: Large Low-Profile Slick
+      source: fandom
+  tire-rear:
+    - label: Large Low-Profile Slick
+      source: fandom
+  gear-set:
+    - label: 4:1
+      source: fandom
+loadoutSource: fandom
+loadoutSourceTitle: Nitrage Jr.
+priceJpy: 1210
+priceJpyExTax: 1100
+priceHkd: 110
+releaseDate: 2021-03-26
+releaseDateRaw: 2021年3月26日(金)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95398/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95398/95398_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95398-nitrage-jr-clear-blue-special-ma-chassis/
+specsRaw: ●全長152mm ●全幅92mm ●ダブルシャフトモーター付き ●接着剤を使わずはめ込みとビス止めで組み立てられます。
+scrapedAt: 2026-09-08
