@@ -1,5 +1,13 @@
 > Research snapshot from 2026-09-08. Where this differs from `docs/PLAN.md`, the plan is authoritative.
 
+> **Corrected 2026-09-08 by the first scraper run** (`scripts/catalog/`). Four points below were wrong or incomplete:
+> 1. **The JP detail page already carries the English name**, in the `<span>` right after the `<h1>`. The English catalog does not need to be scraped at all — that removes ~400 requests and a parser.
+> 2. **tamiya.hk carries a Traditional Chinese name per SKU** in the Store API's `short_description` (`15549` → 「田宮 15549 HG 碳纖維 闊身後置支架 (2mm) (滑動阻尼裝置用)」), not just English. It covers 60% of our v1 selection, which turns per-item TC naming from "author all of it" into "fill the gaps".
+> 3. **Decode with `new TextDecoder('shift_jis')`** (Node's WHATWG decoder is Windows-31J), *not* strict Shift_JIS. `iconv -f SHIFT_JIS` aborts on the NEC extension characters in item names and silently truncates the GUP list page from 20 items to 4.
+> 4. **Page sizes differ per view**: the product lists page at 20, the per-chassis compatibility pages at 40. Genres that fit on a single page render no pager block at all, so an absent item count is normal rather than a markup change.
+>
+> Volumes actually retrieved: 690 parts across the six parts genres, 1,104 Mini 4WD SKUs from tamiya.hk, and 175–470 compatible items per chassis (ME is newest and smallest, MA largest).
+
 # Mini 4WD parts database — data-source feasibility (2026-09-08)
 
 Summary verdict up front:

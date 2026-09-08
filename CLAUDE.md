@@ -38,6 +38,13 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - 3D assets must be simplified, stylised representations generated procedurally or modelled in-house. Never offer GLB downloads. Keep the "unofficial fan site" disclaimer.
 - Traditional Chinese terminology differs between Hong Kong (摩打, 剎車) and Taiwan (馬達, 煞車); store both variants where they differ.
 
+## Catalog Pipeline
+
+- `content/parts/*.yml` and `content/chassis/*.yml` are **generated** — never hand-edit them. Corrections go in `data/overrides/parts.yml` (keyed by Tamiya item number) or `data/chassis/*.yml`, then `npm run catalog:generate`.
+- `npm run scrape` refreshes `data/raw/*.json` (throttled, disk-cached under `.cache/`); `npm run catalog:report` lists what still needs a human; `npm run catalog:verify` validates the committed YAML; `npm test` runs the parser fixtures; `npm run typecheck` type-checks `scripts/` and `shared/` (nothing else does — Node strips the types at runtime).
+- Scripts are plain `.ts` run by Node's native type stripping — no build step, and relative imports need explicit `.ts` extensions.
+- Tamiya's pages are Shift_JIS: decode with `new TextDecoder('shift_jis')`. Strict Shift_JIS decoders truncate the pages.
+
 ## Development Notes
 
 - Run Node/npm commands only after the Nuxt scaffold is committed and `package.json` is in place.

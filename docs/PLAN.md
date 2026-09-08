@@ -109,9 +109,14 @@ Neither Tamiya Stock Class nor B-MAX publishes an approved item list; both are r
 
 ### 3.2 Pipeline
 
-1. Scraper script in repo (run locally, then monthly via GitHub Action): JP list pages → item ids → JP detail → EN detail → per-chassis compat pages → tamiya.hk by SKU. Throttled, ≈1,300 requests per full run. Output: one YAML per item under `content/`.
-2. Hand-authored layer: TC names (HK and TW variants), category, slot mapping, legality overrides, usage notes, own photos.
-3. Attribution page: Tamiya (facts, links), tamiya.hk (prices), Fandom/Wikipedia (CC-BY-SA text where reused).
+Built 2026-09-08 as `scripts/catalog/` — three stages, deliberately separated so a re-run is cheap and can never overwrite hand-authoring:
+
+1. **Scrape wide** (`npm run scrape`): JP list pages → item ids → JP detail → per-chassis compat pages → tamiya.hk Store API. Throttled to one request per 700 ms with a disk cache under `.cache/`, ≈930 requests per full run (the EN catalog turned out to be unnecessary — the JP detail page carries the English name). Output: committed snapshots in `data/raw/*.json` covering **every** item in the parts genres, not just the v1 selection, so widening the catalog later costs no requests.
+2. **Generate narrow** (`npm run catalog:generate`): raw snapshots + `data/taxonomy/*.yml` + `data/overrides/parts.yml` → schema-validated YAML in `content/parts/` and `content/chassis/`. Everything under `content/` is machine-written and rebuilt from scratch on every run.
+3. **Hand-authored layer**: `data/overrides/parts.yml` (keyed by item number) and `data/chassis/*.yml`. Category corrections, motor legality, slot graphs and TW naming live here, never in `content/`. `npm run catalog:report` lists what still needs a human.
+4. Attribution page: Tamiya (facts, links), tamiya.hk (prices, zh-HK names), Fandom/Wikipedia (CC-BY-SA text where reused).
+
+First run committed **382 parts** (244 regular GUP + 42 AO + 96 limited/special/station released since 2023-01) and 8 chassis. Coverage at that point: 99% categorised, 83% with chassis compatibility, 80% with HKD prices, 60% with a Traditional Chinese name. Kits are a second pass with the same code.
 
 ### 3.3 Images and IP
 
@@ -220,7 +225,7 @@ Roughly 4–6 weeks part-time for a one-person MVP asset set. Scaling to hundred
 ### Phase 0 — Foundation (1–2 weeks)
 - Resolve branch layout: the deploy workflow targets `main`, which does not exist (branches are `master` and `gh-pages`). Decide on `main` + Actions deploy; retire the hand-managed `gh-pages` branch.
 - Upgrade scaffold to Nuxt 4 + @nuxt/content v3 + @nuxtjs/i18n; define Zod schemas for parts / chassis / rules / guides / profiles.
-- Write the scraper; run once; commit ≈300–400 item YAMLs plus 8 chassis records; hand-author TC names and categories for the v1 scope.
+- ~~Write the scraper; run once; commit ≈300–400 item YAMLs plus 8 chassis records~~ — done 2026-09-08 (382 parts + 8 chassis, see §3.2). Remaining: zh-TW names, which fall back to the imported zh-HK names until authored.
 - Add PostHog.
 
 ### Phase 1 — Parts database, guides, 2D builder (4–6 weeks)
