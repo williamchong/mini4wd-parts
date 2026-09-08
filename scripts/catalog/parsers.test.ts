@@ -6,6 +6,7 @@ import { parseDetail, parseListPage } from './sources/tamiya-jp.ts'
 import { parseCompatPage } from './sources/tamiya-compat.ts'
 import { mapStoreProduct } from './sources/tamiya-hk.ts'
 import { deriveCategory, deriveSpecs } from './taxonomy.ts'
+import { GUP_TEMPLATE, parseGupArticle, parseTemplate, splitParams, templatePattern } from './sources/fandom.ts'
 
 const fixture = (name: string) =>
   readFileSync(join(import.meta.dirname, '__fixtures__', name), 'utf8')
@@ -120,4 +121,45 @@ test('specs come out of names and the spec block', () => {
   assert.equal(motor.motorShaft, 'double')
   assert.equal(motor.motorRpmMin, 12200)
   assert.equal(motor.motorRpmMax, 14400)
+})
+
+test('template params survive nested links and templates', () => {
+  // A plain split on "|" would shred [[File:x|y]] and {{Translation|a|b}}.
+  assert.deepEqual(
+    splitParams('a = [[File:x.jpg|270 px]]|b = {{T|one|two}}|c = 3'),
+    ['a = [[File:x.jpg|270 px]]', 'b = {{T|one|two}}', 'c = 3']
+  )
+})
+
+test('template keys are folded, so "No." and "No" are one field', () => {
+  const fields = parseTemplate('{{Infobox Grade-Up Parts|No. = 15034|Parts type = Roller}}',
+    /Infobox[ _]Grade-Up[ _]Parts/i)
+  assert.equal(fields!.no, '15034')
+  assert.equal(fields!['parts type'], 'Roller')
+})
+
+test('a GUP article yields its part type and every item number with its variant', () => {
+  const article = parseGupArticle('Ball Bearing', fixture('fandom-gup.wikitext'))
+
+  assert.equal(article.partsType, 'Ball bearing')
+  assert.deepEqual(article.items.map(item => item.id), ['15034', '15111', '94389'])
+  assert.equal(article.items[0]!.variant, 'Hex hole set')
+  assert.equal(article.items[2]!.variant, 'AO 620 set')
+  // Only the No. field is scanned: the fixture puts a real item number in a
+  // Related field, and release years in Release Date. and the body.
+  assert.equal(article.items.some(item => item.id === '15442'), false)
+})
+
+test('an unterminated template is a parse failure, not a truncated last field', () => {
+  assert.equal(
+    parseTemplate('{{Infobox Grade-Up Parts|No. = 15034|Parts type = Roller', templatePattern(GUP_TEMPLATE)),
+    undefined
+  )
+})
+
+test('the match pattern is derived from the queried template name', () => {
+  // MediaWiki treats spaces and underscores in template names as the same.
+  const fields = parseTemplate('{{Infobox_Grade-Up_Parts|Parts type = Roller}}',
+    templatePattern(GUP_TEMPLATE))
+  assert.equal(fields!['parts type'], 'Roller')
 })

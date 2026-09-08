@@ -1,4 +1,5 @@
 import { readYamlDir, readYamlFileIfPresent } from './io.ts'
+import { list, section } from './print.ts'
 import type { Part, PartOverride } from '../../shared/catalog/schema.ts'
 
 /**
@@ -14,13 +15,6 @@ const tally = (key: (part: Part) => string) => {
   const counts = new Map<string, number>()
   for (const part of parts) counts.set(key(part), (counts.get(key(part)) ?? 0) + 1)
   return [...counts].sort((a, b) => b[1] - a[1])
-}
-
-const section = (title: string) => console.log(`\n${title}\n${'-'.repeat(title.length)}`)
-const list = (label: string, items: string[], limit = 12) => {
-  console.log(`${label}: ${items.length}`)
-  for (const item of items.slice(0, limit)) console.log(`    ${item}`)
-  if (items.length > limit) console.log(`    … ${items.length - limit} more`)
 }
 
 console.log(`${parts.length} parts in content/parts`)

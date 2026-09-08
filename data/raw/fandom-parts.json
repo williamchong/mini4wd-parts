@@ -1,0 +1,2411 @@
+[
+  {
+    "title": "Aluminum Ball-Race Roller",
+    "partsType": "Roller",
+    "items": [
+      {
+        "id": "15437",
+        "variant": "Ringless"
+      },
+      {
+        "id": "94859",
+        "variant": "Ringless Blue"
+      },
+      {
+        "id": "94860",
+        "variant": "Ringless Red"
+      },
+      {
+        "id": "94861",
+        "variant": "Ringless Purple"
+      },
+      {
+        "id": "94862",
+        "variant": "Ringless Gold"
+      },
+      {
+        "id": "95048",
+        "variant": "Ringless Pink"
+      },
+      {
+        "id": "95049",
+        "variant": "Ringless Violet"
+      },
+      {
+        "id": "94897",
+        "variant": "Ringless Black"
+      },
+      {
+        "id": "95576",
+        "variant": "Ringless Blue Reissue"
+      },
+      {
+        "id": "95577",
+        "variant": "Ringless Red Reissue"
+      },
+      {
+        "id": "95612",
+        "variant": "Ringless Green"
+      },
+      {
+        "id": "95301",
+        "variant": "Ringless"
+      },
+      {
+        "id": "95499",
+        "variant": "Ringless Black"
+      },
+      {
+        "id": "95549",
+        "variant": "Ringless Red"
+      },
+      {
+        "id": "15161",
+        "variant": "Rubber"
+      },
+      {
+        "id": "15449",
+        "variant": "Plastic Blue Ring"
+      },
+      {
+        "id": "94932",
+        "variant": "Plastic Red Ring"
+      },
+      {
+        "id": "94933",
+        "variant": "Plastic LBlue Ring"
+      },
+      {
+        "id": "94934",
+        "variant": "Plastic Orange Ring"
+      },
+      {
+        "id": "95347",
+        "variant": "Plastic Red Ring Reissue"
+      },
+      {
+        "id": "95348",
+        "variant": "Plastic LBlue Ring Reissue"
+      },
+      {
+        "id": "94849",
+        "variant": "Rubber Blue"
+      },
+      {
+        "id": "94850",
+        "variant": "Rubber Gun Metal"
+      },
+      {
+        "id": "94851",
+        "variant": "Rubber Red"
+      },
+      {
+        "id": "95580",
+        "variant": "Plastic Red Ring"
+      },
+      {
+        "id": "95563",
+        "variant": "Ringless"
+      },
+      {
+        "id": "49584",
+        "variant": "Rubber Ltd."
+      },
+      {
+        "id": "15125",
+        "variant": "Rubber Black"
+      },
+      {
+        "id": "94145",
+        "variant": "Rubber Blue"
+      },
+      {
+        "id": "94195",
+        "variant": "Rubber Gold"
+      },
+      {
+        "id": "94196",
+        "variant": "Rubber Red"
+      },
+      {
+        "id": "15404",
+        "variant": "Rubber Reissue"
+      },
+      {
+        "id": "15461",
+        "variant": "Plastic Blue Ring"
+      },
+      {
+        "id": "94994",
+        "variant": "Plastic Orange Ring"
+      },
+      {
+        "id": "94995",
+        "variant": "Plastic Red Ring"
+      },
+      {
+        "id": "94996",
+        "variant": "Plastic LBlue Ring"
+      },
+      {
+        "id": "95385",
+        "variant": "Plastic Orange Ring Reissue"
+      },
+      {
+        "id": "95396",
+        "variant": "Plastic Red Ring Reissue"
+      },
+      {
+        "id": "95397",
+        "variant": "Plastic LBlue Ring Reissue"
+      },
+      {
+        "id": "95438",
+        "variant": "Plastic Pink Ring"
+      },
+      {
+        "id": "95493",
+        "variant": "Plastic Green Ring"
+      },
+      {
+        "id": "95421",
+        "variant": "Rubber"
+      },
+      {
+        "id": "95513",
+        "variant": "Plastic Red Ring"
+      },
+      {
+        "id": "15160",
+        "variant": "Rubber"
+      },
+      {
+        "id": "15251",
+        "variant": "Plastic"
+      },
+      {
+        "id": "94787",
+        "variant": "Plastic Red Ring"
+      },
+      {
+        "id": "94788",
+        "variant": "Plastic LBlue Ring"
+      },
+      {
+        "id": "94789",
+        "variant": "Plastic Orange Ring"
+      },
+      {
+        "id": "95326",
+        "variant": "Plastic Red Ring Reissue"
+      },
+      {
+        "id": "95327",
+        "variant": "Plastic LBlue Ring Reissue"
+      },
+      {
+        "id": "95328",
+        "variant": "Plastic Orange Ring Reissue"
+      },
+      {
+        "id": "94739",
+        "variant": "Rubber Blue"
+      },
+      {
+        "id": "94759",
+        "variant": "Rubber Red"
+      },
+      {
+        "id": "94758",
+        "variant": "Rubber Gun Metal"
+      },
+      {
+        "id": "15426",
+        "variant": "Plastic Blue Ring"
+      },
+      {
+        "id": "94886",
+        "variant": "Rubber J-Cup SP"
+      },
+      {
+        "id": "94955",
+        "variant": "Rubber JC2013 Blue"
+      },
+      {
+        "id": "94956",
+        "variant": "Rubber JC2013 Yellow"
+      },
+      {
+        "id": "15464",
+        "variant": "Ringless"
+      },
+      {
+        "id": "95010",
+        "variant": "Ringless Blue"
+      },
+      {
+        "id": "95237",
+        "variant": "Ringless Red"
+      },
+      {
+        "id": "95095",
+        "variant": "Ringless JC2016"
+      },
+      {
+        "id": "95561",
+        "variant": "Ringless Blue Reissue"
+      },
+      {
+        "id": "95137",
+        "variant": "Ringless JC2020"
+      },
+      {
+        "id": "95148",
+        "variant": "Ringless JC2021"
+      },
+      {
+        "id": "95074",
+        "variant": "Ringless"
+      },
+      {
+        "id": "95213",
+        "variant": "Ringless Pink"
+      },
+      {
+        "id": "95315",
+        "variant": "Ringless Blue"
+      },
+      {
+        "id": "95404",
+        "variant": "Ringless Red"
+      },
+      {
+        "id": "95454",
+        "variant": "Ringless Gun Metal"
+      },
+      {
+        "id": "95498",
+        "variant": "Ringless Black"
+      },
+      {
+        "id": "95539",
+        "variant": "Ringless Purple"
+      },
+      {
+        "id": "95582",
+        "variant": "Ringless Gold"
+      },
+      {
+        "id": "95607",
+        "variant": "Ringless Green"
+      }
+    ]
+  },
+  {
+    "title": "Aluminum Wheel Set",
+    "partsType": "Wheels/Tires",
+    "items": [
+      {
+        "id": "15145",
+        "variant": "Small Dia. Narrow"
+      },
+      {
+        "id": "15153",
+        "variant": "Small Dia. Wide-type"
+      },
+      {
+        "id": "94710",
+        "variant": "HG Low-profile"
+      },
+      {
+        "id": "94733",
+        "variant": "HG Low-profile Black"
+      },
+      {
+        "id": "94992",
+        "variant": "HG Deep Rim"
+      },
+      {
+        "id": "94993",
+        "variant": "HG Low-profile Heavy"
+      },
+      {
+        "id": "95276",
+        "variant": "HG Low-profile reissue"
+      },
+      {
+        "id": "95403",
+        "variant": "HG Deep Rim Red"
+      },
+      {
+        "id": "95395",
+        "variant": "HG Small Dia. Super X"
+      },
+      {
+        "id": "95516",
+        "variant": "HG Small Dia Super X Red"
+      },
+      {
+        "id": "49581",
+        "variant": "LW"
+      },
+      {
+        "id": "94705",
+        "variant": "HG Large Dia. Narrow"
+      },
+      {
+        "id": "94732",
+        "variant": "HG Large Dia. Narrow Blue"
+      },
+      {
+        "id": "95012",
+        "variant": "HG Heavy Large Dia. Narrow"
+      },
+      {
+        "id": "95275",
+        "variant": "HG Large Dia. Narrow reissue"
+      },
+      {
+        "id": "95359",
+        "variant": "HG Large Dia. Super X"
+      },
+      {
+        "id": "95538",
+        "variant": "HG Large Dia II"
+      },
+      {
+        "id": "95602",
+        "variant": "HG Small Dia II"
+      }
+    ]
+  },
+  {
+    "title": "Anti-Wear Grease",
+    "partsType": "Grease",
+    "items": []
+  },
+  {
+    "title": "Atomic-Tuned Motor",
+    "partsType": "Motor",
+    "items": [
+      {
+        "id": "15215",
+        "variant": "AT1"
+      },
+      {
+        "id": "94265",
+        "variant": "AT1 J-Cup Sp"
+      },
+      {
+        "id": "15486",
+        "variant": "AT2"
+      },
+      {
+        "id": "15351",
+        "variant": "AT1 PRO"
+      },
+      {
+        "id": "15489",
+        "variant": "AT2 PRO"
+      }
+    ]
+  },
+  {
+    "title": "Ball Bearing",
+    "partsType": "Ball bearing",
+    "items": [
+      {
+        "id": "15034",
+        "variant": "Hex hole set"
+      },
+      {
+        "id": "15111",
+        "variant": "Round hole set"
+      },
+      {
+        "id": "15259",
+        "variant": "DR hex hole set"
+      },
+      {
+        "id": "15269",
+        "variant": "DR round hole set"
+      },
+      {
+        "id": "15287",
+        "variant": "RC hex hole set"
+      },
+      {
+        "id": "15338",
+        "variant": "DR HG set"
+      },
+      {
+        "id": "94389",
+        "variant": "AO 620 set"
+      },
+      {
+        "id": "94752",
+        "variant": "AO 520 set"
+      },
+      {
+        "id": "15519",
+        "variant": "HG round hole set"
+      }
+    ]
+  },
+  {
+    "title": "Brake Sponge Set",
+    "partsType": "Sponge/Brake Skid/Stay",
+    "items": [
+      {
+        "id": "15441",
+        "variant": "3 Types"
+      },
+      {
+        "id": "94786",
+        "variant": "3 Types LE"
+      },
+      {
+        "id": "15492",
+        "variant": "1/2/3 mm Red/White"
+      },
+      {
+        "id": "15512",
+        "variant": "Mild 1/2/3 mm Blue"
+      }
+    ]
+  },
+  {
+    "title": "Ceramic Grease",
+    "partsType": "Grease",
+    "items": [
+      {
+        "id": "15018",
+        "variant": "Mini 4WD"
+      }
+    ]
+  },
+  {
+    "title": "Competition Gear Set",
+    "partsType": "Gear Set",
+    "items": [
+      {
+        "id": "15053"
+      }
+    ]
+  },
+  {
+    "title": "CoroCoro Aniki Special Parts Set Japan Cup 2015",
+    "partsType": "Dress-Up Sticker Set/Stays/Wheels/Tires",
+    "items": []
+  },
+  {
+    "title": "Countersunk Screw Set",
+    "partsType": "Screw set",
+    "items": [
+      {
+        "id": "15510",
+        "variant": "Stainless 10/12/20/25/50 set"
+      },
+      {
+        "id": "15527",
+        "variant": "Stainless 6/8/15 set"
+      },
+      {
+        "id": "95415",
+        "variant": "Stainless 10/12/20/25/50 set black"
+      }
+    ]
+  },
+  {
+    "title": "Disk Wheel Hub Set",
+    "partsType": "Wheels",
+    "items": [
+      {
+        "id": "15003",
+        "variant": "White"
+      },
+      {
+        "id": "15004",
+        "variant": "Silver"
+      },
+      {
+        "id": "15005",
+        "variant": "Gold"
+      }
+    ]
+  },
+  {
+    "title": "Double Roller",
+    "partsType": "Roller",
+    "items": [
+      {
+        "id": "15403",
+        "variant": "Alumi Ringless"
+      },
+      {
+        "id": "94721",
+        "variant": "Alumi Ringless Blue"
+      },
+      {
+        "id": "94966",
+        "variant": "Alumi LW Ringless"
+      },
+      {
+        "id": "95380",
+        "variant": "Alumi LW Ringless Reissue"
+      },
+      {
+        "id": "95562",
+        "variant": "Alumi LW Ringless Red"
+      },
+      {
+        "id": "15398",
+        "variant": "Alumi Ringless"
+      },
+      {
+        "id": "94714",
+        "variant": "Alumi Ringless Black"
+      },
+      {
+        "id": "15418",
+        "variant": "Alumi Rubber"
+      },
+      {
+        "id": "94945",
+        "variant": "Alumi LW Ringless"
+      },
+      {
+        "id": "94979",
+        "variant": "Alumi LW Ringless Blue"
+      },
+      {
+        "id": "94980",
+        "variant": "Alumi LW Ringless Red"
+      },
+      {
+        "id": "95231",
+        "variant": "Alumi Ringless Black reissue"
+      },
+      {
+        "id": "95379",
+        "variant": "Alumi LW Ringless Reissue"
+      },
+      {
+        "id": "95423",
+        "variant": "Alumi LW Ringless Red Reissue"
+      },
+      {
+        "id": "95540",
+        "variant": "Alumi LW Ringless Purple"
+      },
+      {
+        "id": "95581",
+        "variant": "Alumi LW Ringless Gold"
+      },
+      {
+        "id": "95606",
+        "variant": "Alumi LW Ringless Green"
+      },
+      {
+        "id": "15457",
+        "variant": "Ringless"
+      },
+      {
+        "id": "15525",
+        "variant": "Rubber"
+      }
+    ]
+  },
+  {
+    "title": "FA-130 Motor",
+    "partsType": "Motor",
+    "items": [
+      {
+        "id": "94380",
+        "variant": "Single-shaft"
+      }
+    ]
+  },
+  {
+    "title": "Fin-type Low-Profile Wheels",
+    "partsType": "Wheels/Tires",
+    "items": [
+      {
+        "id": "15294",
+        "variant": "1st version"
+      },
+      {
+        "id": "15358",
+        "variant": "2nd version"
+      },
+      {
+        "id": "94642",
+        "variant": "Hard tire & carbon wheel"
+      },
+      {
+        "id": "94805",
+        "variant": "Purple-plated wheel"
+      },
+      {
+        "id": "94872",
+        "variant": "Dark blue tire & silver wheel"
+      }
+    ]
+  },
+  {
+    "title": "Front Plate for Fully Cowled Mini 4WD",
+    "partsType": "Stay",
+    "items": [
+      {
+        "id": "94950",
+        "variant": "CFRP"
+      },
+      {
+        "id": "15472",
+        "variant": "FRP"
+      },
+      {
+        "id": "95253",
+        "variant": "CFRP 20th"
+      },
+      {
+        "id": "95124",
+        "variant": "CFRP 25th"
+      }
+    ]
+  },
+  {
+    "title": "Front Sliding Damper Roller",
+    "partsType": "Stay",
+    "items": [
+      {
+        "id": "15139"
+      },
+      {
+        "id": "15377",
+        "variant": "Wide Roller Stay Set"
+      },
+      {
+        "id": "94935",
+        "variant": "Carbon Wide Stay Mini 4WD GP 2013"
+      }
+    ]
+  },
+  {
+    "title": "Fujitsu Lite",
+    "partsType": "Battery",
+    "items": []
+  },
+  {
+    "title": "Fujitsu Premium",
+    "partsType": "Battery",
+    "items": []
+  },
+  {
+    "title": "Fujitsu Premium G",
+    "partsType": "Battery",
+    "items": []
+  },
+  {
+    "title": "Fujitsu Premium S",
+    "partsType": "Battery",
+    "items": []
+  },
+  {
+    "title": "Gold Plated Terminal Set",
+    "partsType": "Terminal",
+    "items": [
+      {
+        "id": "15045",
+        "variant": "A-type"
+      },
+      {
+        "id": "15046",
+        "variant": "B-type"
+      },
+      {
+        "id": "15047",
+        "variant": "C-type"
+      },
+      {
+        "id": "15078",
+        "variant": "Wild-type"
+      },
+      {
+        "id": "15090",
+        "variant": "Zero-type"
+      },
+      {
+        "id": "15237",
+        "variant": "X-type"
+      },
+      {
+        "id": "15286",
+        "variant": "TR-type"
+      },
+      {
+        "id": "15360",
+        "variant": "MS-type"
+      },
+      {
+        "id": "15421",
+        "variant": "Super-II type"
+      }
+    ]
+  },
+  {
+    "title": "GP System",
+    "partsType": "Lap-detection system",
+    "items": []
+  },
+  {
+    "title": "HG Carbon Stay for Wide Sliding Damper",
+    "partsType": "Stay",
+    "items": [
+      {
+        "id": "95284",
+        "variant": "Carbon front 2mm"
+      },
+      {
+        "id": "95285",
+        "variant": "Carbon rear 2mm"
+      }
+    ]
+  },
+  {
+    "title": "Hi-Mount Roller Set",
+    "partsType": "Stay/Wing Roller Stay",
+    "items": [
+      {
+        "id": "15040",
+        "variant": "OG"
+      },
+      {
+        "id": "15085",
+        "variant": "Lightweight"
+      },
+      {
+        "id": "15115",
+        "variant": "Aero"
+      },
+      {
+        "id": "49507",
+        "variant": "Lightweight COrange"
+      },
+      {
+        "id": "94166",
+        "variant": "Aero Blue"
+      },
+      {
+        "id": "94982",
+        "variant": "Aero Black"
+      },
+      {
+        "id": "95252",
+        "variant": "Aero Black reissue"
+      }
+    ]
+  },
+  {
+    "title": "Hollow Drive Shaft",
+    "partsType": "Driveshafts",
+    "items": [
+      {
+        "id": "15121",
+        "variant": "60mm hard"
+      },
+      {
+        "id": "94339",
+        "variant": "60mm stainless ltd."
+      },
+      {
+        "id": "94340",
+        "variant": "72mm stainless ltd."
+      },
+      {
+        "id": "15297",
+        "variant": "72mm stainless regular"
+      },
+      {
+        "id": "94640",
+        "variant": "60mm stainless ltd. II"
+      },
+      {
+        "id": "15440",
+        "variant": "60mm stainless regular"
+      }
+    ]
+  },
+  {
+    "title": "Hollow Propeller Shaft",
+    "partsType": "Propeller shaft",
+    "items": [
+      {
+        "id": "15107",
+        "variant": "Original"
+      },
+      {
+        "id": "15205",
+        "variant": "1.4mm"
+      },
+      {
+        "id": "15206",
+        "variant": "2.0mm"
+      },
+      {
+        "id": "15234",
+        "variant": "Super X"
+      },
+      {
+        "id": "15284",
+        "variant": "TR-1"
+      }
+    ]
+  },
+  {
+    "title": "Hyper Mini Motor",
+    "items": []
+  },
+  {
+    "title": "Hyper-Dash Motor",
+    "partsType": "Motor",
+    "items": [
+      {
+        "id": "15036",
+        "variant": "HD"
+      },
+      {
+        "id": "15256",
+        "variant": "HD2"
+      },
+      {
+        "id": "15375",
+        "variant": "HD PRO"
+      },
+      {
+        "id": "15477",
+        "variant": "HD3"
+      },
+      {
+        "id": "94876",
+        "variant": "HD2 JC2012"
+      },
+      {
+        "id": "94965",
+        "variant": "HD2 JC2013"
+      },
+      {
+        "id": "94987",
+        "variant": "HD PRO JC2013"
+      },
+      {
+        "id": "95025",
+        "variant": "HD3 JC2014"
+      },
+      {
+        "id": "95026",
+        "variant": "HD PRO JC2014"
+      },
+      {
+        "id": "95084",
+        "variant": "HD3 JC2015"
+      },
+      {
+        "id": "95085",
+        "variant": "HD PRO JC2015"
+      },
+      {
+        "id": "95091",
+        "variant": "HD3 JC2016"
+      },
+      {
+        "id": "95092",
+        "variant": "HD PRO JC2016"
+      },
+      {
+        "id": "95096",
+        "variant": "HD3 JC2017"
+      },
+      {
+        "id": "95097",
+        "variant": "HD PRO JC2017"
+      },
+      {
+        "id": "95111",
+        "variant": "HD3 JC2018"
+      },
+      {
+        "id": "95112",
+        "variant": "HD PRO JC2018"
+      },
+      {
+        "id": "95118",
+        "variant": "HD3 JC2019"
+      },
+      {
+        "id": "95119",
+        "variant": "HD PRO JC2019"
+      },
+      {
+        "id": "95553",
+        "variant": "HD PRO AC2020"
+      },
+      {
+        "id": "95128",
+        "variant": "HD3 JC2020"
+      },
+      {
+        "id": "95129",
+        "variant": "HD PRO JC2020"
+      },
+      {
+        "id": "95141",
+        "variant": "HD3 JC2021"
+      },
+      {
+        "id": "95142",
+        "variant": "HD PRO JC2021"
+      },
+      {
+        "id": "95150",
+        "variant": "HD3 JC2022"
+      },
+      {
+        "id": "95151",
+        "variant": "HD PRO JC2022"
+      },
+      {
+        "id": "95158",
+        "variant": "HD3 JC2023}<br>95159 (HD PRO JC2023"
+      },
+      {
+        "id": "95159",
+        "variant": "HD PRO JC2023"
+      },
+      {
+        "id": "95169",
+        "variant": "HD3 JC2024"
+      },
+      {
+        "id": "95170",
+        "variant": "HD PRO JC2024"
+      },
+      {
+        "id": "95174",
+        "variant": "HD3 JC2025"
+      },
+      {
+        "id": "95175",
+        "variant": "HD PRO JC2025"
+      },
+      {
+        "id": "95182",
+        "variant": "HD3 JC2026"
+      },
+      {
+        "id": "95183",
+        "variant": "HD PRO JC2026"
+      }
+    ]
+  },
+  {
+    "title": "Jet-Dash Motor",
+    "partsType": "Motor",
+    "items": [
+      {
+        "id": "15159"
+      }
+    ]
+  },
+  {
+    "title": "Large Diameter Lightweight Wheel Set",
+    "partsType": "Wheel",
+    "items": [
+      {
+        "id": "15070",
+        "variant": "Light gray"
+      },
+      {
+        "id": "49506",
+        "variant": "Fluorescent Yellow"
+      },
+      {
+        "id": "94288",
+        "variant": "White"
+      }
+    ]
+  },
+  {
+    "title": "Large Diameter Low-Profile 6-Spoke Wheel Set",
+    "partsType": "Wheels/Tires",
+    "items": [
+      {
+        "id": "15511"
+      },
+      {
+        "id": "95371",
+        "variant": "Hard tires and carbon wheels"
+      },
+      {
+        "id": "95639",
+        "variant": "40th Anniversary"
+      }
+    ]
+  },
+  {
+    "title": "Large Diameter Low-Profile Tire and Wheel Set",
+    "partsType": "Wheels/Tires",
+    "items": [
+      {
+        "id": "15445",
+        "variant": "Normal type"
+      },
+      {
+        "id": "15446",
+        "variant": "Super X type"
+      },
+      {
+        "id": "94908",
+        "variant": "Normal type 30th anni."
+      },
+      {
+        "id": "94909",
+        "variant": "Super X type 30th anni."
+      },
+      {
+        "id": "94914",
+        "variant": "Hard tire & carbon wheel normal type"
+      },
+      {
+        "id": "94915",
+        "variant": "Hard tire & carbon wheel Super X type"
+      },
+      {
+        "id": "95094",
+        "variant": "Hard tire & carbon wheel normal type JC2016"
+      },
+      {
+        "id": "95369",
+        "variant": "Hard tire & carbon wheel normal type reissue"
+      },
+      {
+        "id": "95370",
+        "variant": "Hard tire & carbon wheel Super X type reissue"
+      }
+    ]
+  },
+  {
+    "title": "Light-Dash Motor",
+    "partsType": "Motor",
+    "items": [
+      {
+        "id": "15402",
+        "variant": "PRO"
+      },
+      {
+        "id": "15455",
+        "variant": "Single shaft"
+      }
+    ]
+  },
+  {
+    "title": "Low Friction Tires",
+    "partsType": "Wheels/Tires",
+    "items": [
+      {
+        "id": "15534",
+        "variant": "Small dia, low profile black wt. carbon fin wheels"
+      },
+      {
+        "id": "15541",
+        "variant": "Small dia, X narrow black wt. carbon VS wheels"
+      },
+      {
+        "id": "15544",
+        "variant": "Large dia. low-profile black wt. carbon dish wheels"
+      },
+      {
+        "id": "15546",
+        "variant": "Large dia. arched black wt. carbon v-spoke wheel"
+      },
+      {
+        "id": "95208",
+        "variant": "Small dia. low-profile, Maroon"
+      },
+      {
+        "id": "95389",
+        "variant": "Large dia. low-profile, Maroon"
+      },
+      {
+        "id": "95482",
+        "variant": "Large dia. low-profile, Maroon"
+      },
+      {
+        "id": "95482",
+        "variant": "Large dia. arched, Maroon"
+      },
+      {
+        "id": "95116",
+        "variant": "Small dia. low-profile, Fully Cowled Mini 4WD ltd."
+      },
+      {
+        "id": "95542",
+        "variant": "Large dia. slick, Maroon"
+      },
+      {
+        "id": "95140",
+        "variant": "Small dia. low-profile JC2020"
+      },
+      {
+        "id": "95545",
+        "variant": "Small dia. low-profile TMAC 2020"
+      },
+      {
+        "id": "95634",
+        "variant": "Small dia, X narrow maroon wt. VS wheels"
+      },
+      {
+        "id": "95649",
+        "variant": "Small dia, X narrow maroon wt. plated X narrow wheel"
+      },
+      {
+        "id": "95708"
+      }
+    ]
+  },
+  {
+    "title": "Low-Friction Plastic Bearing Set",
+    "partsType": "Bearing",
+    "items": [
+      {
+        "id": "15523",
+        "variant": "Black"
+      },
+      {
+        "id": "95560",
+        "variant": "Orange"
+      }
+    ]
+  },
+  {
+    "title": "Mach-Dash Motor",
+    "items": []
+  },
+  {
+    "title": "Mini 4WD Basic Tune-Up Set",
+    "partsType": "Starter parts set",
+    "items": [
+      {
+        "id": "15435",
+        "variant": "First set"
+      },
+      {
+        "id": "15450",
+        "variant": "AR set"
+      },
+      {
+        "id": "15476",
+        "variant": "MA set"
+      },
+      {
+        "id": "15514",
+        "variant": "FM-A set"
+      },
+      {
+        "id": "15526",
+        "variant": "VZ set"
+      }
+    ]
+  },
+  {
+    "title": "Mini 4WD Battery Case",
+    "partsType": "Case",
+    "items": [
+      {
+        "id": "15423",
+        "variant": "Ver.I"
+      },
+      {
+        "id": "15521",
+        "variant": "Ver.2"
+      }
+    ]
+  },
+  {
+    "title": "Mini 4WD Bearing Lubricant Oil",
+    "partsType": "Grease",
+    "items": [
+      {
+        "id": "15531"
+      }
+    ]
+  },
+  {
+    "title": "Mini 4WD Classic Tune-Up Parts Set",
+    "partsType": "Bundle",
+    "items": [
+      {
+        "id": "94597",
+        "variant": "Vol.1"
+      },
+      {
+        "id": "94598",
+        "variant": "Vol.2"
+      },
+      {
+        "id": "94605",
+        "variant": "Vol.3"
+      },
+      {
+        "id": "95626",
+        "variant": "Vol.1 reissue"
+      },
+      {
+        "id": "95627",
+        "variant": "Vol.2 reissue"
+      },
+      {
+        "id": "95628",
+        "variant": "Vol.3 reissue"
+      }
+    ]
+  },
+  {
+    "title": "Mini 4WD F Grease",
+    "partsType": "Grease",
+    "items": [
+      {
+        "id": "15383"
+      }
+    ]
+  },
+  {
+    "title": "Mini 4WD Multipurpose Tape",
+    "partsType": "Tapes",
+    "items": [
+      {
+        "id": "15463",
+        "variant": "10mm Blue"
+      },
+      {
+        "id": "95070",
+        "variant": "10mm Black"
+      },
+      {
+        "id": "95230",
+        "variant": "10mm Red"
+      },
+      {
+        "id": "95271",
+        "variant": "10mm Black reissue"
+      },
+      {
+        "id": "95103",
+        "variant": "10mm Orange"
+      },
+      {
+        "id": "95554",
+        "variant": "20mm Red"
+      }
+    ]
+  },
+  {
+    "title": "Mini 4WD Ni-Cd 1000",
+    "partsType": "Battery and charger",
+    "items": [
+      {
+        "id": "15211",
+        "variant": "AC Fast Charger Set"
+      },
+      {
+        "id": "15212",
+        "variant": "2-Battery Pack"
+      },
+      {
+        "id": "94664",
+        "variant": "Sanyo Charger Set"
+      }
+    ]
+  },
+  {
+    "title": "Mini 4WD Ni-Cd Battery",
+    "partsType": "Battery and Charger",
+    "items": [
+      {
+        "id": "15009",
+        "variant": "2-battery and charger set"
+      },
+      {
+        "id": "15010",
+        "variant": "2-battery set"
+      },
+      {
+        "id": "15122",
+        "variant": "2-battery and 40 min charger set"
+      }
+    ]
+  },
+  {
+    "title": "Mini 4WD Ni-Cd Battery Charger",
+    "partsType": "Battery Charger",
+    "items": [
+      {
+        "id": "15009",
+        "variant": "Bundled with 2 batteries"
+      },
+      {
+        "id": "15011",
+        "variant": "Standalone set"
+      }
+    ]
+  },
+  {
+    "title": "Mini 4WD Octa-Charger",
+    "partsType": "Charger",
+    "items": [
+      {
+        "id": "15178"
+      }
+    ]
+  },
+  {
+    "title": "Motor Cooling Shield",
+    "partsType": "Motor heatsink",
+    "items": [
+      {
+        "id": "15340",
+        "variant": "Silver"
+      },
+      {
+        "id": "94811",
+        "variant": "Purple"
+      },
+      {
+        "id": "95264",
+        "variant": "Blue"
+      },
+      {
+        "id": "95265",
+        "variant": "Purple Mini 4WD Station"
+      }
+    ]
+  },
+  {
+    "title": "Multi Reinforcing Plate",
+    "partsType": "Stay",
+    "items": [
+      {
+        "id": "15193",
+        "variant": "FRP"
+      },
+      {
+        "id": "15495",
+        "variant": "CFRP Regular"
+      },
+      {
+        "id": "94242",
+        "variant": "FRP Transparent"
+      },
+      {
+        "id": "94755",
+        "variant": "FRP Natural Color"
+      },
+      {
+        "id": "94845",
+        "variant": "CFRP Limited"
+      },
+      {
+        "id": "94881",
+        "variant": "FRP Red Color"
+      },
+      {
+        "id": "95307",
+        "variant": "FRP SIlver"
+      },
+      {
+        "id": "95106",
+        "variant": "CFRP JC2017"
+      }
+    ]
+  },
+  {
+    "title": "Multi-Roller Setting Stay",
+    "partsType": "Bumper/Rear Stay",
+    "items": [
+      {
+        "id": "15394",
+        "variant": "Front V1"
+      },
+      {
+        "id": "94757",
+        "variant": "Front V1 Natural"
+      },
+      {
+        "id": "15430",
+        "variant": "Rear V1"
+      },
+      {
+        "id": "94878",
+        "variant": "Front V1 Red"
+      },
+      {
+        "id": "94879",
+        "variant": "Rear V1 Red"
+      },
+      {
+        "id": "94885",
+        "variant": "Front V1 JPSP"
+      },
+      {
+        "id": "94847",
+        "variant": "Front V1"
+      },
+      {
+        "id": "94848",
+        "variant": "Rear V1"
+      },
+      {
+        "id": "94953",
+        "variant": "Front V1 JC2013"
+      },
+      {
+        "id": "94954",
+        "variant": "Rear V1 JC2013"
+      },
+      {
+        "id": "95305",
+        "variant": "Front V2 Silver"
+      },
+      {
+        "id": "95306",
+        "variant": "Rear V2 SIlver"
+      },
+      {
+        "id": "95104",
+        "variant": "Front V1 JC2017"
+      },
+      {
+        "id": "95105",
+        "variant": "Rear V3 JC2017"
+      },
+      {
+        "id": "95260",
+        "variant": "Rear V1 2nd"
+      },
+      {
+        "id": "95113",
+        "variant": "Front V1 JC2018"
+      },
+      {
+        "id": "95114",
+        "variant": "Rear V3 JC2018"
+      },
+      {
+        "id": "95121",
+        "variant": "Front V3 JC2019"
+      },
+      {
+        "id": "95122",
+        "variant": "Rear V4 JC2019"
+      },
+      {
+        "id": "95131",
+        "variant": "Front V3 JC2020"
+      },
+      {
+        "id": "95132",
+        "variant": "Rear V4 JC2020"
+      },
+      {
+        "id": "95136",
+        "variant": "Rear V4 JC2020 Gold Print"
+      },
+      {
+        "id": "95144",
+        "variant": "Front V3 JC2021"
+      },
+      {
+        "id": "95145",
+        "variant": "Rear V4 JC2021"
+      },
+      {
+        "id": "94738",
+        "variant": "Front V2"
+      },
+      {
+        "id": "94866",
+        "variant": "Front V2 Silver"
+      },
+      {
+        "id": "94867",
+        "variant": "Rear V2 Silver"
+      },
+      {
+        "id": "95258",
+        "variant": "Front V2 2nd"
+      },
+      {
+        "id": "94723",
+        "variant": "Front Blue"
+      },
+      {
+        "id": "94724",
+        "variant": "Front Red"
+      },
+      {
+        "id": "94750",
+        "variant": "Front Black"
+      },
+      {
+        "id": "94826",
+        "variant": "Front Blue wt. Parts"
+      },
+      {
+        "id": "94936",
+        "variant": "Rear Blue"
+      },
+      {
+        "id": "94937",
+        "variant": "Rear Red"
+      }
+    ]
+  },
+  {
+    "title": "NeoChamp",
+    "partsType": "Battery and Charger",
+    "items": [
+      {
+        "id": "15420",
+        "variant": "Battery"
+      },
+      {
+        "id": "15419",
+        "variant": "AC Quick Charger Set"
+      },
+      {
+        "id": "94949",
+        "variant": "AC Quick Charger PRO"
+      },
+      {
+        "id": "55115",
+        "variant": "AC Quick Charger II Set"
+      },
+      {
+        "id": "55116",
+        "variant": "AC Quick Charger PRO II Set"
+      }
+    ]
+  },
+  {
+    "title": "Ni-Cd Battery",
+    "partsType": "Battery",
+    "items": [
+      {
+        "id": "55020",
+        "variant": "2-battery pack"
+      },
+      {
+        "id": "55042",
+        "variant": "8-battery pack"
+      }
+    ]
+  },
+  {
+    "title": "Ni-Cd Battery Charger",
+    "partsType": "Charger",
+    "items": [
+      {
+        "id": "55019"
+      }
+    ]
+  },
+  {
+    "title": "One-Way Wheel Set",
+    "partsType": "Wheels/Tires",
+    "items": [
+      {
+        "id": "15022",
+        "variant": "Classic"
+      },
+      {
+        "id": "15041",
+        "variant": "Wide"
+      },
+      {
+        "id": "15055",
+        "variant": "LW"
+      },
+      {
+        "id": "15069",
+        "variant": "LH"
+      },
+      {
+        "id": "15120",
+        "variant": "Small NT"
+      },
+      {
+        "id": "15137",
+        "variant": "Large NT"
+      },
+      {
+        "id": "15213",
+        "variant": "Small WT"
+      },
+      {
+        "id": "15226",
+        "variant": "Large WT"
+      },
+      {
+        "id": "15238",
+        "variant": "Small SX"
+      },
+      {
+        "id": "15246",
+        "variant": "Large SX"
+      },
+      {
+        "id": "15387",
+        "variant": "Large WT offset tires"
+      },
+      {
+        "id": "15444",
+        "variant": "Large SX offset tires"
+      },
+      {
+        "id": "15443",
+        "variant": "LP 1-way"
+      },
+      {
+        "id": "94167",
+        "variant": "Small NT white wheels and blue tires"
+      },
+      {
+        "id": "94785",
+        "variant": "Large SX offset tires LE"
+      },
+      {
+        "id": "94865",
+        "variant": "Large WT offset tires silver-plated"
+      },
+      {
+        "id": "94958",
+        "variant": "Large SX offset tires green"
+      }
+    ]
+  },
+  {
+    "title": "Parts Case",
+    "partsType": "Case",
+    "items": [
+      {
+        "id": "15065",
+        "variant": "Red"
+      },
+      {
+        "id": "15163",
+        "variant": "Blue"
+      },
+      {
+        "id": "15263",
+        "variant": "DR"
+      }
+    ]
+  },
+  {
+    "title": "Plasma Dash Brush Holder Set",
+    "partsType": "Motor Brush",
+    "items": [
+      {
+        "id": "94387"
+      }
+    ]
+  },
+  {
+    "title": "Plasma-Dash Motor",
+    "items": []
+  },
+  {
+    "title": "Power Dash Motor",
+    "partsType": "Motor",
+    "items": [
+      {
+        "id": "15317"
+      }
+    ]
+  },
+  {
+    "title": "PowerChamp",
+    "partsType": "Battery",
+    "items": [
+      {
+        "id": "55043"
+      }
+    ]
+  },
+  {
+    "title": "PowerChamp EX",
+    "partsType": "Battery",
+    "items": [
+      {
+        "id": "55046"
+      }
+    ]
+  },
+  {
+    "title": "PowerChamp FD",
+    "partsType": "Battery",
+    "items": [
+      {
+        "id": "55101",
+        "variant": "2-battery pack"
+      },
+      {
+        "id": "55110",
+        "variant": "12-battery pack"
+      }
+    ]
+  },
+  {
+    "title": "PowerChamp Gold",
+    "partsType": "Battery",
+    "items": [
+      {
+        "id": "55052",
+        "variant": "2-battery pack"
+      },
+      {
+        "id": "55069",
+        "variant": "8-battery pack"
+      }
+    ]
+  },
+  {
+    "title": "PowerChamp GR",
+    "partsType": "Battery",
+    "items": [
+      {
+        "id": "55077",
+        "variant": "GR"
+      },
+      {
+        "id": "94532",
+        "variant": "GR2"
+      }
+    ]
+  },
+  {
+    "title": "PowerChamp GT",
+    "partsType": "Battery",
+    "items": [
+      {
+        "id": "55113",
+        "variant": "2-batteries pack"
+      },
+      {
+        "id": "55114",
+        "variant": "12-batteries pack"
+      }
+    ]
+  },
+  {
+    "title": "PowerChamp GX",
+    "partsType": "Battery",
+    "items": [
+      {
+        "id": "55089",
+        "variant": "GX"
+      },
+      {
+        "id": "94557",
+        "variant": "GX-Gold"
+      }
+    ]
+  },
+  {
+    "title": "PowerChamp GZ",
+    "partsType": "Battery",
+    "items": [
+      {
+        "id": "55098",
+        "variant": "2-battery pack"
+      },
+      {
+        "id": "55099",
+        "variant": "4-battery pack"
+      }
+    ]
+  },
+  {
+    "title": "PowerChamp RC",
+    "partsType": "Battery",
+    "items": [
+      {
+        "id": "55100",
+        "variant": "12-batteries pack"
+      }
+    ]
+  },
+  {
+    "title": "PowerChamp RS",
+    "partsType": "Battery",
+    "items": [
+      {
+        "id": "55117",
+        "variant": "2-battery pack"
+      },
+      {
+        "id": "55118",
+        "variant": "12-battery pack"
+      }
+    ]
+  },
+  {
+    "title": "PowerChamp RX",
+    "partsType": "Battery",
+    "items": [
+      {
+        "id": "55119",
+        "variant": "2-batteries pack"
+      },
+      {
+        "id": "55120",
+        "variant": "12-battery pack"
+      }
+    ]
+  },
+  {
+    "title": "PowerChamp SP",
+    "partsType": "Battery",
+    "items": [
+      {
+        "id": "55073"
+      }
+    ]
+  },
+  {
+    "title": "QD Octa-Charger",
+    "partsType": "Charger",
+    "items": [
+      {
+        "id": "55041"
+      }
+    ]
+  },
+  {
+    "title": "R/C Mini 4WD Racer's Box",
+    "partsType": "Case",
+    "items": [
+      {
+        "id": "15296"
+      }
+    ]
+  },
+  {
+    "title": "R/C System AG",
+    "partsType": "R/C Unit",
+    "items": [
+      {
+        "id": "15324",
+        "variant": "Ad-1"
+      },
+      {
+        "id": "15325",
+        "variant": "Ad-2"
+      },
+      {
+        "id": "15326",
+        "variant": "Ad-3"
+      },
+      {
+        "id": "15327",
+        "variant": "Ad-4"
+      },
+      {
+        "id": "15328",
+        "variant": "Ad-5"
+      }
+    ]
+  },
+  {
+    "title": "R/C System TRT-1/TRR-1",
+    "partsType": "R/C unit",
+    "items": [
+      {
+        "id": "15299",
+        "variant": "Ad-1"
+      },
+      {
+        "id": "15300",
+        "variant": "Ad-2"
+      },
+      {
+        "id": "15301",
+        "variant": "Ad-3"
+      },
+      {
+        "id": "15302",
+        "variant": "Ad-4"
+      },
+      {
+        "id": "15303",
+        "variant": "Ad-5"
+      }
+    ]
+  },
+  {
+    "title": "Rear Sliding Damper and Brake Set",
+    "partsType": "Rear Roller Stays/Brake Skid",
+    "items": [
+      {
+        "id": "15198"
+      }
+    ]
+  },
+  {
+    "title": "Reinforced Gears with Easy Locking Gear Cover",
+    "partsType": "Gear set/Gear Cover",
+    "items": [
+      {
+        "id": "15438"
+      }
+    ]
+  },
+  {
+    "title": "Rev-Tuned Motor",
+    "partsType": "Motor",
+    "items": [
+      {
+        "id": "15133",
+        "variant": "RT1/Later versions"
+      },
+      {
+        "id": "15485",
+        "variant": "RT2"
+      },
+      {
+        "id": "15350",
+        "variant": "RT1 PRO"
+      },
+      {
+        "id": "15488",
+        "variant": "RT2 PRO"
+      }
+    ]
+  },
+  {
+    "title": "Roller Ball Bearings",
+    "partsType": "Rollers",
+    "items": [
+      {
+        "id": "94140",
+        "variant": "Large dia."
+      },
+      {
+        "id": "94141",
+        "variant": "Mid dia."
+      },
+      {
+        "id": "49596",
+        "variant": "13mm clear seal 2pcs"
+      },
+      {
+        "id": "49597",
+        "variant": "9mm 2pcs limited"
+      },
+      {
+        "id": "15180",
+        "variant": "13mm 2pcs"
+      },
+      {
+        "id": "15181",
+        "variant": "9mm 2pcs"
+      },
+      {
+        "id": "94298",
+        "variant": "7mm 2pcs wt. rear stay"
+      },
+      {
+        "id": "94360",
+        "variant": "9.5mm flange"
+      },
+      {
+        "id": "94361",
+        "variant": "12.5mm flange"
+      },
+      {
+        "id": "94311",
+        "variant": "9mm 4pcs"
+      },
+      {
+        "id": "15308",
+        "variant": "RC 11mm 2pcs"
+      },
+      {
+        "id": "15344",
+        "variant": "DR 9mm 2pcs"
+      },
+      {
+        "id": "15345",
+        "variant": "DR 11mm 2pcs"
+      },
+      {
+        "id": "94609",
+        "variant": "7mm 2pcs"
+      },
+      {
+        "id": "94617",
+        "variant": "10mm 2pcs"
+      },
+      {
+        "id": "94713",
+        "variant": "13mm 6pcs"
+      },
+      {
+        "id": "15475",
+        "variant": "13mm Ver.II 2pcs"
+      },
+      {
+        "id": "95311",
+        "variant": "13mm Ver.II 6pcs"
+      }
+    ]
+  },
+  {
+    "title": "Sliding Damper Roller",
+    "partsType": "Wing Roller Stay",
+    "items": [
+      {
+        "id": "15128"
+      }
+    ]
+  },
+  {
+    "title": "Speed Roller and Wheel Set",
+    "partsType": "Wheels/Rollers",
+    "items": [
+      {
+        "id": "15015"
+      }
+    ]
+  },
+  {
+    "title": "Sprint Dash Motor",
+    "partsType": "Motor",
+    "items": [
+      {
+        "id": "15318"
+      }
+    ]
+  },
+  {
+    "title": "Super Hard Low-Profile Tire",
+    "partsType": "Tires",
+    "items": [
+      {
+        "id": "94921",
+        "variant": "Small dia. Normal"
+      },
+      {
+        "id": "95080",
+        "variant": "Small dia. Yellow Sideprint"
+      },
+      {
+        "id": "95323",
+        "variant": "Small dia. Normal reissue"
+      },
+      {
+        "id": "95374",
+        "variant": "Large dia. Normal"
+      }
+    ]
+  },
+  {
+    "title": "Super Racer's Box",
+    "partsType": "Case",
+    "items": [
+      {
+        "id": "15144",
+        "variant": "Original"
+      },
+      {
+        "id": "15254",
+        "variant": "Smoke"
+      },
+      {
+        "id": "15262",
+        "variant": "DR"
+      },
+      {
+        "id": "15354",
+        "variant": "Mini 4WD PRO"
+      }
+    ]
+  },
+  {
+    "title": "Super Speed Gear Set",
+    "partsType": "Gear Set",
+    "items": [
+      {
+        "id": "15132",
+        "variant": "SRG"
+      },
+      {
+        "id": "15187",
+        "variant": "Lightweight SRG"
+      },
+      {
+        "id": "94388",
+        "variant": "Super X set"
+      },
+      {
+        "id": "15285",
+        "variant": "TR-1"
+      },
+      {
+        "id": "15349",
+        "variant": "MS"
+      },
+      {
+        "id": "15432",
+        "variant": "Super XX and Super-II set"
+      }
+    ]
+  },
+  {
+    "title": "Tapered Aluminum Roller",
+    "partsType": "Roller",
+    "items": [
+      {
+        "id": "95497"
+      },
+      {
+        "id": "95597"
+      },
+      {
+        "id": "95436",
+        "variant": "Silver"
+      },
+      {
+        "id": "95541",
+        "variant": "Purple"
+      },
+      {
+        "id": "95583",
+        "variant": "Gold"
+      }
+    ]
+  },
+  {
+    "title": "Titanium Grease",
+    "partsType": "Grease",
+    "items": [
+      {
+        "id": "15175",
+        "variant": "Mini 4WD"
+      },
+      {
+        "id": "15290",
+        "variant": "R/C Mini 4WD"
+      }
+    ]
+  },
+  {
+    "title": "Torque-Tuned Motor",
+    "partsType": "Motor",
+    "items": [
+      {
+        "id": "15134",
+        "variant": "TT1/Later versions"
+      },
+      {
+        "id": "15484",
+        "variant": "TT2"
+      },
+      {
+        "id": "15346",
+        "variant": "TT1 PRO"
+      },
+      {
+        "id": "15487",
+        "variant": "TT2 PRO"
+      }
+    ]
+  },
+  {
+    "title": "Touch Dash Motor",
+    "partsType": "Motor",
+    "items": [
+      {
+        "id": "15225"
+      }
+    ]
+  },
+  {
+    "title": "Turbo-Dash Motor",
+    "partsType": "Motor",
+    "items": [
+      {
+        "id": "94113"
+      }
+    ]
+  },
+  {
+    "title": "Ultra Dash Motor",
+    "partsType": "Motor",
+    "items": [
+      {
+        "id": "15140"
+      },
+      {
+        "id": "15307",
+        "variant": "R/C Mini 4WD re-release"
+      }
+    ]
+  },
+  {
+    "title": "Wide Plate for AR Chassis",
+    "partsType": "Stay",
+    "items": [
+      {
+        "id": "15451",
+        "variant": "FRP Front"
+      },
+      {
+        "id": "15452",
+        "variant": "FRP Rear"
+      },
+      {
+        "id": "94998",
+        "variant": "FRP Front JC2013"
+      },
+      {
+        "id": "94999",
+        "variant": "FRP Rear JC2013"
+      },
+      {
+        "id": "95043",
+        "variant": "CFRP Rear 1.5mm Ver,1 JC2014"
+      },
+      {
+        "id": "95478",
+        "variant": "CFRP Rear 1.5mm Ver,1"
+      },
+      {
+        "id": "15498",
+        "variant": "CFRP Front 1.5mm Ver.2"
+      },
+      {
+        "id": "15499",
+        "variant": "CFRP Rear 1.5mm Ver.2"
+      },
+      {
+        "id": "95088",
+        "variant": "CFRP Front 1.5mm Ver.2 JC2015"
+      },
+      {
+        "id": "95089",
+        "variant": "CFRP Rear 1.5mm Ver.2 JC2015"
+      },
+      {
+        "id": "94902",
+        "variant": "CFRP Front 2mm"
+      },
+      {
+        "id": "94903",
+        "variant": "CFRP Rear 2mm"
+      },
+      {
+        "id": "94963",
+        "variant": "CFRP Front 2mm Red lame"
+      },
+      {
+        "id": "94964",
+        "variant": "CFRP Rear 2mm Red lame"
+      },
+      {
+        "id": "95004",
+        "variant": "CFRP Front 2mm Blue lame"
+      },
+      {
+        "id": "95005",
+        "variant": "CFRP Rear 2mm Blue lame"
+      },
+      {
+        "id": "95063",
+        "variant": "CFRP Front 2mm Gold lame"
+      },
+      {
+        "id": "95064",
+        "variant": "CFRP Rear 2mm Gold lame"
+      },
+      {
+        "id": "95050",
+        "variant": "Duralumin set Pink"
+      },
+      {
+        "id": "95051",
+        "variant": "Duralumin set Violet"
+      },
+      {
+        "id": "95309",
+        "variant": "Duralumin set Blue"
+      }
+    ]
+  },
+  {
+    "title": "Wide Sliding Damper",
+    "partsType": "Front Bumper/Rear Roller Stay",
+    "items": [
+      {
+        "id": "15469",
+        "variant": "Wide Front Sliding Damper"
+      },
+      {
+        "id": "15467",
+        "variant": "Wide Rear Sliding Damper"
+      },
+      {
+        "id": "95056",
+        "variant": "Wide Front Sliding Damper White/Blue"
+      },
+      {
+        "id": "95057",
+        "variant": "Wide Rear Sliding Damper White/Blue"
+      },
+      {
+        "id": "95363",
+        "variant": "Wide Front Sliding Damper Clear/Red"
+      },
+      {
+        "id": "95364",
+        "variant": "Wide Rear Sliding Damper Clear/Red"
+      }
+    ]
+  },
+  {
+    "title": "Winning Bird Formula Clear Body Set",
+    "partsType": "Body set",
+    "items": [
+      {
+        "id": "15074"
+      },
+      {
+        "id": "94345",
+        "variant": "Re-release"
+      },
+      {
+        "id": "15503",
+        "variant": "Polycarbonate"
+      }
+    ]
+  },
+  {
+    "title": "ZEN-Tuned Motor",
+    "partsType": "Motor",
+    "items": [
+      {
+        "id": "94031"
+      }
+    ]
+  }
+]

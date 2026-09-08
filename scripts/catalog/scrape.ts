@@ -6,6 +6,7 @@ import { GENRE_SERIES, scrapeGenreList, scrapeDetail, type GenreCode, type JpIte
 import { scrapeChassisCompat } from './sources/tamiya-compat.ts'
 import { CHASSIS_CODES } from '../../shared/catalog/schema.ts'
 import { scrapeHkStore } from './sources/tamiya-hk.ts'
+import { scrapeFandomParts } from './sources/fandom.ts'
 
 /**
  * Stage 1 of the catalog pipeline: fetch everything, decide nothing.
@@ -73,4 +74,14 @@ if (wants('hk')) {
   items.sort((a, b) => a.id.localeCompare(b.id))
   console.log('')
   await writeRaw('tamiya-hk', items)
+}
+
+// Not a catalog source: this feeds catalog:crossref, which audits our derived
+// categories against the wiki's hand-written ones. Nothing here reaches content/.
+if (wants('fandom')) {
+  console.log('Mini 4WD Fandom wiki (taxonomy cross-reference)')
+  const articles = await scrapeFandomParts(noCache)
+  console.log(`  ${articles.length} articles, `
+    + `${new Set(articles.flatMap(a => a.items.map(i => i.id))).size} item numbers`)
+  await writeRaw('fandom-parts', articles)
 }

@@ -1,0 +1,8 @@
+{{Infobox Grade-Up Parts|No. = 15034 (Hex hole set)<br>15111 (Round hole set)<br>94389 (AO 620 set)|Release Date. = 1988 (Hex hole set)<br>1992 (Round hole set)<br>2010 (AO 620 set)|Parts type = Ball bearing|Related = 15442|image = <gallery>
+File:Example.jpg|Hex
+</gallery>|Bearing = Yes}}The '''Ball Bearing''' {{Translation|ボールベアリング|Bōru Bearingu}} is a series of Mini 4WD Grade-Up Parts.
+
+== General Info ==
+Body text that mentions 1988 and other four-digit years which must not be read as item numbers.
+
+[[Category:Grade-Up Parts]]

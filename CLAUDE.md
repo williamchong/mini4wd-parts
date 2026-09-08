@@ -41,7 +41,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Catalog Pipeline
 
 - `content/parts/*.yml` and `content/chassis/*.yml` are **generated** — never hand-edit them. Corrections go in `data/overrides/parts.yml` (keyed by Tamiya item number) or `data/chassis/*.yml`, then `npm run catalog:generate`.
-- `npm run scrape` refreshes `data/raw/*.json` (throttled, disk-cached under `.cache/`); `npm run catalog:report` lists what still needs a human; `npm run catalog:verify` validates the committed YAML; `npm test` runs the parser fixtures; `npm run typecheck` type-checks `scripts/` and `shared/` (nothing else does — Node strips the types at runtime).
+- `npm run scrape` refreshes `data/raw/*.json` (throttled, disk-cached under `.cache/`; `--only=jp,compat,hk,fandom` limits it to one source); `npm run catalog:report` lists what still needs a human; `npm run catalog:crossref` audits our derived categories against the Fandom wiki's hand-written ones and prints disagreements to review; `npm run catalog:verify` validates the committed YAML; `npm test` runs the parser fixtures; `npm run typecheck` type-checks `scripts/` and `shared/` (nothing else does — Node strips the types at runtime).
+- The Fandom wiki (`data/raw/fandom-parts.json`) is a **QA source only** — CC-BY-SA, and nothing from it is written into `content/`. It exists because our categories come from ordered substring rules over Japanese names, whose one failure mode is a short keyword swallowing a longer word (シール ate シールド).
 - Scripts are plain `.ts` run by Node's native type stripping — no build step, and relative imports need explicit `.ts` extensions.
 - Tamiya's pages are Shift_JIS: decode with `new TextDecoder('shift_jis')`. Strict Shift_JIS decoders truncate the pages.
 

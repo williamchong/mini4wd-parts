@@ -11,6 +11,7 @@
     "scrape": "node scripts/catalog/scrape.ts",
     "catalog:generate": "node scripts/catalog/generate.ts",
     "catalog:report": "node scripts/catalog/report.ts",
+    "catalog:crossref": "node scripts/catalog/crossref.ts",
     "catalog:verify": "node scripts/catalog/verify.ts",
     "test": "node --test 'scripts/**/*.test.ts'",
     "typecheck": "tsc -p scripts/tsconfig.json"
