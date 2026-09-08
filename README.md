@@ -34,7 +34,7 @@ A Traditional-Chinese-first site where beginners browse Tamiya Mini 4WD parts, a
 ## 技術方向 Technical Direction
 
 - Nuxt 4 + @nuxt/content v3（零件、底盤、規則、教學以 YAML / Markdown 存放於 repo）
-- @nuxtjs/i18n（zh-TW 預設、`/en/`、之後 `/ja/`）
+- @nuxtjs/i18n（`zh-Hant` 預設、`/en/`、之後 `/ja/`；港台用語以切換按鈕處理，不另開語系）
 - Google model-viewer（展示）＋ TresJS / Three.js（3D 組車器）
 - 第一階段為純靜態網站（GitHub Pages）；第二階段起遷移至 Cloudflare Workers，使用 D1 / R2 儲存使用者組裝與評分
 - 資料來源：田宮日本官網產品目錄與底盤對應零件頁、tamiya.hk 商店 API、Fandom / Wikipedia（CC-BY-SA，附註出處）

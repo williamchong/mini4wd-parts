@@ -137,7 +137,7 @@ First run committed **382 parts** (244 regular GUP + 42 AO + 96 limited/special/
 |---|---|---|
 | Framework | **Nuxt 4** (current 4.5) | Nuxt 3 reached end-of-life 2026-07-31; the scaffold's 3.14 is unsupported. Migration cost is near zero today (3 pages, 1 component). |
 | Content | **@nuxt/content v3** with Zod-validated collections (parts, chassis, rules, guides) | SQL-backed collections, client-side WASM SQLite in static mode, D1 in serverless mode; Nuxt Studio is now free/OSS for editing. |
-| i18n | **@nuxtjs/i18n v10**, `prefix_except_default`, zh-TW default, `/en/…`, later `/ja/…` | Keeps existing root URLs, emits hreflang/canonical, avoids the static-generation quirk of pure `prefix`. |
+| i18n | **@nuxtjs/i18n v10**, `prefix_except_default`, **zh-Hant** default, `/en/…`, later `/ja/…` | Keeps existing root URLs, emits hreflang/canonical, avoids the static-generation quirk of pure `prefix`. Region-neutral rather than zh-TW because every Traditional Chinese name in the catalog came from tamiya.hk: a zh-TW label would serve Hong Kong wording under a Taiwan flag for 100% of parts and kits. Hong Kong and Taiwan differ by a glossary, not by pages, so they are a reader-level wording toggle over one page set (`app/composables/useWording.ts`), not two locales. Promote zh-TW to a routed locale only if content diverges beyond terminology. |
 | 3D display | **Google model-viewer** (already used) for hero, part previews, share pages | Cheap, AR-capable, but cannot compose meshes (only material variants). |
 | 3D builder | **Three.js via @tresjs/nuxt** (v5.x, active) on the builder route only, client-only and code-split | Vue-native declarative scene graph; maps directly to the slot graph. Babylon is heavier; model-viewer cannot swap geometry. |
 | Share/OG images | **nuxt-og-image v6** (Takumi renderer, runs on Workers) composing part list + a thumbnail captured from the builder canvas | Crawlers do not run WebGL, so the PNG must be pre-rendered. |
@@ -185,7 +185,9 @@ A rules-based scorer over the same catalog. Inputs: chassis owned or none, class
 
 ### 4.6 i18n and SEO
 
-One prerendered page per part (`/parts/15442-…`), chassis, guide and class, in each locale; JSON-LD `Product`; per-locale sitemaps. Part names in all locales live inline in the YAML so a single record feeds every locale; guide bodies are separate Markdown files per locale.
+One prerendered page per part (`/parts/15442-…`), chassis, guide and class, in each locale; JSON-LD `Product`; per-locale sitemaps. Part names in all locales live inline in the YAML so a single record feeds every locale; guide bodies are separate Markdown files per locale, one @nuxt/content collection each (`content/zh-Hant/**`, `content/en/**`).
+
+Traditional Chinese is one page set, not two: `zh-Hant` at the root, with `zh-HK` and `zh-TW` hreflang alternates pointing at the same URL and a wording toggle deciding which regional term a reader sees. `resolveName` in `shared/catalog/names.ts` applies the same preference to catalog names, and prose reaches it through the `:term{name="…"}` MDC component.
 
 ### 4.7 Kits and build presets
 
@@ -333,10 +335,10 @@ Milestones are renamed M0–M4 to make clear they are not the old Phase 0–4.
 
 ### M0 — Foundation (remaining, ~1 week)
 
-- Push the four local commits (`8f41dbb`…`4d00ff3`); the deploy workflow fires on `main` and the catalog has never reached the remote.
-- Resolve branch layout: `main` + Actions deploy, retire the hand-managed `gh-pages` and the stale `master`.
-- Add `@nuxtjs/i18n` **before** any real routes exist, so `/parts/…` and `/build` are born with `prefix_except_default` rather than retrofitted.
 - Add PostHog, so the builder funnel has a baseline from its first day.
+- ~~Push the four local commits (`8f41dbb`…`4d00ff3`)~~ — done 2026-09-08; the catalog is live.
+- ~~Resolve branch layout: `main` + Actions deploy, retire the hand-managed `gh-pages` and the stale `master`~~ — done 2026-09-09; Pages reports `build_type: workflow` and only `main` remains.
+- ~~Add `@nuxtjs/i18n` **before** any real routes exist, so `/parts/…` and `/build` are born with `prefix_except_default` rather than retrofitted~~ — done 2026-09-09 (§4.1, §4.6).
 - ~~Nuxt 4 + @nuxt/content v3 scaffold, Zod schemas~~ — done, `83086af`.
 - ~~Scraper and catalog pipeline; 382 parts + 8 chassis~~ — done 2026-09-08 (§3.2).
 
@@ -357,7 +359,7 @@ Three workstreams. The catalog and builder ones are independent of the asset one
 
 **c. 3D view (§5.4).** MA chassis with slot-named sockets, 3 generic bodies, ~12 parametric generators, the fallback proxy, `@tresjs/nuxt` on the `/build` route only, client-only and code-split. View-only: orbit, zoom, reset camera. Other chassis show a still and a notice.
 
-**M1 is done when:** a beginner can open `/build`, pick the kit box on their desk, change the motor and rollers, see a warning that the motor is Open-only, see the cost of what they still need to buy, watch the car update in 3D, and send the link to a friend — in zh-TW and en.
+**M1 is done when:** a beginner can open `/build`, pick the kit box on their desk, change the motor and rollers, see a warning that the motor is Open-only, see the cost of what they still need to buy, watch the car update in 3D, and send the link to a friend — in Traditional Chinese and en.
 
 **Explicitly not in M1:** the wizard, votes, accounts, short links, OG images, D1, click-to-select in 3D, per-kit body shapes, chassis other than MA in 3D. Still on GitHub Pages, still fully static.
 
