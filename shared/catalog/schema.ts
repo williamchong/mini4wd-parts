@@ -156,6 +156,8 @@ export const SLOTS = [
 /** Tri-state: we never claim a rule we have not actually checked. */
 const legality = z.enum(['legal', 'illegal', 'unknown'])
 
+export type PartLegality = z.infer<typeof legality>
+
 /** How a derived field got its value, so the report can audit coverage. */
 const provenance = z.enum(['scraped', 'derived', 'override'])
 

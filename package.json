@@ -13,7 +13,7 @@
     "catalog:report": "node scripts/catalog/report.ts",
     "catalog:crossref": "node scripts/catalog/crossref.ts",
     "catalog:verify": "node scripts/catalog/verify.ts",
-    "test": "node --test 'scripts/**/*.test.ts'",
+    "test": "node --test '{scripts,shared}/**/*.test.ts'",
     "typecheck": "tsc -p scripts/tsconfig.json"
   },
   "dependencies": {

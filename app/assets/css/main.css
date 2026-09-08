@@ -121,3 +121,279 @@ body {
 .wip-content .locale-controls a {
   color: inherit;
 }
+
+/* ---------------------------------------------------------------- builder */
+
+.build-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.build-controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.build-note {
+  margin: 0 0 1.5rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.9em;
+  background: #f4f6f8;
+  border-left: 3px solid #c8d2da;
+  border-radius: 3px;
+}
+
+button.link {
+  font: inherit;
+  padding: 0;
+  color: inherit;
+  background: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
+/* Chassis picker */
+
+.chassis-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  list-style: none;
+}
+
+.chassis-list button {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  width: 100%;
+  height: 100%;
+  padding: 0.9rem 1rem;
+  font: inherit;
+  text-align: start;
+  background: #fff;
+  border: 1px solid #d8dee4;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.chassis-list button:hover {
+  border-color: #8a99a8;
+}
+
+.chassis-name {
+  font-weight: 600;
+}
+
+.chassis-facts,
+.chassis-notes {
+  font-size: 0.85em;
+  opacity: 0.75;
+}
+
+/* Slot list */
+
+.slot-list {
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid #e3e8ec;
+}
+
+.slot-row {
+  display: grid;
+  grid-template-columns: 9rem 1fr auto;
+  gap: 1rem;
+  align-items: baseline;
+  padding: 0.7rem 0.25rem;
+  border-bottom: 1px solid #e3e8ec;
+}
+
+.slot-row.swapped {
+  background: #f6faf6;
+}
+
+.slot-label {
+  font-weight: 600;
+}
+
+.slot-label .required {
+  color: #b4433c;
+}
+
+.slot-entry,
+.slot-empty {
+  margin: 0;
+}
+
+.slot-empty {
+  opacity: 0.5;
+}
+
+.slot-origin {
+  font-size: 0.75em;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  opacity: 0.6;
+}
+
+.slot-actions {
+  display: flex;
+  gap: 0.75rem;
+  align-items: baseline;
+}
+
+/* Part picker */
+
+.picker-backdrop {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  background: rgb(0 0 0 / 45%);
+}
+
+.picker {
+  display: flex;
+  flex-direction: column;
+  width: min(38rem, 100%);
+  max-height: 85vh;
+  padding: 1.25rem;
+  background: #fff;
+  border-radius: 8px;
+}
+
+.picker-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.picker-head h2 {
+  margin: 0;
+  font-size: 1.1rem;
+}
+
+.picker-search {
+  font: inherit;
+  padding: 0.5rem 0.7rem;
+  margin: 0.75rem 0 0.5rem;
+  border: 1px solid #d8dee4;
+  border-radius: 4px;
+}
+
+.picker-count {
+  margin: 0 0 0.5rem;
+  font-size: 0.85em;
+  opacity: 0.7;
+}
+
+.picker-list {
+  padding: 0;
+  margin: 0;
+  overflow-y: auto;
+  list-style: none;
+}
+
+.picker-list button {
+  display: block;
+  width: 100%;
+  padding: 0;
+  font: inherit;
+  text-align: start;
+  background: none;
+  border: none;
+  border-top: 1px solid #eef1f4;
+  cursor: pointer;
+}
+
+.picker-list button:hover {
+  background: #f6f8fa;
+}
+
+/* Part card */
+
+.part-card {
+  padding: 0.6rem 0.5rem;
+}
+
+.part-head {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.part-name.fallback {
+  opacity: 0.75;
+  font-style: italic;
+}
+
+.part-id {
+  font-size: 0.8em;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.55;
+}
+
+.part-meta {
+  display: flex;
+  gap: 0.6rem;
+  align-items: baseline;
+  margin-top: 0.15rem;
+  font-size: 0.85em;
+}
+
+.legality {
+  padding: 0 0.35rem;
+  border-radius: 3px;
+}
+
+.legality.illegal {
+  color: #8c2f2a;
+  background: #fbeceb;
+}
+
+.legality.unknown {
+  color: #6b5b1f;
+  background: #fbf6e3;
+}
+
+.part-specs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.75rem;
+  margin: 0.3rem 0 0;
+  font-size: 0.8em;
+  opacity: 0.75;
+}
+
+.part-specs dt {
+  display: inline;
+}
+
+.part-specs dt::after {
+  content: ' ';
+}
+
+.part-specs dd {
+  display: inline;
+  margin: 0 0.5rem 0 0;
+  font-weight: 600;
+}
+
+@media (max-width: 34rem) {
+  .slot-row {
+    grid-template-columns: 1fr auto;
+  }
+
+  .slot-label {
+    grid-column: 1 / -1;
+  }
+}

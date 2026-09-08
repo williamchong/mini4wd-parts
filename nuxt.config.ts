@@ -49,8 +49,8 @@ export default defineNuxtConfig({
     prerender: {
       crawlLinks: true,
       routes: [
-        '/', '/about', '/guides', '/parts',
-        '/en', '/en/about', '/en/guides', '/en/parts'
+        '/', '/about', '/guides', '/parts', '/build',
+        '/en', '/en/about', '/en/guides', '/en/parts', '/en/build'
       ]
     }
   },

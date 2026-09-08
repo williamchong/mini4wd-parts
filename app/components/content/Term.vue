@@ -9,9 +9,9 @@
  */
 defineProps<{ name: string }>()
 
-const { wording } = useWording()
+const { term } = useTerm()
 </script>
 
 <template>
-  <span>{{ $t(`terms.${wording}.${name}`) }}</span>
+  <span>{{ term(name) }}</span>
 </template>

@@ -7,7 +7,8 @@
     "home": "Home",
     "guides": "Guides",
     "parts": "Parts",
-    "about": "About"
+    "about": "About",
+    "build": "Builder"
   },
   "landing": {
     "modelAlt": "Mini 4WD Beginner's Guide Information Site logo",
@@ -21,5 +22,91 @@
     "label": "Wording",
     "hk": "HK",
     "tw": "TW"
+  },
+  "build": {
+    "title": "Builder",
+    "pickChassis": "Pick a chassis to start",
+    "pickPart": "Choose {slot}",
+    "searchParts": "Search by name or item number",
+    "candidates": "{count} parts fit",
+    "close": "Close",
+    "swap": "Swap",
+    "revert": "Revert",
+    "stock": "Stock",
+    "swapped": "Swapped",
+    "empty": "Empty",
+    "required": "Required",
+    "class": "Class",
+    "startOver": "Start over",
+    "stockNote": "Everything a bare chassis comes with is moulded plastic Tamiya never sold separately, so a fresh build has an empty shopping list.",
+    "classes": {
+      "open": "Open",
+      "stockBmax": "Stock / B-MAX",
+      "junior": "Junior"
+    },
+    "legality": {
+      "illegal": "Not allowed in this class",
+      "unknown": "Not verified"
+    },
+    "motorPosition": {
+      "front": "Front motor",
+      "mid": "Mid motor",
+      "rear": "Rear motor"
+    },
+    "slot": {
+      "body": "Body",
+      "motor": "Motor",
+      "gear-set": "Gear set",
+      "counter-gear": "Counter gear",
+      "terminal": "Terminal",
+      "switch": "Switch",
+      "axle": "Axle",
+      "propeller-shaft": "Propeller shaft",
+      "bearing": "Bearing",
+      "wheel-front": "Front wheels",
+      "wheel-rear": "Rear wheels",
+      "tire-front": "Front tires",
+      "tire-rear": "Rear tires",
+      "roller-front": "Front rollers",
+      "roller-rear": "Rear rollers",
+      "roller-side": "Side rollers",
+      "front-stay": "Front stay",
+      "rear-stay": "Rear stay",
+      "side-stay": "Side stay",
+      "brake": "Brake",
+      "damper": "Damper",
+      "fastener": "Fasteners"
+    }
+  },
+  "spec": {
+    "rollerDiameter": "Diameter",
+    "rollerType": "Material",
+    "plateThickness": "Thickness",
+    "plateMaterial": "Material",
+    "wheelDiameter": "Wheel diameter",
+    "tireDiameter": "Tire diameter",
+    "tireHardness": "Hardness",
+    "gearRatio": "Gear ratio",
+    "motorShaft": "Shaft",
+    "motorRpm": "Speed (rpm)",
+    "motorTorque": "Torque (g·cm)",
+    "weight": "Weight",
+    "pieces": "Pieces",
+    "shaft": {
+      "single": "Single shaft",
+      "double": "Double shaft"
+    },
+    "roller": {
+      "plastic": "Plastic",
+      "aluminium": "Aluminium",
+      "bearing": "Ball bearing",
+      "other": "Other"
+    },
+    "material": {
+      "frp": "FRP",
+      "carbon": "Carbon",
+      "aluminium": "Aluminium",
+      "other": "Other"
+    }
   }
 }

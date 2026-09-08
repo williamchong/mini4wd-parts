@@ -7,7 +7,8 @@
     "home": "首頁",
     "guides": "指南",
     "parts": "零件",
-    "about": "關於"
+    "about": "關於",
+    "build": "組車器"
   },
   "landing": {
     "modelAlt": "迷你四驅新手入門資訊站標誌",
@@ -21,6 +22,92 @@
     "label": "用語",
     "hk": "港",
     "tw": "台"
+  },
+  "build": {
+    "title": "組車器",
+    "pickChassis": "選擇底盤開始",
+    "pickPart": "選擇{slot}",
+    "searchParts": "搜尋名稱或編號",
+    "candidates": "{count} 件可用零件",
+    "close": "關閉",
+    "swap": "更換",
+    "revert": "還原",
+    "stock": "原裝",
+    "swapped": "已更換",
+    "empty": "未安裝",
+    "required": "必要部位",
+    "class": "賽制",
+    "startOver": "重新開始",
+    "stockNote": "原裝配置全是套件附送的塑膠件，田宮沒有單獨發售，所以剛開始的購物清單是空的。",
+    "classes": {
+      "open": "公開組 Open",
+      "stockBmax": "基礎賽 Stock / B-MAX",
+      "junior": "少年組 Junior"
+    },
+    "legality": {
+      "illegal": "此賽制不可用",
+      "unknown": "尚未確認"
+    },
+    "motorPosition": {
+      "front": "前置摩打",
+      "mid": "中置摩打",
+      "rear": "後置摩打"
+    },
+    "slot": {
+      "body": "車殼",
+      "motor": "摩打",
+      "gear-set": "齒輪組",
+      "counter-gear": "中間齒輪",
+      "terminal": "電池金屬片",
+      "switch": "電源開關",
+      "axle": "車軸",
+      "propeller-shaft": "傳動軸",
+      "bearing": "軸承",
+      "wheel-front": "前輪框",
+      "wheel-rear": "後輪框",
+      "tire-front": "前輪胎",
+      "tire-rear": "後輪胎",
+      "roller-front": "前導輪",
+      "roller-rear": "後導輪",
+      "roller-side": "側導輪",
+      "front-stay": "前支架",
+      "rear-stay": "後支架",
+      "side-stay": "側支架",
+      "brake": "剎車",
+      "damper": "制震器",
+      "fastener": "螺絲配件"
+    }
+  },
+  "spec": {
+    "rollerDiameter": "直徑",
+    "rollerType": "材質",
+    "plateThickness": "厚度",
+    "plateMaterial": "材質",
+    "wheelDiameter": "輪框直徑",
+    "tireDiameter": "輪胎直徑",
+    "tireHardness": "硬度",
+    "gearRatio": "齒輪比",
+    "motorShaft": "軸型",
+    "motorRpm": "轉速 (rpm)",
+    "motorTorque": "扭力 (g·cm)",
+    "weight": "重量",
+    "pieces": "數量",
+    "shaft": {
+      "single": "單軸",
+      "double": "雙軸"
+    },
+    "roller": {
+      "plastic": "塑膠",
+      "aluminium": "鋁",
+      "bearing": "軸承",
+      "other": "其他"
+    },
+    "material": {
+      "frp": "FRP",
+      "carbon": "碳纖維",
+      "aluminium": "鋁",
+      "other": "其他"
+    }
   },
   "terms": {
     "hk": {
