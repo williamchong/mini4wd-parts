@@ -161,7 +161,7 @@ MVP can stay on GitHub Pages: everything in M1 is static, the 3D view included �
 - `priceJpy`, `priceHkd`, `releaseDate`, `status` (current / limited / discontinued)
 - `images []`, `model3d {glb, attach}`, `requires []`, `tags []`, `roles []` and scoring attributes for the wizard
 
-**chassis**: id, names, family, motor position, shaft type, wheelbase/tread/weight, kit gear ratios, `slots [{id, type, maxCount, mirror, socketNode}]`, kits [].
+**chassis**: id, names, family, motor position, shaft type, wheelbase/tread/weight, kit gear ratios, `slots [{id, type, maxCount, mirror, required}]` (plus `socketNode` when the 3D sockets land, §5.2), kits [].
 
 **rules**: declarative JSON (see 4.3). **guides**: Markdown per locale. **profiles**: wizard weight vectors.
 
@@ -171,7 +171,7 @@ A compact `catalog.json` (ids, names, category, slots, compat, key specs) is shi
 
 ### 4.3 Rule engine
 
-Declarative rules evaluated in the browser and re-validated by the Worker at share time. Rule types: slot capacity, chassis compatibility, motor shaft type, class legality (per selected class), dependencies (`requires`, e.g. bearing rollers need 2 mm screws), mutual exclusion, numeric constraints (total width ≤ 105 mm, tire 22–35 mm, weight ≥ 90 g estimate). Output is a list of `{ruleId, severity: error|warning|note, parts[], message{locale}}` displayed inline, PCPartPicker style. Never claim 100% coverage; show "verify against organiser PDF" notes for class rules.
+Declarative rules evaluated in the browser and re-validated by the Worker at share time. Rule types: slot capacity, unfilled `required` slots (§4.2 — the build is not a runnable car), chassis compatibility, motor shaft type, class legality (per selected class), dependencies (`requires`, e.g. bearing rollers need 2 mm screws), mutual exclusion, numeric constraints (total width ≤ 105 mm, tire 22–35 mm, weight ≥ 90 g estimate). Output is a list of `{ruleId, severity: error|warning|note, parts[], message{locale}}` displayed inline, PCPartPicker style. Never claim 100% coverage; show "verify against organiser PDF" notes for class rules.
 
 ### 4.4 Wizard / recommender
 
@@ -193,7 +193,7 @@ The MVP's two entry points — bare chassis and existing kit — are the same ob
 
 **A build** is `{ chassis, kit?, class, slots: { [slotId]: Array<{ partId, origin }> } }`, where `origin` is `stock` (came with the kit or the chassis' own runner) or `swapped` (the user chose it). Carrying `origin` is what makes three things fall out for free: a "what you changed from the box" diff, a shopping list of only the parts you still need to buy, and a legality check that can say *which* modification broke Stock Class.
 
-- **Bare chassis:** seed from the chassis' `defaultLoadout` (kit gears, plastic rollers, kit wheels/tires, shafts, FA-130), leave every slot it does not name empty. `defaultLoadout` is what gets seeded; the slot's `required` flag is a validity rule for §4.3, not a seeding instruction.
+- **Bare chassis:** seed from the chassis' `defaultLoadout` (kit gears, plastic rollers, kit wheels/tires, shafts, FA-130), leave every slot it does not name empty. `defaultLoadout` decides what is seeded, not the slot's `required` flag (§4.3).
 - **From a kit:** seed from the kit's `stockLoadout` — the chassis `defaultLoadout` overlaid with the kit's own body and its per-kit differences, since a kit may ship a different gear ratio, low-profile wheels or harder tires.
 
 #### Where the kit data comes from

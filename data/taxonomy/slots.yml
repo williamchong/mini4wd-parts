@@ -15,11 +15,11 @@ profiles:
     - { id: motor, type: motor, maxCount: 1, required: true }
     - { id: gear-set, type: gear, maxCount: 1, required: true }
     # Mandatory on a real single-shaft chassis, but left optional deliberately:
-    # SLOTS_BY_CATEGORY maps every `gear` part to both `gear` and `counter-gear`,
-    # so a ギヤーセット — which already contains the counter gear — would fill
-    # `gear-set` and still leave this slot flagged empty. Whether a gear set
-    # satisfies this slot is a modelling question for the kit / defaultLoadout
-    # work (§4.7), not a flag flip.
+    # SLOTS_BY_CATEGORY (scripts/catalog/taxonomy.ts) maps every `gear` part to
+    # both `gear` and `counter-gear`, so a ギヤーセット — which already contains
+    # the counter gear — would fill `gear-set` and still leave this slot flagged
+    # empty. Whether a gear set satisfies this slot is a modelling question for
+    # the kit / defaultLoadout work (§4.7), not a flag flip.
     - { id: counter-gear, type: counter-gear, maxCount: 1 }
     - { id: propeller-shaft, type: propeller-shaft, maxCount: 1, required: true }
     - { id: terminal, type: terminal, maxCount: 1, required: true }
