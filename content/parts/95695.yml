@@ -1,0 +1,38 @@
+id: "95695"
+names:
+  ja: N-04･T-04 強化ユニット (ホワイト)
+  en: REINFORCED N-04/T-04 UNITS (WHITE)
+  zh-HK: 強化 N-04/T-04組件 (白色)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: chassis-set
+categorySource: derived
+slots:
+  - none
+isCarPart: true
+chassisCompat:
+  include:
+    - ms
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 660
+priceJpyExTax: 600
+priceHkd: 60
+releaseDate: 2025-10-25
+releaseDateRaw: 2025年10月25日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95695/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95695/95695_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95695-reinforced-n-04-t-04-units-white/
+specsRaw: 強度の高いポリカABS樹脂製。3タイプの軸受けパーツを用意して、セッティングが可能
+scrapedAt: 2026-09-08

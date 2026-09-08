@@ -1,0 +1,38 @@
+id: "95239"
+names:
+  ja: カーボン強化スーパーFMシャーシセット
+  en: CARBON REINFORCED SUPER FM CHASSIS SET
+  zh-HK: 碳纖維強化 Super FM底盤套裝
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: chassis-set
+categorySource: derived
+slots:
+  - none
+isCarPart: true
+chassisCompat:
+  include: []
+  other:
+    - superFM
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 440
+priceJpyExTax: 400
+priceHkd: 40
+releaseDate: 2025-03-22
+releaseDateRaw: 2025年3月22日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95239/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95239/95239_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95239-carbon-reinforced-super-fm-chassis-set-2/
+specsRaw: カーボンファイバー配合ナイロン樹脂製シャーシ
+scrapedAt: 2026-09-08

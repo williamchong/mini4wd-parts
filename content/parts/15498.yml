@@ -1,0 +1,48 @@
+id: "15498"
+names:
+  ja: HG カーボンフロントワイドステー （1.5mm）
+  en: HG CARBON WIDE FRONT PLATE (1.5mm)
+  zh-HK: HG碳纖維前置闊幅防撞支架(1.5mm)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 498
+seriesLabel: ミニ四駆グレードアップパーツ
+category: plate
+categorySource: derived
+slots:
+  - front-stay
+  - rear-stay
+  - side-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - ar
+    - fm-a
+    - super-2
+    - vs
+  other:
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  plateThicknessMm: 1.5
+  plateMaterial: carbon
+priceJpy: 1034
+priceJpyExTax: 940
+priceHkd: 94
+releaseDate: 2016-06-18
+releaseDateRaw: 2016年6月18日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15498/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15498/15498_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15498-car-wide-f-plt-1-5mm/
+scrapedAt: 2026-09-08

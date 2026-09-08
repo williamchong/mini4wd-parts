@@ -1,0 +1,61 @@
+id: "15525"
+names:
+  ja: ゴムリング付2段低摩擦プラローラーセット (赤・青13-12mm)
+  en: LOW FRICTION PLASTIC DOUBLE ROLLERS w/RUBBER RINGS (RED & BLUE/13-12mm)
+  zh-HK: 兩段式低摩擦塑料膠圈導輪套裝(紅、藍13-12mm)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 525
+seriesLabel: ミニ四駆グレードアップパーツ
+category: roller
+categorySource: derived
+slots:
+  - roller-front
+  - roller-rear
+  - roller-side
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  rollerDiameterMm: 13
+  rollerType: plastic
+priceJpy: 352
+priceJpyExTax: 320
+priceHkd: 26
+releaseDate: 2020-05-23
+releaseDateRaw: 2020年5月23日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15525/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15525/15525_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15525-jr-plastic-double-rollers/
+specsRaw: 赤と青のゴムリング付き2段プラローラーを各色2個ずつセット
+scrapedAt: 2026-09-08

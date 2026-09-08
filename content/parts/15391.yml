@@ -1,0 +1,54 @@
+id: "15391"
+names:
+  ja: 大径スタビヘッドセット(11mm、15mm)
+  en: LARGE DIA. STABILIZER HEAD SET (11mm, 15mm)
+  zh-HK: 大徑前置防傾圓盤套裝(11mm、15mm)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 391
+seriesLabel: ミニ四駆グレードアップパーツ
+category: stabilizer
+categorySource: derived
+slots:
+  - damper
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 506
+priceJpyExTax: 460
+priceHkd: 46
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15391/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15391/15391_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15391-stabilizer-head-set/
+scrapedAt: 2026-09-08

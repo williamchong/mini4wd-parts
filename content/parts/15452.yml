@@ -1,0 +1,51 @@
+id: "15452"
+names:
+  ja: ARシャーシ FRPリヤワイドステー
+  en: FRP WIDE REAR PLATE (for AR CHASSIS)
+  zh-HK: AR底盤專用FRP後置闊幅支架
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 452
+seriesLabel: ミニ四駆グレードアップパーツ
+category: plate
+categorySource: derived
+slots:
+  - front-stay
+  - rear-stay
+  - side-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - superTZ_X
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  plateMaterial: frp
+priceJpy: 330
+priceJpyExTax: 300
+priceHkd: 30
+releaseDate: 2012-08-11
+releaseDateRaw: 2012年8月11日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15452/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15452/15452_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15452-frp-wide-rear-plate-ar-chassis/
+scrapedAt: 2026-09-08

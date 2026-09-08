@@ -1,0 +1,58 @@
+id: "15463"
+names:
+  ja: ミニ四駆マルチテープ （10mm幅 ブルー）
+  en: MINI 4WD MULTIPURPOSE TAPE (10mm WIDTH/BLUE)
+  zh-HK: 迷你四驅車多用途膠紙(10mm闊 藍色)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 463
+seriesLabel: ミニ四駆グレードアップパーツ
+category: accessory
+categorySource: derived
+slots:
+  - none
+isCarPart: false
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: unknown
+  stockBmax: unknown
+  junior: unknown
+  source: derived
+  notes: 非車體零件，不適用比賽規則
+specs: {}
+priceJpy: 396
+priceJpyExTax: 360
+priceHkd: 36
+releaseDate: 2013-07-06
+releaseDateRaw: 2013年7月6日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15463/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15463/15463_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15463-mini-4wd-multipurpose-tape-10mm-width-blue/
+specsRaw: 幅10mm、長さ15m
+scrapedAt: 2026-09-08

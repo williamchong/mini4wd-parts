@@ -1,0 +1,36 @@
+id: "15476"
+names:
+  ja: MAシャーシ ファーストトライパーツセット
+  en: BASIC TUNE-UP PARTS SET for MA CHASSIS
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 476
+seriesLabel: ミニ四駆グレードアップパーツ
+category: bundle
+categorySource: derived
+slots:
+  - none
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 1100
+priceJpyExTax: 1000
+priceHkd: 90
+releaseDate: 2014-03-22
+releaseDateRaw: 2014年3月22日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15476/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15476/15476_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15476-basic-tune-up-parts-set-for-ma-chassis/
+scrapedAt: 2026-09-08

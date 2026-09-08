@@ -1,0 +1,46 @@
+id: "95324"
+names:
+  ja: アジャスト マスダンパー （2.5g×6個）
+  en: ADJUSTABLE MASS DAMPERS (2.5g WEIGHTS x6)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: mass-damper
+categorySource: derived
+slots:
+  - damper
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - superTZ_X
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 660
+priceJpyExTax: 600
+priceHkd: 52
+releaseDate: 2026-11
+releaseDateRaw: 2026年11月発売予定
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95324/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95324/95324_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95324-adjustable-mass-dampers-2-5g-weights-x6/
+specsRaw: 2.5ｇの真ちゅう製ウェイト6個に加え、取り付け用ビス、ナット、スタビライザーボールなどをセット
+scrapedAt: 2026-09-08

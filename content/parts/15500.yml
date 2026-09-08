@@ -1,0 +1,54 @@
+id: "15500"
+names:
+  ja: 2mmアルミロックナット （ブルー5個）
+  en: 2mm ALUMINUM LOCK NUT (BLUE, 5PCS.)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 500
+seriesLabel: ミニ四駆グレードアップパーツ
+category: screw
+categorySource: derived
+slots:
+  - fastener
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 550
+priceJpyExTax: 500
+priceHkd: 38
+releaseDate: 2016-03-05
+releaseDateRaw: 2016年3月5日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15500/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15500/15500_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15500-1-32-mini-4wd-2mm-aluminum-lock-nut-blue-5pcs/
+scrapedAt: 2026-09-08

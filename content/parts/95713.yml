@@ -1,0 +1,57 @@
+id: "95713"
+names:
+  ja: レッドスパイクタイヤ & シルバーメッキホイールセット
+  en: RED SPIKE TIRE & SILVER COLOR PLATED WHEEL SET
+  zh-HK: 迷你四驅車 紅色尖刺輪胎 & 銀色電鍍輪圈 套裝
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: wheel-tire-set
+categorySource: derived
+slots:
+  - wheel-front
+  - wheel-rear
+  - tire-front
+  - tire-rear
+isCarPart: true
+chassisCompat:
+  include:
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type1
+    - type2
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 352
+priceJpyExTax: 320
+priceHkd: 32
+releaseDate: 2026-09-12
+releaseDateRaw: 2026年9月12日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95713/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95713/95713_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95713-mini-4wd-red-spike-tire-silver-color-plated-wheel-set/
+specsRaw: シルバーメッキホイールとレッドカラーのスパイクタイヤをセット
+scrapedAt: 2026-09-08

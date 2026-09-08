@@ -1,0 +1,40 @@
+id: "15382"
+names:
+  ja: N-03・T-03バンパーレスユニット
+  en: BUMPERLESS N-03/T-03 UNITS
+  zh-HK: N-03．T-03 無防撞桿零件
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 382
+seriesLabel: ミニ四駆グレードアップパーツ
+category: bumper
+categorySource: derived
+slots:
+  - front-stay
+  - rear-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - ms
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 330
+priceJpyExTax: 300
+priceHkd: 30
+releaseDate: 2023-03-18
+releaseDateRaw: 2023年3月18日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15382/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15382/15382_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15382-bumperless-n-03-t-03-units/
+specsRaw: N-03、T-03ユニットに加えて、520プラベアリングなどもセット
+scrapedAt: 2026-09-08

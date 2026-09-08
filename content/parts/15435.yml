@@ -1,0 +1,43 @@
+id: "15435"
+names:
+  ja: ファーストトライ パーツセット
+  en: MINI 4WD BASIC TUNE-UP SET
+  zh-HK: 基礎零件套裝
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 435
+seriesLabel: ミニ四駆グレードアップパーツ
+category: bundle
+categorySource: derived
+slots:
+  - none
+isCarPart: true
+chassisCompat:
+  include:
+    - ms
+    - super-2
+    - vs
+  other:
+    - superTZ_X
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 1100
+priceJpyExTax: 1000
+priceHkd: 90
+releaseDate: 2011-09-17
+releaseDateRaw: 2011年9月17日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15435/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15435/15435_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15435-mini-4wd-basic-tune-set/
+scrapedAt: 2026-09-08

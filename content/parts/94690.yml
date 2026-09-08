@@ -1,0 +1,32 @@
+id: "94690"
+names:
+  ja: AO-1015 2ｍｍロックナット10個セット
+  en: MINI 4WD 2mm LOCK NUT (10PCS.)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: ao
+seriesLabel: ミニ四駆用AOパーツ
+category: screw
+categorySource: derived
+slots:
+  - fastener
+isCarPart: true
+chassisCompat:
+  include: []
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 330
+priceJpyExTax: 300
+priceHkd: 30
+status: current
+officialUrl: https://www.tamiya.com/japan/products/94690/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/94690/94690_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-94690-mini-4wd-2mm-lock-nut-10/
+scrapedAt: 2026-09-08

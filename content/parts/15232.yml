@@ -1,0 +1,54 @@
+id: "15232"
+names:
+  ja: ミニ四駆ビスセットA
+  en: MINI 4WD SCREW SET A
+  zh-HK: 迷你四驅車 螺絲套裝A
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 232
+seriesLabel: ミニ四駆グレードアップパーツ
+category: screw
+categorySource: derived
+slots:
+  - fastener
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 154
+priceJpyExTax: 140
+priceHkd: 14
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15232/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15232/15232_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15232-mini-4wd-screw-set-a/
+scrapedAt: 2026-09-08

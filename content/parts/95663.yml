@@ -1,0 +1,55 @@
+id: "95663"
+names:
+  ja: ハイマウントチューブスタビセット (クリヤーブルー)
+  en: HI-MOUNT TUBE STABILIZER SET (CLEAR BLUE)
+  zh-HK: 高設置 圓筒型防傾桿套裝 (透明藍)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: stabilizer
+categorySource: derived
+slots:
+  - damper
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 220
+priceJpyExTax: 200
+priceHkd: 20
+releaseDate: 2024-08
+releaseDateRaw: 2024年8月 ジャパンカップ2024 仙台大会から発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95663/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95663/95663_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95663-hi-mount-tube-stabilizer-set-clear-blue/
+specsRaw: 直径8mm、高さ10mmの樹脂製スタビライザー3個をはじめ、取り付け用のロングビス、アルミスペーサーなどもセット
+scrapedAt: 2026-09-08

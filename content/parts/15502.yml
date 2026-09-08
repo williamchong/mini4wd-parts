@@ -1,0 +1,42 @@
+id: "15502"
+names:
+  ja: サンダーショット クリヤーボディセット （ポリカ）
+  en: THUNDER SHOT CLEAR BODY SET (POLYCARBONATE)
+  zh-HK: Thunder Shot 透明車殼套裝 (PC軟殼)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 502
+seriesLabel: ミニ四駆グレードアップパーツ
+category: body
+categorySource: derived
+slots:
+  - body
+isCarPart: true
+chassisCompat:
+  include:
+    - ar
+    - vz
+    - super-2
+    - vs
+  other:
+    - super1
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 528
+priceJpyExTax: 480
+priceHkd: 48
+releaseDate: 2016-07-16
+releaseDateRaw: 2016年7月16日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15502/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15502/15502_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15502-thunder-shot-clear-body-set-polycarbonate/
+scrapedAt: 2026-09-08

@@ -1,0 +1,48 @@
+id: "15501"
+names:
+  ja: スリムマスダンパーセット
+  en: SLIMLINE MASS DAMPER SET
+  zh-HK: 迷你四驅車 纖幼制震裝置套裝
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 501
+seriesLabel: ミニ四駆グレードアップパーツ
+category: mass-damper
+categorySource: derived
+slots:
+  - damper
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - superTZ_X
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 440
+priceJpyExTax: 400
+priceHkd: 40
+releaseDate: 2016-03-05
+releaseDateRaw: 2016年3月5日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15501/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15501/15501_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15501-slimline-mass-damper-set/
+scrapedAt: 2026-09-08

@@ -1,0 +1,54 @@
+id: "15438"
+names:
+  ja: 強化ギヤ＆ワンロックギヤカバー(スーパーIIシャーシ用)
+  en: REINFORCED GEARS w/EASY LOCKING GEAR COVER
+  zh-HK: Super II 碳纖維齒輪和碳纖維快拆蓋鎖
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 438
+seriesLabel: ミニ四駆グレードアップパーツ
+category: gear-cover
+categorySource: derived
+slots:
+  - none
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 374
+priceJpyExTax: 340
+priceHkd: 34
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15438/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15438/15438_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15438-reinforces-gears-w-easy-locking-gear-cover-for-mini-4wd/
+scrapedAt: 2026-09-08

@@ -1,0 +1,61 @@
+id: "95188"
+names:
+  ja: レーサーミニ四駆40周年記念 アトミックチューン2モーター
+  en: RACING MINI 4WD 40th ANNIVERSARY ATOMIC-TUNED 2 MOTOR
+  zh-HK: 迷你四驅車 Racing Mini 4WD 40週年紀念 Atomic-Tuned 2 摩打
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: limited
+seriesLabel: ミニ四駆限定販売商品（パーツ）
+category: motor
+categorySource: derived
+slots:
+  - motor
+isCarPart: true
+chassisCompat:
+  include:
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type1
+    - type2
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: override
+  notes: 需個別確認馬達規則
+specs:
+  motorShaft: single
+  motorRpmMin: 12700
+  motorRpmMax: 14900
+  motorTorqueMin: 1.5
+  motorTorqueMax: 1.8
+priceJpy: 462
+priceJpyExTax: 420
+priceHkd: 42
+releaseDate: 2026-08-29
+releaseDateRaw: 2026年8月29日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95188/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95188/95188_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95188-racing-mini-4wd-40th-anniversary-atomic-tuned-2-motor/
+specsRaw: 適正電圧：2.4～3.0V、推奨負荷トルク：1.5-1.8mN･m、回転数：12700-14900r/min、消費電流：1.8-2.2A
+scrapedAt: 2026-09-08

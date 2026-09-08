@@ -1,0 +1,38 @@
+id: "94801"
+names:
+  ja: AO-1023 2段アルミローラー用5mmパイプ（4本）
+  en: 5mm PIPE FOR DOUBLE ALUMINUM ROLLERS (4PCS.)
+  zh-HK: 2段式 鋁合金導輪用 5mm墊管
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: ao
+seriesLabel: ミニ四駆用AOパーツ
+category: roller
+categorySource: derived
+slots:
+  - roller-front
+  - roller-rear
+  - roller-side
+isCarPart: true
+chassisCompat:
+  include: []
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  rollerDiameterMm: 5
+  rollerType: aluminium
+priceJpy: 154
+priceJpyExTax: 140
+priceHkd: 14
+status: current
+officialUrl: https://www.tamiya.com/japan/products/94801/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/94801/94801_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-94801-5mm-pipe-for-double-aluminum-rollers-4pcs/
+scrapedAt: 2026-09-08

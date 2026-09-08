@@ -1,0 +1,50 @@
+id: "95387"
+names:
+  ja: HG ボールリンクマスダンパー （スクエア/カーボンプレート）
+  en: HG MASS DAMPER SET w/BALL CONNECTORS (BLOCK WEIGHT/CARBON PLATE)
+  zh-HK: HG 球連接式制震鉛塊 (方型/碳纖維片)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: plate
+categorySource: derived
+slots:
+  - front-stay
+  - rear-stay
+  - side-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - superTZ_X
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  plateMaterial: carbon
+priceJpy: 968
+priceJpyExTax: 880
+priceHkd: 88
+releaseDate: 2023-06-10
+releaseDateRaw: 2023年6月10日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95387/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95387/95387_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95387-jr-mass-damper-set-w-ball-connectors/
+specsRaw: 6×6×32mmのマスダンパー1個（重量：8.3g）と、アジャスター、カーボンプレート、ピロボールなどをセット
+scrapedAt: 2026-09-08

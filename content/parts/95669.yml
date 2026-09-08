@@ -1,0 +1,38 @@
+id: "95669"
+names:
+  ja: フルカウルミニ四駆30周年 ミニ四駆キャッチャー（ブラック）
+  en: FULLY COWLED 30TH ANNIV. MINI 4WD CAR CATCHER (BLACK)
+  zh-HK: Fully Cowled Mini 4WD 全罩式迷你四驅車 30週年紀念 接車器 (黑色)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: accessory
+categorySource: derived
+slots:
+  - none
+isCarPart: false
+chassisCompat:
+  include: []
+  other: []
+  source: scraped
+classLegality:
+  open: unknown
+  stockBmax: unknown
+  junior: unknown
+  source: derived
+  notes: 非車體零件，不適用比賽規則
+specs: {}
+priceJpy: 616
+priceJpyExTax: 560
+priceHkd: 56
+releaseDate: 2024-08-31
+releaseDateRaw: 2024年8月31日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95669/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95669/info/95669_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95669-fully-cowled-30th-anniv-mini-4wd-car-catcher-black/
+specsRaw: 厚さ0.75mmのPP(ポリプロピレン)材を使用、組み立てた時のサイズ：110×190×70mm
+scrapedAt: 2026-09-08

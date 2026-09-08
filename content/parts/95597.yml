@@ -1,0 +1,61 @@
+id: "95597"
+names:
+  ja: HG 17mmオールアルミベアリングローラー (テーパータイプ)
+  en: HG 17mm TAPERED ALUMINUM BALL-RACE ROLLERS (RINGLESS)
+  zh-HK: HG 17mm 全鋁製滾珠軸承導輪 (梯形)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: roller
+categorySource: derived
+slots:
+  - roller-front
+  - roller-rear
+  - roller-side
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type1
+    - type2
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  rollerDiameterMm: 17
+  rollerType: bearing
+priceJpy: 880
+priceJpyExTax: 800
+priceHkd: 80
+releaseDate: 2023-08-26
+releaseDateRaw: 2023年8月26日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95597/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95597/95597_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95597-hg-17mm-taper-alu-br-rollers/
+specsRaw: アルミベアリングローラーに加えて、取り付け用の2×8mmビス2本やローラー用スペーサー4個もセット
+scrapedAt: 2026-09-08

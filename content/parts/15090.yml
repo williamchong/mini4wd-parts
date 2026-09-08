@@ -1,0 +1,33 @@
+id: "15090"
+names:
+  ja: ゼロシャーシ・ゴールドターミナル
+  en: 0 CHASSIS GOLD PLATED TERMINAL SET
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 90
+seriesLabel: ミニ四駆グレードアップパーツ
+category: terminal
+categorySource: derived
+slots:
+  - terminal
+isCarPart: true
+chassisCompat:
+  include: []
+  other:
+    - super1
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 264
+priceJpyExTax: 240
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15090/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/15090/15090_1_03.jpg
+scrapedAt: 2026-09-08

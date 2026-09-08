@@ -1,0 +1,52 @@
+id: "15150"
+names:
+  ja: FRP強化マウントプレートセット
+  en: FRP MOUNT PLATE SET
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 150
+seriesLabel: ミニ四駆グレードアップパーツ
+category: plate
+categorySource: derived
+slots:
+  - front-stay
+  - rear-stay
+  - side-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - ms
+    - me
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  plateMaterial: frp
+priceJpy: 308
+priceJpyExTax: 280
+priceHkd: 24
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15150/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15150/15150_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15150-frp-mount-plate-set/
+scrapedAt: 2026-09-08

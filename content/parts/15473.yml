@@ -1,0 +1,56 @@
+id: "15473"
+names:
+  ja: アルミスペーサーセット （12/6.7/6/3/1.5mm）
+  en: ALUMINUM SPACER SET (12/6.7/6/3/1.5mm)
+  zh-HK: 鋁製間隔圓管套裝(12/6.7/6/3/1.5mm)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 473
+seriesLabel: ミニ四駆グレードアップパーツ
+category: spacer
+categorySource: derived
+slots:
+  - fastener
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 286
+priceJpyExTax: 260
+priceHkd: 26
+releaseDate: 2014-02-08
+releaseDateRaw: 2014年2月8日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15473/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15473/15473_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15473-jr-aluminum-spacer-set-12-6-7-6-3-1-5mm/
+scrapedAt: 2026-09-08

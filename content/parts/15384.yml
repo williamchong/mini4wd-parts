@@ -1,0 +1,33 @@
+id: "15384"
+names:
+  ja: N-03・T-03バンパーレス LED(赤)ユニット
+  en: BUMPERLESS N-03/T-03 UNITS w/LED UNIT (RED)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 384
+seriesLabel: ミニ四駆グレードアップパーツ
+category: bumper
+categorySource: derived
+slots:
+  - front-stay
+  - rear-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - ms
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 616
+priceJpyExTax: 560
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15384/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15384/15384_1.jpg
+scrapedAt: 2026-09-08

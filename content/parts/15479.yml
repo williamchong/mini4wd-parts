@@ -1,0 +1,42 @@
+id: "15479"
+names:
+  ja: バックブレーダー クリヤーボディセット（ポリカ）
+  en: BUCK BLADER CLEAR BODY SET (POLYCARBONATE)
+  zh-HK: 俠客號 透明車殼套裝
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 479
+seriesLabel: ミニ四駆グレードアップパーツ
+category: body
+categorySource: derived
+slots:
+  - body
+isCarPart: true
+chassisCompat:
+  include:
+    - ar
+    - super-2
+  other:
+    - super1
+    - superTZ
+    - superTZ_X
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 528
+priceJpyExTax: 480
+priceHkd: 48
+releaseDate: 2015-02-21
+releaseDateRaw: 2015年2月21日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15479/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15479/15479_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15479-1-32-mini-4wd-buck-blader-clear-polycarbonate-body-set/
+scrapedAt: 2026-09-08

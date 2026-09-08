@@ -1,0 +1,50 @@
+id: "15357"
+names:
+  ja: ミニ四駆PRO FRPワイドプレートセット
+  en: MINI 4WD PRO FRP SIDE EXTENSION ROLLER MOUNT
+  zh-HK: FRP擴展支架套裝
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 357
+seriesLabel: ミニ四駆グレードアップパーツ
+category: plate
+categorySource: derived
+slots:
+  - front-stay
+  - rear-stay
+  - side-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - super-2
+    - vs
+  other:
+    - super1
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  plateMaterial: frp
+priceJpy: 264
+priceJpyExTax: 240
+priceHkd: 24
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15357/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15357/15357_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15357-mini-4wd-pro-frp-side-extension-roller-mount/
+scrapedAt: 2026-09-08

@@ -1,0 +1,35 @@
+id: "10322"
+names:
+  ja: AO-1047 ミニ四駆ベーシックボックス クリヤーカバー (3枚)
+  en: BASIC MINI 4WD CAR BOX CLEAR COVERS (3PCS.)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: ao
+seriesLabel: ミニ四駆用AOパーツ
+category: accessory
+categorySource: derived
+slots:
+  - none
+isCarPart: false
+chassisCompat:
+  include: []
+  other: []
+  source: scraped
+classLegality:
+  open: unknown
+  stockBmax: unknown
+  junior: unknown
+  source: derived
+  notes: 非車體零件，不適用比賽規則
+specs:
+  pieces: 3
+priceJpy: 396
+priceJpyExTax: 360
+releaseDate: 2019-12-07
+releaseDateRaw: 2019年12月7日(土)ごろ発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/10322/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/10322/10322_1.jpg
+specsRaw: PET製、サイズ：169×238mm 3枚入り
+scrapedAt: 2026-09-08

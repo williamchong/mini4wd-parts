@@ -1,0 +1,56 @@
+id: "15519"
+names:
+  ja: HG 丸穴ボールベアリング （4個）
+  en: HG ROUND HOLE BALL BEARINGS (4PCS.)
+  zh-HK: HG 圓孔滾珠軸承(4顆)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 519
+seriesLabel: ミニ四駆グレードアップパーツ
+category: bearing
+categorySource: derived
+slots:
+  - bearing
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 1540
+priceJpyExTax: 1400
+priceHkd: 140
+releaseDate: 2018-12-15
+releaseDateRaw: 2018年12月15日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15519/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15519/15519_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15519-hg-round-hole-ball-bearings-4/
+scrapedAt: 2026-09-08

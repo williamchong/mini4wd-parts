@@ -1,0 +1,38 @@
+id: "15517"
+names:
+  ja: マスダンパー スクエア ショート （8x8x14mm 2個）
+  en: SHORT MASS DAMPER BLOCK (8x8x14mm/2PCS.)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 517
+seriesLabel: ミニ四駆グレードアップパーツ
+category: mass-damper
+categorySource: derived
+slots:
+  - damper
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ar
+    - fm-a
+    - vz
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 506
+priceJpyExTax: 460
+releaseDate: 2018-02-10
+releaseDateRaw: 2018年2月10日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15517/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15517/15517_1.jpg
+specsRaw: サイズ：8×8×14mm 重量：6.6g 真ちゅう製
+scrapedAt: 2026-09-08

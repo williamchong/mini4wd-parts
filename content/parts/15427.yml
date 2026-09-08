@@ -1,0 +1,49 @@
+id: "15427"
+names:
+  ja: マスダンパー スクエア(6×6×32mm)
+  en: MASS DAMPER BLOCK (6x6x32mm)
+  zh-HK: 制震鉛塊 (6x6x32mm)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 427
+seriesLabel: ミニ四駆グレードアップパーツ
+category: mass-damper
+categorySource: derived
+slots:
+  - damper
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - superTZ_X
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 396
+priceJpyExTax: 360
+priceHkd: 36
+releaseDate: 2023-03-11
+releaseDateRaw: 2023年3月11日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15427/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15427/15427_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15427-mass-damper-block-6x6x32mm/
+specsRaw: サイズ：6×6×32mm 重量：8.3g 真ちゅう製
+scrapedAt: 2026-09-08

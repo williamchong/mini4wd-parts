@@ -1,0 +1,33 @@
+id: "94802"
+names:
+  ja: AO-1025 2x5mmトラスビス (10本)
+  en: 2x5mm TRUSS SCREW (10PCS.)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: ao
+seriesLabel: ミニ四駆用AOパーツ
+category: screw
+categorySource: derived
+slots:
+  - fastener
+isCarPart: true
+chassisCompat:
+  include: []
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 176
+priceJpyExTax: 160
+priceHkd: 10
+status: current
+officialUrl: https://www.tamiya.com/japan/products/94802/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/94802/94802_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-94802-jr-2x5mm-truss-screw-10pcs/
+specsRaw: 2×5mmサイズのトラスビスを10本セット
+scrapedAt: 2026-09-08

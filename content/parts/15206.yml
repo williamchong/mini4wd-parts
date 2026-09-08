@@ -1,0 +1,41 @@
+id: "15206"
+names:
+  ja: 2.0mm中空軽量プロペラシャフト（タイプ5シャーシ、スーパーFMシャーシ用）
+  en: MINI 4WD 2.0mm HOLLOW PROPELLER SHAFT (FOR TYPE 5/SUPER FMシャーシ CHASSIS)
+  zh-HK: 2.0mm中空輕量傳動軸
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 206
+seriesLabel: ミニ四駆グレードアップパーツ
+category: shaft
+categorySource: derived
+slots:
+  - shaft
+isCarPart: true
+chassisCompat:
+  include: []
+  other:
+    - FM
+    - superFM
+    - type4
+    - type5
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 176
+priceJpyExTax: 160
+priceHkd: 16
+releaseDate: 2017-01-21
+releaseDateRaw: 2017年1月21日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15206/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15206/15206_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15206-jr-2-0mmhollow-propeller-shaft-for-type-5-super-fm-chassis/
+scrapedAt: 2026-09-08

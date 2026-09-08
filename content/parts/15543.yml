@@ -1,0 +1,44 @@
+id: "15543"
+names:
+  ja: スーパーX･XX スーパーハード小径ナロータイヤ (24mm) & カーボン強化ホイール (3本スポーク)
+  en: SUPER HARD SMALL DIA. NARROW TIRES (24mm) & CARBON WHEELS (3-SPOKE, for SUPER X & XX CHASSIS)
+  zh-HK: 超硬細徑窄胎(24mm) & 碳纖維強化輪圈(3輻條/Super X & XX底盤用)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 543
+seriesLabel: ミニ四駆グレードアップパーツ
+category: wheel-tire-set
+categorySource: derived
+slots:
+  - wheel-front
+  - wheel-rear
+  - tire-front
+  - tire-rear
+isCarPart: true
+chassisCompat:
+  include: []
+  other:
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  wheelDiameterMm: 24
+priceJpy: 396
+priceJpyExTax: 360
+priceHkd: 36
+releaseDate: 2025-02-08
+releaseDateRaw: 2025年2月8日(土)ごろ発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15543/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/15543/15543_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15543-super-hard-small-dia-narrow-tires-24mm-carbon-wheels-3-spoke-for-super-x-xx-chassis/
+specsRaw: スーパーハード小径タイヤ(24mm)とカーボン強化ホイール(3本スポーク)を1台分セット
+scrapedAt: 2026-09-08

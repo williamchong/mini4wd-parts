@@ -1,0 +1,32 @@
+id: "94382"
+names:
+  ja: AO-1004 プロペラシャフトA
+nameSources:
+  ja: tamiya.com
+series: ao
+seriesLabel: ミニ四駆用AOパーツ
+category: shaft
+categorySource: derived
+slots:
+  - shaft
+isCarPart: true
+chassisCompat:
+  include:
+    - vs
+  other:
+    - super1
+    - superTZ
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 110
+priceJpyExTax: 100
+status: current
+officialUrl: https://www.tamiya.com/japan/products/94382/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/94382/94382_1.jpg
+scrapedAt: 2026-09-08

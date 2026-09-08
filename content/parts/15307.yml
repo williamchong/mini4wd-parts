@@ -1,0 +1,47 @@
+id: "15307"
+names:
+  ja: ウルトラダッシュモーター
+  en: MINI 4WD ULTRA-DASH MOTOR
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 307
+seriesLabel: ミニ四駆グレードアップパーツ
+category: motor
+categorySource: derived
+slots:
+  - motor
+isCarPart: true
+chassisCompat:
+  include:
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: illegal
+  stockBmax: illegal
+  junior: illegal
+  source: override
+  notes: 田宮公認競技會不可使用
+specs:
+  motorShaft: single
+  motorRpmMin: 24000
+  motorRpmMax: 27500
+  motorTorqueMin: 1.4
+  motorTorqueMax: 1.9
+priceJpy: 748
+priceJpyExTax: 680
+priceHkd: 68
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15307/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/15307/15307_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15307-jr-rc-mini-ultra-dash-motor/
+specsRaw: 適正電圧：2.4～3.0V 推奨負荷トルク：1.4～1.9mN･m 回転数：24000～27500r/min 消費電流：4.0～5.0A ※推奨負荷トルク時
+scrapedAt: 2026-09-08

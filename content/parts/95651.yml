@@ -1,0 +1,60 @@
+id: "95651"
+names:
+  ja: HG 軽量19mmオールアルミベアリングローラー（テーパータイプ）
+  en: HG LIGHTWEIGHT 19mm TAPERED ALUMINUM BALL-RACE ROLLERS (RINGLESS)
+  zh-HK: HG 輕量 19mm 全鋁合金 滾珠軸承導輪 (梯形)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: roller
+categorySource: derived
+slots:
+  - roller-front
+  - roller-rear
+  - roller-side
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - ar
+    - fm-a
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type1
+    - type2
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  rollerDiameterMm: 19
+  rollerType: bearing
+priceJpy: 990
+priceJpyExTax: 900
+priceHkd: 90
+releaseDate: 2024-06-15
+releaseDateRaw: 2024年6月15日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95651/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95651/95651_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95651-hg-lightweight-19mm-tapered-aluminum-ball-race-rollers-ringless/
+specsRaw: テーパー状のアルミベアリングローラーに加えて、取り付け用の2×8mmビス2本やローラー用スペーサー4個もセット
+scrapedAt: 2026-09-08

@@ -1,0 +1,60 @@
+id: "95513"
+names:
+  ja: 19mmプラリング付アルミベアリングローラー (6本スポーク) (レッド)
+  en: 19mm ALUMINUM BALL-RACE ROLLERS (6 SPOKES) w/PLASTIC RINGS (RED)
+  zh-HK: 迷你四驅車 19mm 塑膠環 鋁合金軸承導輪 (6輻)(紅色)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: roller
+categorySource: derived
+slots:
+  - roller-front
+  - roller-rear
+  - roller-side
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - ar
+    - fm-a
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type1
+    - type2
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  rollerDiameterMm: 19
+  rollerType: bearing
+priceJpy: 902
+priceJpyExTax: 820
+priceHkd: 82
+releaseDate: 2024-01-27
+releaseDateRaw: 2024年1月27日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95513/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95513/95513_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95513-19mm-aluminum-ball-race-rollers-6-spokes-w-plastic-rings-red/
+specsRaw: 高精度･高強度のアルミ製ローラー2個に加え、レッドのプラリングや取り付け用2×8mmビス、スペーサーもセット。
+scrapedAt: 2026-09-08

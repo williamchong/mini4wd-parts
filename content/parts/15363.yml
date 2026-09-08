@@ -1,0 +1,36 @@
+id: "15363"
+names:
+  ja: ミニ四駆PRO MSシャーシ用強化ギヤカバー
+  en: MINI 4WD PRO REINFORCED GEAR COVER (for MS CHASSIS)
+  zh-HK: MS底盤的強化齒輪蓋
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 363
+seriesLabel: ミニ四駆グレードアップパーツ
+category: gear-cover
+categorySource: derived
+slots:
+  - none
+isCarPart: true
+chassisCompat:
+  include:
+    - ms
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 462
+priceJpyExTax: 420
+priceHkd: 42
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15363/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15363/15363_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15363-enhanced-gear-cover-mini-4wd-pro-ms-chassis/
+scrapedAt: 2026-09-08

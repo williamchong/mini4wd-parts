@@ -1,0 +1,42 @@
+id: "15429"
+names:
+  ja: ミニ四駆PRO MSシャーシ用ハイスピードEXギヤセット(3.7:1)
+  en: MINI 4WD PRO HIGH SPEED EX GEAR SET (for MS CHASSIS/GEAR RATIO 3.7:1)
+  zh-HK: 適用於中置車底盤用高速齒輪組3.7:1
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 429
+seriesLabel: ミニ四駆グレードアップパーツ
+category: gear
+categorySource: derived
+slots:
+  - gear
+  - counter-gear
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  gearRatio: 3.7:1
+priceJpy: 352
+priceJpyExTax: 320
+priceHkd: 32
+releaseDate: 2011-07-16
+releaseDateRaw: 2011年7月16日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15429/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15429/15429_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15429-1-32-mini-4wd-pro-ms-chassis-high-speed-ex-gear-set-ratio-3-71/
+scrapedAt: 2026-09-08

@@ -1,0 +1,40 @@
+id: "15466"
+names:
+  ja: エアロ アバンテ クリヤーボディセット
+  en: AERO AVANTE CLEAR BODY SET
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 466
+seriesLabel: ミニ四駆グレードアップパーツ
+category: body
+categorySource: derived
+slots:
+  - body
+isCarPart: true
+chassisCompat:
+  include:
+    - ar
+    - super-2
+    - vs
+  other:
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 528
+priceJpyExTax: 480
+priceHkd: 48
+releaseDate: 2013-09-21
+releaseDateRaw: 2013年9月21日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15466/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15466/15466_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15466-aero-avante-clear-body-set/
+scrapedAt: 2026-09-08

@@ -1,0 +1,61 @@
+id: "15542"
+names:
+  ja: スーパーハード小径ローハイトタイヤ (26mm) & カーボン強化ホイール (Yスポーク)
+  en: SUPER HARD SMALL DIA. LOW-PROFILE TIRES (26mm) & CARBON WHEELS (Y SPOKE)
+  zh-HK: 超硬細徑薄胎(26mm) & 碳纖維強化輪圈(Y型輻條)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 542
+seriesLabel: ミニ四駆グレードアップパーツ
+category: wheel-tire-set
+categorySource: derived
+slots:
+  - wheel-front
+  - wheel-rear
+  - tire-front
+  - tire-rear
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  wheelDiameterMm: 26
+priceJpy: 396
+priceJpyExTax: 360
+priceHkd: 36
+releaseDate: 2025-01-11
+releaseDateRaw: 2025年1月11日(土)ごろ発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15542/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/15542/15542_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15542-super-hard-small-dia-low-profile-tires-26mm-carbon-wheels-y-spoke/
+specsRaw: スーパーハード小径ローハイトタイヤ (26mm) とカーボン強化ホイール (Yスポーク)を1台分セット
+scrapedAt: 2026-09-08

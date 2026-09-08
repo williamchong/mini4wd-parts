@@ -1,0 +1,55 @@
+id: "15383"
+names:
+  ja: ミニ四駆Fグリス（フッ素樹脂配合）
+  en: MINI 4WD F GREASE (FLUOROPOLYMER COMPOUND)
+  zh-HK: 迷你四驅車F型潤滑油(混合氟素樹脂)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 383
+seriesLabel: ミニ四駆グレードアップパーツ
+category: accessory
+categorySource: derived
+slots:
+  - none
+isCarPart: false
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: unknown
+  stockBmax: unknown
+  junior: unknown
+  source: derived
+  notes: 非車體零件，不適用比賽規則
+specs: {}
+priceJpy: 440
+priceJpyExTax: 400
+priceHkd: 40
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15383/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15383/15383_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15383-1-32-mini-4wd-f-grease-fluoropolymer-compound/
+scrapedAt: 2026-09-08

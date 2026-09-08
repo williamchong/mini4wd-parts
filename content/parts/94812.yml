@@ -1,0 +1,36 @@
+id: "94812"
+names:
+  ja: AO-1026 13-12mmローラー用ゴムリング(6個)
+  en: RUBBER RINGS FOR 13-12mm DOUBLE ALUMINUM ROLLERS (6PCS.)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: ao
+seriesLabel: ミニ四駆用AOパーツ
+category: roller
+categorySource: derived
+slots:
+  - roller-front
+  - roller-rear
+  - roller-side
+isCarPart: true
+chassisCompat:
+  include: []
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  rollerDiameterMm: 13
+  rollerType: plastic
+priceJpy: 110
+priceJpyExTax: 100
+priceHkd: 10
+status: current
+officialUrl: https://www.tamiya.com/japan/products/94812/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/94812/94812_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-94812-rubber-rings-for-13-12mm-double-aluminum-rollers-6pcs/
+scrapedAt: 2026-09-08

@@ -1,0 +1,53 @@
+id: "15550"
+names:
+  ja: HG カーボンブレーキステー (1.5mm)
+  en: HG CARBON BRAKE STAY (1.5mm)
+  zh-HK: 迷你四驅車 HG 碳纖維 減速片 (1.5mm)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 550
+seriesLabel: ミニ四駆グレードアップパーツ
+category: plate
+categorySource: derived
+slots:
+  - front-stay
+  - rear-stay
+  - side-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - superTZ_X
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  plateThicknessMm: 1.5
+  plateMaterial: carbon
+priceJpy: 1078
+priceJpyExTax: 980
+priceHkd: 98
+releaseDate: 2026-03-14
+releaseDateRaw: 2026年3月14日(土)ごろ発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15550/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/15550/15550_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15550-mini-4wd-hg-carbon-brake-stay-1-5mm/
+specsRaw: 1.5mm厚カーボン製ステーに加えて、取り付け用ビスやアルミカラーなどもセット
+scrapedAt: 2026-09-08

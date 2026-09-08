@@ -1,0 +1,46 @@
+id: "15532"
+names:
+  ja: 2段低摩擦プラローラー (19-19mm) ブルー
+  en: LOW FRICTION PLASTIC DOUBLE ROLLERS (BLUE/19-19mm)
+  zh-HK: 2段式 低摩擦 塑膠導輪 (19-19mm) 藍色
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 532
+seriesLabel: ミニ四駆グレードアップパーツ
+category: roller
+categorySource: derived
+slots:
+  - roller-front
+  - roller-rear
+  - roller-side
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - me
+    - ar
+    - vz
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  rollerDiameterMm: 19
+  rollerType: plastic
+priceJpy: 308
+priceJpyExTax: 280
+priceHkd: 28
+releaseDate: 2022-10-08
+releaseDateRaw: 2022年10月8日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15532/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/15532/15532_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15532-low-friction-plastic-double-rollers-blue-19-19mm/
+specsRaw: ブルーカラーの2段プラローラー2個に加えて、ブッシュ4個、取り付けビス、スペー サー、板レンチなどをセット
+scrapedAt: 2026-09-08

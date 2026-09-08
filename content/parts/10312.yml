@@ -1,0 +1,31 @@
+id: "10312"
+names:
+  ja: AO-1041 ミニ四駆G-18ギヤ（黄10個）
+  en: MINI 4WD G-18 GEAR (YELLOW/10PCS.)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: ao
+seriesLabel: ミニ四駆用AOパーツ
+category: gear
+categorySource: derived
+slots:
+  - gear
+  - counter-gear
+isCarPart: true
+chassisCompat:
+  include: []
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 220
+priceJpyExTax: 200
+status: current
+officialUrl: https://www.tamiya.com/japan/products/10312/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/10312/10312_1.jpg
+scrapedAt: 2026-09-08

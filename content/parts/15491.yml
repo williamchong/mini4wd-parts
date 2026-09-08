@@ -1,0 +1,55 @@
+id: "15491"
+names:
+  ja: 大径Vスポークナローホイール （バレルタイヤ付）
+  en: LARGE DIA. V SPOKE NARROW WHEELS (w/ARCHED TIRES)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 491
+seriesLabel: ミニ四駆グレードアップパーツ
+category: wheel-tire-set
+categorySource: derived
+slots:
+  - wheel-front
+  - wheel-rear
+  - tire-front
+  - tire-rear
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 352
+priceJpyExTax: 320
+releaseDate: 2015-08-29
+releaseDateRaw: 2015年8月29日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15491/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15491/15491_1.jpg
+scrapedAt: 2026-09-08

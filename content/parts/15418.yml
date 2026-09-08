@@ -1,0 +1,58 @@
+id: "15418"
+names:
+  ja: ゴムリング付 2段アルミローラーーセット（13-12mm）
+  en: DOUBLE ALUMINUM ROLLERS w/RUBBER RINGS (13-12mm)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 418
+seriesLabel: ミニ四駆グレードアップパーツ
+category: roller
+categorySource: derived
+slots:
+  - roller-front
+  - roller-rear
+  - roller-side
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  rollerDiameterMm: 13
+  rollerType: aluminium
+priceJpy: 1210
+priceJpyExTax: 1100
+priceHkd: 110
+releaseDate: 2010-11-13
+releaseDateRaw: 2010年11月13日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15418/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15418/15418_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15418-double-aluminum-rollers-w-rubber-rings-13-12mm/
+scrapedAt: 2026-09-08

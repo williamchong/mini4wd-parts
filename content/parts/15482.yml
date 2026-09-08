@@ -1,0 +1,38 @@
+id: "15482"
+names:
+  ja: ベルダーガ クリヤーボディセット
+  en: VELDAGA CLEAR BODY SET
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 482
+seriesLabel: ミニ四駆グレードアップパーツ
+category: body
+categorySource: derived
+slots:
+  - body
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 528
+priceJpyExTax: 480
+priceHkd: 48
+releaseDate: 2015-05-30
+releaseDateRaw: 2015年5月30日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15482/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15482/15482_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15482-veldaga-clear-body-set/
+scrapedAt: 2026-09-08

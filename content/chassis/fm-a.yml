@@ -1,0 +1,356 @@
+id: fm-a
+names:
+  ja: FM-Aシャーシ
+  en: FM-A Chassis
+  zh-HK: FM-A 底盤
+  zh-TW: FM-A 底盤
+tamiyaCode: FM_A
+family: standard
+motorPosition: front
+motorShaft: single
+releaseYear: 2017
+kitGearRatio: 3.5:1
+wheelbaseMm: 83
+treadFrontMm: 59.5
+treadRearMm: 59.5
+weightG: 117
+status: current
+notes: 前置馬達（Front Midship Aero），重心偏前，在高低起伏的立體賽道上較穩定，底部有防撞滑條。
+slots:
+  - id: body
+    type: body
+    maxCount: 1
+    mirror: false
+    required: true
+  - id: motor
+    type: motor
+    maxCount: 1
+    mirror: false
+    required: true
+  - id: gear-set
+    type: gear
+    maxCount: 1
+    mirror: false
+    required: true
+  - id: counter-gear
+    type: counter-gear
+    maxCount: 1
+    mirror: false
+    required: false
+  - id: terminal
+    type: terminal
+    maxCount: 1
+    mirror: false
+    required: true
+  - id: switch
+    type: switch
+    maxCount: 1
+    mirror: false
+    required: false
+  - id: axle
+    type: shaft
+    maxCount: 2
+    mirror: true
+    required: true
+  - id: bearing
+    type: bearing
+    maxCount: 4
+    mirror: true
+    required: false
+  - id: wheel-front
+    type: wheel-front
+    maxCount: 2
+    mirror: true
+    required: true
+  - id: wheel-rear
+    type: wheel-rear
+    maxCount: 2
+    mirror: true
+    required: true
+  - id: tire-front
+    type: tire-front
+    maxCount: 2
+    mirror: true
+    required: true
+  - id: tire-rear
+    type: tire-rear
+    maxCount: 2
+    mirror: true
+    required: true
+  - id: front-stay
+    type: front-stay
+    maxCount: 1
+    mirror: false
+    required: false
+  - id: rear-stay
+    type: rear-stay
+    maxCount: 1
+    mirror: false
+    required: false
+  - id: side-stay
+    type: side-stay
+    maxCount: 2
+    mirror: true
+    required: false
+  - id: roller-front
+    type: roller-front
+    maxCount: 2
+    mirror: true
+    required: false
+  - id: roller-rear
+    type: roller-rear
+    maxCount: 2
+    mirror: true
+    required: false
+  - id: roller-side
+    type: roller-side
+    maxCount: 2
+    mirror: true
+    required: false
+  - id: brake
+    type: brake
+    maxCount: 2
+    mirror: false
+    required: false
+  - id: damper
+    type: damper
+    maxCount: 4
+    mirror: false
+    required: false
+  - id: fastener
+    type: fastener
+    maxCount: 8
+    mirror: false
+    required: false
+compatibleParts:
+  - "10319"
+  - "10320"
+  - "10321"
+  - "15059"
+  - "15111"
+  - "15117"
+  - "15120"
+  - "15139"
+  - "15158"
+  - "15160"
+  - "15161"
+  - "15163"
+  - "15176"
+  - "15180"
+  - "15186"
+  - "15193"
+  - "15208"
+  - "15213"
+  - "15219"
+  - "15230"
+  - "15232"
+  - "15233"
+  - "15234"
+  - "15236"
+  - "15237"
+  - "15239"
+  - "15243"
+  - "15251"
+  - "15261"
+  - "15287"
+  - "15289"
+  - "15307"
+  - "15317"
+  - "15318"
+  - "15343"
+  - "15344"
+  - "15345"
+  - "15348"
+  - "15354"
+  - "15357"
+  - "15358"
+  - "15359"
+  - "15361"
+  - "15364"
+  - "15365"
+  - "15366"
+  - "15376"
+  - "15378"
+  - "15379"
+  - "15381"
+  - "15383"
+  - "15385"
+  - "15386"
+  - "15387"
+  - "15388"
+  - "15389"
+  - "15391"
+  - "15392"
+  - "15393"
+  - "15394"
+  - "15395"
+  - "15396"
+  - "15397"
+  - "15398"
+  - "15400"
+  - "15401"
+  - "15403"
+  - "15404"
+  - "15405"
+  - "15406"
+  - "15407"
+  - "15408"
+  - "15409"
+  - "15410"
+  - "15414"
+  - "15416"
+  - "15418"
+  - "15422"
+  - "15423"
+  - "15424"
+  - "15425"
+  - "15426"
+  - "15427"
+  - "15428"
+  - "15430"
+  - "15431"
+  - "15432"
+  - "15434"
+  - "15436"
+  - "15437"
+  - "15438"
+  - "15439"
+  - "15440"
+  - "15442"
+  - "15443"
+  - "15445"
+  - "15446"
+  - "15449"
+  - "15451"
+  - "15452"
+  - "15453"
+  - "15454"
+  - "15455"
+  - "15457"
+  - "15458"
+  - "15459"
+  - "15460"
+  - "15461"
+  - "15462"
+  - "15463"
+  - "15464"
+  - "15465"
+  - "15467"
+  - "15468"
+  - "15469"
+  - "15471"
+  - "15472"
+  - "15473"
+  - "15474"
+  - "15475"
+  - "15477"
+  - "15478"
+  - "15483"
+  - "15484"
+  - "15485"
+  - "15486"
+  - "15490"
+  - "15491"
+  - "15493"
+  - "15495"
+  - "15497"
+  - "15498"
+  - "15499"
+  - "15500"
+  - "15501"
+  - "15505"
+  - "15506"
+  - "15507"
+  - "15508"
+  - "15509"
+  - "15510"
+  - "15511"
+  - "15513"
+  - "15514"
+  - "15515"
+  - "15516"
+  - "15517"
+  - "15518"
+  - "15519"
+  - "15520"
+  - "15521"
+  - "15522"
+  - "15523"
+  - "15524"
+  - "15525"
+  - "15527"
+  - "15528"
+  - "15530"
+  - "15531"
+  - "15533"
+  - "15534"
+  - "15541"
+  - "15542"
+  - "15544"
+  - "15545"
+  - "15546"
+  - "15548"
+  - "15550"
+  - "15551"
+  - "95156"
+  - "95157"
+  - "95158"
+  - "95160"
+  - "95162"
+  - "95166"
+  - "95167"
+  - "95169"
+  - "95171"
+  - "95174"
+  - "95176"
+  - "95178"
+  - "95179"
+  - "95180"
+  - "95182"
+  - "95184"
+  - "95186"
+  - "95187"
+  - "95188"
+  - "95233"
+  - "95257"
+  - "95259"
+  - "95324"
+  - "95383"
+  - "95387"
+  - "95393"
+  - "95396"
+  - "95404"
+  - "95415"
+  - "95423"
+  - "95424"
+  - "95426"
+  - "95434"
+  - "95442"
+  - "95458"
+  - "95459"
+  - "95481"
+  - "95492"
+  - "95497"
+  - "95513"
+  - "95555"
+  - "95556"
+  - "95563"
+  - "95597"
+  - "95602"
+  - "95640"
+  - "95651"
+  - "95660"
+  - "95661"
+  - "95663"
+  - "95665"
+  - "95674"
+  - "95675"
+  - "95680"
+  - "95683"
+  - "95692"
+  - "95693"
+  - "95704"
+  - "95709"
+  - "95713"
+  - "95718"
+  - "95719"

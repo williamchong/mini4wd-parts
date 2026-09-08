@@ -1,0 +1,35 @@
+id: "15132"
+names:
+  ja: 超速ギヤーセット
+  en: RACING MINI 4WD SPECIAL RATIO GEARING
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 132
+seriesLabel: ミニ四駆グレードアップパーツ
+category: gear
+categorySource: derived
+slots:
+  - gear
+  - counter-gear
+isCarPart: true
+chassisCompat:
+  include: []
+  other:
+    - super1
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 330
+priceJpyExTax: 300
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15132/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15132/15132_1.jpg
+scrapedAt: 2026-09-08

@@ -1,0 +1,44 @@
+id: "95662"
+names:
+  ja: 2段低摩擦プラローラー (13-13mm) レッド
+  en: LOW FRICTION PLASTIC DOUBLE ROLLERS (RED/13-13mm)
+  zh-HK: 2段式低摩擦 塑膠導輪 (13-13mm) 紅色
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: roller
+categorySource: derived
+slots:
+  - roller-front
+  - roller-rear
+  - roller-side
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ar
+    - vz
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  rollerDiameterMm: 13
+  rollerType: plastic
+priceJpy: 242
+priceJpyExTax: 220
+priceHkd: 22
+releaseDate: 2024-07
+releaseDateRaw: 2024年7月 ジャパンカップ2024 静岡大会から発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95662/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95662/95662_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95662-mini-4wd-low-friction-plastic-double-rollers-red-13-13mm/
+specsRaw: 低摩擦樹脂製の一体型2段ローラー2個に加えて、取り付け用のビスやナット、スペーサー、板レンチなどもセット。
+scrapedAt: 2026-09-08

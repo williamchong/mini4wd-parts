@@ -1,0 +1,43 @@
+id: "15205"
+names:
+  ja: 1.4mm中空軽量プロペラシャフト （スーパー1・TZシャーシ用）
+  en: MINI 4WD 1.4mm HOLLOW PROPELLER SHAFT (FOR SUPER 1/TZ CHASSIS)
+  zh-HK: 1.4mm中空輕量傳動軸
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 205
+seriesLabel: ミニ四駆グレードアップパーツ
+category: shaft
+categorySource: derived
+slots:
+  - shaft
+isCarPart: true
+chassisCompat:
+  include:
+    - ar
+    - vz
+    - super-2
+    - vs
+  other:
+    - super1
+    - superTZ
+    - superTZ_X
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 154
+priceJpyExTax: 140
+priceHkd: 14
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15205/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15205/15205_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15205-1-4mm-hollow-pro-shafts-1-tz-chas/
+scrapedAt: 2026-09-08

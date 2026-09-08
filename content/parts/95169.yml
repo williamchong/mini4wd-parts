@@ -1,0 +1,59 @@
+id: "95169"
+names:
+  ja: ハイパーダッシュ3モーター J-CUP 2024
+  en: HYPER-DASH 3 MOTOR J-CUP 2024
+  zh-HK: 迷你四驅車 Hyper-Dash 3 摩打 日本盃2024特別版
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: limited
+seriesLabel: ミニ四駆限定販売商品（パーツ）
+category: motor
+categorySource: derived
+slots:
+  - motor
+isCarPart: true
+chassisCompat:
+  include:
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: illegal
+  source: override
+  notes: 少年組僅限 Tune 系列馬達
+specs:
+  motorShaft: single
+  motorRpmMin: 17200
+  motorRpmMax: 21200
+  motorTorqueMin: 1.4
+  motorTorqueMax: 1.9
+priceJpy: 506
+priceJpyExTax: 460
+priceHkd: 46
+releaseDate: 2024-07-06
+releaseDateRaw: 2024年7月6日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95169/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95169/95169_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95169-mini-4wd-hyper-dash-3-motor-j-cup-2024/
+specsRaw: 適正電圧：2.4-3.0V、推奨負荷トルク：1.4-1.9mN･m、回転数：17200-21200r/min ●消費電流：1.6-3.0A
+scrapedAt: 2026-09-08

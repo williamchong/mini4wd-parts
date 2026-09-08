@@ -1,0 +1,35 @@
+id: "15258"
+names:
+  ja: ステアリングシステムセット
+  en: MINI 4WD STEERING SYSTEM SET(VS/TZ/TZ-X CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 258
+seriesLabel: ミニ四駆グレードアップパーツ
+category: bumper
+categorySource: derived
+slots:
+  - front-stay
+  - rear-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - vs
+  other:
+    - superTZ
+    - superTZ_X
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 506
+priceJpyExTax: 460
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15258/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15258/15258_1.jpg
+scrapedAt: 2026-09-08

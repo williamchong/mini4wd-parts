@@ -1,0 +1,57 @@
+id: "15460"
+names:
+  ja: ミニ四駆 パーツケースセット
+  en: MINI 4WD PARTS STORAGE BOX SET
+  zh-HK: 迷你四驅車零件盒套裝
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 460
+seriesLabel: ミニ四駆グレードアップパーツ
+category: accessory
+categorySource: derived
+slots:
+  - none
+isCarPart: false
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: unknown
+  stockBmax: unknown
+  junior: unknown
+  source: derived
+  notes: 非車體零件，不適用比賽規則
+specs: {}
+priceJpy: 1100
+priceJpyExTax: 1000
+priceHkd: 86
+releaseDate: 2013-03-09
+releaseDateRaw: 2013年3月9日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15460/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15460/15460_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15460-mini-4wd-parts-storage-box/
+scrapedAt: 2026-09-08

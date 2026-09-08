@@ -1,0 +1,41 @@
+id: "15459"
+names:
+  ja: ARシャーシ サイドマスダンパーセット
+  en: SIDE MASS DAMPER SET (for AR CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 459
+seriesLabel: ミニ四駆グレードアップパーツ
+category: mass-damper
+categorySource: derived
+slots:
+  - damper
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - me
+    - ar
+    - fm-a
+    - vz
+  other:
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 682
+priceJpyExTax: 620
+priceHkd: 62
+releaseDate: 2013-01-26
+releaseDateRaw: 2013年1月26日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15459/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15459/15459_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15459-side-mass-damper-ser-ar-chassis/
+scrapedAt: 2026-09-08

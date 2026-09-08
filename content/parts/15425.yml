@@ -1,0 +1,46 @@
+id: "15425"
+names:
+  ja: FRP リヤダブルローラーステー(19mm低摩擦プラローラー付)
+  en: FRP REAR DOUBLE ROLLER STAY (w/19mm LOW FRICTION ROLLERS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 425
+seriesLabel: ミニ四駆グレードアップパーツ
+category: plate
+categorySource: derived
+slots:
+  - front-stay
+  - rear-stay
+  - side-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - ms
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - superTZ_X
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  plateMaterial: frp
+priceJpy: 462
+priceJpyExTax: 420
+priceHkd: 42
+releaseDate: 2011-03-26
+releaseDateRaw: 2011年3月26日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15425/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15425/15425_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15425-mini-4wd-frp-rr-double-roller-stay-w-19mm-low-friction-rollers/
+scrapedAt: 2026-09-08

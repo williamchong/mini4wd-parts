@@ -1,0 +1,54 @@
+id: "15440"
+names:
+  ja: 60mm中空ステンレスシャフト
+  en: 60mm HOLLOW STAINLESS STEEL SHAFT
+  zh-HK: 60mm中空不銹鋼軸
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 440
+seriesLabel: ミニ四駆グレードアップパーツ
+category: shaft
+categorySource: derived
+slots:
+  - shaft
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 198
+priceJpyExTax: 180
+priceHkd: 18
+releaseDate: 2011-12-10
+releaseDateRaw: 2011年12月10日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15440/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/15440/15440_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15440-60mm-hollow-stainless-steel-shaft/
+scrapedAt: 2026-09-08

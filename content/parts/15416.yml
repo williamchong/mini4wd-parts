@@ -1,0 +1,52 @@
+id: "15416"
+names:
+  ja: 60mmブラック強化シャフト(4本)
+  en: 60mm REINFORCED SHAFTS (BLACK, 4PCS.)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 416
+seriesLabel: ミニ四駆グレードアップパーツ
+category: shaft
+categorySource: derived
+slots:
+  - shaft
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 220
+priceJpyExTax: 200
+priceHkd: 20
+releaseDate: 2010-05-29
+releaseDateRaw: 2010年5月29日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15416/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15416/15416_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15416-60mm-rein-shaft-black/
+scrapedAt: 2026-09-08

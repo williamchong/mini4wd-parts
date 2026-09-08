@@ -1,0 +1,38 @@
+id: "94792"
+names:
+  ja: AO-1021 17・19mmローラー用ゴムリング(6個)
+  en: O-RING SET For 17/19mm ROLLERS (6PCS.)
+  zh-HK: AO-1021 17/19mm導輪用 O圈套裝 (6件)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: ao
+seriesLabel: ミニ四駆用AOパーツ
+category: roller
+categorySource: derived
+slots:
+  - roller-front
+  - roller-rear
+  - roller-side
+isCarPart: true
+chassisCompat:
+  include: []
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  rollerDiameterMm: 19
+  rollerType: plastic
+priceJpy: 110
+priceJpyExTax: 100
+priceHkd: 10
+status: current
+officialUrl: https://www.tamiya.com/japan/products/94792/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/94792/94792_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-94792-o-rings-for-17-19mm-rollers-6/
+scrapedAt: 2026-09-08

@@ -1,0 +1,36 @@
+id: "15470"
+names:
+  ja: ARシャーシ サイドボディキャッチアタッチメント
+  en: SIDE BODY CATCH PARTS (for AR CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 470
+seriesLabel: ミニ四駆グレードアップパーツ
+category: body-catch
+categorySource: derived
+slots:
+  - fastener
+isCarPart: true
+chassisCompat:
+  include:
+    - ar
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 242
+priceJpyExTax: 220
+priceHkd: 22
+releaseDate: 2013-12-07
+releaseDateRaw: 2013年12月7日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15470/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15470/15470_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15470-1-32-mini-4wd-side-body-catch-parts-for-ar-chassis/
+scrapedAt: 2026-09-08

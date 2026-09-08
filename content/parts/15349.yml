@@ -1,0 +1,39 @@
+id: "15349"
+names:
+  ja: ミニ四駆PRO MSシャーシ用超速ギヤセット
+  en: MINI 4WD PRO SUPER SPEED GEAR SET (for MS CHASSIS)
+  zh-HK: 適用於中置車底盤用超速齒輪組3.5:1
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 349
+seriesLabel: ミニ四駆グレードアップパーツ
+category: gear
+categorySource: derived
+slots:
+  - gear
+  - counter-gear
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 352
+priceJpyExTax: 320
+priceHkd: 32
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15349/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15349/15349_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15349-1-32-mini-4wd-ms-chassis-super-speed-gear/
+scrapedAt: 2026-09-08

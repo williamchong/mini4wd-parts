@@ -1,0 +1,49 @@
+id: "15549"
+names:
+  ja: HG カーボンリヤワイドプレート (2㎜) (スライドダンパー対応)
+  en: HG CARBON WIDE REAR PLATE (2mm) (SLIDING DAMPERS)
+  zh-HK: HG 碳纖維 闊身後置支架 (2mm) (滑動阻尼裝置用)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 549
+seriesLabel: ミニ四駆グレードアップパーツ
+category: plate
+categorySource: derived
+slots:
+  - front-stay
+  - rear-stay
+  - side-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - vz
+    - super-2
+    - vs
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  plateThicknessMm: 2
+  plateMaterial: carbon
+priceJpy: 1078
+priceJpyExTax: 980
+priceHkd: 98
+releaseDate: 2026-02-21
+releaseDateRaw: 2026年2月21日(土)ごろ発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15549/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/15549/15549_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15549-hg-carbon-wide-rear-plate-2mm-sliding-dampers/
+specsRaw: 2mm厚カーボン製のリヤワイドプレートと取り付け用ビス・ナットなどをセット
+scrapedAt: 2026-09-08

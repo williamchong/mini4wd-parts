@@ -1,0 +1,58 @@
+id: "95719"
+names:
+  ja: 2mmアルミロックナット （ブラック5個）
+  en: 2mm ALUMINUM LOCK NUT (BLACK, 5PCS.)
+  zh-HK: 2mm 鋁合金鎖緊螺母 （黑色 5 個）
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: screw
+categorySource: derived
+slots:
+  - fastener
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type1
+    - type2
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 550
+priceJpyExTax: 500
+priceHkd: 50
+releaseDate: 2026-09-19
+releaseDateRaw: 2026年9月19日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95719/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95719/95719_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95719-2mm-aluminum-lock-nut-black-5-pcs/
+specsRaw: ブラックアルマイト加工されたアルミ製ロックナット5個
+scrapedAt: 2026-09-08

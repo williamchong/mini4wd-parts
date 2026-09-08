@@ -1,0 +1,44 @@
+id: "15441"
+names:
+  ja: ブレーキスポンジセット
+  en: BRAKE SPONGE SET (3 TYPES)
+  zh-HK: 制動海綿套裝
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 441
+seriesLabel: ミニ四駆グレードアップパーツ
+category: brake
+categorySource: derived
+slots:
+  - brake
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - vz
+    - super-2
+  other:
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 484
+priceJpyExTax: 440
+priceHkd: 44
+releaseDate: 2011-12-10
+releaseDateRaw: 2011年12月10日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15441/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15441/15441_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15411-brake-sponge-set-3-types/
+scrapedAt: 2026-09-08

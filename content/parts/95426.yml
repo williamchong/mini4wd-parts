@@ -1,0 +1,59 @@
+id: "95426"
+names:
+  ja: 2mmアルミロックナット （ピンク5個）
+  en: 2mm ALUMINUM LOCK NUT (PINK, 5PCS.)
+  zh-HK: 2mm 鋁合金 螺帽 (粉紅色5個)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: screw
+categorySource: derived
+slots:
+  - fastener
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type1
+    - type2
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  pieces: 5
+priceJpy: 550
+priceJpyExTax: 500
+priceHkd: 38
+releaseDate: 2026-11
+releaseDateRaw: 2026年11月発売予定
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95426/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95426/95426_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95426-2mm-aluminum-lock-nut-pink-5pcs/
+specsRaw: ピンクアルマイト加工されたアルミロックナット5個入り
+scrapedAt: 2026-09-08

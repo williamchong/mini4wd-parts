@@ -1,0 +1,56 @@
+id: "15404"
+names:
+  ja: 19mmアルミベアリングローラー(5本スポークタイプ)
+  en: 19mm ALUMINUM BALL-RACE ROLLERS (5-SPOKE TYPE)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 404
+seriesLabel: ミニ四駆グレードアップパーツ
+category: roller
+categorySource: derived
+slots:
+  - roller-front
+  - roller-rear
+  - roller-side
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  rollerDiameterMm: 19
+  rollerType: bearing
+priceJpy: 726
+priceJpyExTax: 660
+releaseDate: 2009-09-12
+releaseDateRaw: 2009年9月12日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15404/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15404/15404_1.jpg
+scrapedAt: 2026-09-08

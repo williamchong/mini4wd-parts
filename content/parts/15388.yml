@@ -1,0 +1,55 @@
+id: "15388"
+names:
+  ja: ナローレストンスポンジタイヤセット（ブラック）
+  en: NARROW RESTON SPONGE TIRES (BLACK)
+  zh-HK: 海綿窄胎套裝 (黑色)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 388
+seriesLabel: ミニ四駆グレードアップパーツ
+category: tire
+categorySource: derived
+slots:
+  - tire-front
+  - tire-rear
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 550
+priceJpyExTax: 500
+priceHkd: 50
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15388/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15388/15388_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15388-narrow-reston-sponge-tires-black/
+scrapedAt: 2026-09-08

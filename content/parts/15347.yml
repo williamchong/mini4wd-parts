@@ -1,0 +1,39 @@
+id: "15347"
+names:
+  ja: ミニ四駆PRO MSシャーシ用ギヤベアリングセット
+  en: MINI 4WD PRO GEAR BEARING SET (for MS Chassis)
+  zh-HK: 適用於中置車底盤用520啤鈴及齒輪軸承
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 347
+seriesLabel: ミニ四駆グレードアップパーツ
+category: gear
+categorySource: derived
+slots:
+  - gear
+  - counter-gear
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 572
+priceJpyExTax: 520
+priceHkd: 52
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15347/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15347/15347_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15347-mini-4wd-pro-gear-bearing-set-ms-chassis/
+scrapedAt: 2026-09-08

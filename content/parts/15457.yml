@@ -1,0 +1,60 @@
+id: "15457"
+names:
+  ja: 2段低摩擦プラローラーセット （赤・青13-12mm）
+  en: LOW FRICTION PLASTIC DOUBLE ROLLERS (RED & BLUE / 13-12mm)
+  zh-HK: 兩段式低摩擦塑料導輪套裝(紅、藍13-12mm)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 457
+seriesLabel: ミニ四駆グレードアップパーツ
+category: roller
+categorySource: derived
+slots:
+  - roller-front
+  - roller-rear
+  - roller-side
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  rollerDiameterMm: 13
+  rollerType: plastic
+priceJpy: 286
+priceJpyExTax: 260
+priceHkd: 22
+releaseDate: 2013-01-12
+releaseDateRaw: 2013年1月12日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15457/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15457/15457_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15457-plastic-double-rollers/
+scrapedAt: 2026-09-08

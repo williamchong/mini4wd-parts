@@ -1,0 +1,58 @@
+id: "95404"
+names:
+  ja: HG 軽量19mmオールアルミベアリングローラー （レッド）
+  en: HG LIGHTWEIGHT 19mm ALUMINUM BALL-RACE ROLLERS (RINGLESS/RED)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: roller
+categorySource: derived
+slots:
+  - roller-front
+  - roller-rear
+  - roller-side
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - ar
+    - fm-a
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type1
+    - type2
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  rollerDiameterMm: 19
+  rollerType: bearing
+priceJpy: 1078
+priceJpyExTax: 980
+priceHkd: 90
+releaseDate: 2027-01
+releaseDateRaw: 2027年1月発送予定
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95404/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95404/95404_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95404-hg-lw-lightweight-ball-race-rollers-aluminum-19mm-ringless-red/
+specsRaw: レッドアルマイト加工を施したアルミ製ローラー2個をセット
+scrapedAt: 2026-09-08

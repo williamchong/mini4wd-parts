@@ -1,0 +1,34 @@
+id: "15362"
+names:
+  ja: MSシャーシ リヤダブルローラーステー
+  en: REAR DOUBLE ROLLER STAY (for MS CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 362
+seriesLabel: ミニ四駆グレードアップパーツ
+category: plate
+categorySource: derived
+slots:
+  - front-stay
+  - rear-stay
+  - side-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - ms
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 506
+priceJpyExTax: 460
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15362/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15362/15362_1.jpg
+scrapedAt: 2026-09-08

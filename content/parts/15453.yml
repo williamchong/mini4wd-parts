@@ -1,0 +1,57 @@
+id: "15453"
+names:
+  ja: カーボン強化8Tピニオンギヤ(6個)
+  en: CARBON REINFORCED 8T PINION GEAR (6PCS.)
+  zh-HK: 碳纖維8T小齒輪(6件)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 453
+seriesLabel: ミニ四駆グレードアップパーツ
+category: gear
+categorySource: derived
+slots:
+  - gear
+  - counter-gear
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 176
+priceJpyExTax: 160
+priceHkd: 16
+releaseDate: 2012-09-01
+releaseDateRaw: 2012年9月1日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15453/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15453/15453_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15453-carbon-reinforced-8t-pinion-gear-6pcs/
+scrapedAt: 2026-09-08

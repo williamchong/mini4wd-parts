@@ -1,0 +1,30 @@
+id: "10307"
+names:
+  ja: AO-1036 ミニ四駆 2mmスプリングワッシャー(20個）
+  en: MINI 4WD 2mm SPRING WASHER (20PCS.)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: ao
+seriesLabel: ミニ四駆用AOパーツ
+category: screw
+categorySource: derived
+slots:
+  - fastener
+isCarPart: true
+chassisCompat:
+  include: []
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 110
+priceJpyExTax: 100
+status: current
+officialUrl: https://www.tamiya.com/japan/products/10307/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/10307/10307_1.jpg
+scrapedAt: 2026-09-08

@@ -1,0 +1,40 @@
+id: "15355"
+names:
+  ja: ミニ四駆PRO MSシャーシ用ハイスピードギヤ(4:1)
+  en: MINI 4WD PRO HIGH SPEED GEAR SET (for MS CHASSIS/GEAR RATIO 4:1)
+  zh-HK: 適用於中置車底盤用高速齒輪組4:1
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 355
+seriesLabel: ミニ四駆グレードアップパーツ
+category: gear
+categorySource: derived
+slots:
+  - gear
+  - counter-gear
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  gearRatio: 4:1
+priceJpy: 352
+priceJpyExTax: 320
+priceHkd: 32
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15355/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15355/15355_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15355-mini-4wd-pro-high-speed-gear-set-ms-chassis-gear-ratio-41/
+scrapedAt: 2026-09-08

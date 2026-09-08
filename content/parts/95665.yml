@@ -1,0 +1,59 @@
+id: "95665"
+names:
+  ja: フルカウルミニ四駆30周年 レッドスリックタイヤ＆金メッキホイール
+  en: FULLY COWLED 30TH ANNIV. RED SLICK TIRES & GOLD COLOR PLATED WHEELS
+  zh-HK: Fully Cowled Mini 4WD 全罩式四驅車30週件紀念 紅色光面輪胎 & 電鍍金色輪圈
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: wheel-tire-set
+categorySource: derived
+slots:
+  - wheel-front
+  - wheel-rear
+  - tire-front
+  - tire-rear
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - ar
+    - fm-a
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type1
+    - type2
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 396
+priceJpyExTax: 360
+priceHkd: 36
+releaseDate: 2024-07-27
+releaseDateRaw: 2024年7月27日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95665/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95665/95665_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95665-fully-cowled-30th-anniv-red-slick-tires-gold-color-plated-wheels/
+specsRaw: ゴールドカラーメッキホイールと小径スリックタイヤを1台分セット
+scrapedAt: 2026-09-08

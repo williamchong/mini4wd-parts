@@ -1,0 +1,38 @@
+id: "95208"
+names:
+  ja: ローフリクション ローハイトタイヤ（2本 マルーン）
+  en: LOW FRICTION LOW PROFILE TIRE (MAROON, 2PCS.)
+  zh-HK: 低摩擦 薄胎 (2件 栗色)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: tire
+categorySource: derived
+slots:
+  - tire-front
+  - tire-rear
+isCarPart: true
+chassisCompat:
+  include: []
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 220
+priceJpyExTax: 200
+priceHkd: 20
+releaseDate: 2024-03-30
+releaseDateRaw: 【発売日決定】2024年3月30日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95208/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95208/95208_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95208-jr-low-friction-tire-low-profile-maroon-2pcs/
+specsRaw: タイヤ2本のセット、ホイール装着時の外径26mm
+scrapedAt: 2026-09-08

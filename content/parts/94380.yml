@@ -1,0 +1,30 @@
+id: "94380"
+names:
+  ja: AO-1001 FA-130タイプノーマルモーター
+nameSources:
+  ja: tamiya.com
+series: ao
+seriesLabel: ミニ四駆用AOパーツ
+category: motor
+categorySource: derived
+slots:
+  - motor
+isCarPart: true
+chassisCompat:
+  include: []
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: override
+  notes: 需個別確認馬達規則
+specs:
+  motorShaft: single
+priceJpy: 165
+priceJpyExTax: 150
+status: current
+officialUrl: https://www.tamiya.com/japan/products/94380/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/94380/94380_1.jpg
+scrapedAt: 2026-09-08

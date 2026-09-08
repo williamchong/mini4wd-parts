@@ -1,0 +1,59 @@
+id: "15530"
+names:
+  ja: 13･19mmローラー用FRPマルチ補強プレート
+  en: FRP REINFORCING PLATES for 13/19mm ROLLERS
+  zh-HK: 13/19mm導輪用 FRP 強化防撞桿
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 530
+seriesLabel: ミニ四駆グレードアップパーツ
+category: plate
+categorySource: derived
+slots:
+  - front-stay
+  - rear-stay
+  - side-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  plateMaterial: frp
+priceJpy: 264
+priceJpyExTax: 240
+priceHkd: 24
+releaseDate: 2021-11-13
+releaseDateRaw: 2021年11月13日(土)ごろ発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15530/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/F/001/001_15530_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15530-frp-reinforced-plates-for-13-19mm-rollers/
+scrapedAt: 2026-09-08

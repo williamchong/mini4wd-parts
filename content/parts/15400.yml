@@ -1,0 +1,44 @@
+id: "15400"
+names:
+  ja: フッソコートギヤシャフト(ツバ付2本)
+  en: FLUORINE COATED GEAR SHAFT (RIBBED, 2PCS.)
+  zh-HK: 適用於軸車底盤低磨擦減速齒輪軸
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 400
+seriesLabel: ミニ四駆グレードアップパーツ
+category: gear
+categorySource: derived
+slots:
+  - gear
+  - counter-gear
+isCarPart: true
+chassisCompat:
+  include:
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - superX
+    - superXX
+    - type3
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 198
+priceJpyExTax: 180
+priceHkd: 18
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15400/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15400/15400_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15400-fluorine-coated-gear-shaft-ribbed-2pcs/
+scrapedAt: 2026-09-08

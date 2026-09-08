@@ -1,0 +1,58 @@
+id: "95660"
+names:
+  ja: HG ローハイト用ヘビーアルミホイールII (リバーシブル2本)
+  en: HG HEAVY ALUMINUM WHEELS for LOW-PROFILE TIRES II (REVERSIBLE, 2PCS.)
+  zh-HK: HG 薄胎用 重量級鋁合金輪圈II (可反轉用, 2件)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: wheel
+categorySource: derived
+slots:
+  - wheel-front
+  - wheel-rear
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type1
+    - type2
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 836
+priceJpyExTax: 760
+priceHkd: 76
+releaseDate: 2024-06-22
+releaseDateRaw: 2024年6月22日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95660/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95660/95660_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95660-hg-heavy-aluminum-wheels-for-low-profile-tires-ii-reversible-2pcs/
+specsRaw: アルミ削り出し製ホイール2本とホイールブッシュ4個をセット
+scrapedAt: 2026-09-08

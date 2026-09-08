@@ -1,0 +1,42 @@
+id: "15520"
+names:
+  ja: リヤスキッドローラーセット
+  en: REAR SKID ROLLER SET
+  zh-HK: 後置滑行滾輪套裝
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 520
+seriesLabel: ミニ四駆グレードアップパーツ
+category: roller
+categorySource: derived
+slots:
+  - roller-front
+  - roller-rear
+  - roller-side
+isCarPart: true
+chassisCompat:
+  include:
+    - ms
+    - fm-a
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 352
+priceJpyExTax: 320
+priceHkd: 32
+releaseDate: 2019-03-09
+releaseDateRaw: 2019年3月9日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15520/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15520/15520_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15520-rear-skid-roller-set/
+specsRaw: ポリカーボネート製ステー、POM樹脂製8mmローラーの他に、取り付け用ビス･ナット類もセット
+scrapedAt: 2026-09-08

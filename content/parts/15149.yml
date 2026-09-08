@@ -1,0 +1,37 @@
+id: "15149"
+names:
+  ja: アルミモーターサポート
+  en: ALUMINUM MOTOR SUPPORT
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 149
+seriesLabel: ミニ四駆グレードアップパーツ
+category: motor-mount
+categorySource: derived
+slots:
+  - none
+isCarPart: true
+chassisCompat:
+  include:
+    - super-2
+  other:
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 132
+priceJpyExTax: 120
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15149/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15149/15149_1.jpg
+scrapedAt: 2026-09-08

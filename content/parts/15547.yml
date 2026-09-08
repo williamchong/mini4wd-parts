@@ -1,0 +1,42 @@
+id: "15547"
+names:
+  ja: EZシャーシ スパイクタイヤ＆ホイールセット
+  en: SPIKE TIRE & WHEEL SET (for EZ CHASSIS)
+  zh-HK: 尖剌輪胎&輪圈套裝 (EZ底盤用)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 547
+seriesLabel: ミニ四駆グレードアップパーツ
+category: wheel-tire-set
+categorySource: derived
+slots:
+  - wheel-front
+  - wheel-rear
+  - tire-front
+  - tire-rear
+isCarPart: true
+chassisCompat:
+  include: []
+  other:
+    - ez
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 352
+priceJpyExTax: 320
+priceHkd: 32
+releaseDate: 2025-06-14
+releaseDateRaw: 2025年6月14日(土)ごろ発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15547/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/15547/15547_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15547-spike-tire-wheel-set-for-ez-chassis/
+specsRaw: タイヤとホイールを4本ずつ、1台分をセット
+scrapedAt: 2026-09-08

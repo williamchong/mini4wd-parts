@@ -1,0 +1,38 @@
+id: "95280"
+names:
+  ja: ミニ四駆 チェックボックス （全長･最大幅）
+  en: MINI 4WD CAR DIMENSION CHECKER
+  zh-HK: 迷你四驅車 尺寸測量箱 (全長．闊)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: setting-tool
+categorySource: derived
+slots:
+  - none
+isCarPart: false
+chassisCompat:
+  include: []
+  other: []
+  source: scraped
+classLegality:
+  open: unknown
+  stockBmax: unknown
+  junior: unknown
+  source: derived
+  notes: 非車體零件，不適用比賽規則
+specs: {}
+priceJpy: 1980
+priceJpyExTax: 1800
+priceHkd: 180
+releaseDate: 2023-08-26
+releaseDateRaw: 2023年8月26日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95280/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95280/95280_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95280-mini-4wd-car-dimension-checker/
+specsRaw: ボックスの内寸は165×105×50mm。
+scrapedAt: 2026-09-08

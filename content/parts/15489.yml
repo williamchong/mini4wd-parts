@@ -1,0 +1,43 @@
+id: "15489"
+names:
+  ja: アトミックチューン2モーターPRO
+  en: ATOMIC-TUNED 2 MOTOR PRO
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 489
+seriesLabel: ミニ四駆グレードアップパーツ
+category: motor
+categorySource: derived
+slots:
+  - motor
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: override
+  notes: 需個別確認馬達規則
+specs:
+  motorShaft: double
+  motorRpmMin: 12300
+  motorRpmMax: 14500
+  motorTorqueMin: 1.6
+  motorTorqueMax: 1.8
+priceJpy: 462
+priceJpyExTax: 420
+priceHkd: 42
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15489/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15489/15489_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15489-1-32-mini-4wd-racing-motors-jr-atomic-tuned-2-motor-pro/
+specsRaw: 適正電圧：2.4～3.0V 推奨負荷トルク：1.6～1.8mN･m 回転数：12300～14500r/min 消費電流：1.5～1.7A ※推奨負荷トルク時
+scrapedAt: 2026-09-08

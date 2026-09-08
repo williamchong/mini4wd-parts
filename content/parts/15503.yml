@@ -1,0 +1,38 @@
+id: "15503"
+names:
+  ja: ウイニングバード フォーミュラー クリヤーボディセット(ポリカ)
+  en: WINNING BIRD FORMULA CLEAR BODY SET (POLYCARBONATE)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 503
+seriesLabel: ミニ四駆グレードアップパーツ
+category: body
+categorySource: derived
+slots:
+  - body
+isCarPart: true
+chassisCompat:
+  include:
+    - super-2
+  other:
+    - superTZ
+    - superTZ_X
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 528
+priceJpyExTax: 480
+priceHkd: 48
+releaseDate: 2016-10-08
+releaseDateRaw: 2016年10月8日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15503/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15503/15503_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15503-winning-bird-formula-clear-body-set-polycarbonate/
+scrapedAt: 2026-09-08

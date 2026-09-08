@@ -1,0 +1,32 @@
+id: "15356"
+names:
+  ja: MSシャーシ ミニ四駆ボディ用アダプター＆ボディキャッチセット
+  en: MINI 4WD BODY MOUNT ADAPTER & CATCH SET (for MS CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 356
+seriesLabel: ミニ四駆グレードアップパーツ
+category: body-catch
+categorySource: derived
+slots:
+  - fastener
+isCarPart: true
+chassisCompat:
+  include:
+    - ms
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 176
+priceJpyExTax: 160
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15356/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15356/15356_1.jpg
+scrapedAt: 2026-09-08

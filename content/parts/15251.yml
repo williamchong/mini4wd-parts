@@ -1,0 +1,58 @@
+id: "15251"
+names:
+  ja: 19mmプラリング付 アルミベアリングローラーセット
+  en: 19mm ALUMINUM ROLLER w/PLASTIC RING
+  zh-HK: 19mm連塑膠圈鋁製軸承導輪套裝
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 251
+seriesLabel: ミニ四駆グレードアップパーツ
+category: roller
+categorySource: derived
+slots:
+  - roller-front
+  - roller-rear
+  - roller-side
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  rollerDiameterMm: 19
+  rollerType: bearing
+priceJpy: 814
+priceJpyExTax: 740
+priceHkd: 74
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15251/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15251/15251_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15251-19mm-aluminum-roller-w-plastic-ring/
+scrapedAt: 2026-09-08

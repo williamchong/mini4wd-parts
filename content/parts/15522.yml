@@ -1,0 +1,61 @@
+id: "15522"
+names:
+  ja: HG 17mmオールアルミベアリングローラーセット
+  en: HG 17mm ALUMINUM BALL-RACE ROLLERS (RINGLESS)
+  zh-HK: 17mm鋁製軸承導輪
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 522
+seriesLabel: ミニ四駆グレードアップパーツ
+category: roller
+categorySource: derived
+slots:
+  - roller-front
+  - roller-rear
+  - roller-side
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  rollerDiameterMm: 17
+  rollerType: bearing
+priceJpy: 836
+priceJpyExTax: 760
+priceHkd: 76
+releaseDate: 2019-09-07
+releaseDateRaw: 2019年9月7日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15522/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15522/15522_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya15522/
+specsRaw: オールアルミ製ローラーを2個セット
+scrapedAt: 2026-09-08

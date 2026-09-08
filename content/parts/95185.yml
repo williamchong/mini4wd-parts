@@ -1,0 +1,46 @@
+id: "95185"
+names:
+  ja: トルクチューン2モーターPRO J-CUP 2026
+  en: TORQUE-TUNED 2 MOTOR PRO J-CUP 2026
+  zh-HK: 迷你四驅車 Torque-Tuned 2 摩打 PRO 日本盃2026特別版
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: limited
+seriesLabel: ミニ四駆限定販売商品（パーツ）
+category: motor
+categorySource: derived
+slots:
+  - motor
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: override
+  notes: 需個別確認馬達規則
+specs:
+  motorShaft: double
+  motorRpmMin: 12200
+  motorRpmMax: 14400
+  motorTorqueMin: 1.7
+  motorTorqueMax: 2.1
+priceJpy: 462
+priceJpyExTax: 420
+priceHkd: 42
+releaseDate: 2026-06-20
+releaseDateRaw: 2026年6月20日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95185/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95185/95185_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95185-mini-4wd-torque-tuned-2-motor-pro-j-cup-2026/
+specsRaw: 適正電圧：2.4-3.0V、推奨負荷トルク：1.7-2.1mN・m、回転数：12200-14400r/min、消費電流：1.7-2.0A
+scrapedAt: 2026-09-08

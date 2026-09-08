@@ -1,0 +1,48 @@
+id: "15524"
+names:
+  ja: VZシャーシ FRP フロントワイドステー
+  en: FRP WIDE FRONT PLATE (for VZ CHASSIS)
+  zh-HK: VZ擴展FRP支架
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 524
+seriesLabel: ミニ四駆グレードアップパーツ
+category: plate
+categorySource: derived
+slots:
+  - front-stay
+  - rear-stay
+  - side-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - me
+    - ar
+    - fm-a
+    - vz
+  other:
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  plateMaterial: frp
+priceJpy: 330
+priceJpyExTax: 300
+priceHkd: 30
+releaseDate: 2020-03-28
+releaseDateRaw: 2020年3月28日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15524/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15524/15524_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15524-frp-wide-f-plate-vz-chassis/
+specsRaw: 1.5mm厚のFRP製ステーに加えて、ビスやナット、ワッシャーなどの取り付け金具もセット
+scrapedAt: 2026-09-08

@@ -1,0 +1,62 @@
+id: "95709"
+names:
+  ja: HG 11mmアルミベアリングローラー (ボウルタイプ)
+  en: HG 11mm ALUMINUM BALL-RACE ROLLERS (BOWL TYPE)
+  zh-HK: HG 11mm 鋁合金 滾珠軸承 導輪 (碗形)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: roller
+categorySource: derived
+slots:
+  - roller-front
+  - roller-rear
+  - roller-side
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type1
+    - type2
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  rollerDiameterMm: 11
+  rollerType: bearing
+priceJpy: 814
+priceJpyExTax: 740
+priceHkd: 74
+releaseDate: 2026-05-23
+releaseDateRaw: 2026年5月23日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95709/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95709/95709_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95709-hg-11mm-aluminum-ball-race-rollers-bowl-type/
+specsRaw: おわん形の11mmアルミベアリングローラー2個と取り付けビスなどをセット。
+scrapedAt: 2026-09-08

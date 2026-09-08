@@ -1,0 +1,50 @@
+id: "95675"
+names:
+  ja: フルカウルミニ四駆30周年 HG カーボンリヤブレーキステー (1.5mm/シルバー)
+  en: FULLY COWLED 30TH ANNIV. HG CARBON REAR BRAKE STAY (1.5mm/SILVER)
+  zh-HK: Fully Cowled Mini 4WD 全罩式四驅車30週件紀念 HG 碳纖維 後置減速片 (1.5mm/銀色)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: plate
+categorySource: derived
+slots:
+  - front-stay
+  - rear-stay
+  - side-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - superTZ_X
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  plateMaterial: carbon
+priceJpy: 1078
+priceJpyExTax: 980
+priceHkd: 98
+releaseDate: 2024-11-02
+releaseDateRaw: 2024年11月2日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95675/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95675/95675_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95675-fully-cowled-30th-anniv-hg-carbon-rear-brake-stay-1-5mm-silver/
+specsRaw: 1.5mm厚シルバーカーボン製。取り付けビスやナット、ワッシャーなどもセット。
+scrapedAt: 2026-09-08

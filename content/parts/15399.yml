@@ -1,0 +1,36 @@
+id: "15399"
+names:
+  ja: MSシャーシ マルチブレーキセット
+  en: MULTI-BRAKE SET (FOR MS CHASSIS)
+  zh-HK: MS底盤剎車套件
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 399
+seriesLabel: ミニ四駆グレードアップパーツ
+category: brake
+categorySource: derived
+slots:
+  - brake
+isCarPart: true
+chassisCompat:
+  include:
+    - ms
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 396
+priceJpyExTax: 360
+priceHkd: 36
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15399/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15399/15399_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15399-multi-brake-parts-set-for-ms-chassis/
+scrapedAt: 2026-09-08

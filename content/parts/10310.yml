@@ -1,0 +1,31 @@
+id: "10310"
+names:
+  ja: AO-1039 ミニ四駆サーキットジャンプ台 (2個)
+  en: MINI 4WD CIRCUIT JUMP RAMP (2PCS.)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: ao
+seriesLabel: ミニ四駆用AOパーツ
+category: accessory
+categorySource: derived
+slots:
+  - none
+isCarPart: false
+chassisCompat:
+  include: []
+  other: []
+  source: scraped
+classLegality:
+  open: unknown
+  stockBmax: unknown
+  junior: unknown
+  source: derived
+  notes: 非車體零件，不適用比賽規則
+specs: {}
+priceJpy: 440
+priceJpyExTax: 400
+status: current
+officialUrl: https://www.tamiya.com/japan/products/10310/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/10310/10310_1.jpg
+scrapedAt: 2026-09-08

@@ -1,0 +1,40 @@
+id: "95646"
+names:
+  ja: ネオVQS クリヤーボディセット
+  en: NEO-VQS CLEAR BODY SET
+  zh-HK: Neo-VQS 透明車殼套裝
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: body
+categorySource: derived
+slots:
+  - body
+isCarPart: true
+chassisCompat:
+  include:
+    - vz
+    - super-2
+    - vs
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 528
+priceJpyExTax: 480
+priceHkd: 48
+releaseDate: 2023-07
+releaseDateRaw: 2023年7月発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95646/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95646/95646_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95646-neo-vqs-clear-body-set/
+specsRaw: 軽量でショックに強い0.4mm厚のポリカーボネート製ボディとクリヤータイプのステッカー、ABS樹脂製ボディキャッチ、取り付け用ビスをセット
+scrapedAt: 2026-09-08

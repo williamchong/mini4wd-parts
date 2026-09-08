@@ -1,0 +1,43 @@
+id: "15428"
+names:
+  ja: マスダンパー スクエア(8×8×32mm)
+  en: MASS DAMPER BLOCK (8x8x32mm)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 428
+seriesLabel: ミニ四駆グレードアップパーツ
+category: mass-damper
+categorySource: derived
+slots:
+  - damper
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - superTZ_X
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 440
+priceJpyExTax: 400
+releaseDate: 2011-07-09
+releaseDateRaw: 2011年7月9日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15428/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15428/15428_1.jpg
+scrapedAt: 2026-09-08

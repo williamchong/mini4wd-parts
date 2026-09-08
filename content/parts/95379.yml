@@ -1,0 +1,40 @@
+id: "95379"
+names:
+  ja: 軽量2段アルミローラーセット (13-12mm)
+  en: LIGHTWEIGHT DOUBLE ALUMINUM ROLLERS (13-12mm)
+  zh-HK: 輕量 雙層 鋁合金 導輪 (13-12mm)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: roller
+categorySource: derived
+slots:
+  - roller-front
+  - roller-rear
+  - roller-side
+isCarPart: true
+chassisCompat:
+  include: []
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  rollerDiameterMm: 13
+  rollerType: aluminium
+priceJpy: 990
+priceJpyExTax: 900
+priceHkd: 90
+releaseDate: 2026-08-29
+releaseDateRaw: 2026年8月29日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95379/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95379/95379_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95379-jr-lw-double-aluminum-rollers-13-12mm/
+scrapedAt: 2026-09-08

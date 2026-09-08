@@ -1,0 +1,50 @@
+id: "15499"
+names:
+  ja: HGカーボンリヤワイドステー (1.5mm）
+  en: HG CARBON WIDE REAR PLATE (1.5mm)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 499
+seriesLabel: ミニ四駆グレードアップパーツ
+category: plate
+categorySource: derived
+slots:
+  - front-stay
+  - rear-stay
+  - side-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - superTZ_X
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  plateThicknessMm: 1.5
+  plateMaterial: carbon
+priceJpy: 1078
+priceJpyExTax: 980
+priceHkd: 98
+releaseDate: 2016-06-18
+releaseDateRaw: 2016年6月18日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15499/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15499/15499_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15499-1-32-mini-4wd-hg-carbon-wide-rear-plate-1-5mm/
+scrapedAt: 2026-09-08

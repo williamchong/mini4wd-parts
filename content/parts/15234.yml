@@ -1,0 +1,38 @@
+id: "15234"
+names:
+  ja: スーパーXシャーシ・中空軽量プロペラシャフト
+  en: HOLLOW PROPELLER SHAFT (FOR SUPER X CHASSIS)
+  zh-HK: Super X底盤專用中空輕量傳動軸
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 234
+seriesLabel: ミニ四駆グレードアップパーツ
+category: shaft
+categorySource: derived
+slots:
+  - shaft
+isCarPart: true
+chassisCompat:
+  include:
+    - fm-a
+  other:
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 154
+priceJpyExTax: 140
+priceHkd: 14
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15234/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15234/15234_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15234-mini-4wd-hollow-propeller-shaft-for-super-x-chassis/
+scrapedAt: 2026-09-08

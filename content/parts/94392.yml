@@ -1,0 +1,32 @@
+id: "94392"
+names:
+  ja: AO-1012 850ベアリング2個セット
+  en: 850 BALL BEARING SET (2 pcs.)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: ao
+seriesLabel: ミニ四駆用AOパーツ
+category: bearing
+categorySource: derived
+slots:
+  - bearing
+isCarPart: true
+chassisCompat:
+  include: []
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 726
+priceJpyExTax: 660
+priceHkd: 66
+status: current
+officialUrl: https://www.tamiya.com/japan/products/94392/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/94392/94392_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-94392-ao-1012-mini-4wd-rc-car-kit-850-ball-bearing2pcs/
+scrapedAt: 2026-09-08

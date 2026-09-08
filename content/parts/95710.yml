@@ -1,0 +1,38 @@
+id: "95710"
+names:
+  ja: スーパーFM 蛍光カラーシャーシセット(オレンジ・イエロー)
+  en: SUPER FM FLUORESCENT-COLOR CHASSIS SET (ORANGE/YELLOW)
+  zh-HK: Super FM 底盤 熒光色底盤套装（熒光橙・熒光黄）
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: chassis-set
+categorySource: derived
+slots:
+  - none
+isCarPart: true
+chassisCompat:
+  include: []
+  other:
+    - superFM
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 660
+priceJpyExTax: 600
+priceHkd: 60
+releaseDate: 2026-09-19
+releaseDateRaw: 2026年9月19日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95710/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95710/95710_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95710-super-fm-chassis-fluorescent-chassis-set-fluorescent-orange-fluorescent-yellow/
+specsRaw: 蛍光オレンジと蛍光イエローの2色のシャーシ、Aパーツ、リヤステーをセット
+scrapedAt: 2026-09-08

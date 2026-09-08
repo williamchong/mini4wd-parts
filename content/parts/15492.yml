@@ -1,0 +1,44 @@
+id: "15492"
+names:
+  ja: ブレーキスポンジセット（1/2/3mm ホワイト）
+  en: BRAKE SPONGE SET (1/2/3mm WHITE)
+  zh-HK: 迷你四驅車 制動海綿套裝(1/2/3mm 白色)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 492
+seriesLabel: ミニ四駆グレードアップパーツ
+category: brake
+categorySource: derived
+slots:
+  - brake
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - vz
+    - super-2
+  other:
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 484
+priceJpyExTax: 440
+priceHkd: 44
+releaseDate: 2015-11-14
+releaseDateRaw: 2015年11月14日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15492/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/15492/15492_1_02.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15492-brake-sponge-set-1-2-3mm-red/
+scrapedAt: 2026-09-08

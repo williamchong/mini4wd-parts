@@ -1,0 +1,56 @@
+id: "15317"
+names:
+  ja: パワーダッシュモーター
+  en: POWER-DASH MOTOR
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 317
+seriesLabel: ミニ四駆グレードアップパーツ
+category: motor
+categorySource: derived
+slots:
+  - motor
+isCarPart: true
+chassisCompat:
+  include:
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: illegal
+  source: override
+  notes: 少年組僅限 Tune 系列馬達
+specs:
+  motorShaft: single
+  motorRpmMin: 19900
+  motorRpmMax: 23600
+  motorTorqueMin: 1.5
+  motorTorqueMax: 2
+priceJpy: 506
+priceJpyExTax: 460
+priceHkd: 46
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15317/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/15317/15317_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15317-r-c-mini-4wd-power-dash-motor/
+specsRaw: 適正電圧：2.4～3.0V 推奨負荷トルク：1.5～2.0mN･m 回転数：19900～23600r/min 消費電流：2.5～3.3A ※推奨負荷トルク時
+scrapedAt: 2026-09-08

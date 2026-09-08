@@ -1,0 +1,55 @@
+id: "15378"
+names:
+  ja: オフセットトレッドタイヤ・ソフト（クリヤー）
+  en: OFFSET TREAD TIRES (SOFT/CLEAR)
+  zh-HK: 偏移胎面輪胎 (軟胎/透明)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 378
+seriesLabel: ミニ四駆グレードアップパーツ
+category: tire
+categorySource: derived
+slots:
+  - tire-front
+  - tire-rear
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 264
+priceJpyExTax: 240
+priceHkd: 24
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15378/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15378/15378_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15378-offset-tread-tires-soft-clear/
+scrapedAt: 2026-09-08

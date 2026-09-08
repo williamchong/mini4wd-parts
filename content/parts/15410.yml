@@ -1,0 +1,53 @@
+id: "15410"
+names:
+  ja: アルミディスクホイールセット(ストライプタイプ)
+  en: WHEEL w/ALUMINUM DISC SET (STRIPE MARKINGS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 410
+seriesLabel: ミニ四駆グレードアップパーツ
+category: wheel
+categorySource: derived
+slots:
+  - wheel-front
+  - wheel-rear
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 528
+priceJpyExTax: 480
+releaseDate: 2010-07-10
+releaseDateRaw: 2010年7月10日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15410/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15410/15410_1.jpg
+scrapedAt: 2026-09-08

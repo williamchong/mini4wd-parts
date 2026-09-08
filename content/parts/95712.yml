@@ -1,0 +1,39 @@
+id: "95712"
+names:
+  ja: ダッシュ１号･皇帝（エンペラー）シルバーメッキボディセット
+  en: DASH-1 EMPEROR SILVER COLOR PLATED BODY SET
+  zh-HK: Dash-1 皇帝號 銀色電鍍車殼套裝
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: body
+categorySource: derived
+slots:
+  - body
+isCarPart: true
+chassisCompat:
+  include:
+    - super-2
+  other:
+    - type3
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 594
+priceJpyExTax: 540
+priceHkd: 54
+releaseDate: 2026-09-12
+releaseDateRaw: 2026年9月12日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95712/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95712/95712_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95712-dash-1-emperor-silver-color-plated-body-set/
+specsRaw: 輝きあふれるシルバーメッキボディと専用ステッカーをセット
+scrapedAt: 2026-09-08

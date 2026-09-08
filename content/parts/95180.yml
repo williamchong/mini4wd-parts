@@ -1,0 +1,50 @@
+id: "95180"
+names:
+  ja: HG ボールリンクマスダンパー （スクエア/カーボンプレート）J-CUP2025
+  en: HG MASS DAMPER SET w/BALL CONNECTORS (BLOCK WEIGHT/CARBON PLATE) J-CUP 2025
+  zh-HK: HG 球連接式制震鉛塊 (方型/碳纖維片) 日本盃2025特別版
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: limited
+seriesLabel: ミニ四駆限定販売商品（パーツ）
+category: plate
+categorySource: derived
+slots:
+  - front-stay
+  - rear-stay
+  - side-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - superTZ_X
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  plateMaterial: carbon
+priceJpy: 1056
+priceJpyExTax: 960
+priceHkd: 96
+releaseDate: 2025-08-09
+releaseDateRaw: 2025年8月9日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95180/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95180/95180_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95180-hg-mass-damper-set-w-ball-connectors-block-weight-carbon-plate-j-cup-2025/
+specsRaw: 6×6×32mmのマスダンパー1個（重量：8.3g）と、アジャスター、カーボンプレート、ピロボールなどをセット
+scrapedAt: 2026-09-08

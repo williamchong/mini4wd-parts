@@ -1,0 +1,58 @@
+id: "15344"
+names:
+  ja: ローラー用9mmボールベアリングセット
+  en: 9mm BALL BEARINGS (2PCS.)
+  zh-HK: 導輪專用9mm滾珠軸承套裝
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 344
+seriesLabel: ミニ四駆グレードアップパーツ
+category: roller
+categorySource: derived
+slots:
+  - roller-front
+  - roller-rear
+  - roller-side
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  rollerDiameterMm: 9
+  rollerType: bearing
+priceJpy: 616
+priceJpyExTax: 560
+priceHkd: 56
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15344/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15344/15344_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15344-mini-4wd-9mm-ball-bearings-2pcs/
+scrapedAt: 2026-09-08

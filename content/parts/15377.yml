@@ -1,0 +1,40 @@
+id: "15377"
+names:
+  ja: スライド・ワイドローラーステーセット
+  en: WIDE ROLLER STAY SET (DAMPED)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 377
+seriesLabel: ミニ四駆グレードアップパーツ
+category: plate
+categorySource: derived
+slots:
+  - front-stay
+  - rear-stay
+  - side-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - ms
+    - vs
+  other:
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 374
+priceJpyExTax: 340
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15377/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15377/15377_1.jpg
+scrapedAt: 2026-09-08

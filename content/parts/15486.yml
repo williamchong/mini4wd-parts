@@ -1,0 +1,58 @@
+id: "15486"
+names:
+  ja: アトミックチューン2モーター
+  en: ATOMIC-TUNED 2 MOTOR
+  zh-HK: 迷你四驅車用 Atomic-Tuned 2 摩打
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 486
+seriesLabel: ミニ四駆グレードアップパーツ
+category: motor
+categorySource: derived
+slots:
+  - motor
+isCarPart: true
+chassisCompat:
+  include:
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: override
+  notes: 需個別確認馬達規則
+specs:
+  motorShaft: single
+  motorRpmMin: 12700
+  motorRpmMax: 14900
+  motorTorqueMin: 1.5
+  motorTorqueMax: 1.8
+priceJpy: 462
+priceJpyExTax: 420
+priceHkd: 42
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15486/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15486/15486_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15486mini-4wd-atomic-tuned-2-motor/
+specsRaw: 適正電圧：2.4～3.0V 推奨負荷トルク：1.5～1.8mN･m 回転数：12700～14900r/min 消費電流：1.8～2.2A ※推奨負荷トルク時
+scrapedAt: 2026-09-08

@@ -1,0 +1,57 @@
+id: "15523"
+names:
+  ja: 低摩擦プラベアリングセット
+  en: LOW-FRICTION PLASTIC BEARING SET
+  zh-HK: 低摩擦塑料軸承
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 523
+seriesLabel: ミニ四駆グレードアップパーツ
+category: bearing
+categorySource: derived
+slots:
+  - bearing
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 220
+priceJpyExTax: 200
+priceHkd: 20
+releaseDate: 2020-01-11
+releaseDateRaw: 2020年1月11日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15523/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15523/15523_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15523-low-friction-plastic-bearing-set/
+specsRaw: POM樹脂製。620プラベアリング×5個、520プラベアリング×2個
+scrapedAt: 2026-09-08

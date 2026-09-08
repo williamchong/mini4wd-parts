@@ -1,0 +1,45 @@
+id: "95175"
+names:
+  ja: ハイパーダッシュモーターPRO J-CUP 2025
+  en: HYPER-DASH MOTOR PRO J-CUP 2025
+  zh-HK: 迷你四驅車 Hyper-Dash 摩打 PRO 日本盃2025特別版
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: limited
+seriesLabel: ミニ四駆限定販売商品（パーツ）
+category: motor
+categorySource: derived
+slots:
+  - motor
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: illegal
+  source: override
+  notes: 少年組僅限 Tune 系列馬達
+specs:
+  motorShaft: double
+  motorRpmMin: 17200
+  motorRpmMax: 21200
+  motorTorqueMin: 1.4
+  motorTorqueMax: 1.9
+priceJpy: 528
+priceJpyExTax: 480
+priceHkd: 48
+releaseDate: 2025-07-12
+releaseDateRaw: 2025年7月12日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95175/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95175/95175_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95175-mini-4wd-hyper-dash-motor-pro-j-cup-2025/
+specsRaw: 適正電圧：2.4-3.0V、推奨負荷トルク：1.4-1.9mN･m、回転数：17200-21200r/min、消費電流：1.6-3.0A
+scrapedAt: 2026-09-08

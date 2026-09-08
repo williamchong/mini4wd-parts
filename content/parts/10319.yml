@@ -1,0 +1,35 @@
+id: "10319"
+names:
+  ja: AO-1044 ミニ四駆 プロペラシャフトCセット
+  en: MINI 4WD PROPELLER SHAFT C SET
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: ao
+seriesLabel: ミニ四駆用AOパーツ
+category: shaft
+categorySource: derived
+slots:
+  - shaft
+isCarPart: true
+chassisCompat:
+  include:
+    - fm-a
+  other:
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 110
+priceJpyExTax: 100
+releaseDate: 2018-10-20
+releaseDateRaw: 2018年10月20日(土)ごろ発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/10319/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/10319/10319_1.jpg
+scrapedAt: 2026-09-08

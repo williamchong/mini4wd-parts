@@ -1,0 +1,53 @@
+id: "15120"
+names:
+  ja: ナローワンウェイホイールセット
+  en: NARROW ONE-WAY WHEEL SET
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 120
+seriesLabel: ミニ四駆グレードアップパーツ
+category: wheel
+categorySource: derived
+slots:
+  - wheel-front
+  - wheel-rear
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 660
+priceJpyExTax: 600
+priceHkd: 60
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15120/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15120/15120_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15120-mini-4wd-narrow-one-way-wheel-set/
+scrapedAt: 2026-09-08

@@ -1,0 +1,41 @@
+id: "15469"
+names:
+  ja: フロントワイドスライドダンパー
+  en: WIDE FRONT SLIDING DAMPER
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 469
+seriesLabel: ミニ四駆グレードアップパーツ
+category: slide-damper
+categorySource: derived
+slots:
+  - damper
+  - front-stay
+  - rear-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - me
+    - ar
+    - fm-a
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 484
+priceJpyExTax: 440
+priceHkd: 44
+releaseDate: 2013-09-28
+releaseDateRaw: 2013年9月28日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15469/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15469/15469_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15469-wide-front-sliding-damper-2/
+scrapedAt: 2026-09-08

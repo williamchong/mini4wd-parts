@@ -1,0 +1,28 @@
+id: "94383"
+names:
+  ja: AO-1005 プロペラシャフトB
+nameSources:
+  ja: tamiya.com
+series: ao
+seriesLabel: ミニ四駆用AOパーツ
+category: shaft
+categorySource: derived
+slots:
+  - shaft
+isCarPart: true
+chassisCompat:
+  include: []
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 110
+priceJpyExTax: 100
+status: current
+officialUrl: https://www.tamiya.com/japan/products/94383/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/94383/94383_1.jpg
+scrapedAt: 2026-09-08

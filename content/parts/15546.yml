@@ -1,0 +1,61 @@
+id: "15546"
+names:
+  ja: ローフリクション大径バレルタイヤ(31mm)＆カーボン強化ホイール(Vスポーク)
+  en: LARGE DIA. LOW FRICTION ARCHED TIRES (31mm) & CARBON WHEELS (V SPOKE)
+  zh-HK: 大徑低摩擦拱形胎 (31mm) & 碳纖維強化輪圈 (V型輻條)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 546
+seriesLabel: ミニ四駆グレードアップパーツ
+category: wheel-tire-set
+categorySource: derived
+slots:
+  - wheel-front
+  - wheel-rear
+  - tire-front
+  - tire-rear
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  wheelDiameterMm: 31
+priceJpy: 440
+priceJpyExTax: 400
+priceHkd: 40
+releaseDate: 2025-05-24
+releaseDateRaw: 2025年5月24日(土)ごろ発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15546/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/15546/15546_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15546-large-dia-low-friction-arched-tires-31mm-carbon-wheels-v-spoke/
+specsRaw: ローフリクション大径バレルタイヤ(31mm)とカーボン強化ホイール(Vスポーク)を1台分セット
+scrapedAt: 2026-09-08

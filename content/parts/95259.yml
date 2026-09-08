@@ -1,0 +1,50 @@
+id: "95259"
+names:
+  ja: HG カーボンリヤステー（3mm）
+  en: HG CARBON REAR STAY (3mm)
+  zh-HK: HG 碳纖維 後置防撞桿 (3mm)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: plate
+categorySource: derived
+slots:
+  - front-stay
+  - rear-stay
+  - side-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - ar
+    - fm-a
+    - super-2
+    - vs
+  other:
+    - superTZ_X
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  plateThicknessMm: 3
+  plateMaterial: carbon
+priceJpy: 1320
+priceJpyExTax: 1200
+priceHkd: 120
+releaseDate: 2024-08-10
+releaseDateRaw: 2024年8月10日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95259/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95259/95259_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95259-hg-carbon-rear-stay-3mm/
+specsRaw: 3mm厚カーボン製
+scrapedAt: 2026-09-08

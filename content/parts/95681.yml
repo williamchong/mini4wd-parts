@@ -1,0 +1,38 @@
+id: "95681"
+names:
+  ja: MSシャーシ 強化ギヤカバー (蛍光オレンジ)ミニ四駆ステーション
+  en: REINFORCED GEAR COVER (for MS CHASSIS) FLUORESCENT ORANGE MINI 4WD STATION
+  zh-HK: MS底盤用 強化齒輪蓋 (螢光橙色/Mini 4WD Station限定)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: station
+seriesLabel: ミニ四駆ステーション限定
+category: gear-cover
+categorySource: derived
+slots:
+  - none
+isCarPart: true
+chassisCompat:
+  include:
+    - ms
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 462
+priceJpyExTax: 420
+priceHkd: 42
+releaseDate: 2025-04-19
+releaseDateRaw: 2025年4月19日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95681/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95681/95681_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95681-reinforced-gear-cover-for-ms-chassis-fluorescent-orange-mini-4wd-station/
+specsRaw: ギヤカバーと電池おさえパーツに加えて、取り付け用のビスとワッシャーもセット
+scrapedAt: 2026-09-08

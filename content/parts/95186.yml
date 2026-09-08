@@ -1,0 +1,49 @@
+id: "95186"
+names:
+  ja: HG カーボンフロントワイドステー (1.5mm) J-CUP 2026
+  en: HG CARBON WIDE FRONT PLATE (1.5mm) J-CUP 2026
+  zh-HK: HG 碳纖維 前置支架 (1.5mm) 日本盃2026
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: limited
+seriesLabel: ミニ四駆限定販売商品（パーツ）
+category: plate
+categorySource: derived
+slots:
+  - front-stay
+  - rear-stay
+  - side-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - me
+    - ar
+    - fm-a
+    - vz
+  other:
+    - superTZ_X
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  plateThicknessMm: 1.5
+  plateMaterial: carbon
+priceJpy: 1210
+priceJpyExTax: 1100
+priceHkd: 110
+releaseDate: 2026-07-11
+releaseDateRaw: 2026年7月11日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95186/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95186/95186_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95186-hg-carbon-wide-front-plate-1-5mm-j-cup-2026/
+specsRaw: 1.5mm厚のカーボン製ステーに加えて、ビスやナット、ワッシャーなどの取り付け金具もセット
+scrapedAt: 2026-09-08

@@ -1,0 +1,56 @@
+id: "95393"
+names:
+  ja: ラバーボディキャッチ（ブルー・レッド）
+  en: RUBBER BODY CATCHES (BLUE/RED)
+  zh-HK: 橡膠車殼固定環 (藍色．紅色)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: body-catch
+categorySource: derived
+slots:
+  - fastener
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - ar
+    - fm-a
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type1
+    - type2
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 286
+priceJpyExTax: 260
+priceHkd: 26
+releaseDate: 2023-09-30
+releaseDateRaw: 2023年9月30日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95393/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95393/95393_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95393-rubber-body-catches-blue-red/
+specsRaw: Oリングタイプのゴム製ボディキャッチ。ブルーとレッドをそれぞれ4個ずつセット。
+scrapedAt: 2026-09-08

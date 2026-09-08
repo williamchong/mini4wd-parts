@@ -1,0 +1,52 @@
+id: "10320"
+names:
+  ja: AO-1045 ミニ四駆 ゴムパイプ3.5×60mm（5本）
+  en: MINI 4WD RUBBER TUBING 3.5x60mm (5PCS.)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: ao
+seriesLabel: ミニ四駆用AOパーツ
+category: other
+categorySource: override
+slots:
+  - none
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - ar
+    - fm-a
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type1
+    - type2
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 143
+priceJpyExTax: 130
+releaseDate: 2019-05-26
+releaseDateRaw: 2019年5月26日(日)ごろ発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/10320/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/10320/10320_1.jpg
+specsRaw: 3.5×60mmのブラックカラーのゴムパイプを5本セット
+scrapedAt: 2026-09-08

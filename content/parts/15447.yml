@@ -1,0 +1,39 @@
+id: "15447"
+names:
+  ja: トライダガーXX クリヤーボディセット
+  en: TRIDAGGER XX CLEAR BODY SET
+  zh-HK: 火鳥XX 透明車殼套裝
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 447
+seriesLabel: ミニ四駆グレードアップパーツ
+category: body
+categorySource: derived
+slots:
+  - body
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 506
+priceJpyExTax: 460
+priceHkd: 46
+releaseDate: 2012-06-23
+releaseDateRaw: 2012年6月23日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15447/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15447/15447_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15447-tridagger-xx-clear-body-set/
+scrapedAt: 2026-09-08

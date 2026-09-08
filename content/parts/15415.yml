@@ -1,0 +1,38 @@
+id: "15415"
+names:
+  ja: スーパーX･XXカーボン小径ホイール＆バレルタイヤ(白)
+  en: SMALL DIA. CARBON WHEEL & WHITE ARCHED TIRES (FOR SUPER X & XX CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 415
+seriesLabel: ミニ四駆グレードアップパーツ
+category: wheel-tire-set
+categorySource: derived
+slots:
+  - wheel-front
+  - wheel-rear
+  - tire-front
+  - tire-rear
+isCarPart: true
+chassisCompat:
+  include: []
+  other:
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 352
+priceJpyExTax: 320
+priceHkd: 32
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15415/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15415/15415_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15415-small-dia-carbon-wheel-white-arched-tires-for-super-x-xx-chassis/
+scrapedAt: 2026-09-08

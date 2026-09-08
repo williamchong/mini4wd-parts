@@ -1,0 +1,34 @@
+id: "15367"
+names:
+  ja: N-02・T-01強化ユニット
+  en: REINFORCED N-02/T-01 UNITS
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 367
+seriesLabel: ミニ四駆グレードアップパーツ
+category: chassis-set
+categorySource: derived
+slots:
+  - none
+isCarPart: true
+chassisCompat:
+  include:
+    - ms
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 330
+priceJpyExTax: 300
+priceHkd: 30
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15367/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15367/15367_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15367-reinforced-n-02-t-01-units/
+scrapedAt: 2026-09-08

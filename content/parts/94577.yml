@@ -1,0 +1,33 @@
+id: "94577"
+names:
+  ja: AO-1014 8Tピニオン（紫）
+  en: 8T PLASTIC PINION GEAR SET (10PCS.)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: ao
+seriesLabel: ミニ四駆用AOパーツ
+category: gear
+categorySource: derived
+slots:
+  - gear
+  - counter-gear
+isCarPart: true
+chassisCompat:
+  include: []
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 165
+priceJpyExTax: 150
+priceHkd: 15
+status: current
+officialUrl: https://www.tamiya.com/japan/products/94577/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/94577/94577_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-94577-8t-plastic-pinion-gear-x-10/
+scrapedAt: 2026-09-08

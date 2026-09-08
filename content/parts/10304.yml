@@ -1,0 +1,31 @@
+id: "10304"
+names:
+  ja: AO-1033 ミニ四駆 両面テープセット
+  en: MINI 4WD DOUBLE-SIDED TAPE SET
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: ao
+seriesLabel: ミニ四駆用AOパーツ
+category: accessory
+categorySource: derived
+slots:
+  - none
+isCarPart: false
+chassisCompat:
+  include: []
+  other: []
+  source: scraped
+classLegality:
+  open: unknown
+  stockBmax: unknown
+  junior: unknown
+  source: derived
+  notes: 非車體零件，不適用比賽規則
+specs: {}
+priceJpy: 220
+priceJpyExTax: 200
+status: current
+officialUrl: https://www.tamiya.com/japan/products/10304/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/10304/10304_1.jpg
+scrapedAt: 2026-09-08

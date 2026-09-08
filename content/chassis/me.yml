@@ -1,0 +1,292 @@
+id: me
+names:
+  ja: MEシャーシ
+  en: ME Chassis
+  zh-HK: ME 底盤
+  zh-TW: ME 底盤
+tamiyaCode: me
+family: pro
+motorPosition: mid
+motorShaft: double
+releaseYear: 2025
+kitGearRatio: 3.5:1
+wheelbaseMm: 80
+treadFrontMm: 60
+treadRearMm: 66
+weightG: 117
+status: current
+notes: 最新的雙軸底盤，主打「剛性與柔性並存」的傳動設計，2026 年 1 月起列入官方規則。
+slots:
+  - id: body
+    type: body
+    maxCount: 1
+    mirror: false
+    required: true
+  - id: motor
+    type: motor
+    maxCount: 1
+    mirror: false
+    required: true
+  - id: gear-set
+    type: gear
+    maxCount: 1
+    mirror: false
+    required: true
+  - id: terminal
+    type: terminal
+    maxCount: 1
+    mirror: false
+    required: true
+  - id: switch
+    type: switch
+    maxCount: 1
+    mirror: false
+    required: false
+  - id: axle
+    type: shaft
+    maxCount: 2
+    mirror: true
+    required: true
+  - id: bearing
+    type: bearing
+    maxCount: 4
+    mirror: true
+    required: false
+  - id: wheel-front
+    type: wheel-front
+    maxCount: 2
+    mirror: true
+    required: true
+  - id: wheel-rear
+    type: wheel-rear
+    maxCount: 2
+    mirror: true
+    required: true
+  - id: tire-front
+    type: tire-front
+    maxCount: 2
+    mirror: true
+    required: true
+  - id: tire-rear
+    type: tire-rear
+    maxCount: 2
+    mirror: true
+    required: true
+  - id: front-stay
+    type: front-stay
+    maxCount: 1
+    mirror: false
+    required: false
+  - id: rear-stay
+    type: rear-stay
+    maxCount: 1
+    mirror: false
+    required: false
+  - id: side-stay
+    type: side-stay
+    maxCount: 2
+    mirror: true
+    required: false
+  - id: roller-front
+    type: roller-front
+    maxCount: 2
+    mirror: true
+    required: false
+  - id: roller-rear
+    type: roller-rear
+    maxCount: 2
+    mirror: true
+    required: false
+  - id: roller-side
+    type: roller-side
+    maxCount: 2
+    mirror: true
+    required: false
+  - id: brake
+    type: brake
+    maxCount: 2
+    mirror: false
+    required: false
+  - id: damper
+    type: damper
+    maxCount: 4
+    mirror: false
+    required: false
+  - id: fastener
+    type: fastener
+    maxCount: 8
+    mirror: false
+    required: false
+compatibleParts:
+  - "15059"
+  - "15111"
+  - "15117"
+  - "15120"
+  - "15139"
+  - "15150"
+  - "15158"
+  - "15160"
+  - "15161"
+  - "15163"
+  - "15180"
+  - "15193"
+  - "15208"
+  - "15213"
+  - "15219"
+  - "15230"
+  - "15232"
+  - "15233"
+  - "15239"
+  - "15243"
+  - "15251"
+  - "15261"
+  - "15287"
+  - "15289"
+  - "15343"
+  - "15344"
+  - "15345"
+  - "15347"
+  - "15348"
+  - "15349"
+  - "15352"
+  - "15353"
+  - "15355"
+  - "15357"
+  - "15358"
+  - "15359"
+  - "15360"
+  - "15364"
+  - "15365"
+  - "15366"
+  - "15373"
+  - "15375"
+  - "15376"
+  - "15378"
+  - "15379"
+  - "15381"
+  - "15383"
+  - "15385"
+  - "15386"
+  - "15387"
+  - "15388"
+  - "15389"
+  - "15390"
+  - "15391"
+  - "15392"
+  - "15393"
+  - "15394"
+  - "15395"
+  - "15396"
+  - "15397"
+  - "15398"
+  - "15401"
+  - "15402"
+  - "15403"
+  - "15404"
+  - "15406"
+  - "15407"
+  - "15408"
+  - "15409"
+  - "15410"
+  - "15416"
+  - "15418"
+  - "15422"
+  - "15423"
+  - "15424"
+  - "15426"
+  - "15427"
+  - "15429"
+  - "15430"
+  - "15431"
+  - "15433"
+  - "15436"
+  - "15437"
+  - "15438"
+  - "15439"
+  - "15440"
+  - "15441"
+  - "15443"
+  - "15445"
+  - "15449"
+  - "15452"
+  - "15453"
+  - "15454"
+  - "15457"
+  - "15459"
+  - "15460"
+  - "15461"
+  - "15462"
+  - "15463"
+  - "15464"
+  - "15465"
+  - "15467"
+  - "15468"
+  - "15469"
+  - "15471"
+  - "15472"
+  - "15473"
+  - "15475"
+  - "15478"
+  - "15481"
+  - "15482"
+  - "15483"
+  - "15487"
+  - "15488"
+  - "15489"
+  - "15491"
+  - "15492"
+  - "15493"
+  - "15495"
+  - "15497"
+  - "15499"
+  - "15500"
+  - "15501"
+  - "15505"
+  - "15506"
+  - "15507"
+  - "15508"
+  - "15509"
+  - "15510"
+  - "15511"
+  - "15513"
+  - "15518"
+  - "15519"
+  - "15521"
+  - "15522"
+  - "15523"
+  - "15524"
+  - "15525"
+  - "15526"
+  - "15527"
+  - "15528"
+  - "15529"
+  - "15530"
+  - "15531"
+  - "15532"
+  - "15533"
+  - "15534"
+  - "15541"
+  - "15542"
+  - "15544"
+  - "15546"
+  - "15548"
+  - "15549"
+  - "15550"
+  - "15551"
+  - "95183"
+  - "95185"
+  - "95186"
+  - "95187"
+  - "95189"
+  - "95324"
+  - "95396"
+  - "95424"
+  - "95426"
+  - "95458"
+  - "95459"
+  - "95555"
+  - "95556"
+  - "95704"
+  - "95709"
+  - "95718"
+  - "95719"

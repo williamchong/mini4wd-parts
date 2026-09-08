@@ -1,0 +1,43 @@
+id: "95649"
+names:
+  ja: スーパーX・XX ローフリクション小径ナロータイヤ(24mm)&シルバーメッキ3本スポークホイール
+  en: LOW FRICTION SMALL DIA. NARROW TIRES (24mm) & SILVER PLATED 3-SPOKE WHEELS (FOR SUPER X & XX CHASSIS )
+  zh-HK: Super X & XX 底盤用 低摩擦細徑窄胎 (24mm) & 電鍍銀3輻輪圈
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: wheel-tire-set
+categorySource: derived
+slots:
+  - wheel-front
+  - wheel-rear
+  - tire-front
+  - tire-rear
+isCarPart: true
+chassisCompat:
+  include: []
+  other:
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  wheelDiameterMm: 24
+priceJpy: 396
+priceJpyExTax: 360
+priceHkd: 36
+releaseDate: 2024-03-16
+releaseDateRaw: 2024年3月16日 ミニ四駆グランプリ2024スプリング 東京大会1Dから発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95649/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95649/95649_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95649-low-friction-small-dia-narrow-tires-24mm-silver-plated-3-spoke-wheels-for-super-x-xx-chassis/
+specsRaw: 低摩擦素材を使用した小径ローハイトタイヤとホイールの4本セット。※硬いタイヤのため、強く押し込んで装着します。
+scrapedAt: 2026-09-08

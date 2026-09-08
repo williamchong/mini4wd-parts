@@ -1,0 +1,60 @@
+id: "15426"
+names:
+  ja: 19mmプラリング付 アルミベアリングローラー(ディッシュタイプ)
+  en: 19mm ALUMINUM ROLLERS w/PLASTIC RINGS (DISH TYPE)
+  zh-HK: 19mm連塑膠圈鋁製軸承導輪(碟形)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 426
+seriesLabel: ミニ四駆グレードアップパーツ
+category: roller
+categorySource: derived
+slots:
+  - roller-front
+  - roller-rear
+  - roller-side
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  rollerDiameterMm: 19
+  rollerType: bearing
+priceJpy: 814
+priceJpyExTax: 740
+priceHkd: 74
+releaseDate: 2011-06-25
+releaseDateRaw: 2011年6月25日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15426/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15426/15426_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15426-1-32-mini-4wd-19mm-aluiminum-rollers-w-plastic-ringsdish-type/
+scrapedAt: 2026-09-08

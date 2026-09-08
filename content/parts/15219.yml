@@ -1,0 +1,53 @@
+id: "15219"
+names:
+  ja: 小径メッキスポークホイールセット（レストンスポンジタイヤ付）
+  en: SMALL DIA. PLATED SPOKE WHEEL SET (w/RESTON SPONGE TIRES)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 219
+seriesLabel: ミニ四駆グレードアップパーツ
+category: wheel-tire-set
+categorySource: derived
+slots:
+  - wheel-front
+  - wheel-rear
+  - tire-front
+  - tire-rear
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 594
+priceJpyExTax: 540
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15219/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/15219/15219_1.jpg
+scrapedAt: 2026-09-08

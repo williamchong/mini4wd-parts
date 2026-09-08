@@ -1,0 +1,45 @@
+id: "15545"
+names:
+  ja: スーパーX･XX ハード小径ローハイトタイヤ (26mm･グレイ )&カーボン強化ホイール (ディッシュ)
+  en: HARD SMALL DIA. LOW-PROFILE TIRES (26mm/GRAY) & CARBON WHEELS (DISH, for SUPER X & XX CHASSIS)
+  zh-HK: 細徑硬身薄胎(26mm/灰色) & 碳纖維強化輪圈(碟型輪圈, Super X & XX底盤用)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 545
+seriesLabel: ミニ四駆グレードアップパーツ
+category: wheel-tire-set
+categorySource: derived
+slots:
+  - wheel-front
+  - wheel-rear
+  - tire-front
+  - tire-rear
+isCarPart: true
+chassisCompat:
+  include:
+    - fm-a
+  other:
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  wheelDiameterMm: 26
+priceJpy: 352
+priceJpyExTax: 320
+priceHkd: 32
+releaseDate: 2025-04-12
+releaseDateRaw: 2025年4月12日(土)ごろ発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15545/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/15545/15545_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15545-hard-small-dia-low-profile-tires-26mm-gray-carbon-wheels-dish-for-super-x-xx-chassis/
+specsRaw: ハード小径タイヤ(26mm)とカーボン強化ホイール(ディッシュ)を1台分セット
+scrapedAt: 2026-09-08

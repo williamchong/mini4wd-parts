@@ -1,0 +1,42 @@
+id: "95697"
+names:
+  ja: 2段低摩擦プラローラー (19-19mm) レッド (ミニ四駆ステーション)
+  en: LOW FRICTION PLASTIC DOUBLE ROLLERS (RED/19-19mm) MINI 4WD STATION
+  zh-HK: 低摩擦 塑膠 雙層導輪 (紅色/19-19mm) 迷你四驅站點賽特別版
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: plate
+categorySource: derived
+slots:
+  - front-stay
+  - rear-stay
+  - side-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ar
+    - vz
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 308
+priceJpyExTax: 280
+priceHkd: 28
+releaseDate: 2025-10-25
+releaseDateRaw: 2025年10月25日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95697/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95697/95697_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95697-low-friction-plastic-double-rollers-red-19-19mm-mini-4wd-station/
+specsRaw: レッドカラーの2段プラローラー2個に加えて、ブッシュ4個、取り付けビス、スペーサー、板レンチなどをセット。
+scrapedAt: 2026-09-08

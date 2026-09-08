@@ -1,0 +1,55 @@
+id: "15239"
+names:
+  ja: 中空ゴム小径タイヤ(ホイール付)
+  en: SMALL DIA. SEMI-PNEUMATIC TIRES w/WHEELS
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 239
+seriesLabel: ミニ四駆グレードアップパーツ
+category: wheel-tire-set
+categorySource: derived
+slots:
+  - wheel-front
+  - wheel-rear
+  - tire-front
+  - tire-rear
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 286
+priceJpyExTax: 260
+priceHkd: 26
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15239/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15239/15239_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15239-small-dia-semi-pneumatic-tires-w-wheels/
+scrapedAt: 2026-09-08

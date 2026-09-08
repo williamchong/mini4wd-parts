@@ -1,0 +1,28 @@
+id: "94387"
+names:
+  ja: AO-1009 プラズマダッシュブラシホルダーセット
+nameSources:
+  ja: tamiya.com
+series: ao
+seriesLabel: ミニ四駆用AOパーツ
+category: other
+categorySource: override
+slots:
+  - none
+isCarPart: true
+chassisCompat:
+  include: []
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 187
+priceJpyExTax: 170
+status: current
+officialUrl: https://www.tamiya.com/japan/products/94387/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/94387/94387_1.jpg
+scrapedAt: 2026-09-08

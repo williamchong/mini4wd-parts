@@ -1,0 +1,41 @@
+id: "15494"
+names:
+  ja: アスチュート クリヤーボディセット （ポリカ）
+  en: ASTUTE CLEAR BODY SET (POLYCARBONATE)
+  zh-HK: Astute 透明軟殼
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 494
+seriesLabel: ミニ四駆グレードアップパーツ
+category: body
+categorySource: derived
+slots:
+  - body
+isCarPart: true
+chassisCompat:
+  include:
+    - super-2
+  other:
+    - super1
+    - superTZ
+    - superTZ_X
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 528
+priceJpyExTax: 480
+priceHkd: 48
+releaseDate: 2015-11-21
+releaseDateRaw: 2015年11月21日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15494/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15494/15494_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15494-mini-4wd-astute-clear-body-set-polycarbonate/
+scrapedAt: 2026-09-08

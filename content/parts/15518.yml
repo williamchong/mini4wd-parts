@@ -1,0 +1,52 @@
+id: "15518"
+names:
+  ja: FRPリヤブレーキステーセット
+  en: FRP REAR BRAKE STAY SET
+  zh-HK: 迷你四驅車 FRP後置減速裝置套裝
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 518
+seriesLabel: ミニ四駆グレードアップパーツ
+category: plate
+categorySource: derived
+slots:
+  - front-stay
+  - rear-stay
+  - side-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - superTZ_X
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  plateMaterial: frp
+priceJpy: 418
+priceJpyExTax: 380
+priceHkd: 38
+releaseDate: 2018-10-13
+releaseDateRaw: 2018年10月13日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15518/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/15518/15518_1_02.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15518-frp-rear-brake-stay-set/
+specsRaw: 1.5mm厚FRP製ステーに加えて、2mm厚のブレーキスポンジ（ホワイト）、取り付け用ビスやアルミカラーなどもセット
+scrapedAt: 2026-09-08

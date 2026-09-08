@@ -1,0 +1,33 @@
+id: "10306"
+names:
+  ja: AO-1035 ミニ四駆ホイールブッシュ(白/8個)
+  en: MINI 4WD BUSHING for ALUMINUM WHEELS (WHITE, 8PCS.)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: ao
+seriesLabel: ミニ四駆用AOパーツ
+category: wheel
+categorySource: derived
+slots:
+  - wheel-front
+  - wheel-rear
+isCarPart: true
+chassisCompat:
+  include: []
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 198
+priceJpyExTax: 180
+releaseDate: 2013-11-30
+releaseDateRaw: 2013年11月30日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/10306/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/10306/10306_1.jpg
+scrapedAt: 2026-09-08

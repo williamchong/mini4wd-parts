@@ -1,0 +1,37 @@
+id: "15297"
+names:
+  ja: 72mm中空ステンレスシャフト
+  en: 72mm HOLLOW STAINLESS STEEL SHAFTS
+  zh-HK: 72mm中空不銹鋼軸
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 297
+seriesLabel: ミニ四駆グレードアップパーツ
+category: shaft
+categorySource: derived
+slots:
+  - shaft
+isCarPart: true
+chassisCompat:
+  include: []
+  other:
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 198
+priceJpyExTax: 180
+priceHkd: 18
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15297/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15297/15297_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15297-mini-4wd-72mm-hollow-stainless-steel-shafts/
+scrapedAt: 2026-09-08

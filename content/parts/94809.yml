@@ -1,0 +1,32 @@
+id: "94809"
+names:
+  ja: AO-1024 2×38mm両ネジシャフト（4本）
+  en: 2x38mm THREADED SHAFT (4PCS.)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: ao
+seriesLabel: ミニ四駆用AOパーツ
+category: shaft
+categorySource: derived
+slots:
+  - shaft
+isCarPart: true
+chassisCompat:
+  include: []
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 330
+priceJpyExTax: 300
+priceHkd: 30
+status: current
+officialUrl: https://www.tamiya.com/japan/products/94809/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/94809/94809_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-94809-2x38mm-threaded-shaft-4/
+scrapedAt: 2026-09-08

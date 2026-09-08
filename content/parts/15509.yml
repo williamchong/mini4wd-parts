@@ -1,0 +1,57 @@
+id: "15509"
+names:
+  ja: ローハイトオフセットトレッドタイヤ・ハード（ホワイト）
+  en: LOW-PROFILE OFFSET TREAD TIRES (HARD/WHITE)
+  zh-HK: 小直徑白色薄輪胎
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 509
+seriesLabel: ミニ四駆グレードアップパーツ
+category: tire
+categorySource: derived
+slots:
+  - tire-front
+  - tire-rear
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 264
+priceJpyExTax: 240
+priceHkd: 24
+releaseDate: 2017-02-18
+releaseDateRaw: 2017年2月18日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15509/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15509/15509_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15509-jr-lp-offset-tread-tires-hard-white/
+scrapedAt: 2026-09-08

@@ -1,0 +1,47 @@
+id: "15478"
+names:
+  ja: ボールリンクマスダンパー （スクエア）
+  en: MASS DAMPER SET w/BALL CONNECTORS (BLOCK WEIGHT)
+  zh-HK: 懸掛式制震裝置(方磚)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 478
+seriesLabel: ミニ四駆グレードアップパーツ
+category: mass-damper
+categorySource: derived
+slots:
+  - damper
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - superTZ_X
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 572
+priceJpyExTax: 520
+priceHkd: 52
+releaseDateRaw: 2014年 7月19日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15478/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15478/15478_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15478-mass-damper-block-w-ball-con/
+scrapedAt: 2026-09-08

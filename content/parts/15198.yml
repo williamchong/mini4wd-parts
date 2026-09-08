@@ -1,0 +1,43 @@
+id: "15198"
+names:
+  ja: リヤースライドダンパー・ブレーキセット
+  en: REAR SLIDING DAMPER & BRAKE SET
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 198
+seriesLabel: ミニ四駆グレードアップパーツ
+category: brake
+categorySource: derived
+slots:
+  - brake
+isCarPart: true
+chassisCompat:
+  include:
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 462
+priceJpyExTax: 420
+priceHkd: 42
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15198/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15198/15198_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15198-mini-4wd-rear-slide-damp-brake/
+scrapedAt: 2026-09-08

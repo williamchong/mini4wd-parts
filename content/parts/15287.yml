@@ -1,0 +1,54 @@
+id: "15287"
+names:
+  ja: 六角穴ボールベアリング4個セット
+  en: R/C MINI 4WD HEX HOLE BALL BEARING SET (4 pcs.)
+  zh-HK: 六角孔滾珠軸承4顆裝
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 287
+seriesLabel: ミニ四駆グレードアップパーツ
+category: bearing
+categorySource: derived
+slots:
+  - bearing
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 880
+priceJpyExTax: 800
+priceHkd: 80
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15287/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/15287/15287_1_03.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15287-mini-4wd-hex-hole-ball-bearing-4pcs-set/
+scrapedAt: 2026-09-08

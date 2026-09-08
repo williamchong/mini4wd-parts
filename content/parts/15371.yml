@@ -1,0 +1,33 @@
+id: "15371"
+names:
+  ja: ネオファルコン クリヤーボディセット
+  en: NEO FALCON CLEAR BODY SET
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 371
+seriesLabel: ミニ四駆グレードアップパーツ
+category: body
+categorySource: derived
+slots:
+  - body
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 396
+priceJpyExTax: 360
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15371/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15371/15371_1.jpg
+scrapedAt: 2026-09-08

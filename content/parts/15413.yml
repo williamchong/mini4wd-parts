@@ -1,0 +1,42 @@
+id: "15413"
+names:
+  ja: ゴムブレーキセット
+  en: RUBBER BRAKE SET
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 413
+seriesLabel: ミニ四駆グレードアップパーツ
+category: brake
+categorySource: derived
+slots:
+  - brake
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - ar
+    - super-2
+    - vs
+  other:
+    - superFM
+    - superTZ_X
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 220
+priceJpyExTax: 200
+releaseDate: 2010-07-17
+releaseDateRaw: 2010年7月17日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15413/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15413/15413_1.jpg
+scrapedAt: 2026-09-08

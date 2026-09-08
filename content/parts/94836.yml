@@ -1,0 +1,31 @@
+id: "94836"
+names:
+  ja: AO-1029 ミニ四駆 大径バレルタイヤ
+  en: MINI 4WD LARGE DIA. ARCHED TIRE
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: ao
+seriesLabel: ミニ四駆用AOパーツ
+category: tire
+categorySource: derived
+slots:
+  - tire-front
+  - tire-rear
+isCarPart: true
+chassisCompat:
+  include: []
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 242
+priceJpyExTax: 220
+status: current
+officialUrl: https://www.tamiya.com/japan/products/94836/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/94836/94836_1.jpg
+scrapedAt: 2026-09-08

@@ -1,0 +1,43 @@
+id: "15405"
+names:
+  ja: フロントアンダーガード
+  en: FRONT UNDER GUARD
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 405
+seriesLabel: ミニ四駆グレードアップパーツ
+category: bumper
+categorySource: derived
+slots:
+  - front-stay
+  - rear-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - ar
+    - fm-a
+    - super-2
+    - vs
+  other:
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 396
+priceJpyExTax: 360
+priceHkd: 36
+releaseDate: 2009-12-19
+releaseDateRaw: 2009年12月19日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15405/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15405/15405_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15405-mini4wd-front-under-guard/
+scrapedAt: 2026-09-08

@@ -1,0 +1,42 @@
+id: "15444"
+names:
+  ja: スーパーX･XX 大径ワンウェイホイール （オフセットタイヤ付き）
+  en: LARGE DIA. 1-WAY WHEEL SET (FOR SUPER X & XX CHASSIS)
+  zh-HK: 大徑差速輪套裝 (Super X & XX 底盤用)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 444
+seriesLabel: ミニ四駆グレードアップパーツ
+category: wheel-tire-set
+categorySource: derived
+slots:
+  - wheel-front
+  - wheel-rear
+  - tire-front
+  - tire-rear
+isCarPart: true
+chassisCompat:
+  include: []
+  other:
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 616
+priceJpyExTax: 560
+priceHkd: 56
+releaseDate: 2012-02-25
+releaseDateRaw: 2012年2月25日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15444/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15444/15444_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15444-jr-lg-diameter-1-way-wheel-set-super-x-xx-chassis/
+scrapedAt: 2026-09-08

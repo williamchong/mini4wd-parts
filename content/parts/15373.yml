@@ -1,0 +1,55 @@
+id: "15373"
+names:
+  ja: ローラー角度調整プレートセット
+  en: ROLLER ANGLE ADJUSTER PLATE SET
+  zh-HK: 導輪角度調節墊片套裝
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 373
+seriesLabel: ミニ四駆グレードアップパーツ
+category: plate
+categorySource: derived
+slots:
+  - front-stay
+  - rear-stay
+  - side-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 286
+priceJpyExTax: 260
+priceHkd: 26
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15373/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15373/15373_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15373-roller-angle-adjuster-plate-set/
+scrapedAt: 2026-09-08

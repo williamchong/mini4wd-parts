@@ -1,0 +1,45 @@
+id: "15432"
+names:
+  ja: スーパーXX・スーパーIIシャーシ用超速ギヤセット
+  en: SUPER SPEED GEAR SET (for SUPER XX & SUPER-II CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 432
+seriesLabel: ミニ四駆グレードアップパーツ
+category: gear
+categorySource: derived
+slots:
+  - gear
+  - counter-gear
+isCarPart: true
+chassisCompat:
+  include:
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 308
+priceJpyExTax: 280
+priceHkd: 24
+releaseDate: 2011-07-09
+releaseDateRaw: 2011年7月9日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15432/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15432/15432_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15432-ss-gear-superxx-superii/
+scrapedAt: 2026-09-08

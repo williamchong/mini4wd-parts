@@ -1,0 +1,43 @@
+id: "15471"
+names:
+  ja: HG スライドダンパーグリスセット
+  en: HG SLIDING DAMPER GREASE SET
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 471
+seriesLabel: ミニ四駆グレードアップパーツ
+category: accessory
+categorySource: derived
+slots:
+  - none
+isCarPart: false
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+  other: []
+  source: scraped
+classLegality:
+  open: unknown
+  stockBmax: unknown
+  junior: unknown
+  source: derived
+  notes: 非車體零件，不適用比賽規則
+specs: {}
+priceJpy: 550
+priceJpyExTax: 500
+priceHkd: 40
+releaseDate: 2013-10-12
+releaseDateRaw: 2013年10月12日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15471/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15471/15471_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15471-hg-sliding-damper-grease-set/
+scrapedAt: 2026-09-08

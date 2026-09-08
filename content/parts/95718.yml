@@ -1,0 +1,56 @@
+id: "95718"
+names:
+  ja: 低摩擦ハイマウントチューブスタビセット (ホワイト) ミニ四駆ステーション
+  en: LOW FRICTION HI-MOUNT TUBE STABILIZER SET (WHITE) MINI 4WD STATION
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: plate
+categorySource: derived
+slots:
+  - front-stay
+  - rear-stay
+  - side-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type1
+    - type2
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 264
+priceJpyExTax: 240
+releaseDate: 2026-10-31
+releaseDateRaw: 2026年10月31日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95718/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95718/95718_1.jpg
+specsRaw: 直径8mm、高さ10mmのPOM樹脂製スタビライザー3個と、取り付け用スペーサーやビスなどもセット
+scrapedAt: 2026-09-08

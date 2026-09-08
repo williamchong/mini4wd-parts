@@ -1,0 +1,38 @@
+id: "15504"
+names:
+  ja: スーパーX・XX大径5本スポークホイール&ハードスリック(レッド)
+  en: LARGE-DIAMETER 5-SPOKE WHEELS & HARD RED SLICK TIRES (for SUPER X & XX CHASSIS)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 504
+seriesLabel: ミニ四駆グレードアップパーツ
+category: wheel
+categorySource: derived
+slots:
+  - wheel-front
+  - wheel-rear
+isCarPart: true
+chassisCompat:
+  include: []
+  other:
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 352
+priceJpyExTax: 320
+priceHkd: 32
+releaseDate: 2016-11-12
+releaseDateRaw: 2016年11月12日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15504/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15504/15504_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15504-1-32-mini-4wd-jr-lg-dia-5-spoke-wheels-w-hard-red-slick-tires/
+scrapedAt: 2026-09-08

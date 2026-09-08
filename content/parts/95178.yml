@@ -1,0 +1,51 @@
+id: "95178"
+names:
+  ja: HG カーボンマルチ強化プレート(1.5mm) J-CUP2025
+  en: HG CARBON REINFORCING PLATE (1.5mm) J-CUP 2025
+  zh-HK: HG 碳纖維強化 防撞桿 (1.5mm) 日本盃2025特別版
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: limited
+seriesLabel: ミニ四駆限定販売商品（パーツ）
+category: plate
+categorySource: derived
+slots:
+  - front-stay
+  - rear-stay
+  - side-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - superTZ_X
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  plateThicknessMm: 1.5
+  plateMaterial: carbon
+priceJpy: 1034
+priceJpyExTax: 940
+priceHkd: 94
+releaseDate: 2025-07-19
+releaseDateRaw: 2025年7月19日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95178/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95178/95178_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95178-hg-carbon-reinforcing-plate-1-5mm-j-cup-2025/
+specsRaw: 軽量で強度の高い1.5mm厚カーボン製ステー。取り付けビスやナット、ワッシャーなどもセット。
+scrapedAt: 2026-09-08

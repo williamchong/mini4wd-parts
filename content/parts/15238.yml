@@ -1,0 +1,35 @@
+id: "15238"
+names:
+  ja: スーパーX・ナローワンウェイホイール
+  en: NARROW ONE-WAY WHEEL SET FOR SUPER X CHASSIS
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 238
+seriesLabel: ミニ四駆グレードアップパーツ
+category: wheel
+categorySource: derived
+slots:
+  - wheel-front
+  - wheel-rear
+isCarPart: true
+chassisCompat:
+  include: []
+  other:
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 660
+priceJpyExTax: 600
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15238/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15238/15238_1.jpg
+specsRaw: ワンウェイホイールとスポンジタイヤを1台分セット
+scrapedAt: 2026-09-08

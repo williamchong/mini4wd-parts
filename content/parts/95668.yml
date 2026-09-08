@@ -1,0 +1,38 @@
+id: "95668"
+names:
+  ja: フルカウルミニ四駆 コンパクトバッグ (ブラック)
+  en: FULLY COWLED MINI 4WD COMPACT BAG (BLACK)
+  zh-HK: Fully Cowled Mini 4WD 全罩式迷你四驅車 便攜袋 (黑色)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: accessory
+categorySource: derived
+slots:
+  - none
+isCarPart: false
+chassisCompat:
+  include: []
+  other: []
+  source: scraped
+classLegality:
+  open: unknown
+  stockBmax: unknown
+  junior: unknown
+  source: derived
+  notes: 非車體零件，不適用比賽規則
+specs: {}
+priceJpy: 1628
+priceJpyExTax: 1480
+priceHkd: 148
+releaseDate: 2024-10-26
+releaseDateRaw: 2024年10月26日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95668/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95668/95668_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95668-fully-cowled-mini-4wd-compact-bag-black/
+specsRaw: 収納可能重量：1kg、サイズ：縦120×横190×高さ115mm（内寸）、材質：ナイロン
+scrapedAt: 2026-09-08

@@ -1,0 +1,35 @@
+id: "94768"
+names:
+  ja: AO-1018 ベアリングローラー用スペーサー(20個)
+  en: BEARING ROLLER SPACER (20PCS.)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: ao
+seriesLabel: ミニ四駆用AOパーツ
+category: roller
+categorySource: derived
+slots:
+  - roller-front
+  - roller-rear
+  - roller-side
+isCarPart: true
+chassisCompat:
+  include: []
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  rollerType: bearing
+priceJpy: 220
+priceJpyExTax: 200
+priceHkd: 20
+status: current
+officialUrl: https://www.tamiya.com/japan/products/94768/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/94768/94768_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-94768-bearing-roller-spacer-20pcs/
+scrapedAt: 2026-09-08

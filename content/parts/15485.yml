@@ -1,0 +1,56 @@
+id: "15485"
+names:
+  ja: レブチューン2モーター
+  en: REV-TUNED 2 MOTOR
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 485
+seriesLabel: ミニ四駆グレードアップパーツ
+category: motor
+categorySource: derived
+slots:
+  - motor
+isCarPart: true
+chassisCompat:
+  include:
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: override
+  notes: 需個別確認馬達規則
+specs:
+  motorShaft: single
+  motorRpmMin: 13400
+  motorRpmMax: 15200
+  motorTorqueMin: 1.2
+  motorTorqueMax: 1.5
+priceJpy: 462
+priceJpyExTax: 420
+priceHkd: 42
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15485/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15485/15485_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15485-rev-tuned-2-motor/
+specsRaw: 適正電圧：2.4～3.0V 推奨負荷トルク：1.2～1.5mN･m 回転数：13400～15200r/min 消費電流：1.6～2.0A ※推奨負荷トルク時
+scrapedAt: 2026-09-08

@@ -1,0 +1,37 @@
+id: "15496"
+names:
+  ja: アバンテ クリヤーボディセット （ポリカ）
+  en: AVANTE CLEAR BODY SET (POLYCARBONATE)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 496
+seriesLabel: ミニ四駆グレードアップパーツ
+category: body
+categorySource: derived
+slots:
+  - body
+isCarPart: true
+chassisCompat:
+  include:
+    - super-2
+  other:
+    - super1
+    - superTZ
+    - superTZ_X
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 528
+priceJpyExTax: 480
+releaseDate: 2016-03-05
+releaseDateRaw: 2016年3月5日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15496/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15496/15496_1.jpg
+scrapedAt: 2026-09-08

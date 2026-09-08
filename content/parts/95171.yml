@@ -1,0 +1,59 @@
+id: "95171"
+names:
+  ja: トルクチューン2モーター J-CUP 2024
+  en: TORQUE-TUNED 2 MOTOR J-CUP 2024
+  zh-HK: 迷你四驅車 Torque-Tuned 2 摩打 日本盃2024特別版
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: limited
+seriesLabel: ミニ四駆限定販売商品（パーツ）
+category: motor
+categorySource: derived
+slots:
+  - motor
+isCarPart: true
+chassisCompat:
+  include:
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: override
+  notes: 需個別確認馬達規則
+specs:
+  motorShaft: single
+  motorRpmMin: 12300
+  motorRpmMax: 14700
+  motorTorqueMin: 1.6
+  motorTorqueMax: 2
+priceJpy: 462
+priceJpyExTax: 420
+priceHkd: 42
+releaseDate: 2024-07-06
+releaseDateRaw: 2024年7月6日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95171/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95171/95171_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95171-mini-4wd-torque-tuned-2-motor-j-cup-2024/
+specsRaw: ●適正電圧：2.4-3.0V、推奨負荷トルク：1.6-2.0mN･m、回転数：12300-14700r/min ●消費電流：1.7-2.0A ●片軸モーター
+scrapedAt: 2026-09-08

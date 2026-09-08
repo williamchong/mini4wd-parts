@@ -1,0 +1,46 @@
+id: "15401"
+names:
+  ja: マスダンパーセット(ヘビー)
+  en: MASS DAMPER SET (HEAVY)
+  zh-HK: 制震裝置套裝(重型)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 401
+seriesLabel: ミニ四駆グレードアップパーツ
+category: mass-damper
+categorySource: derived
+slots:
+  - damper
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - superTZ_X
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 396
+priceJpyExTax: 360
+priceHkd: 36
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15401/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15401/15401_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15401-1-32-mini-4wd-jr-mass-damper-heavy-usable-with-miscellaneous-for-1-32-mini-4wd/
+scrapedAt: 2026-09-08

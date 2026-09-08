@@ -1,0 +1,51 @@
+id: "15379"
+names:
+  ja: オフセットトレッドタイヤ・ハード（ホワイト）
+  en: OFFSET TREAD TIRES (HARD/WHITE)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 379
+seriesLabel: ミニ四駆グレードアップパーツ
+category: tire
+categorySource: derived
+slots:
+  - tire-front
+  - tire-rear
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 264
+priceJpyExTax: 240
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15379/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15379/15379_1.jpg
+scrapedAt: 2026-09-08

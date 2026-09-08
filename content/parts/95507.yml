@@ -1,0 +1,36 @@
+id: "95507"
+names:
+  ja: ミニ四駆 HGアルミセッティングボード （ブラック）
+  en: MINI 4WD HG ALUMINUM SETTING BOARD (BLACK)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: special
+seriesLabel: ミニ四駆特別企画商品（パーツ）
+category: setting-tool
+categorySource: derived
+slots:
+  - none
+isCarPart: false
+chassisCompat:
+  include: []
+  other: []
+  source: scraped
+classLegality:
+  open: unknown
+  stockBmax: unknown
+  junior: unknown
+  source: derived
+  notes: 非車體零件，不適用比賽規則
+specs: {}
+priceJpy: 1980
+priceJpyExTax: 1800
+priceHkd: 180
+releaseDate: 2023-06-10
+releaseDateRaw: 2023年6月10日(土)発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95507/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95507/95507_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95507-mini-4wd-hg-aluminum-setting-board-black/
+specsRaw: サイズ：横190mm×縦112mm 高品質なアルミ製
+scrapedAt: 2026-09-08

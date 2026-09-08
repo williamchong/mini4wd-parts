@@ -1,0 +1,38 @@
+id: "15360"
+names:
+  ja: MSシャーシ ゴールドターミナル
+  en: GOLD PLATED TERMINAL SET (for MS CHASSIS)
+  zh-HK: 適用於中置車底盤用鍍金導電片
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 360
+seriesLabel: ミニ四駆グレードアップパーツ
+category: terminal
+categorySource: derived
+slots:
+  - terminal
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 418
+priceJpyExTax: 380
+priceHkd: 38
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15360/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/15360/15360_1s.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15360-mini-pro-gold-terminal-ms-chassis/
+scrapedAt: 2026-09-08

@@ -1,0 +1,56 @@
+id: "15493"
+names:
+  ja: 2mmアルミロックナット （レッド5個）
+  en: 2mm ALUMINUM LOCK NUT (RED, 5PCS.)
+  zh-HK: 2mm鋁製鎖頭絲帽套裝(紅色5個)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 493
+seriesLabel: ミニ四駆グレードアップパーツ
+category: screw
+categorySource: derived
+slots:
+  - fastener
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 550
+priceJpyExTax: 500
+priceHkd: 38
+releaseDate: 2015-11-21
+releaseDateRaw: 2015年11月21日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15493/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15493/15493_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15493-accessori-mini-4wd-dadi-autobloccanti-rossi-2-mm-lock-nut-art/
+scrapedAt: 2026-09-08

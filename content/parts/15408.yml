@@ -1,0 +1,58 @@
+id: "15408"
+names:
+  ja: ロングスタビ低摩擦プラローラー(13mm)セット
+  en: LONG STABILIZING POLE & LOW FRICTION PLASTIC ROLLER SET (13mm)
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+series: gup
+gupNumber: 408
+seriesLabel: ミニ四駆グレードアップパーツ
+category: roller
+categorySource: derived
+slots:
+  - roller-front
+  - roller-rear
+  - roller-side
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  rollerDiameterMm: 13
+  rollerType: plastic
+priceJpy: 330
+priceJpyExTax: 300
+priceHkd: 30
+releaseDate: 2010-02-20
+releaseDateRaw: 2010年2月20日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15408/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15408/15408_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15408-l-pole-low-fric-roller-13mm/
+scrapedAt: 2026-09-08

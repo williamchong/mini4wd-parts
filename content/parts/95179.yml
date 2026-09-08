@@ -1,0 +1,51 @@
+id: "95179"
+names:
+  ja: HG カーボンリヤローラーステー(1.5mm) J-CUP2025
+  en: HG CARBON REAR ROLLER STAY (1.5mm) J-CUP 2025
+  zh-HK: HG 碳纖維強化 後置 導輪設置架 (1.5mm) 日本盃2025特別版
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: limited
+seriesLabel: ミニ四駆限定販売商品（パーツ）
+category: plate
+categorySource: derived
+slots:
+  - front-stay
+  - rear-stay
+  - side-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - superTZ_X
+    - superX
+    - superXX
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  plateThicknessMm: 1.5
+  plateMaterial: carbon
+priceJpy: 1078
+priceJpyExTax: 980
+priceHkd: 98
+releaseDate: 2025-07-19
+releaseDateRaw: 2025年7月19日(土)ごろ発売
+status: limited
+officialUrl: https://www.tamiya.com/japan/products/95179/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95179/95179_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-95179-hg-carbon-rear-roller-stay-1-5mm-j-cup-2025/
+specsRaw: 軽量で強度の高い1.5mm厚カーボン製ステー。取り付けビスやナット、ワッシャーなどもセット。
+scrapedAt: 2026-09-08

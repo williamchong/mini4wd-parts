@@ -1,0 +1,46 @@
+id: "15467"
+names:
+  ja: リヤワイドスライドダンパー
+  en: WIDE REAR SLIDING DAMPER
+  zh-HK: 後置闊幅滑動阻尼裝置
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 467
+seriesLabel: ミニ四駆グレードアップパーツ
+category: slide-damper
+categorySource: derived
+slots:
+  - damper
+  - front-stay
+  - rear-stay
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+  other: []
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs: {}
+priceJpy: 484
+priceJpyExTax: 440
+priceHkd: 44
+releaseDate: 2013-09-28
+releaseDateRaw: 2013年9月28日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15467/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15467/15467_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15467-wide-rear-sliding-damper/
+scrapedAt: 2026-09-08

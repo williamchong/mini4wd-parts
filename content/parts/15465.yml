@@ -1,0 +1,57 @@
+id: "15465"
+names:
+  ja: ミニ四駆 オイルペン
+  en: MINI 4WD OIL APPLICATOR
+  zh-HK: 迷你四驅車 潤滑油筆
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 465
+seriesLabel: ミニ四駆グレードアップパーツ
+category: accessory
+categorySource: derived
+slots:
+  - none
+isCarPart: false
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: unknown
+  stockBmax: unknown
+  junior: unknown
+  source: derived
+  notes: 非車體零件，不適用比賽規則
+specs: {}
+priceJpy: 770
+priceJpyExTax: 700
+priceHkd: 58
+releaseDate: 2013-09-28
+releaseDateRaw: 2013年9月28日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15465/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15465/15465_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15465-mini-4wd-oil-applicator/
+scrapedAt: 2026-09-08

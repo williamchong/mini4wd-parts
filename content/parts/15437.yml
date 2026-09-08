@@ -1,0 +1,60 @@
+id: "15437"
+names:
+  ja: 13mmオールアルミベアリングローラー
+  en: 13mm ALUMINUM BALL-RACE ROLLERS (RINGLESS)
+  zh-HK: 13mm全鋁軸承導輪
+nameSources:
+  ja: tamiya.com
+  en: tamiya.com
+  zh-HK: tamiya.hk
+series: gup
+gupNumber: 437
+seriesLabel: ミニ四駆グレードアップパーツ
+category: roller
+categorySource: derived
+slots:
+  - roller-front
+  - roller-rear
+  - roller-side
+isCarPart: true
+chassisCompat:
+  include:
+    - ma
+    - ms
+    - me
+    - ar
+    - fm-a
+    - vz
+    - super-2
+    - vs
+  other:
+    - FM
+    - super1
+    - superFM
+    - superTZ
+    - superTZ_X
+    - superX
+    - superXX
+    - type3
+    - type4
+    - type5
+    - zero
+  source: scraped
+classLegality:
+  open: legal
+  stockBmax: legal
+  junior: legal
+  source: derived
+specs:
+  rollerDiameterMm: 13
+  rollerType: bearing
+priceJpy: 770
+priceJpyExTax: 700
+priceHkd: 70
+releaseDate: 2011-10-29
+releaseDateRaw: 2011年10月29日(土)発売
+status: current
+officialUrl: https://www.tamiya.com/japan/products/15437/index.html
+officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15437/15437_1.jpg
+hkStoreUrl: https://tamiya.hk/product/tamiya-15437-13mm-aluminum-ball-race-rollers-ringless-for-1-32-mini-4wd/
+scrapedAt: 2026-09-08
