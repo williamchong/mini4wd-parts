@@ -1,6 +1,6 @@
 # mini4wd.parts — Product & Technical Plan
 
-Status: draft v2, 2026-09-08. The catalog pipeline is built and 382 parts + 8 chassis are committed; §6 was re-targeted the same day around an MVP builder with a live 3D view.
+Status: draft v2, 2026-09-08. The catalog pipeline is built and 382 parts, 8 chassis and 305 kits are committed; §6 was re-targeted the same day around an MVP builder with a live 3D view, and M1a (kits) closed the same day.
 Research notes that fed this document (concepts, data sources, 3D assets, tech stack) are summarised inline with source links.
 
 ---
@@ -120,7 +120,7 @@ Attribution page: Tamiya (facts, links), tamiya.hk (prices, zh-HK names), Fandom
 
 First run committed **382 parts** (244 regular GUP + 42 AO + 96 limited/special/station released since 2023-01) and 8 chassis. Coverage at that point: 99% categorised, 83% with chassis compatibility, 80% with HKD prices, 60% with a Traditional Chinese name.
 
-**Kits are not in the snapshot at all.** Verified 2026-09-08: `data/raw/tamiya-jp-items.json` holds 690 items whose ids begin only with 10/15/55/84/94/95 — no 18xxx or 19xxx. `GENRE_SERIES` maps six genre codes and every one of them is a parts genre (`303010` gup, `303030` ao, `303020` special, `303025` limited, `3050` station, `3020` batteries — unmapped). The "second pass with the same code" is therefore real work, and M1 depends on it (§4.7).
+**Kits came in a second pass, into their own snapshot.** The parts run covered only parts genres, so `data/raw/tamiya-jp-items.json` holds 690 items whose ids begin with 10/15/55/84/94/95 and no 18xxx or 19xxx. `KIT_GENRE_SERIES` adds the 14 kit genres under `3010` and writes `data/raw/tamiya-jp-kits.json` (448 items), kept separate so a kit re-scrape leaves the parts diff untouched. See §4.7.
 
 ### 3.3 Images and IP
 
@@ -207,7 +207,7 @@ Two sources, and the split matters because they have opposite gaps.
 | | |
 |---|---|
 | rows (one per kit variant) | 819 |
-| distinct item numbers | 639, of which **334 are 18xxx/19xxx kits** |
+| distinct item numbers | 819, of which **334 are 18xxx/19xxx kits** |
 | chassis type | 99.9% |
 | wheel size / type / spoke / fitment / colour / material | 99–100% |
 | tire size / type / colour / material | 99.6–100% |
@@ -215,23 +215,54 @@ Two sources, and the split matters because they have opposite gaps.
 | motor | 86.8% |
 | body colour / material, L × W × H | 94–100% |
 
-That is exactly the **kit-specific delta** — the slots where kits differ from one another. What it omits (plastic rollers, shafts, bearings, terminal, gear cover) is precisely what the chassis `defaultLoadout` supplies uniformly. So the two sources compose: wiki for the delta, `defaultLoadout` for the rest, `data/overrides/kits.yml` only for the outliers rather than for all 30-odd kits by hand.
+That is exactly the **kit-specific delta** — the slots where kits differ from one another. What it omits (plastic rollers, shafts, bearings, terminal, gear cover) is precisely what the chassis `defaultLoadout` supplies uniformly. So the two sources compose: wiki for the delta, `defaultLoadout` for the rest, `data/overrides/kits.yml` only for the outliers rather than for all 300-odd kits by hand.
 
-Caveats to hold onto: the wiki skews toward notable and anime-derived cars over current shelf stock, so a recent kit may be missing; its fields are free text (`Wheel type=Low-Profile Fin-Type`) and need mapping to our item numbers, which is a lookup table per chassis, not per kit; and it is **CC-BY-SA**, so kit pages that use it must attribute, not just the attribution page. Tamiya stays canonical wherever the two disagree on a fact.
+Caveats to hold onto: the wiki skews toward notable and anime-derived cars over current shelf stock, so a recent kit may be missing; its fields are free text (`Wheel type=Low-Profile Fin-Type`); and it is **CC-BY-SA**, so kit pages that use it must attribute, not just the attribution page. Tamiya stays canonical wherever the two disagree on a fact.
+
+#### What the join actually yields (built and measured 2026-09-08)
+
+The 819 rows are not 819 usable kits — over half sit on chassis we do not model. Walking all 14 kit genre list pages and joining on item number gave:
+
+| | |
+|---|---|
+| Tamiya kit ids across the 14 in-scope genres | 448 |
+| of those, carrying a chassis tag | 433 |
+| **of those, on a v1 chassis — the committed catalog** | **305** |
+| by chassis | ma 69, vs 50, super-2 50, ms 50, ar 34, fm-a 29, vz 21, me 2 |
+| covered by a wiki loadout | 96% (13 kits fall back to the chassis default) |
+| with a gear ratio | 97% |
+| with an HKD price | 78% |
+| with a Traditional Chinese name | 33% |
+
+**Deciding a kit's chassis needs both signals, in the right order.** The chassis tags on a kit page are a *compatibility* list, not a statement about the box: ロボレース デボット2.0 (MAシャーシ) is tagged `ms`, `ar` and `ma`, so reading the first tag files an MA kit under MS — a wrong slot profile and a wrong `defaultLoadout`, and nothing downstream can catch it because MS is a real chassis. So the **name** wins where it names a chassis, the **tag** is trusted only when it leaves one in-scope answer, and the rest are left for `data/overrides/kits.yml`. Across 448 kits that is 4 with multiple tags, of which 2 the name settles, 1 is out of scope anyway, and exactly 1 (95586 ディオマース・ネロ) needs a human.
+
+Three findings changed the design, and all three point the same way — **the wiki describes a box, it does not enumerate purchasable parts**:
+
+1. **The motor field is worthless and does not need to be.** 423 of 463 v1 rows say `Standard`, which is the normal motor the chassis `defaultLoadout` already supplies. Only a real upgrade is a delta worth storing.
+2. **Tamiya rarely supplies the gear ratio.** Its 【基本スペック】 block carries `ギヤ比` on about 5% of kit pages (2 of a 40-kit sample), against the wiki's 98%. So the two are not interchangeable: **Tamiya is canonical for identity, price, date and chassis; the wiki carries the loadout.** Where Tamiya does print a ratio it still wins, and those are the newest kits — which is how ME gets one despite having no wiki row.
+3. **Most loadout entries can never have an item number.** `Wheel type = Low-Profile Saber-Type` is moulded into the kit and Tamiya has never sold it as a Grade-Up Part. So a loadout entry carries an optional `partId` **and** a free-text `label`, and a label with no item number is the normal case. That is also what makes the shopping list correct: an entry with no `partId` is something you already own and cannot buy.
+
+That last point retires the "free-text → item-number lookup table per chassis" this section used to call for. There are 47 distinct wheel types and 14 tire types across the v1 rows, and authoring a mapping for them up front would mostly produce mappings to nothing. `npm run catalog:report` lists the labels by frequency instead, so `data/overrides/kits.yml` can name the few that really do correspond to a catalog part.
+
+ME is the coverage hole — Tamiya lists only two ME kits so far and the wiki covers neither — but that is mitigated: Tamiya prints `ギヤ比` in its own spec block on about one kit page in twenty, and those are the newest kits, so ME still gets a real gear ratio. Where the two disagree Tamiya wins, per §3.
 
 #### Schema and work
 
-**New `kits` collection** (`content/kits/*.yml`, generated like parts): `id`, `names {ja, en, zh-TW, zh-HK}`, `chassis`, `bodyArchetype`, `stockLoadout`, `priceJpy`, `priceHkd`, `releaseDate`, `status`, `officialUrl`, `loadoutSource`.
+**New `kits` collection** (`content/kits/*.yml`, generated like parts): `id`, `names {ja, en, zh-TW, zh-HK}`, `series`, `seriesNumber`, `chassis`, `gearRatio`, `stockLoadout`, `loadoutSource`, `loadoutSourceTitle`, `priceJpy`, `priceHkd`, `releaseDate`, `status`, `officialUrl`. `bodyArchetype` is deliberately absent until the 3D work needs it: nothing can fill it yet, and the catalog omits fields it cannot fill rather than stubbing them.
 
-**New field on chassis:** `defaultLoadout` — slot id → part ids for what the bare chassis runner provides. Hand-authored in `data/chassis/*.yml`, eight records.
+**New field on chassis:** `defaultLoadout` — slot id → what the bare runner provides. Hand-authored in `data/chassis/*.yml`, eight records.
 
-1. Identify the kit genre codes on `tamiya.com/japan/products/list.html`, add them to `GENRE_SERIES` in `scripts/catalog/sources/tamiya-jp.ts`, widen `selects()` in `generate.ts`. The list and detail parsers already handle these pages.
-2. Add a `Technical Info List` reader to `scripts/catalog/sources/fandom.ts`. The generic `parseTemplate` and `splitParams` it needs are already there and tested — the taxonomy cross-reference (§3.2) built them.
-3. Re-run `npm run scrape` (cached, so only the new genres cost requests) and commit the widened snapshots.
-4. Author `defaultLoadout` for the eight chassis, plus the free-text → item-number lookup for wheel/tire/motor/gear values.
-5. Extend `shared/catalog/schema.ts` with `kitSchema` and `defaultLoadout`, register the collection in `content.config.ts`, and extend `catalog:verify` to check that every `stockLoadout` entry names a part that exists and fits that slot.
+A kit stores only the **delta** over its chassis' `defaultLoadout`, not the merged result. Seeding a build merges the two, which the bare-chassis entry point needs anyway, and it means re-authoring a chassis default does not require regenerating every kit that uses it.
 
-Scoping note: M1 does not need all ~500 kits, only enough current, in-shops kits that a beginner recognises the box on their desk. The wiki's 334 make that a coverage question rather than an authoring one.
+1. Add `KIT_GENRE_SERIES` to `scripts/catalog/sources/tamiya-jp.ts` alongside `GENRE_SERIES` (14 codes; Wild, Dangun and Train stay out per §3.1). The genre becomes a type parameter on `ListEntry`/`JpItem`, so a kit reaching the part builder is a compile error rather than a bogus `gupNumber`.
+2. Add a `Technical Info List` reader to `sources/fandom.ts`. `parseTemplate` had to become `parseTemplates`: a car article carries one call per variant and the old parser returned only the first.
+3. Scrape kits into their own `data/raw/tamiya-jp-kits.json`, so a kit re-scrape leaves the parts diff alone.
+4. Author `defaultLoadout` for the eight chassis.
+5. Extend `shared/catalog/schema.ts` with `kitSchema`, `loadout` and `defaultLoadout`, register the collection in `content.config.ts`, and extend `catalog:verify`. The verify check has to resolve a loadout's slot **id** to the chassis profile's slot **type** before testing a part against it — the profile calls a shaft slot `axle` and a gear slot `gear-set`, so comparing ids to types directly would pass almost anything.
+
+Scoping note: M1 does not need all 448 kits, only enough current, in-shops kits that a beginner recognises the box on their desk. The 292 that landed with a wiki loadout make that a coverage question rather than an authoring one.
+
+Two prefix fixes fell out of this work: the wiki item-number pattern was missing `17`, `92` and `93` (limited kit variants), which is why the count above is 819 rather than the 639 first measured, and the tamiya.hk SKU filter was missing `17` (Beginner's kits).
 
 ---
 
@@ -313,7 +344,7 @@ Milestones are renamed M0–M4 to make clear they are not the old Phase 0–4.
 
 Three workstreams. The catalog and builder ones are independent of the asset one, and the fallback proxy (§5.4) means the builder ships whether or not the meshes are ready — start them in parallel and let the 3D fidelity climb behind a working product.
 
-**a. Catalog: kits (§4.7).** Kit genre codes into `GENRE_SERIES`, a `Technical Info List` reader in `sources/fandom.ts`, re-scrape, `kits` collection, `defaultLoadout` on all 8 chassis. `stockLoadout` is imported for the 334 kits the wiki covers, not hand-authored.
+~~**a. Catalog: kits (§4.7).**~~ — done 2026-09-08. 305 kits across the 8 v1 chassis, 96% with an imported `stockLoadout`, plus a hand-authored `defaultLoadout` on all 8 chassis. Nothing was hand-authored per kit.
 
 **b. Site and builder.**
 - Part and chassis pages, prerendered per locale, JSON-LD `Product`, sitemap, attribution page. These are what search engines see and they are cheap now that the data exists.
@@ -353,8 +384,8 @@ Beginner wizard (F5) seeded from the six archetypes in §2.5 and weighted by the
 | Tamiya IP: names, photos, 3D shapes | Facts + own text, own photos for builder parts, stylised 3D, disclaimer, no GLB downloads |
 | 3D asset effort (150–190 h) dominates the timeline | M1 buys only ~40–50 h of it: one chassis, 3 generic bodies, ~12 parametric generators, and a labelled fallback proxy so the builder ships independently of mesh coverage (§5.4) |
 | Pulling 3D into the MVP repeats the mistake §1 warned about | The 3D **view** is cheap and bounded; the 3D **input** surface (raycast proxies, click-to-select, touch tuning) is the expensive half and stays in M3. If the MA chassis mesh slips, the fallback proxy means M1 still ships with a recognisable car |
-| Tamiya publishes no bill-of-materials for kits, so "start from my kit" has no source | The Fandom wiki's `Technical Info List` covers 334 kits with chassis, wheel, tire, gear and motor at 87–100% fill (§4.7); the chassis `defaultLoadout` supplies the rest, `data/overrides/kits.yml` the outliers, and any kit the wiki misses degrades to the plain chassis loadout rather than breaking |
-| Wiki kit data is CC-BY-SA and free text, not item numbers | Attribute on the kit pages themselves, not only the attribution page; map its free-text values (`Wheel type=Low-Profile Fin-Type`) to item numbers with a per-chassis lookup table; Tamiya stays canonical on any fact the two disagree on |
+| ~~Tamiya publishes no bill-of-materials for kits, so "start from my kit" has no source~~ | Resolved 2026-09-08: 305 kits committed, 96% with a `stockLoadout` imported from the wiki's `Technical Info List`, the chassis `defaultLoadout` supplying the rest, and the 13 uncovered kits degrading to it rather than breaking (§4.7) |
+| Wiki kit data is CC-BY-SA and free text, not item numbers | Each kit carries `loadoutSourceTitle` so kit pages attribute on the page itself, not only the attribution page. Free-text values are deliberately **not** forced into item numbers: a loadout entry may carry a label alone, which is correct because most moulded parts were never sold separately. `catalog:report` ranks those labels by frequency so `data/overrides/kits.yml` can name the few that do map. Tamiya stays canonical on any fact the two disagree on |
 | Body shapes are the highest IP risk and the priciest geometry | M1 ships 3 generic stylised archetypes shared across kits, labelled in the UI as representative, not per-kit reproductions (§5.4) |
 | Image-to-3D quality for thin parts | Only used for body blockouts; procedural/Blender for everything else |
 | Cloudflare free-tier limits (KV 1K writes/day, D1 hard limits since 2026-09-01) | Use D1 not KV for writes; prerender everything; Workers Paid is $5/mo if ever needed |
