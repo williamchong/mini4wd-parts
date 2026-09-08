@@ -68,6 +68,7 @@ const SLOTS_BY_CATEGORY: Record<Category, Slot[]> = {
   'gear': ['gear', 'counter-gear'],
   'gear-cover': ['none'],
   'shaft': ['shaft'],
+  'propeller-shaft': ['propeller-shaft'],
   'wheel': ['wheel-front', 'wheel-rear'],
   'tire': ['tire-front', 'tire-rear'],
   'wheel-tire-set': ['wheel-front', 'wheel-rear', 'tire-front', 'tire-rear'],

@@ -94,3 +94,13 @@
 # report stops flagging them.
 '10320': { category: other } # ゴムパイプ 3.5×60mm — brake and damper tuning material
 '94387': { category: other } # プラズマダッシュブラシホルダーセット — motor spare
+# Was mis-derived as a sticker (シールド contains シール). With that rule anchored
+# it falls through to the モーター rule instead, which is worse — a cooling shield
+# would show up in the motor picker. It is a real car part with no slot of its own.
+'15340': { category: other } # モータークーリングシールド — motor heatsink
+
+# --- Category corrections from catalog:crossref -------------------------------
+# Parts whose names contain シャフト but which are not shafts. Surfaced by the
+# Fandom wiki cross-reference; see scripts/catalog/crossref.ts.
+'10308': { category: spacer } # AO-1037 アルミシャフトストッパー — axle locking collar
+'94809': { category: screw }  # AO-1024 2×38mm両ネジシャフト — double-threaded stud

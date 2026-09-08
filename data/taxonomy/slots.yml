@@ -10,6 +10,7 @@ profiles:
     - { id: motor, type: motor, maxCount: 1, required: true }
     - { id: gear-set, type: gear, maxCount: 1, required: true }
     - { id: counter-gear, type: counter-gear, maxCount: 1 }
+    - { id: propeller-shaft, type: propeller-shaft, maxCount: 1 }
     - { id: terminal, type: terminal, maxCount: 1, required: true }
     - { id: switch, type: switch, maxCount: 1 }
     - { id: axle, type: shaft, maxCount: 2, mirror: true, required: true }

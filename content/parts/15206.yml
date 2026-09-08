@@ -10,10 +10,10 @@ nameSources:
 series: gup
 gupNumber: 206
 seriesLabel: ミニ四駆グレードアップパーツ
-category: shaft
+category: propeller-shaft
 categorySource: derived
 slots:
-  - shaft
+  - propeller-shaft
 isCarPart: true
 chassisCompat:
   include: []

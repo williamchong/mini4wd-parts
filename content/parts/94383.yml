@@ -5,10 +5,10 @@ nameSources:
   ja: tamiya.com
 series: ao
 seriesLabel: ミニ四駆用AOパーツ
-category: shaft
+category: propeller-shaft
 categorySource: derived
 slots:
-  - shaft
+  - propeller-shaft
 isCarPart: true
 chassisCompat:
   include: []

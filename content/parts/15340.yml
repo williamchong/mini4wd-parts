@@ -8,11 +8,11 @@ nameSources:
 series: gup
 gupNumber: 340
 seriesLabel: ミニ四駆グレードアップパーツ
-category: sticker
-categorySource: derived
+category: other
+categorySource: override
 slots:
   - none
-isCarPart: false
+isCarPart: true
 chassisCompat:
   include:
     - ms
@@ -24,8 +24,9 @@ classLegality:
   stockBmax: unknown
   junior: unknown
   source: derived
-  notes: 非車體零件，不適用比賽規則
-specs: {}
+  notes: 需個別確認馬達規則
+specs:
+  motorShaft: single
 priceJpy: 330
 priceJpyExTax: 300
 status: current

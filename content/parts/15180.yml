@@ -8,11 +8,13 @@ nameSources:
 series: gup
 gupNumber: 180
 seriesLabel: ミニ四駆グレードアップパーツ
-category: sticker
+category: roller
 categorySource: derived
 slots:
-  - none
-isCarPart: false
+  - roller-front
+  - roller-rear
+  - roller-side
+isCarPart: true
 chassisCompat:
   include:
     - ma
@@ -37,12 +39,13 @@ chassisCompat:
     - zero
   source: scraped
 classLegality:
-  open: unknown
-  stockBmax: unknown
-  junior: unknown
+  open: legal
+  stockBmax: legal
+  junior: legal
   source: derived
-  notes: 非車體零件，不適用比賽規則
-specs: {}
+specs:
+  rollerDiameterMm: 13
+  rollerType: bearing
 priceJpy: 550
 priceJpyExTax: 500
 status: current

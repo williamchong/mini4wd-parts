@@ -7,10 +7,10 @@ nameSources:
   en: tamiya.com
 series: ao
 seriesLabel: ミニ四駆用AOパーツ
-category: shaft
-categorySource: derived
+category: screw
+categorySource: override
 slots:
-  - shaft
+  - fastener
 isCarPart: true
 chassisCompat:
   include: []

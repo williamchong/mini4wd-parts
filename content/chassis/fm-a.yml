@@ -37,6 +37,11 @@ slots:
     maxCount: 1
     mirror: false
     required: false
+  - id: propeller-shaft
+    type: propeller-shaft
+    maxCount: 1
+    mirror: false
+    required: false
   - id: terminal
     type: terminal
     maxCount: 1

@@ -18,9 +18,14 @@
   carPart: false
   match: [ドライバー, ピンバイス, ニッパー, ヤスリ, やすり, ペンチ, プライヤー, プーラー, リューター, クラフトツール, ドリル, ハンダ, チェッカー]
 
+# シール is a substring of シールド (shield) and シールタイプ (sealed), so a bare
+# match filed モータークーリングシールド and a 透明シールタイプ bearing set as
+# stickers. Anchor it to the standalone word. Caught by `npm run catalog:crossref`
+# against the Fandom wiki's curated part types.
 - category: sticker
   carPart: false
-  match: [ステッカー, デカール, シール]
+  match: [ステッカー, デカール]
+  regex: シール(?!ド|タイプ)
 
 - category: accessory
   carPart: false
@@ -100,6 +105,12 @@
 - category: bumper
   match: [バンパー, ステアリング, アンダーガード]
 
+
+# Must sit above `shaft`: プロペラシャフト contains シャフト, but a propeller shaft
+# drives the axles and an axle carries the wheels — different slots entirely, and
+# PRO chassis have no propeller shaft at all.
+- category: propeller-shaft
+  match: [プロペラシャフト]
 
 - category: shaft
   match: [シャフト]

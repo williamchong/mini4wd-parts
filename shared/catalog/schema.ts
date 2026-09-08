@@ -54,7 +54,13 @@ export const PART_CATEGORIES = [
   'bearing',
   'gear',
   'gear-cover',
+  /**
+   * Two different parts share the word シャフト. `shaft` is the axle the wheels
+   * ride on; `propeller-shaft` is the drivetrain link that only single-shaft
+   * chassis have. They fill different slots, so they cannot share a category.
+   */
   'shaft',
+  'propeller-shaft',
   'wheel',
   'tire',
   'wheel-tire-set',
@@ -104,6 +110,7 @@ export const SLOTS = [
   'gear',
   'counter-gear',
   'shaft',
+  'propeller-shaft',
   'bearing',
   'wheel-front',
   'wheel-rear',
