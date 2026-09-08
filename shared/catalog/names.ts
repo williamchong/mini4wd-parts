@@ -70,3 +70,26 @@ export function resolveLabel(
 export function hasTraditionalChineseName(names: LabelNames): boolean {
   return Boolean(names['zh-HK'] || names['zh-TW'])
 }
+
+/**
+ * Whether a catalog record answers a picker's search box.
+ *
+ * Matches the item number as well as the name: a rack of Grade-Up Parts is
+ * labelled by number, and "15549" is often what the reader is holding. Kits are
+ * the same — the number is printed on the end of the box.
+ *
+ * **Every** locale is searched, not just the one being displayed. A reader who
+ * knows a part as "Hyper-Dash", or a kit as "Raikiri", should find it while
+ * reading the Chinese page; the displayed name is one of these values anyway.
+ * That matters more for kits than for parts, because two thirds of them have no
+ * Traditional Chinese name at all.
+ *
+ * Lives here rather than in either picker because there are now two of them and
+ * this rule is easy to half-remember.
+ */
+export function matchesQuery(query: string, id: string, names: LabelNames): boolean {
+  const needle = query.trim().toLowerCase()
+  if (!needle) return true
+  return id.includes(needle)
+    || Object.values(names).some(name => name?.toLowerCase().includes(needle))
+}

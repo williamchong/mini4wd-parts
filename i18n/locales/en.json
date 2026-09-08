@@ -26,6 +26,23 @@
   "build": {
     "title": "Builder",
     "pickChassis": "Pick a chassis to start",
+    "door": {
+      "kit": "From a kit",
+      "chassis": "From a bare chassis"
+    },
+    "pickKit": "Which kit is on your desk?",
+    "searchKits": "Search by kit name or item number",
+    "kitCandidates": "{count} kits",
+    "chassisAll": "All",
+    "kitStatus": {
+      "limited": "Limited edition"
+    },
+    "kitSource": {
+      "fandom": "Parts list for this kit from the Mini 4WD Fandom Wiki:",
+      "licence": "CC BY-SA",
+      "chassis": "Tamiya publishes no parts list for this kit, so what is shown below is this chassis' standard loadout.",
+      "note": "Kit contents and gear ratios come partly from the Mini 4WD Fandom Wiki, used under CC BY-SA."
+    },
     "pickPart": "Choose {slot}",
     "searchParts": "Search by name or item number",
     "candidates": "{count} parts fit",

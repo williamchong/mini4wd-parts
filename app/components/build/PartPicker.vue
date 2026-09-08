@@ -5,6 +5,7 @@
  * own search, because everything else is a property of the catalog rather than
  * of the query they typed.
  */
+import { matchesQuery } from '#shared/catalog/names'
 import type { SlotCandidate } from '#shared/catalog/build'
 import type { Slot } from '#shared/catalog/schema'
 
@@ -18,21 +19,10 @@ const emit = defineEmits<{ select: [string]; close: [] }>()
 
 const query = ref('')
 
-/**
- * Matches the item number as well as the name: a rack of Grade-Up Parts is
- * labelled by number, and "15549" is often what the reader is holding.
- *
- * Every name is searched, not just the one being displayed. A reader who knows
- * a part as "Hyper-Dash" should find it while reading the Chinese page, and the
- * displayed name is one of these values anyway.
- */
-const matches = computed(() => {
-  const needle = query.value.trim().toLowerCase()
-  if (!needle) return props.candidates
-  return props.candidates.filter(({ part }) =>
-    part.id.includes(needle)
-    || Object.values(part.names).some(name => name?.toLowerCase().includes(needle)))
-})
+// The rule this used to spell out inline now lives in `matchesQuery`, because
+// the kit picker needs exactly the same one and two copies would drift.
+const matches = computed(() =>
+  props.candidates.filter(({ part }) => matchesQuery(query.value, part.id, part.names)))
 </script>
 
 <template>

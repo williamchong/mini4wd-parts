@@ -26,6 +26,23 @@
   "build": {
     "title": "組車器",
     "pickChassis": "選擇底盤開始",
+    "door": {
+      "kit": "由套件開始",
+      "chassis": "由淨底盤開始"
+    },
+    "pickKit": "你手上是哪一款套件？",
+    "searchKits": "搜尋套件名稱或編號",
+    "kitCandidates": "{count} 款套件",
+    "chassisAll": "全部",
+    "kitStatus": {
+      "limited": "限定版"
+    },
+    "kitSource": {
+      "fandom": "此套件的零件清單來自 Mini 4WD Fandom Wiki：",
+      "licence": "CC BY-SA 授權",
+      "chassis": "田宮沒有公佈這款套件的零件清單，以下顯示的是此底盤的標準配置。",
+      "note": "套件內容與齒輪比部分取自 Mini 4WD Fandom Wiki，以 CC BY-SA 授權使用。"
+    },
     "pickPart": "選擇{slot}",
     "searchParts": "搜尋名稱或編號",
     "candidates": "{count} 件可用零件",

@@ -37,6 +37,27 @@ export type BuildableChassis = Pick<Chassis, 'id' | 'slots' | 'defaultLoadout' |
 export type BuildableKit = Pick<Kit, 'stockLoadout'>
 
 /**
+ * What the kit picker reads. A superset of `BuildableKit` rather than a
+ * replacement: `resolveBuild` needs exactly one field, and asking it for
+ * thirteen would let the resolver quietly start depending on a price.
+ *
+ * Every field named here ships to every visitor of the prerendered /build
+ * route. Measured over the 305 committed kits: 291 KB raw, 24.6 KB gzipped, of
+ * which `stockLoadout` alone is 179 KB / 7.4 KB. That one is the feature — the
+ * kit is chosen after hydration and there is no server to ask, so it is all 305
+ * loadouts or none, and "none" makes the kit door produce a build
+ * indistinguishable from the bare-chassis one.
+ *
+ * Deliberately absent: `series`, `seriesNumber` (180 of 305, and its only
+ * human-readable partner `seriesLabel` is Japanese-only free text), `specsRaw`,
+ * `officialUrl`, `hkStoreUrl`, `nameSources`, `releaseDateRaw`.
+ */
+export type PickableKit = Pick<Kit,
+  'id' | 'names' | 'chassis' | 'status' | 'gearRatio' | 'priceJpy' | 'priceHkd'
+  | 'releaseDate' | 'officialImage' | 'loadoutSource' | 'loadoutSourceTitle'
+  | 'stockLoadout'>
+
+/**
  * The rulesets a build can be checked against (docs/PLAN.md §2.1).
  *
  * Taken from `classLegality`'s own keys rather than restated, so renaming a

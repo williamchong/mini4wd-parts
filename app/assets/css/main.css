@@ -138,6 +138,27 @@ body {
   gap: 1rem;
 }
 
+.build-title h1 {
+  margin: 0;
+}
+
+/* The same cue the pickers use, applied to a heading: two thirds of kits have
+   no Traditional Chinese name, so this is a marked exception, not an error. */
+.build-title h1.fallback {
+  opacity: 0.8;
+  font-style: italic;
+}
+
+.build-subtitle {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  align-items: baseline;
+  margin: 0.25rem 0 0;
+  font-size: 0.9em;
+  opacity: 0.75;
+}
+
 .build-note {
   margin: 0 0 1.5rem;
   padding: 0.75rem 1rem;
@@ -145,6 +166,31 @@ body {
   background: #f4f6f8;
   border-left: 3px solid #c8d2da;
   border-radius: 3px;
+}
+
+/* Attribution, so it reads as a credit rather than as another warning. */
+.kit-credit {
+  margin: -0.9rem 0 1.5rem;
+  font-size: 0.85em;
+  opacity: 0.8;
+}
+
+.kit-credit a {
+  color: inherit;
+}
+
+.kit-licence {
+  margin-inline-start: 0.5rem;
+  font-variant: all-small-caps;
+  letter-spacing: 0.03em;
+}
+
+.kit-status {
+  padding: 0 0.35rem;
+  font-size: 0.9em;
+  background: #f3e7d0;
+  border-radius: 3px;
+  opacity: 1;
 }
 
 button.link {
@@ -194,6 +240,139 @@ button.link {
 .chassis-notes {
   font-size: 0.85em;
   opacity: 0.75;
+}
+
+/* Kit picker */
+
+.door-toggle {
+  display: inline-flex;
+  margin-bottom: 1.25rem;
+  border: 1px solid #d8dee4;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.door-toggle button {
+  padding: 0.5rem 1rem;
+  font: inherit;
+  background: #fff;
+  border: none;
+  cursor: pointer;
+}
+
+.door-toggle button + button {
+  border-inline-start: 1px solid #d8dee4;
+}
+
+.door-toggle button.active {
+  background: #2c3e50;
+  color: #fff;
+}
+
+.chassis-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.75rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chassis-chips button {
+  display: flex;
+  gap: 0.35rem;
+  align-items: baseline;
+  padding: 0.3rem 0.7rem;
+  font: inherit;
+  font-size: 0.85em;
+  background: #fff;
+  border: 1px solid #d8dee4;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.chassis-chips button.active {
+  background: #2c3e50;
+  border-color: #2c3e50;
+  color: #fff;
+}
+
+.chip-count {
+  font-variant-numeric: tabular-nums;
+  opacity: 0.6;
+}
+
+.kit-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(20rem, 1fr));
+  gap: 0.75rem;
+  padding: 0;
+  list-style: none;
+}
+
+.kit-list button {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+  width: 100%;
+  height: 100%;
+  padding: 0.6rem;
+  font: inherit;
+  text-align: start;
+  background: #fff;
+  border: 1px solid #d8dee4;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.kit-list button:hover {
+  border-color: #8a99a8;
+}
+
+/* Width and height are also set on the element so lazy-loading reserves the
+   box before the photo arrives; this only constrains how it fills it. */
+.kit-thumb {
+  flex: none;
+  width: 5rem;
+  height: auto;
+  background: #f4f6f8;
+  border-radius: 4px;
+}
+
+.kit-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.kit-name {
+  font-weight: 600;
+}
+
+.kit-name.fallback {
+  opacity: 0.75;
+  font-style: italic;
+}
+
+.kit-facts,
+.kit-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: baseline;
+  font-size: 0.85em;
+  opacity: 0.75;
+}
+
+.kit-id {
+  font-variant-numeric: tabular-nums;
+}
+
+.kit-source-note {
+  margin-top: 1.5rem;
+  font-size: 0.8em;
+  opacity: 0.7;
 }
 
 /* Slot list */
