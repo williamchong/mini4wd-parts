@@ -1,6 +1,6 @@
 # mini4wd.parts — Product & Technical Plan
 
-Status: draft v1, 2026-09-08. Planning only; no implementation yet.
+Status: draft v2, 2026-09-08. The catalog pipeline is built and 382 parts + 8 chassis are committed; §6 was re-targeted the same day around an MVP builder with a live 3D view.
 Research notes that fed this document (concepts, data sources, 3D assets, tech stack) are summarised inline with source links.
 
 ---
@@ -9,22 +9,22 @@ Research notes that fed this document (concepts, data sources, 3D assets, tech s
 
 A Traditional-Chinese-first (English second, Japanese later) site for Mini 4WD beginners that combines:
 
-| # | Feature | Phase |
+| # | Feature | Milestone |
 |---|---|---|
-| F1 | Parts database (chassis, kits, Grade-Up Parts) with chassis compatibility and class legality | 1 |
-| F2 | Tutorials: how to pick parts for different goals, class glossary (Open / Stock / B-MAX) | 1 |
-| F3 | Car builder: pick a chassis, fill slots with parts, see compatibility warnings | 1 (2D list UI) → 3 (3D) |
-| F4 | Shareable builds with part list, permalink and preview image | 1 (URL-encoded) → 2 (short links + OG image) → 3 (3D preview) |
-| F5 | Beginner wizard / recommender (budget, class, course type → suggested build) | 2 |
-| F6 | Ratings and popularity for parts and builds | 2 |
-| F7 | Interactive 3D builder (click the car to select parts, model updates live) | 3 |
-| F8 | Accounts, garages, comments, community data contributions | 4 |
+| F1 | Parts database (chassis, kits, Grade-Up Parts) with chassis compatibility and class legality | M1 |
+| F2 | Tutorials: how to pick parts for different goals, class glossary (Open / Stock / B-MAX) | M2 |
+| F3 | Car builder: start from a **kit** or a **bare chassis**, fill slots with parts, see compatibility warnings | **M1** |
+| F4 | Shareable builds with part list, permalink and preview image | M1 (URL-encoded) → M2 (short links + OG image) → M3 (3D preview) |
+| F5 | Beginner wizard / recommender (budget, class, course type → suggested build) | M4 |
+| F6 | Ratings and popularity for parts and builds | M2 |
+| F7 | 3D view of the assembled car, re-rendering live as parts change | **M1 (view-only)** → M3 (click the car to select) |
+| F8 | Accounts, garages, comments, community data contributions | M4 |
 
 Nothing like this exists today. Japanese resources are blog/wiki style and stale, Tamiya's compatibility matrix is a GIF image, the licensed Bandai game (超速グランプリ) shut down in May 2024, and there is no Traditional Chinese item-level database at all. See the prior-art notes in section 8.
 
 ### Guiding decisions
 
-1. **Data first, 3D second.** The builder, wizard, share pages and 3D view all sit on the same slot-graph data model. Ship the parts database and a 2D builder before investing in 3D assets, which is the most expensive and riskiest workstream.
+1. **Data first, 3D second — and the data is now paid for.** The builder, wizard, share pages and 3D view all sit on the same slot-graph data model, which landed on 2026-09-08 (382 parts, 8 chassis, a slot profile per chassis family). The ordering was never "3D last", it was "3D not before the data"; that condition is now met, so the 3D **view** moves into the MVP (§6 M1). What stays late is 3D as an *input* surface — clicking the car to select parts — because that is the expensive, risky half and the 2D list already does the job better on mobile.
 2. **Catalog in git, user data in a database.** Parts, chassis, rules and guides are versioned YAML/Markdown in the repo. Only builds, votes and view counts live in a database.
 3. **Stay in the Nuxt/Vue toolchain**, at near-zero hosting cost.
 4. **Facts are ours, Tamiya's expression is not.** Store facts (item numbers, prices, dimensions, compatibility) and our own text, photos and simplified 3D shapes. Link out to Tamiya for official descriptions and images.
@@ -109,14 +109,18 @@ Neither Tamiya Stock Class nor B-MAX publishes an approved item list; both are r
 
 ### 3.2 Pipeline
 
-Built 2026-09-08 as `scripts/catalog/` — three stages, deliberately separated so a re-run is cheap and can never overwrite hand-authoring:
+Built 2026-09-08 as `scripts/catalog/` — four stages, deliberately separated so a re-run is cheap and can never overwrite hand-authoring:
 
-1. **Scrape wide** (`npm run scrape`): JP list pages → item ids → JP detail → per-chassis compat pages → tamiya.hk Store API. Throttled to one request per 700 ms with a disk cache under `.cache/`, ≈930 requests per full run (the EN catalog turned out to be unnecessary — the JP detail page carries the English name). Output: committed snapshots in `data/raw/*.json` covering **every** item in the parts genres, not just the v1 selection, so widening the catalog later costs no requests.
+1. **Scrape wide** (`npm run scrape`, or `--only=jp,compat,hk,fandom`): JP list pages → item ids → JP detail → per-chassis compat pages → tamiya.hk Store API → Fandom wiki. Throttled to one request per 700 ms with a disk cache under `.cache/`, ≈930 requests per full run (the EN catalog turned out to be unnecessary — the JP detail page carries the English name). Output: committed snapshots in `data/raw/*.json` covering **every** item in the parts genres, not just the v1 selection, so widening the catalog later costs no requests.
 2. **Generate narrow** (`npm run catalog:generate`): raw snapshots + `data/taxonomy/*.yml` + `data/overrides/parts.yml` → schema-validated YAML in `content/parts/` and `content/chassis/`. Everything under `content/` is machine-written and rebuilt from scratch on every run.
 3. **Hand-authored layer**: `data/overrides/parts.yml` (keyed by item number) and `data/chassis/*.yml`. Category corrections, motor legality, slot graphs and TW naming live here, never in `content/`. `npm run catalog:report` lists what still needs a human.
-4. Attribution page: Tamiya (facts, links), tamiya.hk (prices, zh-HK names), Fandom/Wikipedia (CC-BY-SA text where reused).
+4. **Cross-check** (`npm run catalog:crossref`): our derived categories against the Fandom wiki's hand-written `Parts type`, joined on item number. Our categories come from ordered substring rules over Japanese names, whose one failure mode is a short keyword swallowing a longer word — an independent taxonomy is the cheapest detector for exactly that. A QA source only: CC-BY-SA, and nothing from it is written into `content/`. Its first run joined 121 of our 382 parts and caught two live defects (`シール` matching `シールド` and `シールタイプ`; propeller shafts filed as axles) plus a missing propeller-shaft slot.
 
-First run committed **382 parts** (244 regular GUP + 42 AO + 96 limited/special/station released since 2023-01) and 8 chassis. Coverage at that point: 99% categorised, 83% with chassis compatibility, 80% with HKD prices, 60% with a Traditional Chinese name. Kits are a second pass with the same code.
+Attribution page: Tamiya (facts, links), tamiya.hk (prices, zh-HK names), Fandom/Wikipedia (CC-BY-SA text where reused).
+
+First run committed **382 parts** (244 regular GUP + 42 AO + 96 limited/special/station released since 2023-01) and 8 chassis. Coverage at that point: 99% categorised, 83% with chassis compatibility, 80% with HKD prices, 60% with a Traditional Chinese name.
+
+**Kits are not in the snapshot at all.** Verified 2026-09-08: `data/raw/tamiya-jp-items.json` holds 690 items whose ids begin only with 10/15/55/84/94/95 — no 18xxx or 19xxx. `GENRE_SERIES` maps six genre codes and every one of them is a parts genre (`303010` gup, `303030` ao, `303020` special, `303025` limited, `3050` station, `3020` batteries — unmapped). The "second pass with the same code" is therefore real work, and M1 depends on it (§4.7).
 
 ### 3.3 Images and IP
 
@@ -145,7 +149,7 @@ First run committed **382 parts** (244 regular GUP + 42 AO + 96 limited/special/
 
 `@nuxthub/core` is optional sugar over the same Cloudflare bindings (its managed admin was sunset 2025-12-31; the module continues self-host-first). Using Nitro's `cloudflare_module` preset directly is equally fine and avoids a dependency.
 
-MVP can stay on GitHub Pages: everything in Phase 1 is static. The move to Workers happens in Phase 2 when short links and ratings need a database.
+MVP can stay on GitHub Pages: everything in M1 is static, the 3D view included — TresJS runs in the browser. The move to Workers happens in M2 when short links and ratings need a database.
 
 ### 4.2 Data model
 
@@ -171,17 +175,63 @@ Declarative rules evaluated in the browser and re-validated by the Worker at sha
 
 ### 4.4 Wizard / recommender
 
-A rules-based scorer over the same catalog. Inputs: chassis owned or none, class, course type (flat / 3D / unknown), budget, experience. A `profiles` collection maps answers to weight vectors over part attributes (stability, speed, cost, ease); hard filters are compat, legality and budget. Output is a build the user can open in the builder. Community popularity (votes, inclusion counts) is added as one more weight in Phase 2. No ML.
+A rules-based scorer over the same catalog. Inputs: chassis owned or none, class, course type (flat / 3D / unknown), budget, experience. A `profiles` collection maps answers to weight vectors over part attributes (stability, speed, cost, ease); hard filters are compat, legality and budget. Output is a build the user can open in the builder. Community popularity (votes, inclusion counts) is added as one more weight once M2 has collected it — which is why the wizard sits in M4, after the data that makes it good. No ML.
 
 ### 4.5 Sharing
 
-- Phase 1: build encoded in the URL (versioned compact byte array → base64url, e.g. `/build#v1.…`). Zero backend; share page renders the part list and a model-viewer preview of the chassis.
-- Phase 2: `POST /api/builds` → short id, `/b/:id` page with OG image (Takumi card with part list + R2 thumbnail). Fallback OG card per chassis when no thumbnail exists.
-- Phase 3: `/b/:id` embeds the interactive 3D assembled car.
+- M1: build encoded in the URL (versioned compact byte array → base64url, e.g. `/build#v1.…`). Zero backend; share page renders the part list and a model-viewer preview of the chassis.
+- M2: `POST /api/builds` → short id, `/b/:id` page with OG image (Takumi card with part list + R2 thumbnail). Fallback OG card per chassis when no thumbnail exists.
+- M3: `/b/:id` embeds the interactive 3D assembled car.
 
 ### 4.6 i18n and SEO
 
 One prerendered page per part (`/parts/15442-…`), chassis, guide and class, in each locale; JSON-LD `Product`; per-locale sitemaps. Part names in all locales live inline in the YAML so a single record feeds every locale; guide bodies are separate Markdown files per locale.
+
+### 4.7 Kits and build presets
+
+The MVP's two entry points — bare chassis and existing kit — are the same object with different seeds.
+
+**A build** is `{ chassis, kit?, class, slots: { [slotId]: Array<{ partId, origin }> } }`, where `origin` is `stock` (came with the kit or the chassis' own runner) or `swapped` (the user chose it). Carrying `origin` is what makes three things fall out for free: a "what you changed from the box" diff, a shopping list of only the parts you still need to buy, and a legality check that can say *which* modification broke Stock Class.
+
+- **Bare chassis:** seed the required slots from the chassis' `defaultLoadout` (kit gears, plastic rollers, kit wheels/tires, shafts, FA-130), leave the optional ones empty.
+- **From a kit:** seed from the kit's `stockLoadout` — the chassis `defaultLoadout` overlaid with the kit's own body and its per-kit differences, since a kit may ship a different gear ratio, low-profile wheels or harder tires.
+
+#### Where the kit data comes from
+
+Two sources, and the split matters because they have opposite gaps.
+
+**Tamiya** has no kit records in our snapshot at all (§3.2), but remains the only source for **price, release date, official URL and the zh-HK names** the HK store join supplies — so the kit genres have to be added and re-scraped regardless.
+
+**The Fandom wiki turns the loadout from hand-authoring into an import.** Tamiya publishes no structured bill-of-materials — its kit pages give the chassis and prose — but the wiki's `Template:Technical Info List` is a per-item spec table, and it is well populated. Measured 2026-09-08 across 305 articles:
+
+| | |
+|---|---|
+| rows (one per kit variant) | 819 |
+| distinct item numbers | 639, of which **334 are 18xxx/19xxx kits** |
+| chassis type | 99.9% |
+| wheel size / type / spoke / fitment / colour / material | 99–100% |
+| tire size / type / colour / material | 99.6–100% |
+| gear ratio | 98.2% |
+| motor | 86.8% |
+| body colour / material, L × W × H | 94–100% |
+
+That is exactly the **kit-specific delta** — the slots where kits differ from one another. What it omits (plastic rollers, shafts, bearings, terminal, gear cover) is precisely what the chassis `defaultLoadout` supplies uniformly. So the two sources compose: wiki for the delta, `defaultLoadout` for the rest, `data/overrides/kits.yml` only for the outliers rather than for all 30-odd kits by hand.
+
+Caveats to hold onto: the wiki skews toward notable and anime-derived cars over current shelf stock, so a recent kit may be missing; its fields are free text (`Wheel type=Low-Profile Fin-Type`) and need mapping to our item numbers, which is a lookup table per chassis, not per kit; and it is **CC-BY-SA**, so kit pages that use it must attribute, not just the attribution page. Tamiya stays canonical wherever the two disagree on a fact.
+
+#### Schema and work
+
+**New `kits` collection** (`content/kits/*.yml`, generated like parts): `id`, `names {ja, en, zh-TW, zh-HK}`, `chassis`, `bodyArchetype`, `stockLoadout`, `priceJpy`, `priceHkd`, `releaseDate`, `status`, `officialUrl`, `loadoutSource`.
+
+**New field on chassis:** `defaultLoadout` — slot id → part ids for what the bare chassis runner provides. Hand-authored in `data/chassis/*.yml`, eight records.
+
+1. Identify the kit genre codes on `tamiya.com/japan/products/list.html`, add them to `GENRE_SERIES` in `scripts/catalog/sources/tamiya-jp.ts`, widen `selects()` in `generate.ts`. The list and detail parsers already handle these pages.
+2. Add a `Technical Info List` reader to `scripts/catalog/sources/fandom.ts`. The generic `parseTemplate` and `splitParams` it needs are already there and tested — the taxonomy cross-reference (§3.2) built them.
+3. Re-run `npm run scrape` (cached, so only the new genres cost requests) and commit the widened snapshots.
+4. Author `defaultLoadout` for the eight chassis, plus the free-text → item-number lookup for wheel/tire/motor/gear values.
+5. Extend `shared/catalog/schema.ts` with `kitSchema` and `defaultLoadout`, register the collection in `content.config.ts`, and extend `catalog:verify` to check that every `stockLoadout` entry names a part that exists and fits that slot.
+
+Scoping note: M1 does not need all ~500 kits, only enough current, in-shops kits that a beginner recognises the box on their desk. The wiki's 334 make that a coverage question rather than an authoring one.
 
 ---
 
@@ -218,36 +268,79 @@ One prerendered page per part (`/parts/15442-…`), chassis, guide and class, in
 
 Roughly 4–6 weeks part-time for a one-person MVP asset set. Scaling to hundreds of GUP items afterwards is mostly parameter tables, which is the main argument for the procedural route.
 
+### 5.4 Cutting that down for M1
+
+150–190 h is the roadmap's long pole and it is not an MVP. Three decisions cut it to roughly **40–50 h** without giving up the thing the owner actually asked for — watching a 3D car change as you swap parts.
+
+**1. Parametric by category, never per item.** A 19 mm aluminium roller and a 19 mm plastic roller are one revolve with two parameter sets. Build the generators against `category` + `specs`, not against item numbers, and 383 parts collapse to about a dozen scripts. The catalog already carries the parameters (`rollerDiameterMm`, `wheelDiameterMm`, `plateThicknessMm`, …), which is exactly what §3's spec extraction was for.
+
+**2. A universal fallback, so no build can fail to render.** Any part with no generator draws a labelled grey proxy sized from its specs (or a category-default box). This is the load-bearing decision: it decouples asset production from catalog coverage entirely. The builder ships when the *chassis* is done, and every generator added after that is a silent visual upgrade with no code change. Without this rule, 3D blocks on 383 meshes and never ships.
+
+**3. One chassis, generic bodies.** §7 already mitigates the asset risk with "start with one chassis (MA) and ~20 parts to validate UX". M1 takes that literally: **MA only** in 3D. MA is the right pick — most kits (69), monocoque so it is one mesh, and beginner-facing. The other seven chassis get the full 2D builder plus a still image and a "3D preview coming" note. Bodies are **3 generic stylised archetypes** assigned per kit, not per-kit shapes: bodies are simultaneously the most expensive geometry and the highest IP risk (§5.1), so buying only 3 of them is doubly right. Label them in the UI as representative shapes.
+
+**Sockets reuse the slot ids that already exist.** The empty nodes in the chassis GLB are named for the ids in `data/taxonomy/slots.yml` — `roller-front`, `wheel-rear`, `front-stay`, `body`, `motor`. No socket-name mapping table, no second data model: the 3D pane reads the same build object the 2D list writes, and `parent.getObjectByName(slotId).add(mesh)` is the whole attach step. Mirrored slots (`mirror: true`) get `-l`/`-r` suffixed sockets and one mesh instanced twice.
+
+**Priority is what you can see.** Body, wheels, tires, rollers, stays and chassis colour carry essentially all the visual difference between two builds. Motor, gears, terminal, bearings, switch and screws are hidden or sub-millimetre — crude shapes or nothing, and no one will notice.
+
+| M1 asset | Count | Method | Hours |
+|---|---|---|---|
+| MA chassis, slot-named socket empties | 1 | Blender | 15–20 |
+| Generic stylised bodies | 3 | AI blockout → Blender retopo | 8–12 |
+| Parametric generators (roller, wheel, tire, plate/stay, brake, mass damper, spacer, screw, bearing, shaft, motor, gear) | ~12 | build123d → GLB | 10–14 |
+| Shared materials, fallback proxy, socket QA | — | | 6–8 |
+| **M1 total** | | | **~40–50 h** |
+
+**M1's 3D pane is view-only.** Selection stays in the 2D list: it is faster, it works on a phone, it is accessible, and it needs no raycast proxies, no hover outlines and no touch tuning. Click-the-car-to-select is deferred to M3 (§6) with the rest of §5.2's interaction work.
+
 ---
 
-## 6. Phased implementation plan
+## 6. Roadmap
 
-### Phase 0 — Foundation (1–2 weeks)
-- Resolve branch layout: the deploy workflow targets `main`, which does not exist (branches are `master` and `gh-pages`). Decide on `main` + Actions deploy; retire the hand-managed `gh-pages` branch.
-- Upgrade scaffold to Nuxt 4 + @nuxt/content v3 + @nuxtjs/i18n; define Zod schemas for parts / chassis / rules / guides / profiles.
-- ~~Write the scraper; run once; commit ≈300–400 item YAMLs plus 8 chassis records~~ — done 2026-09-08 (382 parts + 8 chassis, see §3.2). Remaining: zh-TW names, which fall back to the imported zh-HK names until authored.
-- Add PostHog.
+Re-targeted 2026-09-08. The owner set the MVP as: **start from a bare chassis or an existing kit, swap parts in a compatibility-checked list, and watch a 3D model of the result update.** That pulls the 3D view (F7) forward out of the old Phase 3 and pushes the wizard (F5) and community signals (F6) back behind it. §1's data-first ordering is not abandoned, it is spent — see guiding decision 1.
 
-### Phase 1 — Parts database, guides, 2D builder (4–6 weeks)
-- Prerendered part, chassis, class and guide pages (zh-TW + en), sitemaps, JSON-LD, attribution page.
-- Tutorials: class glossary (Open / Stock / B-MAX / B-Stock → Stock alias / Box Stock), chassis picker guide, motor guide, "first upgrade" guide, setup basics.
-- Builder v0: chassis picker → slot list → part picker per slot with search/filter, rule engine warnings, class toggle, cost and estimated weight totals.
-- Share v0: URL-encoded build, share page with part list and model-viewer chassis preview.
-- Still on GitHub Pages.
+Milestones are renamed M0–M4 to make clear they are not the old Phase 0–4.
 
-### Phase 2 — Wizard, permalinks, community signals (4–6 weeks)
-- Move hosting to Cloudflare Workers with static assets; DNS move; D1 migrations; R2.
-- Short links, OG images, canvas thumbnail upload, Turnstile, rate limiting, server-side re-validation.
-- Anonymous votes on builds and parts, view counts, "popular builds" and "most used parts" pages.
-- Wizard with editable weight profiles seeded from the six archetypes.
+### M0 — Foundation (remaining, ~1 week)
 
-### Phase 3 — 3D builder (6–10 weeks, asset work can start during Phase 1)
-- Procedural part generator + Blender chassis/bodies + gltf-transform pipeline in CI.
-- TresJS builder route: socket loading, click-to-select, hover highlight, swap animation, camera presets, mobile touch.
-- 3D preview on share pages; AR via model-viewer on a baked export if feasible.
+- Push the four local commits (`8f41dbb`…`4d00ff3`); the deploy workflow fires on `main` and the catalog has never reached the remote.
+- Resolve branch layout: `main` + Actions deploy, retire the hand-managed `gh-pages` and the stale `master`.
+- Add `@nuxtjs/i18n` **before** any real routes exist, so `/parts/…` and `/build` are born with `prefix_except_default` rather than retrofitted.
+- Add PostHog, so the builder funnel has a baseline from its first day.
+- ~~Nuxt 4 + @nuxt/content v3 scaffold, Zod schemas~~ — done, `83086af`.
+- ~~Scraper and catalog pipeline; 382 parts + 8 chassis~~ — done 2026-09-08 (§3.2).
 
-### Phase 4 — Identity and community (ongoing)
-- Optional login, garages, comments, ja locale, contribution workflow (PRs or Nuxt Studio), price history from official feeds, per-course setting notes.
+### M1 — MVP: the builder (the target)
+
+Three workstreams. The catalog and builder ones are independent of the asset one, and the fallback proxy (§5.4) means the builder ships whether or not the meshes are ready — start them in parallel and let the 3D fidelity climb behind a working product.
+
+**a. Catalog: kits (§4.7).** Kit genre codes into `GENRE_SERIES`, a `Technical Info List` reader in `sources/fandom.ts`, re-scrape, `kits` collection, `defaultLoadout` on all 8 chassis. `stockLoadout` is imported for the 334 kits the wiki covers, not hand-authored.
+
+**b. Site and builder.**
+- Part and chassis pages, prerendered per locale, JSON-LD `Product`, sitemap, attribution page. These are what search engines see and they are cheap now that the data exists.
+- `/build` with two entry points: kit picker (search by name or item number, filtered to current kits) or bare-chassis picker.
+- Slot list from the chassis' profile, each row showing its part, `stock` vs `swapped`, and a swap action.
+- Part picker per slot: filtered by slot type, chassis compatibility and the selected class; searchable; shows price and the specs that matter for that slot.
+- Rule engine (§4.3) inline, three severities. Ship the rules that the committed data can actually answer — slot capacity, chassis compat, motor shaft type, class legality, tire diameter — and leave the ones needing data we do not have (total width, precise weight) as explicit "not checked yet" rather than guessing.
+- Totals: part count, JPY and HKD cost, estimated weight, final gear ratio.
+- Build encoded in the URL (§4.5); reload restores; copy-link shares.
+
+**c. 3D view (§5.4).** MA chassis with slot-named sockets, 3 generic bodies, ~12 parametric generators, the fallback proxy, `@tresjs/nuxt` on the `/build` route only, client-only and code-split. View-only: orbit, zoom, reset camera. Other chassis show a still and a notice.
+
+**M1 is done when:** a beginner can open `/build`, pick the kit box on their desk, change the motor and rollers, see a warning that the motor is Open-only, see the cost of what they still need to buy, watch the car update in 3D, and send the link to a friend — in zh-TW and en.
+
+**Explicitly not in M1:** the wizard, votes, accounts, short links, OG images, D1, click-to-select in 3D, per-kit body shapes, chassis other than MA in 3D. Still on GitHub Pages, still fully static.
+
+### M2 — Permalinks, sharing, community signals (4–6 weeks)
+
+Move to Cloudflare Workers with static assets; DNS to Cloudflare; D1 and R2. Short links and `/b/:id`, canvas-snapshot thumbnails to R2, `nuxt-og-image` share cards, Turnstile, rate limiting, server-side re-validation of shared builds. Anonymous votes on builds and parts, view counts, "popular builds" and "most used parts". Guides and tutorials (F2): class glossary, chassis picker, motor guide, first-upgrade guide, setup basics.
+
+### M3 — Full 3D builder (6–10 weeks)
+
+The remaining chassis, per-kit bodies where they are worth modelling, the rest of the parametric library, and 3D as an *input* surface: raycast slot proxies, click-to-select, hover highlight, swap animation, camera presets, mobile touch tuning (§5.2). 3D preview on share pages; AR via model-viewer on a baked export.
+
+### M4 — Wizard, identity, community (ongoing)
+
+Beginner wizard (F5) seeded from the six archetypes in §2.5 and weighted by the popularity data M2 collects — it is a better recommender with real usage behind it, which is why it moved after M2 rather than before. Optional login, garages, comments, `ja` locale, contribution workflow, price history, per-course setting notes.
 
 ---
 
@@ -258,13 +351,17 @@ Roughly 4–6 weeks part-time for a one-person MVP asset set. Scaling to hundred
 | Risk / question | Mitigation |
 |---|---|
 | Tamiya IP: names, photos, 3D shapes | Facts + own text, own photos for builder parts, stylised 3D, disclaimer, no GLB downloads |
-| 3D asset effort (150–190 h) dominates the timeline | Data-first ordering; procedural generation; start with one chassis (MA) and ~20 parts to validate UX before full asset production |
+| 3D asset effort (150–190 h) dominates the timeline | M1 buys only ~40–50 h of it: one chassis, 3 generic bodies, ~12 parametric generators, and a labelled fallback proxy so the builder ships independently of mesh coverage (§5.4) |
+| Pulling 3D into the MVP repeats the mistake §1 warned about | The 3D **view** is cheap and bounded; the 3D **input** surface (raycast proxies, click-to-select, touch tuning) is the expensive half and stays in M3. If the MA chassis mesh slips, the fallback proxy means M1 still ships with a recognisable car |
+| Tamiya publishes no bill-of-materials for kits, so "start from my kit" has no source | The Fandom wiki's `Technical Info List` covers 334 kits with chassis, wheel, tire, gear and motor at 87–100% fill (§4.7); the chassis `defaultLoadout` supplies the rest, `data/overrides/kits.yml` the outliers, and any kit the wiki misses degrades to the plain chassis loadout rather than breaking |
+| Wiki kit data is CC-BY-SA and free text, not item numbers | Attribute on the kit pages themselves, not only the attribution page; map its free-text values (`Wheel type=Low-Profile Fin-Type`) to item numbers with a per-chassis lookup table; Tamiya stays canonical on any fact the two disagree on |
+| Body shapes are the highest IP risk and the priciest geometry | M1 ships 3 generic stylised archetypes shared across kits, labelled in the UI as representative, not per-kit reproductions (§5.4) |
 | Image-to-3D quality for thin parts | Only used for body blockouts; procedural/Blender for everything else |
 | Cloudflare free-tier limits (KV 1K writes/day, D1 hard limits since 2026-09-01) | Use D1 not KV for writes; prerender everything; Workers Paid is $5/mo if ever needed |
 | Scraper brittleness (Tamiya site is classic ASP, Shift_JIS) | One-off scrape committed to git; monthly diff run; manual review of new items |
 | TC naming has no source of truth (HK 摩打 vs TW 馬達) | Store HK and TW variants; glossary page explaining both |
 | Rule coverage can never be 100% | Three severities; "verify with organiser PDF" notes; rules are data so community can PR fixes |
-| Existing scaffold is on EOL Nuxt 3 | Upgrade in Phase 0 before writing real content |
+| ~~Existing scaffold is on EOL Nuxt 3~~ | Resolved: upgraded to Nuxt 4 + @nuxt/content v3 in `83086af` |
 
 ---
 
