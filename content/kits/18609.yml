@@ -12,22 +12,36 @@ chassis: ms
 gearRatio: 3.5:1
 stockLoadout:
   body:
-    - label: 1/32 トルクルーザー
+    - label:
+        ja: 1/32 トルクルーザー
+        en: TORCRUISER
       source: tamiya
   wheel-front:
-    - label: Small VS-Type
+    - label:
+        en: Small VS-Type
+        zh-HK: 小徑VS型輪框
       source: fandom
   wheel-rear:
-    - label: Small VS-Type
+    - label:
+        en: Small VS-Type
+        zh-HK: 小徑VS型輪框
       source: fandom
   tire-front:
-    - label: Small X-Type Narrow
+    - label:
+        en: Small X Narrow-Type
+        zh-HK: 小徑X型窄版輪胎
       source: fandom
   tire-rear:
-    - label: Small X-Type Narrow
+    - label:
+        en: Small X Narrow-Type
+        zh-HK: 小徑X型窄版輪胎
       source: fandom
   gear-set:
-    - label: 3.5:1
+    - label:
+        ja: 3.5:1
+        en: 3.5:1
+        zh-HK: 3.5:1
+        zh-TW: 3.5:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Torcruiser

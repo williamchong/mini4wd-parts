@@ -10,7 +10,9 @@ seriesLabel: ミニ四駆限定販売商品（マシン）
 chassis: ma
 stockLoadout:
   body:
-    - label: DCR-01 (デクロス-01) ブルーメッキボディ (MAシャーシ)
+    - label:
+        ja: DCR-01 (デクロス-01) ブルーメッキボディ (MAシャーシ)
+        en: DCR-01 BLUE METALLIC BODY (MA CHASSIS)
       source: tamiya
 loadoutSource: chassis
 priceJpy: 1430

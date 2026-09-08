@@ -11,22 +11,36 @@ chassis: fm-a
 gearRatio: 3.5:1
 stockLoadout:
   body:
-    - label: レイザーバック クリヤーバイオレットスペシャル (FM-Aシャーシ)
+    - label:
+        ja: レイザーバック クリヤーバイオレットスペシャル (FM-Aシャーシ)
+        en: RAZORBACK CLEAR VIOLET SPECIAL(FM-A CHASSIS)
       source: tamiya
   wheel-front:
-    - label: Small
+    - label:
+        en: Small
+        zh-HK: 小徑輪框
       source: fandom
   wheel-rear:
-    - label: Small
+    - label:
+        en: Small
+        zh-HK: 小徑輪框
       source: fandom
   tire-front:
-    - label: Small Rally Block
+    - label:
+        en: Small Rally Block
+        zh-HK: 小徑越野塊狀胎
       source: fandom
   tire-rear:
-    - label: Small Rally Block
+    - label:
+        en: Small Rally Block
+        zh-HK: 小徑越野塊狀胎
       source: fandom
   gear-set:
-    - label: 3.5:1
+    - label:
+        ja: 3.5:1
+        en: 3.5:1
+        zh-HK: 3.5:1
+        zh-TW: 3.5:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Razorback

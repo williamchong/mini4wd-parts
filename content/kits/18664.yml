@@ -12,10 +12,16 @@ chassis: me
 gearRatio: 3.5:1
 stockLoadout:
   body:
-    - label: ティクシヴ（MEシャーシ）
+    - label:
+        ja: ティクシヴ（MEシャーシ）
+        en: TYXIV (ME CHASSIS)
       source: tamiya
   gear-set:
-    - label: 3.5:1
+    - label:
+        ja: 3.5:1
+        en: 3.5:1
+        zh-HK: 3.5:1
+        zh-TW: 3.5:1
       source: tamiya
 loadoutSource: chassis
 priceJpy: 1650

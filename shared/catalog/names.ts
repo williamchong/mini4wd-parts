@@ -1,4 +1,4 @@
-import type { Part } from './schema.ts'
+import type { LabelNames, Part } from './schema.ts'
 
 /**
  * Picking a display name out of a catalog record.
@@ -43,14 +43,30 @@ export function resolveName(
   locale: NameLocale,
   wording: Wording = 'hk'
 ): { value: string, from: keyof Names } {
+  // `ja` is required by the schema, so validated data always resolves.
+  return resolveLabel(names, locale, wording) ?? { value: names.ja, from: 'ja' }
+}
+
+/**
+ * The same walk over a record where every locale is optional — a loadout label
+ * (`labelNames`), whose locales depend on where it was imported from.
+ *
+ * Returns nothing rather than a placeholder when no locale in the chain has a
+ * value, because the two callers want different things from that: the builder
+ * shows the slot's own name, and `catalog:report` counts it as work to do.
+ */
+export function resolveLabel(
+  names: LabelNames,
+  locale: NameLocale,
+  wording: Wording = 'hk'
+): { value: string, from: keyof Names } | undefined {
   for (const key of ORDER[locale][wording]) {
     const value = names[key]
     if (value) return { value, from: key }
   }
-  // `ja` is required by the schema, so this is unreachable for validated data.
-  return { value: names.ja, from: 'ja' }
+  return undefined
 }
 
-export function hasTraditionalChineseName(names: Names): boolean {
+export function hasTraditionalChineseName(names: LabelNames): boolean {
   return Boolean(names['zh-HK'] || names['zh-TW'])
 }

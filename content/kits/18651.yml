@@ -14,22 +14,37 @@ chassis: ma
 gearRatio: 4:1
 stockLoadout:
   body:
-    - label: ダンシング ディバイン ドール（MAシャーシ）
+    - label:
+        ja: ダンシング ディバイン ドール（MAシャーシ）
+        en: DANCING DIVINE DOLL (MA CHASSIS)
+        zh-HK: 1/32 迷你四驅車 舞蹈天使 Dancing Divine Doll（MA底盤）
       source: tamiya
   wheel-front:
-    - label: Large MS II
+    - label:
+        en: Large MS II
+        zh-HK: 大徑MS二代輪框
       source: fandom
   wheel-rear:
-    - label: Large MS II
+    - label:
+        en: Large MS II
+        zh-HK: 大徑MS二代輪框
       source: fandom
   tire-front:
-    - label: Large Avante-Type Slick
+    - label:
+        en: Large Avante-Type Slick
+        zh-HK: 大徑阿邦特型光頭胎
       source: fandom
   tire-rear:
-    - label: Large Avante-Type Slick
+    - label:
+        en: Large Avante-Type Slick
+        zh-HK: 大徑阿邦特型光頭胎
       source: fandom
   gear-set:
-    - label: 4:1
+    - label:
+        ja: 4:1
+        en: 4:1
+        zh-HK: 4:1
+        zh-TW: 4:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Dancing Divine Doll

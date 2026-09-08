@@ -14,22 +14,37 @@ chassis: ar
 gearRatio: 4.2:1
 stockLoadout:
   body:
-    - label: 1/32 ビートマグナム プレミアム （ARシャーシ）
+    - label:
+        ja: 1/32 ビートマグナム プレミアム （ARシャーシ）
+        en: BEAT-MAGNUM PREMIUM (AR CHASSIS)
+        zh-HK: 1/32 迷你四驅車 快拍麥林 Premium (AR底盤)
       source: tamiya
   wheel-front:
-    - label: Large TZ Fully Cowled Type
+    - label:
+        en: Large TZ Fully Cowled-Type
+        zh-HK: 大徑TZ全罩型輪框
       source: fandom
   wheel-rear:
-    - label: Large TZ Fully Cowled Type
+    - label:
+        en: Large TZ Fully Cowled-Type
+        zh-HK: 大徑TZ全罩型輪框
       source: fandom
   tire-front:
-    - label: Large Avante-Type Slick
+    - label:
+        en: Large Avante-Type Slick
+        zh-HK: 大徑阿邦特型光頭胎
       source: fandom
   tire-rear:
-    - label: Large Avante-Type Slick
+    - label:
+        en: Large Avante-Type Slick
+        zh-HK: 大徑阿邦特型光頭胎
       source: fandom
   gear-set:
-    - label: 4.2:1
+    - label:
+        ja: 4.2:1
+        en: 4.2:1
+        zh-HK: 4.2:1
+        zh-TW: 4.2:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Beat-Magnum

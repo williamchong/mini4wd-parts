@@ -45,9 +45,9 @@ const chassis: Chassis = {
     { id: 'switch', type: 'switch', maxCount: 1, mirror: false, required: true }
   ],
   defaultLoadout: {
-    motor: [{ label: '套件標準雙軸馬達', source: 'chassis' }],
-    'gear-set': [{ label: '套件標準齒輪組', source: 'chassis' }],
-    switch: [{ label: '套件標準電源開關', source: 'chassis' }]
+    motor: [{ label: { 'zh-HK': '套件標準雙軸摩打', en: 'Kit standard double-shaft motor' }, source: 'chassis' }],
+    'gear-set': [{ label: { 'zh-HK': '套件標準齒輪組' }, source: 'chassis' }],
+    switch: [{ label: { 'zh-HK': '套件標準電源開關' }, source: 'chassis' }]
   },
   compatibleParts: []
 }
@@ -57,7 +57,7 @@ const kit: Kit = {
   names: { ja: 'テストキット' },
   series: 'pro',
   chassis: 'ma',
-  stockLoadout: { motor: [{ label: 'Torque-Tuned 2', source: 'fandom' }] },
+  stockLoadout: { motor: [{ label: { en: 'Torque-Tuned 2' }, source: 'fandom' }] },
   loadoutSource: 'fandom',
   status: 'current',
   officialUrl: 'https://example.test/18700',
@@ -74,7 +74,7 @@ test('a bare chassis build starts stock, fully assembled and owning no parts', (
   const slots = resolveBuild(chassis, undefined, newBuild('ma'))
 
   assert.equal(slots.length, chassis.slots.length)
-  assert.equal(slotById(slots, 'motor').entries[0]?.label, '套件標準雙軸馬達')
+  assert.equal(slotById(slots, 'motor').entries[0]?.label?.['zh-HK'], '套件標準雙軸摩打')
   assert.equal(slotById(slots, 'motor').entries[0]?.origin, 'chassis')
   // Nothing in a runner's default loadout is a Grade-Up Part, so a fresh build
   // has a shopping list of nothing at all.
@@ -91,7 +91,7 @@ test('a slot the chassis does not fill resolves empty rather than missing', () =
 test('a kit replaces the chassis entry for the slots it names, and only those', () => {
   const slots = resolveBuild(chassis, kit, newBuild('ma', '18700'))
 
-  assert.equal(slotById(slots, 'motor').entries[0]?.label, 'Torque-Tuned 2')
+  assert.equal(slotById(slots, 'motor').entries[0]?.label?.en, 'Torque-Tuned 2')
   assert.equal(slotById(slots, 'motor').entries[0]?.origin, 'kit')
   // The kit says nothing about gears, so the runner's default still stands.
   assert.equal(slotById(slots, 'gear-set').entries[0]?.origin, 'chassis')
@@ -125,7 +125,7 @@ test('a mirrored slot holds as many parts as the user put in it', () => {
 })
 
 test('a loadout key naming a slot the chassis lacks is dropped', () => {
-  const strayKit: Kit = { ...kit, stockLoadout: { 'roller-front': [{ label: 'x', source: 'fandom' }] } }
+  const strayKit: Kit = { ...kit, stockLoadout: { 'roller-front': [{ label: { en: 'x' }, source: 'fandom' }] } }
   const slots = resolveBuild(chassis, strayKit, newBuild('ma', '18700'))
   assert.equal(slots.some(slot => slot.id === 'roller-front'), false)
 })

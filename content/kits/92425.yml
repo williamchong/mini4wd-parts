@@ -11,22 +11,36 @@ chassis: vs
 gearRatio: 5:1
 stockLoadout:
   body:
-    - label: リトルライアン ミニ四駆スペシャル (VSシャーシ)
+    - label:
+        ja: リトルライアン ミニ四駆スペシャル (VSシャーシ)
+        en: LITTLE RYAN MINI 4WD SPECIAL EDITION (VS CHASSIS)
       source: tamiya
   wheel-front:
-    - label: Small Low-Profile Fin-Type
+    - label:
+        en: Small Low-Profile Fin-Type
+        zh-HK: 小徑低框鰭型輪框
       source: fandom
   wheel-rear:
-    - label: Small Low-Profile Fin-Type
+    - label:
+        en: Small Low-Profile Fin-Type
+        zh-HK: 小徑低框鰭型輪框
       source: fandom
   tire-front:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   tire-rear:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   gear-set:
-    - label: 5:1
+    - label:
+        ja: 5:1
+        en: 5:1
+        zh-HK: 5:1
+        zh-TW: 5:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Little Ryan Mini 4WD Special

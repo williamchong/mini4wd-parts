@@ -13,22 +13,37 @@ chassis: super-2
 gearRatio: 5:1
 stockLoadout:
   body:
-    - label: 2024年 干支ミニ四駆｢辰年｣
+    - label:
+        ja: 2024年 干支ミニ四駆｢辰年｣
+        en: MINI 4WD NEW YEAR'S EDITION "YEAR OF THE DRAGON 2024"
+        zh-HK: 1/32 迷你四驅車 2024年 生肖迷你四驅車「龍年」
       source: tamiya
   wheel-front:
-    - label: Large Low-Profile 6-Spoke
+    - label:
+        en: Large Low-Profile 6-Spoke
+        zh-HK: 大徑低框六輻輪框
       source: fandom
   wheel-rear:
-    - label: Large Low-Profile 6-Spoke
+    - label:
+        en: Large Low-Profile 6-Spoke
+        zh-HK: 大徑低框六輻輪框
       source: fandom
   tire-front:
-    - label: Large Low-Profile Slick
+    - label:
+        en: Large Low-Profile Slick
+        zh-HK: 大徑低框光頭胎
       source: fandom
   tire-rear:
-    - label: Large Low-Profile Slick
+    - label:
+        en: Large Low-Profile Slick
+        zh-HK: 大徑低框光頭胎
       source: fandom
   gear-set:
-    - label: 5:1
+    - label:
+        ja: 5:1
+        en: 5:1
+        zh-HK: 5:1
+        zh-TW: 5:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Mini 4WD New Year's Edition - Year of the Dragon 2024

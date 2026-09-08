@@ -12,22 +12,36 @@ chassis: super-2
 gearRatio: 4:1
 stockLoadout:
   body:
-    - label: ダイハツ コペン XMZ （スーパーIIシャーシ）
+    - label:
+        ja: ダイハツ コペン XMZ （スーパーIIシャーシ）
+        en: DAIHATSU KOPEN (FUTURE INCLUDED) XMZ (SUPER-II CHASSIS)
       source: tamiya
   wheel-front:
-    - label: Small Low-Profile Saber-Type
+    - label:
+        en: Small Low-Profile Saber-Type
+        zh-HK: 小徑低框軍刀型輪框
       source: fandom
   wheel-rear:
-    - label: Small Low-Profile Saber-Type
+    - label:
+        en: Small Low-Profile Saber-Type
+        zh-HK: 小徑低框軍刀型輪框
       source: fandom
   tire-front:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   tire-rear:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   gear-set:
-    - label: 4:1
+    - label:
+        ja: 4:1
+        en: 4:1
+        zh-HK: 4:1
+        zh-TW: 4:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Daihatsu Kopen XMZ

@@ -11,22 +11,36 @@ chassis: super-2
 gearRatio: 4.2:1
 stockLoadout:
   body:
-    - label: 1/32 ビッグウィッグRS（スーパーIIシャーシ）
+    - label:
+        ja: 1/32 ビッグウィッグRS（スーパーIIシャーシ）
+        en: THE BIGWIG RS (SUPER-II CHASSIS)
       source: tamiya
   wheel-front:
-    - label: Large Manta Ray-Type
+    - label:
+        en: Large Manta Ray-Type
+        zh-HK: 大徑魔鬼魚型輪框
       source: fandom
   wheel-rear:
-    - label: Large Manta Ray-Type
+    - label:
+        en: Large Manta Ray-Type
+        zh-HK: 大徑魔鬼魚型輪框
       source: fandom
   tire-front:
-    - label: Large Avante-Type Slick
+    - label:
+        en: Large Avante-Type Slick
+        zh-HK: 大徑阿邦特型光頭胎
       source: fandom
   tire-rear:
-    - label: Large Avante-Type Slick
+    - label:
+        en: Large Avante-Type Slick
+        zh-HK: 大徑阿邦特型光頭胎
       source: fandom
   gear-set:
-    - label: 4.2:1
+    - label:
+        ja: 4.2:1
+        en: 4.2:1
+        zh-HK: 4.2:1
+        zh-TW: 4.2:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Bigwig Jr.

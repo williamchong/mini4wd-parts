@@ -14,22 +14,37 @@ chassis: ma
 gearRatio: 3.5:1
 stockLoadout:
   body:
-    - label: トヨタ ガズー レーシング WRT/ヤリス WRC （MAシャーシ）
+    - label:
+        ja: トヨタ ガズー レーシング WRT/ヤリス WRC （MAシャーシ）
+        en: TOYOTA GAZOO Racing WRT/Yaris WRC (MA CHASSIS)
+        zh-HK: 1/32 Mini 4WD 豐田汽車 GAZOO Racing WRT/雅力士 WRC (MA 底盤)
       source: tamiya
   wheel-front:
-    - label: Small Low-Profile Dish-Type
+    - label:
+        en: Small Low-Profile Dish-Type
+        zh-HK: 小徑低框碟型輪框
       source: fandom
   wheel-rear:
-    - label: Small Low-Profile Dish-Type
+    - label:
+        en: Small Low-Profile Dish-Type
+        zh-HK: 小徑低框碟型輪框
       source: fandom
   tire-front:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   tire-rear:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   gear-set:
-    - label: 3.5:1
+    - label:
+        ja: 3.5:1
+        en: 3.5:1
+        zh-HK: 3.5:1
+        zh-TW: 3.5:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Toyota Gazoo Racing WRT/Yaris WRC

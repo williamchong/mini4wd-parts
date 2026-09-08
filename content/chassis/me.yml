@@ -119,40 +119,65 @@ slots:
     required: false
 defaultLoadout:
   motor:
-    - label: 套件標準雙軸馬達
+    - label:
+        en: Kit standard double-shaft motor
+        zh-HK: 套件標準雙軸摩打
+        zh-TW: 套件標準雙軸馬達
       source: chassis
   gear-set:
-    - label: 套件標準齒輪組
+    - label:
+        en: Kit standard gears
+        zh-HK: 套件標準齒輪組
       source: chassis
   terminal:
-    - label: 套件標準電池金屬片
+    - label:
+        en: Kit standard terminals
+        zh-HK: 套件標準電池金屬片
       source: chassis
   switch:
-    - label: 套件標準電源開關
+    - label:
+        en: Kit standard switch
+        zh-HK: 套件標準電源開關
       source: chassis
   axle:
-    - label: 套件標準車軸
+    - label:
+        en: Kit standard axles
+        zh-HK: 套件標準車軸
       source: chassis
   bearing:
-    - label: 套件標準塑膠軸襯
+    - label:
+        en: Kit standard plastic bushings
+        zh-HK: 套件標準塑膠軸襯
       source: chassis
   wheel-front:
-    - label: 套件標準輪框
+    - label:
+        en: Kit standard wheels
+        zh-HK: 套件標準輪框
       source: chassis
   wheel-rear:
-    - label: 套件標準輪框
+    - label:
+        en: Kit standard wheels
+        zh-HK: 套件標準輪框
       source: chassis
   tire-front:
-    - label: 套件標準輪胎
+    - label:
+        en: Kit standard tires
+        zh-HK: 套件標準輪胎
       source: chassis
   tire-rear:
-    - label: 套件標準輪胎
+    - label:
+        en: Kit standard tires
+        zh-HK: 套件標準輪胎
       source: chassis
   roller-front:
-    - label: 套件標準塑膠導輪
+    - label:
+        en: Kit standard plastic rollers
+        zh-HK: 套件標準塑膠導輪
       source: chassis
   roller-rear:
-    - label: 套件標準塑膠導輪
+    - label:
+        en: Kit standard plastic rollers
+        zh-HK: 套件標準塑膠導輪
       source: chassis
 compatibleParts:
   - "15059"

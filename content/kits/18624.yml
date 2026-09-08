@@ -14,22 +14,37 @@ chassis: ms
 gearRatio: 4:1
 stockLoadout:
   body:
-    - label: 1/32 ホットショットJr.（MSシャーシ）
+    - label:
+        ja: 1/32 ホットショットJr.（MSシャーシ）
+        en: HOTSHOT Jr. (MS CHASSIS)
+        zh-HK: 1/32 迷你四驅車 熱射 Jr. (MS 底盤)
       source: tamiya
   wheel-front:
-    - label: Large MS II
+    - label:
+        en: Large MS II
+        zh-HK: 大徑MS二代輪框
       source: fandom
   wheel-rear:
-    - label: Large MS II
+    - label:
+        en: Large MS II
+        zh-HK: 大徑MS二代輪框
       source: fandom
   tire-front:
-    - label: Large Avante-Type Spiked
+    - label:
+        en: Large Avante-Type Spiked
+        zh-HK: 大徑阿邦特型釘胎
       source: fandom
   tire-rear:
-    - label: Large Avante-Type Spiked
+    - label:
+        en: Large Avante-Type Spiked
+        zh-HK: 大徑阿邦特型釘胎
       source: fandom
   gear-set:
-    - label: 4:1
+    - label:
+        ja: 4:1
+        en: 4:1
+        zh-HK: 4:1
+        zh-TW: 4:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Hotshot Jr.

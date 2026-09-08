@@ -11,22 +11,36 @@ chassis: fm-a
 gearRatio: 3.5:1
 stockLoadout:
   body:
-    - label: 1/32 バロンビエント ジャパンカップ2019 （FM-Aシャーシ）
+    - label:
+        ja: 1/32 バロンビエント ジャパンカップ2019 （FM-Aシャーシ）
+        en: BARON VIENTO (FM-A CHASSIS) JAPAN CUP 2019
       source: tamiya
   wheel-front:
-    - label: Small X Low-Profile
+    - label:
+        en: Small X Low-Profile
+        zh-HK: 小徑X型低框輪框
       source: fandom
   wheel-rear:
-    - label: Small X Low-Profile
+    - label:
+        en: Small X Low-Profile
+        zh-HK: 小徑X型低框輪框
       source: fandom
   tire-front:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   tire-rear:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   gear-set:
-    - label: 3.5:1
+    - label:
+        ja: 3.5:1
+        en: 3.5:1
+        zh-HK: 3.5:1
+        zh-TW: 3.5:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Baron Viento

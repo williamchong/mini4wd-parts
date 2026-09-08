@@ -11,22 +11,36 @@ chassis: fm-a
 gearRatio: 4.2:1
 stockLoadout:
   body:
-    - label: ジオグライダー ブラックスペシャル (FM-Aシャーシ)
+    - label:
+        ja: ジオグライダー ブラックスペシャル (FM-Aシャーシ)
+        en: GEO GLIDER BLACK SPECIAL (FM-A CHASSIS)
       source: tamiya
   wheel-front:
-    - label: Large V-Spoke
+    - label:
+        en: Large V-Spoke
+        zh-HK: 大徑V字輻輪框
       source: fandom
   wheel-rear:
-    - label: Large V-Spoke
+    - label:
+        en: Large V-Spoke
+        zh-HK: 大徑V字輻輪框
       source: fandom
   tire-front:
-    - label: Large Arched
+    - label:
+        en: Large Arched
+        zh-HK: 大徑弧形輪胎
       source: fandom
   tire-rear:
-    - label: Large Arched
+    - label:
+        en: Large Arched
+        zh-HK: 大徑弧形輪胎
       source: fandom
   gear-set:
-    - label: 4.2:1
+    - label:
+        ja: 4.2:1
+        en: 4.2:1
+        zh-HK: 4.2:1
+        zh-TW: 4.2:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Geo Glider

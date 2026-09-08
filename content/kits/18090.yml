@@ -14,22 +14,37 @@ chassis: super-2
 gearRatio: 5:1
 stockLoadout:
   body:
-    - label: ミニ四駆キャット
+    - label:
+        ja: ミニ四駆キャット
+        en: MINI 4WD CAT RACER
+        zh-HK: 1/32 迷你四驅車 小貓賽車 (Super-II 底盤)
       source: tamiya
   wheel-front:
-    - label: Large V-Spoke
+    - label:
+        en: Large V-Spoke
+        zh-HK: 大徑V字輻輪框
       source: fandom
   wheel-rear:
-    - label: Large V-Spoke
+    - label:
+        en: Large V-Spoke
+        zh-HK: 大徑V字輻輪框
       source: fandom
   tire-front:
-    - label: Large Arched
+    - label:
+        en: Large Arched
+        zh-HK: 大徑弧形輪胎
       source: fandom
   tire-rear:
-    - label: Large Arched
+    - label:
+        en: Large Arched
+        zh-HK: 大徑弧形輪胎
       source: fandom
   gear-set:
-    - label: 5:1
+    - label:
+        ja: 5:1
+        en: 5:1
+        zh-HK: 5:1
+        zh-TW: 5:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Mini 4WD Cat Racer

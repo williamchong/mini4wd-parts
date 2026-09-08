@@ -18,3 +18,33 @@
 # not fit that slot, so a wrong guess fails the build rather than shipping.
 #
 # `npm run catalog:report` lists the kits still relying on labels alone.
+
+# --- Motors -----------------------------------------------------------------
+#
+# Every motor the wiki names is a real Grade-Up Part, so all fifteen resolve to
+# an item number rather than staying free text. That buys three things a label
+# could not: the builder can link the motor, it localises through the part's own
+# names instead of a translation we authored, and it reaches the shopping list
+# as something you can actually buy.
+#
+# The PRO suffix is load-bearing — 15487 is double-shaft and 15484 single — and
+# the wiki gets it right on all fifteen: every PRO label sits on an MA kit and
+# every bare one on a single-shaft chassis. `catalog:verify` checks the part
+# fits the slot but not that the shaft fits the chassis, so this pairing was
+# checked by hand against each kit's chassis (docs/PLAN.md §4.8).
+
+'18647': { stockLoadout: { motor: [{ partId: '15487', source: override }] } }  # MA   Torque-Tuned 2 PRO
+'18706': { stockLoadout: { motor: [{ partId: '15485', source: override }] } }  # AR   Rev-Tuned 2
+'18710': { stockLoadout: { motor: [{ partId: '15486', source: override }] } }  # FM-A Atomic-Tuned 2
+'95281': { stockLoadout: { motor: [{ partId: '15488', source: override }] } }  # MA   Rev-Tuned 2 PRO
+'95302': { stockLoadout: { motor: [{ partId: '15487', source: override }] } }  # MA   Torque-Tuned 2 PRO
+'95303': { stockLoadout: { motor: [{ partId: '15487', source: override }] } }  # MA   Torque-Tuned 2 PRO
+'95304': { stockLoadout: { motor: [{ partId: '15487', source: override }] } }  # MA   Torque-Tuned 2 PRO
+'95365': { stockLoadout: { motor: [{ partId: '15487', source: override }] } }  # MA   Torque-Tuned 2 PRO
+'95366': { stockLoadout: { motor: [{ partId: '15487', source: override }] } }  # MA   Torque-Tuned 2 PRO
+'95414': { stockLoadout: { motor: [{ partId: '15487', source: override }] } }  # MA   Torque-Tuned 2 PRO
+'95422': { stockLoadout: { motor: [{ partId: '15487', source: override }] } }  # MA   Torque-Tuned 2 PRO
+'95480': { stockLoadout: { motor: [{ partId: '15487', source: override }] } }  # MA   Torque-Tuned 2 PRO
+'95598': { stockLoadout: { motor: [{ partId: '15455', source: override }] } }  # VZ   Light-Dash Motor
+'95616': { stockLoadout: { motor: [{ partId: '15488', source: override }] } }  # MA   Rev-Tuned 2 PRO
+'95621': { stockLoadout: { motor: [{ partId: '15484', source: override }] } }  # FM-A Torque-Tuned 2

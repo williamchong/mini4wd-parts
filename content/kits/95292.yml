@@ -11,22 +11,34 @@ chassis: ar
 gearRatio: 3.5:1
 stockLoadout:
   body:
-    - label: 1/32 フレイムアスチュート 赤メタリック(カーボン強化ホイール)
+    - label:
+        ja: 1/32 フレイムアスチュート 赤メタリック(カーボン強化ホイール)
+        en: FLAME ASTUTE RED METALLIC (w/CARBON REINFORCED WHEELS)
       source: tamiya
   wheel-front:
-    - label: Small / Low-Profile Saber-Type (1st set) / Low-Profile Fin-Type (2nd set)
+    - label:
+        en: Small / Low-Profile Saber-Type (1st Set) / Low-Profile Fin-Type (2nd Set)
       source: fandom
   wheel-rear:
-    - label: Small / Low-Profile Saber-Type (1st set) / Low-Profile Fin-Type (2nd set)
+    - label:
+        en: Small / Low-Profile Saber-Type (1st Set) / Low-Profile Fin-Type (2nd Set)
       source: fandom
   tire-front:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   tire-rear:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   gear-set:
-    - label: 3.5:1
+    - label:
+        ja: 3.5:1
+        en: 3.5:1
+        zh-HK: 3.5:1
+        zh-TW: 3.5:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Flame Astute

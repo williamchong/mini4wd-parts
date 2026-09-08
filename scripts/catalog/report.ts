@@ -1,6 +1,6 @@
 import { readYamlDir, readYamlFileIfPresent } from './io.ts'
 import { list, section } from './print.ts'
-import type { Kit, Part, PartOverride } from '../../shared/catalog/schema.ts'
+import type { Kit, LabelNames, Part, PartOverride } from '../../shared/catalog/schema.ts'
 import { hasTraditionalChineseName } from '../../shared/catalog/names.ts'
 
 /**
@@ -95,19 +95,25 @@ list('  No price', kits.filter(kit => kit.priceJpy === undefined).map(label), 4)
 //
 // The gear set is excluded: its label is a ratio, which is already a field of
 // its own, and no catalog part is the moulded gears a kit ships.
-const unresolved = new Map<string, number>()
-for (const kit of kits) {
-  for (const [slot, filled] of Object.entries(kit.stockLoadout)) {
-    if (slot === 'gear-set') continue
-    for (const entry of filled) {
-      if (entry.partId || !entry.label || entry.source !== 'fandom') continue
-      unresolved.set(entry.label, (unresolved.get(entry.label) ?? 0) + 1)
-    }
-  }
-}
-list('  Imported loadout labels with no catalog part',
-  [...unresolved].sort((a, b) => b[1] - a[1])
-    .map(([text, count]) => `${String(count).padStart(3)}×  ${text}`))
+//
+// Keyed by the normalised English (§4.8) rather than by what the wiki wrote, so
+// one wheel spelled two ways is one row here instead of two.
+const imported = kits.flatMap(kit =>
+  Object.entries(kit.stockLoadout)
+    .filter(([slot]) => slot !== 'gear-set')
+    .flatMap(([, filled]) => filled)
+    .filter(entry => !entry.partId && entry.label && entry.source === 'fandom')
+    .map(entry => entry.label!))
+
+const counted = (labels: LabelNames[]) =>
+  tally(labels, names => names.en ?? names.ja ?? '?')
+    .map(([text, count]) => `${String(count).padStart(3)}×  ${text}`)
+
+list('  Imported loadout labels with no catalog part', counted(imported))
+// The worklist for data/taxonomy/loadout-labels.yml. These render in English on
+// the Chinese builder, marked as a fallback.
+list('  Imported loadout labels with no Traditional Chinese',
+  counted(imported.filter(names => !hasTraditionalChineseName(names))))
 
 const kitPercent = (n: number) => percent(n, kits.length)
 console.log(`\n  Per-kit loadout            ${kitPercent(kits.filter(k => k.loadoutSource === 'fandom').length)}`)

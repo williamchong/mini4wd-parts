@@ -12,25 +12,39 @@ chassis: fm-a
 gearRatio: 3.5:1
 stockLoadout:
   body:
-    - label: ミニ四駆スターターパックFM-Aバランスタイプ (ラウディーブル)
+    - label:
+        ja: ミニ四駆スターターパックFM-Aバランスタイプ (ラウディーブル)
+        en: MINI 4WD STARTER PACK FM-A BALANCED SPEC (ROWDY BULL)
       source: tamiya
   wheel-front:
-    - label: Small Low-Profile Fin-Type
+    - label:
+        en: Small Low-Profile Fin-Type
+        zh-HK: 小徑低框鰭型輪框
       source: fandom
   wheel-rear:
-    - label: Small Low-Profile Fin-Type
+    - label:
+        en: Small Low-Profile Fin-Type
+        zh-HK: 小徑低框鰭型輪框
       source: fandom
   tire-front:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   tire-rear:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   motor:
-    - label: Atomic-Tuned 2
-      source: fandom
+    - partId: "15486"
+      source: override
   gear-set:
-    - label: 3.5:1
+    - label:
+        ja: 3.5:1
+        en: 3.5:1
+        zh-HK: 3.5:1
+        zh-TW: 3.5:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Mini 4WD Starter Pack FM-A Balanced Spec

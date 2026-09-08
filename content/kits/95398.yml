@@ -11,22 +11,36 @@ chassis: ma
 gearRatio: 4:1
 stockLoadout:
   body:
-    - label: 1/32 ナイトレージJr. クリヤーブルースペシャル (MAシャーシ)
+    - label:
+        ja: 1/32 ナイトレージJr. クリヤーブルースペシャル (MAシャーシ)
+        en: NITRAGE Jr. CLEAR BLUE SPECIAL (MA CHASSIS)
       source: tamiya
   wheel-front:
-    - label: Large Low-Profile 6-Spoke
+    - label:
+        en: Large Low-Profile 6-Spoke
+        zh-HK: 大徑低框六輻輪框
       source: fandom
   wheel-rear:
-    - label: Large Low-Profile 6-Spoke
+    - label:
+        en: Large Low-Profile 6-Spoke
+        zh-HK: 大徑低框六輻輪框
       source: fandom
   tire-front:
-    - label: Large Low-Profile Slick
+    - label:
+        en: Large Low-Profile Slick
+        zh-HK: 大徑低框光頭胎
       source: fandom
   tire-rear:
-    - label: Large Low-Profile Slick
+    - label:
+        en: Large Low-Profile Slick
+        zh-HK: 大徑低框光頭胎
       source: fandom
   gear-set:
-    - label: 4:1
+    - label:
+        ja: 4:1
+        en: 4:1
+        zh-HK: 4:1
+        zh-TW: 4:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Nitrage Jr.

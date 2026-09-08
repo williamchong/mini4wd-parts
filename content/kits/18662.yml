@@ -14,10 +14,17 @@ chassis: ms
 gearRatio: 3.7:1
 stockLoadout:
   body:
-    - label: アバンテMk.III ネロ アドバンスパック (MSシャーシ)
+    - label:
+        ja: アバンテMk.III ネロ アドバンスパック (MSシャーシ)
+        en: AVANTE Mk.III NERO (MS CHASSIS) ADVANCED PACK
+        zh-HK: 1/32 迷你四驅車 Avante Mk.III Nero (MS底盤) 進階套裝
       source: tamiya
   gear-set:
-    - label: 3.7:1
+    - label:
+        ja: 3.7:1
+        en: 3.7:1
+        zh-HK: 3.7:1
+        zh-TW: 3.7:1
       source: tamiya
 loadoutSource: chassis
 priceJpy: 3300

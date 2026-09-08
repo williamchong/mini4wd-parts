@@ -11,22 +11,36 @@ chassis: vz
 gearRatio: 4.2:1
 stockLoadout:
   body:
-    - label: ミニ四駆ペンギン
+    - label:
+        ja: ミニ四駆ペンギン
+        en: MINI 4WD PENGUIN RACER
       source: tamiya
   wheel-front:
-    - label: Large Low-Profile 6-Spoke
+    - label:
+        en: Large Low-Profile 6-Spoke
+        zh-HK: 大徑低框六輻輪框
       source: fandom
   wheel-rear:
-    - label: Large Low-Profile 6-Spoke
+    - label:
+        en: Large Low-Profile 6-Spoke
+        zh-HK: 大徑低框六輻輪框
       source: fandom
   tire-front:
-    - label: Large Low-Profile Slick
+    - label:
+        en: Large Low-Profile Slick
+        zh-HK: 大徑低框光頭胎
       source: fandom
   tire-rear:
-    - label: Large Low-Profile Slick
+    - label:
+        en: Large Low-Profile Slick
+        zh-HK: 大徑低框光頭胎
       source: fandom
   gear-set:
-    - label: 4.2:1
+    - label:
+        ja: 4.2:1
+        en: 4.2:1
+        zh-HK: 4.2:1
+        zh-TW: 4.2:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Mini 4WD Penguin Racer

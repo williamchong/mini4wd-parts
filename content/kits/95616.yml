@@ -11,25 +11,39 @@ chassis: ma
 gearRatio: 3.5:1
 stockLoadout:
   body:
-    - label: がんばれ!熊本 ミニ四駆 (くまモン版) パステルブルーシャーシ
+    - label:
+        ja: がんばれ!熊本 ミニ四駆 (くまモン版) パステルブルーシャーシ
+        en: KUMAMON MINI 4WD - SUPPORTING KUMAMOTO - PASTEL BLUE CHASSIS
       source: tamiya
   wheel-front:
-    - label: Small Low-Profile Saber-Typ
+    - label:
+        en: Small Low-Profile Saber-Type
+        zh-HK: 小徑低框軍刀型輪框
       source: fandom
   wheel-rear:
-    - label: Small Low-Profile Saber-Typ
+    - label:
+        en: Small Low-Profile Saber-Type
+        zh-HK: 小徑低框軍刀型輪框
       source: fandom
   tire-front:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   tire-rear:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   motor:
-    - label: Rev-Tuned 2 PRO
-      source: fandom
+    - partId: "15488"
+      source: override
   gear-set:
-    - label: 3.5:1
+    - label:
+        ja: 3.5:1
+        en: 3.5:1
+        zh-HK: 3.5:1
+        zh-TW: 3.5:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Kumamon Mini 4WD - Supporting Kumamoto

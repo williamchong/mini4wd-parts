@@ -32,8 +32,11 @@
     "close": "關閉",
     "swap": "更換",
     "revert": "還原",
-    "stock": "原裝",
-    "swapped": "已更換",
+    "origin": {
+      "chassis": "底盤標準",
+      "kit": "套件隨附",
+      "user": "你選的"
+    },
     "empty": "未安裝",
     "required": "必要部位",
     "class": "賽制",

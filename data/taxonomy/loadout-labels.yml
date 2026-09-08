@@ -1,0 +1,142 @@
+# Traditional Chinese for the wheel and tire phrases imported from the Fandom
+# wiki — docs/PLAN.md §4.8.
+#
+# Keyed by the phrase as `normaliseLabel` (scripts/catalog/labels.ts) leaves it,
+# not as the wiki wrote it: the wiki spells one wheel several ways, and keying
+# on the raw text would translate the same wheel twice and let the two drift.
+# Run `npm run catalog:report` for the phrases still missing an entry — those
+# render in English, marked as a fallback, rather than disappearing.
+#
+# `en` is never authored here. It is the normalised wiki phrase itself, which is
+# both what an English reader should see and the key a reviewer looks up.
+#
+# TERMINOLOGY, and it is a judgement call rather than a citation: Tamiya HK
+# publishes no Traditional Chinese for wheel and tire *types*, so unlike part
+# names (which come from tamiya.hk) these are ours. Hong Kong and Taiwan agree
+# on most of this vocabulary — 小徑, 大徑, 低框, 光頭胎 — so most rows carry only
+# `zh-HK` and the Taiwan reader falls through to it, exactly as `resolveLabel`
+# does for part names. A `zh-TW` appears only where the two genuinely differ.
+
+# Spellings no mechanical rule reaches: a truncation, a redundant plural, and
+# word order the wiki inverts. Left of the arrow is post-normalisation text.
+aliases:
+  # The wiki drops the final "e" on one article.
+  Small Low-Profile Saber-Typ: Small Low-Profile Saber-Type
+  # Profile and type swapped round.
+  Small Saber-Type Low-Profile: Small Low-Profile Saber-Type
+  Small Fin-Type Low-Profile: Small Low-Profile Fin-Type
+  Small X-Type Narrow: Small X Narrow-Type
+  # The slot already says these are tires.
+  Small Low-Profile Tires: Small Low-Profile
+
+labels:
+  # — Wheels ————————————————————————————————————————————————————————
+  Small:
+    zh-HK: 小徑輪框
+  Large Lightweight:
+    zh-HK: 大徑輕量輪框
+  Large Narrow Lightweight:
+    zh-HK: 大徑窄版輕量輪框
+  Large Flat Dish:
+    zh-HK: 大徑平碟輪框
+  Large Low-Profile Dish-Type:
+    zh-HK: 大徑低框碟型輪框
+  Large Low-Profile 6-Spoke:
+    zh-HK: 大徑低框六輻輪框
+  Large Mesh-Type:
+    zh-HK: 大徑網格輪框
+  Large V-Spoke:
+    zh-HK: 大徑V字輻輪框
+  Large Teardrop-Type:
+    zh-HK: 大徑水滴型輪框
+  Large FM-Type:
+    zh-HK: 大徑FM型輪框
+  Large TZ-Type:
+    zh-HK: 大徑TZ型輪框
+  Large TZ Fully Cowled-Type:
+    zh-HK: 大徑TZ全罩型輪框
+  Large Manta Ray-Type:
+    zh-HK: 大徑魔鬼魚型輪框
+  Large MS I:
+    zh-HK: 大徑MS一代輪框
+  Large MS II:
+    zh-HK: 大徑MS二代輪框
+  Small Low-Profile A-Spoke:
+    zh-HK: 小徑低框A字輻輪框
+  Small Low-Profile T-Spoke:
+    zh-HK: 小徑低框T字輻輪框
+  Small Low-Profile Y-Spoke:
+    zh-HK: 小徑低框Y字輻輪框
+  Small Low-Profile Dish-Type:
+    zh-HK: 小徑低框碟型輪框
+  Small Low-Profile Fin-Type:
+    zh-HK: 小徑低框鰭型輪框
+  Small Low-Profile Saber-Type:
+    zh-HK: 小徑低框軍刀型輪框
+  Small Low-Profile Spiral-Type:
+    zh-HK: 小徑低框螺旋型輪框
+  Small Low-Profile Angular-Type:
+    zh-HK: 小徑低框角型輪框
+  Small Fully Cowled-Type:
+    zh-HK: 小徑全罩型輪框
+  Small Fully Cowled Mesh-Type:
+    zh-HK: 小徑全罩網格輪框
+  Small TZ Fully Cowled-Type:
+    zh-HK: 小徑TZ全罩型輪框
+  Small VS-Type:
+    zh-HK: 小徑VS型輪框
+  Small X Low-Profile:
+    zh-HK: 小徑X型低框輪框
+
+  # — Tires —————————————————————————————————————————————————————————
+  Small Low-Profile:
+    zh-HK: 小徑低框輪胎
+  Small Low-Profile Slick:
+    zh-HK: 小徑低框光頭胎
+  Small Low-Profile Offset:
+    zh-HK: 小徑低框偏位輪胎
+  Small High-Profile Slick:
+    zh-HK: 小徑高框光頭胎
+  Small X Narrow-Type:
+    zh-HK: 小徑X型窄版輪胎
+  Small Rally Block:
+    zh-HK: 小徑越野塊狀胎
+  Small Treaded Radial:
+    zh-HK: 小徑紋路輻射胎
+  Large Low-Profile:
+    zh-HK: 大徑低框輪胎
+  Large Low-Profile Slick:
+    zh-HK: 大徑低框光頭胎
+  Large Arched:
+    zh-HK: 大徑弧形輪胎
+  Large Avante-Type Slick:
+    zh-HK: 大徑阿邦特型光頭胎
+  Large Avante-Type Spiked:
+    zh-HK: 大徑阿邦特型釘胎
+
+  # — Motors ————————————————————————————————————————————————————————
+  # Every motor phrase the wiki uses is a real Grade-Up Part, so all fifteen
+  # entries are resolved to an item number in data/overrides/kits.yml and none
+  # of these should ever render. They are kept as the safety net for a re-scrape
+  # that turns up a motor no override covers yet — the raw snapshot already
+  # holds `Atomic-Tuned 2 Motor` and `Torque-Tuned 2 Motor` on kits outside our
+  # chassis scope, which `normaliseLabel` folds onto these keys by dropping the
+  # trailing "Motor".
+  Atomic-Tuned 2:
+    zh-HK: 原子加速二代摩打
+    zh-TW: 原子加速二代馬達
+  Rev-Tuned 2:
+    zh-HK: 高轉二代摩打
+    zh-TW: 高轉二代馬達
+  Rev-Tuned 2 PRO:
+    zh-HK: 高轉二代摩打 PRO
+    zh-TW: 高轉二代馬達 PRO
+  Torque-Tuned 2:
+    zh-HK: 扭力二代摩打
+    zh-TW: 扭力二代馬達
+  Torque-Tuned 2 PRO:
+    zh-HK: 扭力二代摩打 PRO
+    zh-TW: 扭力二代馬達 PRO
+  Light-Dash:
+    zh-HK: 輕量衝刺摩打
+    zh-TW: 輕量衝刺馬達

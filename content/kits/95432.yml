@@ -11,22 +11,36 @@ chassis: super-2
 gearRatio: 3.5:1
 stockLoadout:
   body:
-    - label: ファイターマグナムVFX プレミアム （スーパーIIシャーシ）
+    - label:
+        ja: ファイターマグナムVFX プレミアム （スーパーIIシャーシ）
+        en: FIGHTER MAGNUM VFX PREMIUM (SUPER-II CHASSIS)
       source: tamiya
   wheel-front:
-    - label: Small Low-Profile Spiral-Type
+    - label:
+        en: Small Low-Profile Spiral-Type
+        zh-HK: 小徑低框螺旋型輪框
       source: fandom
   wheel-rear:
-    - label: Small Low-Profile Spiral-Type
+    - label:
+        en: Small Low-Profile Spiral-Type
+        zh-HK: 小徑低框螺旋型輪框
       source: fandom
   tire-front:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   tire-rear:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   gear-set:
-    - label: 3.5:1
+    - label:
+        ja: 3.5:1
+        en: 3.5:1
+        zh-HK: 3.5:1
+        zh-TW: 3.5:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Fighter Magnum VFX

@@ -11,22 +11,36 @@ chassis: ms
 gearRatio: 4:1
 stockLoadout:
   body:
-    - label: サンダーショット Mk.II クリヤースペシャル（ポリカボディ）
+    - label:
+        ja: サンダーショット Mk.II クリヤースペシャル（ポリカボディ）
+        en: THUNDER SHOT Mk.II CLEAR SPECIAL (POLYCARBONATE BODY)
       source: tamiya
   wheel-front:
-    - label: Large Narrow Lightweight
+    - label:
+        en: Large Narrow Lightweight
+        zh-HK: 大徑窄版輕量輪框
       source: fandom
   wheel-rear:
-    - label: Large Narrow Lightweight
+    - label:
+        en: Large Narrow Lightweight
+        zh-HK: 大徑窄版輕量輪框
       source: fandom
   tire-front:
-    - label: Large Arched
+    - label:
+        en: Large Arched
+        zh-HK: 大徑弧形輪胎
       source: fandom
   tire-rear:
-    - label: Large Arched
+    - label:
+        en: Large Arched
+        zh-HK: 大徑弧形輪胎
       source: fandom
   gear-set:
-    - label: 4:1
+    - label:
+        ja: 4:1
+        en: 4:1
+        zh-HK: 4:1
+        zh-TW: 4:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Thunder Shot Mk.II

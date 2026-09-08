@@ -14,22 +14,37 @@ chassis: ma
 gearRatio: 4:1
 stockLoadout:
   body:
-    - label: 1/32 DCR-01（デクロス-01）（MAシャーシ）
+    - label:
+        ja: 1/32 DCR-01（デクロス-01）（MAシャーシ）
+        en: DCR-01 (MA CHASSIS)
+        zh-HK: 1/32 迷你四驅車 DCR-01 (MA底盤)
       source: tamiya
   wheel-front:
-    - label: Large Low-Profile 6-Spoke
+    - label:
+        en: Large Low-Profile 6-Spoke
+        zh-HK: 大徑低框六輻輪框
       source: fandom
   wheel-rear:
-    - label: Large Low-Profile 6-Spoke
+    - label:
+        en: Large Low-Profile 6-Spoke
+        zh-HK: 大徑低框六輻輪框
       source: fandom
   tire-front:
-    - label: Large Low-Profile Slick
+    - label:
+        en: Large Low-Profile Slick
+        zh-HK: 大徑低框光頭胎
       source: fandom
   tire-rear:
-    - label: Large Low-Profile Slick
+    - label:
+        en: Large Low-Profile Slick
+        zh-HK: 大徑低框光頭胎
       source: fandom
   gear-set:
-    - label: 4:1
+    - label:
+        ja: 4:1
+        en: 4:1
+        zh-HK: 4:1
+        zh-TW: 4:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: DCR-01

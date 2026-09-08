@@ -12,22 +12,36 @@ chassis: super-2
 gearRatio: 4:1
 stockLoadout:
   body:
-    - label: ミニ四駆パンダ2
+    - label:
+        ja: ミニ四駆パンダ2
+        en: MINI 4WD PANDA RACER 2
       source: tamiya
   wheel-front:
-    - label: Small
+    - label:
+        en: Small
+        zh-HK: 小徑輪框
       source: fandom
   wheel-rear:
-    - label: Small
+    - label:
+        en: Small
+        zh-HK: 小徑輪框
       source: fandom
   tire-front:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   tire-rear:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   gear-set:
-    - label: 4:1
+    - label:
+        ja: 4:1
+        en: 4:1
+        zh-HK: 4:1
+        zh-TW: 4:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Mini 4WD Panda Racer 2

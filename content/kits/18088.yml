@@ -12,22 +12,36 @@ chassis: super-2
 gearRatio: 5:1
 stockLoadout:
   body:
-    - label: ミニ四駆フクロウ
+    - label:
+        ja: ミニ四駆フクロウ
+        en: MINI 4WD OWL RACER
       source: tamiya
   wheel-front:
-    - label: Large Narrow Lightweight
+    - label:
+        en: Large Narrow Lightweight
+        zh-HK: 大徑窄版輕量輪框
       source: fandom
   wheel-rear:
-    - label: Large Narrow Lightweight
+    - label:
+        en: Large Narrow Lightweight
+        zh-HK: 大徑窄版輕量輪框
       source: fandom
   tire-front:
-    - label: Large Arched
+    - label:
+        en: Large Arched
+        zh-HK: 大徑弧形輪胎
       source: fandom
   tire-rear:
-    - label: Large Arched
+    - label:
+        en: Large Arched
+        zh-HK: 大徑弧形輪胎
       source: fandom
   gear-set:
-    - label: 5:1
+    - label:
+        ja: 5:1
+        en: 5:1
+        zh-HK: 5:1
+        zh-TW: 5:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Mini 4WD Owl Racer

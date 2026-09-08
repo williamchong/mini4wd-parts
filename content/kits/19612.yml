@@ -12,22 +12,36 @@ chassis: vs
 gearRatio: 4:1 / 3.5:1
 stockLoadout:
   body:
-    - label: 1/32 ライトニングマグナム
+    - label:
+        ja: 1/32 ライトニングマグナム
+        en: LIGHTNING-MAGNUM
       source: tamiya
   wheel-front:
-    - label: Small VS-Type
+    - label:
+        en: Small VS-Type
+        zh-HK: 小徑VS型輪框
       source: fandom
   wheel-rear:
-    - label: Small VS-Type
+    - label:
+        en: Small VS-Type
+        zh-HK: 小徑VS型輪框
       source: fandom
   tire-front:
-    - label: Small X Narrow-Type
+    - label:
+        en: Small X Narrow-Type
+        zh-HK: 小徑X型窄版輪胎
       source: fandom
   tire-rear:
-    - label: Small X Narrow-Type
+    - label:
+        en: Small X Narrow-Type
+        zh-HK: 小徑X型窄版輪胎
       source: fandom
   gear-set:
-    - label: 4:1 / 3.5:1
+    - label:
+        ja: 4:1 / 3.5:1
+        en: 4:1 / 3.5:1
+        zh-HK: 4:1 / 3.5:1
+        zh-TW: 4:1 / 3.5:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Lightning-Magnum

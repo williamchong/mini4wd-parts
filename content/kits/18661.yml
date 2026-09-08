@@ -14,22 +14,37 @@ chassis: ma
 gearRatio: 3.5:1
 stockLoadout:
   body:
-    - label: レクサス LBX MORIZO RR (MAシャーシ)
+    - label:
+        ja: レクサス LBX MORIZO RR (MAシャーシ)
+        en: LEXUS LBX MORIZO RR (MA CHASSIS)
+        zh-HK: 1/32 迷你四驅車 淩志 LBX Morizo RR (MA底盤)
       source: tamiya
   wheel-front:
-    - label: Small Low-Profile Fin-type
+    - label:
+        en: Small Low-Profile Fin-Type
+        zh-HK: 小徑低框鰭型輪框
       source: fandom
   wheel-rear:
-    - label: Small Low-Profile Fin-type
+    - label:
+        en: Small Low-Profile Fin-Type
+        zh-HK: 小徑低框鰭型輪框
       source: fandom
   tire-front:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   tire-rear:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   gear-set:
-    - label: 3.5:1
+    - label:
+        ja: 3.5:1
+        en: 3.5:1
+        zh-HK: 3.5:1
+        zh-TW: 3.5:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Lexus LBX Morizo RR

@@ -11,25 +11,39 @@ chassis: fm-a
 gearRatio: 3.7:1
 stockLoadout:
   body:
-    - label: ミニ四駆コアラGT
+    - label:
+        ja: ミニ四駆コアラGT
+        en: MINI 4WD KOALA RACER GT
       source: tamiya
   wheel-front:
-    - label: Small Low-Profile A-Spoke
+    - label:
+        en: Small Low-Profile A-Spoke
+        zh-HK: 小徑低框A字輻輪框
       source: fandom
   wheel-rear:
-    - label: Small Low-Profile A-Spoke
+    - label:
+        en: Small Low-Profile A-Spoke
+        zh-HK: 小徑低框A字輻輪框
       source: fandom
   tire-front:
-    - label: Small Low-Profile Tires
+    - label:
+        en: Small Low-Profile
+        zh-HK: 小徑低框輪胎
       source: fandom
   tire-rear:
-    - label: Small Low-Profile Tires
+    - label:
+        en: Small Low-Profile
+        zh-HK: 小徑低框輪胎
       source: fandom
   motor:
-    - label: Torque-Tuned 2
-      source: fandom
+    - partId: "15484"
+      source: override
   gear-set:
-    - label: 3.7:1
+    - label:
+        ja: 3.7:1
+        en: 3.7:1
+        zh-HK: 3.7:1
+        zh-TW: 3.7:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Mini 4WD Koala Racer GT

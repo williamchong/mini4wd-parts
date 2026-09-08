@@ -32,8 +32,11 @@
     "close": "Close",
     "swap": "Swap",
     "revert": "Revert",
-    "stock": "Stock",
-    "swapped": "Swapped",
+    "origin": {
+      "chassis": "Standard for this chassis",
+      "kit": "From your kit",
+      "user": "You chose this"
+    },
     "empty": "Empty",
     "required": "Required",
     "class": "Class",

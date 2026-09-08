@@ -11,22 +11,36 @@ chassis: ma
 gearRatio: 3.5:1
 stockLoadout:
   body:
-    - label: 1/32 アビリスタ ジャパンカップ 2018 (MAシャーシ)
+    - label:
+        ja: 1/32 アビリスタ ジャパンカップ 2018 (MAシャーシ)
+        en: ABILISTA (MA CHASSIS) JAPAN CUP 2018
       source: tamiya
   wheel-front:
-    - label: Small Low-Profile A-Spoke
+    - label:
+        en: Small Low-Profile A-Spoke
+        zh-HK: 小徑低框A字輻輪框
       source: fandom
   wheel-rear:
-    - label: Small Low-Profile A-Spoke
+    - label:
+        en: Small Low-Profile A-Spoke
+        zh-HK: 小徑低框A字輻輪框
       source: fandom
   tire-front:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   tire-rear:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   gear-set:
-    - label: 3.5:1
+    - label:
+        ja: 3.5:1
+        en: 3.5:1
+        zh-HK: 3.5:1
+        zh-TW: 3.5:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Abilista

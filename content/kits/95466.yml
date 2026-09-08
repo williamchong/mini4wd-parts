@@ -13,22 +13,37 @@ chassis: ms
 gearRatio: 4:1
 stockLoadout:
   body:
-    - label: マンタレイMk.II ブラックスペシャル
+    - label:
+        ja: マンタレイMk.II ブラックスペシャル
+        en: MANTA RAY Mk.II BLACK SPECIAL
+        zh-HK: 1/32 迷你四驅車 魔鬼魚Mk.II Manta Ray Mk.II 黑色特別版 (MS底盤)
       source: tamiya
   wheel-front:
-    - label: Large Narrow Lightweight
+    - label:
+        en: Large Narrow Lightweight
+        zh-HK: 大徑窄版輕量輪框
       source: fandom
   wheel-rear:
-    - label: Large Narrow Lightweight
+    - label:
+        en: Large Narrow Lightweight
+        zh-HK: 大徑窄版輕量輪框
       source: fandom
   tire-front:
-    - label: Large Arched
+    - label:
+        en: Large Arched
+        zh-HK: 大徑弧形輪胎
       source: fandom
   tire-rear:
-    - label: Large Arched
+    - label:
+        en: Large Arched
+        zh-HK: 大徑弧形輪胎
       source: fandom
   gear-set:
-    - label: 4:1
+    - label:
+        ja: 4:1
+        en: 4:1
+        zh-HK: 4:1
+        zh-TW: 4:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Manta Ray Mk.II

@@ -241,6 +241,23 @@ button.link {
   opacity: 0.6;
 }
 
+/* What came in the box is sourced fact; what the chassis default supplies is
+   our own inference, and a beginner checking a real kit needs to tell them
+   apart. The user's own choices carry the most weight of the three. */
+.slot-origin.kit {
+  opacity: 0.85;
+}
+
+.slot-origin.user {
+  opacity: 1;
+  font-weight: 600;
+}
+
+.slot-entry.fallback {
+  opacity: 0.75;
+  font-style: italic;
+}
+
 .slot-actions {
   display: flex;
   gap: 0.75rem;

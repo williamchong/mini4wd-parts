@@ -12,22 +12,36 @@ chassis: ma
 gearRatio: 4:1
 stockLoadout:
   body:
-    - label: 1/32 シューティングプラウドスター（MAシャーシ）
+    - label:
+        ja: 1/32 シューティングプラウドスター（MAシャーシ）
+        en: SHOOTING PROUD STAR (MA CHASSIS)
       source: tamiya
   wheel-front:
-    - label: Large MS II
+    - label:
+        en: Large MS II
+        zh-HK: 大徑MS二代輪框
       source: fandom
   wheel-rear:
-    - label: Large MS II
+    - label:
+        en: Large MS II
+        zh-HK: 大徑MS二代輪框
       source: fandom
   tire-front:
-    - label: Large Avante-type Slick
+    - label:
+        en: Large Avante-Type Slick
+        zh-HK: 大徑阿邦特型光頭胎
       source: fandom
   tire-rear:
-    - label: Large Avante-type Slick
+    - label:
+        en: Large Avante-Type Slick
+        zh-HK: 大徑阿邦特型光頭胎
       source: fandom
   gear-set:
-    - label: 4:1
+    - label:
+        ja: 4:1
+        en: 4:1
+        zh-HK: 4:1
+        zh-TW: 4:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Shooting Proud Star

@@ -28,26 +28,38 @@ notes: 最新的雙軸底盤，主打「剛性與柔性並存」的傳動設計�
 # there is no item number to name here.
 defaultLoadout:
   motor:
-    - { label: 套件標準雙軸馬達, source: chassis }
+    - label: { zh-HK: 套件標準雙軸摩打, zh-TW: 套件標準雙軸馬達, en: Kit standard double-shaft motor }
+      source: chassis
   gear-set:
-    - { label: 套件標準齒輪組, source: chassis }
+    - label: { zh-HK: 套件標準齒輪組, en: Kit standard gears }
+      source: chassis
   terminal:
-    - { label: 套件標準電池金屬片, source: chassis }
+    - label: { zh-HK: 套件標準電池金屬片, en: Kit standard terminals }
+      source: chassis
   switch:
-    - { label: 套件標準電源開關, source: chassis }
+    - label: { zh-HK: 套件標準電源開關, en: Kit standard switch }
+      source: chassis
   axle:
-    - { label: 套件標準車軸, source: chassis }
+    - label: { zh-HK: 套件標準車軸, en: Kit standard axles }
+      source: chassis
   bearing:
-    - { label: 套件標準塑膠軸襯, source: chassis }
+    - label: { zh-HK: 套件標準塑膠軸襯, en: Kit standard plastic bushings }
+      source: chassis
   wheel-front:
-    - { label: 套件標準輪框, source: chassis }
+    - label: { zh-HK: 套件標準輪框, en: Kit standard wheels }
+      source: chassis
   wheel-rear:
-    - { label: 套件標準輪框, source: chassis }
+    - label: { zh-HK: 套件標準輪框, en: Kit standard wheels }
+      source: chassis
   tire-front:
-    - { label: 套件標準輪胎, source: chassis }
+    - label: { zh-HK: 套件標準輪胎, en: Kit standard tires }
+      source: chassis
   tire-rear:
-    - { label: 套件標準輪胎, source: chassis }
+    - label: { zh-HK: 套件標準輪胎, en: Kit standard tires }
+      source: chassis
   roller-front:
-    - { label: 套件標準塑膠導輪, source: chassis }
+    - label: { zh-HK: 套件標準塑膠導輪, en: Kit standard plastic rollers }
+      source: chassis
   roller-rear:
-    - { label: 套件標準塑膠導輪, source: chassis }
+    - label: { zh-HK: 套件標準塑膠導輪, en: Kit standard plastic rollers }
+      source: chassis

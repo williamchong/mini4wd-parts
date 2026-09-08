@@ -13,22 +13,37 @@ chassis: fm-a
 gearRatio: 5:1
 stockLoadout:
   body:
-    - label: K4ギャンボー シルバーメッキボディ (FM-Aシャーシ)
+    - label:
+        ja: K4ギャンボー シルバーメッキボディ (FM-Aシャーシ)
+        en: K4 GAMBOL SILVER METALLIC BODY (FM-A CHASSIS)
+        zh-HK: 1/32 迷你四驅車 K4 Gambol 電鍍銀車殼版 (FM-A底盤)
       source: tamiya
   wheel-front:
-    - label: Small Low-Profile A-spoke
+    - label:
+        en: Small Low-Profile A-Spoke
+        zh-HK: 小徑低框A字輻輪框
       source: fandom
   wheel-rear:
-    - label: Small Low-Profile A-spoke
+    - label:
+        en: Small Low-Profile A-Spoke
+        zh-HK: 小徑低框A字輻輪框
       source: fandom
   tire-front:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   tire-rear:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   gear-set:
-    - label: 5:1
+    - label:
+        ja: 5:1
+        en: 5:1
+        zh-HK: 5:1
+        zh-TW: 5:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: K4 Gambol

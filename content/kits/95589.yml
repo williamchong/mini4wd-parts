@@ -13,22 +13,37 @@ chassis: fm-a
 gearRatio: 4.2:1
 stockLoadout:
   body:
-    - label: カッパーファング ブラックスペシャル (FM-Aシャーシ)
+    - label:
+        ja: カッパーファング ブラックスペシャル (FM-Aシャーシ)
+        en: COPPERFANG BLACK SPECIAL (FM-A CHASSIS)
+        zh-HK: 1/32 迷你四驅車 Copper Fang 黑色特別版 (FM-A底盤)
       source: tamiya
   wheel-front:
-    - label: Large MS II
+    - label:
+        en: Large MS II
+        zh-HK: 大徑MS二代輪框
       source: fandom
   wheel-rear:
-    - label: Large MS II
+    - label:
+        en: Large MS II
+        zh-HK: 大徑MS二代輪框
       source: fandom
   tire-front:
-    - label: Large Avante-Type Slick
+    - label:
+        en: Large Avante-Type Slick
+        zh-HK: 大徑阿邦特型光頭胎
       source: fandom
   tire-rear:
-    - label: Large Avante-Type Slick
+    - label:
+        en: Large Avante-Type Slick
+        zh-HK: 大徑阿邦特型光頭胎
       source: fandom
   gear-set:
-    - label: 4.2:1
+    - label:
+        ja: 4.2:1
+        en: 4.2:1
+        zh-HK: 4.2:1
+        zh-TW: 4.2:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Copperfang

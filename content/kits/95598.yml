@@ -13,25 +13,40 @@ chassis: vz
 gearRatio: 3.7:1
 stockLoadout:
   body:
-    - label: ネオVQS アドバンスパック (VZシャーシ)
+    - label:
+        ja: ネオVQS アドバンスパック (VZシャーシ)
+        en: NEO-VQS (VZ CHASSIS) ADVANCED PACK
+        zh-HK: 1/32 Mini 4WD Neo-VQS 升級套裝 (VZ底盤)
       source: tamiya
   wheel-front:
-    - label: Small Low-Profile A-Spoke
+    - label:
+        en: Small Low-Profile A-Spoke
+        zh-HK: 小徑低框A字輻輪框
       source: fandom
   wheel-rear:
-    - label: Small Low-Profile A-Spoke
+    - label:
+        en: Small Low-Profile A-Spoke
+        zh-HK: 小徑低框A字輻輪框
       source: fandom
   tire-front:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   tire-rear:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   motor:
-    - label: Light-Dash Motor
-      source: fandom
+    - partId: "15455"
+      source: override
   gear-set:
-    - label: 3.7:1
+    - label:
+        ja: 3.7:1
+        en: 3.7:1
+        zh-HK: 3.7:1
+        zh-TW: 3.7:1
       source: tamiya
 loadoutSource: fandom
 loadoutSourceTitle: Neo-VQS Advanced Pack

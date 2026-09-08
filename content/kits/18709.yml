@@ -11,7 +11,9 @@ seriesLabel: 1/32 ミニ四駆REVシリーズ
 chassis: fm-a
 stockLoadout:
   body:
-    - label: バロンビエント （FM-Aシャーシ）
+    - label:
+        ja: バロンビエント （FM-Aシャーシ）
+        en: BARON VIENTO (FM-A CHASSIS)
       source: tamiya
 loadoutSource: chassis
 priceJpy: 1210

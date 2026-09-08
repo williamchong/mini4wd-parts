@@ -5,8 +5,9 @@
  * call site, so without this every template repeats
  * `resolveName(x.names, locale, wording)` and any one of them can drift.
  */
-import { resolveName } from '#shared/catalog/names'
+import { resolveLabel, resolveName } from '#shared/catalog/names'
 import type { NameLocale, Names } from '#shared/catalog/names'
+import type { LabelNames } from '#shared/catalog/schema'
 
 export function useCatalogName() {
   const { locale } = useI18n()
@@ -19,16 +20,30 @@ export function useCatalogName() {
   /** The name, plus the locale key it actually came from. */
   const resolve = (names: Names) => resolveName(names, nameLocale.value, wording.value)
 
+  /** Whether a resolved name came from a locale this page does not serve. */
+  const marks = (from: keyof Names) =>
+    nameLocale.value !== 'en' && from !== 'zh-HK' && from !== 'zh-TW'
+
   /**
-   * True when the best name we have is the Japanese one. 40% of parts and 67%
-   * of kits are in that state, and showing a Japanese string unmarked in a
-   * Chinese page reads as a mistake rather than as a gap in the data.
+   * A loadout label, which may have no locale we can serve at all — a
+   * wiki-imported phrase we have not translated carries only `en`.
+   *
+   * Returns the marking alongside the value rather than leaving the caller to
+   * ask separately, because the answer falls out of the same walk and asking
+   * twice means walking twice for every entry of every slot.
    */
-  const isFallback = (names: Names) => {
-    if (nameLocale.value === 'en') return false
-    const { from } = resolve(names)
-    return from !== 'zh-HK' && from !== 'zh-TW'
+  const label = (names: LabelNames) => {
+    const hit = resolveLabel(names, nameLocale.value, wording.value)
+    return hit && { ...hit, fallback: marks(hit.from) }
   }
 
-  return { resolve, name: (names: Names) => resolve(names).value, isFallback }
+  /**
+   * True when the best name we have is not a Traditional Chinese one. 40% of
+   * parts and 67% of kits are in that state, as are the wiki-imported loadout
+   * labels, and showing a foreign string unmarked in a Chinese page reads as a
+   * mistake rather than as a gap in the data.
+   */
+  const isFallback = (names: Names) => marks(resolve(names).from)
+
+  return { resolve, name: (names: Names) => resolve(names).value, isFallback, label }
 }

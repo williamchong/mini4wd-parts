@@ -268,10 +268,23 @@ export const partSchema = z.object({
  * leave them out, which is exactly what a `label` with no `partId` means:
  * you already own this, and you cannot buy it separately.
  */
+/**
+ * A label's own names, in whatever locales we have for it.
+ *
+ * Every key is optional, unlike `partNames` where `ja` is required, because a
+ * label's locales depend on where it came from: a wiki-imported wheel phrase
+ * has only `en`, a hand-authored chassis default has only Traditional Chinese.
+ * `resolveLabel` in ./names.ts is the partial-tolerant reader that follows from
+ * that, and it can return nothing.
+ */
+export const labelNames = partNames.partial()
+
 export const loadoutEntry = z.object({
   partId: z.string().optional(),
-  /** Free text shown when there is no catalog part to link to. */
-  label: z.string().optional(),
+  /** Shown when there is no catalog part to link to. */
+  label: labelNames.refine(names => Object.values(names).some(Boolean), {
+    message: 'needs at least one locale'
+  }).optional(),
   source: z.enum(['fandom', 'tamiya', 'chassis', 'override'])
 }).refine(entry => entry.partId !== undefined || entry.label !== undefined, {
   message: 'needs a partId or a label'
@@ -387,6 +400,7 @@ export type Chassis = z.infer<typeof chassisSchema>
 export type Kit = z.infer<typeof kitSchema>
 export type Loadout = z.infer<typeof loadout>
 export type LoadoutEntry = z.infer<typeof loadoutEntry>
+export type LabelNames = z.infer<typeof labelNames>
 export type PartCategory = Part['category']
 export type Slot = Part['slots'][number]
 

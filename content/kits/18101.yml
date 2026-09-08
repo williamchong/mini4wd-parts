@@ -14,22 +14,37 @@ chassis: vz
 gearRatio: 3.5:1
 stockLoadout:
   body:
-    - label: スーパーアバンテJr. (VZシャーシ)
+    - label:
+        ja: スーパーアバンテJr. (VZシャーシ)
+        en: SUPER AVANTE Jr. (VZ CHASSIS)
+        zh-HK: 1/32 迷你四驅車 Super Avante Jr. (VZ底盤)
       source: tamiya
   wheel-front:
-    - label: Small Low-Profile Angular-Type
+    - label:
+        en: Small Low-Profile Angular-Type
+        zh-HK: 小徑低框角型輪框
       source: fandom
   wheel-rear:
-    - label: Small Low-Profile Angular-Type
+    - label:
+        en: Small Low-Profile Angular-Type
+        zh-HK: 小徑低框角型輪框
       source: fandom
   tire-front:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   tire-rear:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   gear-set:
-    - label: 3.5:1
+    - label:
+        ja: 3.5:1
+        en: 3.5:1
+        zh-HK: 3.5:1
+        zh-TW: 3.5:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Super Avante Jr. (TD4)

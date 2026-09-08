@@ -4,8 +4,9 @@ import { stringify } from 'yaml'
 import { ROOT } from './fetch.ts'
 import { readJsonFile, readYamlFile, readYamlFileIfPresent } from './io.ts'
 import { partSchema, chassisSchema, kitSchema, CHASSIS_IDS, chassisIdFor } from '../../shared/catalog/schema.ts'
-import type { ChassisId, KitOverride, Loadout, PartOverride } from '../../shared/catalog/schema.ts'
+import type { ChassisId, KitOverride, LabelNames, Loadout, PartOverride } from '../../shared/catalog/schema.ts'
 import { compact, deriveCategory, deriveLegality, deriveSlots, deriveSpecs, isPlainObject, normalise } from './taxonomy.ts'
+import { labelFor, neutralLabel } from './labels.ts'
 import { GENRE_SERIES, KIT_GENRE_SERIES, type JpItem, type KitGenreCode, type PartGenreCode } from './sources/tamiya-jp.ts'
 import type { HkItem } from './sources/tamiya-hk.ts'
 import type { FandomKitVariant } from './sources/fandom.ts'
@@ -187,22 +188,33 @@ function buildKit(item: JpItem<KitGenreCode>, chassis: ChassisId) {
   const hk = hkById.get(item.id)
   const wiki = loadoutById.get(item.id)
 
+  const names = compact({
+    ja: item.nameJa,
+    en: item.nameEn ?? hk?.nameEn,
+    'zh-HK': hk?.nameZhHk
+  })
+
   const stockLoadout: Loadout = {}
-  const fill = (slot: string, label: string | undefined, source: 'tamiya' | 'fandom') => {
+  const fill = (slot: string, label: LabelNames | undefined, source: 'tamiya' | 'fandom') => {
     if (label) stockLoadout[slot] = [{ label, source }]
   }
 
   // The body is the one slot a bare runner cannot fill, so it always comes from
-  // the kit. Tamiya's name is the label because that is what is on the box.
-  fill('body', item.nameJa, 'tamiya')
+  // the kit — and the box's name *is* the kit's name, so the label is the record
+  // the locale columns above already built rather than a second copy of `nameJa`
+  // that only Japanese readers could read.
+  fill('body', names, 'tamiya')
 
   if (wiki) {
     // One value covers both axles: the wiki records what the kit ships, not a
-    // per-corner fitment.
-    fill('wheel-front', wiki.wheel, 'fandom')
-    fill('wheel-rear', wiki.wheel, 'fandom')
-    fill('tire-front', wiki.tire, 'fandom')
-    fill('tire-rear', wiki.tire, 'fandom')
+    // per-corner fitment. Resolved once for that reason as much as for the cost
+    // — two calls would be two objects for what the wiki states as one value.
+    const wheel = labelFor(wiki.wheel)
+    const tire = labelFor(wiki.tire)
+    fill('wheel-front', wheel, 'fandom')
+    fill('wheel-rear', wheel, 'fandom')
+    fill('tire-front', tire, 'fandom')
+    fill('tire-rear', tire, 'fandom')
     // "Standard" is the normal motor the chassis default already supplies, and
     // it is nine values in ten, so only a real upgrade is a delta worth storing.
     // The family check is not redundant with that: the wiki's motor field is
@@ -210,7 +222,7 @@ function buildKit(item: JpItem<KitGenreCode>, chassis: ChassisId) {
     // Elastomer" is a tire material), and a builder showing that as your motor
     // is worse than showing the chassis default.
     if (wiki.motor && !/^standard$/i.test(wiki.motor) && /tuned|dash|motor/i.test(wiki.motor)) {
-      fill('motor', wiki.motor, 'fandom')
+      fill('motor', labelFor(wiki.motor), 'fandom')
     }
   }
 
@@ -224,15 +236,15 @@ function buildKit(item: JpItem<KitGenreCode>, chassis: ChassisId) {
   const tamiyaGear = /ギヤ比[^●\d]{0,12}?([\d.]+\s*:\s*[\d.]+)/
     .exec(normalise(item.specsRaw ?? ''))?.[1]?.replace(/\s/g, '')
   const gearRatio = tamiyaGear ?? wiki?.gearRatio
-  fill('gear-set', gearRatio, tamiyaGear ? 'tamiya' : 'fandom')
+  // A ratio reads the same in every language, so it is stored in every locale
+  // rather than under `ja` alone. Both fallback chains do end at `ja`, so one
+  // copy would resolve everywhere — but it would resolve *as a fallback*, and
+  // the builder italicises those to mark a string it could not translate.
+  fill('gear-set', gearRatio ? neutralLabel(gearRatio) : undefined, tamiyaGear ? 'tamiya' : 'fandom')
 
   const record = {
     id: item.id,
-    names: compact({
-      ja: item.nameJa,
-      en: item.nameEn ?? hk?.nameEn,
-      'zh-HK': hk?.nameZhHk
-    }),
+    names,
     nameSources: compact({
       ja: 'tamiya.com',
       en: item.nameEn ? 'tamiya.com' : hk?.nameEn ? 'tamiya.hk' : undefined,

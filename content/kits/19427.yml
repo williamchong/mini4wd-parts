@@ -11,7 +11,9 @@ seriesLabel: 1/32 フルカウルミニ四駆シリーズ
 chassis: vs
 stockLoadout:
   body:
-    - label: 1/32 ディオスパーダ GPA
+    - label:
+        ja: 1/32 ディオスパーダ GPA
+        en: DIOSPADA GPA
       source: tamiya
 loadoutSource: chassis
 priceJpy: 770

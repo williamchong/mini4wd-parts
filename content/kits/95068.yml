@@ -11,22 +11,36 @@ chassis: super-2
 gearRatio: 4:1
 stockLoadout:
   body:
-    - label: 1/32 ミニ四駆・くまモン バージョン
+    - label:
+        ja: 1/32 ミニ四駆・くまモン バージョン
+        en: MINI 4WD KUMAMON VERSION
       source: tamiya
   wheel-front:
-    - label: Small Fully Cowled-type
+    - label:
+        en: Small Fully Cowled-Type
+        zh-HK: 小徑全罩型輪框
       source: fandom
   wheel-rear:
-    - label: Small Fully Cowled-type
+    - label:
+        en: Small Fully Cowled-Type
+        zh-HK: 小徑全罩型輪框
       source: fandom
   tire-front:
-    - label: Small High-Profile Slick
+    - label:
+        en: Small High-Profile Slick
+        zh-HK: 小徑高框光頭胎
       source: fandom
   tire-rear:
-    - label: Small High-Profile Slick
+    - label:
+        en: Small High-Profile Slick
+        zh-HK: 小徑高框光頭胎
       source: fandom
   gear-set:
-    - label: 4:1
+    - label:
+        ja: 4:1
+        en: 4:1
+        zh-HK: 4:1
+        zh-TW: 4:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Mini 4WD Kumamon Version

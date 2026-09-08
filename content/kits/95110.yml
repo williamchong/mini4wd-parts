@@ -11,22 +11,36 @@ chassis: ms
 gearRatio: 4:1
 stockLoadout:
   body:
-    - label: 1/32 ダッシュ1号 皇帝(エンペラー) メモリアル(MSシャーシ) -ジャパンカップ開催30年記念-
+    - label:
+        ja: 1/32 ダッシュ1号 皇帝(エンペラー) メモリアル(MSシャーシ) -ジャパンカップ開催30年記念-
+        en: DASH-1 EMPEROR MEMORIAL (MS CHASSIS) 30 YEARS OF THE JAPAN CUP
       source: tamiya
   wheel-front:
-    - label: Large Low-Profile
+    - label:
+        en: Large Low-Profile
+        zh-HK: 大徑低框輪胎
       source: fandom
   wheel-rear:
-    - label: Large Low-Profile
+    - label:
+        en: Large Low-Profile
+        zh-HK: 大徑低框輪胎
       source: fandom
   tire-front:
-    - label: Large Low-Profile
+    - label:
+        en: Large Low-Profile
+        zh-HK: 大徑低框輪胎
       source: fandom
   tire-rear:
-    - label: Large Low-Profile
+    - label:
+        en: Large Low-Profile
+        zh-HK: 大徑低框輪胎
       source: fandom
   gear-set:
-    - label: 4:1
+    - label:
+        ja: 4:1
+        en: 4:1
+        zh-HK: 4:1
+        zh-TW: 4:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Dash-1 Emperor

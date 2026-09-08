@@ -14,22 +14,37 @@ chassis: fm-a
 gearRatio: 3.5:1
 stockLoadout:
   body:
-    - label: グレートマグナムR（リボルバー ） （FM-Aシャーシ）
+    - label:
+        ja: グレートマグナムR（リボルバー ） （FM-Aシャーシ）
+        en: GREAT MAGNUM R (FM-A CHASSIS)
+        zh-HK: 1/32 迷你四驅車 衝鋒麥林/偉大衝鋒 R (FM-A 底盤)
       source: tamiya
   wheel-front:
-    - label: Small Low-Profile A-spoke
+    - label:
+        en: Small Low-Profile A-Spoke
+        zh-HK: 小徑低框A字輻輪框
       source: fandom
   wheel-rear:
-    - label: Small Low-Profile A-spoke
+    - label:
+        en: Small Low-Profile A-Spoke
+        zh-HK: 小徑低框A字輻輪框
       source: fandom
   tire-front:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   tire-rear:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   gear-set:
-    - label: 3.5:1
+    - label:
+        ja: 3.5:1
+        en: 3.5:1
+        zh-HK: 3.5:1
+        zh-TW: 3.5:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Great Magnum R

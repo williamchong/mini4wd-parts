@@ -13,22 +13,37 @@ chassis: vs
 gearRatio: 5:1
 stockLoadout:
   body:
-    - label: ミニ四駆ドッグ 黒柴スペシャル (VSシャーシ)
+    - label:
+        ja: ミニ四駆ドッグ 黒柴スペシャル (VSシャーシ)
+        en: MINI 4WD DOG RACER KUROSHIBA SPECIAL (VS CHASSIS)
+        zh-HK: 1/32 迷你四驅車 狗狗車手 黑柴特別版 (VS底盤)
       source: tamiya
   wheel-front:
-    - label: Large Low-Profile 6-Spoke
+    - label:
+        en: Large Low-Profile 6-Spoke
+        zh-HK: 大徑低框六輻輪框
       source: fandom
   wheel-rear:
-    - label: Large Low-Profile 6-Spoke
+    - label:
+        en: Large Low-Profile 6-Spoke
+        zh-HK: 大徑低框六輻輪框
       source: fandom
   tire-front:
-    - label: Large Low-Profile Slick
+    - label:
+        en: Large Low-Profile Slick
+        zh-HK: 大徑低框光頭胎
       source: fandom
   tire-rear:
-    - label: Large Low-Profile Slick
+    - label:
+        en: Large Low-Profile Slick
+        zh-HK: 大徑低框光頭胎
       source: fandom
   gear-set:
-    - label: 5:1
+    - label:
+        ja: 5:1
+        en: 5:1
+        zh-HK: 5:1
+        zh-TW: 5:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Mini 4WD Dog Racer

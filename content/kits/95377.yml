@@ -11,22 +11,36 @@ chassis: super-2
 gearRatio: 4.2:1
 stockLoadout:
   body:
-    - label: アストロブーメラン プレミアム ブラックスペシャル (スーパーIIシャーシ)
+    - label:
+        ja: アストロブーメラン プレミアム ブラックスペシャル (スーパーIIシャーシ)
+        en: ASTRO-BOOMERANG PREMIUM BLACK SPECIAL (SUPER-II CHASSIS)
       source: tamiya
   wheel-front:
-    - label: Large Narrow Lightweight
+    - label:
+        en: Large Narrow Lightweight
+        zh-HK: 大徑窄版輕量輪框
       source: fandom
   wheel-rear:
-    - label: Large Narrow Lightweight
+    - label:
+        en: Large Narrow Lightweight
+        zh-HK: 大徑窄版輕量輪框
       source: fandom
   tire-front:
-    - label: Large Arched
+    - label:
+        en: Large Arched
+        zh-HK: 大徑弧形輪胎
       source: fandom
   tire-rear:
-    - label: Large Arched
+    - label:
+        en: Large Arched
+        zh-HK: 大徑弧形輪胎
       source: fandom
   gear-set:
-    - label: 4.2:1
+    - label:
+        ja: 4.2:1
+        en: 4.2:1
+        zh-HK: 4.2:1
+        zh-TW: 4.2:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Astro-Boomerang

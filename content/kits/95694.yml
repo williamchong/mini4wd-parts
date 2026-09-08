@@ -12,7 +12,10 @@ seriesLabel: ミニ四駆特別企画（マシン）
 chassis: super-2
 stockLoadout:
   body:
-    - label: 2026年 干支ミニ四駆「午年」
+    - label:
+        ja: 2026年 干支ミニ四駆「午年」
+        en: MINI 4WD NEW YEAR'S EDITION "YEAR OF THE HORSE 2026"
+        zh-HK: 1/32 迷你四驅車 2026年 干支迷你四驅車 「午年」 (Super-II底盤)
       source: tamiya
 loadoutSource: chassis
 priceJpy: 1540

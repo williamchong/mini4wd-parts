@@ -13,22 +13,37 @@ chassis: vs
 gearRatio: 4:1
 stockLoadout:
   body:
-    - label: バリアトロン
+    - label:
+        ja: バリアトロン
+        en: VARIATRON
+        zh-HK: 1/32 迷你四驅車 Variatron (VS底盤)
       source: tamiya
   wheel-front:
-    - label: Large Flat Dish
+    - label:
+        en: Large Flat Dish
+        zh-HK: 大徑平碟輪框
       source: fandom
   wheel-rear:
-    - label: Large Flat Dish
+    - label:
+        en: Large Flat Dish
+        zh-HK: 大徑平碟輪框
       source: fandom
   tire-front:
-    - label: Large Avante-Type Slick
+    - label:
+        en: Large Avante-Type Slick
+        zh-HK: 大徑阿邦特型光頭胎
       source: fandom
   tire-rear:
-    - label: Large Avante-Type Slick
+    - label:
+        en: Large Avante-Type Slick
+        zh-HK: 大徑阿邦特型光頭胎
       source: fandom
   gear-set:
-    - label: 4:1
+    - label:
+        ja: 4:1
+        en: 4:1
+        zh-HK: 4:1
+        zh-TW: 4:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Variatron

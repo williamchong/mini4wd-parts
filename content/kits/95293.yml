@@ -11,22 +11,34 @@ chassis: ma
 gearRatio: 3.5:1
 stockLoadout:
   body:
-    - label: 1/32 フェスタジョーヌ 金メタリック(カーボン強化ホイール)
+    - label:
+        ja: 1/32 フェスタジョーヌ 金メタリック(カーボン強化ホイール)
+        en: FESTA JAUNE GOLD METALLIC (w/CARBON REINFORCED WHEELS)
       source: tamiya
   wheel-front:
-    - label: Small (Both) / Low-Profile Fin-Type (1st) / Low-Profile Dish-Type (2nd)
+    - label:
+        en: Small / Low-Profile Fin-Type (1st) / Low-Profile Dish-Type (2nd)
       source: fandom
   wheel-rear:
-    - label: Small (Both) / Low-Profile Fin-Type (1st) / Low-Profile Dish-Type (2nd)
+    - label:
+        en: Small / Low-Profile Fin-Type (1st) / Low-Profile Dish-Type (2nd)
       source: fandom
   tire-front:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   tire-rear:
-    - label: Small Low-Profile Slick
+    - label:
+        en: Small Low-Profile Slick
+        zh-HK: 小徑低框光頭胎
       source: fandom
   gear-set:
-    - label: 3.5:1
+    - label:
+        ja: 3.5:1
+        en: 3.5:1
+        zh-HK: 3.5:1
+        zh-TW: 3.5:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Festa Jaune

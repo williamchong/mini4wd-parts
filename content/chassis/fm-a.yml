@@ -132,43 +132,69 @@ defaultLoadout:
     - partId: "94380"
       source: chassis
   gear-set:
-    - label: 套件標準齒輪組
+    - label:
+        en: Kit standard gears
+        zh-HK: 套件標準齒輪組
       source: chassis
   counter-gear:
-    - label: 套件標準中間齒輪
+    - label:
+        en: Kit standard counter gear
+        zh-HK: 套件標準中間齒輪
       source: chassis
   propeller-shaft:
-    - label: 套件標準傳動軸
+    - label:
+        en: Kit standard propeller shaft
+        zh-HK: 套件標準傳動軸
       source: chassis
   terminal:
-    - label: 套件標準電池金屬片
+    - label:
+        en: Kit standard terminals
+        zh-HK: 套件標準電池金屬片
       source: chassis
   switch:
-    - label: 套件標準電源開關
+    - label:
+        en: Kit standard switch
+        zh-HK: 套件標準電源開關
       source: chassis
   axle:
-    - label: 套件標準車軸
+    - label:
+        en: Kit standard axles
+        zh-HK: 套件標準車軸
       source: chassis
   bearing:
-    - label: 套件標準塑膠軸襯
+    - label:
+        en: Kit standard plastic bushings
+        zh-HK: 套件標準塑膠軸襯
       source: chassis
   wheel-front:
-    - label: 套件標準輪框
+    - label:
+        en: Kit standard wheels
+        zh-HK: 套件標準輪框
       source: chassis
   wheel-rear:
-    - label: 套件標準輪框
+    - label:
+        en: Kit standard wheels
+        zh-HK: 套件標準輪框
       source: chassis
   tire-front:
-    - label: 套件標準輪胎
+    - label:
+        en: Kit standard tires
+        zh-HK: 套件標準輪胎
       source: chassis
   tire-rear:
-    - label: 套件標準輪胎
+    - label:
+        en: Kit standard tires
+        zh-HK: 套件標準輪胎
       source: chassis
   roller-front:
-    - label: 套件標準塑膠導輪
+    - label:
+        en: Kit standard plastic rollers
+        zh-HK: 套件標準塑膠導輪
       source: chassis
   roller-rear:
-    - label: 套件標準塑膠導輪
+    - label:
+        en: Kit standard plastic rollers
+        zh-HK: 套件標準塑膠導輪
       source: chassis
 compatibleParts:
   - "10319"

@@ -16,7 +16,7 @@
  * `part.slots` lists types (`gear`, `shaft`). Two of the 22 slots differ.
  */
 import type {
-  Chassis, ChassisId, Kit, LoadoutEntry, Part, PartLegality, Slot
+  Chassis, ChassisId, Kit, LabelNames, LoadoutEntry, Part, PartLegality, Slot
 } from './schema.ts'
 
 /**
@@ -74,7 +74,7 @@ export type EntryOrigin = 'chassis' | 'kit' | 'user'
  */
 export type ResolvedEntry = {
   partId?: string
-  label?: string
+  label?: LabelNames
   origin: EntryOrigin
 }
 

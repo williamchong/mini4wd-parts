@@ -12,22 +12,36 @@ chassis: vs
 gearRatio: 4:1
 stockLoadout:
   body:
-    - label: 1/32 アバンテRS
+    - label:
+        ja: 1/32 アバンテRS
+        en: AVANTE RS
       source: tamiya
   wheel-front:
-    - label: Large Mesh-Type
+    - label:
+        en: Large Mesh-Type
+        zh-HK: 大徑網格輪框
       source: fandom
   wheel-rear:
-    - label: Large Mesh-Type
+    - label:
+        en: Large Mesh-Type
+        zh-HK: 大徑網格輪框
       source: fandom
   tire-front:
-    - label: Large Avante-Type Slick
+    - label:
+        en: Large Avante-Type Slick
+        zh-HK: 大徑阿邦特型光頭胎
       source: fandom
   tire-rear:
-    - label: Large Avante-Type Slick
+    - label:
+        en: Large Avante-Type Slick
+        zh-HK: 大徑阿邦特型光頭胎
       source: fandom
   gear-set:
-    - label: 4:1
+    - label:
+        ja: 4:1
+        en: 4:1
+        zh-HK: 4:1
+        zh-TW: 4:1
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Avante Jr.
