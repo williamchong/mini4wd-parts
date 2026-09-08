@@ -17,6 +17,14 @@ const API = 'https://mini-4wd.fandom.com/api.php'
 export const GUP_TEMPLATE = 'Template:Infobox Grade-Up Parts'
 
 /**
+ * The per-variant spec table on car articles. Unlike the GUP infobox this is
+ * a real import rather than a cross-check: Tamiya publishes no bill of
+ * materials for a kit, and this template is the only structured source for
+ * what a given box actually contains (docs/PLAN.md §4.7).
+ */
+export const KIT_TEMPLATE = 'Template:Technical Info List'
+
+/**
  * Match a template call by the same name used for the API query, so the two
  * cannot drift apart. MediaWiki treats spaces and underscores in template names
  * as interchangeable, and articles use both.
@@ -46,7 +54,7 @@ export interface FandomPart {
  * the prefixes keeps the other five-digit numbers the wiki writes — prices,
  * dimensions — from being read as items.
  */
-const ITEM_NUMBER = /\b((?:10|15|18|19|49|55|84|94|95)\d{3})\b/g
+const ITEM_NUMBER = /\b((?:10|15|17|18|19|49|55|84|92|93|94|95)\d{3})\b/g
 
 /**
  * Split a template body on its top-level `|`. Wiki markup nests `[[File:x|y]]`
@@ -86,38 +94,58 @@ export function splitParams(body: string): string[] {
 }
 
 /**
- * Pure parser for one `{{Template|k = v|…}}` call. Keys are lower-cased and
- * lose a trailing dot, because the wiki writes both "No." and "No".
+ * Pure parser for every `{{Template|k = v|…}}` call of one name, in document
+ * order. Keys are lower-cased and lose a trailing dot, because the wiki writes
+ * both "No." and "No".
  *
- * Returns undefined for an unterminated template rather than guessing where it
- * ended: the closing `}}` is what tells us `i - 2` is the end of the body, and
- * without it the last field silently loses its final two characters.
+ * Plural because a car article carries one Technical Info List per variant —
+ * Avante Jr. has ten, one per re-release — so reading only the first would
+ * quietly drop every box but one.
+ *
+ * An unterminated call ends the scan rather than being guessed at: the closing
+ * `}}` is what tells us `i - 2` is the end of the body, and without it the last
+ * field silently loses its final two characters.
  */
-export function parseTemplate(text: string, name: RegExp): Record<string, string> | undefined {
-  const opening = new RegExp(`\\{\\{\\s*${name.source}\\s*`, name.flags.replace('g', ''))
-  const start = opening.exec(text)
-  if (!start) return undefined
+export function parseTemplates(text: string, name: RegExp): Record<string, string>[] {
+  // Global so the scan can resume from `lastIndex` rather than re-slicing the
+  // rest of the article on every call it finds.
+  const opening = new RegExp(`\\{\\{\\s*${name.source}\\s*`, `${name.flags.replace('g', '')}g`)
+  const calls: Record<string, string>[] = []
+  let offset = 0
 
-  let depth = 1
-  let i = start.index + start[0].length
-  const from = i
-  while (i < text.length && depth > 0) {
-    const pair = text.slice(i, i + 2)
-    if (pair === '{{') { depth += 1; i += 2 }
-    else if (pair === '}}') { depth -= 1; i += 2 }
-    else i += 1
-  }
-  if (depth > 0) return undefined
+  while (offset < text.length) {
+    opening.lastIndex = offset
+    const start = opening.exec(text)
+    if (!start) break
 
-  const fields: Record<string, string> = {}
-  for (const param of splitParams(text.slice(from, i - 2))) {
-    const split = param.indexOf('=')
-    if (split === -1) continue
-    const key = param.slice(0, split).trim().replace(/\.$/, '').trim().toLowerCase()
-    if (key) fields[key] = param.slice(split + 1).trim()
+    let depth = 1
+    let i = start.index + start[0].length
+    const from = i
+    while (i < text.length && depth > 0) {
+      const pair = text.slice(i, i + 2)
+      if (pair === '{{') { depth += 1; i += 2 }
+      else if (pair === '}}') { depth -= 1; i += 2 }
+      else i += 1
+    }
+    if (depth > 0) break
+
+    const fields: Record<string, string> = {}
+    for (const param of splitParams(text.slice(from, i - 2))) {
+      const split = param.indexOf('=')
+      if (split === -1) continue
+      const key = param.slice(0, split).trim().replace(/\.$/, '').trim().toLowerCase()
+      if (key) fields[key] = param.slice(split + 1).trim()
+    }
+    calls.push(fields)
+    offset = i
   }
-  return fields
+
+  return calls
 }
+
+/** The first call, for the infoboxes that only ever appear once per article. */
+export const parseTemplate = (text: string, name: RegExp): Record<string, string> | undefined =>
+  parseTemplates(text, name)[0]
 
 /** Pure parser for one article's wikitext. */
 export function parseGupArticle(title: string, wikitext: string): FandomPart {
@@ -131,6 +159,61 @@ export function parseGupArticle(title: string, wikitext: string): FandomPart {
   }
 
   return { title, partsType: fields['parts type'] || undefined, items }
+}
+
+/** One box: an article's Technical Info List row, flattened. */
+export interface FandomKitVariant {
+  /** Source article. CC-BY-SA, so attribution travels with the data. */
+  title: string
+  /** Item numbers this row covers; a re-release shares one row. */
+  ids: string[]
+  variant?: string
+  chassis?: string
+  gearRatio?: string
+  motor?: string
+  /** Wheels and tires as one phrase; the wiki splits each across two fields. */
+  wheel?: string
+  tire?: string
+}
+
+/** "[[VS Chassis|VS]]" -> "VS". Chassis and materials are usually linked. */
+const unlink = (value: string) => value.replace(/\[\[(?:[^\]|]*\|)?([^\]]*)\]\]/g, '$1')
+
+/**
+ * Wiki field values are free text with markup in them. "n/a" is dropped so an
+ * explicit blank reads the same as an absent field.
+ */
+function plain(value: string | undefined): string | undefined {
+  if (value === undefined) return undefined
+  const text = unlink(value)
+    .replace(/<br\s*\/?>/gi, ' / ')
+    .replace(/<[^>]+>/g, '')
+    .replace(/\s+/g, ' ')
+    .trim()
+  return text && text.toLowerCase() !== 'n/a' ? text : undefined
+}
+
+const KIT_PATTERN = templatePattern(KIT_TEMPLATE)
+
+/** Pure parser for one car article's variant rows. */
+export function parseKitArticle(title: string, wikitext: string): FandomKitVariant[] {
+  return parseTemplates(wikitext, KIT_PATTERN).map((fields) => {
+    // The wiki records a wheel as size + type ("Small", "Low-Profile Fin-Type")
+    // and we want the one phrase a builder row can show.
+    const phrase = (...keys: string[]) =>
+      keys.map(key => plain(fields[key])).filter(Boolean).join(' ') || undefined
+
+    return {
+      title,
+      ids: [...(fields['item number'] ?? '').matchAll(ITEM_NUMBER)].map(match => match[1]!),
+      variant: plain(fields.variant),
+      chassis: plain(fields['chassis type']),
+      gearRatio: plain(fields.gear),
+      motor: plain(fields.motor),
+      wheel: phrase('wheel size', 'wheel type'),
+      tire: phrase('tire size', 'tire type')
+    }
+  })
 }
 
 interface EmbeddedIn {
@@ -168,12 +251,13 @@ async function listTranscluders(template: string, noCache: boolean): Promise<str
 }
 
 /**
- * The API takes 50 titles per request, so the whole wiki costs ~3 requests
- * rather than one per article.
+ * Wikitext of every article transcluding a template. The API takes 50 titles
+ * per request, so a whole template's worth costs a handful of requests rather
+ * than one per article.
  */
-export async function scrapeFandomParts(noCache = false): Promise<FandomPart[]> {
-  const titles = await listTranscluders(GUP_TEMPLATE, noCache)
-  const parts: FandomPart[] = []
+async function fetchArticles(template: string, noCache: boolean) {
+  const titles = await listTranscluders(template, noCache)
+  const articles: { title: string, wikitext: string }[] = []
 
   for (let i = 0; i < titles.length; i += 50) {
     const page = await fetchJson<Revisions>(
@@ -188,11 +272,28 @@ export async function scrapeFandomParts(noCache = false): Promise<FandomPart[]> 
     )
     for (const entry of Object.values(page.query.pages)) {
       const wikitext = entry.revisions?.[0]?.slots.main['*']
-      if (wikitext) parts.push(parseGupArticle(entry.title, wikitext))
+      if (wikitext) articles.push({ title: entry.title, wikitext })
     }
     progress('articles', Math.min(i + 50, titles.length), titles.length)
   }
   console.log('')
 
-  return parts.sort((a, b) => a.title.localeCompare(b.title))
+  return articles
+}
+
+export async function scrapeFandomParts(noCache = false): Promise<FandomPart[]> {
+  return (await fetchArticles(GUP_TEMPLATE, noCache))
+    .map(article => parseGupArticle(article.title, article.wikitext))
+    .sort((a, b) => a.title.localeCompare(b.title))
+}
+
+export async function scrapeFandomKits(noCache = false): Promise<FandomKitVariant[]> {
+  return (await fetchArticles(KIT_TEMPLATE, noCache))
+    .flatMap(article => parseKitArticle(article.title, article.wikitext))
+    // A row whose Item number holds nothing we recognise (Mini-F and Type-1
+    // cars, mostly) can never join to a Tamiya item, so it would only pad the
+    // snapshot and its diffs.
+    .filter(variant => variant.ids.length)
+    .sort((a, b) => a.title.localeCompare(b.title)
+      || (a.variant ?? '').localeCompare(b.variant ?? ''))
 }

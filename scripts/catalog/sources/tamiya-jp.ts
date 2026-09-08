@@ -20,16 +20,48 @@ export const GENRE_SERIES = {
   '3020': undefined
 } as const
 
-export type GenreCode = keyof typeof GENRE_SERIES
+/**
+ * The kit branch (`3010`) of the same tree, mapped to our kit series. Kept
+ * apart from GENRE_SERIES rather than merged into it because the two produce
+ * different records: these codes never yield a part.
+ *
+ * Wild (301020), Dangun (301089) and Train (301090) are deliberately absent —
+ * they are out of the v1 catalog (docs/PLAN.md §3.1).
+ */
+export const KIT_GENRE_SERIES = {
+  '301010': 'standard',
+  '301030': 'racer',
+  '301031': 'racer-special',
+  '301040': 'fully-cowled',
+  '301050': 'aero',
+  '301051': 'laser',
+  '301070': 'rev',
+  '301080': 'pro',
+  '301081': 'super',
+  '301082': 'mighty',
+  '301083': 'real',
+  '301084': 'beginners',
+  '301085': 'special',
+  '301086': 'limited'
+} as const
 
-export interface ListEntry {
+export type PartGenreCode = keyof typeof GENRE_SERIES
+export type KitGenreCode = keyof typeof KIT_GENRE_SERIES
+export type GenreCode = PartGenreCode | KitGenreCode
+
+/**
+ * Carrying the genre as a type parameter is what stops a kit reaching the part
+ * builder: `data/raw/tamiya-jp-kits.json` reads back as `JpItem<KitGenreCode>`,
+ * which `GENRE_SERIES[item.genre]` will not accept.
+ */
+export interface ListEntry<G extends GenreCode = GenreCode> {
   id: string
-  genre: GenreCode
+  genre: G
   seriesLabel: string
   listName: string
 }
 
-export interface JpItem extends ListEntry {
+export interface JpItem<G extends GenreCode = GenreCode> extends ListEntry<G> {
   nameJa: string
   nameEn?: string
   gupNumber?: number
@@ -50,9 +82,9 @@ const text = (value: string | undefined) =>
   (value ?? '').replace(/　/g, ' ').replace(/\s+/g, ' ').trim()
 
 /** Pure parser for a product list page, so tests need no network. */
-export function parseListPage(html: string, genre: GenreCode): Page<ListEntry> {
+export function parseListPage<G extends GenreCode>(html: string, genre: G): Page<ListEntry<G>> {
   const $ = cheerio.load(html)
-  const entries: ListEntry[] = []
+  const entries: ListEntry<G>[] = []
 
   itemAnchors($).each((_, element) => {
     const anchor = $(element)
@@ -68,13 +100,14 @@ export function parseListPage(html: string, genre: GenreCode): Page<ListEntry> {
 }
 
 /** Collect every item id in a genre, following `absolutepage` pagination. */
-export const scrapeGenreList = (genre: GenreCode, noCache = false) => walkPages<ListEntry>({
-  label: `genre ${genre}`,
-  url: page => `${BASE}/list.html?field_sort=d&cmdarticlesearch=1&genre_item=${genre}&absolutepage=${page}`,
-  parse: html => parseListPage(html, genre),
-  idOf: entry => entry.id,
-  noCache
-})
+export const scrapeGenreList = <G extends GenreCode>(genre: G, noCache = false) =>
+  walkPages<ListEntry<G>>({
+    label: `genre ${genre}`,
+    url: page => `${BASE}/list.html?field_sort=d&cmdarticlesearch=1&genre_item=${genre}&absolutepage=${page}`,
+    parse: html => parseListPage(html, genre),
+    idOf: entry => entry.id,
+    noCache
+  })
 
 /** Pull the 【 xxx 】 segment out of a Tamiya description block. */
 function bracketSection($: cheerio.CheerioAPI, heading: string): string | undefined {
@@ -111,11 +144,15 @@ function parseReleaseDate(raw: string): string | undefined {
 export const detailUrl = (id: string) => `${BASE}/${id}/index.html`
 
 /** Pure parser for a product detail page. */
-export function parseDetail(html: string, entry: ListEntry): JpItem {
+export function parseDetail<G extends GenreCode>(html: string, entry: ListEntry<G>): JpItem<G> {
   const officialUrl = detailUrl(entry.id)
   const $ = cheerio.load(html)
   const block = $('.item_title_block_').first()
 
+  // Both product lines print a number in this slot, and they mean different
+  // things: "GP.549" on a part is the Grade-Up Part number, "No.64" on a kit is
+  // its place in its own kit line. Only the part builder may read it as a GUP
+  // number — buildKit stores it as `seriesNumber`.
   const titleMeta = text(block.find('.title1_ p').text())
   const gupNumber = /No\.(\d+)/.exec(titleMeta)?.[1]
 
@@ -165,6 +202,9 @@ export function parseDetail(html: string, entry: ListEntry): JpItem {
   }
 }
 
-export async function scrapeDetail(entry: ListEntry, noCache = false): Promise<JpItem> {
+export async function scrapeDetail<G extends GenreCode>(
+  entry: ListEntry<G>,
+  noCache = false
+): Promise<JpItem<G>> {
   return parseDetail(await fetchText(detailUrl(entry.id), { noCache }), entry)
 }

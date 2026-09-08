@@ -31,11 +31,11 @@ const stripHtml = (html: string) =>
 
 /**
  * Mini 4WD item-number spaces (CLAUDE.md, "Domain Notes"): 15xxx regular GUP,
- * 18xxx/19xxx kits, 92xxx/94xxx/95xxx limited and special. The HK store also
- * sells RC and scale models, whose 24xxx/35xxx/58xxx numbers we skip so the
- * committed snapshot stays about Mini 4WD.
+ * 17xxx Beginner's kits, 18xxx/19xxx kits, 92xxx/94xxx/95xxx limited and
+ * special. The HK store also sells RC and scale models, whose 24xxx/35xxx/58xxx
+ * numbers we skip so the committed snapshot stays about Mini 4WD.
  */
-const MINI_4WD_ITEM = /^(?:15|18|19|92|94|95)\d{3}$/
+const MINI_4WD_ITEM = /^(?:15|17|18|19|92|94|95)\d{3}$/
 
 /** Pure mapper for one Store API product; null when the SKU is not an item no. */
 export function mapStoreProduct(product: StoreProduct): HkItem | null {

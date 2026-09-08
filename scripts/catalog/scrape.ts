@@ -2,11 +2,14 @@ import { mkdir, writeFile } from 'node:fs/promises'
 import { join } from 'node:path'
 import { parseArgs } from 'node:util'
 import { ROOT, progress } from './fetch.ts'
-import { GENRE_SERIES, scrapeGenreList, scrapeDetail, type GenreCode, type JpItem } from './sources/tamiya-jp.ts'
+import {
+  GENRE_SERIES, KIT_GENRE_SERIES, scrapeGenreList, scrapeDetail,
+  type GenreCode, type JpItem, type ListEntry, type KitGenreCode, type PartGenreCode
+} from './sources/tamiya-jp.ts'
 import { scrapeChassisCompat } from './sources/tamiya-compat.ts'
 import { CHASSIS_CODES } from '../../shared/catalog/schema.ts'
 import { scrapeHkStore } from './sources/tamiya-hk.ts'
-import { scrapeFandomParts } from './sources/fandom.ts'
+import { scrapeFandomKits, scrapeFandomParts } from './sources/fandom.ts'
 
 /**
  * Stage 1 of the catalog pipeline: fetch everything, decide nothing.
@@ -39,23 +42,34 @@ async function writeRaw(name: string, data: unknown) {
   console.log(`  -> data/raw/${name}.json`)
 }
 
-if (wants('jp')) {
-  console.log('Tamiya JP catalog')
-  const entries = []
-  for (const genre of Object.keys(GENRE_SERIES) as GenreCode[]) {
+/** List every genre in a branch, then fetch each item's detail page. */
+async function scrapeGenres<G extends GenreCode>(genres: readonly G[]): Promise<JpItem<G>[]> {
+  const entries: ListEntry<G>[] = []
+  for (const genre of genres) {
     entries.push(...await scrapeGenreList(genre, noCache))
     console.log('')
   }
 
   const targets = limit ? entries.slice(0, limit) : entries
-  const items: JpItem[] = []
+  const items: JpItem<G>[] = []
   for (const entry of targets) {
     items.push(await scrapeDetail(entry, noCache))
     progress('details', items.length, targets.length)
   }
   console.log('')
-  items.sort((a, b) => a.id.localeCompare(b.id))
-  await writeRaw('tamiya-jp-items', items)
+  return items.sort((a, b) => a.id.localeCompare(b.id))
+}
+
+if (wants('jp')) {
+  console.log('Tamiya JP catalog')
+  await writeRaw('tamiya-jp-items', await scrapeGenres(Object.keys(GENRE_SERIES) as PartGenreCode[]))
+}
+
+// Kits land in their own snapshot: they build a different record, and keeping
+// them out of the parts file means a kit re-scrape leaves the parts diff alone.
+if (wants('kits')) {
+  console.log('Tamiya JP kits')
+  await writeRaw('tamiya-jp-kits', await scrapeGenres(Object.keys(KIT_GENRE_SERIES) as KitGenreCode[]))
 }
 
 if (wants('compat')) {
@@ -76,12 +90,21 @@ if (wants('hk')) {
   await writeRaw('tamiya-hk', items)
 }
 
-// Not a catalog source: this feeds catalog:crossref, which audits our derived
-// categories against the wiki's hand-written ones. Nothing here reaches content/.
+// The wiki plays two different roles. For parts it is a QA source only, feeding
+// catalog:crossref; nothing from fandom-parts.json reaches content/. For kits it
+// is the only structured source of what is in the box, so fandom-kits.json does
+// reach content/ — under CC-BY-SA, which is why each variant carries its article
+// title for attribution (docs/PLAN.md §4.7).
 if (wants('fandom')) {
-  console.log('Mini 4WD Fandom wiki (taxonomy cross-reference)')
+  console.log('Mini 4WD Fandom wiki (part taxonomy cross-reference)')
   const articles = await scrapeFandomParts(noCache)
   console.log(`  ${articles.length} articles, `
     + `${new Set(articles.flatMap(a => a.items.map(i => i.id))).size} item numbers`)
   await writeRaw('fandom-parts', articles)
+
+  console.log('Mini 4WD Fandom wiki (kit loadouts)')
+  const variants = await scrapeFandomKits(noCache)
+  console.log(`  ${variants.length} variants, `
+    + `${new Set(variants.flatMap(variant => variant.ids)).size} item numbers`)
+  await writeRaw('fandom-kits', variants)
 }

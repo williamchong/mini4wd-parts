@@ -1,0 +1,20 @@
+# Hand-authored corrections layered on top of the generated kit records.
+#
+# scripts/catalog/generate.ts deep-merges each entry into the derived record,
+# exactly as data/overrides/parts.yml does for parts. Nothing in content/kits is
+# ever edited by hand — a re-scrape rewrites it from scratch.
+#
+# The usual reason to add an entry here is to turn a loadout label into a real
+# catalog part. The Fandom wiki describes what a box contains in free text
+# ("Small Low-Profile Fin-Type"), and most of those moulded parts have no Tamiya
+# item number at all. Where one genuinely does, name it:
+#
+#   '18717':
+#     stockLoadout:
+#       wheel-front: [{ partId: '15120', source: override }]
+#       wheel-rear:  [{ partId: '15120', source: override }]
+#
+# `npm run catalog:verify` rejects a partId that is not in the catalog or does
+# not fit that slot, so a wrong guess fails the build rather than shipping.
+#
+# `npm run catalog:report` lists the kits still relying on labels alone.

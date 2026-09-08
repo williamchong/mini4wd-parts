@@ -1,0 +1,8 @@
+The '''Example Racer''' is a Mini 4WD car. Released in 1994 for 1200 yen.
+
+== Technical info ==
+{{Technical Info Header}}{{Technical Info List|Variant = Standard|Item number = 18014|Body color = Blue|Body material = PS|Chassis type = [[VZ Chassis|VZ]]|Wheel size = Small|Wheel type = Low-Profile Fin-Type|Wheel color = White|Tire size = Small|Tire type = Low-Profile Slick|Tire material = Med. Elastomer|Motor = Standard|Length = 156|Width = 97|Height = 33|Gear = 3.5:1}}
+{{Technical Info List|Variant = Black Special|Item number = 18506, 95501|Body color = Smoke|Chassis type = [[Super-II Chassis|Super-II]]|Wheel size = Large|Wheel type = Narrow Lightweight|Tire size = Large|Tire type = Arched|Motor = Torque-Tuned 2|Gear = 5:1<br>4.2:1}}
+{{Technical Info List|Variant = Premium|Item number = 95700|Body color = Clear|Chassis type = [[MA Chassis|MA]]|Wheel size = Small|Wheel type = Y-Spoke|Tire size = Small|Tire type = Low-Profile Slick|Motor = n/a|Gear = 3.5:1}}
+
+[[Category:Mini 4WD cars]]

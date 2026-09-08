@@ -6,7 +6,10 @@ import { parseDetail, parseListPage } from './sources/tamiya-jp.ts'
 import { parseCompatPage } from './sources/tamiya-compat.ts'
 import { mapStoreProduct } from './sources/tamiya-hk.ts'
 import { deriveCategory, deriveSpecs } from './taxonomy.ts'
-import { GUP_TEMPLATE, parseGupArticle, parseTemplate, splitParams, templatePattern } from './sources/fandom.ts'
+import {
+  GUP_TEMPLATE, KIT_TEMPLATE, parseGupArticle, parseKitArticle, parseTemplate,
+  parseTemplates, splitParams, templatePattern
+} from './sources/fandom.ts'
 
 const fixture = (name: string) =>
   readFileSync(join(import.meta.dirname, '__fixtures__', name), 'utf8')
@@ -155,6 +158,45 @@ test('an unterminated template is a parse failure, not a truncated last field', 
     parseTemplate('{{Infobox Grade-Up Parts|No. = 15034|Parts type = Roller', templatePattern(GUP_TEMPLATE)),
     undefined
   )
+})
+
+test('every call of a repeated template is read, not just the first', () => {
+  const calls = parseTemplates(
+    '{{T|a = 1}} prose {{T|a = 2}}{{Other|a = x}}{{T|a = 3}}', /T/)
+  assert.deepEqual(calls.map(call => call.a), ['1', '2', '3'])
+})
+
+test('a kit article yields one variant per box', () => {
+  const variants = parseKitArticle('Example Racer', fixture('fandom-kit.wikitext'))
+  assert.equal(variants.length, 3)
+
+  const [standard, special, premium] = variants
+  assert.equal(standard!.title, 'Example Racer')
+  assert.equal(standard!.variant, 'Standard')
+  // The chassis is a wiki link, and only its display text is the value.
+  assert.equal(standard!.chassis, 'VZ')
+  // Size and type are one physical thing that the wiki splits across two fields.
+  assert.equal(standard!.wheel, 'Small Low-Profile Fin-Type')
+  assert.equal(standard!.tire, 'Small Low-Profile Slick')
+  assert.equal(standard!.gearRatio, '3.5:1')
+  assert.deepEqual(standard!.ids, ['18014'])
+
+  // A re-release shares one row, so a row can name several item numbers.
+  assert.deepEqual(special!.ids, ['18506', '95501'])
+  assert.equal(special!.motor, 'Torque-Tuned 2')
+  assert.equal(special!.gearRatio, '5:1 / 4.2:1')
+
+  // "n/a" is an absent value written out, not a motor called n/a.
+  assert.equal(premium!.motor, undefined)
+  assert.deepEqual(premium!.ids, ['95700'])
+})
+
+test('a kit article with no spec table yields nothing rather than a blank row', () => {
+  assert.deepEqual(parseKitArticle('Stub', 'Just prose about item 18014.'), [])
+})
+
+test('the kit template name matches the one the API is queried with', () => {
+  assert.equal(templatePattern(KIT_TEMPLATE).test('Technical_Info_List'), true)
 })
 
 test('the match pattern is derived from the queried template name', () => {

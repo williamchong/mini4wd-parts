@@ -39,6 +39,14 @@ export const CODE_TO_CHASSIS = Object.fromEntries(
 ) as Record<string, ChassisId>
 
 /**
+ * One of Tamiya's chassis tags as our id, or undefined when the tag names a
+ * chassis outside the v1 set. Tamiya's codes are inconsistently cased, so every
+ * caller has to fold before looking up — hence one place that does it.
+ */
+export const chassisIdFor = (code: string): ChassisId | undefined =>
+  CODE_TO_CHASSIS[code.toLowerCase()]
+
+/**
  * Our own part taxonomy. Tamiya's own category labels are too coarse (almost
  * everything is just "ミニ四駆グレードアップパーツ"), so this is derived from
  * name keywords in scripts/catalog/taxonomy.ts and correctable per item.
@@ -81,6 +89,28 @@ export const PART_CATEGORIES = [
   'bundle',
   'accessory',
   'other'
+] as const
+
+/**
+ * Tamiya's kit product lines, the `3010` branch of the same tree. Kits are a
+ * separate collection from parts because almost nothing they carry is the same:
+ * a kit has a chassis and a loadout, not a category and a slot list.
+ */
+export const KIT_SERIES = [
+  'standard',      // 301010 ミニ四駆シリーズ
+  'racer',         // 301030 レーサーミニ四駆
+  'racer-special', // 301031 レーサーミニ四駆 特別仕様
+  'fully-cowled',  // 301040 フルカウルミニ四駆
+  'aero',          // 301050 エアロミニ四駆
+  'laser',         // 301051 レーザーミニ四駆
+  'rev',           // 301070 ミニ四駆REV
+  'pro',           // 301080 ミニ四駆PRO
+  'super',         // 301081 スーパーミニ四駆
+  'mighty',        // 301082 マイティミニ四駆
+  'real',          // 301083 リアル/メカニカルミニ四駆
+  'beginners',     // 301084 ビギナーズミニ四駆
+  'special',       // 301085 特別企画(マシン)
+  'limited'        // 301086 限定(マシン)
 ] as const
 
 /** Where an item sits in Tamiya's own product tree. */
@@ -138,6 +168,9 @@ export const partNames = z.object({
   'zh-TW': z.string().optional()
 })
 
+/** Which source each name came from, for the attribution page. */
+export const nameSources = z.record(z.string(), z.string())
+
 export const partSpecs = z.object({
   rollerDiameterMm: z.number().optional(),
   rollerType: z.enum(['plastic', 'aluminium', 'bearing', 'other']).optional(),
@@ -160,8 +193,7 @@ export const partSchema = z.object({
   /** Tamiya item number, e.g. "15549". The catalog's primary key. */
   id: z.string().regex(/^\d{4,5}$/),
   names: partNames,
-  /** Which locale each TC name came from, for the attribution page. */
-  nameSources: z.record(z.string(), z.string()).optional(),
+  nameSources: nameSources.optional(),
 
   series: z.enum(PART_SERIES),
   /** GUP number printed on the box ("No.549"), regular GUP only. */
@@ -219,6 +251,29 @@ export const partSchema = z.object({
   scrapedAt: z.string()
 })
 
+/**
+ * One thing a runner or a kit puts in a slot before the user changes anything.
+ *
+ * `partId` is optional, and for most entries it is absent. What comes in the
+ * box is largely molded into the kit — the wheels, the tires, the plastic
+ * rollers, the terminal, the double-shaft normal motor — and Tamiya sells no
+ * Grade-Up Part equivalent, so there is no item number to name. The builder
+ * still has to show those slots as filled, and the shopping list still has to
+ * leave them out, which is exactly what a `label` with no `partId` means:
+ * you already own this, and you cannot buy it separately.
+ */
+export const loadoutEntry = z.object({
+  partId: z.string().optional(),
+  /** Free text shown when there is no catalog part to link to. */
+  label: z.string().optional(),
+  source: z.enum(['fandom', 'tamiya', 'chassis', 'override'])
+}).refine(entry => entry.partId !== undefined || entry.label !== undefined, {
+  message: 'needs a partId or a label'
+})
+
+/** Slot id (from data/taxonomy/slots.yml) -> what fills it. */
+export const loadout = z.record(z.string(), z.array(loadoutEntry))
+
 export const chassisSchema = z.object({
   id: z.enum(CHASSIS_IDS),
   names: partNames,
@@ -247,21 +302,96 @@ export const chassisSchema = z.object({
      */
     required: z.boolean().default(false)
   })),
+  /**
+   * What the bare runner supplies, slot by slot. This is what seeds a build
+   * started from a chassis rather than a kit, and it is the base a kit's
+   * `stockLoadout` overlays (docs/PLAN.md §4.7). Hand-authored in
+   * data/chassis/*.yml: Tamiya publishes no bill of materials for a runner.
+   *
+   * Unrelated to a slot's `required` flag — a runner fills optional slots too,
+   * and leaves some required ones (the body) to the kit.
+   */
+  defaultLoadout: loadout.default({}),
+
   /** Item numbers Tamiya lists on this chassis' compat page (v1 scope only). */
   compatibleParts: z.array(z.string()).default([])
+})
+
+/**
+ * A boxed kit: a chassis, a body and the loadout that differs from the bare
+ * runner. One of the builder's two entry points (docs/PLAN.md §4.7).
+ */
+export const kitSchema = z.object({
+  id: z.string().regex(/^\d{4,5}$/),
+  names: partNames,
+  nameSources: z.record(z.string(), z.string()).optional(),
+
+  series: z.enum(KIT_SERIES),
+  /**
+   * The number printed on the box within its own line ("ミニ四駆PRO No.64").
+   * Deliberately not `gupNumber`: the detail page prints both in the same
+   * place, and reading a kit's series number as a Grade-Up Part number would
+   * silently claim the kit is a part you can buy.
+   */
+  seriesNumber: z.number().optional(),
+  seriesLabel: z.string().optional(),
+
+  chassis: z.enum(CHASSIS_IDS),
+  /** As shipped, which is not always the chassis' usual ratio. */
+  gearRatio: z.string().optional(),
+
+  /**
+   * What this kit adds to or changes about its chassis' `defaultLoadout` —
+   * the body always, plus whichever wheels, tires, gears or motor differ.
+   * Stored as the delta rather than the merged result so that re-authoring a
+   * chassis default does not require regenerating every kit that uses it.
+   */
+  stockLoadout: loadout.default({}),
+  /**
+   * Where the wheels, tires and motor came from. `chassis` means no wiki row
+   * covers this kit and the runner's defaults stand for all three — the kit may
+   * still carry a `gearRatio`, which Tamiya sometimes prints itself.
+   */
+  loadoutSource: z.enum(['fandom', 'chassis']),
+  /**
+   * Fandom article the loadout was read from. The wiki is CC-BY-SA, so a kit
+   * page that uses it has to attribute on the page itself, not only on the
+   * site-wide attribution page.
+   */
+  loadoutSourceTitle: z.string().optional(),
+
+  priceJpy: z.number().optional(),
+  priceJpyExTax: z.number().optional(),
+  priceHkd: z.number().optional(),
+  releaseDate: z.string().optional(),
+  releaseDateRaw: z.string().optional(),
+  status: z.enum(['current', 'limited', 'discontinued', 'unknown']),
+
+  officialUrl: z.string(),
+  officialImage: z.string().optional(),
+  hkStoreUrl: z.string().optional(),
+
+  specsRaw: z.string().optional(),
+  scrapedAt: z.string()
 })
 
 export type Part = z.infer<typeof partSchema>
 export type PartSpecs = z.infer<typeof partSpecs>
 export type Chassis = z.infer<typeof chassisSchema>
+export type Kit = z.infer<typeof kitSchema>
+export type Loadout = z.infer<typeof loadout>
+export type LoadoutEntry = z.infer<typeof loadoutEntry>
 export type PartCategory = Part['category']
 export type Slot = Part['slots'][number]
 
 /**
- * A hand-authored entry in data/overrides/parts.yml. Typed against the real
- * record so a mistyped override field is a compile error rather than a value
- * Zod silently strips at generate time.
+ * A hand-authored entry in one of the data/overrides files. Typed against the
+ * real record so a mistyped override field is a compile error rather than a
+ * value Zod silently strips at generate time.
  */
-export type PartOverride = {
-  [K in keyof Part]?: Part[K] extends object ? Partial<Part[K]> : Part[K]
+export type Override<T> = {
+  [K in keyof T]?: T[K] extends object ? Partial<T[K]> : T[K]
 }
+
+export type PartOverride = Override<Part>
+export type KitOverride = Override<Kit>

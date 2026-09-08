@@ -1,6 +1,6 @@
 import { readYamlDir, readYamlFileIfPresent } from './io.ts'
 import { list, section } from './print.ts'
-import type { Part, PartOverride } from '../../shared/catalog/schema.ts'
+import type { Kit, Part, PartOverride } from '../../shared/catalog/schema.ts'
 
 /**
  * Coverage and QA report. This is what drives the manual pass: every line it
@@ -9,24 +9,33 @@ import type { Part, PartOverride } from '../../shared/catalog/schema.ts'
  */
 
 const parts = readYamlDir<Part>('content/parts').map(file => file.data)
+const kits = readYamlDir<Kit>('content/kits').map(file => file.data)
 const overrides = readYamlFileIfPresent<Record<string, PartOverride>>('data/overrides/parts.yml', {})
 
-const tally = (key: (part: Part) => string) => {
+function tally<T>(items: T[], key: (item: T) => string) {
   const counts = new Map<string, number>()
-  for (const part of parts) counts.set(key(part), (counts.get(key(part)) ?? 0) + 1)
+  for (const item of items) {
+    const value = key(item)
+    counts.set(value, (counts.get(value) ?? 0) + 1)
+  }
   return [...counts].sort((a, b) => b[1] - a[1])
 }
+
+/** Parts and kits are both keyed by item number and both carry a JP name. */
+const label = (record: Part | Kit) => `${record.id} ${record.names.ja}`
+// A collection can legitimately be empty — a fresh clone, or a --only=jp
+// scrape — and "NaN%" reads as a bug in the report rather than an empty input.
+const percent = (n: number, total: number) => (total ? `${Math.round((n / total) * 100)}%` : '—')
 
 console.log(`${parts.length} parts in content/parts`)
 
 section('By series')
-for (const [series, count] of tally(part => part.series)) console.log(`  ${series.padEnd(10)} ${count}`)
+for (const [series, count] of tally(parts, part => part.series)) console.log(`  ${series.padEnd(10)} ${count}`)
 
 section('By category')
-for (const [category, count] of tally(part => part.category)) console.log(`  ${category.padEnd(16)} ${count}`)
+for (const [category, count] of tally(parts, part => part.category)) console.log(`  ${category.padEnd(16)} ${count}`)
 
 section('Gaps to fix')
-const label = (part: Part) => `${part.id} ${part.names.ja}`
 
 // "other" is a legitimate outcome for odds and ends, but only once a human has
 // confirmed it in data/overrides/parts.yml.
@@ -56,8 +65,51 @@ list('  Override entries matching no selected item',
   Object.keys(overrides).filter(id => !ids.has(id)))
 
 section('Coverage')
-const percent = (n: number) => `${Math.round((n / parts.length) * 100)}%`
-console.log(`  Traditional Chinese names  ${percent(parts.filter(p => p.names['zh-HK'] || p.names['zh-TW']).length)}`)
-console.log(`  HKD prices                 ${percent(parts.filter(p => p.priceHkd !== undefined).length)}`)
-console.log(`  Chassis compatibility      ${percent(parts.filter(p => p.chassisCompat.include.length > 0).length)}`)
-console.log(`  Categorised                ${percent(parts.filter(p => p.category !== 'other').length)}`)
+const partPercent = (n: number) => percent(n, parts.length)
+console.log(`  Traditional Chinese names  ${partPercent(parts.filter(p => p.names['zh-HK'] || p.names['zh-TW']).length)}`)
+console.log(`  HKD prices                 ${partPercent(parts.filter(p => p.priceHkd !== undefined).length)}`)
+console.log(`  Chassis compatibility      ${partPercent(parts.filter(p => p.chassisCompat.include.length > 0).length)}`)
+console.log(`  Categorised                ${partPercent(parts.filter(p => p.category !== 'other').length)}`)
+
+section('Kits')
+console.log(`${kits.length} kits in content/kits`)
+
+console.log('')
+for (const [chassis, count] of tally(kits, kit => kit.chassis)) console.log(`  ${chassis.padEnd(10)} ${count}`)
+console.log('')
+
+// Not a defect: a kit with no wiki row still opens in the builder, seeded from
+// its chassis' runner. What it loses is the handful of slots a kit changes.
+list('  No per-kit loadout (falls back to the chassis default)',
+  kits.filter(kit => kit.loadoutSource === 'chassis').map(label), 4)
+list('  No gear ratio', kits.filter(kit => !kit.gearRatio).map(label), 4)
+list('  No Traditional Chinese name',
+  kits.filter(kit => !kit.names['zh-HK'] && !kit.names['zh-TW']).map(label), 4)
+list('  No price', kits.filter(kit => kit.priceJpy === undefined).map(label), 4)
+
+// Every imported loadout entry that is still a bare label is a part we have not
+// identified. Most of them never will be — moulded wheels and tires are not
+// sold separately — so this is a shortlist to triage in data/overrides/kits.yml
+// rather than a count of things that are wrong.
+//
+// The gear set is excluded: its label is a ratio, which is already a field of
+// its own, and no catalog part is the moulded gears a kit ships.
+const unresolved = new Map<string, number>()
+for (const kit of kits) {
+  for (const [slot, filled] of Object.entries(kit.stockLoadout)) {
+    if (slot === 'gear-set') continue
+    for (const entry of filled) {
+      if (entry.partId || !entry.label || entry.source !== 'fandom') continue
+      unresolved.set(entry.label, (unresolved.get(entry.label) ?? 0) + 1)
+    }
+  }
+}
+list('  Imported loadout labels with no catalog part',
+  [...unresolved].sort((a, b) => b[1] - a[1])
+    .map(([text, count]) => `${String(count).padStart(3)}×  ${text}`))
+
+const kitPercent = (n: number) => percent(n, kits.length)
+console.log(`\n  Per-kit loadout            ${kitPercent(kits.filter(k => k.loadoutSource === 'fandom').length)}`)
+console.log(`  Gear ratio                 ${kitPercent(kits.filter(k => k.gearRatio).length)}`)
+console.log(`  HKD prices                 ${kitPercent(kits.filter(k => k.priceHkd !== undefined).length)}`)
+console.log(`  Traditional Chinese names  ${kitPercent(kits.filter(k => k.names['zh-HK'] || k.names['zh-TW']).length)}`)

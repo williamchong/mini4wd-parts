@@ -1,5 +1,5 @@
 import { defineCollection, defineContentConfig, z } from '@nuxt/content'
-import { partSchema, chassisSchema } from './shared/catalog/schema.ts'
+import { partSchema, chassisSchema, kitSchema } from './shared/catalog/schema.ts'
 
 export default defineContentConfig({
   collections: {
@@ -25,6 +25,12 @@ export default defineContentConfig({
       type: 'data',
       source: 'chassis/**.yml',
       schema: chassisSchema
+    }),
+
+    kits: defineCollection({
+      type: 'data',
+      source: 'kits/**.yml',
+      schema: kitSchema
     })
   }
 })
