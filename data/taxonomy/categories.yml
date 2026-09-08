@@ -1,0 +1,111 @@
+# Category derivation rules for scripts/catalog/taxonomy.ts.
+#
+# Tamiya labels almost every Grade-Up Part "ミニ四駆グレードアップパーツ", so our
+# taxonomy has to come from the product name. Rules are ordered and the FIRST
+# match wins, which is what resolves the ambiguous names: "HG カーボンリヤワイド
+# プレート (スライドダンパー対応)" is a plate, not a slide damper, because the
+# plate rule sits above it.
+#
+# `match` entries are plain substrings tested against the NFKC-normalised
+# Japanese name, then the English name. Anything that still lands wrong belongs
+# in data/overrides/parts.yml, not in a more baroque rule here.
+
+- category: setting-tool
+  carPart: false
+  match: [セッティングボード, セッティングゲージ, セッティング治具, ゲージ, チェックボックス]
+
+- category: tool
+  carPart: false
+  match: [ドライバー, ピンバイス, ニッパー, ヤスリ, やすり, ペンチ, プライヤー, プーラー, リューター, クラフトツール, ドリル, ハンダ, チェッカー]
+
+- category: sticker
+  carPart: false
+  match: [ステッカー, デカール, シール]
+
+- category: accessory
+  carPart: false
+  match: [ケース, バッグ, ポーチ, マット, グリス, オイル, 塗料, マーカー, タオル, ストラップ, クリーナー,
+          テープ, ボックス, クリヤーカバー, サーキット, ピット, キャッチャー, メンテナンスベース, スリーブ]
+
+- category: bundle
+  match: [ファーストトライパーツセット, スターターパック, ベーシックパーツセット, パーツセット]
+
+# Tamiya writes these as "大径ナローライトウェイトホイール&ハードバレルタイヤ" —
+# the two words are separated by the variant name, so a substring will not do.
+- category: wheel-tire-set
+  regex: (ホイール.*タイヤ|タイヤ.*ホイール)
+
+- category: tire
+  match: [タイヤ]
+
+- category: wheel
+  match: [ホイール]
+
+- category: gear-cover
+  match: [ギヤカバー, ギアカバー]
+
+- category: gear
+  match: [ギヤ, ギア, ピニオン, クラウン]
+
+- category: motor-mount
+  match: [モーターマウント, モーターサポート]
+
+- category: motor
+  match: [モーター]
+
+
+- category: terminal
+  match: [ターミナル]
+
+- category: switch
+  match: [スイッチ]
+
+- category: battery-holder
+  match: [電池ホルダー, バッテリーホルダー]
+
+- category: battery
+  match: [ネオチャンプ, パワーチャンプ, 充電器, 電池, バッテリー]
+
+- category: body-catch
+  match: [ボディキャッチ, ボディーキャッチ]
+
+- category: chassis-set
+  match: [強化ユニット, センターシャーシ]
+  regex: シャーシ\s*(セット|キット|強化)
+
+- category: body
+  match: [ボディ, キャノピー, ポリカ]
+
+- category: plate
+  match: [プレート, ステー, ブレース, 補強]
+
+- category: roller
+  match: [ローラー]
+
+- category: bearing
+  match: [ベアリング, ハトメ, はとめ, 軸受け]
+
+- category: brake
+  match: [ブレーキ]
+
+- category: slide-damper
+  match: [スライドダンパー]
+
+- category: mass-damper
+  match: [マスダンパー, ウエイト, ウェイト, バランサー]
+
+- category: stabilizer
+  match: [スタビ]
+
+- category: bumper
+  match: [バンパー, ステアリング, アンダーガード]
+
+
+- category: shaft
+  match: [シャフト]
+
+- category: spacer
+  match: [スペーサー, カラー, 六角マウント, Oリング]
+
+- category: screw
+  match: [ビス, ナット, ワッシャー, スプリング, ロックナット, スクリュー]

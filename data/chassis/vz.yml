@@ -1,0 +1,19 @@
+id: vz
+tamiyaCode: vz
+slotProfile: standard
+names:
+  ja: VZシャーシ
+  en: VZ Chassis
+  zh-HK: VZ 底盤
+  zh-TW: VZ 底盤
+family: standard
+motorPosition: rear
+motorShaft: single
+releaseYear: 2020
+kitGearRatio: '3.5:1'
+wheelbaseMm: 80
+treadFrontMm: 59.5
+treadRearMm: 65.5
+weightG: 108.3
+status: current
+notes: 現行最輕的底盤，體積小、剛性佳，可視為 VS 底盤的後繼型號。

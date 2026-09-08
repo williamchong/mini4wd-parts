@@ -1,0 +1,19 @@
+id: me
+tamiyaCode: me
+slotProfile: pro
+names:
+  ja: MEシャーシ
+  en: ME Chassis
+  zh-HK: ME 底盤
+  zh-TW: ME 底盤
+family: pro
+motorPosition: mid
+motorShaft: double
+releaseYear: 2025
+kitGearRatio: '3.5:1'
+wheelbaseMm: 80
+treadFrontMm: 60
+treadRearMm: 66
+weightG: 117
+status: current
+notes: 最新的雙軸底盤，主打「剛性與柔性並存」的傳動設計，2026 年 1 月起列入官方規則。

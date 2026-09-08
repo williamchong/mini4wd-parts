@@ -1,0 +1,19 @@
+id: ar
+tamiyaCode: ar
+slotProfile: standard
+names:
+  ja: ARシャーシ
+  en: AR Chassis
+  zh-HK: AR 底盤
+  zh-TW: AR 底盤
+family: standard
+motorPosition: rear
+motorShaft: single
+releaseYear: 2012
+kitGearRatio: '4.2:1'
+wheelbaseMm: 82
+treadFrontMm: 67
+treadRearMm: 67
+weightG: 123.5
+status: current
+notes: 第一款原廠六導輪底盤，電池位置低、車底密閉，不必拆車架即可更換馬達與電池，保養容易。

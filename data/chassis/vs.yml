@@ -1,0 +1,19 @@
+id: vs
+tamiyaCode: vs
+slotProfile: standard
+names:
+  ja: VSシャーシ
+  en: VS Chassis
+  zh-HK: VS 底盤
+  zh-TW: VS 底盤
+family: standard
+motorPosition: rear
+motorShaft: single
+releaseYear: 1997
+kitGearRatio: '4:1'
+wheelbaseMm: 80
+treadFrontMm: 64
+treadRearMm: 69
+weightG: 113.8
+status: rerelease
+notes: 輕巧短軸距的經典底盤，目前主要以復刻套件形式販售，改裝空間大但剛性較低。

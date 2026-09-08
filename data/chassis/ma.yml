@@ -1,0 +1,19 @@
+id: ma
+tamiyaCode: ma
+slotProfile: pro
+names:
+  ja: MAシャーシ
+  en: MA Chassis
+  zh-HK: MA 底盤
+  zh-TW: MA 底盤
+family: pro
+motorPosition: mid
+motorShaft: double
+releaseYear: 2013
+kitGearRatio: '3.5:1'
+wheelbaseMm: 80
+treadFrontMm: 59.5
+treadRearMm: 59.5
+weightG: 125.9
+status: current
+notes: 一體式單片車架，剛性高、組裝簡單，原廠即為六導輪設計，是新手最常被推薦的雙軸底盤。

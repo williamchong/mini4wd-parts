@@ -1,0 +1,96 @@
+# Hand-authored corrections layered on top of the scraped catalog.
+#
+# scripts/catalog/generate.ts deep-merges each entry into the derived record and
+# marks the touched fields as `source: override`. Nothing in content/ is ever
+# edited by hand — corrections belong here, so a re-scrape cannot undo them.
+#
+# Motors are the standing exception to derived legality: Tamiya's rules name
+# specific motors rather than a category (docs/research/concepts-and-rules.md
+# §1.1, §3), so every motor needs an explicit entry.
+#
+#   Junior / Family / Trial : Tune series only
+#   Stock Class / B-MAX GP  : Tune + Dash series
+#   Open                    : Tune + Dash, except Ultra-Dash and Plasma-Dash
+#
+# Specs (RPM, torque) are parsed from Tamiya's own 【基本スペック】 block and are
+# deliberately not repeated here.
+
+# --- Single-shaft motors (VS / VZ / AR / FM-A / Super-II …) -------------------
+'15484': # トルクチューン2モーター
+  specs: { motorShaft: single }
+  classLegality: { open: legal, stockBmax: legal, junior: legal }
+'15485': # レブチューン2モーター
+  specs: { motorShaft: single }
+  classLegality: { open: legal, stockBmax: legal, junior: legal }
+'15486': # アトミックチューン2モーター
+  specs: { motorShaft: single }
+  classLegality: { open: legal, stockBmax: legal, junior: legal }
+'15455': # ライトダッシュモーター
+  specs: { motorShaft: single }
+  classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }
+'15477': # ハイパーダッシュ3モーター
+  specs: { motorShaft: single }
+  classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }
+'15317': # パワーダッシュモーター
+  specs: { motorShaft: single }
+  classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }
+'15318': # スプリントダッシュモーター
+  specs: { motorShaft: single }
+  classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }
+'15307': # ウルトラダッシュモーター
+  specs: { motorShaft: single }
+  classLegality: { open: illegal, stockBmax: illegal, junior: illegal, notes: 田宮公認競技會不可使用 }
+'15186': # プラズマダッシュモーター
+  specs: { motorShaft: single }
+  classLegality: { open: illegal, stockBmax: illegal, junior: illegal, notes: 田宮公認競技會不可使用 }
+
+# --- Double-shaft PRO motors (MS / MA / ME) ----------------------------------
+'15487': # トルクチューン2モーターPRO
+  specs: { motorShaft: double }
+  classLegality: { open: legal, stockBmax: legal, junior: legal }
+'15488': # レブチューン2モーターPRO
+  specs: { motorShaft: double }
+  classLegality: { open: legal, stockBmax: legal, junior: legal }
+'15489': # アトミックチューン2モーターPRO
+  specs: { motorShaft: double }
+  classLegality: { open: legal, stockBmax: legal, junior: legal }
+'15402': # ライトダッシュモーターPRO
+  specs: { motorShaft: double }
+  classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }
+'15375': # ハイパーダッシュモーターPRO
+  specs: { motorShaft: double }
+  classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }
+'15433': # マッハダッシュモーターPRO
+  specs: { motorShaft: double }
+  classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }
+
+# --- Japan Cup / limited motor colourways ------------------------------------
+# Same motor, limited packaging (docs/research/concepts-and-rules.md §3), so they
+# inherit the legality of their base item.
+'95158': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 } } # ハイパーダッシュ3 J-CUP 2023
+'95169': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 } } # ハイパーダッシュ3 J-CUP 2024
+'95174': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 } } # ハイパーダッシュ3 J-CUP 2025
+'95182': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 } } # ハイパーダッシュ3 J-CUP 2026
+'95159': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 } } # ハイパーダッシュPRO J-CUP 2023
+'95170': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 } } # ハイパーダッシュPRO J-CUP 2024
+'95175': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 } } # ハイパーダッシュPRO J-CUP 2025
+'95183': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 } } # ハイパーダッシュPRO J-CUP 2026
+'95171': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: legal } } # トルクチューン2 J-CUP 2024
+'95176': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: legal } } # トルクチューン2 J-CUP 2025
+'95184': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: legal } } # トルクチューン2 J-CUP 2026
+'95172': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: legal } } # トルクチューン2 PRO J-CUP 2024
+'95177': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: legal } } # トルクチューン2 PRO J-CUP 2025
+'95185': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: legal } } # トルクチューン2 PRO J-CUP 2026
+'95188': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: legal } } # アトミックチューン2 40周年記念
+'95189': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: legal } } # アトミックチューン2 PRO 40周年記念
+
+# --- Kit motor ---------------------------------------------------------------
+'94380': # AO-1001 FA-130タイプノーマルモーター — the motor every kit ships with.
+  specs: { motorShaft: single }
+  classLegality: { open: legal, stockBmax: legal, junior: legal }
+
+# --- Reviewed, genuinely uncategorised ---------------------------------------
+# Real car parts that fit none of our slots; kept as "other" on purpose so the
+# report stops flagging them.
+'10320': { category: other } # ゴムパイプ 3.5×60mm — brake and damper tuning material
+'94387': { category: other } # プラズマダッシュブラシホルダーセット — motor spare

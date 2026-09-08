@@ -1,0 +1,19 @@
+id: super-2
+tamiyaCode: super2
+slotProfile: standard
+names:
+  ja: スーパーIIシャーシ
+  en: Super-II Chassis
+  zh-HK: Super II 底盤
+  zh-TW: Super II 底盤
+family: standard
+motorPosition: rear
+motorShaft: single
+releaseYear: 2010
+kitGearRatio: '4.2:1'
+wheelbaseMm: 80
+treadFrontMm: 64
+treadRearMm: 64
+weightG: 115
+status: current
+notes: Super-1 的現代化版本，仍是每年限定套件常用的底盤，改裝零件選擇多。

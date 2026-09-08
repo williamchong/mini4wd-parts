@@ -1,0 +1,50 @@
+# Builder slot graph, shared by the 2D builder, the rule engine and (later) the
+# 3D socket graph — docs/PLAN.md §4.2, §5.2.
+#
+# Two profiles cover every chassis in v1. The only structural difference is the
+# drivetrain: PRO chassis (MS/MA/ME) drive both axles from a central double-shaft
+# motor and have no propeller/counter gear, single-shaft chassis do.
+profiles:
+  standard:
+    - { id: body, type: body, maxCount: 1, required: true }
+    - { id: motor, type: motor, maxCount: 1, required: true }
+    - { id: gear-set, type: gear, maxCount: 1, required: true }
+    - { id: counter-gear, type: counter-gear, maxCount: 1 }
+    - { id: terminal, type: terminal, maxCount: 1, required: true }
+    - { id: switch, type: switch, maxCount: 1 }
+    - { id: axle, type: shaft, maxCount: 2, mirror: true, required: true }
+    - { id: bearing, type: bearing, maxCount: 4, mirror: true }
+    - { id: wheel-front, type: wheel-front, maxCount: 2, mirror: true, required: true }
+    - { id: wheel-rear, type: wheel-rear, maxCount: 2, mirror: true, required: true }
+    - { id: tire-front, type: tire-front, maxCount: 2, mirror: true, required: true }
+    - { id: tire-rear, type: tire-rear, maxCount: 2, mirror: true, required: true }
+    - { id: front-stay, type: front-stay, maxCount: 1 }
+    - { id: rear-stay, type: rear-stay, maxCount: 1 }
+    - { id: side-stay, type: side-stay, maxCount: 2, mirror: true }
+    - { id: roller-front, type: roller-front, maxCount: 2, mirror: true }
+    - { id: roller-rear, type: roller-rear, maxCount: 2, mirror: true }
+    - { id: roller-side, type: roller-side, maxCount: 2, mirror: true }
+    - { id: brake, type: brake, maxCount: 2 }
+    - { id: damper, type: damper, maxCount: 4 }
+    - { id: fastener, type: fastener, maxCount: 8 }
+  pro:
+    - { id: body, type: body, maxCount: 1, required: true }
+    - { id: motor, type: motor, maxCount: 1, required: true }
+    - { id: gear-set, type: gear, maxCount: 1, required: true }
+    - { id: terminal, type: terminal, maxCount: 1, required: true }
+    - { id: switch, type: switch, maxCount: 1 }
+    - { id: axle, type: shaft, maxCount: 2, mirror: true, required: true }
+    - { id: bearing, type: bearing, maxCount: 4, mirror: true }
+    - { id: wheel-front, type: wheel-front, maxCount: 2, mirror: true, required: true }
+    - { id: wheel-rear, type: wheel-rear, maxCount: 2, mirror: true, required: true }
+    - { id: tire-front, type: tire-front, maxCount: 2, mirror: true, required: true }
+    - { id: tire-rear, type: tire-rear, maxCount: 2, mirror: true, required: true }
+    - { id: front-stay, type: front-stay, maxCount: 1 }
+    - { id: rear-stay, type: rear-stay, maxCount: 1 }
+    - { id: side-stay, type: side-stay, maxCount: 2, mirror: true }
+    - { id: roller-front, type: roller-front, maxCount: 2, mirror: true }
+    - { id: roller-rear, type: roller-rear, maxCount: 2, mirror: true }
+    - { id: roller-side, type: roller-side, maxCount: 2, mirror: true }
+    - { id: brake, type: brake, maxCount: 2 }
+    - { id: damper, type: damper, maxCount: 4 }
+    - { id: fastener, type: fastener, maxCount: 8 }

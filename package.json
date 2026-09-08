@@ -7,7 +7,13 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "scrape": "node scripts/catalog/scrape.ts",
+    "catalog:generate": "node scripts/catalog/generate.ts",
+    "catalog:report": "node scripts/catalog/report.ts",
+    "catalog:verify": "node scripts/catalog/verify.ts",
+    "test": "node --test 'scripts/**/*.test.ts'",
+    "typecheck": "tsc -p scripts/tsconfig.json"
   },
   "dependencies": {
     "@nuxt/content": "^3.16.0",
@@ -15,6 +21,11 @@
     "vue": "^3.5.42"
   },
   "devDependencies": {
-    "better-sqlite3": "^13.0.3"
+    "@types/node": "^26.5.0",
+    "better-sqlite3": "^13.0.3",
+    "cheerio": "^1.2.0",
+    "typescript": "^7.0.2",
+    "yaml": "^2.9.0",
+    "zod": "^3.25.76"
   }
 }

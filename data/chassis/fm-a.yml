@@ -1,0 +1,19 @@
+id: fm-a
+tamiyaCode: FM_A
+slotProfile: standard
+names:
+  ja: FM-Aシャーシ
+  en: FM-A Chassis
+  zh-HK: FM-A 底盤
+  zh-TW: FM-A 底盤
+family: standard
+motorPosition: front
+motorShaft: single
+releaseYear: 2017
+kitGearRatio: '3.5:1'
+wheelbaseMm: 83
+treadFrontMm: 59.5
+treadRearMm: 59.5
+weightG: 117
+status: current
+notes: 前置馬達（Front Midship Aero），重心偏前，在高低起伏的立體賽道上較穩定，底部有防撞滑條。

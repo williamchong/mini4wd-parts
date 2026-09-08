@@ -1,0 +1,19 @@
+id: ms
+tamiyaCode: ms
+slotProfile: pro
+names:
+  ja: MSシャーシ
+  en: MS Chassis
+  zh-HK: MS 底盤
+  zh-TW: MS 底盤
+family: pro
+motorPosition: mid
+motorShaft: double
+releaseYear: 2005
+kitGearRatio: '4:1'
+wheelbaseMm: 80
+treadFrontMm: 67
+treadRearMm: 69
+weightG: 124.7
+status: current
+notes: 前中後三段式車架，是 Open 組「MSフレキ」懸吊改裝的基礎；該改裝需要切削車架，在 Stock／B-MAX 不合法。
