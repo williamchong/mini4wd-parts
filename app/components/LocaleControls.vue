@@ -2,6 +2,8 @@
 const { locale, locales } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
 const { wording, setWording } = useWording()
+
+const otherLocales = computed(() => locales.value.filter(l => l.code !== locale.value))
 </script>
 
 <template>
@@ -13,7 +15,7 @@ const { wording, setWording } = useWording()
       the English tree reachable to a reader and a search engine.
     -->
     <NuxtLink
-      v-for="l in locales.filter(l => l.code !== locale)"
+      v-for="l in otherLocales"
       :key="l.code"
       :to="switchLocalePath(l.code)"
     >{{ l.name }}</NuxtLink>

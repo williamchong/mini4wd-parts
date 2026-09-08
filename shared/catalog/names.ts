@@ -51,7 +51,6 @@ export function resolveName(
   return { value: names.ja, from: 'ja' }
 }
 
-/** Whether a record has a Traditional Chinese name of either regional variant. */
 export function hasTraditionalChineseName(names: Names): boolean {
   return Boolean(names['zh-HK'] || names['zh-TW'])
 }

@@ -8,8 +8,10 @@
  * @nuxt/content with no prefix, which is what makes the `:term` shorthand work.
  */
 defineProps<{ name: string }>()
+
+const { wording } = useWording()
 </script>
 
 <template>
-  <span>{{ $t(`terms.${name}`) }}</span>
+  <span>{{ $t(`terms.${wording}.${name}`) }}</span>
 </template>

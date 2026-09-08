@@ -7,11 +7,8 @@
  */
 const { t, locale } = useI18n()
 const i18nHead = useLocaleHead()
-const { wording, setWording, restoreWording } = useWording()
+const { restoreWording } = useWording()
 
-// Seed the glossary on the server too, so prerendered HTML carries real terms
-// rather than raw `terms.*` keys.
-setWording(wording.value, { persist: false })
 onMounted(restoreWording)
 
 const zhHref = computed(() =>

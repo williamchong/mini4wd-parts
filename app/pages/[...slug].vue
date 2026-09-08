@@ -17,14 +17,12 @@ const collection = computed(() => locale.value === 'en' ? 'contentEn' : 'content
 // from the prerendered HTML and then empties itself on hydration.
 const contentPath = computed(() => route.path.replace(/\/+$/, '') || '/')
 
-// The catch-all component instance is reused between sibling content routes,
-// so the fetcher has to be re-run on path changes rather than only on setup —
-// and the key has to be a getter, or every route would share the first path's
-// cache entry.
+// The catch-all component instance is reused between sibling content routes, so
+// the key has to be a getter: as a literal every route would share the first
+// path's cache entry, and it is the key changing that re-runs the fetch.
 const { data: page } = await useAsyncData(
   () => `content-${contentPath.value}`,
-  () => queryCollection(collection.value).path(contentPath.value).first(),
-  { watch: [contentPath] }
+  () => queryCollection(collection.value).path(contentPath.value).first()
 )
 
 if (!page.value) {

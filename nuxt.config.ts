@@ -11,7 +11,7 @@ export default defineNuxtConfig({
   // name in the catalog comes from tamiya.hk: labelling the root zh-TW would
   // serve Hong Kong wording under a Taiwan flag. Hong Kong and Taiwan differ by
   // a glossary, not by pages, so the two are a reader-level wording toggle
-  // (see app/plugins/wording.client.ts) and both are advertised via hreflang
+  // (see app/composables/useWording.ts) and both are advertised via hreflang
   // in app/app.vue.
   i18n: {
     strategy: 'prefix_except_default',
