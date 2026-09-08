@@ -33,6 +33,7 @@
     "pickKit": "Which kit is on your desk?",
     "searchKits": "Search by kit name or item number",
     "kitCandidates": "{count} kits",
+    "showMore": "Show {count} more",
     "chassisAll": "All",
     "kitStatus": {
       "limited": "Limited edition"

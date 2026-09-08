@@ -10,6 +10,7 @@
 import {
   BUILD_CLASSES, partsForSlot, resolveBuild, swappableSlotTypes
 } from '#shared/catalog/build'
+import { orderKits } from '#shared/catalog/kits'
 import type { PickableKit, ResolvedSlot } from '#shared/catalog/build'
 import type { ChassisId } from '#shared/catalog/schema'
 
@@ -42,6 +43,8 @@ const { data: catalog } = await useAsyncData('build-catalog', async () => {
       .select('id', 'stem', 'names', 'category', 'slots', 'isCarPart',
         'chassisCompat', 'classLegality', 'specs', 'priceJpy', 'priceHkd')
       .all(),
+    // `releaseDate` is selected but deliberately not shipped: it orders the
+    // picker and nothing renders it, so it is dropped again below.
     queryCollection('kits')
       .select('id', 'stem', 'names', 'chassis', 'status', 'gearRatio',
         'priceJpy', 'priceHkd', 'releaseDate', 'officialImage',
@@ -63,12 +66,18 @@ const { data: catalog } = await useAsyncData('build-catalog', async () => {
     // takes 56 of 382 records out of the payload.
     parts: parts.map(fromContent)
       .filter(part => part.isCarPart && part.slots.some(slot => slot !== 'none')),
-    // A kit naming a chassis we do not ship cannot seed a build: `start` would
-    // succeed, `chassis` would compute to undefined, and the reader would be
-    // bounced back to the picker by a click that looked like it did nothing.
-    // No kit is in that state today; this keeps it that way rather than
-    // trusting it to stay true through a descoped chassis.
-    kits: kits.map(fromContent).filter(kit => chassisIds.has(kit.chassis))
+    // Ordered here rather than in the picker, and then stripped of the field
+    // that ordered it. Sorting once at prerender beats re-sorting on every
+    // keystroke, and it lets `releaseDate` — which nothing renders — stay out
+    // of the payload, worth 1.5 KB gzipped across 305 records.
+    //
+    // The filter is not paranoia: a kit naming a chassis we do not ship would
+    // let `start` succeed while `chassis` computed to undefined, bouncing the
+    // reader back to the picker by a click that looked like it did nothing. No
+    // kit is in that state today; this keeps it that way through a descoped
+    // chassis rather than trusting it.
+    kits: orderKits(kits.map(fromContent).filter(kit => chassisIds.has(kit.chassis)))
+      .map(({ releaseDate: _releaseDate, ...kit }) => kit)
   }
 })
 
@@ -78,9 +87,6 @@ const partsById = computed(() =>
 const chassis = computed(() =>
   catalog.value?.chassis.find(c => c.id === build.value?.chassis))
 
-const kitsById = computed(() =>
-  new Map((catalog.value?.kits ?? []).map(kit => [kit.id, kit])))
-
 /**
  * Undefined for a bare-chassis build, and also for a build naming a kit we no
  * longer ship — a link made against an older catalog, say. Both degrade to the
@@ -89,7 +95,7 @@ const kitsById = computed(() =>
  * so a missing kit cannot become a header with no name behind it.
  */
 const kit = computed(() =>
-  build.value?.kit ? kitsById.value.get(build.value.kit) : undefined)
+  catalog.value?.kits.find(k => k.id === build.value?.kit))
 
 const slots = computed<ResolvedSlot[]>(() =>
   chassis.value && build.value ? resolveBuild(chassis.value, kit.value, build.value) : [])
@@ -141,11 +147,16 @@ useHead(() => ({ title: `${t('build.title')} — ${t('site.title')}` }))
     <!-- Two doors into the same object (docs/PLAN.md §4.7), with the kit open
          by default because most beginners arrive holding a box. -->
     <div v-if="!build || !chassis" class="build-start">
-      <div class="door-toggle" role="tablist">
+      <!-- Deliberately not role="tablist"/"tab": that pattern promises
+           roving-tabindex and arrow-key selection, which these plain buttons do
+           not implement, and a screen reader that announces "tab 1 of 2" and
+           then ignores the arrow keys is worse off than with no role at all.
+           Two toggle buttons is what this actually is, so `aria-pressed` says
+           so — the same treatment the chassis chips use. -->
+      <div class="door-toggle">
         <button
           type="button"
-          role="tab"
-          :aria-selected="door === 'kit'"
+          :aria-pressed="door === 'kit'"
           :class="{ active: door === 'kit' }"
           @click="door = 'kit'"
         >
@@ -153,8 +164,7 @@ useHead(() => ({ title: `${t('build.title')} — ${t('site.title')}` }))
         </button>
         <button
           type="button"
-          role="tab"
-          :aria-selected="door === 'chassis'"
+          :aria-pressed="door === 'chassis'"
           :class="{ active: door === 'chassis' }"
           @click="door = 'chassis'"
         >

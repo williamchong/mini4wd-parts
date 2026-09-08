@@ -5,7 +5,7 @@
  * component: linking back to the Fandom article a kit's loadout was imported
  * from, and deciding what order 305 boxes appear in.
  */
-import type { PickableKit } from './build.ts'
+import type { Kit } from './schema.ts'
 
 export const FANDOM_WIKI = 'https://mini-4wd.fandom.com'
 
@@ -51,8 +51,11 @@ export function fandomArticleUrl(title: string): string {
  * owns, not one they cannot have.
  *
  * Ties break on `id` so a generate run produces a stable order.
+ *
+ * Runs once at prerender, not per keystroke, which is also what lets
+ * `releaseDate` stay out of the payload — see `PickableKit`.
  */
-export function orderKits<T extends Pick<PickableKit, 'id' | 'releaseDate'>>(kits: T[]): T[] {
+export function orderKits<T extends Pick<Kit, 'id' | 'releaseDate'>>(kits: T[]): T[] {
   return [...kits].sort((a, b) => {
     if (a.releaseDate !== b.releaseDate) {
       if (!a.releaseDate) return 1

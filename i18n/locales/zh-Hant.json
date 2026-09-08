@@ -33,6 +33,7 @@
     "pickKit": "你手上是哪一款套件？",
     "searchKits": "搜尋套件名稱或編號",
     "kitCandidates": "{count} 款套件",
+    "showMore": "顯示其餘 {count} 款",
     "chassisAll": "全部",
     "kitStatus": {
       "limited": "限定版"

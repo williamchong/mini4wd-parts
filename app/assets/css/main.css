@@ -124,6 +124,16 @@ body {
 
 /* ---------------------------------------------------------------- builder */
 
+/* A name we could not resolve in the reader's own language, shown in whatever
+   locale we do have. Applied alongside a component's own class (.kit-name,
+   .part-name, .slot-entry, a build heading) rather than on its own, so one rule
+   covers every surface — 40% of parts and two thirds of kits are in this state,
+   which makes it a marked exception rather than an error. */
+.fallback {
+  opacity: 0.75;
+  font-style: italic;
+}
+
 .build-head {
   display: flex;
   flex-wrap: wrap;
@@ -140,13 +150,6 @@ body {
 
 .build-title h1 {
   margin: 0;
-}
-
-/* The same cue the pickers use, applied to a heading: two thirds of kits have
-   no Traditional Chinese name, so this is a marked exception, not an error. */
-.build-title h1.fallback {
-  opacity: 0.8;
-  font-style: italic;
 }
 
 .build-subtitle {
@@ -329,6 +332,30 @@ button.link {
   border-color: #8a99a8;
 }
 
+/* Skips layout and paint for rows below the fold, and stops the browser
+   fetching their photos until they are actually scrolled to. The intrinsic size
+   is the row height, so the scrollbar still reflects the real list length. */
+.kit-list > li {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 5.5rem;
+}
+
+.show-more {
+  display: block;
+  width: 100%;
+  margin-top: 0.75rem;
+  padding: 0.6rem;
+  font: inherit;
+  background: #fff;
+  border: 1px solid #d8dee4;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.show-more:hover {
+  border-color: #8a99a8;
+}
+
 /* Width and height are also set on the element so lazy-loading reserves the
    box before the photo arrives; this only constrains how it fills it. */
 .kit-thumb {
@@ -348,11 +375,6 @@ button.link {
 
 .kit-name {
   font-weight: 600;
-}
-
-.kit-name.fallback {
-  opacity: 0.75;
-  font-style: italic;
 }
 
 .kit-facts,
@@ -430,11 +452,6 @@ button.link {
 .slot-origin.user {
   opacity: 1;
   font-weight: 600;
-}
-
-.slot-entry.fallback {
-  opacity: 0.75;
-  font-style: italic;
 }
 
 .slot-actions {
@@ -525,11 +542,6 @@ button.link {
   gap: 0.5rem;
   align-items: baseline;
   justify-content: space-between;
-}
-
-.part-name.fallback {
-  opacity: 0.75;
-  font-style: italic;
 }
 
 .part-id {

@@ -42,20 +42,28 @@ export type BuildableKit = Pick<Kit, 'stockLoadout'>
  * thirteen would let the resolver quietly start depending on a price.
  *
  * Every field named here ships to every visitor of the prerendered /build
- * route. Measured over the 305 committed kits: 291 KB raw, 24.6 KB gzipped, of
- * which `stockLoadout` alone is 179 KB / 7.4 KB. That one is the feature — the
- * kit is chosen after hydration and there is no server to ask, so it is all 305
- * loadouts or none, and "none" makes the kit door produce a build
- * indistinguishable from the bare-chassis one.
+ * route, and the real cost is **+52.7 KB gzipped** — the route goes 35.7 to
+ * 88.4 — not the ~25 KB these records gzip to as a plain JSON array. The
+ * payload interns each distinct string once and refers to it by index, so the
+ * repeated label text is nearly free and the *shape* is what costs: 1,783
+ * loadout entries, each an object holding a label object inside an array, all
+ * of them unique integer references gzip cannot collapse. Do not re-estimate
+ * this by gzipping the equivalent JSON; that under-counts by 2× (§6 M1b).
+ *
+ * `stockLoadout` is most of it and is not optional: the kit is chosen after
+ * hydration and there is no server to ask, so it is all 305 loadouts or none,
+ * and "none" makes the kit door produce a build indistinguishable from the
+ * bare-chassis one.
  *
  * Deliberately absent: `series`, `seriesNumber` (180 of 305, and its only
  * human-readable partner `seriesLabel` is Japanese-only free text), `specsRaw`,
- * `officialUrl`, `hkStoreUrl`, `nameSources`, `releaseDateRaw`.
+ * `officialUrl`, `hkStoreUrl`, `nameSources`, `releaseDateRaw` — and
+ * `releaseDate`, which orders the picker at prerender and is then stripped,
+ * because nothing renders it.
  */
 export type PickableKit = Pick<Kit,
   'id' | 'names' | 'chassis' | 'status' | 'gearRatio' | 'priceJpy' | 'priceHkd'
-  | 'releaseDate' | 'officialImage' | 'loadoutSource' | 'loadoutSourceTitle'
-  | 'stockLoadout'>
+  | 'officialImage' | 'loadoutSource' | 'loadoutSourceTitle' | 'stockLoadout'>
 
 /**
  * The rulesets a build can be checked against (docs/PLAN.md §2.1).
