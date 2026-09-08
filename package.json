@@ -1,0 +1,20 @@
+{
+  "name": "mini4wd-parts",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "@nuxt/content": "^3.16.0",
+    "nuxt": "^4.5.2",
+    "vue": "^3.5.42"
+  },
+  "devDependencies": {
+    "better-sqlite3": "^13.0.3"
+  }
+}
