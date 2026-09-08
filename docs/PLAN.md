@@ -1,6 +1,6 @@
 # mini4wd.parts — Product & Technical Plan
 
-Status: draft v2, 2026-09-08. The catalog pipeline is built and 382 parts, 8 chassis and 305 kits are committed; §6 was re-targeted the same day around an MVP builder with a live 3D view, and M1a (kits) closed the same day. i18n landed 2026-09-09, leaving PostHog as the only open M0 item.
+Status: draft v2, 2026-09-08. The catalog pipeline is built and 382 parts, 8 chassis and 305 kits are committed; §6 was re-targeted the same day around an MVP builder with a live 3D view, and M1a (kits) closed the same day. i18n landed 2026-09-09, leaving PostHog as the only open M0 item. The builder spine — bare-chassis entry, slot list, part picker — landed 2026-09-09 and re-ordered M1b (§6).
 Research notes that fed this document (concepts, data sources, 3D assets, tech stack) are summarised inline with source links.
 
 ---
@@ -348,14 +348,14 @@ Three workstreams. The catalog and builder ones are independent of the asset one
 
 ~~**a. Catalog: kits (§4.7).**~~ — done 2026-09-08. 305 kits across the 8 v1 chassis, 96% with an imported `stockLoadout`, plus a hand-authored `defaultLoadout` on all 8 chassis. Nothing was hand-authored per kit.
 
-**b. Site and builder.**
-- Part and chassis pages, prerendered per locale, JSON-LD `Product`, sitemap, attribution page. These are what search engines see and they are cheap now that the data exists.
-- `/build` with two entry points: kit picker (search by name or item number, filtered to current kits) or bare-chassis picker.
-- Slot list from the chassis' profile, each row showing its part, `stock` vs `swapped`, and a swap action.
-- Part picker per slot: filtered by slot type, chassis compatibility and the selected class; searchable; shows price and the specs that matter for that slot.
-- Rule engine (§4.3) inline, three severities. Ship the rules that the committed data can actually answer — slot capacity, chassis compat, motor shaft type, class legality, tire diameter — and leave the ones needing data we do not have (total width, precise weight) as explicit "not checked yet" rather than guessing.
+**b. Site and builder.** Re-ordered 2026-09-09: the SEO pages moved from the head of this list to the foot of it. The plan's own reason for putting them first was that they are *cheap now that the data exists* — a marginal-cost argument, not a blocker, and nothing in the M1 done-criterion below needs them. The builder drives instead, so the catalog access layer is designed against the part picker's requirements (filter by **slot type**) rather than the browse page's (filter by **category**); the same query serves both, but only one of the two orderings produces a picker without rework.
+
+- ~~`/build` bare-chassis entry point; slot list from the chassis' profile, each row showing its part, `stock` vs `swapped`, and a swap action; part picker per slot, filtered by slot type, chassis compatibility and motor shaft, searchable, showing price and the specs that matter for that slot~~ — done 2026-09-09. A build is stored as a **delta** (`chassis`, optional `kit`, `swaps` keyed by slot id), never as a resolved loadout, mirroring how a kit's `stockLoadout` is a delta over its chassis' `defaultLoadout`. Resolution is pure and unit-tested in `shared/catalog/build.ts`.
+- `/build` kit entry point: kit picker searching by name or item number, filtered to current kits, overlaying `stockLoadout` on the chassis default.
+- Rule engine (§4.3) inline, three severities. Ship the rules that the committed data can actually answer — slot capacity, chassis compat, motor shaft type, class legality, tire diameter — and leave the ones needing data we do not have (total width, precise weight) as explicit "not checked yet" rather than guessing. Chassis compat and motor shaft already filter the picker, so a build assembled in the UI cannot break them; they stay rules because a build arriving from a URL was not assembled in the UI.
 - Totals: part count, JPY and HKD cost, estimated weight, final gear ratio.
-- Build encoded in the URL (§4.5); reload restores; copy-link shares.
+- Build encoded in the URL (§4.5); reload restores; copy-link shares. The state is already shaped for it: only the delta needs serialising.
+- Part and chassis pages, prerendered per locale, JSON-LD `Product`, sitemap, attribution page. Last rather than first: they are additive, they get cheaper once the builder has settled what a part row must show, and `PartCard` is already the component they will reuse.
 
 **c. 3D view (§5.4).** MA chassis with slot-named sockets, 3 generic bodies, ~12 parametric generators, the fallback proxy, `@tresjs/nuxt` on the `/build` route only, client-only and code-split. View-only: orbit, zoom, reset camera. Other chassis show a still and a notice.
 
@@ -393,6 +393,8 @@ Beginner wizard (F5) seeded from the six archetypes in §2.5 and weighted by the
 | Cloudflare free-tier limits (KV 1K writes/day, D1 hard limits since 2026-09-01) | Use D1 not KV for writes; prerender everything; Workers Paid is $5/mo if ever needed |
 | Scraper brittleness (Tamiya site is classic ASP, Shift_JIS) | One-off scrape committed to git; monthly diff run; manual review of new items |
 | TC naming has no source of truth (HK 摩打 vs TW 馬達) | Store HK and TW variants; glossary page explaining both |
+| Loadout labels are single-language free text, and the builder now renders them. A chassis' `defaultLoadout` labels are hand-authored Traditional Chinese (`套件標準雙軸馬達`), so the English builder shows Chinese; kit `stockLoadout` labels are imported English from the wiki (`Small Low-Profile Slick`, 268×), so the Chinese builder will show English the moment the kit entry point lands | Surfaced 2026-09-09 by the builder spine. `loadoutEntry.label` is one string, so fixing it is a schema change reaching `data/chassis/*.yml`, the generator and the kit importer — its own chunk, and it should land **before** the kit entry point rather than after |
+| `chassis.notes` is one hand-authored Traditional Chinese string with no locale variants | Hidden on `/en` rather than shown in the wrong language (`ChassisPicker.vue`). Localise the field when the loadout labels are localised — it is the same schema problem |
 | Rule coverage can never be 100% | Three severities; "verify with organiser PDF" notes; rules are data so community can PR fixes |
 | ~~Existing scaffold is on EOL Nuxt 3~~ | Resolved: upgraded to Nuxt 4 + @nuxt/content v3 in `83086af` |
 
