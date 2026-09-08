@@ -240,6 +240,11 @@ export const chassisSchema = z.object({
     type: z.enum(SLOTS),
     maxCount: z.number(),
     mirror: z.boolean().default(false),
+    /**
+     * A build with this slot empty is not a runnable car, so the rule engine
+     * reports an `error`. Not a seeding instruction — seeding reads
+     * `defaultLoadout`. Authored in data/taxonomy/slots.yml.
+     */
     required: z.boolean().default(false)
   })),
   /** Item numbers Tamiya lists on this chassis' compat page (v1 scope only). */

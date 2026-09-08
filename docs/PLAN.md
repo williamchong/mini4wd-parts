@@ -193,7 +193,7 @@ The MVP's two entry points — bare chassis and existing kit — are the same ob
 
 **A build** is `{ chassis, kit?, class, slots: { [slotId]: Array<{ partId, origin }> } }`, where `origin` is `stock` (came with the kit or the chassis' own runner) or `swapped` (the user chose it). Carrying `origin` is what makes three things fall out for free: a "what you changed from the box" diff, a shopping list of only the parts you still need to buy, and a legality check that can say *which* modification broke Stock Class.
 
-- **Bare chassis:** seed the required slots from the chassis' `defaultLoadout` (kit gears, plastic rollers, kit wheels/tires, shafts, FA-130), leave the optional ones empty.
+- **Bare chassis:** seed from the chassis' `defaultLoadout` (kit gears, plastic rollers, kit wheels/tires, shafts, FA-130), leave every slot it does not name empty. `defaultLoadout` is what gets seeded; the slot's `required` flag is a validity rule for §4.3, not a seeding instruction.
 - **From a kit:** seed from the kit's `stockLoadout` — the chassis `defaultLoadout` overlaid with the kit's own body and its per-kit differences, since a kit may ship a different gear ratio, low-profile wheels or harder tires.
 
 #### Where the kit data comes from

@@ -41,7 +41,7 @@ slots:
     type: switch
     maxCount: 1
     mirror: false
-    required: false
+    required: true
   - id: axle
     type: shaft
     maxCount: 2
@@ -91,12 +91,12 @@ slots:
     type: roller-front
     maxCount: 2
     mirror: true
-    required: false
+    required: true
   - id: roller-rear
     type: roller-rear
     maxCount: 2
     mirror: true
-    required: false
+    required: true
   - id: roller-side
     type: roller-side
     maxCount: 2
