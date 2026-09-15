@@ -22,7 +22,7 @@ import type {
 /**
  * The catalog fields the builder actually reads, and no more.
  *
- * Narrower than the full records on purpose: `/build` is prerendered, so every
+ * Narrower than the full records on purpose: the builder is prerendered, so every
  * field these types name is a field shipped to every visitor in the route's
  * payload. Asking for the whole of `Part` puts each item's raw Japanese spec
  * text and each chassis' 400-entry `compatibleParts` list in front of a reader
@@ -30,7 +30,7 @@ import type {
  */
 export type BuildablePart = Pick<Part,
   'id' | 'names' | 'category' | 'slots' | 'isCarPart' | 'chassisCompat'
-  | 'classLegality' | 'specs' | 'priceJpy' | 'priceHkd'>
+  | 'classLegality' | 'specs' | 'priceJpy'>
 
 export type BuildableChassis = Pick<Chassis, 'id' | 'slots' | 'defaultLoadout' | 'motorShaft'>
 
@@ -41,7 +41,7 @@ export type BuildableKit = Pick<Kit, 'stockLoadout'>
  * replacement: `resolveBuild` needs exactly one field, and asking it for
  * thirteen would let the resolver quietly start depending on a price.
  *
- * Every field named here ships to every visitor of the prerendered /build
+ * Every field named here ships to every visitor of the prerendered builder
  * route, and the real cost is **+52.7 KB gzipped** — the route goes 35.7 to
  * 88.4 — not the ~25 KB these records gzip to as a plain JSON array. The
  * payload interns each distinct string once and refers to it by index, so the
@@ -73,8 +73,6 @@ export type PickableKit = Pick<Kit,
  * silently stops matching anything.
  */
 export type BuildClass = Exclude<keyof Part['classLegality'], 'source' | 'notes'>
-
-export const BUILD_CLASSES = ['open', 'stockBmax', 'junior'] as const satisfies readonly BuildClass[]
 
 export type BuildState = {
   chassis: ChassisId
@@ -163,6 +161,39 @@ export function resolveBuild(
 
     return { ...base, entries: [], swapped: false }
   })
+}
+
+const COUNTERPART: Partial<Record<Slot, Slot>> = {
+  'wheel-front': 'wheel-rear',
+  'wheel-rear': 'wheel-front',
+  'tire-front': 'tire-rear',
+  'tire-rear': 'tire-front'
+}
+
+/**
+ * The parts the other end's wheels or tires hold, when copying them into this
+ * slot would change it. Front and rear are usually the same part, so the list
+ * offers the copy. Undefined unless every entry over there is a catalog part
+ * that also fits here — a swap is a list of parts, and moulded stock plastic
+ * with only a label is not one.
+ */
+export function counterpartParts(
+  slot: ResolvedSlot,
+  slots: ResolvedSlot[],
+  partsById: ReadonlyMap<string, Pick<Part, 'slots'>>
+): { from: ResolvedSlot; partIds: string[] } | undefined {
+  const other = COUNTERPART[slot.type]
+  if (!other) return undefined
+  const from = slots.find(s => s.type === other)
+  if (!from?.entries.length) return undefined
+  const partIds: string[] = []
+  for (const entry of from.entries) {
+    if (!entry.partId || !partsById.get(entry.partId)?.slots.includes(slot.type)) return undefined
+    partIds.push(entry.partId)
+  }
+  const same = partIds.length === slot.entries.length
+    && partIds.every((id, i) => id === slot.entries[i]!.partId)
+  return same ? undefined : { from, partIds }
 }
 
 /**

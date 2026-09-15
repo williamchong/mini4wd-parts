@@ -8,8 +8,8 @@
  * a mesh back. That attach step is what the chassis GLB's named empties will be
  * driven by later; only where the groups come from changes.
  *
- * `.client.vue` keeps three out of the server bundle, and build.vue mounts it
- * lazily under `v-if`, so the chunk is fetched only once a build exists.
+ * `.client.vue` keeps three out of the server bundle, and pages/index.vue
+ * mounts it lazily, so the chunk is split from the route's own JavaScript.
  * Nothing here runs during prerender.
  */
 import {
@@ -112,7 +112,7 @@ const HIT: Record<ProxyKind, (mm: number) => BufferGeometry> = {
   damper: () => new BoxGeometry(18, 14, 12)
 }
 
-/** The same three origins the list's badge distinguishes, plus empty. */
+/** Where each slot's contents came from, plus empty. */
 const COLOUR: Record<ProxyState, number> = {
   chassis: 0x9aa0a6,
   kit: 0x4a7fd1,

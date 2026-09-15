@@ -7,13 +7,7 @@
     "home": "首頁",
     "guides": "指南",
     "parts": "零件",
-    "about": "關於",
-    "build": "組車器"
-  },
-  "landing": {
-    "modelAlt": "迷你四驅新手入門資訊站標誌",
-    "heading": "迷你四驅新手入門資訊站正在開發中",
-    "tagline": "敬請期待！"
+    "about": "關於"
   },
   "error": {
     "notFound": "找不到頁面"
@@ -24,7 +18,11 @@
     "tw": "台"
   },
   "build": {
-    "title": "組車器",
+    "title": "組車清單",
+    "base": "套件",
+    "bareChassis": "淨底盤",
+    "noBase": "未選擇套件或底盤",
+    "pickBase": "選擇套件",
     "pickChassis": "選擇底盤開始",
     "door": {
       "kit": "由套件開始",
@@ -41,7 +39,7 @@
     "kitSource": {
       "fandom": "此套件的零件清單來自 Mini 4WD Fandom Wiki：",
       "licence": "CC BY-SA 授權",
-      "chassis": "田宮沒有公佈這款套件的零件清單，以下顯示的是此底盤的標準配置。",
+      "chassis": "田宮沒有公佈這款套件的零件清單，清單顯示的是此底盤的標準配置。",
       "note": "套件內容與齒輪比部分取自 Mini 4WD Fandom Wiki，以 CC BY-SA 授權使用。"
     },
     "pickPart": "選擇{slot}",
@@ -50,25 +48,9 @@
     "close": "關閉",
     "swap": "更換",
     "revert": "還原",
-    "origin": {
-      "chassis": "底盤標準",
-      "kit": "套件隨附",
-      "user": "你選的"
-    },
+    "copyFrom": "複製{slot}",
     "empty": "未安裝",
     "required": "必要部位",
-    "class": "賽制",
-    "startOver": "重新開始",
-    "stockNote": "原裝配置全是套件附送的塑膠件，田宮沒有單獨發售，所以剛開始的購物清單是空的。",
-    "classes": {
-      "open": "公開組 Open",
-      "stockBmax": "基礎賽 Stock / B-MAX",
-      "junior": "少年組 Junior"
-    },
-    "legality": {
-      "illegal": "此賽制不可用",
-      "unknown": "尚未確認"
-    },
     "motorPosition": {
       "front": "前置摩打",
       "mid": "中置摩打",
@@ -78,7 +60,8 @@
       "label": "組裝中車輛的 3D 預覽。點一下車上的零件即可更換；鍵盤及輔助技術請使用下方清單。",
       "resetCamera": "重設視角",
       "hint": "點一下車上的零件來更換。拖曳可旋轉，雙指縮放或滾動可放大縮小。",
-      "unavailable": "3D 預覽暫時只支援 MA 底盤，請使用下方清單組車。"
+      "unavailable": "3D 預覽暫時只支援 MA 底盤，請使用下方清單組車。",
+      "hintEmpty": "先選擇你手上的套件或底盤，就可以逐件更換零件。"
     },
     "slot": {
       "body": "車殼",
@@ -118,7 +101,6 @@
     "motorRpm": "轉速 (rpm)",
     "motorTorque": "扭力 (g·cm)",
     "weight": "重量",
-    "pieces": "數量",
     "shaft": {
       "single": "單軸",
       "double": "雙軸"

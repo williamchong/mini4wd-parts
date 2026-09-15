@@ -17,10 +17,6 @@ export function useBuild() {
     build.value = newBuild(chassis, kit)
   }
 
-  function reset() {
-    build.value = null
-  }
-
   /** Put parts in a slot. An empty list empties the slot, which is not the
    *  same as never having touched it — see `BuildState.swaps`. */
   function swap(slotId: string, partIds: string[]) {
@@ -36,5 +32,5 @@ export function useBuild() {
     build.value = { ...build.value, swaps }
   }
 
-  return { build, buildClass, start, reset, swap, revert }
+  return { build, buildClass, start, swap, revert }
 }

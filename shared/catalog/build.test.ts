@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import {
-  isChassisCompatible, newBuild, partsForSlot, resolveBuild, slotIdsFor,
+  counterpartParts, isChassisCompatible, newBuild, partsForSlot, resolveBuild, slotIdsFor,
   swappableSlotTypes
 } from './build.ts'
 import type { BuildState } from './build.ts'
@@ -224,4 +224,28 @@ test('a slot is swappable only where something actually fits', () => {
   // The only motor in this catalog cannot go in a double-shaft chassis.
   assert.equal(swappableSlotTypes(parts, chassis).has('motor'), false)
   assert.equal(swappableSlotTypes(parts, { ...chassis, motorShaft: 'single' }).has('motor'), true)
+})
+
+test('a wheel or tire row can copy the other end only when that changes it', () => {
+  const wheel = (id: string, entries: { partId?: string }[], swapped = false) => ({
+    id, type: id as 'wheel-front', maxCount: 2, mirror: true, required: true,
+    entries: entries.map(e => ({ ...e, origin: 'user' as const })), swapped
+  })
+  const parts = new Map([
+    ['15001', { slots: ['wheel-front', 'wheel-rear'] as Part['slots'] }],
+    ['15002', { slots: ['wheel-rear'] as Part['slots'] }]
+  ])
+  const front = wheel('wheel-front', [{ partId: '15001' }])
+  const rear = wheel('wheel-rear', [{}])
+  assert.deepEqual(counterpartParts(rear, [front, rear], parts)?.partIds, ['15001'])
+  // Stock plastic has no item number to copy.
+  assert.equal(counterpartParts(front, [front, rear], parts), undefined)
+  // Already the same part.
+  const rearSame = wheel('wheel-rear', [{ partId: '15001' }])
+  assert.equal(counterpartParts(rearSame, [front, rearSame], parts), undefined)
+  // A rear-only part does not go on the front.
+  const rearOnly = wheel('wheel-rear', [{ partId: '15002' }])
+  assert.equal(counterpartParts(front, [front, rearOnly], parts), undefined)
+  // Only wheels and tires have a counterpart.
+  assert.equal(counterpartParts(wheel('motor', []), [front], parts), undefined)
 })

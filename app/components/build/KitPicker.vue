@@ -2,9 +2,7 @@
 /**
  * The kit door: which box is on the reader's desk.
  *
- * Inline rather than a modal, unlike PartPicker — that one is for swapping a
- * slot inside an existing build, this is the entry screen itself, the same job
- * ChassisPicker does.
+ * Rendered inside BasePicker's dialog, beside ChassisPicker.
  *
  * Rows are led by Tamiya's own product photo because recognising your box among
  * 305 is a visual task, and two thirds of these kits have no Traditional
@@ -88,11 +86,10 @@ const brokenImages = ref(new Set<string>())
 const list = useTemplateRef<HTMLElement>('list')
 
 /**
- * The route is prerendered, so the browser starts fetching these images while
- * parsing the HTML — long before Vue hydrates and attaches `@error`. An image
- * that already failed by then fired its event into the void and would sit as a
- * broken icon forever, which is exactly the failure the handler exists to
- * prevent. Sweeping once on mount catches those.
+ * An image that failed before `@error` was attached fired its event into the
+ * void and would sit as a broken icon forever. The list is client-rendered
+ * inside a dialog today, so that window is small, but a prerendered picker
+ * (a future /kits page) reopens it. Sweeping once on mount catches those.
  */
 onMounted(() => {
   for (const img of list.value?.querySelectorAll<HTMLImageElement>('img[data-kit]') ?? []) {
@@ -172,7 +169,7 @@ onMounted(() => {
               <span v-if="row.kit.priceJpy" class="price">¥{{ row.kit.priceJpy.toLocaleString() }}</span>
               <span v-if="row.kit.priceHkd" class="price">HK${{ row.kit.priceHkd }}</span>
               <!-- `current` is the default and badging it would bury the one
-                   that matters, the same rule PartCard applies to legality. -->
+                   that matters. -->
               <span v-if="row.kit.status === 'limited'" class="kit-status">
                 {{ $t('build.kitStatus.limited') }}
               </span>

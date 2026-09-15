@@ -7,13 +7,7 @@
     "home": "Home",
     "guides": "Guides",
     "parts": "Parts",
-    "about": "About",
-    "build": "Builder"
-  },
-  "landing": {
-    "modelAlt": "Mini 4WD Beginner's Guide Information Site logo",
-    "heading": "Mini 4WD Beginner's Guide Information Site Under Development",
-    "tagline": "Stay tuned!"
+    "about": "About"
   },
   "error": {
     "notFound": "Page not found"
@@ -24,7 +18,11 @@
     "tw": "TW"
   },
   "build": {
-    "title": "Builder",
+    "title": "Build list",
+    "base": "Kit",
+    "bareChassis": "Bare chassis",
+    "noBase": "No kit or chassis chosen",
+    "pickBase": "Choose a kit",
     "pickChassis": "Pick a chassis to start",
     "door": {
       "kit": "From a kit",
@@ -41,7 +39,7 @@
     "kitSource": {
       "fandom": "Parts list for this kit from the Mini 4WD Fandom Wiki:",
       "licence": "CC BY-SA",
-      "chassis": "Tamiya publishes no parts list for this kit, so what is shown below is this chassis' standard loadout.",
+      "chassis": "Tamiya publishes no parts list for this kit, so the list shows this chassis' standard loadout.",
       "note": "Kit contents and gear ratios come partly from the Mini 4WD Fandom Wiki, used under CC BY-SA."
     },
     "pickPart": "Choose {slot}",
@@ -50,25 +48,9 @@
     "close": "Close",
     "swap": "Swap",
     "revert": "Revert",
-    "origin": {
-      "chassis": "Standard for this chassis",
-      "kit": "From your kit",
-      "user": "You chose this"
-    },
+    "copyFrom": "Copy {slot}",
     "empty": "Empty",
     "required": "Required",
-    "class": "Class",
-    "startOver": "Start over",
-    "stockNote": "Everything a bare chassis comes with is moulded plastic Tamiya never sold separately, so a fresh build has an empty shopping list.",
-    "classes": {
-      "open": "Open",
-      "stockBmax": "Stock / B-MAX",
-      "junior": "Junior"
-    },
-    "legality": {
-      "illegal": "Not allowed in this class",
-      "unknown": "Not verified"
-    },
     "motorPosition": {
       "front": "Front motor",
       "mid": "Mid motor",
@@ -78,7 +60,8 @@
       "label": "3D preview of the build. Tap a part on the car to change it; the list below is the keyboard and screen-reader path.",
       "resetCamera": "Reset view",
       "hint": "Tap a part on the car to change it. Drag to rotate, pinch or scroll to zoom.",
-      "unavailable": "The 3D preview only covers the MA chassis for now. Build with the list below."
+      "unavailable": "The 3D preview only covers the MA chassis for now. Build with the list below.",
+      "hintEmpty": "Choose the kit or chassis you have first, then swap parts one by one."
     },
     "slot": {
       "body": "Body",
@@ -118,7 +101,6 @@
     "motorRpm": "Speed (rpm)",
     "motorTorque": "Torque (g·cm)",
     "weight": "Weight",
-    "pieces": "Pieces",
     "shaft": {
       "single": "Single shaft",
       "double": "Double shaft"

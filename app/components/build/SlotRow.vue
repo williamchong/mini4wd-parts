@@ -2,18 +2,21 @@
 /**
  * One slot of the build. What is in it comes from `resolveBuild`, so this
  * component never has to know whether the contents came from the chassis, the
- * kit or the user — only how to label the difference.
+ * kit or the user — only whether the user changed it, which is what Revert
+ * undoes.
  */
 import type { BuildablePart, ResolvedSlot } from '#shared/catalog/build'
 
 const props = defineProps<{
   slot: ResolvedSlot
   partsById: Map<string, BuildablePart>
-  /** False when no part in the catalog can go here — the `switch` slot. */
+  /** False while there is no build to change yet. */
   swappable: boolean
+  /** The front/rear counterpart this row can copy, when copying would change it. */
+  copyFrom?: ResolvedSlot
 }>()
 
-const emit = defineEmits<{ open: []; revert: [] }>()
+const emit = defineEmits<{ open: []; revert: []; copy: [] }>()
 
 const { label: resolveLabel } = useCatalogName()
 const { term } = useTerm()
@@ -21,6 +24,9 @@ const { term } = useTerm()
 // Regional wording applies to slot names too, so 摩打 / 馬達 follows the
 // toggle rather than being frozen into the message file.
 const label = computed(() => term(props.slot.type, `build.slot.${props.slot.id}`))
+
+const copyLabel = computed(() =>
+  props.copyFrom ? term(props.copyFrom.type, `build.slot.${props.copyFrom.id}`) : '')
 
 /**
  * What to print for each entry, and whether to mark it.
@@ -44,17 +50,6 @@ const rows = computed(() => props.slot.entries.map((entry) => {
     fallback: hit?.fallback ?? false
   }
 }))
-
-/**
- * Where the slot's contents came from, which `resolveBuild` already knows per
- * entry and sets uniformly across a slot. Three states rather than the binary
- * stock/swapped badge this replaced: "standard for this chassis" is our own
- * inference from the chassis default, "from your kit" is sourced from the box,
- * and conflating the two hid exactly the distinction a beginner needs to check
- * against the parts in front of them (docs/PLAN.md §4.8).
- */
-const origin = computed(() =>
-  props.slot.swapped ? 'user' : props.slot.entries[0]?.origin)
 </script>
 
 <template>
@@ -74,16 +69,14 @@ const origin = computed(() =>
       >
         {{ row.text }}
       </p>
-      <!-- An empty slot is neither stock nor swapped, so it is labelled by the
-           entry text alone rather than by a badge that contradicts it. -->
-      <span v-if="origin" class="slot-origin" :class="origin">
-        {{ $t(`build.origin.${origin}`) }}
-      </span>
     </div>
 
-    <div class="slot-actions">
-      <button v-if="swappable" type="button" @click="emit('open')">
+    <div v-if="swappable" class="slot-actions">
+      <button type="button" @click="emit('open')">
         {{ $t('build.swap') }}
+      </button>
+      <button v-if="copyFrom" type="button" class="link" @click="emit('copy')">
+        {{ $t('build.copyFrom', { slot: copyLabel }) }}
       </button>
       <button v-if="slot.swapped" type="button" class="link" @click="emit('revert')">
         {{ $t('build.revert') }}

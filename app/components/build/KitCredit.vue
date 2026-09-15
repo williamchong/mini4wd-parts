@@ -49,8 +49,7 @@ const article = computed(() =>
     >{{ $t('build.kitSource.licence') }}</a>
   </p>
 
-  <!-- The 13 kits with no wiki row. The three-state origin badge already says
-       every slot but the body is the chassis' own default; this says why, which
-       a badge cannot. No empty link, no "source unknown". -->
+  <!-- The 13 kits with no wiki row: every slot but the body is the chassis'
+       own default, and this says why. No empty link, no "source unknown". -->
   <p v-else class="kit-credit kit-credit-none">{{ $t('build.kitSource.chassis') }}</p>
 </template>

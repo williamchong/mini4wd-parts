@@ -45,11 +45,7 @@ const matches = computed(() =>
       <ul class="picker-list">
         <li v-for="candidate in matches" :key="candidate.part.id">
           <button type="button" @click="emit('select', candidate.part.id)">
-            <PartCard
-              :part="candidate.part"
-              :slot-type="slotType"
-              :legality="candidate.legality"
-            />
+            <PartCard :part="candidate.part" :slot-type="slotType" />
           </button>
         </li>
       </ul>

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 /**
- * The bare-chassis entry point. The kit entry point is the other one and lands
- * next; both produce the same `BuildState`, differing only in whether a kit's
- * `stockLoadout` overlays the chassis default.
+ * The bare-chassis entry point. KitPicker is the other one; both produce the
+ * same `BuildState`, differing only in whether a kit's `stockLoadout` overlays
+ * the chassis default.
  */
 import type { Chassis, ChassisId } from '#shared/catalog/schema'
 

@@ -3,7 +3,7 @@
  * This exists for the head. @nuxtjs/i18n only manages `lang`, hreflang and
  * canonical when `experimental.strictSeo` is on, and with it off `useLocaleHead`
  * has to be called somewhere that wraps every route. layouts/content.vue is not
- * that place — pages/index.vue does not use it.
+ * that place — a page is free to opt out of it.
  */
 const { t, locale } = useI18n()
 const i18nHead = useLocaleHead()

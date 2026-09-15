@@ -68,16 +68,16 @@ const BY_SLOT: Partial<Record<Slot, (specs: PartSpecs) => (SpecRow | undefined)[
 }
 
 /**
- * Rows for a part in a given slot, plus the two worth knowing whatever the
- * slot: what it weighs and how many come in the packet. A spec the catalog does
- * not have is omitted rather than printed as a dash.
+ * Rows for a part in a given slot, plus its weight, which is worth knowing
+ * whatever the slot. Packet quantity is left off: it says nothing about which
+ * part to pick. A spec the catalog does not have is omitted rather than
+ * printed as a dash.
  */
 export function specRowsFor(part: Pick<Part, 'specs'>, slotType?: Slot): SpecRow[] {
   const specs = part.specs
   const rows = [
     ...(slotType ? BY_SLOT[slotType]?.(specs) ?? [] : []),
-    specs.weightG === undefined ? undefined : { key: 'weight', value: `${specs.weightG}g` },
-    specs.pieces === undefined ? undefined : { key: 'pieces', value: String(specs.pieces) }
+    specs.weightG === undefined ? undefined : { key: 'weight', value: `${specs.weightG}g` }
   ]
   return rows.filter((row): row is SpecRow => row !== undefined)
 }
