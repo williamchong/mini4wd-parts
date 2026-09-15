@@ -33,7 +33,11 @@ const props = defineProps<{
   openSlotId: string | null
 }>()
 
-const emit = defineEmits<{ select: [slotId: string] }>()
+const emit = defineEmits<{
+  select: [slotId: string]
+  /** The first frame is on the canvas; whatever stood in for it can go. */
+  ready: []
+}>()
 
 const canvas = ref<HTMLCanvasElement>()
 
@@ -246,10 +250,15 @@ onMounted(() => {
   function requestRender() {
     if (!frame) frame = requestAnimationFrame(tick)
   }
+  let drawn = false
   function tick() {
     frame = 0
     controls.update()
     renderer.render(scene, camera)
+    if (!drawn) {
+      drawn = true
+      emit('ready')
+    }
   }
   controls.addEventListener('change', requestRender)
 

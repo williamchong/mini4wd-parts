@@ -204,6 +204,18 @@ const hydrated = ref(false)
 onMounted(() => { hydrated.value = true })
 
 /**
+ * The poster is a screenshot of the empty MA scene at the home view, one per
+ * frame aspect, so the pane is not blank for the ~2.5 s the three chunk takes
+ * on a slow-4G phone (measured 2026-09-16). It is server-rendered and swapped
+ * out when the scene's first frame lands, which draws the same picture. Only
+ * the empty car matches it, so a build — kept in state across client-side
+ * navigation — mounts with no poster. Retake it when the camera, colours or
+ * MA sockets change.
+ */
+const sceneReady = ref(false)
+const showPoster = computed(() => shownChassis.value?.id === PLACEHOLDER_CHASSIS && !hasBuild.value && !sceneReady.value)
+
+/**
  * A tap on the car opens the same picker as the row's Swap button, with the
  * same guard: a slot no catalog part can fill has nothing to pick from. On the
  * placeholder car there is nothing to swap yet, so a tap asks for the kit.
@@ -246,6 +258,10 @@ useHead(() => ({ title: `${t('build.title')} — ${t('site.title')}` }))
          list does not jump when the canvas appears. Keyed by chassis so a
          different socket table gets a fresh scene rather than a patched one. -->
     <div class="scene-frame">
+      <picture v-if="showPoster" class="scene-poster">
+        <source media="(min-width: 640px)" srcset="/images/scene-poster-16x9.webp">
+        <img src="/images/scene-poster-4x3.webp" alt="" width="712" height="534">
+      </picture>
       <LazyBuildScene
         v-if="hasScene && shownChassis && hydrated"
         :key="shownChassis.id"
@@ -254,6 +270,7 @@ useHead(() => ({ title: `${t('build.title')} — ${t('site.title')}` }))
         :parts="partsById"
         :open-slot-id="openSlotId"
         @select="pick"
+        @ready="sceneReady = true"
       />
       <p v-else-if="!hasScene" class="scene-placeholder">{{ $t('build.scene.unavailable') }}</p>
     </div>
