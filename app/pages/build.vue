@@ -11,6 +11,7 @@ import {
   BUILD_CLASSES, partsForSlot, resolveBuild, swappableSlotTypes
 } from '#shared/catalog/build'
 import { orderKits } from '#shared/catalog/kits'
+import { SCENE_CHASSIS } from '#shared/scene/chassis'
 import type { PickableKit, ResolvedSlot } from '#shared/catalog/build'
 import type { ChassisId } from '#shared/catalog/schema'
 
@@ -120,6 +121,23 @@ const openSlotId = ref<string | null>(null)
 const openSlot = computed<ResolvedSlot | null>(() =>
   slots.value.find(slot => slot.id === openSlotId.value) ?? null)
 
+/**
+ * Whether the 3D pane can draw this chassis at all (docs/PLAN.md §5.5). Only
+ * MA has a socket table today; the other seven say so and build from the list.
+ * Read from its own module rather than from the socket table — see
+ * shared/scene/chassis.ts for the 10.7 KB that sharing the table cost.
+ */
+const hasScene = computed(() => !!chassis.value && SCENE_CHASSIS.has(chassis.value.id))
+
+/**
+ * A tap on the car opens the same picker as the row's Swap button, with the
+ * same guard: a slot no catalog part can fill has nothing to pick from.
+ */
+function pick(slotId: string) {
+  const slot = slots.value.find(s => s.id === slotId)
+  if (slot && swappable.value.has(slot.type)) openSlotId.value = slotId
+}
+
 const candidates = computed(() =>
   openSlot.value && chassis.value
     ? partsForSlot(catalog.value?.parts ?? [], openSlot.value.type, chassis.value, buildClass.value)
@@ -222,6 +240,24 @@ useHead(() => ({ title: `${t('build.title')} — ${t('site.title')}` }))
            numbers, so a fresh build is complete, stock, and worth nothing on a
            shopping list. Saying so beats an unexplained wall of "stock". -->
       <p class="build-note">{{ $t('build.stockNote') }}</p>
+
+      <!-- 3D first, the list beneath it (§5.4). The frame reserves the
+           pane's space before the three chunk arrives, so the list does not
+           jump when the canvas appears; `Lazy` keeps that chunk off every
+           page and off this one until a build exists. Keyed by chassis so
+           a different socket table gets a fresh scene rather than a patched
+           one. -->
+      <div v-if="hasScene && chassis" class="scene-frame">
+        <LazyBuildScene
+          :key="chassis.id"
+          :chassis="chassis.id"
+          :slots="slots"
+          :open-slot-id="openSlotId"
+          @select="pick"
+        />
+      </div>
+      <p v-if="hasScene" class="scene-hint">{{ $t('build.scene.hint') }}</p>
+      <p v-else class="scene-unavailable">{{ $t('build.scene.unavailable') }}</p>
 
       <!-- Sits with the slot list it credits rather than in a page footer, so
            the attribution travels with the content it covers. -->

@@ -74,6 +74,12 @@
       "mid": "Mid motor",
       "rear": "Rear motor"
     },
+    "scene": {
+      "label": "3D preview of the build. Tap a part on the car to change it; the list below is the keyboard and screen-reader path.",
+      "resetCamera": "Reset view",
+      "hint": "Tap a part on the car to change it. Drag to rotate, pinch or scroll to zoom.",
+      "unavailable": "The 3D preview only covers the MA chassis for now. Build with the list below."
+    },
     "slot": {
       "body": "Body",
       "motor": "Motor",

@@ -22,10 +22,12 @@
     "@nuxt/content": "^3.16.0",
     "@nuxtjs/i18n": "^10.6.0",
     "nuxt": "^4.5.2",
+    "three": "^0.186.0",
     "vue": "^3.5.42"
   },
   "devDependencies": {
     "@types/node": "^26.5.0",
+    "@types/three": "^0.186.0",
     "better-sqlite3": "^13.0.3",
     "cheerio": "^1.2.0",
     "typescript": "^7.0.2",

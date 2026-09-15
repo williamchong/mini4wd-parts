@@ -206,6 +206,56 @@ button.link {
   cursor: pointer;
 }
 
+/* 3D pane (docs/PLAN.md §5.5). The frame owns the size so the space exists
+   before the client-only scene chunk has loaded. */
+.scene-frame {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  margin: 1rem 0 0.25rem;
+  border-radius: 8px;
+  background: #e9edf1;
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .scene-frame {
+    aspect-ratio: 16 / 9;
+  }
+}
+
+.scene,
+.scene canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.scene canvas {
+  touch-action: none;
+  cursor: grab;
+}
+
+.scene-reset {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  font: inherit;
+  font-size: 0.85em;
+  padding: 0.2rem 0.6rem;
+  color: #2c3e50;
+  background: rgb(255 255 255 / 85%);
+  border: 1px solid #c8ced4;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.scene-hint,
+.scene-unavailable {
+  font-size: 0.9em;
+  color: #666;
+  margin: 0 0 1rem;
+}
+
 /* Chassis picker */
 
 .chassis-list {
