@@ -89,6 +89,12 @@ const { data: catalog } = await useAsyncData('build-catalog', async () => {
 const partsById = computed(() =>
   new Map((catalog.value?.parts ?? []).map(part => [part.id, part])))
 
+const { copied, copyLink } = useBuildLink(() => catalog.value && {
+  chassis: catalog.value.chassis,
+  kits: catalog.value.kits,
+  partsById: partsById.value
+})
+
 const chassis = computed(() =>
   catalog.value?.chassis.find(c => c.id === build.value?.chassis))
 
@@ -278,7 +284,12 @@ useHead(() => ({ title: `${t('build.title')} — ${t('site.title')}` }))
       {{ hasBuild ? $t('build.scene.hint') : $t('build.scene.hintEmpty') }}
     </p>
 
-    <h1 class="build-list-title">{{ $t('build.title') }}</h1>
+    <div class="build-list-header">
+      <h1 class="build-list-title">{{ $t('build.title') }}</h1>
+      <button v-if="hasBuild" type="button" class="link" aria-live="polite" @click="copyLink">
+        {{ copied ? $t('build.linkCopied') : $t('build.copyLink') }}
+      </button>
+    </div>
 
     <ul class="slot-list">
       <!-- What the car is built on. Once a kit is chosen it is the build's

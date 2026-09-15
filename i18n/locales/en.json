@@ -47,6 +47,8 @@
     "candidates": "{count} parts fit",
     "close": "Close",
     "swap": "Swap",
+    "copyLink": "Copy link",
+    "linkCopied": "Link copied",
     "revert": "Revert",
     "copyFrom": "Copy {slot}",
     "moreSlots": "Other parts: {slots}",

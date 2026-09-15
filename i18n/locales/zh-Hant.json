@@ -47,6 +47,8 @@
     "candidates": "{count} 件可用零件",
     "close": "關閉",
     "swap": "更換",
+    "copyLink": "複製連結",
+    "linkCopied": "已複製連結",
     "revert": "還原",
     "copyFrom": "複製{slot}",
     "moreSlots": "其他零件：{slots}",

@@ -215,6 +215,14 @@ button.link {
   margin: 0 0 1rem;
 }
 
+.build-list-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 0 1rem;
+}
+
 .content-container h1.build-list-title {
   margin: 1.5rem 0 0;
   font-size: 1.25rem;

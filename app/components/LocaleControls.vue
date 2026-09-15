@@ -4,6 +4,16 @@ const switchLocalePath = useSwitchLocalePath()
 const { wording, setWording } = useWording()
 
 const otherLocales = computed(() => locales.value.filter(l => l.code !== locale.value))
+
+/**
+ * Without the hash `switchLocalePath` copies from the router's route. A hash
+ * never means the same thing in the other locale: a heading anchor is a slug
+ * of translated text, and the builder writes its link with `replaceState`,
+ * which the router never sees, so the copied hash is the build as it was when
+ * the page was opened, and switching would undo every change since
+ * (app/composables/useBuildLink.ts puts the current build back).
+ */
+const localeHref = (code: Parameters<typeof switchLocalePath>[0]) => switchLocalePath(code).split('#')[0]
 </script>
 
 <template>
@@ -17,7 +27,7 @@ const otherLocales = computed(() => locales.value.filter(l => l.code !== locale.
     <NuxtLink
       v-for="l in otherLocales"
       :key="l.code"
-      :to="switchLocalePath(l.code)"
+      :to="localeHref(l.code)"
     >{{ l.name }}</NuxtLink>
 
     <!-- Hong Kong and Taiwan are wordings of the same pages, so this is a
