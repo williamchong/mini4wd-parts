@@ -22,11 +22,13 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { socketsFor } from '#shared/scene/sockets'
 import type { ProxyKind } from '#shared/scene/sockets'
 import type { EntryOrigin, ResolvedSlot } from '#shared/catalog/build'
-import type { ChassisId } from '#shared/catalog/schema'
+import type { ChassisId, PartSpecs } from '#shared/catalog/schema'
 
 const props = defineProps<{
   chassis: ChassisId
   slots: ResolvedSlot[]
+  /** The catalog by item number, read only for the specs that size a proxy. */
+  parts: ReadonlyMap<string, { specs: PartSpecs }>
   /** The slot whose picker is open; its proxy stays lit until it closes. */
   openSlotId: string | null
 }>()
@@ -40,21 +42,47 @@ type ProxyState = EntryOrigin | 'empty'
 type Highlight = 'none' | 'hover' | 'open'
 
 /**
- * Sizes are category defaults in millimetres (§5.5); sizing from `specs` is a
- * later upgrade that changes the look, not the risk. Box arguments are
+ * Sizes are category defaults in millimetres (§5.5), except that the round
+ * parts take the diameter `diameterFor` finds on the part. Box arguments are
  * width (x, across the car), height (y), depth (z, along the car). Wheels and
  * tires spin about x, rollers about y.
  */
-const VISIBLE: Record<ProxyKind, () => BufferGeometry> = {
+const VISIBLE: Record<ProxyKind, (mm: number) => BufferGeometry> = {
   body: () => new BoxGeometry(40, 30, 130),
   motor: () => new BoxGeometry(30, 15, 20),
-  wheel: () => new CylinderGeometry(10, 10, 10, 24).rotateZ(Math.PI / 2),
-  tire: () => new CylinderGeometry(13, 13, 9, 24).rotateZ(Math.PI / 2),
-  roller: () => new CylinderGeometry(6.5, 6.5, 5, 20),
+  wheel: mm => new CylinderGeometry(mm / 2, mm / 2, 10, 24).rotateZ(Math.PI / 2),
+  tire: mm => new CylinderGeometry(mm / 2, mm / 2, 9, 24).rotateZ(Math.PI / 2),
+  roller: mm => new CylinderGeometry(mm / 2, mm / 2, 5, 20),
   stay: () => new BoxGeometry(60, 2, 20),
   'side-stay': () => new BoxGeometry(20, 2, 40),
   brake: () => new BoxGeometry(40, 3, 14),
   damper: () => new BoxGeometry(14, 10, 8)
+}
+
+/**
+ * The diameter a round proxy is drawn at, in millimetres. A roller or wheel
+ * is sized from its own record when the catalog has one (41 rollers, 9
+ * wheels); no tire records a diameter, so a tire is a band around whatever
+ * wheel sits in its socket. The defaults are the sizes the taps were measured
+ * at (§5.5), so a slot with no spec looks exactly as it did.
+ */
+const DEFAULT_DIAMETER_MM = { roller: 13, wheel: 20, tire: 26 } as const
+const TIRE_BAND_MM = DEFAULT_DIAMETER_MM.tire - DEFAULT_DIAMETER_MM.wheel
+
+function diameterFor(kind: ProxyKind, slot: ResolvedSlot, bySlot: Map<string, ResolvedSlot>): number {
+  const specs = (s: ResolvedSlot | undefined) => {
+    const id = s?.entries[0]?.partId
+    return id ? props.parts.get(id)?.specs : undefined
+  }
+  switch (kind) {
+    case 'roller': return specs(slot)?.rollerDiameterMm ?? DEFAULT_DIAMETER_MM.roller
+    case 'wheel': return specs(slot)?.wheelDiameterMm ?? DEFAULT_DIAMETER_MM.wheel
+    case 'tire': {
+      const wheel = specs(bySlot.get(slot.id.replace('tire', 'wheel')))?.wheelDiameterMm
+      return specs(slot)?.tireDiameterMm ?? (wheel ? wheel + TIRE_BAND_MM : DEFAULT_DIAMETER_MM.tire)
+    }
+    default: return 0
+  }
 }
 
 /**
@@ -72,12 +100,12 @@ const VISIBLE: Record<ProxyKind, () => BufferGeometry> = {
  * most angles. So its hit volume is the roof only, and `slotAt` prefers any
  * other part along the ray besides.
  */
-const HIT: Record<ProxyKind, () => BufferGeometry> = {
+const HIT: Record<ProxyKind, (mm: number) => BufferGeometry> = {
   body: () => new BoxGeometry(40, 10, 130).translate(0, 10, 0),
   motor: () => new BoxGeometry(34, 19, 24),
-  wheel: () => new CylinderGeometry(10, 10, 12, 16).rotateZ(Math.PI / 2),
-  tire: () => new CylinderGeometry(15, 15, 9, 16).rotateZ(Math.PI / 2),
-  roller: () => new SphereGeometry(13, 12, 8),
+  wheel: mm => new CylinderGeometry(mm / 2, mm / 2, 12, 16).rotateZ(Math.PI / 2),
+  tire: mm => new CylinderGeometry(mm / 2 + 2, mm / 2 + 2, 9, 16).rotateZ(Math.PI / 2),
+  roller: mm => new SphereGeometry(mm, 12, 8),
   stay: () => new BoxGeometry(60, 8, 22),
   'side-stay': () => new BoxGeometry(22, 8, 40),
   brake: () => new BoxGeometry(40, 8, 16),
@@ -110,11 +138,11 @@ onMounted(() => {
   const geometries = new Map<string, BufferGeometry>()
   const materials = new Map<string, MeshStandardMaterial>()
 
-  function geometry(table: Record<ProxyKind, () => BufferGeometry>, kind: ProxyKind, prefix: string) {
-    const key = `${prefix}:${kind}`
+  function geometry(table: Record<ProxyKind, (mm: number) => BufferGeometry>, kind: ProxyKind, mm: number, prefix: string) {
+    const key = `${prefix}:${kind}:${mm}`
     let found = geometries.get(key)
     if (!found) {
-      found = table[kind]()
+      found = table[kind](mm)
       geometries.set(key, found)
     }
     return found
@@ -223,9 +251,10 @@ onMounted(() => {
       group.clear()
       const state: ProxyState = slot.entries[0]?.origin ?? 'empty'
       const data: ProxyData = { slotId: socket.slotId, state, kind: socket.kind }
-      const visible = new Mesh(geometry(VISIBLE, socket.kind, 'v'), material(state, highlightFor(socket.slotId), socket.kind))
+      const mm = diameterFor(socket.kind, slot, bySlot)
+      const visible = new Mesh(geometry(VISIBLE, socket.kind, mm, 'v'), material(state, highlightFor(socket.slotId), socket.kind))
       visible.userData = data
-      const hit = new Mesh(geometry(HIT, socket.kind, 'h'))
+      const hit = new Mesh(geometry(HIT, socket.kind, mm, 'h'))
       hit.visible = false
       hit.userData = data
       group.add(visible, hit)

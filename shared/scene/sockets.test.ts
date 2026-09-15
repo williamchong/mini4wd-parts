@@ -39,6 +39,16 @@ test('a mirrored slot gets a -l and a -r socket at mirrored x', () => {
   }
 })
 
+test('every tire socket sits on a wheel socket named by swapping the word', () => {
+  // The scene sizes a tire from the wheel in `slot.id.replace('tire', 'wheel')`.
+  const sockets = socketsFor('ma')!
+  for (const tire of sockets.filter(s => s.kind === 'tire')) {
+    const wheel = sockets.find(s => s.name === tire.name.replace('tire', 'wheel'))
+    assert.ok(wheel && wheel.kind === 'wheel', tire.name)
+    assert.deepEqual(wheel.position, tire.position)
+  }
+})
+
 test('the chassis the page reserves a pane for are exactly those with a table', () => {
   for (const id of CHASSIS_IDS) {
     assert.equal(SCENE_CHASSIS.has(id), socketsFor(id) !== undefined, id)

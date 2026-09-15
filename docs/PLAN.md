@@ -479,7 +479,9 @@ Three things the measurement changed, none of them predicted:
 
 Also: the body is always drawn at 45% opacity, or it hides the motor and the inside of every wheel; the tap-versus-drag threshold works (a drag across a roller opened nothing, a tap on it opened the front-roller picker with 45 candidates, choosing one turned both mirrored rollers orange); and the scene draws only when the camera or the build moved, so a static pane costs nothing between interactions.
 
-**Still not done, as scoped:** the 3D/list preference, spec-driven proxy sizes, the other-chassis still image, PostHog events. **Next in M1c:** the MA chassis GLB with slot-named empties, which replaces the socket table for MA and nothing else in the pane.
+**Spec-driven sizes followed the same day.** A roller or wheel is drawn at its record's `rollerDiameterMm` / `wheelDiameterMm` when it has one (41 rollers, 9 wheels), and a tire — no tire records a diameter — is a 6 mm band around whatever wheel is in its socket; the hit volumes scale with them. A slot with no spec keeps the measured defaults, so nothing above moved. What it does not do yet: lift the axle for a large-diameter wheel, so a ⌀31 front on ⌀20 rears dips below the tray rather than raising the car. The pane takes the page's part map as a prop for the specs alone.
+
+**Still not done, as scoped:** the 3D/list preference, the other-chassis still image, PostHog events. **Next in M1c:** the MA chassis GLB with slot-named empties, which replaces the socket table for MA and nothing else in the pane.
 
 ---
 

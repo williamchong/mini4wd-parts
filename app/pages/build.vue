@@ -252,6 +252,7 @@ useHead(() => ({ title: `${t('build.title')} — ${t('site.title')}` }))
           :key="chassis.id"
           :chassis="chassis.id"
           :slots="slots"
+          :parts="partsById"
           :open-slot-id="openSlotId"
           @select="pick"
         />
