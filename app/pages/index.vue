@@ -23,7 +23,7 @@ definePageMeta({ layout: 'content' })
 
 const { t } = useI18n()
 const { resolve, isFallback } = useCatalogName()
-const { term } = useTerm()
+const { slotLabel } = useTerm()
 const { build, buildClass, start, swap, revert } = useBuild()
 
 /**
@@ -154,7 +154,7 @@ watch(() => moreSlots.value.some(slot => slot.swapped), (swapped) => {
 }, { immediate: true })
 
 const moreSummary = computed(() => t('build.moreSlots', {
-  slots: moreSlots.value.map(slot => term(slot.type, `build.slot.${slot.id}`)).join(t('build.listSeparator'))
+  slots: moreSlots.value.map(slotLabel).join(t('build.listSeparator'))
 }))
 
 function onMoreToggle(event: Event) {
@@ -235,7 +235,7 @@ const candidates = computed(() =>
     : [])
 
 const openSlotLabel = computed(() =>
-  openSlot.value ? term(openSlot.value.type, `build.slot.${openSlot.value.id}`) : '')
+  openSlot.value ? slotLabel(openSlot.value) : '')
 
 /**
  * A selection puts one of the part in the slot. How many packets a mirrored or
@@ -333,8 +333,10 @@ useHead(() => ({ title: `${t('build.title')} — ${t('site.title')}` }))
           :slot="slot"
           :parts-by-id="partsById"
           :swappable="hasBuild"
+          :copy-from="copies.get(slot.id)?.from"
           @open="openSlotId = slot.id"
           @revert="revert(slot.id)"
+          @copy="copy(slot.id)"
         />
       </ul>
     </details>

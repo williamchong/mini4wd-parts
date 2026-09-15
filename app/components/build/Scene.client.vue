@@ -245,10 +245,15 @@ onMounted(() => {
    * pane keeps no main-thread wake-up running either. The controls announce
    * their own motion through `change` — a drag, a zoom, and every frame damping
    * is still coasting, which is what keeps a released drag drawing to rest.
+   *
+   * Nothing is drawn before the first resize: a frame requested at mount runs
+   * before the observer fires, draws into the default 300×150 canvas, and is
+   * wiped by `setSize` before it is painted — having already sent `ready`.
    */
   let frame = 0
+  let sized = false
   function requestRender() {
-    if (!frame) frame = requestAnimationFrame(tick)
+    if (sized && !frame) frame = requestAnimationFrame(tick)
   }
   let drawn = false
   function tick() {
@@ -378,7 +383,12 @@ onMounted(() => {
       camera.position.copy(controls.position0)
       controls.update()
     }
-    requestRender()
+    // Drawn here rather than requested: `setSize` has just cleared the canvas,
+    // and a draw inside the observer callback lands in this frame's paint,
+    // where a requested one would leave a blank frame first.
+    sized = true
+    cancelAnimationFrame(frame)
+    tick()
   })
   resize.observe(element)
 

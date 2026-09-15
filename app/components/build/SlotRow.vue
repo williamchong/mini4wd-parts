@@ -19,14 +19,14 @@ const props = defineProps<{
 const emit = defineEmits<{ open: []; revert: []; copy: [] }>()
 
 const { label: resolveLabel } = useCatalogName()
-const { term } = useTerm()
+const { slotLabel } = useTerm()
 
 // Regional wording applies to slot names too, so 摩打 / 馬達 follows the
 // toggle rather than being frozen into the message file.
-const label = computed(() => term(props.slot.type, `build.slot.${props.slot.id}`))
+const label = computed(() => slotLabel(props.slot))
 
 const copyLabel = computed(() =>
-  props.copyFrom ? term(props.copyFrom.type, `build.slot.${props.copyFrom.id}`) : '')
+  props.copyFrom ? slotLabel(props.copyFrom) : '')
 
 /**
  * What to print for each entry, and whether to mark it.

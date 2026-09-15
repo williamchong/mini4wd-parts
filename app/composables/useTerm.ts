@@ -17,5 +17,8 @@ export function useTerm() {
     return fallbackKey ? t(fallbackKey) : name
   }
 
-  return { term }
+  /** A build slot's name, which follows the wording toggle like any term. */
+  const slotLabel = (slot: { id: string, type: string }) => term(slot.type, `build.slot.${slot.id}`)
+
+  return { term, slotLabel }
 }
