@@ -21,7 +21,7 @@ import type { BufferGeometry } from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { socketsFor } from '#shared/scene/sockets'
 import type { ProxyKind } from '#shared/scene/sockets'
-import type { EntryOrigin, ResolvedSlot } from '#shared/catalog/build'
+import type { ResolvedSlot } from '#shared/catalog/build'
 import type { ChassisId, PartSpecs } from '#shared/catalog/schema'
 
 const props = defineProps<{
@@ -37,8 +37,12 @@ const emit = defineEmits<{ select: [slotId: string] }>()
 
 const canvas = ref<HTMLCanvasElement>()
 
-/** What a proxy is showing: where its slot's contents came from, or nothing. */
-type ProxyState = EntryOrigin | 'empty'
+/**
+ * What a proxy is showing: the kit's or chassis' own part, one the reader put
+ * in, or nothing. The same distinction the list draws with `swapped` — where a
+ * stock part came from is not something a beginner is asked to care about.
+ */
+type ProxyState = 'stock' | 'changed' | 'empty'
 type Highlight = 'none' | 'hover' | 'open'
 
 /**
@@ -112,11 +116,9 @@ const HIT: Record<ProxyKind, (mm: number) => BufferGeometry> = {
   damper: () => new BoxGeometry(18, 14, 12)
 }
 
-/** Where each slot's contents came from, plus empty. */
 const COLOUR: Record<ProxyState, number> = {
-  chassis: 0x9aa0a6,
-  kit: 0x4a7fd1,
-  user: 0xe8842a,
+  stock: 0x4a7fd1,
+  changed: 0xe8842a,
   empty: 0xb8bcc2
 }
 
@@ -233,7 +235,24 @@ onMounted(() => {
   controls.update()
   controls.saveState()
 
-  let dirty = true
+  /**
+   * Frames are requested, not looped: a frame is scheduled only when something
+   * changed, and a still scene schedules nothing, so an idle or scrolled-away
+   * pane keeps no main-thread wake-up running either. The controls announce
+   * their own motion through `change` — a drag, a zoom, and every frame damping
+   * is still coasting, which is what keeps a released drag drawing to rest.
+   */
+  let frame = 0
+  function requestRender() {
+    if (!frame) frame = requestAnimationFrame(tick)
+  }
+  function tick() {
+    frame = 0
+    controls.update()
+    renderer.render(scene, camera)
+  }
+  controls.addEventListener('change', requestRender)
+
   let hits: Mesh[] = []
   let hovered: string | null = null
 
@@ -249,7 +268,7 @@ onMounted(() => {
       const slot = bySlot.get(socket.slotId)
       if (!group || !slot) continue
       group.clear()
-      const state: ProxyState = slot.entries[0]?.origin ?? 'empty'
+      const state: ProxyState = !slot.entries.length ? 'empty' : slot.swapped ? 'changed' : 'stock'
       const data: ProxyData = { slotId: socket.slotId, state, kind: socket.kind }
       const mm = diameterFor(socket.kind, slot, bySlot)
       const visible = new Mesh(geometry(VISIBLE, socket.kind, mm, 'v'), material(state, highlightFor(socket.slotId), socket.kind))
@@ -260,7 +279,7 @@ onMounted(() => {
       group.add(visible, hit)
       hits.push(hit)
     }
-    dirty = true
+    requestRender()
   }
 
   /** Re-pick materials after hover or the open slot changed; no re-attach. */
@@ -272,7 +291,7 @@ onMounted(() => {
         visible.material = material(data.state, highlightFor(data.slotId), data.kind)
       }
     }
-    dirty = true
+    requestRender()
   }
 
   const raycaster = new Raycaster()
@@ -350,24 +369,11 @@ onMounted(() => {
       camera.position.copy(controls.position0)
       controls.update()
     }
-    dirty = true
+    requestRender()
   })
   resize.observe(element)
 
-  // Drawn only when something changed: the controls report their own motion
-  // (damping included), the build and the highlight set `dirty`. A static
-  // scene therefore costs the GPU nothing between interactions.
-  let frame = 0
-  function tick() {
-    frame = requestAnimationFrame(tick)
-    if (controls.update() || dirty) {
-      renderer.render(scene, camera)
-      dirty = false
-    }
-  }
-
   populate()
-  tick()
 
   const stopSlots = watch(() => props.slots, populate)
   const stopOpen = watch(() => props.openSlotId, restyle)
@@ -380,11 +386,12 @@ onMounted(() => {
     controls.update()
     controls.reset()
     controls.enableDamping = true
-    dirty = true
+    requestRender()
   }
 
   cleanup = () => {
     cancelAnimationFrame(frame)
+    controls.removeEventListener('change', requestRender)
     stopSlots()
     stopOpen()
     resize.disconnect()
