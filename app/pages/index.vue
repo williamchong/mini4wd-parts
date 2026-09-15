@@ -17,7 +17,7 @@ import {
 import { orderKits } from '#shared/catalog/kits'
 import { SCENE_CHASSIS } from '#shared/scene/chassis'
 import type { ResolvedSlot } from '#shared/catalog/build'
-import type { ChassisId } from '#shared/catalog/schema'
+import type { ChassisId, Slot } from '#shared/catalog/schema'
 
 definePageMeta({ layout: 'content' })
 
@@ -131,6 +131,35 @@ const swappable = computed(() =>
  * no socket for those slots either.
  */
 const listedSlots = computed(() => slots.value.filter(slot => swappable.value.has(slot.type)))
+
+/**
+ * Slots a beginner rarely changes, folded under one summary at the end of the
+ * list. The summary names them, so a reader looking for gold terminals still
+ * sees where they are without opening it. None has a socket in the 3D pane, so
+ * a tap on the car never needs a row in here.
+ */
+const MORE_SLOT_TYPES = new Set<Slot>(['terminal', 'shaft', 'fastener'])
+
+const mainSlots = computed(() => listedSlots.value.filter(slot => !MORE_SLOT_TYPES.has(slot.type)))
+const moreSlots = computed(() => listedSlots.value.filter(slot => MORE_SLOT_TYPES.has(slot.type)))
+
+/**
+ * Open is the reader's to toggle, with one exception: a change is never hidden,
+ * so the group opens whenever something inside it is swapped. It is not closed
+ * again on revert — that would fold the section away under the button just used.
+ */
+const moreOpen = ref(false)
+watch(() => moreSlots.value.some(slot => slot.swapped), (swapped) => {
+  if (swapped) moreOpen.value = true
+}, { immediate: true })
+
+const moreSummary = computed(() => t('build.moreSlots', {
+  slots: moreSlots.value.map(slot => term(slot.type, `build.slot.${slot.id}`)).join(t('build.listSeparator'))
+}))
+
+function onMoreToggle(event: Event) {
+  moreOpen.value = (event.target as HTMLDetailsElement).open
+}
 
 const baseOpen = ref(false)
 
@@ -264,7 +293,7 @@ useHead(() => ({ title: `${t('build.title')} — ${t('site.title')}` }))
       </li>
 
       <BuildSlotRow
-        v-for="slot in listedSlots"
+        v-for="slot in mainSlots"
         :key="slot.id"
         :slot="slot"
         :parts-by-id="partsById"
@@ -275,6 +304,23 @@ useHead(() => ({ title: `${t('build.title')} — ${t('site.title')}` }))
         @copy="copy(slot.id)"
       />
     </ul>
+
+    <details v-if="moreSlots.length" class="more-slots" :open="moreOpen" @toggle="onMoreToggle">
+      <summary>
+        {{ moreSummary }}
+      </summary>
+      <ul class="slot-list">
+        <BuildSlotRow
+          v-for="slot in moreSlots"
+          :key="slot.id"
+          :slot="slot"
+          :parts-by-id="partsById"
+          :swappable="hasBuild"
+          @open="openSlotId = slot.id"
+          @revert="revert(slot.id)"
+        />
+      </ul>
+    </details>
 
     <!-- Sits with the slot list it credits rather than in a page footer, so
          the attribution travels with the content it covers. -->

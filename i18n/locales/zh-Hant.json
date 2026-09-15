@@ -49,6 +49,8 @@
     "swap": "更換",
     "revert": "還原",
     "copyFrom": "複製{slot}",
+    "moreSlots": "其他零件：{slots}",
+    "listSeparator": "、",
     "empty": "未安裝",
     "motorPosition": {
       "front": "前置摩打",

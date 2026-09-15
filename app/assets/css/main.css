@@ -419,6 +419,17 @@ button.link {
   border-bottom: 1px solid #e3e8ec;
 }
 
+.more-slots > summary {
+  padding: 0.7rem 0.25rem;
+  border-bottom: 1px solid #e3e8ec;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.more-slots > .slot-list {
+  border-top: none;
+}
+
 .slot-row.swapped {
   background: #f6faf6;
 }
