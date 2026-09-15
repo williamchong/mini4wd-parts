@@ -163,11 +163,6 @@ onMounted(() => {
               <span class="kit-id">{{ row.kit.id }}</span>
               <span>{{ row.chassisName }}</span>
               <span v-if="row.kit.gearRatio">{{ row.kit.gearRatio }}</span>
-            </span>
-
-            <span class="kit-meta">
-              <span v-if="row.kit.priceJpy" class="price">¥{{ row.kit.priceJpy.toLocaleString() }}</span>
-              <span v-if="row.kit.priceHkd" class="price">HK${{ row.kit.priceHkd }}</span>
               <!-- `current` is the default and badging it would bury the one
                    that matters. -->
               <span v-if="row.kit.status === 'limited'" class="kit-status">

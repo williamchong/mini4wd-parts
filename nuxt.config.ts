@@ -26,15 +26,6 @@ export default defineNuxtConfig({
     baseUrl: SITE_URL
   },
 
-  // model-viewer is a CDN web component, not a Vue component. Without this Vue
-  // refuses to render the tag during SSR, which forces <client-only> and costs
-  // a 0.1 layout shift when the real element replaces the empty placeholder.
-  vue: {
-    compilerOptions: {
-      isCustomElement: tag => tag === 'model-viewer'
-    }
-  },
-
   experimental: {
     // Nothing here depends on route rules, and it saves a request per page.
     appManifest: false

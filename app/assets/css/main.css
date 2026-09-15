@@ -383,8 +383,7 @@ button.link {
   font-weight: 600;
 }
 
-.kit-facts,
-.kit-meta {
+.kit-facts {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
@@ -426,10 +425,6 @@ button.link {
 
 .slot-label {
   font-weight: 600;
-}
-
-.slot-label .required {
-  color: #b4433c;
 }
 
 .slot-entry,

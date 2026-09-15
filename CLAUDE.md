@@ -13,14 +13,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `main` is the only branch; the hand-managed `gh-pages` and the stale `master` are retired. `.github/workflows/deploy.yml` runs `npm test`, `npm run typecheck` and `npm run catalog:verify`, then builds, on push to `main` and GitHub Pages serves the Actions artifact (`build_type: workflow`).
 - The site is a committed **Nuxt 4.5 + @nuxt/content v3** scaffold using the `app/` directory, with `@nuxtjs/i18n` on `prefix_except_default`. Routes so far are the landing page and a content catch-all; `/parts/…`, `/kits/…` and `/build` do not exist yet.
 - `content/` holds the generated catalog (382 parts, 8 chassis, 305 kits) plus per-locale prose under `content/zh-Hant/` and `content/en/`.
-- `public/images/4wd.glb` is a single baked hero model (3 meshes, ~66k triangles). It is not part-separated and cannot serve as the 3D builder base.
+- The old baked hero model (`public/images/4wd.glb`) is gone with the model-viewer landing page; `public/images/4wd.png` stays as the `og:image`.
 
 ## Planned Architecture (see docs/PLAN.md §4)
 
 - **Framework:** Nuxt 4, `nuxt generate` for static pages; server routes only for `/api/*` and `/b/:id` from M2.
 - **Content:** @nuxt/content v3 collections with Zod schemas. Catalog data (parts, chassis, rules, guides, wizard profiles) is versioned YAML/Markdown in `content/`, keyed by Tamiya item number. Only user-generated data (builds, votes, view counts) goes to a database.
 - **i18n:** @nuxtjs/i18n, `prefix_except_default`, `zh-Hant` default, `/en/`, later `/ja/`. Traditional Chinese is one page set: Hong Kong and Taiwan wording is a reader toggle (`app/composables/useWording.ts`, `:term{name="…"}` in prose, `resolveName` in `shared/catalog/names.ts`), advertised via `zh-HK`/`zh-TW` hreflang on the same URL. Part names for all locales live inline in each part record; guide bodies are separate Markdown files per locale, one @nuxt/content collection each.
-- **3D:** plain three.js (no TresJS, decided 2026-09-16, see `docs/PLAN.md` §4.1 and §5.5) in one `.client.vue` scene component, loaded only on the builder route once a build exists, client-only and code-split. The same component will serve the hero and part previews; Google `<model-viewer>` stays on the landing page only until the builder scene renders a recognisable MA car, then it is removed. Part meshes are one GLB per variant; the chassis GLB carries named socket nodes.
+- **3D:** plain three.js (no TresJS, decided 2026-09-16, see `docs/PLAN.md` §4.1 and §5.5) in one `.client.vue` scene component, loaded only on the builder route once a build exists, client-only and code-split. The same component serves the home page and will serve part previews; Google `<model-viewer>` has been removed. Part meshes are one GLB per variant; the chassis GLB carries named socket nodes.
 - **Hosting:** M1 stays on GitHub Pages. M2 moves to Cloudflare Workers with static assets, D1 (builds, votes), R2 (thumbnails), Turnstile (abuse control), nuxt-og-image for share cards.
 - **Rule engine and wizard:** declarative JSON rules (slot capacity, chassis compat, motor shaft type, class legality, dependencies, numeric limits) evaluated client-side and re-validated server-side; the wizard is a weighted scorer over the same catalog, no ML.
 

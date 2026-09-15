@@ -52,7 +52,7 @@ const { data: catalog } = await useAsyncData('build-catalog', async () => {
     // picker and nothing renders it, so it is dropped again below.
     queryCollection('kits')
       .select('id', 'stem', 'names', 'chassis', 'status', 'gearRatio',
-        'priceJpy', 'priceHkd', 'releaseDate', 'officialImage',
+        'releaseDate', 'officialImage',
         'loadoutSource', 'loadoutSourceTitle', 'stockLoadout')
       .all()
   ])

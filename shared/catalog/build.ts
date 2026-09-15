@@ -57,12 +57,12 @@ export type BuildableKit = Pick<Kit, 'stockLoadout'>
  *
  * Deliberately absent: `series`, `seriesNumber` (180 of 305, and its only
  * human-readable partner `seriesLabel` is Japanese-only free text), `specsRaw`,
- * `officialUrl`, `hkStoreUrl`, `nameSources`, `releaseDateRaw` — and
- * `releaseDate`, which orders the picker at prerender and is then stripped,
- * because nothing renders it.
+ * `officialUrl`, `hkStoreUrl`, `nameSources`, `releaseDateRaw`, the prices —
+ * nobody recognises their box by price — and `releaseDate`, which orders the
+ * picker at prerender and is then stripped, because nothing renders it.
  */
 export type PickableKit = Pick<Kit,
-  'id' | 'names' | 'chassis' | 'status' | 'gearRatio' | 'priceJpy' | 'priceHkd'
+  'id' | 'names' | 'chassis' | 'status' | 'gearRatio'
   | 'officialImage' | 'loadoutSource' | 'loadoutSourceTitle' | 'stockLoadout'>
 
 /**

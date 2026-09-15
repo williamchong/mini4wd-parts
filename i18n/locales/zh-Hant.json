@@ -19,10 +19,10 @@
   },
   "build": {
     "title": "組車清單",
-    "base": "套件",
+    "base": "套件／底盤",
     "bareChassis": "淨底盤",
     "noBase": "未選擇套件或底盤",
-    "pickBase": "選擇套件",
+    "pickBase": "選擇套件或底盤",
     "pickChassis": "選擇底盤開始",
     "door": {
       "kit": "由套件開始",
@@ -50,7 +50,6 @@
     "revert": "還原",
     "copyFrom": "複製{slot}",
     "empty": "未安裝",
-    "required": "必要部位",
     "motorPosition": {
       "front": "前置摩打",
       "mid": "中置摩打",

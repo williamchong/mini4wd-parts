@@ -54,10 +54,7 @@ const rows = computed(() => props.slot.entries.map((entry) => {
 
 <template>
   <li class="slot-row" :class="{ swapped: slot.swapped }">
-    <div class="slot-label">
-      {{ label }}
-      <span v-if="slot.required" class="required" :title="$t('build.required')">*</span>
-    </div>
+    <div class="slot-label">{{ label }}</div>
 
     <div class="slot-entries">
       <p v-if="!slot.entries.length" class="slot-empty">{{ $t('build.empty') }}</p>
