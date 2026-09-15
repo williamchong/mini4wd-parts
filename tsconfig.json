@@ -1,0 +1,10 @@
+{
+  // Editor and vue-tsc entry point for app/ and nuxt.config.ts. scripts/ is
+  // deliberately not referenced: it has its own tsconfig for Node's type
+  // stripping, checked by `npm run typecheck:scripts`.
+  "files": [],
+  "references": [
+    { "path": "./.nuxt/tsconfig.app.json" },
+    { "path": "./.nuxt/tsconfig.node.json" }
+  ]
+}

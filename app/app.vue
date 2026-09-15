@@ -12,7 +12,7 @@ const { restoreWording } = useWording()
 onMounted(restoreWording)
 
 const zhHref = computed(() =>
-  i18nHead.value.link?.find(link => link.hreflang === 'zh-Hant')?.href
+  i18nHead.value.link?.find(link => 'hreflang' in link && link.hreflang === 'zh-Hant')?.href
 )
 
 useHead(() => ({
@@ -27,8 +27,8 @@ useHead(() => ({
     // collide with the module's own.
     ...(zhHref.value
       ? [
-          { rel: 'alternate', hreflang: 'zh-HK', href: zhHref.value },
-          { rel: 'alternate', hreflang: 'zh-TW', href: zhHref.value }
+          { rel: 'alternate' as const, hreflang: 'zh-HK', href: zhHref.value },
+          { rel: 'alternate' as const, hreflang: 'zh-TW', href: zhHref.value }
         ]
       : [])
   ],

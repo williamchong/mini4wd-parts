@@ -56,7 +56,7 @@ const { data: catalog } = await useAsyncData('build-catalog', async () => {
   // the Tamiya item number back. Building the chassis id set from the raw docs
   // gives a set of file paths, against which every kit's `ma`/`vs`/`ar` fails —
   // silently, as an empty picker rather than an error.
-  const known = chassis.map(fromContent)
+  const known = chassis.map(fromContent('chassis'))
   const chassisIds = new Set(known.map(c => c.id))
   return {
     chassis: known,
@@ -64,7 +64,7 @@ const { data: catalog } = await useAsyncData('build-catalog', async () => {
     // requires `isCarPart`, and a part slotted `none` fills nothing. Dropping
     // them at prerender rather than shipping and re-filtering in the browser
     // takes 56 of 382 records out of the payload.
-    parts: parts.map(fromContent)
+    parts: parts.map(fromContent('parts'))
       .filter(part => part.isCarPart && part.slots.some(slot => slot !== 'none')),
     // Ordered here rather than in the picker, and then stripped of the field
     // that ordered it. Sorting once at prerender beats re-sorting on every
@@ -76,7 +76,7 @@ const { data: catalog } = await useAsyncData('build-catalog', async () => {
     // reader back to the picker by a click that looked like it did nothing. No
     // kit is in that state today; this keeps it that way through a descoped
     // chassis rather than trusting it.
-    kits: orderKits(kits.map(fromContent).filter(kit => chassisIds.has(kit.chassis)))
+    kits: orderKits(kits.map(fromContent('kits')).filter(kit => chassisIds.has(kit.chassis)))
       .map(({ releaseDate: _releaseDate, ...kit }) => kit)
   }
 })
