@@ -104,3 +104,9 @@
 # Fandom wiki cross-reference; see scripts/catalog/crossref.ts.
 '10308': { category: spacer } # AO-1037 アルミシャフトストッパー — axle locking collar
 '94809': { category: screw }  # AO-1024 2×38mm両ネジシャフト — double-threaded stud
+# Parts whose names contain ホイール but which are not wheels, or not only wheels.
+# A bushing is a hub insert for aluminium wheels, a small fitting like the shaft
+# stopper above. 15504's tire is a ハードスリック, which the タイヤ regex cannot see.
+'10306': { category: spacer } # AO-1035 ミニ四駆ホイールブッシュ(白/8個)
+'94774': { category: spacer } # AO-1020 ミニ四駆アルミホイール用ブッシュ(黒8個入り)
+'15504': { category: wheel-tire-set } # スーパーX・XX大径5本スポークホイール&ハードスリック(レッド)

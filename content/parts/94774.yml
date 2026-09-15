@@ -9,11 +9,10 @@ nameSources:
   zh-HK: tamiya.hk
 series: ao
 seriesLabel: ミニ四駆用AOパーツ
-category: wheel
-categorySource: derived
+category: spacer
+categorySource: override
 slots:
-  - wheel-front
-  - wheel-rear
+  - fastener
 isCarPart: true
 chassisCompat:
   include: []

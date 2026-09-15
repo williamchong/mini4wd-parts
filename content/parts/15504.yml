@@ -8,11 +8,13 @@ nameSources:
 series: gup
 gupNumber: 504
 seriesLabel: ミニ四駆グレードアップパーツ
-category: wheel
-categorySource: derived
+category: wheel-tire-set
+categorySource: override
 slots:
   - wheel-front
   - wheel-rear
+  - tire-front
+  - tire-rear
 isCarPart: true
 chassisCompat:
   include: []
