@@ -249,3 +249,21 @@ test('a wheel or tire row can copy the other end only when that changes it', () 
   // Only wheels and tires have a counterpart.
   assert.equal(counterpartParts(wheel('motor', []), [front], parts), undefined)
 })
+
+test('a part maps to every slot id it fits, in the chassis\' order', () => {
+  const brake = part({ id: '15512', slots: ['brake', 'motor'] })
+  // `motor` comes first on the chassis, so the answer is not the part's order.
+  assert.deepEqual(slotIdsFor(brake, chassis), ['motor', 'brake'])
+})
+
+test('a part that does not go on this chassis maps to no slot at all', () => {
+  const single = part({ id: '15486', slots: ['motor'], specs: { motorShaft: 'single' } })
+  assert.deepEqual(slotIdsFor(single, chassis), [])
+  const foreign = part({
+    id: '15487',
+    slots: ['brake'],
+    chassisCompat: { include: ['vz'], other: [], source: 'scraped' }
+  })
+  assert.deepEqual(slotIdsFor(foreign, chassis), [])
+  assert.deepEqual(slotIdsFor(part({ id: '15488', slots: ['damper'] }), chassis), [])
+})

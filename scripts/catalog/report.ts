@@ -1,5 +1,6 @@
-import { readYamlDir, readYamlFileIfPresent } from './io.ts'
+import { readJsonFile, readYamlDir, readYamlFileIfPresent } from './io.ts'
 import { list, section } from './print.ts'
+import type { FandomPart } from './sources/fandom.ts'
 import type { Kit, LabelNames, Part, PartOverride } from '../../shared/catalog/schema.ts'
 import { hasTraditionalChineseName } from '../../shared/catalog/names.ts'
 
@@ -12,6 +13,7 @@ import { hasTraditionalChineseName } from '../../shared/catalog/names.ts'
 const parts = readYamlDir<Part>('content/parts').map(file => file.data)
 const kits = readYamlDir<Kit>('content/kits').map(file => file.data)
 const overrides = readYamlFileIfPresent<Record<string, PartOverride>>('data/overrides/parts.yml', {})
+const wiki = readJsonFile<FandomPart[]>('data/raw/fandom-parts.json')
 
 function tally<T>(items: T[], key: (item: T) => string) {
   const counts = new Map<string, number>()
@@ -65,6 +67,25 @@ const ids = new Set(parts.map(part => part.id))
 list('  Override entries matching no selected item',
   Object.keys(overrides).filter(id => !ids.has(id)))
 
+/**
+ * A part with no wiki article is not a gap — the wiki covers the Grade-Up Parts
+ * range and barely touches AO spares. An item *two* articles both claim is one:
+ * `generate.ts` keeps the first, which makes file order decide an attribution
+ * link, so the pick is printed rather than left silent.
+ */
+const claims = new Map<string, string[]>()
+for (const article of wiki) {
+  for (const item of article.items) {
+    if (!ids.has(item.id)) continue
+    const titles = claims.get(item.id) ?? []
+    if (!titles.includes(article.title)) titles.push(article.title)
+    claims.set(item.id, titles)
+  }
+}
+list('  Item numbers two wiki articles both claim (the first is kept)',
+  [...claims].filter(([, titles]) => titles.length > 1)
+    .map(([id, titles]) => `${id} ${titles.join(' / ')}`))
+
 section('Coverage')
 const partPercent = (n: number) => percent(n, parts.length)
 console.log(`  Traditional Chinese names  ${partPercent(parts.filter(p => hasTraditionalChineseName(p.names)).length)}`)
@@ -72,6 +93,7 @@ console.log(`  HKD prices                 ${partPercent(parts.filter(p => p.pric
 console.log(`  Chassis compatibility      ${partPercent(parts.filter(p => p.chassisCompat.include.length > 0).length)}`)
 console.log(`  Categorised                ${partPercent(parts.filter(p => p.category !== 'other').length)}`)
 console.log(`  Thumbnails                 ${partPercent(parts.filter(p => p.thumbnail).length)}`)
+console.log(`  Fandom articles            ${partPercent(parts.filter(p => p.fandomTitle).length)}`)
 
 section('Kits')
 console.log(`${kits.length} kits in content/kits`)

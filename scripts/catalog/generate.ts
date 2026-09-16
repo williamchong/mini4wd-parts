@@ -11,7 +11,7 @@ import { compact, deriveCategory, deriveLegality, deriveSlots, deriveSpecs, isPl
 import { labelFor, neutralLabel } from './labels.ts'
 import { GENRE_SERIES, KIT_GENRE_SERIES, type JpItem, type KitGenreCode, type PartGenreCode } from './sources/tamiya-jp.ts'
 import type { HkItem } from './sources/tamiya-hk.ts'
-import type { FandomKitVariant } from './sources/fandom.ts'
+import type { FandomKitVariant, FandomPart } from './sources/fandom.ts'
 
 /**
  * Stage 2 of the catalog pipeline: raw snapshots + hand-authored overrides ->
@@ -30,6 +30,7 @@ const jpKits = readJsonFile<JpItem<KitGenreCode>[]>('data/raw/tamiya-jp-kits.jso
 const compat = readJsonFile<Record<string, string[]>>('data/raw/tamiya-compat.json')
 const hkItems = readJsonFile<HkItem[]>('data/raw/tamiya-hk.json')
 const fandomKits = readJsonFile<FandomKitVariant[]>('data/raw/fandom-kits.json')
+const fandomParts = readJsonFile<FandomPart[]>('data/raw/fandom-parts.json')
 const overrides = readYamlFileIfPresent<Record<string, PartOverride>>('data/overrides/parts.yml', {})
 const kitOverrides = readYamlFileIfPresent<Record<string, KitOverride>>('data/overrides/kits.yml', {})
 const slotProfiles = readYamlFile<{ profiles: Record<string, unknown[]> }>('data/taxonomy/slots.yml').profiles
@@ -50,6 +51,12 @@ const thumbsByCollection = {
 const thumbnailFor = (collection: ThumbCollection, id: string) =>
   thumbsByCollection[collection].has(id) ? thumbnailPath(collection, id) : undefined
 
+/** The bigger copy, parts only, because only parts have a page of their own. */
+const detailThumbs = thumbnailIds('parts', 'detail')
+
+const detailThumbnailFor = (id: string) =>
+  detailThumbs.has(id) ? thumbnailPath('parts', id, 'detail') : undefined
+
 /**
  * Item number -> the wiki row describing that box. One row can cover several
  * item numbers (a re-release under a new number shares its spec table), so the
@@ -58,6 +65,23 @@ const thumbnailFor = (collection: ThumbCollection, id: string) =>
 const loadoutById = new Map<string, FandomKitVariant>()
 for (const variant of fandomKits) {
   for (const id of variant.ids) if (!loadoutById.has(id)) loadoutById.set(id, variant)
+}
+
+/**
+ * Item number -> the wiki article covering its product family, which a part
+ * page links to as the attribution for the variant list it shows beside it
+ * (docs/PLAN.md §6 M1b).
+ *
+ * First article wins, the same rule `crossref.ts` uses on the same file, so the
+ * two stages agree about which article describes an item. Two numbers are
+ * claimed twice today; `catalog:report` prints them rather than leaving the
+ * choice to file order alone.
+ */
+const fandomTitleById = new Map<string, string>()
+for (const article of fandomParts) {
+  for (const item of article.items) {
+    if (!fandomTitleById.has(item.id)) fandomTitleById.set(item.id, article.title)
+  }
 }
 
 /** Item numbers Tamiya lists on each chassis' compatibility page. */
@@ -143,7 +167,9 @@ function buildPart(item: JpItem<PartGenreCode>) {
     officialUrl: item.officialUrl,
     officialImage: item.imageUrl,
     thumbnail: thumbnailFor('parts', item.id),
+    detailThumbnail: detailThumbnailFor(item.id),
     hkStoreUrl: hk?.url,
+    fandomTitle: fandomTitleById.get(item.id),
     specsRaw: item.specsRaw,
     scrapedAt: item.scrapedAt
   }

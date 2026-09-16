@@ -81,3 +81,23 @@ export function specRowsFor(part: Pick<Part, 'specs'>, slotType?: Slot): SpecRow
   ]
   return rows.filter((row): row is SpecRow => row !== undefined)
 }
+
+/**
+ * Every spec worth showing for a part on its own page, where no slot is in
+ * question: the union of what each of its slot types asks for, in slot order,
+ * deduped. A wheel-and-tire set carries both the wheel row and the tire rows,
+ * and a reader looking at the part itself wants both — unlike the picker, which
+ * is always filling one particular slot.
+ *
+ * The slotless call is appended rather than special-cased, so weight is present
+ * even for a part that declares no slots at all.
+ */
+export function specRowsForPart(part: Pick<Part, 'specs' | 'slots'>): SpecRow[] {
+  const seen = new Set<string>()
+  return [...part.slots.flatMap(slot => specRowsFor(part, slot)), ...specRowsFor(part)]
+    .filter((row) => {
+      if (seen.has(row.key)) return false
+      seen.add(row.key)
+      return true
+    })
+}

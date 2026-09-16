@@ -2,7 +2,7 @@ import { existsSync } from 'node:fs'
 import type { TypeOf, ZodTypeAny } from 'zod'
 import { readYamlDir } from './io.ts'
 import { thumbnailFile } from './thumbnails.ts'
-import { thumbnailPath, type ThumbCollection } from '../../shared/catalog/thumbnails.ts'
+import { thumbnailPath, type ThumbCollection, type ThumbVariant } from '../../shared/catalog/thumbnails.ts'
 import { partSchema, chassisSchema, kitSchema } from '../../shared/catalog/schema.ts'
 import type { Chassis, Loadout, Slot } from '../../shared/catalog/schema.ts'
 
@@ -76,18 +76,26 @@ function checkLoadout(label: string, entries: Loadout, host: Chassis) {
  * in content/ where nothing may be hand-edited. A broken picture would
  * otherwise only show up in a browser.
  */
-function checkThumbnail(collection: ThumbCollection, id: string, thumbnail?: string) {
+function checkThumbnail(
+  collection: ThumbCollection,
+  id: string,
+  thumbnail?: string,
+  variant: ThumbVariant = 'row'
+) {
   if (!thumbnail) return
-  const expected = thumbnailPath(collection, id)
+  const expected = thumbnailPath(collection, id, variant)
   if (thumbnail !== expected) {
     errors.push(`${collection}/${id}: thumbnail is "${thumbnail}", expected "${expected}"`)
   }
-  else if (!existsSync(thumbnailFile(collection, id))) {
+  else if (!existsSync(thumbnailFile(collection, id, variant))) {
     errors.push(`${collection}/${id}: thumbnail ${thumbnail} does not exist — run npm run catalog:thumbs`)
   }
 }
 
-for (const part of parts) checkThumbnail('parts', part.id, part.thumbnail)
+for (const part of parts) {
+  checkThumbnail('parts', part.id, part.thumbnail)
+  checkThumbnail('parts', part.id, part.detailThumbnail, 'detail')
+}
 
 const chassisById = new Map(chassis.map(entry => [entry.id, entry]))
 

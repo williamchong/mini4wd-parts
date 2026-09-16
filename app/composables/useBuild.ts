@@ -13,6 +13,18 @@ export function useBuild() {
   const build = useState<BuildState | null>('build', () => null)
   const buildClass = useState<BuildClass>('build-class', () => 'open')
 
+  /**
+   * An item number the reader asked for from a part page, waiting for the
+   * builder to place it (docs/PLAN.md §6 M1b).
+   *
+   * It lives here rather than on the part page because the part page navigates
+   * away immediately: the handoff has to survive that, and the builder is the
+   * only screen holding the chassis, the slot profile and the whole catalog —
+   * everything the question "which slot does this go in?" needs. The builder
+   * clears it once it has placed the part or decided it cannot.
+   */
+  const pending = useState<string | null>('pending-part', () => null)
+
   function start(chassis: ChassisId, kit?: string) {
     build.value = newBuild(chassis, kit)
   }
@@ -32,5 +44,5 @@ export function useBuild() {
     build.value = { ...build.value, swaps }
   }
 
-  return { build, buildClass, start, swap, revert }
+  return { build, buildClass, pending, start, swap, revert }
 }

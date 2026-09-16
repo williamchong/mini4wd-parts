@@ -257,7 +257,28 @@ export const partSchema = z.object({
   officialUrl: z.string(),
   officialImage: z.string().optional(),
   thumbnail: z.string().optional(),
+  /**
+   * The 320x240 copy of the same photo, which only a part page renders — a row
+   * thumbnail leading a detail page is a postage stamp. Absent where Tamiya's
+   * own photo was too small to make one without enlarging it, and the page
+   * falls back to `thumbnail` (scripts/catalog/thumbs.ts).
+   */
+  detailThumbnail: z.string().optional(),
   hkStoreUrl: z.string().optional(),
+  /**
+   * The Mini 4WD Fandom article covering this part's product family, e.g.
+   * "Aluminum Ball-Race Roller" for all thirteen of its colours. The title, not
+   * the URL: `fandomArticleUrl` in ./kits.ts builds the link, and a stored URL
+   * would be the same string with 38 bytes of prefix on every record.
+   *
+   * The only field any part takes from `data/raw/fandom-parts.json`, which is
+   * otherwise a cross-check the catalog never imports (scripts/catalog/
+   * crossref.ts). It earns the exception the same way a kit's
+   * `loadoutSourceTitle` does: the link *is* the CC-BY-SA attribution, and no
+   * other source groups item numbers into families at all. Present on 121 of
+   * 382 parts — the wiki covers Grade-Up Parts, not the AO spares range.
+   */
+  fandomTitle: z.string().optional(),
 
   /** Free-text 【基本スペック】 from Tamiya, kept for later spec parsing. */
   specsRaw: z.string().optional(),

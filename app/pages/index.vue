@@ -12,7 +12,7 @@
  * model is tested without a browser and this file stays about presentation.
  */
 import {
-  counterpartParts, partsForSlot, resolveBuild, swappableSlotTypes
+  counterpartParts, partsForSlot, resolveBuild, slotIdsFor, swappableSlotTypes
 } from '#shared/catalog/build'
 import { orderKits } from '#shared/catalog/kits'
 import { flagThumbnail, thumbnailSrc } from '#shared/catalog/thumbnails'
@@ -25,7 +25,7 @@ definePageMeta({ layout: 'content' })
 const { t } = useI18n()
 const { resolve, isFallback } = useCatalogName()
 const { slotLabel } = useTerm()
-const { build, buildClass, start, swap, revert } = useBuild()
+const { build, buildClass, pending, start, swap, revert } = useBuild()
 
 /**
  * Only the columns the builder reads, because this route is prerendered and
@@ -187,7 +187,96 @@ const baseOpen = ref(false)
 function chooseBase(chassisId: ChassisId, kitId?: string) {
   start(chassisId, kitId)
   baseOpen.value = false
+  // A reader who arrived from a part page with nothing on the bench had to
+  // answer this question first; now their part can land.
+  placePending()
 }
+
+/**
+ * Closing the base picker without choosing one abandons an add-to-build
+ * handoff. Without this the item number would sit in state until the *next*
+ * base was chosen — pages and minutes later — and drop a part on the car that
+ * the reader had moved on from, announced by a notice they did not ask for.
+ */
+function closeBase() {
+  baseOpen.value = false
+  cancelPending()
+}
+
+/**
+ * The part a reader asked for on its own page, put on the car (`pending` in
+ * useBuild.ts). This screen is where that can be answered at all: the part page
+ * knows an item number, and which slot it goes in is a question about a
+ * chassis, a slot profile and the whole catalog, all of which live here.
+ *
+ * Three outcomes, and the reader is told about each: it goes somewhere, it
+ * could go to several places and they choose, or it fits nothing on this car.
+ */
+const notice = ref('')
+const pendingName = ref('')
+
+/**
+ * Held as ids and resolved against `slots`, for the same reason `openSlotId`
+ * below is: the rows these name already live in `slots`, and a snapshot of them
+ * would go stale the moment anything else changed the build.
+ */
+const pendingSlotIds = ref<string[]>([])
+
+const pendingSlots = computed(() =>
+  slots.value.filter(slot => pendingSlotIds.value.includes(slot.id)))
+
+function placePending() {
+  const id = pending.value
+  if (!id) return
+  const part = partsById.value.get(id)
+  // An item number this catalog does not ship as a buildable part — a link made
+  // against an older one — is dropped rather than carried around.
+  if (!part) {
+    pending.value = null
+    return
+  }
+  pendingName.value = resolve(part.names).value
+
+  if (!chassis.value) {
+    baseOpen.value = true
+    return
+  }
+
+  const ids = slotIdsFor(part, chassis.value)
+  if (!ids.length) {
+    notice.value = t('build.cannotAdd', { part: pendingName.value })
+    pending.value = null
+    return
+  }
+  if (ids.length > 1) {
+    pendingSlotIds.value = ids
+    return
+  }
+  place(ids[0]!)
+}
+
+function place(slotId: string) {
+  const id = pending.value
+  if (!id) return
+  swap(slotId, [id])
+  const slot = slots.value.find(s => s.id === slotId)
+  notice.value = t('build.added', {
+    part: pendingName.value,
+    slot: slot ? slotLabel(slot) : slotId
+  })
+  cancelPending()
+  // The row is often below the 3D pane, so the change would otherwise happen
+  // off screen. After the DOM has the swap, not before.
+  nextTick(() => document.getElementById(`slot-${slotId}`)
+    ?.scrollIntoView({ behavior: 'smooth', block: 'center' }))
+}
+
+function cancelPending() {
+  pending.value = null
+  pendingSlotIds.value = []
+}
+
+onMounted(placePending)
 
 /** Slot id -> what its front/rear counterpart would copy into it. */
 const copies = computed(() => new Map(hasBuild.value
@@ -306,6 +395,11 @@ useHead(() => ({ title: `${t('build.title')} — ${t('site.title')}` }))
       </button>
     </div>
 
+    <p v-if="notice" class="build-notice" aria-live="polite">
+      <span>{{ notice }}</span>
+      <button type="button" class="link" @click="notice = ''">{{ $t('build.dismiss') }}</button>
+    </p>
+
     <ul class="slot-list">
       <!-- What the car is built on. Once a kit is chosen it is the build's
            identity, but the chassis stays on screen: the slot profile comes
@@ -387,7 +481,15 @@ useHead(() => ({ title: `${t('build.title')} — ${t('site.title')}` }))
       :kits="catalog?.kits ?? []"
       :chassis="catalog?.chassis ?? []"
       @select="chooseBase"
-      @close="baseOpen = false"
+      @close="closeBase"
+    />
+
+    <LazyBuildSlotPicker
+      v-if="pendingSlots.length"
+      :slots="pendingSlots"
+      :part-name="pendingName"
+      @select="place"
+      @close="cancelPending"
     />
 
     <LazyBuildPartPicker

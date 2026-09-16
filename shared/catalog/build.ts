@@ -220,12 +220,27 @@ export function isChassisCompatible(
     || part.chassisCompat.include.includes(chassisId)
 }
 
-/** The slot ids on this chassis whose type a part is allowed to occupy. */
-export function slotIdsFor(
-  part: Pick<Part, 'slots'>,
-  chassis: Pick<Chassis, 'slots'>
-): string[] {
-  return chassis.slots.filter(slot => part.slots.includes(slot.type)).map(slot => slot.id)
+/**
+ * The slot ids on this chassis a part can occupy — its type matches the socket
+ * *and* it physically goes on this chassis (`fits`, below).
+ *
+ * The part page's add-to-build button is what needs this in the UI
+ * (docs/PLAN.md §6 M1b): it knows a part and nothing about a chassis, so the
+ * question "which slot?" can only be answered once the reader is back on a
+ * build. Slot **ids**, because that is what a swap is keyed by, and the
+ * chassis' own order, because front before rear before side is how the build
+ * list already reads — not "emptiest first", which would send a beginner's
+ * first pair of rollers to the side stay.
+ *
+ * Empty means the part goes nowhere on this car, and the three reasons are
+ * deliberately not distinguished: a chassis Tamiya does not list it for, a
+ * single-shaft motor on a PRO chassis, and a propeller shaft on a chassis that
+ * has none all leave the reader with the same one thing to do.
+ */
+export function slotIdsFor(part: BuildablePart, chassis: BuildableChassis): string[] {
+  return chassis.slots
+    .filter(slot => part.slots.includes(slot.type) && fits(part, slot.type, chassis))
+    .map(slot => slot.id)
 }
 
 /**

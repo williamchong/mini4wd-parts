@@ -1,10 +1,12 @@
 import { fetchJson, progress } from '../fetch.ts'
 
 /**
- * Mini 4WD Fandom wiki (CC-BY-SA). We take nothing from it into content/ — it
- * is a second opinion used to audit our own derivation, because our categories
- * come from ordered substring rules over Japanese product names and that design
- * has exactly one failure mode: a short keyword swallowing a longer word.
+ * Mini 4WD Fandom wiki (CC-BY-SA). Mainly a second opinion used to audit our
+ * own derivation, because our categories come from ordered substring rules over
+ * Japanese product names and that design has exactly one failure mode: a short
+ * keyword swallowing a longer word. The one thing content/parts imports from it
+ * is each article's *title*, as `fandomTitle` — the link a part page attributes
+ * its variant list to (docs/PLAN.md §6 M1b). No wiki text is taken.
  *
  * The useful property is the shape of `Infobox Grade-Up Parts`: one article
  * covers a whole product family, so 93 articles carry ~470 item numbers, each

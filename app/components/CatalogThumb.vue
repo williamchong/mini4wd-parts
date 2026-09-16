@@ -7,9 +7,25 @@
  * path — but the fallback stays anyway. It is what makes honouring a takedown a
  * matter of deleting a directory: without the photos every row still reads.
  */
+import { THUMB_SIZES } from '#shared/catalog/thumbnails'
+import type { ThumbVariant } from '#shared/catalog/thumbnails'
 import type { IconName } from '~/utils/icons'
 
-const props = defineProps<{ src?: string, icon: IconName }>()
+const props = withDefaults(defineProps<{
+  src?: string
+  icon: IconName
+  /**
+   * Which of the two generated sizes `src` names. It sets the intrinsic size
+   * the browser reserves — attributes that claimed 160x120 for a 320x240 file
+   * would misdescribe it the day the two stop sharing a 4:3 box — and a detail
+   * copy is by definition the one picture its page leads with, so it also loads
+   * eagerly rather than behind everything else on the route.
+   */
+  variant?: ThumbVariant
+}>(), { src: undefined, variant: 'row' })
+
+const size = computed(() => THUMB_SIZES[props.variant])
+const eager = computed(() => props.variant === 'detail')
 
 const broken = ref(false)
 const image = useTemplateRef<HTMLImageElement>('image')
@@ -38,10 +54,11 @@ onMounted(() => {
     class="catalog-thumb"
     :src="src"
     alt=""
-    loading="lazy"
+    :loading="eager ? 'eager' : 'lazy'"
+    :fetchpriority="eager ? 'high' : undefined"
     decoding="async"
-    width="160"
-    height="120"
+    :width="size.width"
+    :height="size.height"
     @error="broken = true"
   >
   <span v-else class="catalog-thumb is-icon">

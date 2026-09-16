@@ -89,7 +89,97 @@
       "side-stay": "Side stay",
       "brake": "Brake",
       "damper": "Damper",
-      "fastener": "Fasteners"
+      "fastener": "Fasteners",
+      "gear": "Gear",
+      "shaft": "Axle"
+    },
+    "pickSlot": "Where does {part} go?",
+    "added": "{part} is now in the {slot} slot",
+    "cannotAdd": "{part} does not fit this chassis",
+    "replaces": "Replaces what is fitted",
+    "dismiss": "Dismiss",
+    "details": "Details"
+  },
+  "part": {
+    "addToBuild": "Add to build",
+    "notFound": "No such part",
+    "description": "{name} ({id}) — Mini 4WD {category} part. {chassis}.",
+    "gupNumber": "No.{number}",
+    "specs": "Specifications",
+    "compat": "Fits these chassis",
+    "compatAll": "Fits any chassis",
+    "fits": "Fits {list}",
+    "compatOther": "TAMIYA also lists: {list} (outside this site's v1 scope)",
+    "slots": "Goes in",
+    "classes": "Race classes",
+    "otherNames": "Names in other languages",
+    "links": "Links",
+    "official": "TAMIYA product page",
+    "hkStore": "tamiya.hk product page",
+    "wiki": "Mini 4WD Fandom Wiki: {title}",
+    "wikiCredit": "The variant list and its article link come from the Mini 4WD Fandom Wiki, used under",
+    "variants": "Other versions of this part",
+    "related": "Similar parts",
+    "series": {
+      "gup": "Grade-Up Part",
+      "ao": "AO spare",
+      "special": "Special edition",
+      "limited": "Limited edition",
+      "station": "Mini 4WD Station exclusive",
+      "other": "Other"
+    },
+    "status": {
+      "limited": "Limited"
+    },
+    "class": {
+      "open": "Open",
+      "stockBmax": "Stock Class / B-MAX",
+      "junior": "Junior"
+    },
+    "legality": {
+      "legal": "Legal",
+      "illegal": "Not legal",
+      "unknown": "Not checked"
+    },
+    "localeName": {
+      "ja": "Japanese",
+      "en": "English",
+      "zh-HK": "Chinese (Hong Kong)",
+      "zh-TW": "Chinese (Taiwan)"
+    },
+    "category": {
+      "roller": "roller",
+      "plate": "reinforcing plate",
+      "bumper": "bumper",
+      "brake": "brake",
+      "mass-damper": "mass damper",
+      "slide-damper": "slide damper",
+      "stabilizer": "stabilizer",
+      "bearing": "bearing",
+      "gear": "gear",
+      "gear-cover": "gear cover",
+      "shaft": "axle",
+      "propeller-shaft": "propeller shaft",
+      "wheel": "wheel",
+      "tire": "tire",
+      "wheel-tire-set": "wheel and tire set",
+      "motor": "motor",
+      "motor-mount": "motor mount",
+      "terminal": "terminal",
+      "switch": "switch",
+      "battery": "battery",
+      "battery-holder": "battery holder",
+      "spacer": "spacer",
+      "screw": "screw",
+      "body-catch": "body catch",
+      "body": "body",
+      "chassis-set": "chassis set",
+      "sticker": "sticker",
+      "setting-tool": "setting tool",
+      "tool": "tool",
+      "bundle": "bundle",
+      "accessory": "accessory",
+      "other": "other"
     }
   },
   "spec": {

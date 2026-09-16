@@ -89,7 +89,97 @@
       "side-stay": "側支架",
       "brake": "剎車",
       "damper": "制震器",
-      "fastener": "螺絲配件"
+      "fastener": "螺絲配件",
+      "gear": "齒輪",
+      "shaft": "車軸"
+    },
+    "pickSlot": "「{part}」要裝在哪裡？",
+    "added": "已把「{part}」裝上{slot}",
+    "cannotAdd": "「{part}」不適用於目前的底盤",
+    "replaces": "會取代現有零件",
+    "dismiss": "關閉提示",
+    "details": "詳細資料"
+  },
+  "part": {
+    "addToBuild": "加入組車清單",
+    "notFound": "找不到這個零件",
+    "description": "{name}（{id}）：迷你四驅{category}零件，{chassis}。",
+    "gupNumber": "No.{number}",
+    "specs": "規格",
+    "compat": "適用底盤",
+    "compatAll": "不限底盤（通用零件）",
+    "fits": "適用 {list}",
+    "compatOther": "田宮另有標示：{list}（不在本站 v1 範圍）",
+    "slots": "可安裝位置",
+    "classes": "賽制",
+    "otherNames": "其他語言名稱",
+    "links": "相關連結",
+    "official": "田宮官方產品頁",
+    "hkStore": "tamiya.hk 產品頁",
+    "wiki": "Mini 4WD Fandom Wiki：{title}",
+    "wikiCredit": "同款版本列表及條目連結取自 Mini 4WD Fandom Wiki，以",
+    "variants": "同款其他版本",
+    "related": "同類零件",
+    "series": {
+      "gup": "改裝零件 GUP",
+      "ao": "AO 補充零件",
+      "special": "特別企畫",
+      "limited": "限定商品",
+      "station": "四驅站限定",
+      "other": "其他"
+    },
+    "status": {
+      "limited": "限定版"
+    },
+    "class": {
+      "open": "公開組 Open",
+      "stockBmax": "基礎賽／B-MAX",
+      "junior": "少年組"
+    },
+    "legality": {
+      "legal": "可用",
+      "illegal": "不可用",
+      "unknown": "未確認"
+    },
+    "localeName": {
+      "ja": "日文",
+      "en": "英文",
+      "zh-HK": "繁體中文（香港）",
+      "zh-TW": "繁體中文（台灣）"
+    },
+    "category": {
+      "roller": "導輪",
+      "plate": "強化板",
+      "bumper": "保險桿",
+      "brake": "剎車",
+      "mass-damper": "配重制震器",
+      "slide-damper": "滑動制震器",
+      "stabilizer": "穩定桿",
+      "bearing": "軸承",
+      "gear": "齒輪",
+      "gear-cover": "齒輪蓋",
+      "shaft": "車軸",
+      "propeller-shaft": "傳動軸",
+      "wheel": "輪框",
+      "tire": "輪胎",
+      "wheel-tire-set": "輪框輪胎組",
+      "motor": "馬達",
+      "motor-mount": "馬達座",
+      "terminal": "電池金屬片",
+      "switch": "電源開關",
+      "battery": "電池",
+      "battery-holder": "電池座",
+      "spacer": "墊片",
+      "screw": "螺絲",
+      "body-catch": "車殼扣",
+      "body": "車殼",
+      "chassis-set": "底盤套件",
+      "sticker": "貼紙",
+      "setting-tool": "調校工具",
+      "tool": "工具",
+      "bundle": "套裝",
+      "accessory": "配件",
+      "other": "其他"
     }
   },
   "spec": {

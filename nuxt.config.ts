@@ -1,5 +1,19 @@
+import { readdirSync } from 'node:fs'
+
 const SITE_URL = 'https://mini4wd.parts'
 const GA_MEASUREMENT_ID = 'G-GJ34BG7E3W'
+
+/**
+ * Every part page, read from the generated catalog rather than crawled.
+ *
+ * `crawlLinks` would reach most of them through the variant and related-part
+ * links, but only most: a part whose family has no other member is linked from
+ * nothing until `/parts` becomes a real browse index (docs/PLAN.md §6 M1b).
+ * The filenames are the item numbers, so this needs no YAML parsed.
+ */
+const partRoutes = readdirSync(new URL('content/parts', import.meta.url))
+  .filter(name => name.endsWith('.yml'))
+  .map(name => `/parts/${name.slice(0, -'.yml'.length)}`)
 
 export default defineNuxtConfig({
   compatibilityDate: '2026-09-08',
@@ -26,6 +40,14 @@ export default defineNuxtConfig({
     baseUrl: SITE_URL
   },
 
+  runtimeConfig: {
+    public: {
+      // The head needs absolute URLs — og:image and the JSON-LD `url` — and
+      // there is no request to derive an origin from in a prerendered page.
+      siteUrl: SITE_URL
+    }
+  },
+
   experimental: {
     // Nothing here depends on route rules, and it saves a request per page.
     appManifest: false
@@ -41,7 +63,9 @@ export default defineNuxtConfig({
       crawlLinks: true,
       routes: [
         '/', '/about', '/guides', '/parts', '/build',
-        '/en', '/en/about', '/en/guides', '/en/parts', '/en/build'
+        '/en', '/en/about', '/en/guides', '/en/parts', '/en/build',
+        ...partRoutes,
+        ...partRoutes.map(route => `/en${route}`)
       ]
     }
   },

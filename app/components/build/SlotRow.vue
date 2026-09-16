@@ -21,6 +21,7 @@ const emit = defineEmits<{ open: []; revert: []; copy: [] }>()
 
 const { label: resolveLabel } = useCatalogName()
 const { slotLabel } = useTerm()
+const localePath = useLocalePath()
 
 // Regional wording applies to slot names too, so 摩打 / 馬達 follows the
 // toggle rather than being frozen into the message file.
@@ -49,6 +50,10 @@ const rows = computed(() => props.slot.entries.map((entry) => {
   return {
     text: hit?.value ?? (entry.label ? label.value : entry.partId ?? ''),
     fallback: hit?.fallback ?? false,
+    // Only a catalog part has a page. The moulded-in-the-box entries are the
+    // majority and link nowhere, which is why this is a row of text with some
+    // links in it rather than a row of links.
+    partId: entry.partId,
     // Only a catalog part has a photo. Everything else in a stock build is
     // molded into the kit, so the slot's own glyph is all there can be.
     thumbnail: thumbnailSrc('parts', part)
@@ -57,7 +62,9 @@ const rows = computed(() => props.slot.entries.map((entry) => {
 </script>
 
 <template>
-  <li class="slot-row" :class="{ swapped: slot.swapped }">
+  <!-- Addressable so a part added from its own page can scroll its row into
+       view (`place` in pages/index.vue). -->
+  <li :id="`slot-${slot.id}`" class="slot-row" :class="{ swapped: slot.swapped }">
     <div class="slot-label">{{ label }}</div>
 
     <div class="slot-entries">
@@ -72,7 +79,8 @@ const rows = computed(() => props.slot.entries.map((entry) => {
         :class="{ fallback: row.fallback }"
       >
         <CatalogThumb class="entry-thumb" :src="row.thumbnail" :icon="slot.type" />
-        <span>{{ row.text }}</span>
+        <NuxtLink v-if="row.partId" :to="localePath(`/parts/${row.partId}`)">{{ row.text }}</NuxtLink>
+        <span v-else>{{ row.text }}</span>
       </p>
     </div>
 

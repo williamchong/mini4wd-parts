@@ -700,3 +700,170 @@ button.link {
     grid-column: 1 / -1;
   }
 }
+
+/* Part page */
+
+/* The photo is the one picture the reader came for, so it leads at its real
+   size — 320x240, the detail copy (shared/catalog/thumbnails.ts) — and drops
+   above the text on a phone rather than shrinking to a picker thumbnail. */
+.part-hero {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  align-items: flex-start;
+  margin-bottom: 1.5rem;
+}
+
+.part-photo {
+  width: 320px;
+  max-width: 100%;
+}
+
+.part-hero-text {
+  flex: 1 1 16rem;
+}
+
+.part-hero-text h1 {
+  margin: 0.25rem 0 0.5rem;
+  font-size: 1.5rem;
+  line-height: 1.3;
+}
+
+.part-eyebrow,
+.part-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 0.75rem;
+  margin: 0;
+  font-size: 0.85em;
+  color: #555;
+}
+
+.part-facts {
+  margin: 0 0 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.part-section h2 {
+  font-size: 1.05rem;
+  border-bottom: 1px solid #e3e8ec;
+  padding-bottom: 0.3rem;
+}
+
+/* Two columns that stay aligned down the page: a label reads as a label even
+   where the value beside it is one word. */
+.part-table {
+  display: grid;
+  grid-template-columns: minmax(6rem, auto) 1fr;
+  gap: 0.35rem 1rem;
+  margin: 0.75rem 0;
+}
+
+.part-table dt {
+  color: #555;
+  font-size: 0.9em;
+}
+
+.part-table dd {
+  margin: 0;
+}
+
+.legality-illegal {
+  color: #b23c2e;
+}
+
+.legality-unknown {
+  opacity: 0.6;
+}
+
+.part-note {
+  margin: 0.5rem 0;
+  font-size: 0.85em;
+  color: #555;
+}
+
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.75rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chip {
+  padding: 0.3rem 0.7rem;
+  font-size: 0.85em;
+  background: #fff;
+  border: 1px solid #d8dee4;
+  border-radius: 999px;
+}
+
+.part-links {
+  margin: 0.75rem 0;
+  padding-left: 1.2rem;
+  line-height: 1.8;
+}
+
+/* Picture, name, number — the same three things a picker row shows, without
+   the specs, because these are links rather than a choice. */
+.part-link-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(11rem, 1fr));
+  gap: 0.75rem;
+  margin: 0.75rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.part-link-list a {
+  display: block;
+  padding: 0.5rem;
+  color: inherit;
+  text-decoration: none;
+  background: #fff;
+  border: 1px solid #e3e8ec;
+  border-radius: 6px;
+}
+
+.part-link-list a:hover {
+  border-color: #b9c4cd;
+}
+
+.part-link-name {
+  display: block;
+  margin: 0.4rem 0 0.1rem;
+  font-size: 0.9em;
+  line-height: 1.35;
+}
+
+/* Builder: what came back from a part page */
+
+.build-notice {
+  display: flex;
+  gap: 0.75rem;
+  align-items: baseline;
+  justify-content: space-between;
+  margin: 0 0 0.75rem;
+  padding: 0.6rem 0.8rem;
+  font-size: 0.9em;
+  background: #eef5ec;
+  border: 1px solid #cfe0ca;
+  border-radius: 4px;
+}
+
+/* The slot chooser reuses the part picker's shell; its rows are one line each,
+   so they get the padding the part card would otherwise bring. */
+.slot-picker .picker-list button {
+  display: flex;
+  gap: 0.75rem;
+  align-items: baseline;
+  justify-content: space-between;
+  padding: 0.7rem 0.5rem;
+}
+
+.picker-details {
+  display: inline-block;
+  padding: 0.2rem 0.5rem 0.6rem;
+  font-size: 0.85em;
+}

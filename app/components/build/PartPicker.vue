@@ -17,6 +17,7 @@ const props = defineProps<{
 
 const emit = defineEmits<{ select: [string]; close: [] }>()
 
+const localePath = useLocalePath()
 const query = ref('')
 
 // The rule this used to spell out inline now lives in `matchesQuery`, because
@@ -47,6 +48,12 @@ const matches = computed(() =>
           <button type="button" @click="emit('select', candidate.part.id)">
             <PartCard :part="candidate.part" :slot-type="slotType" />
           </button>
+          <!-- Beside the button, never inside it: an anchor nested in a button
+               is invalid, and the two do different things — one fills the slot,
+               one leaves the builder to read about the part. -->
+          <NuxtLink class="link picker-details" :to="localePath(`/parts/${candidate.part.id}`)">
+            {{ $t('build.details') }}
+          </NuxtLink>
         </li>
       </ul>
     </div>
