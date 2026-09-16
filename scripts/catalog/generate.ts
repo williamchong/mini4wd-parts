@@ -51,11 +51,14 @@ const thumbsByCollection = {
 const thumbnailFor = (collection: ThumbCollection, id: string) =>
   thumbsByCollection[collection].has(id) ? thumbnailPath(collection, id) : undefined
 
-/** The bigger copy, parts only, because only parts have a page of their own. */
-const detailThumbs = thumbnailIds('parts', 'detail')
+/** The bigger copy, for the collections whose records have a page of their own. */
+const detailThumbs = {
+  parts: thumbnailIds('parts', 'detail'),
+  chassis: thumbnailIds('chassis', 'detail')
+}
 
-const detailThumbnailFor = (id: string) =>
-  detailThumbs.has(id) ? thumbnailPath('parts', id, 'detail') : undefined
+const detailThumbnailFor = (collection: 'parts' | 'chassis', id: string) =>
+  detailThumbs[collection].has(id) ? thumbnailPath(collection, id, 'detail') : undefined
 
 /**
  * Item number -> the wiki row describing that box. One row can cover several
@@ -167,7 +170,7 @@ function buildPart(item: JpItem<PartGenreCode>) {
     officialUrl: item.officialUrl,
     officialImage: item.imageUrl,
     thumbnail: thumbnailFor('parts', item.id),
-    detailThumbnail: detailThumbnailFor(item.id),
+    detailThumbnail: detailThumbnailFor('parts', item.id),
     hkStoreUrl: hk?.url,
     fandomTitle: fandomTitleById.get(item.id),
     specsRaw: item.specsRaw,
@@ -382,6 +385,7 @@ for (const id of CHASSIS_IDS) {
     ...rest,
     slots: slotProfiles[slotProfile],
     thumbnail: thumbnailFor('chassis', id),
+    detailThumbnail: detailThumbnailFor('chassis', id),
     compatibleParts: (compat[id] ?? []).filter(itemId => selectedIds.has(itemId)).sort()
   }
   const result = chassisSchema.safeParse(record)

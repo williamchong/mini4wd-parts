@@ -77,3 +77,18 @@ const GLYPH_FOR: Record<IconName, Glyph> = {
 }
 
 export const glyphFor = (name: IconName) => GLYPHS[GLYPH_FOR[name]]
+
+/**
+ * The one glyph that stands for a *list* of parts: the slot type most of them
+ * fill. A browse page groups by category rather than by slot, so it has no
+ * single icon otherwise — and reading it off the parts themselves beats a
+ * hand-written category-to-icon table, which would be a fourth list to keep in
+ * step with the taxonomy, the naming rules and the locale files.
+ */
+export function commonestSlot(parts: { slots: Slot[] }[]): IconName {
+  const tally = new Map<Slot, number>()
+  for (const part of parts) {
+    for (const slot of part.slots) tally.set(slot, (tally.get(slot) ?? 0) + 1)
+  }
+  return [...tally].sort((a, b) => b[1] - a[1])[0]?.[0] ?? 'none'
+}

@@ -1,4 +1,6 @@
 import { z } from 'zod'
+import { CHASSIS_IDS } from './chassis.ts'
+import type { ChassisId } from './chassis.ts'
 
 /**
  * Catalog schemas, shared by `content.config.ts` (build-time validation of the
@@ -10,12 +12,10 @@ import { z } from 'zod'
  * scrape (3D models, wizard roles, own photos) are omitted rather than stubbed.
  */
 
-/** Chassis we model in v1. See docs/PLAN.md §2.2. */
-export const CHASSIS_IDS = [
-  'ma', 'ms', 'me', 'ar', 'fm-a', 'vz', 'super-2', 'vs'
-] as const
-
-export type ChassisId = (typeof CHASSIS_IDS)[number]
+// Re-exported so the schema stays the one import most callers need; the list
+// itself lives in ./chassis.ts, which page components can import without Zod.
+export { CHASSIS_IDS, byChassisOrder, isChassisId } from './chassis.ts'
+export type { ChassisId } from './chassis.ts'
 
 /**
  * Our chassis id -> Tamiya's `genre_item` code. Tamiya's codes are
@@ -342,6 +342,8 @@ export const chassisSchema = z.object({
    * so the only place Tamiya pictures one is the chassis select page.
    */
   thumbnail: z.string().optional(),
+  /** The 320x240 copy the chassis page leads with, as a part page does. */
+  detailThumbnail: z.string().optional(),
   slots: z.array(z.object({
     id: z.string(),
     type: z.enum(SLOTS),

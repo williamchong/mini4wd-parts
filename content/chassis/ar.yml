@@ -17,6 +17,7 @@ weightG: 123.5
 status: current
 notes: 第一款原廠六導輪底盤，電池位置低、車底密閉，不必拆車架即可更換馬達與電池，保養容易。
 thumbnail: /thumbs/chassis/ar.webp
+detailThumbnail: /thumbs/chassis-detail/ar.webp
 slots:
   - id: body
     type: body

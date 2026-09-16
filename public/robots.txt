@@ -1,0 +1,6 @@
+# A sitemap nothing points at is a sitemap only Search Console knows about, and
+# robots.txt is the one place a crawler looks for it without being told.
+User-agent: *
+Allow: /
+
+Sitemap: https://mini4wd.parts/sitemap.xml

@@ -106,6 +106,7 @@ for (const entry of chassis) {
   }
   checkLoadout(`chassis/${entry.id} defaultLoadout`, entry.defaultLoadout, entry)
   checkThumbnail('chassis', entry.id, entry.thumbnail)
+  checkThumbnail('chassis', entry.id, entry.detailThumbnail, 'detail')
 }
 
 const kitIds = new Set<string>()

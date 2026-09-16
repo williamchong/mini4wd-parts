@@ -87,6 +87,8 @@ const { data } = await useAsyncData(() => `part-${id.value}`, async () => {
     part,
     variants,
     related,
+    /** For the link out to the category page; the rows themselves stay at 8. */
+    categoryTotal: sameCategory.length,
     // Only the chassis this part actually fits, named. The other seven records
     // have no reason to be in 764 payloads.
     chassis: chassis.map(fromContent('chassis'))
@@ -204,6 +206,14 @@ useHead(() => ({
 
 <template>
   <article class="part-page">
+    <Breadcrumbs
+      :trail="[
+        { to: '/parts', label: $t('nav.parts') },
+        { to: `/parts/category/${part.category}`, label: category },
+        { label: name }
+      ]"
+    />
+
     <header class="part-hero">
       <CatalogThumb
         class="part-photo"
@@ -255,8 +265,10 @@ useHead(() => ({
         {{ $t('part.compatAll') }}
       </p>
       <ul v-else class="chip-row">
-        <li v-for="entry in data!.chassis" :key="entry.id" class="chip">
-          {{ resolve(entry.names).value }}
+        <li v-for="entry in data!.chassis" :key="entry.id">
+          <NuxtLink class="chip" :to="localePath(`/chassis/${entry.id}`)">
+            {{ resolve(entry.names).value }}
+          </NuxtLink>
         </li>
       </ul>
       <p v-if="part.chassisCompat.other.length" class="part-note">
@@ -313,7 +325,12 @@ useHead(() => ({
     </section>
 
     <section v-if="data!.related.length" class="part-section">
-      <h2>{{ $t('part.related') }}</h2>
+      <h2 class="part-section-head">
+        <span>{{ $t('part.related') }}</span>
+        <NuxtLink :to="localePath(`/parts/category/${part.category}`)">
+          {{ $t('part.seeAllInCategory', { count: data!.categoryTotal }) }}
+        </NuxtLink>
+      </h2>
       <PartLinkList :parts="data!.related" :icon="icon" />
     </section>
 

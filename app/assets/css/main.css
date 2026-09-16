@@ -867,3 +867,131 @@ button.link {
   padding: 0.2rem 0.5rem 0.6rem;
   font-size: 0.85em;
 }
+
+/* ---------------------------------------------------------- breadcrumbs */
+
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin: 0 0 1rem;
+  padding: 0;
+  font-size: 0.85em;
+  color: #555;
+  list-style: none;
+}
+
+.breadcrumbs li + li::before {
+  content: '›';
+  margin-inline-end: 0.35rem;
+  opacity: 0.5;
+}
+
+.breadcrumbs a {
+  color: inherit;
+}
+
+.breadcrumbs [aria-current='page'] {
+  color: #333;
+  font-weight: 600;
+}
+
+/* --------------------------------------------------------------- browse */
+
+.browse-intro {
+  margin: 0.25rem 0 1.5rem;
+  color: #444;
+  line-height: 1.6;
+}
+
+/* Narrower boxes than .part-link-list: a category card is a glyph and two
+   short lines, with no photo to give a row its width. */
+.category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(9rem, 1fr));
+  gap: 0.75rem;
+  margin: 1rem 0;
+  padding: 0;
+  list-style: none;
+}
+
+.category-grid a {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  align-items: flex-start;
+  /* A two-line label must not leave the cards beside it short of the row. */
+  height: 100%;
+  box-sizing: border-box;
+  padding: 0.7rem 0.8rem;
+  color: inherit;
+  text-decoration: none;
+  background: #fff;
+  border: 1px solid #e3e8ec;
+  border-radius: 6px;
+}
+
+.category-grid a:hover {
+  border-color: #b9c4cd;
+}
+
+/* The glyph sizes itself to its box everywhere else, and here there is no box. */
+.category-grid .slot-icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: #55606b;
+}
+
+/* Everything else about it is .chip-count, which it is worn beside. */
+.category-count {
+  font-size: 0.8em;
+}
+
+.browse-filter-label {
+  margin: 1.5rem 0 0;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+/* A heading that also links out — "same category" with "see all 49" beside it. */
+.part-section-head {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.part-section-head a {
+  font-size: 0.8rem;
+  font-weight: normal;
+}
+
+/* A chip that goes somewhere, beside the chips that only state a fact. */
+a.chip {
+  display: inline-flex;
+  gap: 0.35rem;
+  align-items: baseline;
+  color: inherit;
+  text-decoration: none;
+}
+
+a.chip:hover {
+  border-color: #b9c4cd;
+}
+
+/* -------------------------------------------------------- chassis page */
+
+.chassis-notes {
+  margin: 0.75rem 0 0;
+  color: #444;
+  line-height: 1.6;
+}
+
+/* A slot can hold more than one thing, so its value is a list even where it
+   almost always has one entry. */
+.loadout-entries {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}

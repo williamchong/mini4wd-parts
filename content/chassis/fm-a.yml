@@ -17,6 +17,7 @@ weightG: 117
 status: current
 notes: 前置馬達（Front Midship Aero），重心偏前，在高低起伏的立體賽道上較穩定，底部有防撞滑條。
 thumbnail: /thumbs/chassis/fm-a.webp
+detailThumbnail: /thumbs/chassis-detail/fm-a.webp
 slots:
   - id: body
     type: body

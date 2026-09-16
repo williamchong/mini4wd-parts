@@ -7,6 +7,7 @@
     "home": "首頁",
     "guides": "指南",
     "parts": "零件",
+    "chassis": "底盤",
     "about": "關於"
   },
   "error": {
@@ -109,7 +110,7 @@
     "compat": "適用底盤",
     "compatAll": "不限底盤（通用零件）",
     "fits": "適用 {list}",
-    "compatOther": "田宮另有標示：{list}（不在本站 v1 範圍）",
+    "compatOther": "田宮另有標示：{list}（本站未收錄）",
     "slots": "可安裝位置",
     "classes": "賽制",
     "otherNames": "其他語言名稱",
@@ -180,7 +181,8 @@
       "bundle": "套裝",
       "accessory": "配件",
       "other": "其他"
-    }
+    },
+    "seeAllInCategory": "查看全部 {count} 件"
   },
   "spec": {
     "rollerDiameter": "直徑",
@@ -210,16 +212,68 @@
       "carbon": "碳纖維",
       "aluminium": "鋁",
       "other": "其他"
-    }
+    },
+    "wheelbase": "軸距",
+    "tread": "輪距",
+    "motorPosition": "摩打位置",
+    "releaseYear": "推出年份",
+    "family": "系列",
+    "status": "狀態"
   },
   "terms": {
     "hk": {
       "motor": "摩打",
-      "brake": "剎車"
+      "brake": "剎車",
+      "motor-mount": "摩打座"
     },
     "tw": {
       "motor": "馬達",
-      "brake": "煞車"
+      "brake": "煞車",
+      "motor-mount": "馬達座"
+    }
+  },
+  "breadcrumb": {
+    "label": "頁面階層"
+  },
+  "browse": {
+    "parts": {
+      "title": "零件分類",
+      "intro": "本站收錄 {count} 件田宮迷你四驅零件，依用途分為 {categories} 類。挑一類開始看，或直接回首頁組車。",
+      "description": "田宮迷你四驅零件分類總覽：{count} 件零件、{categories} 個分類，每類可按適用底盤篩選。",
+      "count": "{count} 件"
+    },
+    "category": {
+      "notFound": "找不到這個分類",
+      "count": "{count} 件零件",
+      "description": "田宮迷你四驅{category}一覽，共 {count} 件，可按適用底盤篩選，並連到各零件的規格與賽制資訊。",
+      "filter": "按底盤篩選",
+      "none": "沒有標示適用這款底盤的零件。"
+    }
+  },
+  "chassis": {
+    "title": "底盤",
+    "intro": "底盤決定摩打位置、齒輪配置，以及哪些零件裝得上。以下是 {count} 款現行及常見底盤。",
+    "description": "迷你四驅底盤一覽：{count} 款底盤的規格、標準配置、採用的套件與適用零件。",
+    "notFound": "找不到這款底盤",
+    "specs": "規格",
+    "slots": "可安裝位置",
+    "defaultLoadout": "淨底盤標準配置",
+    "loadoutNote": "淨底盤（不含車殼）出廠時各位置的配件。",
+    "kits": "採用此底盤的套件",
+    "kitsNote": "點任何一款即可用它開始組車。",
+    "kitsCount": "{count} 款套件",
+    "compatParts": "適用零件",
+    "compatNote": "田宮為此底盤標示 {count} 件適用零件，依分類如下。",
+    "maxCount": "最多 {count}",
+    "pageDescription": "{name}：{motor}，{year} 年推出。規格、標準配置、採用此底盤的 {kits} 款套件與適用零件。",
+    "family": {
+      "pro": "PRO 系列（雙軸摩打）",
+      "standard": "標準系列（單軸摩打）"
+    },
+    "status": {
+      "current": "現行",
+      "rerelease": "再版",
+      "discontinued": "已停產"
     }
   }
 }

@@ -7,6 +7,7 @@
     "home": "Home",
     "guides": "Guides",
     "parts": "Parts",
+    "chassis": "Chassis",
     "about": "About"
   },
   "error": {
@@ -103,13 +104,13 @@
   "part": {
     "addToBuild": "Add to build",
     "notFound": "No such part",
-    "description": "{name} ({id}) — Mini 4WD {category} part. {chassis}.",
+    "description": "{name} ({id}) — Tamiya Mini 4WD {category}. {chassis}.",
     "gupNumber": "No.{number}",
     "specs": "Specifications",
     "compat": "Fits these chassis",
     "compatAll": "Fits any chassis",
     "fits": "Fits {list}",
-    "compatOther": "TAMIYA also lists: {list} (outside this site's v1 scope)",
+    "compatOther": "TAMIYA also lists: {list} (not covered by this site)",
     "slots": "Goes in",
     "classes": "Race classes",
     "otherNames": "Names in other languages",
@@ -148,39 +149,40 @@
       "zh-TW": "Chinese (Taiwan)"
     },
     "category": {
-      "roller": "roller",
-      "plate": "reinforcing plate",
-      "bumper": "bumper",
-      "brake": "brake",
-      "mass-damper": "mass damper",
-      "slide-damper": "slide damper",
-      "stabilizer": "stabilizer",
-      "bearing": "bearing",
-      "gear": "gear",
-      "gear-cover": "gear cover",
-      "shaft": "axle",
-      "propeller-shaft": "propeller shaft",
-      "wheel": "wheel",
-      "tire": "tire",
-      "wheel-tire-set": "wheel and tire set",
-      "motor": "motor",
-      "motor-mount": "motor mount",
-      "terminal": "terminal",
-      "switch": "switch",
-      "battery": "battery",
-      "battery-holder": "battery holder",
-      "spacer": "spacer",
-      "screw": "screw",
-      "body-catch": "body catch",
-      "body": "body",
-      "chassis-set": "chassis set",
-      "sticker": "sticker",
-      "setting-tool": "setting tool",
-      "tool": "tool",
-      "bundle": "bundle",
-      "accessory": "accessory",
-      "other": "other"
-    }
+      "roller": "Roller",
+      "plate": "Reinforcing plate",
+      "bumper": "Bumper",
+      "brake": "Brake",
+      "mass-damper": "Mass damper",
+      "slide-damper": "Slide damper",
+      "stabilizer": "Stabilizer",
+      "bearing": "Bearing",
+      "gear": "Gear",
+      "gear-cover": "Gear cover",
+      "shaft": "Axle",
+      "propeller-shaft": "Propeller shaft",
+      "wheel": "Wheel",
+      "tire": "Tire",
+      "wheel-tire-set": "Wheel and tire set",
+      "motor": "Motor",
+      "motor-mount": "Motor mount",
+      "terminal": "Terminal",
+      "switch": "Switch",
+      "battery": "Battery",
+      "battery-holder": "Battery holder",
+      "spacer": "Spacer",
+      "screw": "Screw",
+      "body-catch": "Body catch",
+      "body": "Body",
+      "chassis-set": "Chassis set",
+      "sticker": "Sticker",
+      "setting-tool": "Setting tool",
+      "tool": "Tool",
+      "bundle": "Bundle",
+      "accessory": "Accessory",
+      "other": "Other"
+    },
+    "seeAllInCategory": "See all {count}"
   },
   "spec": {
     "rollerDiameter": "Diameter",
@@ -210,6 +212,56 @@
       "carbon": "Carbon",
       "aluminium": "Aluminium",
       "other": "Other"
+    },
+    "wheelbase": "Wheelbase",
+    "tread": "Track",
+    "motorPosition": "Motor position",
+    "releaseYear": "Released",
+    "family": "Series",
+    "status": "Status"
+  },
+  "breadcrumb": {
+    "label": "Breadcrumb"
+  },
+  "browse": {
+    "parts": {
+      "title": "Parts by category",
+      "intro": "The catalog holds {count} Tamiya Mini 4WD parts, grouped into {categories} categories by what they do. Pick one, or head back to the builder.",
+      "description": "Tamiya Mini 4WD parts by category: {count} parts across {categories} categories, each filterable by the chassis it fits.",
+      "count": "{count}"
+    },
+    "category": {
+      "notFound": "Category not found",
+      "count": "{count} parts",
+      "description": "{category} — every one in the catalog, {count} in all, filterable by the chassis it fits and linked to full specs and class legality.",
+      "filter": "Filter by chassis",
+      "none": "No part here is listed as fitting that chassis."
+    }
+  },
+  "chassis": {
+    "title": "Chassis",
+    "intro": "The chassis decides where the motor sits, how the gears run, and which parts will fit. Here are the {count} current and commonly used ones.",
+    "description": "Every Mini 4WD chassis in scope: specs, what a bare runner comes with, the kits built on it, and the parts that fit.",
+    "notFound": "Chassis not found",
+    "specs": "Specs",
+    "slots": "Slots",
+    "defaultLoadout": "What a bare chassis comes with",
+    "loadoutNote": "What fills each slot on the bare runner, before a body or any upgrade.",
+    "kits": "Kits on this chassis",
+    "kitsNote": "Pick one to start a build from it.",
+    "kitsCount": "{count} kits",
+    "compatParts": "Compatible parts",
+    "compatNote": "Tamiya lists {count} parts as fitting this chassis, by category:",
+    "maxCount": "up to {count}",
+    "pageDescription": "{name}: {motor}, released {year}. Specs, stock loadout, the {kits} kits built on it, and the parts that fit.",
+    "family": {
+      "pro": "PRO series (double-shaft motor)",
+      "standard": "Standard series (single-shaft motor)"
+    },
+    "status": {
+      "current": "Current",
+      "rerelease": "Re-release",
+      "discontinued": "Discontinued"
     }
   }
 }

@@ -17,6 +17,7 @@ weightG: 125.9
 status: current
 notes: 一體式單片車架，剛性高、組裝簡單，原廠即為六導輪設計，是新手最常被推薦的雙軸底盤。
 thumbnail: /thumbs/chassis/ma.webp
+detailThumbnail: /thumbs/chassis-detail/ma.webp
 slots:
   - id: body
     type: body
