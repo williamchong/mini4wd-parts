@@ -19,8 +19,15 @@ const { t } = useI18n()
 const localePath = useLocalePath()
 const siteUrl = useRuntimeConfig().public.siteUrl
 
-/** Home is on every trail, so it is prepended once rather than by each caller. */
-const items = computed(() => [{ to: '/', label: t('nav.home') }, ...props.trail])
+/**
+ * Home is on every trail, so it is prepended once rather than by each caller.
+ *
+ * Its own key rather than the nav bar's: `/` is the builder and the bar calls
+ * it that, but the first crumb of a trail — and the first `ListItem` of the
+ * `BreadcrumbList` Google reads — names the root of the site, not the tool
+ * standing on it.
+ */
+const items = computed(() => [{ to: '/', label: t('breadcrumb.home') }, ...props.trail])
 
 useHead(() => ({
   script: [{

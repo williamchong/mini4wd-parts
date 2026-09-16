@@ -4,19 +4,18 @@
     "description": "A Mini 4WD information site for beginners, with a complete parts reference and getting-started guides"
   },
   "nav": {
-    "home": "Home",
+    "builder": "Builder",
     "guides": "Guides",
     "parts": "Parts",
     "chassis": "Chassis",
-    "about": "About"
+    "about": "About",
+    "comingSoon": "Coming soon"
+  },
+  "locale": {
+    "label": "Language"
   },
   "error": {
     "notFound": "Page not found"
-  },
-  "wording": {
-    "label": "Wording",
-    "hk": "HK",
-    "tw": "TW"
   },
   "build": {
     "title": "Build list",
@@ -221,6 +220,7 @@
     "status": "Status"
   },
   "breadcrumb": {
+    "home": "Home",
     "label": "Breadcrumb"
   },
   "browse": {

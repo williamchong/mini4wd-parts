@@ -2,9 +2,9 @@
  * Keeps the build in the page's `#hash`, so a reload restores it and the
  * address bar is always a link to what is on screen (docs/PLAN.md §6 M1b).
  *
- * Client-only by construction. The page is prerendered as the empty car; the
- * hash is read after hydration, the same way `restoreWording` swaps in a stored
- * preference, so nothing mismatches.
+ * Client-only by construction. The page is prerendered as the empty car and the
+ * hash is read after hydration, as a normal reactive update rather than a
+ * hydration mismatch.
  *
  * The hash is written with `history.replaceState`, never through the router:
  * a router navigation would run scroll behaviour and route watchers for what is

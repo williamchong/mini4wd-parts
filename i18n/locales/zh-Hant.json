@@ -4,19 +4,18 @@
     "description": "迷你四驅新手入門資訊站，提供完整的迷你四驅相關資訊與新手指南"
   },
   "nav": {
-    "home": "首頁",
+    "builder": "組車",
     "guides": "指南",
     "parts": "零件",
     "chassis": "底盤",
-    "about": "關於"
+    "about": "關於",
+    "comingSoon": "準備中"
+  },
+  "locale": {
+    "label": "語言"
   },
   "error": {
     "notFound": "找不到頁面"
-  },
-  "wording": {
-    "label": "用語",
-    "hk": "港",
-    "tw": "台"
   },
   "build": {
     "title": "組車清單",
@@ -233,6 +232,7 @@
     }
   },
   "breadcrumb": {
+    "home": "首頁",
     "label": "頁面階層"
   },
   "browse": {

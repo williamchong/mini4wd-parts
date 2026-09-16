@@ -1,9 +1,14 @@
 <script setup lang="ts">
+/**
+ * The language menu. One control, one question — Hong Kong and Taiwan wording
+ * used to sit beside it as a second, unrelated toggle, and with only Hong Kong
+ * wording offered (app/composables/useWording.ts) there is nothing left to
+ * merge into the menu but the locales themselves.
+ */
 const { locale, locales } = useI18n()
 const switchLocalePath = useSwitchLocalePath()
-const { wording, setWording } = useWording()
 
-const otherLocales = computed(() => locales.value.filter(l => l.code !== locale.value))
+const current = computed(() => locales.value.find(l => l.code === locale.value))
 
 /**
  * Without the hash `switchLocalePath` copies from the router's route. A hash
@@ -14,33 +19,68 @@ const otherLocales = computed(() => locales.value.filter(l => l.code !== locale.
  * (app/composables/useBuildLink.ts puts the current build back).
  */
 const localeHref = (code: Parameters<typeof switchLocalePath>[0]) => switchLocalePath(code).split('#')[0]
+
+const menu = useTemplateRef<HTMLDetailsElement>('menu')
+
+const close = () => { if (menu.value) menu.value.open = false }
+
+/**
+ * A disclosure does not close itself the way a `<select>` does, and one left
+ * hanging over the page is worse than no menu at all. Both listeners are
+ * client-only by virtue of `onMounted`, which is also the only place `document`
+ * exists on a prerendered route.
+ */
+onMounted(() => {
+  const onPointerDown = (event: PointerEvent) => {
+    if (menu.value?.open && !event.composedPath().includes(menu.value)) close()
+  }
+  const onKeydown = (event: KeyboardEvent) => {
+    if (event.key === 'Escape' && menu.value?.open) close()
+  }
+  document.addEventListener('pointerdown', onPointerDown)
+  document.addEventListener('keydown', onKeydown)
+  onBeforeUnmount(() => {
+    document.removeEventListener('pointerdown', onPointerDown)
+    document.removeEventListener('keydown', onKeydown)
+  })
+})
 </script>
 
 <template>
-  <div class="locale-controls">
-    <!--
-      Real links, not a select: this is the only thing that points at the other
-      locale, so the prerender crawler follows it. The routes are seeded in
-      nuxt.config.ts as well, but a link that exists in the HTML is what makes
-      the English tree reachable to a reader and a search engine.
-    -->
-    <NuxtLink
-      v-for="l in otherLocales"
-      :key="l.code"
-      :to="localeHref(l.code)"
-    >{{ l.name }}</NuxtLink>
+  <!--
+    `<details>` rather than a button and a `v-if`, for two reasons. The panel's
+    links are in the prerendered HTML either way — hidden, but present — which
+    is what lets the crawler reach the English tree and a reader switch before
+    the page has hydrated. And open/close, keyboard included, is the element's
+    job rather than ours.
+  -->
+  <details ref="menu" class="locale-menu">
+    <summary :aria-label="$t('locale.label')">
+      <span aria-hidden="true">🌐</span>
+      <span>{{ current?.name }}</span>
+    </summary>
 
-    <!-- Hong Kong and Taiwan are wordings of the same pages, so this is a
-         preference rather than a link. -->
-    <span v-if="locale === 'zh-Hant'" class="wording">
-      <span class="wording-label">{{ $t('wording.label') }}</span>
-      <button
-        v-for="variant in (['hk', 'tw'] as const)"
-        :key="variant"
-        type="button"
-        :aria-pressed="wording === variant"
-        @click="setWording(variant)"
-      >{{ $t(`wording.${variant}`) }}</button>
-    </span>
-  </div>
+    <ul class="locale-menu-list">
+      <!--
+        Every locale, the current one included and marked, so the menu says
+        what is selected rather than only what else there is. Each carries its
+        own `lang`, because a name is written in the language it names.
+      -->
+      <li v-for="l in locales" :key="l.code">
+        <!--
+          `aria-current` is set rather than left to NuxtLink, which would reach
+          the same `page` on the entry that links to the route already shown.
+          Setting it means the tick cannot quietly vanish on a route where that
+          match does not hold, and setting it to the same value NuxtLink uses
+          means the two can never disagree about which one won.
+        -->
+        <NuxtLink
+          :to="localeHref(l.code)"
+          :lang="l.language"
+          :aria-current="l.code === locale ? 'page' : undefined"
+          @click="close"
+        >{{ l.name }}</NuxtLink>
+      </li>
+    </ul>
+  </details>
 </template>

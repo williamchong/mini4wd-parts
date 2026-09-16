@@ -7,9 +7,6 @@
  */
 const { t, locale } = useI18n()
 const i18nHead = useLocaleHead()
-const { restoreWording } = useWording()
-
-onMounted(restoreWording)
 
 const zhHref = computed(() =>
   i18nHead.value.link?.find(link => 'hreflang' in link && link.hreflang === 'zh-Hant')?.href
@@ -23,8 +20,11 @@ useHead(() => ({
     ...(i18nHead.value.link ?? []),
     // A locale carries exactly one hreflang, and Hong Kong and Taiwan readers
     // share one prerendered page set, so both regions are pointed at the
-    // zh-Hant URL by hand. unhead keys alternates by hreflang, so these cannot
-    // collide with the module's own.
+    // zh-Hant URL by hand. zh-TW stays even though only Hong Kong wording is
+    // offered: the page is readable in Taiwan, and the alternative is being
+    // absent from Taiwan results rather than being present in the wrong words.
+    // unhead keys alternates by hreflang, so these cannot collide with the
+    // module's own.
     ...(zhHref.value
       ? [
           { rel: 'alternate' as const, hreflang: 'zh-HK', href: zhHref.value },
