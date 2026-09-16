@@ -183,6 +183,9 @@ function buildPart(item: JpItem<PartGenreCode>) {
   if (override.classLegality) {
     merged.classLegality = { ...merged.classLegality, source: 'override' }
   }
+  if (override.chassisCompat) {
+    merged.chassisCompat = { ...merged.chassisCompat, source: 'override' }
+  }
   if (override.category && !override.slots) merged.slots = deriveSlots(merged.category)
 
   return { record: merged, matched }

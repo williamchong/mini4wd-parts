@@ -72,22 +72,23 @@ const { data } = await useAsyncData(() => `chassis-${locale.value}-${id.value}`,
     if (compatible.has(itemId(part))) counts.set(part.category, (counts.get(part.category) ?? 0) + 1)
   }
 
-  // At most one entry on any chassis — five of the eight name a propeller shaft
-  // and the other three name nothing — so this is one extra query on five of
-  // the sixteen routes rather than a `names` column on 382 rows of all of them.
+  // Two entries at most — five of the eight chassis name a motor and a
+  // propeller shaft, the other three name nothing — so this is one extra query
+  // on five of the sixteen routes rather than a `names` column on 382 rows of
+  // all of them. The length guard keeps the other three at none.
   const loadoutIds = [...new Set(Object.values(chassis.defaultLoadout).flat()
     .map(entry => entry.partId)
     .filter(partId => partId !== undefined))]
 
-  const loadoutDocs = await Promise.all(loadoutIds.map(partId =>
-    queryCollection('parts').select('id', 'stem', 'names').where('stem', '=', `parts/${partId}`).first()))
+  const loadoutDocs = loadoutIds.length
+    ? await queryCollection('parts').select('id', 'stem', 'names')
+      .where('stem', 'IN', loadoutIds.map(partId => `parts/${partId}`)).all()
+    : []
 
   return {
     chassis,
     kits: kitDocs.map(fromContent('kits')).sort((a, b) => a.id.localeCompare(b.id)),
-    loadoutNames: Object.fromEntries(loadoutDocs
-      .filter(part => part !== null)
-      .map(part => [itemId(part), part.names])),
+    loadoutNames: Object.fromEntries(loadoutDocs.map(part => [itemId(part), part.names])),
     compatTotal: compatible.size,
     categories: [...counts]
       .map(([category, count]) => ({ category, count }))

@@ -31,9 +31,10 @@ defaultLoadout:
   counter-gear:
     - label: { zh-HK: 套件標準中間齒輪, en: Kit standard counter gear }
       source: chassis
+  # Not tagged for this chassis, but it is the shaft VS takes: Tamiya lists the
+  # same 15205 hollow shaft for both — see data/overrides/parts.yml '94382'.
   propeller-shaft:
-    - label: { zh-HK: 套件標準傳動軸, en: Kit standard propeller shaft }
-      source: chassis
+    - { partId: '94382', source: chassis }
   terminal:
     - label: { zh-HK: 套件標準電池金屬片, en: Kit standard terminals }
       source: chassis

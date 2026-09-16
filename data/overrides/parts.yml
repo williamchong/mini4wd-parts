@@ -89,6 +89,18 @@
   specs: { motorShaft: single }
   classLegality: { open: legal, stockBmax: legal, junior: legal }
 
+# --- Kit propeller shaft ------------------------------------------------------
+# AO-1004 is the stock shaft of the Super-1 lineage, and Tamiya's own page tags
+# it for VS alone among our chassis. AR, Super-II and VZ are not tagged — most
+# likely the page predates all three. They take the same shaft: Tamiya lists
+# 15205, the 1.4mm hollow shaft "for Super-1/TZ", on the compat page of AR,
+# Super-II, VZ and VS alike, and a propeller shaft fits only the one length it
+# is cut to. Without this the builder's picker (isChassisCompatible) would hide
+# the very part those three chassis ship with. FM-A needs nothing: AO-1044 is
+# tagged for it.
+'94382': # AO-1004 プロペラシャフトA
+  chassisCompat: { include: [ar, vz, super-2, vs] }
+
 # --- Reviewed, genuinely uncategorised ---------------------------------------
 # Real car parts that fit none of our slots; kept as "other" on purpose so the
 # report stops flagging them.

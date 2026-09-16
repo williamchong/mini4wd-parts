@@ -32,8 +32,7 @@ defaultLoadout:
     - label: { zh-HK: 套件標準中間齒輪, en: Kit standard counter gear }
       source: chassis
   propeller-shaft:
-    - label: { zh-HK: 套件標準傳動軸, en: Kit standard propeller shaft }
-      source: chassis
+    - { partId: '10319', source: chassis }
   terminal:
     - label: { zh-HK: 套件標準電池金屬片, en: Kit standard terminals }
       source: chassis

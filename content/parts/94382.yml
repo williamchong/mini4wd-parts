@@ -12,12 +12,15 @@ slots:
 isCarPart: true
 chassisCompat:
   include:
+    - ar
+    - vz
+    - super-2
     - vs
   other:
     - super1
     - superTZ
     - zero
-  source: scraped
+  source: override
 classLegality:
   open: legal
   stockBmax: legal

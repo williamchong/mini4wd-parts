@@ -144,9 +144,7 @@ defaultLoadout:
         zh-HK: 套件標準中間齒輪
       source: chassis
   propeller-shaft:
-    - label:
-        en: Kit standard propeller shaft
-        zh-HK: 套件標準傳動軸
+    - partId: "10319"
       source: chassis
   terminal:
     - label:
