@@ -16,6 +16,7 @@ treadRearMm: 69
 weightG: 113.8
 status: rerelease
 notes: 輕巧短軸距的經典底盤，目前主要以復刻套件形式販售，改裝空間大但剛性較低。
+thumbnail: /thumbs/chassis/vs.webp
 slots:
   - id: body
     type: body

@@ -16,6 +16,7 @@ treadRearMm: 64
 weightG: 115
 status: current
 notes: Super-1 的現代化版本，仍是每年限定套件常用的底盤，改裝零件選擇多。
+thumbnail: /thumbs/chassis/super-2.webp
 slots:
   - id: body
     type: body

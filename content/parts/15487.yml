@@ -38,6 +38,7 @@ priceHkd: 42
 status: current
 officialUrl: https://www.tamiya.com/japan/products/15487/index.html
 officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15487/15487_1.jpg
+thumbnail: /thumbs/parts/15487.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-15487-torque-tuned-2-motor-pro/
 specsRaw: 適正電圧：2.4～3.0V 推奨負荷トルク：1.7～2.1mN･m 回転数：12200～14400r/min 消費電流：1.7～2.0A ※推奨負荷トルク時
-scrapedAt: 2026-09-08
+scrapedAt: 2026-09-16

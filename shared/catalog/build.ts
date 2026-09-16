@@ -20,6 +20,13 @@ import type {
 } from './schema.ts'
 
 /**
+ * Whether this record has a thumbnail, in place of the path to it: the path is
+ * derivable from the item number, and 631 copies of a 25-byte string is 1.8 KB
+ * gzipped in every visitor's payload (shared/catalog/thumbnails.ts).
+ */
+type HasThumbnail = { hasThumbnail?: boolean }
+
+/**
  * The catalog fields the builder actually reads, and no more.
  *
  * Narrower than the full records on purpose: the builder is prerendered, so every
@@ -30,7 +37,7 @@ import type {
  */
 export type BuildablePart = Pick<Part,
   'id' | 'names' | 'category' | 'slots' | 'isCarPart' | 'chassisCompat'
-  | 'classLegality' | 'specs' | 'priceJpy'>
+  | 'classLegality' | 'specs' | 'priceJpy'> & HasThumbnail
 
 export type BuildableChassis = Pick<Chassis, 'id' | 'slots' | 'defaultLoadout' | 'motorShaft'>
 
@@ -57,13 +64,16 @@ export type BuildableKit = Pick<Kit, 'stockLoadout'>
  *
  * Deliberately absent: `series`, `seriesNumber` (180 of 305, and its only
  * human-readable partner `seriesLabel` is Japanese-only free text), `specsRaw`,
- * `officialUrl`, `hkStoreUrl`, `nameSources`, `releaseDateRaw`, the prices —
+ * `officialUrl`, `hkStoreUrl`, `nameSources`, `releaseDateRaw`,
+ * `officialImage` — the full-size photo on Tamiya's CDN, which nothing renders
+ * now that we serve our own downscale — and `thumbnail`, whose path the client
+ * derives from the item number (see shared/catalog/thumbnails.ts) — the prices —
  * nobody recognises their box by price — and `releaseDate`, which orders the
  * picker at prerender and is then stripped, because nothing renders it.
  */
 export type PickableKit = Pick<Kit,
   'id' | 'names' | 'chassis' | 'status' | 'gearRatio'
-  | 'officialImage' | 'loadoutSource' | 'loadoutSourceTitle' | 'stockLoadout'>
+  | 'loadoutSource' | 'loadoutSourceTitle' | 'stockLoadout'> & HasThumbnail
 
 /**
  * The rulesets a build can be checked against (docs/PLAN.md §2.1).

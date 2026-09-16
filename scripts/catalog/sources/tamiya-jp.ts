@@ -1,6 +1,6 @@
 import * as cheerio from 'cheerio'
 import { fetchText } from '../fetch.ts'
-import { itemAnchors, parsePagerTotal, walkPages, type Page } from './tamiya-page.ts'
+import { absoluteUrl, itemAnchors, parsePagerTotal, walkPages, type Page } from './tamiya-page.ts'
 
 const BASE = 'https://www.tamiya.com/japan/products'
 
@@ -59,6 +59,15 @@ export interface ListEntry<G extends GenreCode = GenreCode> {
   genre: G
   seriesLabel: string
   listName: string
+  /**
+   * The small product photo the list page shows, which is the one we downscale
+   * into public/thumbs (docs/PLAN.md §6 M1b). It is read here rather than
+   * derived from the item number on the detail page's full-size photo, because
+   * the two are not the same file: the thumbnail lives under `cms/img` where
+   * the full photo lives under `japan_contents/img`, some items store the full
+   * photo as `_1_01.jpg`, and a few have no `_s.jpg` at all.
+   */
+  thumbnailUrl?: string
 }
 
 export interface JpItem<G extends GenreCode = GenreCode> extends ListEntry<G> {
@@ -92,7 +101,8 @@ export function parseListPage<G extends GenreCode>(html: string, genre: G): Page
       id: anchor.attr('data-article')!,
       genre,
       seriesLabel: text(anchor.find('.txt_ span').first().text()),
-      listName: text(anchor.find('.txt_ h3').text()).replace(/^ITEM \d+\s*/, '')
+      listName: text(anchor.find('.txt_ h3').text()).replace(/^ITEM \d+\s*/, ''),
+      thumbnailUrl: absoluteUrl(anchor.find('.img_ img').first().attr('src'))
     })
   })
 
@@ -195,7 +205,7 @@ export function parseDetail<G extends GenreCode>(html: string, entry: ListEntry<
     // Facts only: we deliberately do not store Tamiya's description prose.
     compatRaw: bracketSection($, '使用可能シャーシ') ?? bracketSection($, '使用可能マシン'),
     specsRaw: bracketSection($, '基本スペック'),
-    imageUrl: imageUrl ? (imageUrl.startsWith('//') ? `https:${imageUrl}` : imageUrl) : undefined,
+    imageUrl: absoluteUrl(imageUrl),
     officialUrl,
     infoAsOf: infoAsOf ? `${infoAsOf[1]}-${infoAsOf[2]}-${infoAsOf[3]}` : undefined,
     scrapedAt: new Date().toISOString().slice(0, 10)

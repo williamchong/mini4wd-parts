@@ -21,6 +21,21 @@ export function parsePagerTotal($: cheerio.CheerioAPI, context: string): number 
 
 export const itemAnchors = ($: cheerio.CheerioAPI) => $('.item_list_ li a[data-article]')
 
+const ORIGIN = 'https://www.tamiya.com'
+
+/**
+ * An image src as a URL we can fetch. Tamiya writes most of them
+ * protocol-relative, pads some with whitespace, and roots a handful at the
+ * site itself (`/cms/img/...`) — six of 1,138 items, which is few enough to
+ * have been mistaken for a scraping bug and many enough to matter.
+ */
+export function absoluteUrl(url: string | undefined): string | undefined {
+  const trimmed = url?.trim()
+  if (!trimmed) return undefined
+  if (trimmed.startsWith('//')) return `https:${trimmed}`
+  return trimmed.startsWith('/') ? `${ORIGIN}${trimmed}` : trimmed
+}
+
 export interface Page<T> {
   total?: number
   items: T[]

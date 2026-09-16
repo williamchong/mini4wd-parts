@@ -4,11 +4,13 @@
  * same `BuildState`, differing only in whether a kit's `stockLoadout` overlays
  * the chassis default.
  */
+import { thumbnailSrc } from '#shared/catalog/thumbnails'
 import type { Chassis, ChassisId } from '#shared/catalog/schema'
 
 /** Only what a card shows — the page selects these columns and no others. */
 type ChassisCard = Pick<Chassis,
   'id' | 'names' | 'motorShaft' | 'motorPosition' | 'releaseYear' | 'notes'>
+  & { hasThumbnail?: boolean }
 
 defineProps<{ chassis: ChassisCard[] }>()
 const emit = defineEmits<{ select: [ChassisId] }>()
@@ -23,6 +25,7 @@ const { locale } = useI18n()
     <ul class="chassis-list">
       <li v-for="c in chassis" :key="c.id">
         <button type="button" @click="emit('select', c.id)">
+          <CatalogThumb class="chassis-thumb" :src="thumbnailSrc('chassis', c)" icon="chassis" />
           <span class="chassis-name">{{ resolve(c.names).value }}</span>
           <span class="chassis-facts">
             {{ $t(`spec.shaft.${c.motorShaft}`) }} ·

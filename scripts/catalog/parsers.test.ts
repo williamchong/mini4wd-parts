@@ -4,6 +4,7 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { parseDetail, parseListPage } from './sources/tamiya-jp.ts'
 import { parseCompatPage } from './sources/tamiya-compat.ts'
+import { parseChassisImages } from './sources/tamiya-chassis.ts'
 import { mapStoreProduct } from './sources/tamiya-hk.ts'
 import { deriveCategory, deriveSpecs } from './taxonomy.ts'
 import {
@@ -22,6 +23,11 @@ test('list page yields the pager total and every item', () => {
   assert.equal(items[0]!.seriesLabel, 'ミニ四駆グレードアップパーツ')
   // The "ITEM 15549" prefix belongs to the id, not the name.
   assert.equal(items[0]!.listName, 'HG カーボンリヤワイドプレート (2㎜) (スライドダンパー対応)')
+  // Protocol-relative and padded with a space, exactly as Tamiya writes it.
+  assert.equal(items[0]!.thumbnailUrl, 'https://cdn.example/15549_s.jpg')
+  // An item whose row has no photo carries no URL rather than an empty string,
+  // so the thumbnail stage can tell "none published" from "not scraped yet".
+  assert.equal(items[1]!.thumbnailUrl, undefined)
 })
 
 test('detail page yields names, price, date, chassis tags and spec text', () => {
@@ -47,6 +53,15 @@ test('detail page without a release line leaves the date empty', () => {
   const html = fixture('detail-page.html').replace('2026年2月21日(土)ごろ発売', '')
   const item = parseDetail(html, { id: '15549', genre: '303010', seriesLabel: '', listName: '' })
   assert.equal(item.releaseDate, undefined)
+})
+
+test('chassis select page yields one photo per in-scope chassis', () => {
+  const images = parseChassisImages(fixture('chassis-select.html'))
+  assert.deepEqual(images, {
+    'ma': 'https://cdn.example/cms/img/usr/item/ch/519.jpg',
+    // Tamiya's English tree writes `e_mini4wd_chassis_FM_A`; the code folds.
+    'fm-a': 'https://cdn.example/cms/img/usr/item/ch/fm__a.png'
+  })
 })
 
 test('compatibility page yields the pager total and item ids', () => {

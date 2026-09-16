@@ -33,8 +33,8 @@ function schedule<T>(task: () => Promise<T>): Promise<T> {
   return run as Promise<T>
 }
 
-function cachePath(url: string) {
-  return join(CACHE_DIR, `${createHash('sha1').update(url).digest('hex')}.txt`)
+function cachePath(url: string, extension = '.txt') {
+  return join(CACHE_DIR, `${createHash('sha1').update(url).digest('hex')}${extension}`)
 }
 
 /** The cache directory is flat, so it only ever needs creating once per run. */
@@ -64,6 +64,41 @@ export interface FetchOptions {
   json?: boolean
 }
 
+/** One throttled, retried GET. What the bytes mean is the caller's business. */
+function request(url: string, accept: string) {
+  return schedule(async () => {
+    let lastError: unknown
+    for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
+      try {
+        const response = await fetch(url, {
+          headers: {
+            'user-agent': USER_AGENT,
+            accept,
+            'accept-language': 'ja,en;q=0.8'
+          },
+          signal: AbortSignal.timeout(30_000)
+        })
+        if (!response.ok) {
+          const error = new Error(`HTTP ${response.status} for ${url}`)
+          // A 404 or 403 will not fix itself; only retry transient failures.
+          if (response.status >= 400 && response.status < 500) throw Object.assign(error, { fatal: true })
+          throw error
+        }
+        return {
+          buffer: await response.arrayBuffer(),
+          contentType: response.headers.get('content-type')
+        }
+      }
+      catch (error) {
+        lastError = error
+        if ((error as { fatal?: boolean }).fatal) break
+        if (attempt < MAX_RETRIES) await sleep(1000 * 2 ** attempt)
+      }
+    }
+    throw lastError
+  })
+}
+
 /** Fetch a URL as text, cached on disk and throttled. */
 export async function fetchText(url: string, options: FetchOptions = {}): Promise<string> {
   const file = cachePath(url)
@@ -76,37 +111,36 @@ export async function fetchText(url: string, options: FetchOptions = {}): Promis
     }
   }
 
-  const body = await schedule(async () => {
-    let lastError: unknown
-    for (let attempt = 1; attempt <= MAX_RETRIES; attempt++) {
-      try {
-        const response = await fetch(url, {
-          headers: {
-            'user-agent': USER_AGENT,
-            'accept': options.json ? 'application/json' : 'text/html,*/*;q=0.8',
-            'accept-language': 'ja,en;q=0.8'
-          },
-          signal: AbortSignal.timeout(30_000)
-        })
-        if (!response.ok) {
-          const error = new Error(`HTTP ${response.status} for ${url}`)
-          // A 404 or 403 will not fix itself; only retry transient failures.
-          if (response.status >= 400 && response.status < 500) throw Object.assign(error, { fatal: true })
-          throw error
-        }
-        return decode(await response.arrayBuffer(), response.headers.get('content-type'))
-      }
-      catch (error) {
-        lastError = error
-        if ((error as { fatal?: boolean }).fatal) break
-        if (attempt < MAX_RETRIES) await sleep(1000 * 2 ** attempt)
-      }
-    }
-    throw lastError
-  })
+  const { buffer, contentType } = await request(
+    url, options.json ? 'application/json' : 'text/html,*/*;q=0.8')
+  const body = decode(buffer, contentType)
 
   await ensureCacheDir()
   await writeFile(file, body, 'utf8')
+  return body
+}
+
+/**
+ * Fetch a URL as bytes — product photos, which are downscaled rather than
+ * served as they arrive. Cached beside the pages under a different extension so
+ * that a binary body can never be read back through the text path.
+ */
+export async function fetchBytes(url: string, options: FetchOptions = {}): Promise<Buffer> {
+  const file = cachePath(url, '.bin')
+  if (!options.noCache) {
+    try {
+      return await readFile(file)
+    }
+    catch {
+      // Not cached yet.
+    }
+  }
+
+  const { buffer } = await request(url, 'image/*,*/*;q=0.8')
+  const body = Buffer.from(buffer)
+
+  await ensureCacheDir()
+  await writeFile(file, body)
   return body
 }
 

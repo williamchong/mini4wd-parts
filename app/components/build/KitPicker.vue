@@ -4,11 +4,13 @@
  *
  * Rendered inside BasePicker's dialog, beside ChassisPicker.
  *
- * Rows are led by Tamiya's own product photo because recognising your box among
- * 305 is a visual task, and two thirds of these kits have no Traditional
- * Chinese name for a reader to match against (docs/PLAN.md §6 M1b).
+ * Rows are led by a picture because recognising your box among 305 is a visual
+ * task, and two thirds of these kits have no Traditional Chinese name for a
+ * reader to match against. The picture is our own thumbnail of Tamiya's photo,
+ * served from public/thumbs and never hotlinked (docs/PLAN.md §6 M1b).
  */
 import { matchesQuery } from '#shared/catalog/names'
+import { thumbnailSrc } from '#shared/catalog/thumbnails'
 import type { PickableKit } from '#shared/catalog/build'
 import type { Chassis, ChassisId } from '#shared/catalog/schema'
 
@@ -50,17 +52,12 @@ const matches = computed(() => props.kits.filter(kit =>
   && matchesQuery(query.value, kit.id, kit.names)))
 
 /**
- * How many rows are in the DOM, and it is a bandwidth decision rather than a
- * rendering one.
- *
- * Every row carries a photo hotlinked from Tamiya's CDN at its original size —
- * measured at ~94 KB average for something displayed 80 px wide. `loading`
- * `="lazy"` does not save us: the browser still fetches everything within about
- * 1250 px of the viewport, so a full 305-row list pulls megabytes before the
- * reader has typed anything, and ~34 MB if they scroll it all. Capping the list
- * is the only lever available until the catalog carries a thumbnail URL
- * (docs/PLAN.md §6 M1b) — search and the chassis chips are the real navigation
- * anyway, and nobody finds their box by scrolling past 305 photos.
+ * How many rows are in the DOM. It used to be a bandwidth decision: the rows
+ * hotlinked Tamiya's full-size photos, ~94 KB each for something displayed
+ * 80 px wide, so a cold open pulled megabytes before the reader had typed. The
+ * photos are now our own ~4 KB thumbnails (docs/PLAN.md §6 M1b) and that
+ * argument is gone, but the cap stays: search and the chassis chips are the
+ * real navigation, and nobody finds their box by scrolling past 305 rows.
  */
 const PAGE = 24
 const shown = ref(PAGE)
@@ -74,30 +71,9 @@ const visible = computed(() => matches.value.slice(0, shown.value).map(kit => ({
   // does, so asking the template for both would walk it three times.
   name: resolve(kit.names).value,
   fallback: isFallback(kit.names),
+  thumb: thumbnailSrc('kits', kit),
   chassisName: chassisNames.value.get(kit.chassis) ?? kit.chassis
 })))
-
-/**
- * Photos are hotlinked from a CDN we do not control, so a row has to survive
- * one going away — docs/PLAN.md §6 M1b: a hotlink we do not control must not be
- * able to break a picker. A failed image drops to the text row underneath it.
- */
-const brokenImages = ref(new Set<string>())
-const list = useTemplateRef<HTMLElement>('list')
-
-/**
- * An image that failed before `@error` was attached fired its event into the
- * void and would sit as a broken icon forever. The list is client-rendered
- * inside a dialog today, so that window is small, but a prerendered picker
- * (a future /kits page) reopens it. Sweeping once on mount catches those.
- */
-onMounted(() => {
-  for (const img of list.value?.querySelectorAll<HTMLImageElement>('img[data-kit]') ?? []) {
-    if (img.complete && img.naturalWidth === 0 && img.dataset.kit) {
-      brokenImages.value.add(img.dataset.kit)
-    }
-  }
-})
 </script>
 
 <template>
@@ -138,23 +114,10 @@ onMounted(() => {
 
     <p class="picker-count">{{ $t('build.kitCandidates', { count: matches.length }) }}</p>
 
-    <ul ref="list" class="kit-list">
+    <ul class="kit-list">
       <li v-for="row in visible" :key="row.kit.id">
         <button type="button" @click="emit('select', row.kit)">
-          <!-- Explicit width and height so lazy-loading has a box to reason
-               about and the grid does not reflow as photos land. -->
-          <img
-            v-if="row.kit.officialImage && !brokenImages.has(row.kit.id)"
-            class="kit-thumb"
-            :src="row.kit.officialImage"
-            :data-kit="row.kit.id"
-            alt=""
-            loading="lazy"
-            decoding="async"
-            width="160"
-            height="120"
-            @error="brokenImages.add(row.kit.id)"
-          >
+          <CatalogThumb class="kit-thumb" :src="row.thumb" icon="body" />
 
           <span class="kit-body">
             <span class="kit-name" :class="{ fallback: row.fallback }">{{ row.name }}</span>

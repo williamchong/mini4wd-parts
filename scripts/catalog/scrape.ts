@@ -7,12 +7,17 @@ import {
   type GenreCode, type JpItem, type ListEntry, type KitGenreCode, type PartGenreCode
 } from './sources/tamiya-jp.ts'
 import { scrapeChassisCompat } from './sources/tamiya-compat.ts'
+import { scrapeChassisImages } from './sources/tamiya-chassis.ts'
 import { CHASSIS_CODES } from '../../shared/catalog/schema.ts'
 import { scrapeHkStore } from './sources/tamiya-hk.ts'
 import { scrapeFandomKits, scrapeFandomParts } from './sources/fandom.ts'
 
 /**
  * Stage 1 of the catalog pipeline: fetch everything, decide nothing.
+ *
+ * Product photos are not fetched here: they are binary, they are downscaled
+ * rather than stored as found, and they land in public/ rather than data/raw/.
+ * That is stage 1b, scripts/catalog/thumbs.ts.
  *
  * The raw snapshots under data/raw/ are committed so that generate.ts runs
  * offline and so a monthly refresh shows up as a reviewable diff. They cover
@@ -80,6 +85,15 @@ if (wants('compat')) {
     console.log('')
   }
   await writeRaw('tamiya-compat', compat)
+}
+
+// One page, eight photos. A chassis is not a catalogue item, so this is the
+// only place Tamiya publishes a picture of one (docs/PLAN.md §6 M1b).
+if (wants('chassis')) {
+  console.log('Tamiya chassis photos')
+  const images = await scrapeChassisImages(noCache)
+  console.log(`  ${Object.keys(images).length} of ${Object.keys(CHASSIS_CODES).length} chassis`)
+  await writeRaw('tamiya-chassis-images', images)
 }
 
 if (wants('hk')) {

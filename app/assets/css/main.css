@@ -119,6 +119,14 @@ body {
   color: inherit;
 }
 
+/* Quieter than the kit credit above it: it is a standing notice about every
+   picture on the page, not a source for this particular build. */
+.image-credit {
+  margin: 0 0 1.5rem;
+  font-size: 0.8em;
+  opacity: 0.6;
+}
+
 .kit-licence {
   margin-inline-start: 0.5rem;
   font-variant: all-small-caps;
@@ -259,6 +267,10 @@ button.link {
   border-color: #8a99a8;
 }
 
+.chassis-thumb {
+  width: 6rem;
+}
+
 .chassis-name {
   font-weight: 600;
 }
@@ -380,14 +392,37 @@ button.link {
   border-color: #8a99a8;
 }
 
-/* Width and height are also set on the element so lazy-loading reserves the
-   box before the photo arrives; this only constrains how it fills it. */
-.kit-thumb {
+/* Catalog pictures: our own 160x120 thumbnail of Tamiya's product photo, or the
+   drawn slot glyph where there is none — which is most of a stock build, since
+   what comes in the box was never sold as a part (docs/PLAN.md §6 M1b). Both
+   fill the same box, so a list does not go ragged where a photo is missing.
+   Width and height are also set on the <img> so lazy-loading reserves the box
+   before the picture arrives; this only says how it fills it. */
+.catalog-thumb {
+  box-sizing: border-box;
   flex: none;
-  width: 5rem;
-  height: auto;
-  background: #f4f6f8;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  background: #eef2f5;
   border-radius: 4px;
+  object-fit: contain;
+}
+
+.catalog-thumb.is-icon {
+  display: grid;
+  place-items: center;
+  color: #76889a;
+}
+
+/* Two thirds of the box: a drawn glyph is mostly whitespace, so matching a
+   photo's presence in the row takes more of the box than a photo needs. */
+.slot-icon {
+  width: 66%;
+  height: 66%;
+}
+
+.kit-thumb {
+  width: 5rem;
 }
 
 .kit-body {
@@ -432,7 +467,9 @@ button.link {
   display: grid;
   grid-template-columns: 9rem 1fr auto;
   gap: 1rem;
-  align-items: baseline;
+  /* Was baseline, which the entry pictures broke: a 2.5rem thumbnail moves the
+     text's baseline down and took the label and the buttons with it. */
+  align-items: start;
   padding: 0.7rem 0.25rem;
   border-bottom: 1px solid #e3e8ec;
 }
@@ -453,12 +490,38 @@ button.link {
 }
 
 .slot-label {
+  /* Lines up with the first entry's text rather than with the top of its
+     picture. */
+  padding-top: 0.45rem;
   font-weight: 600;
 }
 
+/* One picture per entry, not per row: a slot can hold two different parts, and
+   the thing a reader is looking for is "what is in this slot", entry by entry. */
 .slot-entry,
 .slot-empty {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
   margin: 0;
+}
+
+.entry-thumb {
+  width: 2.5rem;
+}
+
+.base-entry {
+  display: flex;
+  gap: 0.75rem;
+  align-items: flex-start;
+}
+
+.base-thumb {
+  width: 4.5rem;
+}
+
+.base-text {
+  min-width: 0;
 }
 
 .slot-empty {
@@ -572,8 +635,24 @@ button.link {
 
 /* Part card */
 
+/* Picture on the left of the whole card — spanning the name and the specs —
+   rather than beside the name alone, which would leave the specs indented under
+   nothing. */
 .part-card {
+  display: grid;
+  grid-template-columns: 4rem 1fr;
+  gap: 0.15rem 0.6rem;
+  align-items: start;
   padding: 0.6rem 0.5rem;
+}
+
+.part-card > .catalog-thumb {
+  grid-row: 1 / -1;
+}
+
+.part-head,
+.part-specs {
+  grid-column: 2;
 }
 
 .part-head {

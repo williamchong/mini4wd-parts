@@ -5,6 +5,7 @@
  * kit or the user — only whether the user changed it, which is what Revert
  * undoes.
  */
+import { thumbnailSrc } from '#shared/catalog/thumbnails'
 import type { BuildablePart, ResolvedSlot } from '#shared/catalog/build'
 
 const props = defineProps<{
@@ -42,12 +43,15 @@ const copyLabel = computed(() =>
  * required on a catalog record.
  */
 const rows = computed(() => props.slot.entries.map((entry) => {
-  const names = (entry.partId ? props.partsById.get(entry.partId)?.names : undefined)
-    ?? entry.label
+  const part = entry.partId ? props.partsById.get(entry.partId) : undefined
+  const names = part?.names ?? entry.label
   const hit = names && resolveLabel(names)
   return {
     text: hit?.value ?? (entry.label ? label.value : entry.partId ?? ''),
-    fallback: hit?.fallback ?? false
+    fallback: hit?.fallback ?? false,
+    // Only a catalog part has a photo. Everything else in a stock build is
+    // molded into the kit, so the slot's own glyph is all there can be.
+    thumbnail: thumbnailSrc('parts', part)
   }
 }))
 </script>
@@ -57,14 +61,18 @@ const rows = computed(() => props.slot.entries.map((entry) => {
     <div class="slot-label">{{ label }}</div>
 
     <div class="slot-entries">
-      <p v-if="!slot.entries.length" class="slot-empty">{{ $t('build.empty') }}</p>
+      <p v-if="!slot.entries.length" class="slot-empty">
+        <CatalogThumb class="entry-thumb" :icon="slot.type" />
+        <span>{{ $t('build.empty') }}</span>
+      </p>
       <p
         v-for="(row, i) in rows"
         :key="i"
         class="slot-entry"
         :class="{ fallback: row.fallback }"
       >
-        {{ row.text }}
+        <CatalogThumb class="entry-thumb" :src="row.thumbnail" :icon="slot.type" />
+        <span>{{ row.text }}</span>
       </p>
     </div>
 

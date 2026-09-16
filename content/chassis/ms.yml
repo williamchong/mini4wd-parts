@@ -16,6 +16,7 @@ treadRearMm: 69
 weightG: 124.7
 status: current
 notes: 前中後三段式車架，是 Open 組「MSフレキ」懸吊改裝的基礎；該改裝需要切削車架，在 Stock／B-MAX 不合法。
+thumbnail: /thumbs/chassis/ms.webp
 slots:
   - id: body
     type: body

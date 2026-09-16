@@ -71,6 +71,7 @@ console.log(`  Traditional Chinese names  ${partPercent(parts.filter(p => hasTra
 console.log(`  HKD prices                 ${partPercent(parts.filter(p => p.priceHkd !== undefined).length)}`)
 console.log(`  Chassis compatibility      ${partPercent(parts.filter(p => p.chassisCompat.include.length > 0).length)}`)
 console.log(`  Categorised                ${partPercent(parts.filter(p => p.category !== 'other').length)}`)
+console.log(`  Thumbnails                 ${partPercent(parts.filter(p => p.thumbnail).length)}`)
 
 section('Kits')
 console.log(`${kits.length} kits in content/kits`)
@@ -120,3 +121,4 @@ console.log(`\n  Per-kit loadout            ${kitPercent(kits.filter(k => k.load
 console.log(`  Gear ratio                 ${kitPercent(kits.filter(k => k.gearRatio).length)}`)
 console.log(`  HKD prices                 ${kitPercent(kits.filter(k => k.priceHkd !== undefined).length)}`)
 console.log(`  Traditional Chinese names  ${kitPercent(kits.filter(k => hasTraditionalChineseName(k.names)).length)}`)
+console.log(`  Thumbnails                 ${kitPercent(kits.filter(k => k.thumbnail).length)}`)

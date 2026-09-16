@@ -22,6 +22,16 @@ export function readYamlFileIfPresent<T>(path: string, fallback: T): T {
   }
 }
 
+/**
+ * The item numbers in a generated collection, without parsing the records —
+ * the filename is the item number, which is the whole point of the naming.
+ */
+export const listYamlIds = (dir: string): string[] =>
+  readdirSync(join(ROOT, dir))
+    .filter(name => name.endsWith('.yml'))
+    .map(name => name.slice(0, -'.yml'.length))
+    .sort()
+
 /** Every .yml file in a repo-relative directory, in filename order. */
 export function readYamlDir<T>(dir: string): { name: string, data: T }[] {
   const target = join(ROOT, dir)

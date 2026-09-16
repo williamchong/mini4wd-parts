@@ -247,9 +247,16 @@ export const partSchema = z.object({
   releaseDateRaw: z.string().optional(),
   status: z.enum(['current', 'limited', 'discontinued', 'unknown']),
 
-  /** Link-outs. We store URLs as facts; no Tamiya image is re-hosted. */
+  /**
+   * Link-outs, stored as facts. `officialImage` is Tamiya's full-size photo and
+   * is never rendered — what the site shows is `thumbnail`, our own 160x120
+   * downscale of it under public/thumbs (docs/PLAN.md §6 M1b). Absent when
+   * Tamiya publishes no photo or the fetch failed, and the UI falls back to the
+   * slot icon.
+   */
   officialUrl: z.string(),
   officialImage: z.string().optional(),
+  thumbnail: z.string().optional(),
   hkStoreUrl: z.string().optional(),
 
   /** Free-text 【基本スペック】 from Tamiya, kept for later spec parsing. */
@@ -309,6 +316,11 @@ export const chassisSchema = z.object({
   weightG: z.number().optional(),
   status: z.enum(['current', 'rerelease', 'discontinued']),
   notes: z.string().optional(),
+  /**
+   * Our downscale of Tamiya's chassis photo. A chassis is not a catalogue item,
+   * so the only place Tamiya pictures one is the chassis select page.
+   */
+  thumbnail: z.string().optional(),
   slots: z.array(z.object({
     id: z.string(),
     type: z.enum(SLOTS),
@@ -388,6 +400,7 @@ export const kitSchema = z.object({
 
   officialUrl: z.string(),
   officialImage: z.string().optional(),
+  thumbnail: z.string().optional(),
   hkStoreUrl: z.string().optional(),
 
   specsRaw: z.string().optional(),

@@ -15,6 +15,7 @@ import {
   counterpartParts, partsForSlot, resolveBuild, swappableSlotTypes
 } from '#shared/catalog/build'
 import { orderKits } from '#shared/catalog/kits'
+import { flagThumbnail, thumbnailSrc } from '#shared/catalog/thumbnails'
 import { SCENE_CHASSIS } from '#shared/scene/chassis'
 import type { ResolvedSlot } from '#shared/catalog/build'
 import type { ChassisId, Slot } from '#shared/catalog/schema'
@@ -42,17 +43,17 @@ const { data: catalog } = await useAsyncData('build-catalog', async () => {
   const [chassis, parts, kits] = await Promise.all([
     queryCollection('chassis')
       .select('id', 'stem', 'names', 'slots', 'defaultLoadout',
-        'motorShaft', 'motorPosition', 'releaseYear', 'notes')
+        'motorShaft', 'motorPosition', 'releaseYear', 'notes', 'thumbnail')
       .all(),
     queryCollection('parts')
       .select('id', 'stem', 'names', 'category', 'slots', 'isCarPart',
-        'chassisCompat', 'classLegality', 'specs', 'priceJpy')
+        'chassisCompat', 'classLegality', 'specs', 'priceJpy', 'thumbnail')
       .all(),
     // `releaseDate` is selected but deliberately not shipped: it orders the
     // picker and nothing renders it, so it is dropped again below.
     queryCollection('kits')
       .select('id', 'stem', 'names', 'chassis', 'status', 'gearRatio',
-        'releaseDate', 'officialImage',
+        'releaseDate', 'thumbnail',
         'loadoutSource', 'loadoutSourceTitle', 'stockLoadout')
       .all()
   ])
@@ -61,7 +62,12 @@ const { data: catalog } = await useAsyncData('build-catalog', async () => {
   // the Tamiya item number back. Building the chassis id set from the raw docs
   // gives a set of file paths, against which every kit's `ma`/`vs`/`ar` fails —
   // silently, as an empty picker rather than an error.
-  const known = chassis.map(fromContent('chassis'))
+  //
+  // `flagThumbnail` is the other normalisation, applied to all three
+  // collections below: it swaps each record's stored thumbnail path for the one
+  // bit of it the client cannot derive, worth 1.8 KB gzipped across the parts
+  // and kits (shared/catalog/thumbnails.ts).
+  const known = chassis.map(fromContent('chassis')).map(flagThumbnail)
   const chassisIds = new Set(known.map(c => c.id))
   return {
     chassis: known,
@@ -70,7 +76,8 @@ const { data: catalog } = await useAsyncData('build-catalog', async () => {
     // them at prerender rather than shipping and re-filtering in the browser
     // takes 56 of 382 records out of the payload.
     parts: parts.map(fromContent('parts'))
-      .filter(part => part.isCarPart && part.slots.some(slot => slot !== 'none')),
+      .filter(part => part.isCarPart && part.slots.some(slot => slot !== 'none'))
+      .map(flagThumbnail),
     // Ordered here rather than in the picker, and then stripped of the field
     // that ordered it. Sorting once at prerender beats re-sorting on every
     // keystroke, and it lets `releaseDate` — which nothing renders — stay out
@@ -82,7 +89,7 @@ const { data: catalog } = await useAsyncData('build-catalog', async () => {
     // kit is in that state today; this keeps it that way through a descoped
     // chassis rather than trusting it.
     kits: orderKits(kits.map(fromContent('kits')).filter(kit => chassisIds.has(kit.chassis)))
-      .map(({ releaseDate: _releaseDate, ...kit }) => kit)
+      .map(({ releaseDate: _releaseDate, ...kit }) => flagThumbnail(kit))
   }
 })
 
@@ -107,6 +114,14 @@ const chassis = computed(() =>
  */
 const kit = computed(() =>
   catalog.value?.kits.find(k => k.id === build.value?.kit))
+
+/**
+ * The box if the build came from a kit, the bare chassis if not. Nothing before
+ * a base is chosen: the placeholder car above is MA, but this row says no base
+ * is picked yet, and a photo would contradict it.
+ */
+const baseThumb = computed(() =>
+  thumbnailSrc('kits', kit.value) ?? thumbnailSrc('chassis', chassis.value))
 
 /** A build naming a chassis we do not ship is no build at all. */
 const hasBuild = computed(() => !!chassis.value)
@@ -298,20 +313,25 @@ useHead(() => ({ title: `${t('build.title')} — ${t('site.title')}` }))
            which chassis is inside. -->
       <li class="slot-row base-row">
         <div class="slot-label">{{ $t('build.base') }}</div>
-        <div class="slot-entries">
-          <template v-if="hasBuild && chassis">
-            <p class="slot-entry" :class="{ fallback: kit && isFallback(kit.names) }">
-              {{ kit ? resolve(kit.names).value : resolve(chassis.names).value }}
-            </p>
-            <p class="build-subtitle">
-              <span>{{ kit ? resolve(chassis.names).value : $t('build.bareChassis') }}</span>
-              <span v-if="kit?.gearRatio">{{ kit.gearRatio }}</span>
-              <span v-if="kit?.status === 'limited'" class="kit-status">
-                {{ $t('build.kitStatus.limited') }}
-              </span>
-            </p>
-          </template>
-          <p v-else class="slot-empty">{{ $t('build.noBase') }}</p>
+        <div class="slot-entries base-entry">
+          <!-- The box if the build came from a kit, the bare chassis if not:
+               the picture answers the same question the row's first line does. -->
+          <CatalogThumb class="base-thumb" :src="baseThumb" :icon="kit ? 'body' : 'chassis'" />
+          <div class="base-text">
+            <template v-if="hasBuild && chassis">
+              <p class="slot-entry" :class="{ fallback: kit && isFallback(kit.names) }">
+                {{ kit ? resolve(kit.names).value : resolve(chassis.names).value }}
+              </p>
+              <p class="build-subtitle">
+                <span>{{ kit ? resolve(chassis.names).value : $t('build.bareChassis') }}</span>
+                <span v-if="kit?.gearRatio">{{ kit.gearRatio }}</span>
+                <span v-if="kit?.status === 'limited'" class="kit-status">
+                  {{ $t('build.kitStatus.limited') }}
+                </span>
+              </p>
+            </template>
+            <p v-else class="slot-empty">{{ $t('build.noBase') }}</p>
+          </div>
         </div>
         <div class="slot-actions">
           <button type="button" :class="{ primary: !hasBuild }" @click="baseOpen = true">
@@ -355,6 +375,12 @@ useHead(() => ({ title: `${t('build.title')} — ${t('site.title')}` }))
     <!-- Sits with the slot list it credits rather than in a page footer, so
          the attribution travels with the content it covers. -->
     <BuildKitCredit v-if="kit" :kit="kit" />
+
+    <!-- The pictures are ours to serve but not ours to own: thumbnails we
+         generated from Tamiya's product photos (docs/PLAN.md §6 M1b). Credited
+         on the page that shows them, list and pickers alike, rather than only
+         on a site-wide attribution page. -->
+    <p class="image-credit">{{ $t('build.imageCredit') }}</p>
 
     <LazyBuildBasePicker
       v-if="baseOpen"

@@ -3,6 +3,8 @@ import { join } from 'node:path'
 import { stringify } from 'yaml'
 import { ROOT } from './fetch.ts'
 import { readJsonFile, readYamlFile, readYamlFileIfPresent } from './io.ts'
+import { thumbnailIds } from './thumbnails.ts'
+import { thumbnailPath, type ThumbCollection } from '../../shared/catalog/thumbnails.ts'
 import { partSchema, chassisSchema, kitSchema, CHASSIS_IDS, chassisIdFor } from '../../shared/catalog/schema.ts'
 import type { ChassisId, KitOverride, LabelNames, Loadout, PartOverride } from '../../shared/catalog/schema.ts'
 import { compact, deriveCategory, deriveLegality, deriveSlots, deriveSpecs, isPlainObject, normalise } from './taxonomy.ts'
@@ -33,6 +35,20 @@ const kitOverrides = readYamlFileIfPresent<Record<string, KitOverride>>('data/ov
 const slotProfiles = readYamlFile<{ profiles: Record<string, unknown[]> }>('data/taxonomy/slots.yml').profiles
 
 const hkById = new Map(hkItems.map(item => [item.id, item]))
+
+/**
+ * Which records have a thumbnail. Listed once per collection here rather than
+ * asked per record, because `buildPart` runs 690 times and the answer cannot
+ * change while it does.
+ */
+const thumbsByCollection = {
+  parts: thumbnailIds('parts'),
+  kits: thumbnailIds('kits'),
+  chassis: thumbnailIds('chassis')
+}
+
+const thumbnailFor = (collection: ThumbCollection, id: string) =>
+  thumbsByCollection[collection].has(id) ? thumbnailPath(collection, id) : undefined
 
 /**
  * Item number -> the wiki row describing that box. One row can cover several
@@ -126,6 +142,7 @@ function buildPart(item: JpItem<PartGenreCode>) {
     status: item.genre === '303010' || item.genre === '303030' ? 'current' : 'limited',
     officialUrl: item.officialUrl,
     officialImage: item.imageUrl,
+    thumbnail: thumbnailFor('parts', item.id),
     hkStoreUrl: hk?.url,
     specsRaw: item.specsRaw,
     scrapedAt: item.scrapedAt
@@ -267,6 +284,7 @@ function buildKit(item: JpItem<KitGenreCode>, chassis: ChassisId) {
     status: item.genre === '301085' || item.genre === '301086' ? 'limited' : 'current',
     officialUrl: item.officialUrl,
     officialImage: item.imageUrl,
+    thumbnail: thumbnailFor('kits', item.id),
     hkStoreUrl: hk?.url,
     specsRaw: item.specsRaw,
     scrapedAt: item.scrapedAt
@@ -337,6 +355,7 @@ for (const id of CHASSIS_IDS) {
   const record = {
     ...rest,
     slots: slotProfiles[slotProfile],
+    thumbnail: thumbnailFor('chassis', id),
     compatibleParts: (compat[id] ?? []).filter(itemId => selectedIds.has(itemId)).sort()
   }
   const result = chassisSchema.safeParse(record)

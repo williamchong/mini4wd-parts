@@ -48,6 +48,7 @@ priceHkd: 88
 status: current
 officialUrl: https://www.tamiya.com/japan/products/15186/index.html
 officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/15186/15186_1.jpg
+thumbnail: /thumbs/parts/15186.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-15186-jr-plasma-dash-motor/
 specsRaw: 適正電圧：2.4～3.0V 推奨負荷トルク：1.4～1.9mN･m 回転数：25000～28000r/min 消費電流：4.1～5.2A ※推奨負荷トルク時
-scrapedAt: 2026-09-08
+scrapedAt: 2026-09-16

@@ -1,5 +1,8 @@
+import { existsSync } from 'node:fs'
 import type { TypeOf, ZodTypeAny } from 'zod'
 import { readYamlDir } from './io.ts'
+import { thumbnailFile } from './thumbnails.ts'
+import { thumbnailPath, type ThumbCollection } from '../../shared/catalog/thumbnails.ts'
 import { partSchema, chassisSchema, kitSchema } from '../../shared/catalog/schema.ts'
 import type { Chassis, Loadout, Slot } from '../../shared/catalog/schema.ts'
 
@@ -66,6 +69,26 @@ function checkLoadout(label: string, entries: Loadout, host: Chassis) {
   }
 }
 
+/**
+ * A `thumbnail` must name a file that is actually there. The field is written
+ * from the directory listing (scripts/catalog/generate.ts), so a mismatch means
+ * the two have drifted — a thumbnail deleted by hand, say, or a record edited
+ * in content/ where nothing may be hand-edited. A broken picture would
+ * otherwise only show up in a browser.
+ */
+function checkThumbnail(collection: ThumbCollection, id: string, thumbnail?: string) {
+  if (!thumbnail) return
+  const expected = thumbnailPath(collection, id)
+  if (thumbnail !== expected) {
+    errors.push(`${collection}/${id}: thumbnail is "${thumbnail}", expected "${expected}"`)
+  }
+  else if (!existsSync(thumbnailFile(collection, id))) {
+    errors.push(`${collection}/${id}: thumbnail ${thumbnail} does not exist — run npm run catalog:thumbs`)
+  }
+}
+
+for (const part of parts) checkThumbnail('parts', part.id, part.thumbnail)
+
 const chassisById = new Map(chassis.map(entry => [entry.id, entry]))
 
 for (const entry of chassis) {
@@ -74,6 +97,7 @@ for (const entry of chassis) {
     errors.push(`chassis/${entry.id}: ${missing.length} compatibleParts not in the catalog (${missing.slice(0, 3).join(', ')}…)`)
   }
   checkLoadout(`chassis/${entry.id} defaultLoadout`, entry.defaultLoadout, entry)
+  checkThumbnail('chassis', entry.id, entry.thumbnail)
 }
 
 const kitIds = new Set<string>()
@@ -87,6 +111,7 @@ for (const kit of kits) {
     continue
   }
   checkLoadout(`kits/${kit.id} stockLoadout`, kit.stockLoadout, host)
+  checkThumbnail('kits', kit.id, kit.thumbnail)
 }
 
 if (errors.length) {
