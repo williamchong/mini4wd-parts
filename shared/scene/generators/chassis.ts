@@ -1,10 +1,10 @@
 /**
- * The chassis under the sockets, from primitives (docs/PLAN.md §5.6): a floor
- * with wheel-arch cheeks, a centre hump over the motor and batteries, the
- * moulded bumpers with their roller posts, and side guards — enough that the
- * sockets have a car to sit on and the moulded parts of a stock kit are seen.
- * Whether this is enough for M1 or the chassis becomes a modelled GLB is
- * decided after the parts look right against it (§5.6).
+ * The chassis under the sockets, built from prisms and revolves (docs/PLAN.md
+ * §5.6). There are eight chassis in the catalog and one of them is drawn today,
+ * so each gets the detail a reader would recognise it by rather than a tray:
+ * the tub with its side walls and wheel arches, the two AA cells beside the
+ * motor, the gear housings at each axle, the bumpers with their cut-outs and
+ * roller posts, the side guards and the switch.
  *
  * Positions match the socket table for the same chassis (../sockets.ts): the
  * roller posts stand under the roller sockets, the front-stay socket sits on
@@ -13,64 +13,83 @@
  */
 import type { BufferGeometry } from 'three'
 import type { ChassisId } from '../../catalog/schema.ts'
-import { Triangles } from './mesh.ts'
+import { cylinder, Triangles } from './mesh.ts'
 import type { Point2 } from './mesh.ts'
 
 export type ChassisPiece = { geometry: BufferGeometry; colour: number }
 
 const BLACK = 0x26292e
-const COVER = 0x353a42
+const CELL = 0xb9bec6
+const CELL_CAP = 0x3c4046
 
-/** A box by size and centre, the way the socket table thinks. */
-function box(t: Triangles, w: number, h: number, d: number, x: number, y: number, z: number) {
-  t.box(x - w / 2, y - h / 2, z - d / 2, x + w / 2, y + h / 2, z + d / 2)
-}
-
-/** A roller post: a short cylinder up from the bumper to the roller. */
-function post(t: Triangles, x: number, z: number) {
-  const profile: Point2[] = [[0, 4], [2, 4], [2, 13], [0, 13]]
-  const ring = new Triangles()
-  ring.revolve(profile, 8, 'y')
-  t.append(ring, x, 0, z)
-}
+/** A short cylinder up from the bumper to the roller. */
+const post = (t: Triangles, x: number, z: number) => t.revolve(cylinder(2, 4, 13), 8, 'y', [x, 0, z])
 
 /**
- * MA's bumper, seen from above: a wide plate whose outer corners carry the
- * roller posts, with the leading edge swept back between them. Outline is
- * counter-clockwise from above for the front; the rear is the same plate
- * mirrored in z, which reverses it.
+ * MA's bumper at one end: a crossbar carrying the roller posts, two arms
+ * sweeping out from the tub's corners to it, and a centre rib, which leaves
+ * the two cut-outs the real moulding has. Outlines are listed for the front
+ * and mirrored in z for the rear, which reverses them.
  */
 function bumper(t: Triangles, towardNose: 1 | -1) {
-  const z = (v: number) => v * towardNose
-  const outline: Point2[] = [
-    [-45, z(64)], [-45, z(80)], [-36, z(84)], [-18, z(78)], [18, z(78)], [36, z(84)], [45, z(80)], [45, z(64)],
-    [22, z(62)], [-22, z(62)]
+  const shapes: Point2[][] = [
+    // Crossbar, ends swept for the roller pads.
+    [[-46, 76], [-46, 82], [-38, 86], [38, 86], [46, 82], [46, 76]],
+    // Arms, from the tub corner out to the crossbar.
+    [[-29, 62], [-29, 66], [-40, 77], [-32, 77]],
+    [[32, 77], [40, 77], [29, 66], [29, 62]],
+    // Centre rib.
+    [[-5, 62], [-5, 77], [5, 77], [5, 62]]
   ]
-  if (towardNose < 0) outline.reverse()
-  t.prism(outline.map(([x, zz]) => [x, 4.5, zz] as const), outline.map(([x, zz]) => [x, 8, zz] as const))
+  for (const shape of shapes) {
+    const outline = shape.map(([x, z]) => [x, z * towardNose] as const)
+    if (towardNose < 0) outline.reverse()
+    t.plate(outline, 4.5, 8)
+  }
 }
 
 function ma(): ChassisPiece[] {
   const black = new Triangles()
-  box(black, 58, 3, 130, 0, 5.5, 0)
+  // The tub: a floor the width of the tread, and walls up its sides between
+  // the wheel arches, which is what shows below the body.
+  black.boxAt(58, 3, 128, 0, 5.5, 0)
+  for (const x of [-27, 27]) {
+    black.boxAt(4, 12, 40, x, 12, 0)
+    black.boxAt(4, 8, 10, x, 10, 60)
+    black.boxAt(4, 8, 10, x, 10, -60)
+  }
+  // Gear housings either side of each axle, inboard of the wheels.
+  for (const z of [-40, 40]) {
+    for (const x of [-18, 18]) black.boxAt(10, 14, 14, x, 12, z)
+  }
   bumper(black, 1)
   bumper(black, -1)
   for (const [x, z] of [[37, 78], [-37, 78], [37, -78], [-37, -78], [42, 0], [-42, 0]] as const) post(black, x, z)
-  // Side guards out to the side-roller posts at x = ±42.
-  box(black, 18, 4, 36, 38, 6, 0)
-  box(black, 18, 4, 36, -38, 6, 0)
-  // Wheel-arch cheeks between the axles: the flanks of an MA tub.
-  box(black, 6, 12, 44, 26, 12, 0)
-  box(black, 6, 12, 44, -26, 12, 0)
+  // Side guards out to the side-roller posts, with a slot each.
+  for (const x of [-38, 38]) {
+    black.boxAt(18, 4, 8, x, 6, 14)
+    black.boxAt(18, 4, 8, x, 6, -14)
+    black.boxAt(6, 4, 20, x + Math.sign(x) * 6, 6, 0)
+  }
+  // The switch, a slider behind the rear axle.
+  black.boxAt(8, 4, 12, 0, 9, -52)
+  // Motor cover clip over the motor's middle.
+  black.boxAt(22, 2, 12, 0, 28.5, 0)
 
-  // Battery bay behind the motor, motor cover over it; the motor pokes up through.
-  const cover = new Triangles()
-  box(cover, 30, 8, 100, 0, 11, 0)
-  box(cover, 24, 4, 30, 0, 17, 0)
+  // Two AA cells, one each side of the motor, lying along the car.
+  const cells = new Triangles()
+  const caps = new Triangles()
+  for (const x of [-17.5, 17.5]) {
+    cells.revolve(cylinder(7.2, -25, 25), 12, 'z', [x, 11.5, 0])
+    // Terminal plates at the ends of each cell.
+    caps.boxAt(12, 14, 1.5, x, 11.5, 26.5)
+    caps.boxAt(12, 14, 1.5, x, 11.5, -26.5)
+  }
 
   return [
     { geometry: black.geometry(), colour: BLACK },
-    { geometry: cover.geometry(), colour: COVER }
+    { geometry: cells.geometry(), colour: CELL },
+    { geometry: caps.geometry(), colour: CELL_CAP }
   ]
 }
 

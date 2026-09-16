@@ -13,7 +13,7 @@
  * Nothing here runs during prerender.
  */
 import {
-  AmbientLight, BoxGeometry, CylinderGeometry, DirectionalLight, DoubleSide, FrontSide, Group, Mesh,
+  AmbientLight, BoxGeometry, CylinderGeometry, DirectionalLight, Group, Mesh,
   MeshStandardMaterial, PerspectiveCamera, Raycaster, Scene, SphereGeometry,
   Vector2, Vector3, WebGLRenderer
 } from 'three'
@@ -26,6 +26,7 @@ import { bodyGeometry } from '#shared/scene/generators/body'
 import type { Silhouette } from '#shared/scene/generators/body'
 import { chassisPieces } from '#shared/scene/generators/chassis'
 import * as parts from '#shared/scene/generators/parts'
+import { cylinder, Triangles } from '#shared/scene/generators/mesh'
 import type { ResolvedSlot } from '#shared/catalog/build'
 import type { ChassisId, PartSpecs } from '#shared/catalog/schema'
 
@@ -69,8 +70,10 @@ const shapeKey = (kind: ProxyKind, s: Shape) => `${kind}:${s.mm}:${s.wheelMm}:${
 /** The kinds whose hit volume scales with `mm`; the others are fixed boxes. */
 const ROUND: ReadonlySet<ProxyKind> = new Set(['wheel', 'tire', 'roller'])
 
-const VISIBLE: Record<ProxyKind, (shape: Shape) => BufferGeometry> = {
-  body: shape => bodyGeometry(silhouetteFor(shape.silhouette)),
+/** Every kind but the body, whose shell is lofted per kit and held apart from these tables. */
+type Solid = Exclude<ProxyKind, 'body'>
+
+const VISIBLE: Record<Solid, (shape: Shape) => BufferGeometry> = {
   motor: () => parts.motor(),
   wheel: shape => parts.wheel(shape.mm),
   tire: shape => parts.tire(shape.wheelMm, shape.mm - shape.wheelMm),
@@ -82,6 +85,33 @@ const VISIBLE: Record<ProxyKind, (shape: Shape) => BufferGeometry> = {
 }
 
 const DEFAULT_PLATE_MM = 1.5
+
+/**
+ * What an empty slot shows: the simplest outline of the shape that would go
+ * there, drawn in wireframe. Simpler than the real shapes on purpose — a
+ * wireframe of a 16-segment revolve is a tangle, an octagonal ring is a slot.
+ * An empty body draws its loft in wireframe, which reads as a car outline.
+ */
+const outlineBox = (w: number, h: number, d: number, y = 0) => {
+  const t = new Triangles()
+  t.boxAt(w, h, d, 0, y, 0)
+  return t.geometry()
+}
+const outlineRing = (r: number, w: number, axis: 'x' | 'y') => {
+  const t = new Triangles()
+  t.revolve(cylinder(r, -w / 2, w / 2), 8, axis)
+  return t.geometry()
+}
+const OUTLINE: Record<Solid, (shape: Shape) => BufferGeometry> = {
+  motor: () => outlineBox(20, 20, 25),
+  wheel: shape => outlineRing(shape.mm / 2, 10, 'x'),
+  tire: shape => outlineRing(shape.mm / 2, 9, 'x'),
+  roller: shape => outlineRing(shape.mm / 2, 4, 'y'),
+  stay: shape => outlineBox(80, shape.mm, 18, 1 + shape.mm / 2),
+  'side-stay': shape => outlineBox(18, shape.mm, 44, 1 + shape.mm / 2),
+  brake: () => outlineBox(40, 5, 14, -1.5),
+  damper: () => outlineBox(9, 10, 9)
+}
 
 /**
  * The diameter a round proxy is drawn at, in millimetres. A roller or wheel
@@ -121,12 +151,12 @@ function diameterFor(kind: ProxyKind, slot: ResolvedSlot, bySlot: Map<string, Re
  * the hub is the wheel and one on the band is the tire; whether a thumb can
  * tell them apart is what the phone test decides.
  *
- * The body is the exception in the other direction. Measured on a phone-sized
- * frame (2026-09-16), a hit box the size of the body took 62 of 81 taps aimed
- * at a front wheel and the top third of the taps aimed at a front roller: it
- * is the largest thing on the car and it sits in front of everything else from
- * most angles. So its hit volume is the roof only, and `slotAt` prefers any
- * other part along the ray besides.
+ * The body is the exception: its hit volume is its own shell, exactly what is
+ * drawn. While the body was a translucent box (§5.5) a box-sized hit stole
+ * taps aimed at the wheels behind it; now the shell is opaque, whatever the
+ * reader sees under their finger is what they get, and lifting the shell is
+ * how they reach what it covers. The entry here is only used for an empty
+ * body slot, whose outline is drawn in wireframe.
  */
 const HIT: Record<ProxyKind, (mm: number) => BufferGeometry> = {
   body: () => new BoxGeometry(40, 10, 130).translate(0, 10, 0),
@@ -182,6 +212,16 @@ type ProxyData = { slotId: string; state: ProxyState; kind: ProxyKind; tint: num
 let cleanup: (() => void) | undefined
 let resetCamera = () => {}
 
+/**
+ * The shell lifted off the chassis: the assembled car is what a reader
+ * recognises, the lifted one is how they reach the motor and cells under it.
+ * The toggle is in the pane, beside reset, and the list needs no equivalent
+ * because every slot is already a row there.
+ */
+const lifted = ref(false)
+const LIFT_MM = 24
+const LIFTED_OPACITY = 0.35
+
 onMounted(() => {
   const element = canvas.value
   const sockets = socketsFor(props.chassis)
@@ -192,7 +232,7 @@ onMounted(() => {
   const geometries = new Map<string, BufferGeometry>()
   const materials = new Map<string, MeshStandardMaterial>()
 
-  function geometry<T>(table: Record<ProxyKind, (arg: T) => BufferGeometry>, kind: ProxyKind, arg: T, key: string) {
+  function geometry<K extends ProxyKind, T>(table: Record<K, (arg: T) => BufferGeometry>, kind: K, arg: T, key: string) {
     let found = geometries.get(key)
     if (!found) {
       found = table[kind](arg)
@@ -210,9 +250,30 @@ onMounted(() => {
   function bodyFor(id: string) {
     if (body?.id !== id) {
       body?.geometry.dispose()
-      body = { id, geometry: bodyGeometry(silhouetteFor(id)) }
+      const geometry = bodyGeometry(silhouetteFor(id))
+      // The shell is its own hit volume, and a long thin shell's bounding box
+      // rejects most rays before its triangles are tested; its sphere would not.
+      geometry.computeBoundingBox()
+      body = { id, geometry }
     }
     return body.geometry
+  }
+
+  /**
+   * The shell's material, on its own rather than in the cache: its opacity is
+   * animated every frame of a lift, which no shared material may be. It is
+   * always transparent, because whether a material is opaque is baked into
+   * its shader program and flipping it mid-lift would recompile; at opacity 1
+   * a transparent material draws identically, and it is the only one in the
+   * scene, so there is nothing for it to sort against.
+   */
+  const shell = new MeshStandardMaterial({ roughness: 0.55, metalness: 0.1, transparent: true })
+  function styleShell(state: Exclude<ProxyState, 'empty'>, highlight: Highlight, tint: number) {
+    const colour = state === 'stock' ? tint : COLOUR[state]
+    shell.color.setHex(colour)
+    shell.emissive.setHex(colour)
+    shell.emissiveIntensity = highlight === 'open' ? 0.6 : highlight === 'hover' ? 0.3 : 0
+    return shell
   }
 
   /** The chassis' own materials, one per colour, disposed with the rest. */
@@ -232,22 +293,20 @@ onMounted(() => {
    * emissive lift of the same colour, which reads as "lit" without a post pass.
    */
   function material(state: ProxyState, highlight: Highlight, kind: ProxyKind, tint: number) {
-    // The body is the one proxy that encloses others: drawn solid it hides the
-    // motor and the inside of every wheel, so it is always see-through — and
-    // two-sided, so the far flank shows through the near one.
-    const opacity = state === 'empty' ? 0.3 : kind === 'body' ? 0.45 : 1
+    // An empty slot is an outline, not a ghost: a translucent solid read as a
+    // part that was half there. Everything else is opaque, the body included —
+    // what it covers is reached by lifting it.
+    if (kind === 'body' && state !== 'empty') return styleShell(state, highlight, tint)
     const colour = state === 'stock' ? tint : COLOUR[state]
     const finish = FINISH[kind]
-    const key = `${state}:${highlight}:${opacity}:${colour}:${finish}`
+    const key = `${state}:${highlight}:${colour}:${finish}`
     let found = materials.get(key)
     if (!found) {
       found = new MeshStandardMaterial({
         color: colour,
         roughness: finish === 'rubber' ? 0.9 : 0.55,
         metalness: finish === 'metal' ? 0.5 : 0.1,
-        transparent: opacity < 1,
-        opacity,
-        side: finish === 'shell' ? DoubleSide : FrontSide,
+        wireframe: state === 'empty',
         emissive: colour,
         emissiveIntensity: highlight === 'open' ? 0.6 : highlight === 'hover' ? 0.3 : 0
       })
@@ -336,9 +395,34 @@ onMounted(() => {
     if (sized && !frame) frame = requestAnimationFrame(tick)
   }
   let drawn = false
+
+  /**
+   * The body group eases toward its lifted or seated height, and the shell
+   * fades as it rises so it hides nothing of what it was covering. While it
+   * is still moving, each frame requests the next — through `requestRender`,
+   * whose guard is what stops a frame being scheduled twice when the controls
+   * are coasting at the same time.
+   */
+  const bodyGroup = groups.get('body')
+  const bodyRestY = bodyGroup?.position.y ?? 0
+  function tickBody() {
+    if (!bodyGroup) return
+    const target = bodyRestY + (lifted.value ? LIFT_MM : 0)
+    const remaining = target - bodyGroup.position.y
+    if (Math.abs(remaining) > 0.05) {
+      bodyGroup.position.y += remaining * 0.18
+      requestRender()
+    } else {
+      bodyGroup.position.y = target
+    }
+    const progress = (bodyGroup.position.y - bodyRestY) / LIFT_MM
+    shell.opacity = 1 - progress * (1 - LIFTED_OPACITY)
+  }
+
   function tick() {
     frame = 0
     controls.update()
+    tickBody()
     renderer.render(scene, camera)
     if (!drawn) {
       drawn = true
@@ -388,18 +472,25 @@ onMounted(() => {
       }
       const tint = stockTint(socket.kind, shape.silhouette, livery)
       const data: ProxyData = { slotId: socket.slotId, state, kind: socket.kind, tint }
+      const table = state === 'empty' ? OUTLINE : VISIBLE
       const visibleGeometry = socket.kind === 'body'
         ? bodyFor(shape.silhouette)
-        : geometry(VISIBLE, socket.kind, shape, `v:${shapeKey(socket.kind, shape)}`)
+        : geometry(table, socket.kind, shape, `${table === OUTLINE ? 'o' : 'v'}:${shapeKey(socket.kind, shape)}`)
       const visible = new Mesh(visibleGeometry, material(state, highlightFor(socket.slotId), socket.kind, tint))
       visible.userData = data
-      const hitMm = ROUND.has(socket.kind) ? mm : 0
-      const hit = new Mesh(geometry(HIT, socket.kind, hitMm, `h:${socket.kind}:${hitMm}`))
-      hit.visible = false
-      hit.userData = data
-      group.add(visible, hit)
-      hits.push(hit)
       proxies.push(visible)
+      // The shell is its own hit volume; everything else gets an oversized one.
+      if (socket.kind === 'body' && state !== 'empty') {
+        group.add(visible)
+        hits.push(visible)
+      } else {
+        const hitMm = ROUND.has(socket.kind) ? mm : 0
+        const hit = new Mesh(geometry(HIT, socket.kind, hitMm, `h:${socket.kind}:${hitMm}`))
+        hit.visible = false
+        hit.userData = data
+        group.add(visible, hit)
+        hits.push(hit)
+      }
       // A tire larger than the axle height would sink into the ground: raise
       // the whole car instead, by the largest tire on it.
       if (socket.kind === 'tire') lift = Math.max(lift, mm / 2 - socket.position[1])
@@ -420,7 +511,7 @@ onMounted(() => {
   const raycaster = new Raycaster()
   const pointer = new Vector2()
 
-  function slotAt(clientX: number, clientY: number): string | null {
+  function proxyAt(clientX: number, clientY: number): ProxyData | null {
     const rect = element!.getBoundingClientRect()
     pointer.set(
       ((clientX - rect.left) / rect.width) * 2 - 1,
@@ -428,10 +519,9 @@ onMounted(() => {
     )
     raycaster.setFromCamera(pointer, camera)
     const along = raycaster.intersectObjects(hits, false).map(hit => hit.object.userData as ProxyData)
-    // Nearest wins, except that the body loses to anything seen through it:
-    // it is translucent, so the wheel behind it is what the reader is looking at.
-    const chosen = along.find(data => data.kind !== 'body') ?? along[0]
-    return chosen?.slotId ?? null
+    // Nearest wins, except that an empty body — a wireframe — loses to
+    // whatever is seen through it.
+    return along.find(data => data.kind !== 'body' || data.state !== 'empty') ?? along[0] ?? null
   }
 
   let down: { x: number; y: number } | null = null
@@ -449,14 +539,18 @@ onMounted(() => {
     const moved = Math.hypot(event.clientX - down.x, event.clientY - down.y)
     down = null
     if (moved > TAP_SLOP_PX) return
-    const slotId = slotAt(event.clientX, event.clientY)
-    if (slotId) emit('select', slotId)
+    const proxy = proxyAt(event.clientX, event.clientY)
+    // The shell is the exception: a tap lifts it or seats it, and the body is
+    // changed from its row in the list. Tapping the biggest thing on the car
+    // to open a picker would make the picker the thing that keeps opening.
+    if (proxy?.kind === 'body') lifted.value = !lifted.value
+    else if (proxy) emit('select', proxy.slotId)
   }
 
   // Hover is a mouse affordance; a finger has nothing to hover with.
   function onPointerMove(event: PointerEvent) {
     if (event.pointerType !== 'mouse' || down) return
-    const next = slotAt(event.clientX, event.clientY)
+    const next = proxyAt(event.clientX, event.clientY)?.slotId ?? null
     if (next === hovered) return
     hovered = next
     element!.style.cursor = next ? 'pointer' : 'grab'
@@ -505,6 +599,7 @@ onMounted(() => {
 
   const stopSlots = watch(() => props.slots, populate)
   const stopOpen = watch(() => props.openSlotId, restyle)
+  const stopLift = watch(lifted, requestRender)
 
   // Damping keeps applying the last drag's momentum after `reset()`, so a
   // reset pressed while the view is still coasting would drift off home.
@@ -522,6 +617,7 @@ onMounted(() => {
     controls.removeEventListener('change', requestRender)
     stopSlots()
     stopOpen()
+    stopLift()
     resize.disconnect()
     for (const [type, handler] of listeners) element.removeEventListener(type, handler)
     controls.dispose()
@@ -535,6 +631,7 @@ onMounted(() => {
     for (const g of geometries.values()) g.dispose()
     body?.geometry.dispose()
     for (const m of materials.values()) m.dispose()
+    shell.dispose()
     geometries.clear()
     materials.clear()
   }
@@ -551,6 +648,9 @@ onBeforeUnmount(() => cleanup?.())
     <canvas ref="canvas" role="img" :aria-label="$t('build.scene.label')" />
     <button type="button" class="scene-reset" @click="resetCamera()">
       {{ $t('build.scene.resetCamera') }}
+    </button>
+    <button type="button" class="scene-lift" :aria-pressed="lifted" @click="lifted = !lifted">
+      {{ $t(lifted ? 'build.scene.fitBody' : 'build.scene.liftBody') }}
     </button>
   </div>
 </template>

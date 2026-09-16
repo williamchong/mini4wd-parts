@@ -18,11 +18,8 @@
  * the 3D chunk and nothing on a route's own JavaScript grows.
  */
 import type { BufferGeometry } from 'three'
-import { plate, Triangles } from './mesh.ts'
+import { cylinder, plate, Triangles } from './mesh.ts'
 import type { Point2 } from './mesh.ts'
-
-/** The revolve profile of a solid cylinder: radius `r`, from `h0` to `h1` along the axis. */
-const cylinder = (r: number, h0: number, h1: number): Point2[] => [[0, h0], [r, h0], [r, h1], [0, h1]]
 
 /**
  * A roller: a ring with a raised hub, so it reads as a bearing on a post

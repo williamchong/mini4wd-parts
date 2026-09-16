@@ -288,7 +288,8 @@ button.link {
   cursor: grab;
 }
 
-.scene-reset {
+.scene-reset,
+.scene-lift {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
@@ -300,6 +301,17 @@ button.link {
   border: 1px solid #c8ced4;
   border-radius: 4px;
   cursor: pointer;
+}
+
+.scene-lift {
+  right: auto;
+  left: 0.5rem;
+}
+
+.scene-lift[aria-pressed="true"] {
+  background: #2c3e50;
+  color: #fff;
+  border-color: #2c3e50;
 }
 
 /* Stands in for the canvas on chassis the pane cannot draw yet, so the frame

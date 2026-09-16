@@ -60,20 +60,39 @@ export class Triangles {
    * A closed profile in the (radius, along-axis) plane swept around an axis:
    * a rectangle makes a cylinder, an annulus profile a tire. The profile is
    * listed counter-clockwise with radius to the right and the axis up, and
-   * the result is closed, so it needs no caps.
+   * the result is closed, so it needs no caps. A point on the axis (radius 0)
+   * is one apex, not a ring of coincident points, so a capped cylinder is a
+   * fan at each end and no zero-area triangles: half of what a naive sweep
+   * of the same profile would emit.
    */
-  revolve(profile: readonly Point2[], segments: number, axis: 'x' | 'y' | 'z') {
-    const rings = profile.map(([r, h]) => {
-      const ring: Point3[] = []
-      for (let i = 0; i < segments; i++) {
-        const a = (i / segments) * Math.PI * 2
-        const u = r * Math.cos(a)
-        const v = r * Math.sin(a)
-        ring.push(axis === 'x' ? [h, u, v] : axis === 'y' ? [v, h, u] : [u, v, h])
+  revolve(profile: readonly Point2[], segments: number, axis: 'x' | 'y' | 'z', [ox, oy, oz]: Point3 = [0, 0, 0]) {
+    const place = (r: number, h: number, i: number): Point3 => {
+      const a = (i / segments) * Math.PI * 2
+      const u = r * Math.cos(a)
+      const v = r * Math.sin(a)
+      const [x, y, z]: Point3 = axis === 'x' ? [h, u, v] : axis === 'y' ? [v, h, u] : [u, v, h]
+      return [x + ox, y + oy, z + oz]
+    }
+    const ring = ([r, h]: Point2): Point3[] => Array.from({ length: segments }, (_, i) => place(r, h, i))
+    for (let k = 0; k < profile.length; k++) {
+      const a = profile[k]!
+      const b = profile[(k + 1) % profile.length]!
+      if (a[0] === 0 && b[0] === 0) continue
+      if (a[0] > 0 && b[0] > 0) {
+        this.loft([ring(a), ring(b)])
+        continue
       }
-      return ring
-    })
-    this.loft([...rings, rings[0]!])
+      // One end on the axis: the same quads as the loft with the degenerate
+      // ring collapsed to its apex, which keeps the winding the loft has.
+      const [apexProfile, rimProfile] = a[0] === 0 ? [a, b] : [b, a]
+      const apex = place(0, apexProfile[1], 0)
+      const rim = ring(rimProfile)
+      for (let i = 0; i < segments; i++) {
+        const n = (i + 1) % segments
+        if (a[0] === 0) this.tri(apex, rim[n]!, rim[i]!)
+        else this.tri(rim[i]!, rim[n]!, apex)
+      }
+    }
   }
 
   /** An axis-aligned box from two corners. */
@@ -81,6 +100,16 @@ export class Triangles {
     const bottom: Point3[] = [[x0, y0, z0], [x0, y0, z1], [x1, y0, z1], [x1, y0, z0]]
     const top: Point3[] = bottom.map(([x, , z]) => [x, y1, z] as const)
     this.prism(bottom, top)
+  }
+
+  /** A box by size and centre, the way the socket table thinks. */
+  boxAt(w: number, h: number, d: number, x = 0, y = 0, z = 0) {
+    this.box(x - w / 2, y - h / 2, z - d / 2, x + w / 2, y + h / 2, z + d / 2)
+  }
+
+  /** A flat plate from a plan-view outline (x, z), counter-clockwise from above, between two heights. */
+  plate(outline: readonly Point2[], y0: number, y1: number) {
+    this.prism(outline.map(([x, z]) => [x, y0, z] as const), outline.map(([x, z]) => [x, y1, z] as const))
   }
 
   /**
@@ -97,12 +126,6 @@ export class Triangles {
     }
   }
 
-  /** Another set's triangles, translated. */
-  append(other: Triangles, dx = 0, dy = 0, dz = 0) {
-    const p = other.positions
-    for (let i = 0; i < p.length; i += 3) this.positions.push(p[i]! + dx, p[i + 1]! + dy, p[i + 2]! + dz)
-  }
-
   geometry(): BufferGeometry {
     const geometry = new BufferGeometry()
     geometry.setAttribute('position', new Float32BufferAttribute(this.positions, 3))
@@ -111,9 +134,12 @@ export class Triangles {
   }
 }
 
-/** A flat plate from a plan-view outline (x, z), counter-clockwise from above, between two heights. */
-export function plate(outline: readonly (readonly [x: number, z: number])[], y0: number, y1: number): BufferGeometry {
+/** A plate on its own, for a part that is nothing else. */
+export function plate(outline: readonly Point2[], y0: number, y1: number): BufferGeometry {
   const t = new Triangles()
-  t.prism(outline.map(([x, z]) => [x, y0, z] as const), outline.map(([x, z]) => [x, y1, z] as const))
+  t.plate(outline, y0, y1)
   return t.geometry()
 }
+
+/** The revolve profile of a solid cylinder: radius `r`, from `h0` to `h1` along the axis. */
+export const cylinder = (r: number, h0: number, h1: number): Point2[] => [[0, h0], [r, h0], [r, h1], [0, h1]]
