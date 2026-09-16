@@ -13,7 +13,7 @@
  * Nothing here runs during prerender.
  */
 import {
-  AmbientLight, BoxGeometry, CylinderGeometry, DirectionalLight, Group, Mesh,
+  AmbientLight, BoxGeometry, CylinderGeometry, DirectionalLight, DoubleSide, FrontSide, Group, Mesh,
   MeshStandardMaterial, PerspectiveCamera, Raycaster, Scene, SphereGeometry,
   Vector2, Vector3, WebGLRenderer
 } from 'three'
@@ -21,11 +21,18 @@ import type { BufferGeometry } from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { socketsFor } from '#shared/scene/sockets'
 import type { ProxyKind } from '#shared/scene/sockets'
+import { silhouetteFor, silhouetteId } from '#shared/scene/bodies'
+import { bodyGeometry } from '#shared/scene/generators/body'
+import type { Silhouette } from '#shared/scene/generators/body'
+import { chassisPieces } from '#shared/scene/generators/chassis'
+import * as parts from '#shared/scene/generators/parts'
 import type { ResolvedSlot } from '#shared/catalog/build'
 import type { ChassisId, PartSpecs } from '#shared/catalog/schema'
 
 const props = defineProps<{
   chassis: ChassisId
+  /** The kit the build started from, whose box art the body shell is drawn after. */
+  kit: string | null
   slots: ResolvedSlot[]
   /** The catalog by item number, read only for the specs that size a proxy. */
   parts: ReadonlyMap<string, { specs: PartSpecs }>
@@ -50,22 +57,31 @@ type ProxyState = 'stock' | 'changed' | 'empty'
 type Highlight = 'none' | 'hover' | 'open'
 
 /**
- * Sizes are category defaults in millimetres (§5.5), except that the round
- * parts take the diameter `diameterFor` finds on the part. Box arguments are
- * width (x, across the car), height (y), depth (z, along the car). Wheels and
- * tires spin about x, rollers about y.
+ * What sizes a shape: `mm` is what `diameterFor` finds for the kind — a round
+ * part's diameter, a plate's thickness — `wheelMm` the wheel a tire sits on,
+ * `silhouette` which table entry a body is lofted from, and `towardNose`
+ * which end a stay faces. Each field is zero for the kinds that ignore it, so
+ * the cache key built from them holds one geometry per shape that actually
+ * differs. The shapes themselves come from shared/scene/generators (§5.6).
  */
-const VISIBLE: Record<ProxyKind, (mm: number) => BufferGeometry> = {
-  body: () => new BoxGeometry(40, 30, 130),
-  motor: () => new BoxGeometry(30, 15, 20),
-  wheel: mm => new CylinderGeometry(mm / 2, mm / 2, 10, 24).rotateZ(Math.PI / 2),
-  tire: mm => new CylinderGeometry(mm / 2, mm / 2, 9, 24).rotateZ(Math.PI / 2),
-  roller: mm => new CylinderGeometry(mm / 2, mm / 2, 5, 20),
-  stay: () => new BoxGeometry(60, 2, 20),
-  'side-stay': () => new BoxGeometry(20, 2, 40),
-  brake: () => new BoxGeometry(40, 3, 14),
-  damper: () => new BoxGeometry(14, 10, 8)
+type Shape = { mm: number; wheelMm: number; silhouette: string; towardNose: 1 | -1 | 0 }
+const shapeKey = (kind: ProxyKind, s: Shape) => `${kind}:${s.mm}:${s.wheelMm}:${s.silhouette}:${s.towardNose}`
+/** The kinds whose hit volume scales with `mm`; the others are fixed boxes. */
+const ROUND: ReadonlySet<ProxyKind> = new Set(['wheel', 'tire', 'roller'])
+
+const VISIBLE: Record<ProxyKind, (shape: Shape) => BufferGeometry> = {
+  body: shape => bodyGeometry(silhouetteFor(shape.silhouette)),
+  motor: () => parts.motor(),
+  wheel: shape => parts.wheel(shape.mm),
+  tire: shape => parts.tire(shape.wheelMm, shape.mm - shape.wheelMm),
+  roller: shape => parts.roller(shape.mm),
+  stay: shape => parts.stay(shape.mm, shape.towardNose || 1),
+  'side-stay': shape => parts.sideStay(shape.mm),
+  brake: () => parts.brake(),
+  damper: () => parts.damper()
 }
+
+const DEFAULT_PLATE_MM = 1.5
 
 /**
  * The diameter a round proxy is drawn at, in millimetres. A roller or wheel
@@ -77,18 +93,22 @@ const VISIBLE: Record<ProxyKind, (mm: number) => BufferGeometry> = {
 const DEFAULT_DIAMETER_MM = { roller: 13, wheel: 20, tire: 26 } as const
 const TIRE_BAND_MM = DEFAULT_DIAMETER_MM.tire - DEFAULT_DIAMETER_MM.wheel
 
+function specsOf(slot: ResolvedSlot | undefined): PartSpecs | undefined {
+  const id = slot?.entries[0]?.partId
+  return id ? props.parts.get(id)?.specs : undefined
+}
+
+/** The wheel a tire socket's tire sits on: the wheel slot at the same end. */
+function wheelUnder(slot: ResolvedSlot, bySlot: Map<string, ResolvedSlot>): number {
+  return specsOf(bySlot.get(slot.id.replace('tire', 'wheel')))?.wheelDiameterMm ?? DEFAULT_DIAMETER_MM.wheel
+}
+
 function diameterFor(kind: ProxyKind, slot: ResolvedSlot, bySlot: Map<string, ResolvedSlot>): number {
-  const specs = (s: ResolvedSlot | undefined) => {
-    const id = s?.entries[0]?.partId
-    return id ? props.parts.get(id)?.specs : undefined
-  }
   switch (kind) {
-    case 'roller': return specs(slot)?.rollerDiameterMm ?? DEFAULT_DIAMETER_MM.roller
-    case 'wheel': return specs(slot)?.wheelDiameterMm ?? DEFAULT_DIAMETER_MM.wheel
-    case 'tire': {
-      const wheel = specs(bySlot.get(slot.id.replace('tire', 'wheel')))?.wheelDiameterMm
-      return specs(slot)?.tireDiameterMm ?? (wheel ? wheel + TIRE_BAND_MM : DEFAULT_DIAMETER_MM.tire)
-    }
+    case 'roller': return specsOf(slot)?.rollerDiameterMm ?? DEFAULT_DIAMETER_MM.roller
+    case 'stay': case 'side-stay': return specsOf(slot)?.plateThicknessMm ?? DEFAULT_PLATE_MM
+    case 'wheel': return specsOf(slot)?.wheelDiameterMm ?? DEFAULT_DIAMETER_MM.wheel
+    case 'tire': return specsOf(slot)?.tireDiameterMm ?? wheelUnder(slot, bySlot) + TIRE_BAND_MM
     default: return 0
   }
 }
@@ -120,16 +140,44 @@ const HIT: Record<ProxyKind, (mm: number) => BufferGeometry> = {
   damper: () => new BoxGeometry(18, 14, 12)
 }
 
-const COLOUR: Record<ProxyState, number> = {
-  stock: 0x4a7fd1,
+/**
+ * A changed part is orange and an empty slot grey, as before (§5.5). A stock
+ * part used to be blue as well; now that it has a shape it takes the colour
+ * the real thing mostly comes in, so a stock kit reads as a car and the
+ * orange still says what the reader changed. The body's colour is its kit's.
+ */
+const COLOUR: Record<Exclude<ProxyState, 'stock'>, number> = {
   changed: 0xe8842a,
   empty: 0xb8bcc2
+}
+/** What a material is besides its colour: the four finishes a proxy can have. */
+const FINISH: Record<ProxyKind, 'shell' | 'rubber' | 'metal' | 'plastic'> = {
+  body: 'shell',
+  motor: 'metal',
+  wheel: 'plastic',
+  tire: 'rubber',
+  roller: 'metal',
+  stay: 'plastic',
+  'side-stay': 'plastic',
+  brake: 'plastic',
+  damper: 'metal'
+}
+const STOCK_TINT: Record<ProxyKind, number> = {
+  body: 0xd8dbe0,
+  motor: 0x9aa0a8,
+  wheel: 0x3a3d42,
+  tire: 0x1d1f22,
+  roller: 0xc9ced6,
+  stay: 0x2a2d31,
+  'side-stay': 0x2a2d31,
+  brake: 0x3a3d42,
+  damper: 0xb9bec6
 }
 
 /** The pixel distance under which a pointer down/up pair is a tap, not an orbit. */
 const TAP_SLOP_PX = 6
 
-type ProxyData = { slotId: string; state: ProxyState; kind: ProxyKind }
+type ProxyData = { slotId: string; state: ProxyState; kind: ProxyKind; tint: number }
 
 let cleanup: (() => void) | undefined
 let resetCamera = () => {}
@@ -144,12 +192,36 @@ onMounted(() => {
   const geometries = new Map<string, BufferGeometry>()
   const materials = new Map<string, MeshStandardMaterial>()
 
-  function geometry(table: Record<ProxyKind, (mm: number) => BufferGeometry>, kind: ProxyKind, mm: number, prefix: string) {
-    const key = `${prefix}:${kind}:${mm}`
+  function geometry<T>(table: Record<ProxyKind, (arg: T) => BufferGeometry>, kind: ProxyKind, arg: T, key: string) {
     let found = geometries.get(key)
     if (!found) {
-      found = table[kind](mm)
+      found = table[kind](arg)
       geometries.set(key, found)
+    }
+    return found
+  }
+
+  /**
+   * The body is held apart from the cache: a kit change on the same chassis
+   * does not remount, and with a silhouette per kit the cache would keep every
+   * shell a reader had browsed past. One slot, disposed when the kit changes.
+   */
+  let body: { id: string; geometry: BufferGeometry } | undefined
+  function bodyFor(id: string) {
+    if (body?.id !== id) {
+      body?.geometry.dispose()
+      body = { id, geometry: bodyGeometry(silhouetteFor(id)) }
+    }
+    return body.geometry
+  }
+
+  /** The chassis' own materials, one per colour, disposed with the rest. */
+  function chassisMaterial(colour: number) {
+    const key = `chassis:${colour}`
+    let found = materials.get(key)
+    if (!found) {
+      found = new MeshStandardMaterial({ color: colour, roughness: 0.75 })
+      materials.set(key, found)
     }
     return found
   }
@@ -159,20 +231,24 @@ onMounted(() => {
    * so repopulating a socket allocates a mesh and nothing else. Highlight is an
    * emissive lift of the same colour, which reads as "lit" without a post pass.
    */
-  function material(state: ProxyState, highlight: Highlight, kind: ProxyKind) {
+  function material(state: ProxyState, highlight: Highlight, kind: ProxyKind, tint: number) {
     // The body is the one proxy that encloses others: drawn solid it hides the
-    // motor and the inside of every wheel, so it is always see-through.
+    // motor and the inside of every wheel, so it is always see-through — and
+    // two-sided, so the far flank shows through the near one.
     const opacity = state === 'empty' ? 0.3 : kind === 'body' ? 0.45 : 1
-    const key = `${state}:${highlight}:${opacity}`
+    const colour = state === 'stock' ? tint : COLOUR[state]
+    const finish = FINISH[kind]
+    const key = `${state}:${highlight}:${opacity}:${colour}:${finish}`
     let found = materials.get(key)
     if (!found) {
       found = new MeshStandardMaterial({
-        color: COLOUR[state],
-        roughness: 0.6,
-        metalness: 0.1,
+        color: colour,
+        roughness: finish === 'rubber' ? 0.9 : 0.55,
+        metalness: finish === 'metal' ? 0.5 : 0.1,
         transparent: opacity < 1,
         opacity,
-        emissive: COLOUR[state],
+        side: finish === 'shell' ? DoubleSide : FrontSide,
+        emissive: colour,
         emissiveIntensity: highlight === 'open' ? 0.6 : highlight === 'hover' ? 0.3 : 0
       })
       materials.set(key, found)
@@ -214,17 +290,21 @@ onMounted(() => {
   fill.position.set(-100, 80, -120)
   scene.add(key, fill)
 
-  // The chassis itself is not a slot, so it is one static tray under the
-  // sockets rather than a proxy; it exists to give the boxes a car to sit on.
-  const tray = new Mesh(new BoxGeometry(60, 6, 140), new MeshStandardMaterial({ color: 0x5b6470, roughness: 0.8 }))
-  tray.position.set(0, 8, 0)
-  scene.add(tray)
-
   const car = new Group()
+  // The chassis itself is not a slot, so it is drawn once under the sockets
+  // rather than as a proxy (shared/scene/generators/chassis.ts). It rides in
+  // the car group so a lift for large wheels raises it too.
+  const chassis = new Group()
+  for (const piece of chassisPieces(props.chassis) ?? []) {
+    chassis.add(new Mesh(piece.geometry, chassisMaterial(piece.colour)))
+  }
+  car.add(chassis)
+  const groups = new Map<string, Group>()
   for (const socket of sockets) {
     const group = new Group()
     group.name = socket.name
     group.position.set(...socket.position)
+    groups.set(socket.name, group)
     car.add(group)
   }
   scene.add(car)
@@ -268,42 +348,71 @@ onMounted(() => {
   controls.addEventListener('change', requestRender)
 
   let hits: Mesh[] = []
+  let proxies: Mesh[] = []
   let hovered: string | null = null
 
   const highlightFor = (slotId: string): Highlight =>
     slotId === props.openSlotId ? 'open' : slotId === hovered ? 'hover' : 'none'
 
+  /**
+   * The colour a stock part is drawn in: the kit's own for the body, and for
+   * the wheels and rollers when the kit's livery says they differ (white fin
+   * wheels, blue rollers); the category default otherwise.
+   */
+  function stockTint(kind: ProxyKind, bodySilhouette: string, livery: Silhouette): number {
+    if (kind === 'body') return silhouetteFor(bodySilhouette).colour
+    if (kind === 'wheel') return livery.wheelColour ?? STOCK_TINT.wheel
+    if (kind === 'roller') return livery.rollerColour ?? STOCK_TINT.roller
+    return STOCK_TINT[kind]
+  }
+
   /** The attach step: for each socket, clear it and add what its slot holds. */
   function populate() {
     const bySlot = new Map(props.slots.map(slot => [slot.id, slot]))
+    const livery = silhouetteFor(props.kit)
     hits = []
+    proxies = []
+    let lift = 0
     for (const socket of sockets!) {
-      const group = car.getObjectByName(socket.name)
+      const group = groups.get(socket.name)
       const slot = bySlot.get(socket.slotId)
       if (!group || !slot) continue
       group.clear()
       const state: ProxyState = !slot.entries.length ? 'empty' : slot.swapped ? 'changed' : 'stock'
-      const data: ProxyData = { slotId: socket.slotId, state, kind: socket.kind }
       const mm = diameterFor(socket.kind, slot, bySlot)
-      const visible = new Mesh(geometry(VISIBLE, socket.kind, mm, 'v'), material(state, highlightFor(socket.slotId), socket.kind))
+      const shape: Shape = {
+        mm,
+        wheelMm: socket.kind === 'tire' ? wheelUnder(slot, bySlot) : 0,
+        silhouette: socket.kind === 'body' ? silhouetteId(slot.swapped ? null : props.kit) : '',
+        towardNose: socket.kind === 'stay' ? (socket.position[2] < 0 ? -1 : 1) : 0
+      }
+      const tint = stockTint(socket.kind, shape.silhouette, livery)
+      const data: ProxyData = { slotId: socket.slotId, state, kind: socket.kind, tint }
+      const visibleGeometry = socket.kind === 'body'
+        ? bodyFor(shape.silhouette)
+        : geometry(VISIBLE, socket.kind, shape, `v:${shapeKey(socket.kind, shape)}`)
+      const visible = new Mesh(visibleGeometry, material(state, highlightFor(socket.slotId), socket.kind, tint))
       visible.userData = data
-      const hit = new Mesh(geometry(HIT, socket.kind, mm, 'h'))
+      const hitMm = ROUND.has(socket.kind) ? mm : 0
+      const hit = new Mesh(geometry(HIT, socket.kind, hitMm, `h:${socket.kind}:${hitMm}`))
       hit.visible = false
       hit.userData = data
       group.add(visible, hit)
       hits.push(hit)
+      proxies.push(visible)
+      // A tire larger than the axle height would sink into the ground: raise
+      // the whole car instead, by the largest tire on it.
+      if (socket.kind === 'tire') lift = Math.max(lift, mm / 2 - socket.position[1])
     }
+    car.position.y = lift
     requestRender()
   }
 
   /** Re-pick materials after hover or the open slot changed; no re-attach. */
   function restyle() {
-    for (const group of car.children) {
-      const visible = group.children[0]
-      if (visible instanceof Mesh) {
-        const data = visible.userData as ProxyData
-        visible.material = material(data.state, highlightFor(data.slotId), data.kind)
-      }
+    for (const visible of proxies) {
+      const data = visible.userData as ProxyData
+      visible.material = material(data.state, highlightFor(data.slotId), data.kind, data.tint)
     }
     requestRender()
   }
@@ -420,9 +529,11 @@ onMounted(() => {
     // recreated on every chassis change, and browsers cap live contexts.
     renderer.dispose()
     renderer.forceContextLoss()
-    tray.geometry.dispose()
-    tray.material.dispose()
+    for (const piece of chassis.children) {
+      if (piece instanceof Mesh) piece.geometry.dispose()
+    }
     for (const g of geometries.values()) g.dispose()
+    body?.geometry.dispose()
     for (const m of materials.values()) m.dispose()
     geometries.clear()
     materials.clear()

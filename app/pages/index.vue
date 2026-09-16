@@ -472,6 +472,7 @@ useHead(() => ({ title: `${t('build.title')} — ${t('site.title')}` }))
         v-if="hasScene && shownChassis && hydrated"
         :key="shownChassis.id"
         :chassis="shownChassis.id"
+        :kit="kit?.id ?? null"
         :slots="slots"
         :parts="partsById"
         :open-slot-id="openSlotId"
