@@ -552,6 +552,43 @@ Three workstreams. The catalog and builder ones are independent of the asset one
 
   **The payload estimate was wrong, and the reason is worth keeping.** The budget said "~25–35 KB over the wire". Measured on the generated route, 12 kit columns cost **+301 KB raw and +52.7 KB gzipped** (35.7 → 88.4 KB gzip; 183.7 → 484.6 KB raw). The same records as a standalone JSON array gzip to 23 KB, which is where the estimate came from — but Nuxt's payload format interns every repeated string into a table and replaces it with a numeric index, and that *inverts* which half is expensive. Of the 8,074 payload entries the kits add, only **1,809 are strings**; the other 6,265 are objects and arrays of unique integer references, which gzip cannot collapse the way it collapses `"Small Low-Profile Slick"` repeated 268 times. So the text is nearly free and the **shape** is the cost: 1,783 loadout entries × (an entry object + a label object + an array). Estimating a Nuxt payload by gzipping the equivalent JSON will under-count repetitive data every time.
 - Rule engine (§4.3) inline, three severities. Ship the rules that the committed data can actually answer — slot capacity, chassis compat, motor shaft type, class legality, tire diameter — and leave the ones needing data we do not have (total width, precise weight) as explicit "not checked yet" rather than guessing. Chassis compat and motor shaft already filter the picker, so a build assembled in the UI cannot break them; they stay rules because a build arriving from a URL was not assembled in the UI.
+
+  **Scoped 2026-09-16.** Counted before scoping, because the counts decide which rules can say anything:
+
+  - **Open and Stock Class never differ on a part.** All 382 parts carry the same `open` and `stockBmax` verdict (345 legal, 2 illegal, 35 unknown), which matches the research: Stock Class keeps Open's motor list and replaces only the modification rules (`docs/research/concepts-and-rules.md` §1.2). The class that differs is **Junior**, Tune motors only, with 17 parts illegal. So the done-criterion's "the motor is Open-only" has no data behind it and is reworded below. The motor category blurb from `8869b9e` says "some motors are not allowed in Stock Class" in both locale files, which is wrong for the same reason, and is corrected in this chunk.
+  - **Two §4.3 rules have no data.** `tireDiameterMm` and `weightG` are set on **0 of 382** parts, so tire diameter and minimum weight join total width as "not checked yet" rather than rules.
+  - **Stock builds raise no false alarms.** Of 305 kits, none leaves a required slot empty and none carries a part its chassis does not list. One, 95598, has a Junior-illegal stock motor (Light-Dash), which is a correct finding. Every bare chassis leaves `body` empty.
+  - **Slot capacity cannot be broken.** The picker writes one part per swap and `reconcileBuild` already cuts a link to `maxCount`, so a capacity rule would never fire. Dropped.
+  - **`buildClass` already exists and nothing reads it.** `useBuild` holds it (default `open`) and `partsForSlot` ranks by it, but there is no selector, and `PartCard.vue` still says the MVP builds against no class.
+
+  Three decisions, owner, 2026-09-16:
+
+  - **The done-criterion becomes a class-illegal motor**, e.g. a Dash motor with the class set to Junior. Researching whether any part really is Open-only (B-MAX's factory roller combinations and gear pairings are the likeliest candidates) was rejected for M1, because it means more research and probably schema changes.
+  - **The class stays out of the share link.** It describes the event the reader races, not the car, so a friend opening the link sees warnings for their own class. The link format stays at v1. The class is per-viewer state, and remembering it in `localStorage` is a convenience that must survive the storage being empty or throwing.
+  - **An empty body is a warning, not an error.** Every bare-chassis build starts that way, and red there reads as a mistake. Other empty required slots stay errors. No UI path produces one; only a link can.
+
+  **Code, not JSON rules, for M1.** §4.3 describes declarative rules with `message{locale}` in the data. There are four rule types, each needs part lookups that a rule format would have to reinvent, and the messages interpolate names resolved when the page renders. So rules are functions in `shared/catalog/rules.ts` and messages are `build.rules.*` i18n keys. Declarative rules wait for the contribution workflow (M4), which is what they were for.
+
+  | Rule | Severity | Fires when |
+  |---|---|---|
+  | `required-empty` | error; warning for `body` | a `required` slot has no entries |
+  | `chassis-incompatible` | error | `isChassisCompatible` fails; only a link can produce this |
+  | `motor-shaft` | error | motor shaft ≠ `chassis.motorShaft`; only a link can produce this |
+  | `class-illegal` | error | `classLegality[buildClass] === 'illegal'` |
+  | `class-unknown` | note | the verdict is `unknown` (one car part today, 15340) |
+  | `link-trimmed` | note | `reconcileBuild` dropped a kit, a slot or a part from the opened link |
+  | `not-checked` | note, always, collapsed | 105 × 165 × 70 mm, ≥ 90 g, tires 22–35 mm, Stock Class / B-MAX modification rules; check the organiser's PDF |
+
+  Shape:
+
+  - **`checkBuild({ slots, chassis, partsById, buildClass, trimmed }) → Finding[]`**, with `Finding = { rule, severity, slotId?, partId? }`. It is pure, takes the same `ResolvedSlot[]` the list renders, and imports only types from `schema.ts` (no Zod on `/`). M2's server re-validation calls it unchanged.
+  - **`reconcileBuild` reports what it dropped** alongside the build. `useBuildLink` passes that on, which closes the silent-trim gap the share-link work left open.
+  - **`catalog:verify` gains an invariant:** every kit's stock build yields zero errors in Open. A bad loadout override then fails CI, not a reader's screen.
+  - **UI.** A class selector beside the list title: 公開賽 Open · 基礎賽 Stock Class (B-Stock) · 少年組 Junior. A findings summary under the title, errors first, each linking to its row through the existing `slot-<id>` anchors. A marker on `SlotRow`, an icon plus text so it does not rely on colour. A badge on `PartCard` in the picker only when the part is not legal in the chosen class, which is what the `partsForSlot` comment already promises. `classLegality.notes` is not rendered, because it is Traditional Chinese only. Payload cost is zero, since `classLegality` is already selected; measure the chunk and grep the build for `ZodError`.
+
+  Work, in order: `rules.ts` and `rules.test.ts`; `reconcileBuild` returning what it trimmed, and its tests; the verify invariant; the class selector and summary; the row marker and picker badge; the motor blurb and `build.rules.*` keys in both locales; a Chrome run; this section.
+
+  **Done when:** an MA kit with a Hyper-Dash PRO swapped in shows no error in Open or Stock Class and one error in Junior; a hand-edited link putting a single-shaft motor on MA opens with the motor-shaft error on the motor row; a bare chassis shows the body warning; a link naming a part the catalog does not ship shows the trimmed note; `catalog:verify` passes with the invariant on all 305 kits; all of it holds in both locales, and no route loads the Zod chunk.
 - Totals: part count, ~~JPY and HKD cost,~~ estimated weight, final gear ratio.
 
   **Cost is out of M1** (owner, 2026-09-16). The site is Traditional-Chinese-first but not Hong-Kong-only: readers in Taiwan, Malaysia, Singapore and beyond pay neither Tamiya Japan's list price nor tamiya.hk's, and street prices differ from both by shop. A JPY + HKD total would be a precise-looking number that is wrong for most readers, and HKD covers only 80% of parts and 78% of kits besides. The catalog **keeps** `priceJpy`/`priceHkd` — they are facts, already scraped and free to carry — so nothing in the pipeline changes; what moves is showing a total, which waits for regional pricing (M4).
@@ -667,7 +704,7 @@ Three workstreams. The catalog and builder ones are independent of the asset one
 
 This is the milestone's long pole and the one most likely to slip. The fallback that protects the date is the 2D builder, which is already built and already works on all eight chassis: if the meshes or the raycast work run over, M1 ships list-first with the 3D pane view-only, and selection moves into the canvas when it is ready.
 
-**M1 is done when:** a beginner can open `/build`, pick the kit box on their desk, change the motor and rollers, see a warning that the motor is Open-only, ~~see the cost of what they still need to buy,~~ watch the car update in 3D, and send the link to a friend — in Traditional Chinese and en. (Cost clause removed 2026-09-16 by the owner; see Totals above.)
+**M1 is done when:** a beginner can open `/build`, pick the kit box on their desk, change the motor and rollers, ~~see a warning that the motor is Open-only~~ see a warning when the motor is not allowed in the class they picked (reworded 2026-09-16: no part is Open-only in the data, see the rule engine above), ~~see the cost of what they still need to buy,~~ watch the car update in 3D, and send the link to a friend — in Traditional Chinese and en. (Cost clause removed 2026-09-16 by the owner; see Totals above.)
 
 **Explicitly not in M1:** the wizard, votes, accounts, short links, OG images, D1, per-kit body shapes, chassis other than MA in 3D, build cost totals. Still on GitHub Pages, still fully static. (Click-to-select in 3D was on this list until 2026-09-09 and is now M1c.)
 
