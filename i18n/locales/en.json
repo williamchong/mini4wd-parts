@@ -42,7 +42,8 @@
       "chassis": "Tamiya publishes no parts list for this kit, so the list shows this chassis' standard loadout.",
       "note": "Kit contents and gear ratios come partly from the Mini 4WD Fandom Wiki, used under CC BY-SA."
     },
-    "imageCredit": "Product pictures are thumbnails of TAMIYA's official photos and remain TAMIYA's copyright. This is an unofficial fan site with no affiliation to TAMIYA.",
+    "imageCredit": "Product pictures are thumbnails of {tamiya} official photos and remain TAMIYA's copyright. This is an unofficial fan site with no affiliation to TAMIYA.",
+    "imageCreditTamiya": "TAMIYA's",
     "pickPart": "Choose {slot}",
     "searchParts": "Search by name or item number",
     "candidates": "{count} parts fit",
@@ -181,6 +182,40 @@
       "accessory": "Accessory",
       "other": "Other"
     },
+    "categoryIntro": {
+      "roller": "Rollers sit at the front, rear and sides of the car and roll along the track wall to steer it through corners. Larger diameters corner more steadily; smaller ones are lighter with less drag, and rollers with built-in ball bearings spin more freely. The whole car, rollers included, must stay within 105 mm wide.",
+      "plate": "Reinforcing plates, in FRP or carbon, bolt to the front and rear of the chassis. They carry extra rollers, stiffen the car, and are the base most other upgrades mount on. Carbon is stiffer and lighter than FRP, and costs more.",
+      "wheel-tire-set": "A wheel and tire sold as a matched set. Small diameters accelerate faster and sit lower; large diameters reach a higher top speed. Regulations allow tire diameters from 22 to 35 mm.",
+      "motor": "The motor powers the car. Each model trades off speed, torque and battery draw, favouring acceleration or top speed. PRO chassis (MA, MS, ME) take double-shaft motors and all others single-shaft. Some motors are not allowed in Stock Class and other classes, so check class legality before buying.",
+      "accessory": "Things for the hobby rather than the car itself: double-sided tape, parts and motor cases, track pieces and display boxes.",
+      "screw": "Screws, nuts and washers that hold plates, rollers and other upgrades in place. Pick the length and head shape for where it goes; stainless steel screws are stronger than standard ones.",
+      "gear": "Gears carry the motor's turn to the axles. A higher ratio (such as 5:1) accelerates harder; a lower one (such as 3.5:1) reaches a higher top speed. Which gear sets fit depends on the chassis.",
+      "body": "Replacement body sets, clear bodies included. The body shell sets the car's look and affects its weight and centre of gravity; a lighter shell saves weight but is usually less durable.",
+      "tire": "Tires sold on their own. Soft tires grip better but add drag; hard tires roll faster but grip less in corners and on landings. Tire diameter must be between 22 and 35 mm.",
+      "mass-damper": "Metal weights mounted so they can move freely, soaking up the shock of landings and impacts so the car bounces and flips less. Where and how many you fit changes landing stability, at the cost of added weight.",
+      "bearing": "Bearings replace plastic bushings on the axles or gears, so parts spin more freely with less friction. They are one of the most common first upgrades for speed.",
+      "stabilizer": "Stabilizer heads and poles sit at the sides or underside of the car. When it touches the wall or edge of the track, they help it stay level instead of riding up or catching.",
+      "spacer": "Spacers, bushings, stoppers and hex mounts that set the heights and gaps between parts, such as roller height or axle play.",
+      "chassis-set": "Replacement chassis and chassis units, such as reinforced or lightweight chassis and front and rear units. Use them to change colour or material, or to replace a damaged chassis.",
+      "brake": "Brakes sit under the car and touch the track on slopes and jumps to scrub off speed, so the car does not fly off the course. The thickness and hardness of the brake sponge set how strongly it slows the car.",
+      "wheel": "Wheels sold without tires. Diameter, material and design change their weight and how quickly the car picks up speed; aluminium wheels need their own bushings.",
+      "shaft": "Axles join a pair of wheels and come in lengths such as 60 mm and 72 mm to suit the chassis. Reinforced and stainless steel shafts resist bending; hollow shafts are lighter.",
+      "propeller-shaft": "On single-shaft chassis, the propeller shaft carries drive from the motor to the axle at the other end, so all four wheels are driven. Each fits only the chassis whose length it is cut to; PRO chassis do not use one.",
+      "terminal": "The metal contacts between the batteries and the motor. Gold-plated terminals conduct better and resist corrosion, so less power is lost. Each set fits a particular chassis.",
+      "bundle": "Upgrade bundles for beginners, such as the per-chassis Basic Tune-Up Parts Sets, which put a few common upgrades in one box. A good first step if you have never modified a car.",
+      "bumper": "Front and rear bumpers and bumper units that protect the chassis from impacts and give rollers and plates somewhere to mount. Bumperless units save weight.",
+      "body-catch": "Catches that hold the body shell on the chassis. Quick-release and rubber catches make the body faster to take off and put back, for example when changing batteries.",
+      "slide-damper": "Roller mounts that slide sideways on springs. When a roller hits the wall, the mount gives and springs back, absorbing the shock so the car takes corners smoothly instead of bouncing off.",
+      "gear-cover": "Covers that keep dust and debris out of the gears and hold them in position. Reinforced versions last longer.",
+      "sticker": "Decorative stickers, and tapes that protect the body or chassis surface and reduce friction.",
+      "other": "Parts that fit no other category, such as rubber tubing, a motor cooling shield and motor brush holders.",
+      "tool": "Tools for maintaining and checking the car, such as a pinion puller and a speed checker.",
+      "setting-tool": "Tools for setting up the car, such as a checker box for the regulation length and width, and a flat setting board.",
+      "motor-mount": "A support that holds the motor in place so it does not shift or vibrate while running, keeping the drive steady."
+    },
+    "aboutCategory": "About {category}",
+    "moreInfo": "For details on this part, see the {official}.",
+    "moreInfoWiki": "For details on this part, see the {official} or the {wiki}.",
     "seeAllInCategory": "See all {count}"
   },
   "spec": {
@@ -226,7 +261,8 @@
   "browse": {
     "parts": {
       "title": "Parts by category",
-      "intro": "The catalog holds {count} Tamiya Mini 4WD parts, grouped into {categories} categories by what they do. Pick one, or head back to the builder.",
+      "intro": "The catalog holds {count} Tamiya Mini 4WD parts, grouped into {categories} categories by what they do. Pick one, or {builder}.",
+      "builderLink": "head back to the builder",
       "description": "Tamiya Mini 4WD parts by category: {count} parts across {categories} categories, each filterable by the chassis it fits.",
       "count": "{count}"
     },
@@ -235,7 +271,9 @@
       "count": "{count} parts",
       "description": "{category} — every one in the catalog, {count} in all, filterable by the chassis it fits and linked to full specs and class legality.",
       "filter": "Filter by chassis",
-      "none": "No part here is listed as fitting that chassis."
+      "none": "No part here is listed as fitting that chassis.",
+      "moreInfo": "For how each kind of part is used and tuned, see {guide}.",
+      "guide": "Tamiya Hong Kong's Mini 4WD setting guide (in Chinese)"
     }
   },
   "chassis": {

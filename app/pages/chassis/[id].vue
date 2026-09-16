@@ -291,6 +291,6 @@ useHead(() => ({
       <PartLinkList :parts="data!.kits" icon="body" :to="buildLink" />
     </section>
 
-    <p class="image-credit">{{ $t('build.imageCredit') }}</p>
+    <ImageCredit />
   </article>
 </template>

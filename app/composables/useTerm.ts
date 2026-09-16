@@ -7,7 +7,7 @@
  * plain label rather than being an error: only Traditional Chinese has two
  * spellings to choose between.
  */
-import type { Slot } from '#shared/catalog/schema'
+import type { PartCategory, Slot } from '#shared/catalog/schema'
 
 export function useTerm() {
   const { t, te } = useI18n()
@@ -29,5 +29,16 @@ export function useTerm() {
    */
   const slotTypeLabel = (type: Slot) => term(type, `build.slot.${type}`)
 
-  return { term, slotLabel, slotTypeLabel }
+  /**
+   * Our own short introduction to a part category. The Traditional Chinese text
+   * names motors and brakes through placeholders, so the regional word comes
+   * from the same dictionary as every other term; English ignores them. The
+   * three categories with no members have no intro, hence `undefined`.
+   */
+  function categoryIntro(category: PartCategory) {
+    const key = `part.categoryIntro.${category}`
+    return te(key) ? t(key, { motor: term('motor'), brake: term('brake') }) : undefined
+  }
+
+  return { term, slotLabel, slotTypeLabel, categoryIntro }
 }

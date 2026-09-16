@@ -74,7 +74,13 @@ useHead(() => ({
     <Breadcrumbs :trail="[{ label: $t('nav.parts') }]" />
 
     <h1>{{ $t('browse.parts.title') }}</h1>
-    <p class="browse-intro">{{ $t('browse.parts.intro', counts) }}</p>
+    <i18n-t keypath="browse.parts.intro" tag="p" class="browse-intro" scope="global">
+      <template #count>{{ counts.count }}</template>
+      <template #categories>{{ counts.categories }}</template>
+      <template #builder>
+        <NuxtLink :to="localePath('/')">{{ $t('browse.parts.builderLink') }}</NuxtLink>
+      </template>
+    </i18n-t>
 
     <ul class="category-grid">
       <li v-for="entry in categories" :key="entry.category">

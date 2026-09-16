@@ -20,7 +20,7 @@ definePageMeta({ layout: 'content' })
 
 const route = useRoute()
 const { t } = useI18n()
-const { term } = useTerm()
+const { term, categoryIntro } = useTerm()
 const { resolve } = useCatalogName()
 const localePath = useLocalePath()
 
@@ -59,6 +59,10 @@ if (!data.value) {
 
 const category = computed(() => slug.value as PartCategory)
 const label = computed(() => term(category.value, `part.category.${category.value}`))
+const intro = computed(() => categoryIntro(category.value))
+
+/** Tamiya Hong Kong's own guide to what each part type does, in Traditional Chinese. */
+const SETTING_GUIDE = 'https://tamiya.hk/mini-4wd-machine-setting-guide/'
 
 /**
  * Empty until mounted, which is also what the prerendered HTML must show: the
@@ -134,6 +138,14 @@ useHead(() => ({
     />
 
     <h1>{{ label }}</h1>
+    <template v-if="intro">
+      <p class="browse-intro">{{ intro }}</p>
+      <i18n-t keypath="browse.category.moreInfo" tag="p" class="part-note" scope="global">
+        <template #guide>
+          <a :href="SETTING_GUIDE" target="_blank" rel="noopener">{{ $t('browse.category.guide') }}</a>
+        </template>
+      </i18n-t>
+    </template>
     <p class="browse-intro">{{ $t('browse.category.count', { count: data!.parts.length }) }}</p>
 
     <h2 class="browse-filter-label">{{ $t('browse.category.filter') }}</h2>
@@ -167,6 +179,6 @@ useHead(() => ({
     <PartLinkList v-if="shown.length" :parts="shown" :icon="data!.icon" />
     <p v-else class="part-note">{{ $t('browse.category.none') }}</p>
 
-    <p class="image-credit">{{ $t('build.imageCredit') }}</p>
+    <ImageCredit />
   </div>
 </template>

@@ -62,6 +62,6 @@ useHead(() => ({
       </li>
     </ul>
 
-    <p class="image-credit">{{ $t('build.imageCredit') }}</p>
+    <ImageCredit />
   </div>
 </template>

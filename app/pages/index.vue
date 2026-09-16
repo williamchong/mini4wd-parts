@@ -495,7 +495,7 @@ useHead(() => ({ title: `${t('build.title')} — ${t('site.title')}` }))
          generated from Tamiya's product photos (docs/PLAN.md §6 M1b). Credited
          on the page that shows them, list and pickers alike, rather than only
          on a site-wide attribution page. -->
-    <p class="image-credit">{{ $t('build.imageCredit') }}</p>
+    <ImageCredit />
 
     <LazyBuildBasePicker
       v-if="baseOpen"
