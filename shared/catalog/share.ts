@@ -166,3 +166,15 @@ export function reconcileBuild(shared: SharedBuild, catalog: ShareCatalog): Buil
 
   return { chassis: chassis.id, kit: kit?.id, swaps }
 }
+
+/**
+ * Whether `reconcileBuild` lost anything the link named: its kit, its chassis,
+ * a slot, or a part. Compared after the fact rather than tracked inside it, so
+ * the reconciler stays one job and this cannot disagree with what it did.
+ */
+export function wasTrimmed(shared: SharedBuild, state: BuildState): boolean {
+  if (shared.chassis !== state.chassis || shared.kit !== state.kit) return true
+  const sharedSlots = Object.entries(shared.swaps)
+  return sharedSlots.length !== Object.keys(state.swaps).length
+    || sharedSlots.some(([slotId, partIds]) => partIds.length !== state.swaps[slotId]?.length)
+}

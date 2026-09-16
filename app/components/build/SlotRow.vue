@@ -8,6 +8,7 @@
  */
 import { thumbnailSrc } from '#shared/catalog/thumbnails'
 import type { BuildablePart, ResolvedSlot } from '#shared/catalog/build'
+import type { Finding } from '#shared/catalog/rules'
 
 const props = defineProps<{
   slot: ResolvedSlot
@@ -26,6 +27,8 @@ const props = defineProps<{
   stockThumb?: string
   /** The front/rear counterpart this row can copy, when copying would change it. */
   copyFrom?: ResolvedSlot
+  /** What the rule engine says about this row, words already resolved. */
+  findings?: Array<Finding & { text: string }>
 }>()
 
 const emit = defineEmits<{ open: []; revert: []; copy: [] }>()
@@ -95,6 +98,17 @@ const rows = computed(() => props.slot.entries.map((entry) => {
         <CatalogThumb class="entry-thumb" :src="row.thumbnail" :icon="slot.type" />
         <NuxtLink v-if="row.partId" :to="localePath(`/parts/${row.partId}`)">{{ row.text }}</NuxtLink>
         <span v-else>{{ row.text }}</span>
+      </p>
+      <!-- Severity in words as well as colour, so the marker survives a
+           colour-blind reader and a screen reader alike. -->
+      <p
+        v-for="(finding, i) in findings"
+        :key="`finding-${i}`"
+        class="slot-finding"
+        :class="`finding-${finding.severity}`"
+      >
+        <span class="finding-severity">{{ $t(`build.rules.severity.${finding.severity}`) }}</span>
+        <span>{{ finding.text }}</span>
       </p>
     </div>
 

@@ -11,7 +11,7 @@
  * only a change of state, and pushing an entry per swap would turn the back
  * button into an undo that leaves the reader stuck on the page.
  */
-import { encodeBuild, parseBuild, reconcileBuild } from '#shared/catalog/share'
+import { encodeBuild, parseBuild, reconcileBuild, wasTrimmed } from '#shared/catalog/share'
 import type { BuildState } from '#shared/catalog/build'
 import type { ShareCatalog } from '#shared/catalog/share'
 
@@ -22,6 +22,12 @@ export function useBuildLink(catalog: () => ShareCatalog | undefined) {
   const route = useRoute()
   const { build } = useBuild()
   const copied = ref(false)
+  /**
+   * The last link opened lost something on the way in — a part no longer in
+   * the catalog, a kit on another chassis. The rule engine says so; the page
+   * clears it once the reader starts a different build.
+   */
+  const linkTrimmed = ref(false)
 
   /**
    * Replaces the build with the one in the hash when there is a valid one, and
@@ -36,7 +42,10 @@ export function useBuildLink(catalog: () => ShareCatalog | undefined) {
     // mounts; a `lazy` fetch would change that.
     if (shared && !known) return
     const state = shared && known ? reconcileBuild(shared, known) : undefined
-    if (state) build.value = state
+    if (shared && state) {
+      linkTrimmed.value = wasTrimmed(shared, state)
+      build.value = state
+    }
     else writeHash(build.value)
   }
 
@@ -89,5 +98,5 @@ export function useBuildLink(catalog: () => ShareCatalog | undefined) {
 
   onBeforeUnmount(() => clearTimeout(timer))
 
-  return { copied, copyLink }
+  return { copied, copyLink, linkTrimmed }
 }

@@ -84,6 +84,12 @@ export type PickableKit = Pick<Kit,
  */
 export type BuildClass = Exclude<keyof Part['classLegality'], 'source' | 'notes'>
 
+/** Every class, in the order a beginner meets them: the open class first. */
+export const BUILD_CLASSES: readonly BuildClass[] = ['open', 'stockBmax', 'junior']
+
+export const isBuildClass = (value: unknown): value is BuildClass =>
+  BUILD_CLASSES.includes(value as BuildClass)
+
 export type BuildState = {
   chassis: ChassisId
   /** Item number of the kit this build started from, if it started from one. */
@@ -255,11 +261,21 @@ export function slotIdsFor(part: BuildablePart, chassis: BuildableChassis): stri
  * offered rather than hidden — we do not claim a fit we have not checked.
  */
 function fits(part: BuildablePart, slotType: Slot, chassis: BuildableChassis): boolean {
-  if (!isChassisCompatible(part, chassis.id)) return false
-  if (slotType === 'motor' && part.specs.motorShaft !== undefined) {
-    return part.specs.motorShaft === chassis.motorShaft
-  }
-  return true
+  return isChassisCompatible(part, chassis.id) && isShaftCompatible(part, slotType, chassis)
+}
+
+/**
+ * The motor-shaft half of `fits`, exported for the rule engine, which has to
+ * tell the reader which of the two a part from a link failed.
+ */
+export function isShaftCompatible(
+  part: Pick<Part, 'specs'>,
+  slotType: Slot,
+  chassis: Pick<BuildableChassis, 'motorShaft'>
+): boolean {
+  return slotType !== 'motor'
+    || part.specs.motorShaft === undefined
+    || part.specs.motorShaft === chassis.motorShaft
 }
 
 export type SlotCandidate = {

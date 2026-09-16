@@ -749,8 +749,14 @@ button.link {
 }
 
 .part-head,
+.part-legality,
 .part-specs {
   grid-column: 2;
+}
+
+.part-legality {
+  margin: 0.2rem 0 0;
+  font-size: 0.85em;
 }
 
 .part-head {
@@ -953,6 +959,95 @@ button.link {
   background: #eef5ec;
   border: 1px solid #cfe0ca;
   border-radius: 4px;
+}
+
+/* Builder: the rule engine's findings */
+
+.build-findings {
+  margin: 0 0 1rem;
+  font-size: 0.9em;
+}
+
+.findings-class {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0.75rem;
+  align-items: center;
+}
+
+.findings-class .door-toggle {
+  margin-bottom: 0;
+}
+
+.findings-class .door-toggle button {
+  padding: 0.35rem 0.75rem;
+}
+
+.findings-ok {
+  margin: 0.6rem 0 0;
+  color: #3d6b35;
+}
+
+.findings-list {
+  margin: 0.6rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.findings-list li {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+  padding: 0.2rem 0;
+}
+
+.findings-list .link {
+  text-align: start;
+}
+
+.finding-severity {
+  flex: none;
+  padding: 0 0.35rem;
+  font-size: 0.85em;
+  border-radius: 3px;
+  background: #eef1f4;
+}
+
+.finding-error .finding-severity {
+  color: #fff;
+  background: #b23c2e;
+}
+
+.finding-warning .finding-severity {
+  color: #4a3500;
+  background: #f5d77a;
+}
+
+.findings-unchecked {
+  margin: 0.6rem 0 0;
+}
+
+.findings-unchecked > summary {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+.findings-unchecked ul {
+  margin: 0.4rem 0;
+  padding-inline-start: 1.25rem;
+}
+
+.findings-unchecked p {
+  margin: 0;
+  opacity: 0.8;
+}
+
+.slot-finding {
+  display: flex;
+  gap: 0.5rem;
+  align-items: baseline;
+  margin: 0.35rem 0 0;
+  font-size: 0.85em;
 }
 
 /* The slot chooser reuses the part picker's shell; its rows are one line each,

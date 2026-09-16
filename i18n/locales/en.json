@@ -99,7 +99,40 @@
     "cannotAdd": "{part} does not fit this chassis",
     "replaces": "Replaces what is fitted",
     "dismiss": "Dismiss",
-    "details": "Details"
+    "details": "Details",
+    "rules": {
+      "class": "Class",
+      "ok": "No problems found for {class}.",
+      "severity": {
+        "error": "Error",
+        "warning": "Warning",
+        "note": "Note"
+      },
+      "message": {
+        "required-empty": "{slot} is empty, and a race needs one.",
+        "chassis-incompatible": "Tamiya does not list {part} for the {chassis}.",
+        "motor-shaft": "{part} does not fit: the {chassis} takes a {shaft} motor.",
+        "class-illegal": "{part} is not allowed in {class}.",
+        "class-unknown": "Not yet checked whether {part} is allowed in {class}.",
+        "link-trimmed": "Some parts in the link are no longer in the catalog or do not fit this chassis, and were left out."
+      },
+      "badge": {
+        "illegal": "Not allowed in {class}",
+        "unknown": "{class}: not checked"
+      },
+      "notChecked": {
+        "summary": "Rules not checked yet",
+        "size": "Size: within 105 mm wide, 165 mm long and 70 mm high.",
+        "weight": "Weight: at least 90 g with batteries and motor.",
+        "tire": "Tire diameter: 22 to 35 mm.",
+        "modification": "Stock Class / B-MAX modification limits, such as no cutting the chassis and no new screw holes.",
+        "organiser": "These follow Tamiya's published rules. Check the organiser's rules before a race."
+      },
+      "shaft": {
+        "single": "single-shaft",
+        "double": "double-shaft"
+      }
+    }
   },
   "part": {
     "addToBuild": "Add to build",
@@ -186,7 +219,7 @@
       "roller": "Rollers sit at the front, rear and sides of the car and roll along the track wall to steer it through corners. Larger diameters corner more steadily; smaller ones are lighter with less drag, and rollers with built-in ball bearings spin more freely. The whole car, rollers included, must stay within 105 mm wide.",
       "plate": "Reinforcing plates, in FRP or carbon, bolt to the front and rear of the chassis. They carry extra rollers, stiffen the car, and are the base most other upgrades mount on. Carbon is stiffer and lighter than FRP, and costs more.",
       "wheel-tire-set": "A wheel and tire sold as a matched set. Small diameters accelerate faster and sit lower; large diameters reach a higher top speed. Regulations allow tire diameters from 22 to 35 mm.",
-      "motor": "The motor powers the car. Each model trades off speed, torque and battery draw, favouring acceleration or top speed. PRO chassis (MA, MS, ME) take double-shaft motors and all others single-shaft. Some motors are not allowed in Stock Class and other classes, so check class legality before buying.",
+      "motor": "The motor powers the car. Each model trades off speed, torque and battery draw, favouring acceleration or top speed. PRO chassis (MA, MS, ME) take double-shaft motors and all others single-shaft. Some motors are not allowed in Junior and other classes, so check class legality before buying.",
       "accessory": "Things for the hobby rather than the car itself: double-sided tape, parts and motor cases, track pieces and display boxes.",
       "screw": "Screws, nuts and washers that hold plates, rollers and other upgrades in place. Pick the length and head shape for where it goes; stainless steel screws are stronger than standard ones.",
       "gear": "Gears carry the motor's turn to the axles. A higher ratio (such as 5:1) accelerates harder; a lower one (such as 3.5:1) reaches a higher top speed. Which gear sets fit depends on the chassis.",

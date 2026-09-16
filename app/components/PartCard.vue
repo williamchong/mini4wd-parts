@@ -3,18 +3,22 @@
  * One catalog part, as it appears in a picker row. Deliberately generic rather
  * than picker-specific: the parts browse page renders the same card.
  *
- * No price and no class verdict: nobody picks a part by its list price, and the
- * MVP builds against no race class (docs/PLAN.md §6 M1b).
+ * No price: nobody picks a part by its list price. A class verdict only when
+ * the picker passes one and it is not simply "legal" — a beginner learns more
+ * from a Dash motor marked not allowed in Junior than from one that silently
+ * is not offered (docs/PLAN.md §6 M1b).
  */
 import { thumbnailSrc } from '#shared/catalog/thumbnails'
-import type { BuildablePart } from '#shared/catalog/build'
-import type { Slot } from '#shared/catalog/schema'
+import type { BuildablePart, BuildClass } from '#shared/catalog/build'
+import type { PartLegality, Slot } from '#shared/catalog/schema'
 import type { IconName } from '~/utils/icons'
 
 const props = defineProps<{
   part: BuildablePart
   /** Which slot the part is being considered for, so the specs suit it. */
   slotType?: Slot
+  /** The part's standing in the class the build is checked against. */
+  verdict?: { legality: PartLegality; buildClass: BuildClass }
 }>()
 
 const { resolve, isFallback } = useCatalogName()
@@ -41,6 +45,10 @@ const thumb = computed(() => thumbnailSrc('parts', props.part))
       <span class="part-name" :class="{ fallback }">{{ name }}</span>
       <span class="part-id">{{ part.id }}</span>
     </div>
+
+    <p v-if="verdict && verdict.legality !== 'legal'" class="part-legality" :class="`legality-${verdict.legality}`">
+      {{ $t(`build.rules.badge.${verdict.legality}`, { class: $t(`part.class.${verdict.buildClass}`) }) }}
+    </p>
 
     <dl v-if="specs.length" class="part-specs">
       <template v-for="spec in specs" :key="spec.key">

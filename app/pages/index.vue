@@ -12,19 +12,21 @@
  * model is tested without a browser and this file stays about presentation.
  */
 import {
-  counterpartParts, partsForSlot, resolveBuild, slotIdsFor, swappableSlotTypes
+  counterpartParts, isBuildClass, partsForSlot, resolveBuild, slotIdsFor, swappableSlotTypes
 } from '#shared/catalog/build'
 import { orderKits } from '#shared/catalog/kits'
+import { checkBuild } from '#shared/catalog/rules'
 import { flagThumbnail, thumbnailSrc } from '#shared/catalog/thumbnails'
 import { SCENE_CHASSIS } from '#shared/scene/chassis'
 import type { ResolvedSlot } from '#shared/catalog/build'
+import type { Finding } from '#shared/catalog/rules'
 import type { ChassisId, Slot } from '#shared/catalog/schema'
 
 definePageMeta({ layout: 'content' })
 
 const { t } = useI18n()
 const { resolve, isFallback } = useCatalogName()
-const { slotLabel } = useTerm()
+const { term, slotLabel } = useTerm()
 const { build, buildClass, pending, start, swap, revert } = useBuild()
 
 /**
@@ -96,7 +98,7 @@ const { data: catalog } = await useAsyncData('build-catalog', async () => {
 const partsById = computed(() =>
   new Map((catalog.value?.parts ?? []).map(part => [part.id, part])))
 
-const { copied, copyLink } = useBuildLink(() => catalog.value && {
+const { copied, copyLink, linkTrimmed } = useBuildLink(() => catalog.value && {
   chassis: catalog.value.chassis,
   kits: catalog.value.kits,
   partsById: partsById.value
@@ -204,6 +206,7 @@ const baseOpen = ref(false)
 
 function chooseBase(chassisId: ChassisId, kitId?: string) {
   start(chassisId, kitId)
+  linkTrimmed.value = false
   baseOpen.value = false
   // A reader who arrived from a part page with nothing on the bench had to
   // answer this question first; now their part can land.
@@ -284,7 +287,12 @@ function place(slotId: string) {
   })
   cancelPending()
   // The row is often below the 3D pane, so the change would otherwise happen
-  // off screen. After the DOM has the swap, not before.
+  // off screen.
+  scrollToSlot(slotId)
+}
+
+/** After the DOM has caught up with whatever just changed, not before. */
+function scrollToSlot(slotId: string) {
   nextTick(() => document.getElementById(`slot-${slotId}`)
     ?.scrollIntoView({ behavior: 'smooth', block: 'center' }))
 }
@@ -376,6 +384,76 @@ function choose(partId: string) {
   openSlotId.value = null
 }
 
+/**
+ * The rule engine's findings, each with its words resolved once here — the page
+ * is what holds the names, slots and chassis a message interpolates — and shown
+ * twice: in the summary under the title and on the row it is about.
+ */
+const findings = computed(() => {
+  if (!chassis.value || !build.value) return []
+  return checkBuild({
+    slots: slots.value,
+    chassis: chassis.value,
+    partsById: partsById.value,
+    buildClass: buildClass.value,
+    linkTrimmed: linkTrimmed.value
+  }).map(finding => ({ ...finding, text: findingText(finding) }))
+})
+
+function findingText(finding: Finding) {
+  const part = finding.partId ? partsById.value.get(finding.partId) : undefined
+  const slot = finding.slotId ? slots.value.find(s => s.id === finding.slotId) : undefined
+  return t(`build.rules.message.${finding.rule}`, {
+    part: part ? resolve(part.names).value : finding.partId ?? '',
+    slot: slot ? slotLabel(slot) : '',
+    chassis: chassis.value ? resolve(chassis.value.names).value : '',
+    shaft: chassis.value ? t(`build.rules.shaft.${chassis.value.motorShaft}`) : '',
+    motor: term('motor'),
+    class: t(`part.class.${buildClass.value}`)
+  })
+}
+
+// Not Map.groupBy: it is too new for the phones this page is built for.
+const findingsBySlot = computed(() => {
+  const bySlot = new Map<string, typeof findings.value>()
+  for (const finding of findings.value) {
+    if (!finding.slotId) continue
+    const list = bySlot.get(finding.slotId)
+    if (list) list.push(finding)
+    else bySlot.set(finding.slotId, [finding])
+  }
+  return bySlot
+})
+
+/** From a finding to its row, opening the folded group first when it is in there. */
+function goToSlot(slotId: string) {
+  if (moreSlots.value.some(slot => slot.id === slotId)) moreOpen.value = true
+  scrollToSlot(slotId)
+}
+
+/**
+ * The class is the reader's, not the build's: it names the event they race, so
+ * it stays out of the share link and is remembered per browser instead. Storage
+ * can be absent or throw (private windows, blocked site data), and the page
+ * works the same without it.
+ */
+const CLASS_KEY = 'build-class'
+
+onMounted(() => {
+  try {
+    const saved = localStorage.getItem(CLASS_KEY)
+    if (isBuildClass(saved)) buildClass.value = saved
+  }
+  catch {}
+})
+
+watch(buildClass, (value) => {
+  try {
+    localStorage.setItem(CLASS_KEY, value)
+  }
+  catch {}
+})
+
 useHead(() => ({ title: `${t('build.title')} — ${t('site.title')}` }))
 </script>
 
@@ -412,6 +490,13 @@ useHead(() => ({ title: `${t('build.title')} — ${t('site.title')}` }))
         {{ copied ? $t('build.linkCopied') : $t('build.copyLink') }}
       </button>
     </div>
+
+    <BuildFindings
+      v-model:build-class="buildClass"
+      :findings="findings"
+      :has-build="hasBuild"
+      @go="goToSlot"
+    />
 
     <p v-if="notice" class="build-notice" aria-live="polite">
       <span>{{ notice }}</span>
@@ -461,6 +546,7 @@ useHead(() => ({ title: `${t('build.title')} — ${t('site.title')}` }))
         :swappable="hasBuild"
         :stock-thumb="stockThumbFor(slot)"
         :copy-from="copies.get(slot.id)?.from"
+        :findings="findingsBySlot.get(slot.id)"
         @open="openSlotId = slot.id"
         @revert="revert(slot.id)"
         @copy="copy(slot.id)"
@@ -480,6 +566,7 @@ useHead(() => ({ title: `${t('build.title')} — ${t('site.title')}` }))
           :swappable="hasBuild"
           :stock-thumb="stockThumbFor(slot)"
           :copy-from="copies.get(slot.id)?.from"
+          :findings="findingsBySlot.get(slot.id)"
           @open="openSlotId = slot.id"
           @revert="revert(slot.id)"
           @copy="copy(slot.id)"
@@ -518,6 +605,7 @@ useHead(() => ({ title: `${t('build.title')} — ${t('site.title')}` }))
       :candidates="candidates"
       :slot-type="openSlot.type"
       :slot-label="openSlotLabel"
+      :build-class="buildClass"
       @select="choose"
       @close="openSlotId = null"
     />

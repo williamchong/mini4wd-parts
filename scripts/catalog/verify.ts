@@ -5,6 +5,8 @@ import { thumbnailFile } from './thumbnails.ts'
 import { thumbnailPath, type ThumbCollection, type ThumbVariant } from '../../shared/catalog/thumbnails.ts'
 import { partSchema, chassisSchema, kitSchema } from '../../shared/catalog/schema.ts'
 import type { Chassis, Loadout, Slot } from '../../shared/catalog/schema.ts'
+import { newBuild, resolveBuild } from '../../shared/catalog/build.ts'
+import { checkBuild } from '../../shared/catalog/rules.ts'
 
 /**
  * Validates the committed catalog on its own, without Nuxt. `nuxt generate`
@@ -97,6 +99,22 @@ for (const part of parts) {
   checkThumbnail('parts', part.id, part.detailThumbnail, 'detail')
 }
 
+/**
+ * A stock build, bare chassis or kit, must raise no rule-engine error in Open:
+ * a red finding on a car nobody has touched blames the reader for our data. A
+ * loadout override naming a part Tamiya does not list for that chassis is the
+ * usual way in, and failing here keeps it off the site (docs/PLAN.md §6 M1b).
+ */
+const partsById = new Map(parts.map(part => [part.id, part]))
+
+function checkStock(label: string, host: Chassis, kit?: (typeof kits)[number]) {
+  const slots = resolveBuild(host, kit, newBuild(host.id, kit?.id))
+  for (const finding of checkBuild({ slots, chassis: host, partsById, buildClass: 'open' })) {
+    if (finding.severity !== 'error') continue
+    errors.push(`${label}: stock build fails ${finding.rule} on ${finding.slotId}${finding.partId ? ` (part ${finding.partId})` : ''}`)
+  }
+}
+
 const chassisById = new Map(chassis.map(entry => [entry.id, entry]))
 
 for (const entry of chassis) {
@@ -107,6 +125,7 @@ for (const entry of chassis) {
   checkLoadout(`chassis/${entry.id} defaultLoadout`, entry.defaultLoadout, entry)
   checkThumbnail('chassis', entry.id, entry.thumbnail)
   checkThumbnail('chassis', entry.id, entry.detailThumbnail, 'detail')
+  checkStock(`chassis/${entry.id}`, entry)
 }
 
 const kitIds = new Set<string>()
@@ -121,6 +140,7 @@ for (const kit of kits) {
   }
   checkLoadout(`kits/${kit.id} stockLoadout`, kit.stockLoadout, host)
   checkThumbnail('kits', kit.id, kit.thumbnail)
+  checkStock(`kits/${kit.id}`, host, kit)
 }
 
 if (errors.length) {

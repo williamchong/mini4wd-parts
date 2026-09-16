@@ -1,7 +1,8 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
+import { partSchema } from './schema.ts'
 import {
-  counterpartParts, isChassisCompatible, newBuild, partsForSlot, resolveBuild, slotIdsFor,
+  BUILD_CLASSES, counterpartParts, isChassisCompatible, newBuild, partsForSlot, resolveBuild, slotIdsFor,
   swappableSlotTypes
 } from './build.ts'
 import type { BuildState } from './build.ts'
@@ -266,4 +267,9 @@ test('a part that does not go on this chassis maps to no slot at all', () => {
   })
   assert.deepEqual(slotIdsFor(foreign, chassis), [])
   assert.deepEqual(slotIdsFor(part({ id: '15488', slots: ['damper'] }), chassis), [])
+})
+
+test('BUILD_CLASSES names every class the schema records a verdict for', () => {
+  const keys = Object.keys(partSchema.shape.classLegality.shape).filter(key => key !== 'source' && key !== 'notes')
+  assert.deepEqual([...BUILD_CLASSES].sort(), keys.sort())
 })

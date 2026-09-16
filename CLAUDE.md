@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-"迷你四驅新手入門資訊站" (Mini 4WD Beginner's Guide Information Site) at https://mini4wd.parts/. It is a Traditional-Chinese-first Tamiya Mini 4WD site. Live today (M1, in progress): a car builder on the home page (kit or bare chassis, a slot list, compatibility-filtered part pickers, a 3D proxy pane for MA, and the build kept in a shareable link), a parts database with per-part pages, category browsing and chassis pages. Planned: the rule engine, MA meshes, guides, short links and votes (M2), and a beginner wizard (M4).
+"迷你四驅新手入門資訊站" (Mini 4WD Beginner's Guide Information Site) at https://mini4wd.parts/. It is a Traditional-Chinese-first Tamiya Mini 4WD site. Live today (M1, in progress): a car builder on the home page (kit or bare chassis, a slot list, compatibility-filtered part pickers, a rule engine that checks the build against a chosen race class, a 3D proxy pane for MA, and the build kept in a shareable link), a parts database with per-part pages, category browsing and chassis pages. Planned: MA meshes, guides, short links and votes (M2), and a beginner wizard (M4).
 
 **Read `docs/PLAN.md` before implementing any feature.** It holds the agreed scope, phase order, data model, rule-engine design, hosting decisions and open questions. Supporting research with source URLs is in `docs/research/`. Do not re-research points already settled there.
 

@@ -6,13 +6,14 @@
  * of the query they typed.
  */
 import { matchesQuery } from '#shared/catalog/names'
-import type { SlotCandidate } from '#shared/catalog/build'
+import type { BuildClass, SlotCandidate } from '#shared/catalog/build'
 import type { Slot } from '#shared/catalog/schema'
 
 const props = defineProps<{
   candidates: SlotCandidate[]
   slotType: Slot
   slotLabel: string
+  buildClass: BuildClass
 }>()
 
 const emit = defineEmits<{ select: [string]; close: [] }>()
@@ -46,7 +47,11 @@ const matches = computed(() =>
       <ul class="picker-list">
         <li v-for="candidate in matches" :key="candidate.part.id">
           <button type="button" @click="emit('select', candidate.part.id)">
-            <PartCard :part="candidate.part" :slot-type="slotType" />
+            <PartCard
+              :part="candidate.part"
+              :slot-type="slotType"
+              :verdict="{ legality: candidate.legality, buildClass }"
+            />
           </button>
           <!-- Beside the button, never inside it: an anchor nested in a button
                is invalid, and the two do different things — one fills the slot,

@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs'
 import { test } from 'node:test'
 import { parse } from 'yaml'
 import { CHASSIS_IDS } from './schema.ts'
-import { SHARE_CHASSIS, SHARE_SLOTS, encodeBuild, parseBuild, reconcileBuild } from './share.ts'
+import { SHARE_CHASSIS, SHARE_SLOTS, encodeBuild, parseBuild, reconcileBuild, wasTrimmed } from './share.ts'
 import type { ShareCatalog } from './share.ts'
 import type { BuildState } from './build.ts'
 
@@ -151,4 +151,17 @@ test('a slot not on the chassis is dropped, and a slot whose every part was drop
   // `brake` was emptied in the link and stays emptied; `motor` named a part
   // and lost it, which is not the same thing as the sender emptying it.
   assert.deepEqual(reopen(hash)?.swaps, { brake: [] })
+})
+
+test('a link is trimmed when reconciling lost its kit, its chassis, a slot or a part, and not otherwise', () => {
+  const trimmed = (state: BuildState) => {
+    const shared = parseBuild(link(state))!
+    return wasTrimmed(shared, reconcileBuild(shared, catalog)!)
+  }
+  assert.equal(trimmed({ chassis: 'ma', kit: '18099', swaps: { motor: ['15477'], brake: [] } }), false)
+  assert.equal(trimmed({ chassis: 'ma', kit: '99999', swaps: {} }), true)
+  assert.equal(trimmed({ chassis: 'ma', kit: '18111', swaps: {} }), true)
+  assert.equal(trimmed({ chassis: 'ma', swaps: { 'propeller-shaft': ['15477'] } }), true)
+  assert.equal(trimmed({ chassis: 'ma', swaps: { 'roller-front': ['15392', '10000'] } }), true)
+  assert.equal(trimmed({ chassis: 'ma', swaps: { motor: ['10000'] } }), true)
 })

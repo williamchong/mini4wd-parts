@@ -99,7 +99,40 @@
     "cannotAdd": "「{part}」不適用於目前的底盤",
     "replaces": "會取代現有零件",
     "dismiss": "關閉提示",
-    "details": "詳細資料"
+    "details": "詳細資料",
+    "rules": {
+      "class": "賽制",
+      "ok": "按{class}規則，未發現問題。",
+      "severity": {
+        "error": "錯誤",
+        "warning": "注意",
+        "note": "備註"
+      },
+      "message": {
+        "required-empty": "{slot}未安裝，比賽時必須裝上。",
+        "chassis-incompatible": "田宮沒有把「{part}」列為{chassis}適用零件。",
+        "motor-shaft": "「{part}」不適用：{chassis}要用{shaft}{motor}。",
+        "class-illegal": "「{part}」不可用於{class}。",
+        "class-unknown": "未確認「{part}」可否用於{class}。",
+        "link-trimmed": "連結中有些零件已不在目錄內或不適用於此底盤，已略去。"
+      },
+      "badge": {
+        "illegal": "{class}不可用",
+        "unknown": "{class}未確認"
+      },
+      "notChecked": {
+        "summary": "尚未檢查的規則",
+        "size": "車身尺寸：闊 105 mm、長 165 mm、高 70 mm 以內。",
+        "weight": "重量：連電池及{motor}不少於 90 g。",
+        "tire": "輪胎直徑：22 至 35 mm。",
+        "modification": "基礎賽／B-MAX 的改裝限制，例如不可切削底盤、不可鑽新螺絲孔。",
+        "organiser": "以上以田宮公佈的規則為準，參加比賽前請再核對主辦單位的規則。"
+      },
+      "shaft": {
+        "single": "單軸",
+        "double": "雙軸"
+      }
+    }
   },
   "part": {
     "addToBuild": "加入組車清單",
@@ -186,7 +219,7 @@
       "roller": "導輪裝在車頭、車尾及車側，貼著賽道牆壁滾動，引導賽車過彎。直徑較大的導輪過彎較穩，較小的較輕、阻力較低；內置軸承的導輪轉得更順。整車連導輪最闊不可超過 105 mm。",
       "plate": "強化板（FRP 或碳纖）裝在底盤前後，用來加裝導輪、提高強度，也是大部分改裝零件的安裝基礎。碳纖板比 FRP 更硬更輕，但價格較高。",
       "wheel-tire-set": "輪框與輪胎配好一套出售。小徑輪胎加速較快、重心較低；大徑輪胎極速較高。規則限制輪胎直徑在 22 至 35 mm 之間。",
-      "motor": "{motor}是賽車的動力來源，不同型號在轉速、扭力及耗電之間各有取捨，有的重加速、有的重極速。PRO 底盤（MA、MS、ME）用雙軸{motor}，其他底盤用單軸{motor}。部分{motor}在 Stock Class 等賽制不可使用，選購前請先看賽制資訊。",
+      "motor": "{motor}是賽車的動力來源，不同型號在轉速、扭力及耗電之間各有取捨，有的重加速、有的重極速。PRO 底盤（MA、MS、ME）用雙軸{motor}，其他底盤用單軸{motor}。部分{motor}不可用於少年組等賽制，選購前請先看賽制資訊。",
       "accessory": "賽車以外的周邊用品，例如雙面膠、零件盒、{motor}收納盒、賽道組件及展示盒。",
       "screw": "螺絲、螺母及墊圈等緊固件，用來固定強化板、導輪及其他改裝零件。長度及頭部形狀按安裝位置選用；不鏽鋼螺絲比一般螺絲更堅固。",
       "gear": "齒輪把{motor}的轉動傳到車軸。齒輪比數字愈大（例如 5:1）加速愈好，數字愈小（例如 3.5:1）極速愈高。可用的齒輪組合按底盤而定。",
