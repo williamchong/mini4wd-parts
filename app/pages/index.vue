@@ -116,12 +116,30 @@ const kit = computed(() =>
   catalog.value?.kits.find(k => k.id === build.value?.kit))
 
 /**
- * The box if the build came from a kit, the bare chassis if not. Nothing before
- * a base is chosen: the placeholder car above is MA, but this row says no base
- * is picked yet, and a photo would contradict it.
+ * The chassis, even when the build came from a kit. Box art is the one picture
+ * the reader already knows — it is what they picked off the shelf — so spending
+ * this row on it says nothing new, while the chassis photo answers the question
+ * the row exists to answer: which chassis is inside that box. The art is not
+ * lost; `stockThumbFor` moves it to the body slot, which is the part of the car
+ * it actually shows.
+ *
+ * Nothing before a base is chosen: the placeholder car above is MA, but this
+ * row says no base is picked yet, and a photo would contradict it. The kit
+ * fallback is for a chassis whose photo is missing, which none is today.
  */
 const baseThumb = computed(() =>
-  thumbnailSrc('kits', kit.value) ?? thumbnailSrc('chassis', chassis.value))
+  thumbnailSrc('chassis', chassis.value) ?? thumbnailSrc('kits', kit.value))
+
+/**
+ * A picture for a slot still holding what came in the box, where the box shows
+ * it. Only the body qualifies: a kit's body entry is the moulded shell, which
+ * has no product photo because Tamiya never sold it separately, and the box art
+ * is a photograph of exactly that shell on exactly that car. The rest of a
+ * stock loadout — gears, terminals, the propeller shaft — is inside the car in
+ * the picture, not on it.
+ */
+const stockThumbFor = (slot: ResolvedSlot) =>
+  slot.type === 'body' ? thumbnailSrc('kits', kit.value) : undefined
 
 /** A build naming a chassis we do not ship is no build at all. */
 const hasBuild = computed(() => !!chassis.value)
@@ -408,9 +426,10 @@ useHead(() => ({ title: `${t('build.title')} — ${t('site.title')}` }))
       <li class="slot-row base-row">
         <div class="slot-label">{{ $t('build.base') }}</div>
         <div class="slot-entries base-entry">
-          <!-- The box if the build came from a kit, the bare chassis if not:
-               the picture answers the same question the row's first line does. -->
-          <CatalogThumb class="base-thumb" :src="baseThumb" :icon="kit ? 'body' : 'chassis'" />
+          <!-- The chassis, kit or no kit: the first line names the box and the
+               second names the chassis, and this is the one of the two a
+               beginner has never seen. -->
+          <CatalogThumb class="base-thumb" :src="baseThumb" icon="chassis" />
           <div class="base-text">
             <template v-if="hasBuild && chassis">
               <p class="slot-entry" :class="{ fallback: kit && isFallback(kit.names) }">
@@ -440,6 +459,7 @@ useHead(() => ({ title: `${t('build.title')} — ${t('site.title')}` }))
         :slot="slot"
         :parts-by-id="partsById"
         :swappable="hasBuild"
+        :stock-thumb="stockThumbFor(slot)"
         :copy-from="copies.get(slot.id)?.from"
         @open="openSlotId = slot.id"
         @revert="revert(slot.id)"
@@ -458,6 +478,7 @@ useHead(() => ({ title: `${t('build.title')} — ${t('site.title')}` }))
           :slot="slot"
           :parts-by-id="partsById"
           :swappable="hasBuild"
+          :stock-thumb="stockThumbFor(slot)"
           :copy-from="copies.get(slot.id)?.from"
           @open="openSlotId = slot.id"
           @revert="revert(slot.id)"

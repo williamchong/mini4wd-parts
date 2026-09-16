@@ -1,9 +1,10 @@
 <script setup lang="ts">
 /**
  * One slot of the build. What is in it comes from `resolveBuild`, so this
- * component never has to know whether the contents came from the chassis, the
- * kit or the user — only whether the user changed it, which is what Revert
- * undoes.
+ * component barely has to know whether the contents came from the chassis, the
+ * kit or the user — mostly only whether the user changed it, which is what
+ * Revert undoes. `stockThumb` is the one exception, and it reads `origin` for
+ * the reason given there.
  */
 import { thumbnailSrc } from '#shared/catalog/thumbnails'
 import type { BuildablePart, ResolvedSlot } from '#shared/catalog/build'
@@ -13,6 +14,16 @@ const props = defineProps<{
   partsById: Map<string, BuildablePart>
   /** False while there is no build to change yet. */
   swappable: boolean
+  /**
+   * A photo for an entry that came in the box and is not a catalog part, where
+   * the page has one to offer. The body slot is the case that exists: what a
+   * kit puts in it is the moulded shell, which has no product photo of its own
+   * because Tamiya never sold it — but the box art is a picture of that shell.
+   *
+   * Which slots get one is `stockThumbFor` in pages/index.vue; this end only
+   * decides which *entry* within a slot may wear it.
+   */
+  stockThumb?: string
   /** The front/rear counterpart this row can copy, when copying would change it. */
   copyFrom?: ResolvedSlot
 }>()
@@ -54,9 +65,12 @@ const rows = computed(() => props.slot.entries.map((entry) => {
     // majority and link nowhere, which is why this is a row of text with some
     // links in it rather than a row of links.
     partId: entry.partId,
-    // Only a catalog part has a photo. Everything else in a stock build is
-    // molded into the kit, so the slot's own glyph is all there can be.
+    // A catalog part's own photo first: a swapped-in part is not what the box
+    // art shows, however well the box art shows the slot. `stockThumb` covers
+    // the entry that is still the one that came in the box, and everything
+    // else falls through to the slot's glyph.
     thumbnail: thumbnailSrc('parts', part)
+      ?? (entry.origin === 'kit' ? props.stockThumb : undefined)
   }
 }))
 </script>
