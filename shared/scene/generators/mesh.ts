@@ -20,6 +20,10 @@ export const mirrorX = (right: readonly Point2[]): Point2[] =>
 export class Triangles {
   private readonly positions: number[] = []
 
+  get empty() {
+    return this.positions.length === 0
+  }
+
   tri(a: Point3, b: Point3, c: Point3) {
     this.positions.push(...a, ...b, ...c)
   }

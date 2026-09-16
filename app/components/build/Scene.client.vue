@@ -5,8 +5,9 @@
  *
  * Plain three, no TresJS (§4.1, 2026-09-16): the scene is one group per socket
  * named for its slot id, and a change to the build clears each group and adds
- * a mesh back. That attach step is what the chassis GLB's named empties will be
- * driven by later; only where the groups come from changes.
+ * a mesh back. The groups come from the socket table in shared/scene/sockets.ts,
+ * one layout per chassis, and the chassis under them is drawn from the same
+ * layout (§5.6).
  *
  * `.client.vue` keeps three out of the server bundle, and pages/index.vue
  * mounts it lazily, so the chunk is split from the route's own JavaScript.
@@ -19,7 +20,7 @@ import {
 } from 'three'
 import type { BufferGeometry } from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
-import { socketsFor } from '#shared/scene/sockets'
+import { layoutFor, socketsFor } from '#shared/scene/sockets'
 import type { ProxyKind } from '#shared/scene/sockets'
 import { silhouetteFor, silhouetteId } from '#shared/scene/bodies'
 import { bodyGeometry } from '#shared/scene/generators/body'
@@ -63,7 +64,10 @@ type Highlight = 'none' | 'hover' | 'open'
  * `silhouette` which table entry a body is lofted from, and `towardNose`
  * which end a stay faces. Each field is zero for the kinds that ignore it, so
  * the cache key built from them holds one geometry per shape that actually
- * differs. The shapes themselves come from shared/scene/generators (§5.6).
+ * differs. The motor is the one shape keyed by nothing here: it depends on
+ * the chassis alone, and the page remounts this component per chassis, so a
+ * cache never outlives one answer. The shapes themselves come from
+ * shared/scene/generators (§5.6).
  */
 type Shape = { mm: number; wheelMm: number; silhouette: string; towardNose: 1 | -1 | 0 }
 const shapeKey = (kind: ProxyKind, s: Shape) => `${kind}:${s.mm}:${s.wheelMm}:${s.silhouette}:${s.towardNose}`
@@ -74,7 +78,8 @@ const ROUND: ReadonlySet<ProxyKind> = new Set(['wheel', 'tire', 'roller'])
 type Solid = Exclude<ProxyKind, 'body'>
 
 const VISIBLE: Record<Solid, (shape: Shape) => BufferGeometry> = {
-  motor: () => parts.motor(),
+  // An FA-130 lies across the car and has one shaft; a PRO motor lies along it with two.
+  motor: () => parts.motor(layoutFor(props.chassis).motor.across ? 1 : 2),
   wheel: shape => parts.wheel(shape.mm),
   tire: shape => parts.tire(shape.wheelMm, shape.mm - shape.wheelMm),
   roller: shape => parts.roller(shape.mm),
@@ -223,7 +228,7 @@ const LIFTED_OPACITY = 0.35
 onMounted(() => {
   const element = canvas.value
   const sockets = socketsFor(props.chassis)
-  if (!element || !sockets) return
+  if (!element) return
 
   // Per instance, not per module: the caches are disposed with the scene that
   // filled them, and the component remounts on every chassis change.
@@ -352,7 +357,7 @@ onMounted(() => {
   // rather than as a proxy (shared/scene/generators/chassis.ts). It rides in
   // the car group so a lift for large wheels raises it too.
   const chassis = new Group()
-  for (const piece of chassisPieces(props.chassis) ?? []) {
+  for (const piece of chassisPieces(props.chassis)) {
     chassis.add(new Mesh(piece.geometry, chassisMaterial(piece.colour)))
   }
   car.add(chassis)
@@ -361,6 +366,7 @@ onMounted(() => {
     const group = new Group()
     group.name = socket.name
     group.position.set(...socket.position)
+    if (socket.rotateY) group.rotation.y = socket.rotateY
     groups.set(socket.name, group)
     car.add(group)
   }
@@ -455,7 +461,7 @@ onMounted(() => {
     hits = []
     proxies = []
     let lift = 0
-    for (const socket of sockets!) {
+    for (const socket of sockets) {
       const group = groups.get(socket.name)
       const slot = bySlot.get(socket.slotId)
       if (!group || !slot) continue

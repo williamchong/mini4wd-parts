@@ -17,7 +17,6 @@ import {
 import { orderKits } from '#shared/catalog/kits'
 import { checkBuild } from '#shared/catalog/rules'
 import { flagThumbnail, thumbnailSrc } from '#shared/catalog/thumbnails'
-import { SCENE_CHASSIS } from '#shared/scene/chassis'
 import type { ResolvedSlot } from '#shared/catalog/build'
 import type { Finding } from '#shared/catalog/rules'
 import type { ChassisId, Slot } from '#shared/catalog/schema'
@@ -323,15 +322,6 @@ const openSlot = computed<ResolvedSlot | null>(() =>
   slots.value.find(slot => slot.id === openSlotId.value) ?? null)
 
 /**
- * Whether the 3D pane can draw this chassis at all (docs/PLAN.md §5.5). Only
- * MA has a socket table today; the other seven show a placeholder in the pane
- * and build from the list. Read from its own module rather than from the
- * socket table — see shared/scene/chassis.ts for the 10.7 KB that sharing the
- * table cost.
- */
-const hasScene = computed(() => !!shownChassis.value && SCENE_CHASSIS.has(shownChassis.value.id))
-
-/**
  * The pane mounts only after hydration. Hydrated in place, Nuxt's `.client.vue`
  * wrapper runs the scene's `onMounted` while its server placeholder is still
  * in the DOM, so there is no canvas yet and the scene silently never starts.
@@ -469,7 +459,7 @@ useHead(() => ({ title: `${t('build.title')} — ${t('site.title')}` }))
         <img src="/images/scene-poster-4x3.webp" alt="" width="712" height="534">
       </picture>
       <LazyBuildScene
-        v-if="hasScene && shownChassis && hydrated"
+        v-if="shownChassis && hydrated"
         :key="shownChassis.id"
         :chassis="shownChassis.id"
         :kit="kit?.id ?? null"
@@ -479,9 +469,8 @@ useHead(() => ({ title: `${t('build.title')} — ${t('site.title')}` }))
         @select="pick"
         @ready="sceneReady = true"
       />
-      <p v-else-if="!hasScene" class="scene-placeholder">{{ $t('build.scene.unavailable') }}</p>
     </div>
-    <p v-if="hasScene" class="scene-hint">
+    <p class="scene-hint">
       {{ hasBuild ? $t('build.scene.hint') : $t('build.scene.hintEmpty') }}
     </p>
 

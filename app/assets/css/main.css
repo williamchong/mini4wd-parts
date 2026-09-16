@@ -314,19 +314,6 @@ button.link {
   border-color: #2c3e50;
 }
 
-/* Stands in for the canvas on chassis the pane cannot draw yet, so the frame
-   and the list under it sit in the same place on every build. */
-.scene-placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-  margin: 0;
-  padding: 1rem;
-  text-align: center;
-  color: #666;
-}
-
 .scene-hint {
   font-size: 0.9em;
   color: #666;

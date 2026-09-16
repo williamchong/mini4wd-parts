@@ -107,13 +107,14 @@ export function damper(): BufferGeometry {
 }
 
 /**
- * A double-shaft motor: a can along the car with a shaft out of each end,
- * which is how MA and MS carry it. Mostly hidden under the body; only its
- * silhouette matters (§5.4).
+ * A motor: a can with a shaft out of each end for the double-shaft PRO
+ * chassis, or out of one end for the FA-130 the others carry. Drawn along
+ * the car; a single-shaft chassis' socket turns it across (sockets.ts).
+ * Mostly hidden under the body; only its silhouette matters (§5.4).
  */
-export function motor(): BufferGeometry {
+export function motor(shafts: 1 | 2 = 2): BufferGeometry {
   const t = new Triangles()
   t.revolve(cylinder(10, -12.5, 12.5), 14, 'z')
-  t.revolve(cylinder(1, -18.5, 18.5), 6, 'z')
+  t.revolve(cylinder(1, shafts === 2 ? -18.5 : 12, 18.5), 6, 'z')
   return t.geometry()
 }

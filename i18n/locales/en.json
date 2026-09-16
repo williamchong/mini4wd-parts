@@ -67,7 +67,6 @@
       "liftBody": "Lift the body",
       "fitBody": "Fit the body",
       "hint": "Tap a part on the car to change it. Drag to rotate, pinch or scroll to zoom.",
-      "unavailable": "The 3D preview only covers the MA chassis for now. Build with the list below.",
       "hintEmpty": "Choose the kit or chassis you have first, then swap parts one by one."
     },
     "slot": {

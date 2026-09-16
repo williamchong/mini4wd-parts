@@ -2,10 +2,11 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { Vector3 } from 'three'
 import type { BufferGeometry } from 'three'
-import { SCENE_CHASSIS } from '../chassis.ts'
+import { CHASSIS_IDS } from '../../catalog/chassis.ts'
 import { DEFAULT_SILHOUETTE, silhouetteFor } from '../bodies.ts'
 import { bodyGeometry, FLOOR_MM } from './body.ts'
-import { chassisPieces } from './chassis.ts'
+import { BLACK, chassisPieces, STEEL } from './chassis.ts'
+import { layoutFor, socketsFor } from '../sockets.ts'
 import { plate, Triangles } from './mesh.ts'
 import { brake, damper, motor, roller, sideStay, stay, tire, wheel } from './parts.ts'
 
@@ -77,7 +78,7 @@ test('a stay is a plate of its recorded thickness, lying on top of the socket, e
 })
 
 test('every revolved part winds outward', () => {
-  for (const [name, geometry] of [['roller', roller(13)], ['wheel', wheel(24)], ['tire', tire(24, 6)], ['motor', motor()], ['damper', damper()], ['brake', brake()]] as const) {
+  for (const [name, geometry] of [['roller', roller(13)], ['wheel', wheel(24)], ['tire', tire(24, 6)], ['motor', motor()], ['single-shaft motor', motor(1)], ['damper', damper()], ['brake', brake()]] as const) {
     assert.ok(signedVolume(geometry) > 0, name)
   }
 })
@@ -123,14 +124,44 @@ test('every kit without an entry gets the default silhouette', () => {
   assert.notEqual(silhouetteFor('18635'), DEFAULT_SILHOUETTE)
 })
 
-test('every chassis the pane draws has chassis pieces that wind outward, and only those', () => {
-  for (const id of SCENE_CHASSIS) {
+test('every chassis winds outward, stays inside the regulation envelope and under the triangle budget', () => {
+  for (const id of CHASSIS_IDS) {
     const pieces = chassisPieces(id)
-    assert.ok(pieces?.length, id)
+    assert.ok(pieces.length >= 3, id)
+    let triangles = 0
     for (const piece of pieces) {
-      if (piece.geometry.index) continue // three's own primitives
       assert.ok(signedVolume(piece.geometry) > 0, `${id} piece outward`)
+      triangles += piece.geometry.getAttribute('position').count / 3
+      piece.geometry.computeBoundingBox()
+      const box = piece.geometry.boundingBox!
+      assert.ok(box.min.x >= -52.5 && box.max.x <= 52.5, `${id} within 105 mm`)
+      assert.ok(box.min.z >= -95 && box.max.z <= 95, `${id} within the length a bumper reaches`)
+      assert.ok(box.min.y >= 0, `${id} on the ground`)
+    }
+    // §5.6: 1–2k triangles is the budget; past that nothing shows under a shell.
+    assert.ok(triangles <= 2000, `${id}: ${triangles} triangles`)
+  }
+})
+
+test('a chassis whose motor lies across the car draws its propeller shaft in steel; a PRO chassis does not', () => {
+  for (const id of CHASSIS_IDS) {
+    const steel = chassisPieces(id).some(p => p.colour === STEEL)
+    assert.equal(steel, layoutFor(id).motor.across, id)
+  }
+})
+
+test('every roller socket has a post under it', () => {
+  const p = new Vector3()
+  for (const id of CHASSIS_IDS) {
+    const black = chassisPieces(id).find(p => p.colour === BLACK)!.geometry.getAttribute('position')
+    for (const socket of socketsFor(id).filter(s => s.kind === 'roller')) {
+      const [x, , z] = socket.position
+      let found = false
+      for (let i = 0; i < black.count && !found; i++) {
+        p.fromBufferAttribute(black, i)
+        found = Math.abs(p.x - x) < 2.5 && Math.abs(p.z - z) < 2.5 && p.y > 12.9
+      }
+      assert.ok(found, `${id} ${socket.name} has no post`)
     }
   }
-  assert.equal(chassisPieces('vz'), undefined)
 })
