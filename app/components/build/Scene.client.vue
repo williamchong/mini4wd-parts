@@ -90,7 +90,7 @@ const DEFAULT_PLATE_MM = 1.5
  * What an empty slot shows: the simplest outline of the shape that would go
  * there, drawn in wireframe. Simpler than the real shapes on purpose — a
  * wireframe of a 16-segment revolve is a tangle, an octagonal ring is a slot.
- * An empty body draws its loft in wireframe, which reads as a car outline.
+ * An empty body draws nothing (see `populate`).
  */
 const outlineBox = (w: number, h: number, d: number, y = 0) => {
   const t = new Triangles()
@@ -155,11 +155,9 @@ function diameterFor(kind: ProxyKind, slot: ResolvedSlot, bySlot: Map<string, Re
  * drawn. While the body was a translucent box (§5.5) a box-sized hit stole
  * taps aimed at the wheels behind it; now the shell is opaque, whatever the
  * reader sees under their finger is what they get, and lifting the shell is
- * how they reach what it covers. The entry here is only used for an empty
- * body slot, whose outline is drawn in wireframe.
+ * how they reach what it covers.
  */
-const HIT: Record<ProxyKind, (mm: number) => BufferGeometry> = {
-  body: () => new BoxGeometry(40, 10, 130).translate(0, 10, 0),
+const HIT: Record<Solid, (mm: number) => BufferGeometry> = {
   motor: () => new BoxGeometry(34, 19, 24),
   wheel: mm => new CylinderGeometry(mm / 2, mm / 2, 12, 16).rotateZ(Math.PI / 2),
   tire: mm => new CylinderGeometry(mm / 2 + 2, mm / 2 + 2, 9, 16).rotateZ(Math.PI / 2),
@@ -463,6 +461,11 @@ onMounted(() => {
       if (!group || !slot) continue
       group.clear()
       const state: ProxyState = !slot.entries.length ? 'empty' : slot.swapped ? 'changed' : 'stock'
+      // An empty body slot draws nothing: a tap on the shell only lifts it and
+      // the body is chosen from the list, so there is no target to outline,
+      // and a wireframe loft over the whole car was the one outline that read
+      // as a tangle rather than a slot.
+      if (socket.kind === 'body' && state === 'empty') continue
       const mm = diameterFor(socket.kind, slot, bySlot)
       const shape: Shape = {
         mm,
@@ -480,7 +483,7 @@ onMounted(() => {
       visible.userData = data
       proxies.push(visible)
       // The shell is its own hit volume; everything else gets an oversized one.
-      if (socket.kind === 'body' && state !== 'empty') {
+      if (socket.kind === 'body') {
         group.add(visible)
         hits.push(visible)
       } else {
@@ -519,9 +522,7 @@ onMounted(() => {
     )
     raycaster.setFromCamera(pointer, camera)
     const along = raycaster.intersectObjects(hits, false).map(hit => hit.object.userData as ProxyData)
-    // Nearest wins, except that an empty body — a wireframe — loses to
-    // whatever is seen through it.
-    return along.find(data => data.kind !== 'body' || data.state !== 'empty') ?? along[0] ?? null
+    return along[0] ?? null
   }
 
   let down: { x: number; y: number } | null = null
