@@ -4,6 +4,8 @@
 name: Raikiri
 reference: '18640'
 titles: [Raikiri]
+# The Pink Special is a polycarbonate Raikiri on MS.
+kits: ['95486']
 # z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
 hull:
   - [-64, 30, 10, 24, 16]

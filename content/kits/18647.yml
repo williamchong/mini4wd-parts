@@ -53,6 +53,7 @@ colours:
   wheel: "#ec7a24"
   tire: "#1f2124"
   source: scraped
+body: blast-arrow
 priceJpy: 2750
 priceJpyExTax: 2500
 priceHkd: 220

@@ -1,0 +1,26 @@
+# DCR-02 (MA, 2019): an open-wheel racer. A slim body between the wheels, a
+# green canopy low in the middle with raised rails along both sides of it, a
+# tapering nose, and a wide three-plate wing standing over the tail.
+name: DCR-02
+reference: '18650'
+titles: [DCR-02]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-62, 22, 8, 18, 14]
+  - [-48, 25, 9, 20, 16]
+  - [-32, 26, 10, 21, 17, 14, 21]
+  - [-12, 26, 10, 21, 18, 16, 24]
+  - [6, 25, 9, 20, 17, 14, 22]
+  - [24, 23, 8, 18, 14]
+  - [42, 20, 6, 15, 11]
+  - [58, 16, 5, 12, 9]
+  - [68, 10, 3, 7, 7]
+pods:
+  # The side rails running past the cockpit.
+  - x: 24
+    stations:
+      - [-46, 3, 24, 14]
+      - [-30, 3, 23, 14]
+      - [-14, 3, 20, 14]
+      - [2, 3, 17, 14]
+wing: { z: -56, halfWidth: 30, height: 26, chord: 14, pylons: 8 }

@@ -52,6 +52,7 @@ colours:
   wheel: "#2a2c30"
   tire: "#2f9e4f"
   source: scraped
+body: copperfang
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

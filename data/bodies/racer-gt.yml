@@ -1,0 +1,27 @@
+# The MA "GT" animal racers (2015-2021): one front-engined GT coupe moulding
+# that every one of them recolours. A long low nose with a full-width lower
+# grille, swollen fenders that cover all four wheels, a tinted bubble cabin set
+# well back, a fastback tail, and a big two-post GT wing over it.
+name: Mini 4WD Racer GT
+reference: '95414'
+titles:
+  - Mini 4WD Hawk Racer GT
+  - Mini 4WD Kumamon Version GT
+  - Mini 4WD Lupine Racer GT
+  - Mini 4WD Owl Racer GT
+  - Mini 4WD Panda Racer GT
+  - Mini 4WD Pig Racer GT
+  - Mini 4WD Shirokumakko GT
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-64, 29, 9, 23, 14]
+  - [-52, 35, 11, 29, 17]
+  - [-40, 36, 12, 30, 18, 18, 26]
+  - [-22, 35, 12, 29, 17, 17, 28]
+  - [-4, 34, 12, 28, 16, 16, 27]
+  - [12, 35, 11, 29, 16, 11, 20]
+  - [30, 36, 10, 29, 14]
+  - [50, 32, 8, 25, 11]
+  - [68, 21, 5, 15, 7]
+arches: 16
+wing: { z: -56, halfWidth: 26, height: 31, chord: 13, pylons: 20 }

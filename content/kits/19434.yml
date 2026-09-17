@@ -53,6 +53,7 @@ colours:
   wheel: "#eef0f2"
   tire: "#1f2124"
   source: scraped
+body: victory-magnum
 priceJpy: 1540
 priceJpyExTax: 1400
 priceHkd: 120

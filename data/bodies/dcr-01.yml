@@ -1,0 +1,34 @@
+# DCR-01 (MA, 2019): the Cross System racer, and an open-wheeler — a narrow
+# spine that runs between all four wheels rather than over them. A thin pointed
+# nose with a canard either side, a long blistered canopy down the middle, a
+# stepped engine cover, and twin fins swept up at the tail's corners.
+name: DCR-01
+reference: '95161'
+titles: [DCR-01]
+# 95161 is the blue-plated recolour, which has no article of its own.
+kits: ['95161']
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-66, 23, 6, 19, 10]
+  - [-52, 26, 8, 21, 12]
+  - [-34, 26, 9, 21, 13, 14, 19]
+  - [-14, 25, 9, 20, 13, 15, 22]
+  - [4, 24, 8, 19, 12, 14, 20]
+  - [22, 22, 7, 17, 11]
+  - [40, 20, 6, 15, 9]
+  - [56, 16, 5, 12, 7]
+  - [68, 9, 3, 6, 5]
+pods:
+  # The rear fins, swept up off the tail's corners.
+  # z, halfWidth, top, bottom
+  - x: 25
+    stations:
+      - [-60, 2, 18, 9]
+      - [-46, 3, 22, 9]
+      - [-30, 2, 16, 10]
+  # The nose canards, flat and low either side of the point.
+  - x: 26
+    stations:
+      - [46, 4, 10, 6]
+      - [60, 5, 10, 5]
+      - [68, 3, 9, 5]

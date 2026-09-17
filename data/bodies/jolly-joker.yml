@@ -1,0 +1,21 @@
+# Jolly-Joker (AR, 1980s pickup): a tall step-side truck — a deep slab grille
+# under a long flat bonnet, a square cab set back with a raked screen, and a
+# short load bed behind it whose rail sits at the waist. Fenders cut open over
+# all four wheels.
+#
+# Sunny-Shuttle is the same moulding in yellow, so it draws this shell too.
+name: Jolly-Joker
+reference: '95298'
+titles: [Jolly-Joker, Sunny-Shuttle]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-64, 31, 17, 29, 23]
+  - [-46, 33, 18, 31, 24]
+  - [-28, 34, 19, 32, 25, 28, 41]
+  - [-10, 34, 19, 32, 25, 29, 41]
+  - [2, 34, 19, 32, 26, 25, 37]
+  - [10, 34, 17, 32, 26]
+  - [36, 34, 16, 32, 26]
+  - [56, 33, 14, 31, 25]
+  - [66, 30, 12, 27, 21]
+arches: 14

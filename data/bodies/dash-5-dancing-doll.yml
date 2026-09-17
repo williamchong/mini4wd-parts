@@ -1,0 +1,26 @@
+# Dash-5 Dancing Doll (Super-II, 1989): a Dash-series racer that runs between
+# its wheels. A low tapered nose, a tall blue canopy dome over the middle, a
+# pair of angled fins standing on the flanks beside the cabin, and a big wing
+# carried at the tail on deep end plates.
+name: Dash-5 Dancing Doll
+reference: '95266'
+titles: [Dash-5 Dancing Doll]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-58, 22, 10, 18, 17]
+  - [-44, 25, 12, 21, 20]
+  - [-26, 25, 12, 21, 20, 14, 26]
+  - [-8, 25, 12, 21, 20, 17, 30]
+  - [10, 24, 12, 20, 19, 17, 29]
+  - [26, 24, 11, 19, 18, 13, 24]
+  - [42, 23, 10, 18, 16]
+  - [56, 20, 8, 15, 12]
+  - [66, 14, 5, 10, 7]
+pods:
+  # The angled fins standing on the flanks either side of the canopy.
+  - x: 24
+    stations:
+      - [0, 2.5, 28, 14]
+      - [14, 3, 31, 14]
+      - [28, 2.5, 25, 15]
+wing: { z: -46, halfWidth: 22, height: 37, chord: 13 }

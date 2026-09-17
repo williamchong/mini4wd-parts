@@ -1,0 +1,26 @@
+# Mini 4WD New Year's Edition, Year of the Dragon 2024 (Super-II): a pre-war
+# Grand Prix racer, so a narrow cigar body between four exposed wheels. A tall
+# upright radiator grille at the nose with a headlight pod either side of it, a
+# long louvred bonnet, an open cockpit near the tail with a gold dragon
+# ornament standing on the cowl, and a rounded boat tail. No wing.
+# Tamiya prints no 全高 for this kit, so the roof is judged from the art.
+name: Mini 4WD New Year's Edition - Year of the Dragon 2024
+reference: '95650'
+titles: ["Mini 4WD New Year's Edition - Year of the Dragon 2024"]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-58, 13, 8, 10, 14]
+  - [-46, 16, 9, 13, 18]
+  - [-30, 18, 10, 15, 20, 11, 24]
+  - [-14, 18, 10, 15, 21]
+  - [2, 18, 10, 15, 22, 8, 30]
+  - [18, 18, 10, 15, 22]
+  - [36, 17, 10, 14, 22]
+  - [52, 16, 10, 13, 23]
+  - [62, 14, 9, 11, 20]
+pods:
+  # The headlight pods standing either side of the radiator grille.
+  - x: 15
+    stations:
+      - [43, 3.5, 26, 17]
+      - [54, 3.5, 26, 17]

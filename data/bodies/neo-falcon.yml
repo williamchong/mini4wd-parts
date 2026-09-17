@@ -1,0 +1,28 @@
+# Neo Falcon (MS, 2012): an angular wedge racer. A sharp pointed nose with
+# blades spread over the front corners, a broad faceted front deck, a low dark
+# canopy in the middle, sculpted side pods, and a swept wing on a central pylon
+# over the tail. The wheels stand clear of the body.
+name: Neo Falcon
+reference: '18617'
+titles: [Neo Falcon]
+# The clear and spare body sets Tamiya sells for this car.
+parts: ['15371']
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-58, 22, 9, 17, 15]
+  - [-44, 26, 10, 21, 18]
+  - [-28, 29, 11, 23, 19, 12, 25]
+  - [-10, 30, 11, 24, 19, 13, 27]
+  - [8, 29, 10, 23, 18, 11, 24]
+  - [26, 28, 9, 22, 15, 7, 18]
+  - [44, 26, 7, 20, 12]
+  - [60, 22, 5, 16, 8]
+  - [68, 15, 3, 11, 6]
+pods:
+  # The blades spread over the front corners.
+  # z, halfWidth, top, bottom
+  - x: 27
+    stations:
+      - [32, 4, 11, 2]
+      - [56, 5, 9, 1]
+wing: { z: -48, halfWidth: 30, height: 33, chord: 14, pylons: 4 }

@@ -50,6 +50,7 @@ colours:
   wheel: "#b8892a"
   tire: "#1f2124"
   source: scraped
+body: mach-bullet
 priceJpy: 1210
 priceJpyExTax: 1100
 priceHkd: 110

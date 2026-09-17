@@ -49,6 +49,7 @@ colours:
   wheel: "#eef0f2"
   tire: "#7cc0ec"
   source: override
+body: gun-bluster-xto
 priceJpy: 1650
 priceJpyExTax: 1500
 priceHkd: 120

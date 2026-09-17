@@ -49,6 +49,7 @@ colours:
   wheel: "#c9ced6"
   tire: "#2f9e4f"
   source: scraped
+body: dcr-02
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

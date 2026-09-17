@@ -46,6 +46,7 @@ colours:
   wheel: "#eef0f2"
   tire: "#1f2124"
   source: scraped
+body: heat-edge
 priceJpy: 1210
 priceJpyExTax: 1100
 releaseDate: 2018-03-31

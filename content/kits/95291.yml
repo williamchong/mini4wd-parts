@@ -49,6 +49,7 @@ colours:
   wheel: "#2f5fc4"
   tire: "#f2c230"
   source: scraped
+body: super-avante
 priceJpy: 1100
 priceJpyExTax: 1000
 releaseDate: 2016-10-01

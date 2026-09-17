@@ -1,0 +1,19 @@
+# Abilista (MA, 2014): a wide-bodied racer. A low sloping nose with headlights
+# laid along the fender tops, a small cabin set back with a hump behind it,
+# fenders cut open over the wheels, and a wing high on two tall posts.
+name: Abilista
+reference: '18639'
+titles: [Abilista]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-64, 30, 9, 25, 15]
+  - [-50, 34, 11, 28, 18, 18, 23]
+  - [-34, 36, 12, 29, 19, 19, 28]
+  - [-14, 36, 12, 29, 19, 18, 28]
+  - [4, 35, 11, 28, 17, 14, 23]
+  - [22, 34, 9, 27, 15, 8, 17]
+  - [40, 32, 8, 25, 13]
+  - [56, 27, 6, 20, 10]
+  - [68, 15, 4, 10, 6]
+arches: 16
+wing: { z: -56, halfWidth: 29, height: 34, chord: 12, pylons: 14 }

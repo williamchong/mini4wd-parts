@@ -49,6 +49,7 @@ colours:
   wheel: "#c9ced6"
   tire: "#1f2124"
   source: override
+body: trf-racer-jr
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

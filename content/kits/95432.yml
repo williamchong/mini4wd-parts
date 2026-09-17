@@ -49,6 +49,7 @@ colours:
   wheel: "#1f2124"
   tire: "#f2c230"
   source: scraped
+body: fighter-magnum-vfx
 priceJpy: 1100
 priceJpyExTax: 1000
 priceHkd: 100

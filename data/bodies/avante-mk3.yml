@@ -4,6 +4,8 @@
 name: Avante Mk.III
 reference: '18626'
 titles: [Avante Mk.III]
+# The Nero advance pack is an Avante Mk.III on MS.
+kits: ['18662']
 # z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
 hull:
   - [-60, 18, 10, 14, 18]

@@ -5,6 +5,8 @@
 name: Blast Arrow
 reference: '18635'
 titles: [Blast Arrow]
+# The MA starter pack is a Blast Arrow; its own name says so.
+kits: ['18647']
 # z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
 hull:
   - [-70, 37, 5, 30, 11]

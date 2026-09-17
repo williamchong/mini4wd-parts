@@ -1,0 +1,20 @@
+# Proto-Saber Evolution (AR re-release of the 1997 car): a full body with a
+# dipped nose between pointed front fenders, a silver turbine moulded down the
+# centre of the deck, a canopy just behind it, and a flat wing sitting low
+# across a raised tail.
+name: Proto-Saber Evolution
+reference: '19448'
+titles: [Proto-Saber Evolution]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-58, 28, 9, 22, 15, 14, 19]
+  - [-44, 33, 11, 27, 18, 16, 22]
+  - [-26, 36, 11, 29, 19, 18, 24]
+  - [-6, 35, 11, 28, 18, 18, 25]
+  - [12, 34, 10, 27, 16, 15, 21]
+  - [30, 34, 10, 27, 13]
+  - [48, 31, 8, 24, 11]
+  - [61, 23, 6, 16, 8]
+  - [68, 13, 4, 9, 5]
+arches: 16
+wing: { z: -52, halfWidth: 27, height: 27, chord: 14, pylons: 8 }

@@ -1,0 +1,19 @@
+# Mach-Bullet (VS, also on AR): a pre-war grand prix racer. A tall narrow
+# bonnet ending in an upright radiator grille, a slim body between fully open
+# wheels, an open cockpit, and a rounded headrest fairing behind the driver
+# that tapers back to a boat tail.
+name: Mach-Bullet
+reference: '18091'
+titles: [Mach-Bullet]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-62, 13, 8, 9, 14]
+  - [-50, 18, 10, 14, 20, 8, 28]
+  - [-36, 21, 12, 16, 24, 10, 37]
+  - [-24, 22, 12, 17, 25, 9, 39]
+  - [-10, 22, 12, 18, 26]
+  - [6, 22, 13, 18, 27]
+  - [24, 22, 14, 18, 30]
+  - [46, 21, 14, 17, 31]
+  - [58, 20, 13, 16, 29]
+  - [64, 17, 11, 13, 25]

@@ -32,6 +32,7 @@ colours:
   wheel: "#d0312d"
   tire: "#1f2124"
   source: override
+body: avante-mk3
 priceJpy: 3300
 priceJpyExTax: 3000
 priceHkd: 300

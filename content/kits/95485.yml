@@ -49,6 +49,7 @@ colours:
   wheel: "#1f2124"
   tire: "#8e949b"
   source: override
+body: festa-jaune
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

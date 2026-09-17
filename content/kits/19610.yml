@@ -50,6 +50,7 @@ colours:
   wheel: "#d0312d"
   tire: "#1f2124"
   source: scraped
+body: desert-golem
 priceJpy: 858
 priceJpyExTax: 780
 status: current

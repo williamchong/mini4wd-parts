@@ -1,0 +1,26 @@
+# Dash-0 Horizon (Super-II, 1990 Dash series): a wide full-bodied racer with a
+# flat two-finned nose plate, fenders open over all four wheels, a dark canopy
+# dome set just ahead of centre, and a high wing on pylons over a squared-off
+# engine bay at the tail.
+name: Dash-0 Horizon
+reference: '18073'
+titles: [Dash-0 Horizon]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-66, 28, 9, 23, 18]
+  - [-52, 33, 11, 27, 22]
+  - [-36, 36, 12, 29, 22, 20, 26]
+  - [-16, 35, 12, 28, 20, 16, 31]
+  - [4, 34, 12, 27, 19, 17, 32]
+  - [22, 34, 11, 27, 17, 12, 24]
+  - [40, 35, 9, 28, 14]
+  - [54, 35, 6, 29, 9]
+  - [66, 32, 4, 26, 7]
+arches: 16
+pods:
+  # The two upright fins standing on the front nose plate.
+  - x: 24
+    stations:
+      - [52, 2, 20, 9]
+      - [64, 2, 17, 7]
+wing: { z: -50, halfWidth: 28, height: 38, chord: 15, pylons: 22 }

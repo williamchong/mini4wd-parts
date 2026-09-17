@@ -49,6 +49,7 @@ colours:
   wheel: "#eef0f2"
   tire: "#35bfd4"
   source: scraped
+body: panda-racer
 priceJpy: 1540
 priceJpyExTax: 1400
 priceHkd: 140

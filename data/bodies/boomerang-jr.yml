@@ -1,0 +1,18 @@
+# Boomerang Jr. (VS, 1988 original): a squarer buggy than the Avante — a flat
+# wedge bonnet, slab flanks, an open cockpit with the driver behind a low
+# screen and a roll hoop, and a wide wing over the engine deck.
+name: Boomerang Jr.
+reference: '18060'
+titles: [Boomerang Jr.]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-58, 25, 12, 21, 20]
+  - [-44, 27, 14, 23, 22]
+  - [-30, 27, 15, 23, 22, 14, 26]
+  - [-16, 26, 14, 22, 15]
+  - [0, 26, 13, 22, 14, 16, 18]
+  - [16, 25, 11, 21, 12]
+  - [40, 24, 10, 20, 11]
+  - [56, 22, 8, 18, 9]
+  - [66, 17, 6, 13, 7]
+wing: { z: -54, halfWidth: 25, height: 31, chord: 13, pylons: 12 }

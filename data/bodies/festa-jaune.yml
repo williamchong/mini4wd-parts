@@ -1,0 +1,20 @@
+# Festa Jaune (MA, 2013): a wide GT supercar that covers its wheels. A long low
+# nose with nostril intakes either side of a central blade, a tinted cabin set
+# just behind the middle, a cut-away flank over the rear wheel, and a wide
+# swept wing standing above the tail.
+name: Festa Jaune
+reference: '18637'
+titles: [Festa Jaune]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-66, 32, 10, 26, 15]
+  - [-54, 35, 11, 29, 18, 20, 24]
+  - [-38, 37, 12, 30, 19, 21, 29]
+  - [-18, 37, 12, 30, 19, 20, 30]
+  - [0, 36, 11, 29, 18, 17, 26]
+  - [18, 35, 10, 28, 16, 10, 19]
+  - [36, 33, 8, 26, 13]
+  - [54, 28, 6, 21, 10]
+  - [68, 16, 4, 11, 6]
+arches: 16
+wing: { z: -56, halfWidth: 30, height: 32, chord: 12, pylons: 10 }

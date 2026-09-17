@@ -1,0 +1,28 @@
+# Astro-Boomerang (Super-II, clear body special): a low wide aero wedge. A
+# split pointed nose with a swept fin either side, a long bubble canopy set
+# low in the middle, wide flanks sweeping past the wheels, and a flat tail
+# flap sitting straight on the deck over the rear axle.
+name: Astro-Boomerang
+reference: '95279'
+titles: [Astro-Boomerang]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-62, 24, 8, 19, 13]
+  - [-48, 28, 10, 23, 16]
+  - [-34, 30, 10, 25, 17, 16, 22]
+  - [-16, 30, 10, 25, 16, 18, 25]
+  - [2, 29, 9, 24, 15, 14, 21]
+  - [20, 28, 9, 23, 13]
+  - [38, 26, 8, 21, 10]
+  - [54, 22, 6, 17, 7]
+  - [68, 14, 4, 10, 4]
+pods:
+  # The swept fins either side of the nose.
+  - x: 26
+    # z, halfWidth, top, bottom
+    stations:
+      - [34, 4, 15, 4]
+      - [52, 5, 19, 4]
+      - [66, 4, 12, 4]
+# The tail flap, its end plates reaching down to the deck.
+wing: { z: -52, halfWidth: 26, height: 25, chord: 14 }

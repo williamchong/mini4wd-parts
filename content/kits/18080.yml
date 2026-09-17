@@ -50,6 +50,7 @@ colours:
   wheel: "#c9ced6"
   tire: "#2f5fc4"
   source: scraped
+body: bear-hawk-rs
 priceJpy: 1100
 priceJpyExTax: 1000
 priceHkd: 100

@@ -1,0 +1,31 @@
+# Keen Hawk Jr. (MS, 2004): a silver and blue arrow racer between the wheels.
+# A beaked nose with canards either side, a narrow raised spine running back
+# from the canopy, flat side wings flaring over the rear wheels, and a swept
+# rear wing on two posts.
+name: Keen Hawk Jr.
+reference: '18618'
+titles: [Keen Hawk Jr.]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-58, 22, 9, 18, 14]
+  - [-44, 25, 10, 20, 16]
+  - [-28, 26, 11, 21, 17, 13, 24]
+  - [-8, 26, 11, 21, 17, 14, 26]
+  - [10, 25, 10, 20, 16, 11, 23]
+  - [28, 24, 9, 19, 14, 7, 18]
+  - [46, 21, 8, 16, 11]
+  - [60, 15, 6, 11, 7]
+  - [70, 8, 3, 6, 4]
+pods:
+  # The flat side wings over the rear wheels.
+  - x: 26
+    stations:
+      - [-52, 6, 15, 10]
+      - [-34, 8, 17, 10]
+      - [-16, 6, 15, 10]
+  # The canards either side of the beak.
+  - x: 22
+    stations:
+      - [46, 7, 10, 4]
+      - [60, 7, 10, 4]
+wing: { z: -48, halfWidth: 26, height: 33, chord: 14, pylons: 17 }

@@ -1,0 +1,20 @@
+# Dual Ridge Jr. (VZ, 2020 re-release): a smooth teardrop pod running between
+# open wheels, with a long low cockpit cover, a split pointed nose, and a tall
+# twin-plane rear wing carried on posts well above the tail.
+name: Dual Ridge Jr.
+reference: '18096'
+titles: [Dual Ridge Jr.]
+# The clear and spare body sets Tamiya sells for this car.
+parts: ['95645']
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-58, 22, 8, 17, 12]
+  - [-44, 24, 9, 19, 14]
+  - [-28, 25, 10, 20, 15, 14, 19]
+  - [-10, 25, 10, 20, 15, 15, 21]
+  - [8, 24, 9, 19, 14, 13, 19]
+  - [24, 22, 8, 17, 13]
+  - [42, 19, 7, 14, 10]
+  - [56, 14, 5, 10, 7]
+  - [68, 8, 3, 6, 5]
+wing: { z: -50, halfWidth: 26, height: 34, chord: 14, pylons: 14 }

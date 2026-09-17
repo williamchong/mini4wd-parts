@@ -49,6 +49,7 @@ colours:
   wheel: "#ff3b3b"
   tire: "#1f2124"
   source: scraped
+body: hyundai-i20-coupe-wrc
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

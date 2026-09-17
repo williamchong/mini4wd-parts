@@ -1,0 +1,25 @@
+# Mini 4WD Penguin Racer (VZ, 2023): an open-wheel racer, narrow between the
+# wheels. A low pointed nose, flat side pods along the flanks, an open cockpit
+# with a roll bar over the penguin, and a tall wide rear wing on two posts.
+name: Mini 4WD Penguin Racer
+reference: '95570'
+titles: [Mini 4WD Penguin Racer]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-56, 22, 10, 18, 16]
+  - [-42, 24, 12, 20, 18]
+  - [-28, 25, 12, 21, 18, 14, 24]
+  - [-10, 25, 12, 21, 18, 15, 25]
+  - [8, 24, 11, 20, 16, 13, 20]
+  - [26, 23, 10, 19, 13]
+  - [44, 21, 8, 17, 10]
+  - [58, 16, 6, 13, 8]
+  - [68, 10, 4, 8, 5]
+pods:
+  # The side pods that bridge the wheels.
+  - x: 28
+    stations:
+      - [-30, 5, 14, 5]
+      - [-10, 6, 16, 4]
+      - [14, 5, 13, 5]
+wing: { z: -52, halfWidth: 28, height: 31, chord: 12, pylons: 20 }

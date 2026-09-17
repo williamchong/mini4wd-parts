@@ -1,0 +1,29 @@
+# Spin Cobra (Super-II re-release of the 1997 fully-cowled car): a hooded
+# cobra. Two bulbous rounded fender crowns swell either side of a short raised
+# centre nose, the canopy sits low over the middle, and twin sharp fins stand
+# at the rear corners with a low wing between them. Tamiya prints only 38 mm
+# tall, so everything here stays flat.
+name: Spin Cobra
+reference: '19450'
+titles: [Spin Cobra]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-64, 30, 8, 24, 12]
+  - [-52, 34, 10, 27, 15]
+  - [-38, 35, 11, 28, 17, 13, 22]
+  - [-20, 33, 10, 26, 16, 15, 24]
+  - [-2, 32, 10, 25, 15, 13, 22]
+  - [16, 33, 9, 26, 12, 8, 17]
+  - [34, 36, 8, 29, 11]
+  - [52, 33, 6, 25, 9]
+  - [66, 20, 4, 13, 7]
+arches: 15
+pods:
+  # The twin fins standing at the rear corners.
+  # z, halfWidth, top, bottom
+  - x: 27
+    stations:
+      - [-58, 2, 25, 12]
+      - [-46, 3, 26, 13]
+      - [-34, 2, 20, 12]
+wing: { z: -52, halfWidth: 30, height: 26, chord: 12, pylons: 14 }

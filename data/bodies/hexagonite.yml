@@ -1,0 +1,27 @@
+# Hexagonite (MA, 2020): a squared-off rally machine. A flat high bonnet that
+# runs level to a blunt nose, an upright windscreen, a boxy cabin carrying a
+# pair of lamp clusters on the roof, square fenders cut open over the wheels,
+# and a flat wing on short posts at the tail.
+name: Hexagonite
+reference: '18653'
+titles: [Hexagonite]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-64, 34, 12, 30, 19]
+  - [-50, 36, 14, 32, 20, 24, 25]
+  - [-34, 37, 15, 33, 21, 26, 27]
+  - [-14, 37, 15, 33, 21, 26, 27]
+  - [0, 37, 15, 33, 21, 22, 24]
+  - [16, 36, 14, 32, 20]
+  - [40, 36, 14, 31, 20]
+  - [58, 34, 12, 30, 19]
+  - [68, 30, 10, 26, 17]
+arches: 16
+pods:
+  # The lamp clusters standing on the roof.
+  # z, halfWidth, top, bottom
+  - x: 8
+    stations:
+      - [-4, 6, 30, 27]
+      - [8, 6, 30, 27]
+wing: { z: -54, halfWidth: 28, height: 30, chord: 10, pylons: 6 }

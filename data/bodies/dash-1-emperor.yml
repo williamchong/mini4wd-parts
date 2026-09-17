@@ -4,6 +4,9 @@
 name: Dash-1 Emperor
 reference: '18069'
 titles: [Dash-1 Emperor]
+# The clear and spare body sets Tamiya sells for this car.
+parts: ['95712']
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
 hull:
   - [-54, 20, 10, 16, 16]
   - [-38, 23, 12, 19, 19]

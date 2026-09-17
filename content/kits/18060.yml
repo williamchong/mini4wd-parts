@@ -50,6 +50,7 @@ colours:
   wheel: "#c9ced6"
   tire: "#1f2124"
   source: scraped
+body: boomerang-jr
 priceJpy: 880
 priceJpyExTax: 800
 releaseDate: 2005-04-29

@@ -50,6 +50,7 @@ colours:
   wheel: "#1f2124"
   tire: "#ec7a24"
   source: scraped
+body: cat-racer
 priceJpy: 1210
 priceJpyExTax: 1100
 priceHkd: 110

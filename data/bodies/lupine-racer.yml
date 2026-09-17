@@ -1,0 +1,22 @@
+# Mini 4WD Lupine Racer (VS, 2016): the open-cockpit racer body the VS
+# character machines share — a low pointed nose, deep side pods beside the
+# wheels, an open cockpit with a driver between two roll hoops, and a wide
+# rear wing on two posts over the tail. Little Ryan and the red Santa Claus
+# are the same moulding in other colours, with another head in the seat.
+name: Mini 4WD Lupine Racer
+reference: '18085'
+titles: [Mini 4WD Lupine Racer, Little Ryan Mini 4WD Special]
+kits: ['95698']
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-62, 20, 7, 15, 12]
+  - [-48, 25, 9, 20, 16]
+  - [-34, 28, 10, 22, 18, 12, 24]
+  - [-20, 28, 11, 23, 18, 11, 26]
+  - [-4, 28, 11, 23, 17, 10, 25]
+  - [12, 27, 10, 22, 15]
+  - [30, 25, 8, 20, 12]
+  - [50, 20, 6, 15, 8]
+  - [66, 11, 3, 8, 4]
+# The rear wing, high over the tail on two posts.
+wing: { z: -54, halfWidth: 26, height: 30, chord: 14, pylons: 16 }

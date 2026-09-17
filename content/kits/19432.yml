@@ -53,6 +53,7 @@ colours:
   wheel: "#f2c230"
   tire: "#1f2124"
   source: scraped
+body: sonic-saber
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 100

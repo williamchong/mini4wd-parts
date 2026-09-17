@@ -1,0 +1,22 @@
+# Estoura (MA, 2018): a GT endurance racer in the GT40 mould. A long flat nose
+# with headlights let into the fenders, a dark canopy low over the middle, a
+# flat engine deck with louvres behind it, wide fenders cut open over all four
+# wheels, and a big rear wing on two posts high above the tail.
+name: Estoura
+reference: '95691'
+titles: [Estoura]
+# 95691 is the clear-orange special, which has no article of its own.
+kits: ['95691']
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-66, 33, 8, 27, 14]
+  - [-52, 36, 10, 29, 16]
+  - [-36, 37, 11, 30, 17, 18, 21]
+  - [-16, 37, 11, 30, 18, 20, 22]
+  - [2, 36, 10, 29, 17, 18, 21]
+  - [20, 34, 9, 27, 15, 12, 17]
+  - [40, 31, 8, 24, 13]
+  - [56, 25, 6, 18, 10]
+  - [68, 16, 4, 11, 6]
+arches: 16
+wing: { z: -58, halfWidth: 33, height: 24, chord: 11, pylons: 16 }

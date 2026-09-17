@@ -29,6 +29,7 @@ colours:
   wheel: "#1f2124"
   tire: "#1f2124"
   source: override
+body: tyxiv
 priceJpy: 1650
 priceJpyExTax: 1500
 releaseDate: 2026-10-24

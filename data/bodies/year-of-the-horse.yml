@@ -1,0 +1,19 @@
+# 2026 New Year's zodiac kit, "Year of the Horse": a narrow open-wheel racer
+# with a horse at the wheel. The body runs between fully exposed wheels, a
+# short tapered nose, an open cockpit tub, a tall deck rising behind the seat,
+# and a big wing standing high on twin pylons over the tail.
+name: Year of the Horse 2026
+reference: '95694'
+kits: ['95694']
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-58, 20, 10, 16, 20]
+  - [-44, 23, 12, 19, 26]
+  - [-30, 24, 12, 20, 27]
+  - [-16, 24, 12, 20, 18]
+  - [0, 23, 11, 19, 17, 16, 21]
+  - [18, 21, 9, 17, 15]
+  - [34, 18, 7, 14, 12]
+  - [46, 13, 5, 9, 9]
+  - [54, 7, 3, 4, 7]
+wing: { z: -50, halfWidth: 26, height: 38, chord: 14, pylons: 26 }

@@ -50,6 +50,7 @@ colours:
   wheel: "#f2c230"
   tire: "#eef0f2"
   source: scraped
+body: hawk-racer
 priceJpy: 1210
 priceJpyExTax: 1100
 priceHkd: 110

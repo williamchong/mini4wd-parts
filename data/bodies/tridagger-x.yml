@@ -1,0 +1,21 @@
+# Tridagger X (Super-II re-release of the fully-cowled 1996 car): the flat one.
+# A broad duckbill nose that stays wide to its tip with rectangular lights
+# either side, a long low canopy over the middle, a wide flat rear deck, and a
+# big tail wing whose end plates reach down to the deck rather than standing on
+# pylons. Fenders cut open over all four wheels.
+name: Tridagger X
+reference: '19433'
+titles: [Tridagger X]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-64, 30, 8, 24, 13]
+  - [-50, 34, 10, 28, 18]
+  - [-34, 35, 11, 29, 20, 15, 25]
+  - [-14, 34, 11, 28, 19, 17, 28]
+  - [6, 34, 10, 28, 17, 15, 25]
+  - [24, 35, 9, 29, 13]
+  - [42, 36, 8, 30, 11]
+  - [58, 34, 6, 27, 9]
+  - [68, 24, 4, 17, 7]
+arches: 15
+wing: { z: -56, halfWidth: 33, height: 30, chord: 14 }

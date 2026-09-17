@@ -1,0 +1,20 @@
+# Veldaga (MS, 2012): a low silver wedge. A long flat nose that drops almost to
+# the ground, a big cab-forward canopy that runs most of the roof, a short
+# duck-tail deck, fenders cut open over the wheels and no wing.
+name: Veldaga
+reference: '18610'
+titles: [Veldaga]
+# The clear and spare body sets Tamiya sells for this car.
+parts: ['15353', '15482']
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-64, 28, 9, 22, 14, 18, 17]
+  - [-50, 32, 11, 26, 17, 21, 22]
+  - [-32, 35, 12, 28, 19, 22, 26]
+  - [-14, 37, 12, 30, 20, 22, 27]
+  - [4, 36, 11, 29, 19, 19, 25]
+  - [22, 34, 10, 27, 16, 12, 19]
+  - [40, 32, 8, 25, 12]
+  - [56, 28, 6, 21, 8]
+  - [68, 19, 4, 14, 4]
+arches: 16

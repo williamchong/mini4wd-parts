@@ -1,0 +1,26 @@
+# Tridagger WX (AR, 2018): a long low wedge. A broad flat nose deck of louvred
+# vents that reaches far forward to a pointed tip, fenders cut open over all
+# four wheels, a small blue canopy set in the middle, and a swept dorsal fin
+# standing on the rear deck behind it.
+name: Tridagger WX
+reference: '19449'
+titles: [Tridagger WX]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-62, 27, 8, 21, 13]
+  - [-46, 33, 10, 26, 16]
+  - [-30, 36, 11, 29, 18]
+  - [-14, 35, 11, 28, 18, 20, 25]
+  - [2, 34, 11, 27, 17, 20, 26]
+  - [18, 35, 10, 28, 16, 14, 20]
+  - [34, 36, 9, 30, 14]
+  - [52, 33, 7, 27, 11]
+  - [68, 22, 5, 17, 7]
+arches: 15
+pods:
+  # The dorsal fin, standing on the rear deck behind the canopy.
+  - x: 0
+    stations:
+      - [-38, 3, 22, 16]
+      - [-28, 3, 29, 17]
+      - [-18, 3, 26, 18]

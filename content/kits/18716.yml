@@ -50,6 +50,7 @@ colours:
   wheel: "#7a4bb5"
   tire: "#1f2124"
   source: scraped
+body: geo-glider
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 100

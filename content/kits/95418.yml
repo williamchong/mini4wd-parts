@@ -46,6 +46,7 @@ colours:
   wheel: "#c9ced6"
   tire: "#1f2124"
   source: scraped
+body: silwolf
 priceJpy: 1210
 priceJpyExTax: 1100
 releaseDate: 2018-03-31

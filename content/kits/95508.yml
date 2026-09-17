@@ -52,6 +52,7 @@ colours:
   wheel: "#2a2c30"
   tire: "#d0312d"
   source: scraped
+body: neo-tridagger-zmc
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 130

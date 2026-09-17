@@ -1,0 +1,26 @@
+# K4Tasche (FM-A, 2020): a tiny retro pickup truck, tall and stubby. A rounded
+# nose with an upright grille and two round headlights on the fender tops, a
+# boxy cab with a big windscreen and a flat roof, and an open cargo bed with
+# low side walls behind it.
+name: K4Tasche
+reference: '18720'
+titles: [K4Tasche]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-60, 26, 10, 21, 21]
+  - [-50, 30, 12, 26, 23]
+  - [-30, 31, 12, 27, 24]
+  - [-20, 31, 12, 27, 30, 24, 50]
+  - [0, 31, 12, 27, 30, 24, 50]
+  - [10, 32, 12, 28, 32, 20, 42]
+  - [24, 33, 12, 28, 30]
+  - [42, 33, 12, 28, 28]
+  - [58, 31, 11, 26, 26]
+  - [66, 26, 9, 21, 22]
+arches: 16
+pods:
+  # The round headlights, standing on the front fender tops beside the grille.
+  - x: 22
+    stations:
+      - [56, 4, 31, 25]
+      - [64, 4, 30, 25]

@@ -1,0 +1,26 @@
+# Thunder Shot Mk.II (MS, 2006): the 1988 racer redrawn. A low wedge between
+# the wheels with a flat splitter nose, a bright bubble canopy sitting forward
+# of centre, and a tall tail — twin upright fins above the rear axle carrying a
+# wide wing.
+name: Thunder Shot Mk.II
+reference: '18620'
+titles: [Thunder Shot Mk.II]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-62, 22, 8, 18, 14]
+  - [-46, 25, 10, 21, 17]
+  - [-28, 26, 11, 22, 18]
+  - [-10, 26, 11, 22, 16, 12, 25]
+  - [8, 25, 10, 21, 15, 13, 26]
+  - [24, 24, 10, 20, 14, 9, 20]
+  - [40, 22, 9, 18, 11]
+  - [56, 18, 7, 14, 8]
+  - [68, 12, 4, 9, 5]
+pods:
+  # The upright tail fins the wing stands between.
+  - x: 22
+    stations:
+      - [-58, 3, 32, 15]
+      - [-44, 4, 33, 15]
+      - [-28, 3, 24, 15]
+wing: { z: -50, halfWidth: 26, height: 34, chord: 14, pylons: 16 }

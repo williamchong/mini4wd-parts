@@ -1,0 +1,19 @@
+# Mini 4WD Koala Racer GT (FM-A, 2021): the flat mid-engined GT shell of the
+# animal racers. A low pointed nose with headlight bulges, fenders over all
+# four wheels, a clear bubble canopy over the middle with the mascot under it,
+# and a short tapered tail. No wing.
+name: Mini 4WD Koala Racer GT
+reference: '95621'
+titles: [Mini 4WD Koala Racer GT]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-64, 30, 10, 24, 14]
+  - [-50, 34, 11, 28, 16]
+  - [-34, 36, 12, 30, 17, 20, 21]
+  - [-14, 36, 12, 30, 17, 21, 24]
+  - [4, 36, 12, 29, 17, 19, 23]
+  - [20, 35, 11, 28, 16, 12, 18]
+  - [38, 33, 10, 26, 13]
+  - [54, 28, 8, 21, 10]
+  - [68, 19, 5, 14, 7]
+arches: 16

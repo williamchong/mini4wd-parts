@@ -1,0 +1,20 @@
+# Torcruiser (MS, 2012): a front-engined GT road car. A rounded high bonnet, a
+# tall glasshouse with a steep screen over the middle, a fastback tail ending in
+# a lipped deck, fenders cut open over all four wheels and no wing.
+name: Torcruiser
+reference: '18609'
+titles: [Torcruiser]
+# The clear and spare body sets Tamiya sells for this car.
+parts: ['15352', '15481']
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-64, 29, 9, 23, 14, 18, 17]
+  - [-50, 33, 11, 27, 17, 22, 22]
+  - [-32, 36, 12, 29, 19, 23, 26]
+  - [-12, 37, 12, 30, 20, 21, 28]
+  - [6, 36, 11, 29, 19, 17, 26]
+  - [24, 34, 10, 27, 17, 11, 20]
+  - [42, 32, 8, 25, 15]
+  - [58, 28, 6, 22, 12]
+  - [68, 20, 4, 15, 8]
+arches: 16

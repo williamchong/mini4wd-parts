@@ -23,6 +23,7 @@ colours:
   wheel: "#eef0f2"
   tire: "#d0312d"
   source: override
+body: santa-claus
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

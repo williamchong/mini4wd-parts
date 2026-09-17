@@ -1,0 +1,21 @@
+# Mini 4WD Cat Racer (Super-II, 2015): the open-cockpit animal buggy — a low
+# short nose between exposed wheels, a narrow tub with an open cockpit that the
+# animal figure sits in, a tall stepped engine cover behind it, and a big flat
+# wing on two posts over the tail.
+#
+# One moulding, three colours: Owl Racer and Pig Racer are the same shell.
+name: Mini 4WD Cat Racer
+reference: '18090'
+titles: ['Mini 4WD Cat Racer', 'Mini 4WD Owl Racer', 'Mini 4WD Pig Racer']
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-62, 20, 8, 16, 16]
+  - [-48, 24, 10, 19, 24]
+  - [-34, 24, 11, 20, 26]
+  - [-20, 23, 11, 19, 20, 13, 27]
+  - [-4, 23, 10, 19, 14]
+  - [14, 23, 10, 19, 15]
+  - [30, 22, 9, 18, 14]
+  - [44, 19, 7, 15, 12]
+  - [56, 12, 5, 9, 8]
+wing: { z: -50, halfWidth: 28, height: 36, chord: 16, pylons: 22 }

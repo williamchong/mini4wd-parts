@@ -1,0 +1,20 @@
+# Hyundai i20 Coupe WRC (MA, 2019): a three-door rally hatch. A short nose
+# under a big grille, a steep windscreen, a tall cabin whose roof runs flat to
+# a chopped tailgate, boxed fender flares over all four wheels, and a very tall
+# rally wing held clear of the roof on two posts.
+name: Hyundai i20 Coupe WRC
+reference: '95517'
+titles: [Hyundai i20 Coupe WRC]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-64, 31, 10, 25, 16]
+  - [-56, 35, 13, 29, 19, 26, 28]
+  - [-46, 37, 14, 30, 21, 27, 31]
+  - [-24, 37, 14, 30, 21, 27, 32]
+  - [-2, 37, 14, 30, 21, 26, 31]
+  - [16, 37, 13, 30, 20, 21, 24]
+  - [34, 36, 12, 29, 19]
+  - [54, 33, 11, 27, 16]
+  - [66, 27, 9, 21, 12]
+arches: 16
+wing: { z: -54, halfWidth: 31, height: 37, chord: 11, pylons: 23 }

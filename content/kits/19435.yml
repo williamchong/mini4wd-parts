@@ -53,6 +53,7 @@ colours:
   wheel: "#2a2c30"
   tire: "#1f2124"
   source: scraped
+body: vanguard-sonic
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

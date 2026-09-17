@@ -52,6 +52,7 @@ colours:
   wheel: "#2a2c30"
   tire: "#1f2124"
   source: scraped
+body: neo-vqs
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 130

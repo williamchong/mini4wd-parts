@@ -1,0 +1,20 @@
+# Razorback (FM-A, 2020): a full-bodied racer whose front is a low open bay
+# over the front motor, flanked by deep carbon fenders. Behind the cockpit the
+# deck rises into the ridged "razorback" spine that gives the car its name,
+# capped by a short spoiler, and tapers away to a narrow tail.
+name: Razorback
+reference: '18713'
+titles: [Razorback]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-62, 24, 8, 18, 14]
+  - [-52, 29, 9, 24, 19, 16, 24]
+  - [-38, 34, 10, 28, 21, 20, 30]
+  - [-20, 37, 11, 30, 21, 21, 32]
+  - [-2, 37, 11, 30, 20, 20, 30]
+  - [16, 36, 11, 29, 18]
+  - [34, 36, 11, 28, 16]
+  - [50, 32, 9, 25, 14]
+  - [60, 24, 7, 18, 11]
+arches: 16
+wing: { z: -46, halfWidth: 22, height: 30, chord: 12 }

@@ -1,0 +1,25 @@
+# Spin-Axe Mk.II (MS, 2014): a rounded full body over its wheels, a low nose
+# with a pair of round headlights, a small cabin set back, and the two tall
+# swept axe-blade fins at the tail that give the car its name. No rear wing.
+name: Spin-Axe Mk.II
+reference: '18631'
+titles: [Spin-Axe Mk.II]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-62, 30, 9, 24, 15]
+  - [-48, 34, 11, 27, 18, 17, 22]
+  - [-30, 36, 12, 29, 20, 20, 25]
+  - [-10, 36, 12, 29, 20, 20, 27]
+  - [8, 35, 11, 28, 19, 17, 24]
+  - [26, 33, 10, 26, 17, 11, 20]
+  - [44, 31, 8, 24, 14]
+  - [58, 27, 6, 21, 11]
+  - [68, 19, 4, 14, 7]
+arches: 16
+pods:
+  # The two blade fins, leaning back off the shoulders to their peak at the tail.
+  - x: 20
+    stations:
+      - [-54, 3, 36, 22]
+      - [-42, 4, 34, 20]
+      - [-24, 3, 22, 18]

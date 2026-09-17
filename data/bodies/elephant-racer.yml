@@ -1,0 +1,37 @@
+# Mini 4WD Elephant Racer (VZ, 2023): a 1950s sports racer, full-bodied and
+# rounded. Flowing fenders stand proud over all four wheels, a long bonnet with
+# two lamp nacelles on it, an open cockpit for the elephant behind the middle,
+# and a short rounded tail.
+name: Mini 4WD Elephant Racer
+reference: '95569'
+titles: [Mini 4WD Elephant Racer]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-62, 27, 8, 22, 14]
+  - [-50, 33, 10, 27, 18]
+  - [-34, 36, 12, 30, 20]
+  - [-20, 35, 12, 29, 19, 17, 27]
+  - [-2, 35, 12, 29, 19, 17, 28]
+  - [16, 35, 12, 29, 18]
+  - [34, 35, 11, 28, 17]
+  - [52, 32, 9, 26, 15]
+  - [66, 24, 7, 18, 10]
+pods:
+  # The front fender crowns, standing above the bonnet line.
+  - x: 29
+    stations:
+      - [22, 8, 24, 14]
+      - [40, 9, 26, 14]
+      - [54, 8, 22, 14]
+  # The rear fender crowns.
+  - x: 29
+    stations:
+      - [-46, 8, 22, 14]
+      - [-32, 9, 25, 14]
+      - [-18, 8, 22, 14]
+  # The two lamp nacelles on the bonnet.
+  - x: 15
+    stations:
+      - [38, 4, 22, 17]
+      - [50, 4, 21, 16]
+arches: 16

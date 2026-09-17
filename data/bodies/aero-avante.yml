@@ -4,6 +4,11 @@
 name: Aero Avante
 reference: '18701'
 titles: [Aero Avante]
+# The AR starter pack is an Aero Avante; its own name says so.
+kits: ['18706']
+# The clear and spare body sets Tamiya sells for this car.
+parts: ['15466']
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
 hull:
   - [-56, 16, 6, 12, 12]
   - [-40, 22, 8, 16, 15]

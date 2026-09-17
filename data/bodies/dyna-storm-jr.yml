@@ -1,0 +1,19 @@
+# Dyna Storm Jr. (Super-II, 1993 Racing Mini 4WD): a Le Mans prototype — a
+# smooth low teardrop that covers all four wheels, a small dark bubble canopy
+# set back from a rounded nose, and a tall two-pylon wing over the tail.
+name: Dyna Storm Jr.
+reference: '18079'
+titles: ['Dyna Storm Jr.']
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-64, 28, 8, 22, 13]
+  - [-50, 33, 10, 26, 16]
+  - [-34, 36, 11, 29, 18]
+  - [-16, 36, 12, 29, 19, 17, 28]
+  - [2, 35, 12, 28, 19, 18, 30]
+  - [20, 34, 11, 27, 18, 12, 23]
+  - [38, 34, 9, 27, 15]
+  - [54, 29, 6, 23, 11]
+  - [68, 19, 4, 14, 7]
+arches: 16
+wing: { z: -52, halfWidth: 27, height: 36, chord: 14, pylons: 18 }

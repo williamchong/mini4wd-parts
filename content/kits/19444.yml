@@ -53,6 +53,7 @@ colours:
   wheel: "#5fe84a"
   tire: "#1f2124"
   source: scraped
+body: beat-magnum
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 110

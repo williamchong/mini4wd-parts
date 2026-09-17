@@ -1,0 +1,19 @@
+# Mini 4WD Lupine Racer 2 (AR, 2016): an animal racer, so the body runs
+# between open wheels and the wolf sits in an open cockpit. A narrow hull with
+# low side pontoons, a blocky engine cover at the back, a gap, then the
+# helmeted head standing alone above the middle. Tamiya prints no height.
+name: Mini 4WD Lupine Racer 2
+reference: '18102'
+titles: [Mini 4WD Lupine Racer 2]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-50, 21, 9, 17, 15]
+  - [-42, 24, 10, 20, 17, 18, 27]
+  - [-30, 25, 11, 21, 17, 18, 26]
+  - [-24, 25, 11, 21, 17]
+  - [-17, 25, 11, 21, 15, 10, 30]
+  - [-6, 25, 11, 21, 15, 10, 29]
+  - [2, 25, 11, 21, 16]
+  - [22, 24, 10, 20, 16]
+  - [46, 22, 9, 18, 13]
+  - [67, 13, 5, 9, 7]

@@ -49,6 +49,7 @@ colours:
   wheel: "#8e949c"
   tire: "#d0312d"
   source: scraped
+body: shadow-shark
 priceJpy: 1100
 priceJpyExTax: 1000
 releaseDate: 2015-05-30

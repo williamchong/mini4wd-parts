@@ -52,6 +52,7 @@ colours:
   wheel: "#2a2c30"
   tire: "#eef0f2"
   source: override
+body: neo-vqs
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

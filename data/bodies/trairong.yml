@@ -1,0 +1,28 @@
+# Trairong (FM-A, 2019 Thailand): a wide racer whose two front fenders rise in
+# tall pointed humps either side of a deeply sunken bonnet, with a small dark
+# canopy over the middle, flared rear haunches, and a big rear wing on posts
+# standing above the tail.
+name: Trairong
+reference: '18711'
+titles: [Trairong]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-62, 28, 8, 22, 13]
+  - [-48, 33, 10, 27, 16]
+  - [-32, 36, 11, 29, 18, 18, 23]
+  - [-12, 37, 11, 30, 18, 20, 25]
+  - [6, 36, 10, 29, 17, 16, 22]
+  - [24, 35, 9, 28, 15, 10, 17]
+  - [42, 34, 8, 27, 13]
+  - [58, 27, 6, 20, 9]
+  - [70, 14, 4, 10, 5]
+arches: 16
+pods:
+  # The tall pointed front fender humps.
+  - x: 28
+    stations:
+      - [26, 6, 18, 12]
+      - [40, 7, 20, 11]
+      - [54, 6, 17, 10]
+      - [64, 4, 13, 9]
+wing: { z: -50, halfWidth: 28, height: 31, chord: 15, pylons: 21 }

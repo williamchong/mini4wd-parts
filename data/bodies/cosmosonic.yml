@@ -1,0 +1,32 @@
+# Cosmosonic (FM-A, Retsu Seiba's car): a wide full-bodied racer with a very
+# low splitter nose carrying canard plates, a dark canopy set over the middle,
+# flared haunches, and a tall rear wing standing between two upswept fins.
+name: Cosmosonic
+reference: '19454'
+titles: [Cosmosonic]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-62, 28, 8, 22, 13]
+  - [-48, 33, 10, 27, 17]
+  - [-32, 36, 11, 29, 19, 18, 23]
+  - [-12, 37, 11, 30, 19, 19, 26]
+  - [6, 36, 10, 29, 18, 16, 22]
+  - [24, 35, 9, 28, 16, 10, 18]
+  - [42, 34, 8, 27, 14]
+  - [58, 28, 6, 21, 10]
+  - [70, 16, 4, 11, 6]
+arches: 16
+pods:
+  # The upswept fins either side of the wing posts.
+  - x: 30
+    stations:
+      - [-56, 4, 22, 13]
+      - [-42, 5, 25, 13]
+      - [-26, 4, 20, 13]
+  # The canard plates on the nose shoulders.
+  - x: 30
+    stations:
+      - [46, 3, 14, 9]
+      - [60, 4, 16, 9]
+      - [68, 3, 13, 9]
+wing: { z: -50, halfWidth: 28, height: 29, chord: 15, pylons: 20 }

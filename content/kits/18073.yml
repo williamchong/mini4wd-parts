@@ -50,6 +50,7 @@ colours:
   wheel: "#eef0f2"
   tire: "#1f2124"
   source: scraped
+body: dash-0-horizon
 priceJpy: 1100
 priceJpyExTax: 1000
 priceHkd: 100

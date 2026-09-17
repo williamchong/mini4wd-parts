@@ -1,0 +1,27 @@
+# Synchro-Master Z9 (VS, 1994): a long racer with a beak. A pointed snout
+# reaching well past the front wheels between two flat splitter boards, a
+# turbine moulded along the top of the middle, a raised engine cover, and a
+# flat wing on short pylons over the tail.
+name: Synchro-Master Z9
+reference: '19205'
+titles: [Synchro-Master Z9]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-60, 24, 8, 19, 13]
+  - [-46, 27, 9, 22, 16, 14, 20]
+  - [-30, 28, 10, 23, 17, 16, 22]
+  - [-12, 28, 10, 23, 17, 15, 21]
+  - [6, 27, 9, 22, 15, 12, 18]
+  - [24, 26, 8, 20, 13]
+  - [42, 23, 6, 17, 10]
+  - [58, 16, 4, 11, 7]
+  - [72, 8, 2, 5, 4]
+pods:
+  # The flat boards either side of the beak, level with the front wheels.
+  - x: 28
+    # z, halfWidth, top, bottom
+    stations:
+      - [34, 6, 8, 3]
+      - [50, 7, 8, 2]
+      - [64, 5, 7, 2]
+wing: { z: -52, halfWidth: 26, height: 23, chord: 12, pylons: 8 }

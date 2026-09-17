@@ -1,0 +1,18 @@
+# Terra Conqueror Jr. (VS, Conqueror RS): an off-road racer between the
+# wheels — a low pointed nose, a blue canopy over the middle with a scoop on
+# its roof, a short engine cover behind it, and a big rear wing standing on
+# two posts well above the tail.
+name: Terra Conqueror Jr.
+reference: '18078'
+titles: [Terra Conqueror Jr.]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-56, 22, 10, 18, 16]
+  - [-40, 24, 11, 20, 19]
+  - [-24, 25, 11, 21, 19, 14, 26]
+  - [-6, 25, 11, 21, 18, 16, 29]
+  - [12, 24, 10, 20, 15, 12, 23]
+  - [30, 23, 8, 19, 12]
+  - [50, 20, 6, 16, 8]
+  - [66, 13, 3, 9, 5]
+wing: { z: -50, halfWidth: 26, height: 34, chord: 14, pylons: 14 }

@@ -1,0 +1,29 @@
+# Geo Glider (FM-A, 2019): a glider, not a car. A narrow arrow-shaped fuselage
+# runs between the open wheels to a long pointed nose, rises to a tall spine
+# behind the cockpit, and carries two big swept wing panels out over the wheels
+# on either side, with a wide tail plane across the back.
+name: Geo Glider
+reference: '18716'
+titles: [Geo Glider]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-60, 22, 9, 17, 14]
+  - [-46, 24, 10, 19, 17]
+  - [-30, 25, 10, 20, 19, 13, 26]
+  - [-12, 25, 10, 20, 19, 14, 30]
+  - [4, 24, 10, 19, 18, 13, 28]
+  - [20, 23, 9, 18, 16, 10, 22]
+  - [36, 21, 8, 16, 14]
+  - [52, 17, 6, 12, 10]
+  - [66, 10, 4, 7, 6]
+pods:
+  # The wing panels, standing clear of the flank and sweeping up and back over
+  # the rear wheels.
+  - x: 33
+    stations:
+      - [-56, 8, 29, 23]
+      - [-40, 13, 28, 22]
+      - [-20, 14, 25, 20]
+      - [0, 11, 22, 18]
+      - [16, 4, 20, 16]
+wing: { z: -54, halfWidth: 27, height: 30, chord: 14, pylons: 12 }

@@ -21,6 +21,7 @@ colours:
   wheel: "#eef0f2"
   tire: "#1f2124"
   source: override
+body: baron-viento
 priceJpy: 1210
 priceJpyExTax: 1100
 priceHkd: 110

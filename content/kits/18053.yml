@@ -50,6 +50,7 @@ colours:
   wheel: "#eef0f2"
   tire: "#1f2124"
   source: scraped
+body: manta-ray-jr
 priceJpy: 770
 priceJpyExTax: 700
 status: current

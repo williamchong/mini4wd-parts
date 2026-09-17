@@ -1,0 +1,19 @@
+# Desert-Golem (VS, 1996): a wide, heavy-shouldered full body. A rounded snout
+# carrying a bank of five headlights, bulging fenders over all four wheels, a
+# domed canopy over the middle, and a humped engine cover falling away to a
+# short tail. No wing.
+name: Desert-Golem
+reference: '19610'
+titles: [Desert-Golem]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-64, 29, 8, 23, 12]
+  - [-50, 34, 9, 27, 15, 16, 18]
+  - [-34, 36, 10, 29, 16, 19, 22]
+  - [-16, 37, 10, 30, 16, 20, 24]
+  - [2, 36, 10, 29, 15, 19, 23]
+  - [20, 35, 9, 28, 14, 14, 18]
+  - [40, 34, 8, 27, 13]
+  - [56, 30, 6, 23, 11]
+  - [68, 20, 4, 14, 7]
+arches: 15

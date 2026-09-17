@@ -1,0 +1,19 @@
+# Aero Thunder Shot (AR, 2015): a slim central pod with a bubble canopy over
+# the middle, a low pointed nose between the open front wheels, and one long
+# flat wing on pylons that covers the whole rear half of the car.
+name: Aero Thunder Shot
+reference: '18702'
+titles: [Aero Thunder Shot]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-58, 26, 7, 21, 12]
+  - [-44, 30, 8, 24, 14, 14, 18]
+  - [-26, 31, 9, 25, 15, 17, 22]
+  - [-6, 29, 9, 23, 15, 17, 24]
+  - [12, 26, 8, 20, 13, 12, 19]
+  - [30, 24, 7, 18, 11]
+  - [46, 23, 6, 17, 9]
+  - [60, 19, 4, 14, 7]
+  - [70, 10, 3, 7, 4]
+arches: [0, 13]
+wing: { z: -40, halfWidth: 26, height: 30, chord: 34, pylons: 14 }

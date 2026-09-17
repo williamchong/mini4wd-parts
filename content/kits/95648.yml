@@ -52,6 +52,7 @@ colours:
   wheel: "#ff5fae"
   tire: "#1f2124"
   source: scraped
+body: super-avante-jr
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

@@ -1,0 +1,20 @@
+# Toyota GR Yaris (VZ, 2022): a hot hatch. A low blunt nose over a deep grille,
+# a fast windscreen, a roof that tapers down towards the tail into a small roof
+# flap rather than a rally wing, and blistered fenders over all four wheels.
+name: Toyota GR Yaris
+reference: '18097'
+titles: [Toyota GR Yaris]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-66, 29, 8, 23, 12]
+  - [-54, 35, 12, 28, 18, 24, 24]
+  - [-40, 37, 14, 30, 20, 25, 27]
+  - [-20, 37, 14, 30, 20, 25, 28]
+  - [-2, 36, 13, 29, 20, 24, 27]
+  - [14, 36, 13, 29, 19, 19, 22]
+  - [32, 35, 12, 28, 18]
+  - [50, 33, 10, 26, 15]
+  - [66, 25, 8, 19, 10]
+arches: 16
+# The tailgate spoiler: a flap sitting on the roof, not a wing on posts.
+wing: { z: -50, halfWidth: 22, height: 26, chord: 9 }

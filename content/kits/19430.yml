@@ -50,6 +50,7 @@ colours:
   wheel: "#eef0f2"
   tire: "#1f2124"
   source: scraped
+body: diomars-nero
 priceJpy: 880
 priceJpyExTax: 800
 status: current

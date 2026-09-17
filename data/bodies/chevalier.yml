@@ -1,0 +1,18 @@
+# Chevalier (MA, 2024): a low sports coupe. A long pointed bonnet with a raised
+# centre spine, a small dark cabin set well back, a fastback roofline falling
+# into a short cut-off tail, and full fenders over all four wheels.
+name: Chevalier
+reference: '18658'
+titles: [Chevalier]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-64, 31, 9, 25, 15]
+  - [-50, 35, 11, 29, 17]
+  - [-34, 36, 12, 30, 18, 19, 22]
+  - [-16, 36, 12, 30, 18, 19, 24]
+  - [0, 36, 12, 29, 17, 17, 23]
+  - [16, 35, 11, 28, 16, 11, 19]
+  - [34, 33, 10, 26, 14]
+  - [52, 29, 8, 22, 11]
+  - [68, 20, 5, 14, 8]
+arches: 16

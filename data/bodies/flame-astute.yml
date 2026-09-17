@@ -1,0 +1,27 @@
+# Flame Astute (AR, 2015): a wide full-bodied racer that covers all four
+# wheels. A low flat nose with winglets at its corners, a small canopy set
+# just behind the middle, a raised engine deck, and a high rear wing on two
+# pylons with swept end plates.
+name: Flame Astute
+reference: '18705'
+titles: [Flame Astute]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-62, 26, 8, 20, 12]
+  - [-50, 32, 10, 26, 16]
+  - [-34, 36, 11, 29, 19, 18, 23]
+  - [-16, 36, 11, 29, 18, 19, 24]
+  - [2, 35, 11, 28, 17, 17, 22]
+  - [20, 34, 10, 27, 15]
+  - [40, 32, 9, 25, 12]
+  - [56, 26, 6, 19, 9]
+  - [68, 16, 4, 11, 6]
+arches: 16
+pods:
+  # The winglets standing on the front fender corners.
+  - x: 30
+    stations:
+      - [38, 4, 16, 10]
+      - [52, 5, 18, 9]
+      - [62, 4, 14, 8]
+wing: { z: -50, halfWidth: 26, height: 27, chord: 13, pylons: 19 }

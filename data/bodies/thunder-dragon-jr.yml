@@ -1,0 +1,25 @@
+# Thunder Dragon Jr. (VS, re-release of the 1988 car): a sharp flat wedge
+# between big knobbly wheels. A long nose falling almost to the ground, a dark
+# flat canopy panel let into the deck, and twin square fins at the tail with a
+# deep notch between them.
+name: Thunder Dragon Jr.
+reference: '18068'
+titles: [Thunder Dragon Jr.]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-56, 21, 10, 17, 16]
+  - [-42, 24, 11, 20, 20]
+  - [-26, 25, 11, 21, 21, 13, 25]
+  - [-8, 25, 10, 21, 20, 15, 26]
+  - [10, 24, 8, 20, 16]
+  - [28, 22, 6, 18, 12]
+  - [46, 19, 4, 15, 8]
+  - [64, 14, 3, 10, 4]
+pods:
+  # The twin square tail fins.
+  - x: 19
+    # z, halfWidth, top, bottom
+    stations:
+      - [-54, 3, 28, 16]
+      - [-40, 4, 30, 16]
+      - [-24, 3, 22, 16]

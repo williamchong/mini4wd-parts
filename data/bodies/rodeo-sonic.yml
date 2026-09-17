@@ -1,0 +1,28 @@
+# RodeoSonic (MS, 2012): BisonMagnum's rival from the MAX line and near enough
+# the same car — broad front fenders with long headlight slits, a small bubble
+# cabin with a blade along each shoulder, cut-out fenders. Its wing is the
+# difference: wider, flatter and squarer than the Magnum's swept one.
+name: RodeoSonic
+reference: '18622'
+titles: [RodeoSonic]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-64, 28, 8, 22, 14]
+  - [-52, 33, 10, 27, 17]
+  - [-38, 36, 11, 30, 19, 14, 24]
+  - [-18, 36, 11, 30, 19, 15, 26]
+  - [0, 35, 11, 29, 18, 12, 23]
+  - [18, 34, 10, 28, 16]
+  - [38, 35, 10, 28, 15]
+  - [56, 31, 8, 24, 12]
+  - [68, 22, 5, 16, 8]
+arches: 15
+pods:
+  # The curved blades along the roof shoulders, either side of the cabin.
+  # z, halfWidth, top, bottom
+  - x: 24
+    stations:
+      - [-40, 3, 25, 17]
+      - [-16, 4, 27, 17]
+      - [10, 3, 22, 15]
+wing: { z: -54, halfWidth: 30, height: 31, chord: 16 }

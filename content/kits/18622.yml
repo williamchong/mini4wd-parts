@@ -50,6 +50,7 @@ colours:
   wheel: "#5fe84a"
   tire: "#1f2124"
   source: scraped
+body: rodeo-sonic
 priceJpy: 990
 priceJpyExTax: 900
 priceHkd: 90

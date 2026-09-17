@@ -1,0 +1,25 @@
+# Super Avante Jr. (VZ, 2021 TD4 re-release): a wedge racer. A pointed nose,
+# domed covers over the front wheels, a dark bubble canopy over the middle, a
+# high shouldered engine cover, and a flat wing sat low over the tail.
+name: Super Avante Jr. (TD4)
+reference: '18101'
+titles: [Super Avante Jr. (TD4)]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-58, 24, 8, 18, 13]
+  - [-42, 27, 9, 21, 15]
+  - [-26, 28, 10, 22, 15, 15, 19]
+  - [-8, 28, 10, 22, 15, 16, 21]
+  - [10, 27, 9, 21, 14, 13, 18]
+  - [26, 25, 8, 19, 13]
+  - [44, 21, 7, 16, 11]
+  - [58, 15, 5, 11, 8]
+  - [68, 8, 3, 6, 5]
+pods:
+  # The domed fenders over the front wheels.
+  - x: 28
+    stations:
+      - [28, 5, 12, 2]
+      - [40, 7, 18, 2]
+      - [50, 5, 13, 2]
+wing: { z: -52, halfWidth: 26, height: 24, chord: 13, pylons: 9 }

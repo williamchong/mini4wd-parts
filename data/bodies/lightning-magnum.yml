@@ -1,0 +1,27 @@
+# Lightning-Magnum (VS, 1997): a wide full-cowl racer. A low sharp nose with
+# fins either side, fenders cut open over all four wheels, a dark canopy over
+# the middle, side intakes, and a wide flat wing on a short pylon at the tail.
+name: Lightning-Magnum
+reference: '19612'
+titles: [Lightning-Magnum]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-62, 26, 8, 20, 12]
+  - [-48, 31, 9, 25, 14]
+  - [-32, 34, 9, 27, 15, 16, 20]
+  - [-14, 35, 9, 28, 16, 19, 23]
+  - [4, 34, 9, 27, 15, 17, 21]
+  - [22, 33, 8, 26, 13, 12, 16]
+  - [42, 32, 7, 25, 12]
+  - [58, 27, 5, 20, 9]
+  - [68, 16, 3, 10, 5]
+arches: 15
+pods:
+  # The nose fins either side of the pointed snout.
+  - x: 36
+    # z, halfWidth, top, bottom
+    stations:
+      - [38, 6, 12, 4]
+      - [54, 7, 11, 3]
+      - [65, 4, 8, 3]
+wing: { z: -48, halfWidth: 30, height: 27, chord: 14, pylons: 10 }

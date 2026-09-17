@@ -49,6 +49,7 @@ colours:
   wheel: "#ec6fa8"
   tire: "#eef0f2"
   source: override
+body: avante-mk2
 priceJpy: 1320
 priceJpyExTax: 1200
 releaseDate: 2015-05-02

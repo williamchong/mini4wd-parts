@@ -31,6 +31,7 @@ colours:
   wheel: "#ec7a24"
   tire: "#1f2124"
   source: override
+body: estoura
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

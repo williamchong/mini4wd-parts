@@ -53,6 +53,7 @@ colours:
   wheel: "#eef0f2"
   tire: "#1f2124"
   source: scraped
+body: heat-edge
 priceJpy: 1100
 priceJpyExTax: 1000
 priceHkd: 100

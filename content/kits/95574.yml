@@ -49,6 +49,7 @@ colours:
   wheel: "#1f2124"
   tire: "#1f2124"
   source: scraped
+body: rise-emperor
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

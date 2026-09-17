@@ -1,0 +1,22 @@
+# The MA "GT" mascot racers that ship without a wing (2016-2021): the same
+# front-engined GT coupe moulding as [Mini 4WD Racer GT], drawn bare. A low
+# pointed nose, wide fenders cut open over all four wheels, a tall clear bubble
+# canopy over the middle with the mascot sitting under it, and a short tapered
+# tail.
+name: Mini 4WD Racer GT (no wing)
+reference: '95281'
+titles:
+  - Kumamon Mini 4WD - Supporting Kumamoto
+  - Mini 4WD Dog Racer GT
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-64, 31, 10, 25, 16]
+  - [-50, 35, 12, 29, 19]
+  - [-34, 36, 12, 30, 20, 19, 24]
+  - [-16, 36, 12, 30, 20, 20, 29]
+  - [2, 36, 12, 30, 19, 19, 28]
+  - [18, 35, 11, 28, 17, 13, 22]
+  - [36, 33, 10, 26, 14]
+  - [54, 28, 8, 21, 11]
+  - [68, 19, 5, 14, 8]
+arches: 16

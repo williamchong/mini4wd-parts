@@ -1,0 +1,30 @@
+# Slash Reaper (VS, 2016): a wide angular body that reaches out over the
+# wheels, cut open at both arches — a flat sharp nose, a low canopy panel set
+# in the middle of a broad deck, blade fins standing along each flank, and two
+# short fins at the tail corners.
+name: Slash Reaper
+reference: '18066'
+titles: [Slash Reaper]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-62, 26, 8, 20, 13]
+  - [-46, 29, 9, 23, 16, 14, 22]
+  - [-28, 31, 10, 25, 18, 16, 25]
+  - [-8, 31, 10, 25, 18, 16, 26]
+  - [12, 30, 9, 24, 16, 13, 22]
+  - [30, 29, 8, 23, 14]
+  - [48, 26, 7, 21, 11]
+  - [64, 18, 4, 14, 6]
+arches: 15
+pods:
+  # The blade fins that stand along the top of each flank.
+  - x: 30
+    stations:
+      - [-34, 2, 30, 14]
+      - [-10, 2, 31, 14]
+      - [14, 2, 28, 12]
+  # The fins at the tail corners.
+  - x: 25
+    stations:
+      - [-60, 3, 26, 12]
+      - [-46, 3, 29, 14]

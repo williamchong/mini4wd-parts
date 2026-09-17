@@ -1,0 +1,27 @@
+# Great BlastSonic (AR re-release of the 1998 car): the last of the Sonic
+# line. A sculpted full body over all four wheels, winglets on the front
+# fenders, a dark blue canopy high in the middle, and a wide two-tier wing
+# carried on pylons above a raised tail.
+name: Great BlastSonic
+reference: '19446'
+titles: [Great BlastSonic]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-58, 28, 9, 22, 15]
+  - [-44, 33, 11, 27, 18]
+  - [-26, 36, 11, 29, 19, 17, 23]
+  - [-6, 35, 11, 28, 18, 18, 25]
+  - [12, 34, 10, 27, 16, 16, 22]
+  - [30, 34, 10, 27, 13]
+  - [48, 32, 8, 25, 11]
+  - [61, 24, 6, 17, 8]
+  - [68, 14, 4, 10, 5]
+arches: 16
+pods:
+  # The winglets on top of the front fenders.
+  - x: 30
+    stations:
+      - [38, 4, 16, 11]
+      - [52, 5, 18, 10]
+      - [62, 4, 14, 8]
+wing: { z: -48, halfWidth: 29, height: 30, chord: 17, pylons: 18 }

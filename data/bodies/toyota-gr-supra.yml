@@ -1,0 +1,19 @@
+# Toyota GR Supra (MA, 2019): a long-nosed road coupe. A low pointed nose over
+# wide front fenders, a long bonnet, a small double-bubble cabin set well back,
+# a fastback roof that runs into a ducktail, and swollen rear haunches — the
+# wheels show under cut-open arches at both ends.
+name: Toyota GR Supra
+reference: '18655'
+titles: [Toyota GR Supra]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-66, 30, 8, 24, 14]
+  - [-54, 34, 10, 28, 18, 24, 23]
+  - [-38, 36, 11, 30, 19, 22, 27]
+  - [-18, 36, 11, 29, 19, 21, 29]
+  - [0, 35, 11, 28, 18, 19, 27]
+  - [18, 35, 10, 28, 17, 13, 21]
+  - [38, 33, 9, 26, 16]
+  - [56, 28, 7, 21, 12]
+  - [68, 18, 5, 12, 7]
+arches: 16

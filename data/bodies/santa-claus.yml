@@ -1,0 +1,19 @@
+# Mini 4WD Santa Claus (VS, 95678): a pre-war grand prix car — a narrow body
+# between the wheels, a chrome radiator shell standing at the nose, a long
+# louvred bonnet, an open cockpit with Santa in it under a small headrest
+# cowl, and a rounded boat tail that tapers away behind him.
+name: Mini 4WD Santa Claus
+reference: '95678'
+kits: ['95678']
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-62, 10, 6, 7, 12]
+  - [-52, 15, 8, 12, 18]
+  - [-38, 19, 10, 15, 23]
+  - [-26, 20, 12, 16, 26, 12, 33]
+  - [-12, 20, 12, 16, 25, 13, 30]
+  - [4, 20, 13, 16, 26]
+  - [24, 19, 13, 15, 25]
+  - [44, 18, 13, 14, 26]
+  - [56, 16, 14, 13, 31]
+  - [64, 13, 12, 10, 28]

@@ -1,0 +1,38 @@
+# Mini 4WD Panda Racer (Super-II, 2016): an open-cockpit racer that runs
+# between its wheels. A long low pointed nose with a flat splitter, a shallow
+# cowl, an open tub with two chrome roll hoops over the animal driver, small
+# fender blades over each wheel, and a wide flat plank wing high over the tail.
+name: Mini 4WD Panda Racer
+reference: '18084'
+titles: [Mini 4WD Panda Racer]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-60, 22, 8, 18, 13]
+  - [-46, 26, 10, 22, 18]
+  - [-34, 28, 11, 23, 21]
+  - [-18, 27, 11, 22, 17]
+  - [0, 26, 10, 21, 16]
+  - [16, 26, 10, 21, 15]
+  - [34, 25, 9, 20, 12]
+  - [52, 22, 7, 17, 9]
+  - [68, 15, 5, 11, 5]
+pods:
+  # The two roll hoops arching over the open cockpit.
+  - x: 14
+    # z, halfWidth, top, bottom
+    stations:
+      - [-26, 3, 29, 16]
+      - [-14, 3, 27, 16]
+  # Fender blades over the rear wheels.
+  - x: 29
+    stations:
+      - [-52, 5, 12, 4]
+      - [-40, 8, 17, 4]
+      - [-26, 5, 12, 4]
+  # Fender blades over the front wheels.
+  - x: 29
+    stations:
+      - [28, 5, 12, 4]
+      - [40, 8, 16, 4]
+      - [52, 5, 12, 4]
+wing: { z: -56, halfWidth: 26, height: 31, chord: 13, pylons: 16 }

@@ -1,0 +1,27 @@
+# Mini 4WD Kumamon Version (Super-II, limited): an open-cockpit racer with the
+# bear mascot sitting in it. A wide swept nose over exposed front springs, a
+# deep open tub, an open engine bay behind the driver's bulkhead, and a large
+# wing on a stalk with a tall end plate at the tail.
+name: Mini 4WD Kumamon Version
+reference: '95068'
+titles: [Mini 4WD Kumamon Version]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-58, 22, 9, 18, 14]
+  - [-44, 26, 10, 21, 17]
+  - [-30, 27, 11, 22, 19]
+  - [-16, 27, 11, 22, 21, 14, 25]
+  - [0, 27, 11, 22, 16]
+  - [16, 27, 11, 22, 18]
+  - [34, 26, 10, 21, 14]
+  - [52, 23, 8, 18, 10]
+  - [68, 15, 5, 11, 5]
+pods:
+  # Sweeping fenders over the front wheels.
+  - x: 28
+    # z, halfWidth, top, bottom
+    stations:
+      - [28, 5, 11, 4]
+      - [40, 8, 16, 4]
+      - [54, 5, 11, 4]
+wing: { z: -46, halfWidth: 28, height: 30, chord: 16, pylons: 12 }

@@ -1,0 +1,28 @@
+# Blitzer-Sonic (VS, 1996): a low full-cowl racer. A narrow pointed nose with
+# flat canards at its corners, wide fenders cut open over all four wheels, a
+# dark canopy set just behind the middle, and a broad two-tier rear wing on
+# pylons over the tail.
+name: Blitzer-Sonic
+reference: '19614'
+titles: [Blitzer-Sonic]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-62, 24, 7, 19, 11]
+  - [-48, 30, 8, 24, 13]
+  - [-32, 34, 9, 27, 14, 16, 18]
+  - [-14, 35, 9, 28, 14, 18, 19]
+  - [2, 34, 9, 27, 13, 17, 18]
+  - [20, 33, 8, 26, 12, 12, 14]
+  - [40, 33, 7, 26, 11]
+  - [56, 29, 6, 22, 9]
+  - [68, 17, 4, 11, 5]
+arches: 15
+pods:
+  # Flat canards either side of the nose, over the front fenders.
+  - x: 36
+    # z, halfWidth, top, bottom
+    stations:
+      - [36, 6, 12, 4]
+      - [52, 7, 11, 3]
+      - [64, 5, 8, 3]
+wing: { z: -52, halfWidth: 29, height: 21, chord: 13, pylons: 12 }

@@ -50,6 +50,7 @@ colours:
   wheel: "#d0312d"
   tire: "#1f2124"
   source: scraped
+body: tridagger-x
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 100

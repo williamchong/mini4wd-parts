@@ -49,6 +49,7 @@ colours:
   wheel: "#2a2c30"
   tire: "#2f9e4f"
   source: scraped
+body: shadow-shark
 priceJpy: 1100
 priceJpyExTax: 1000
 priceHkd: 100

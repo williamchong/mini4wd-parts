@@ -1,0 +1,24 @@
+# Super Dragon Jr. (VS re-release of the 1989 car): a narrow rounded body
+# between the wheels — a blunt low nose, a dark canopy mid-way back with a
+# raised cowl behind it, and two fins that sweep up off the rear flanks and
+# meet over the tail.
+name: Super Dragon Jr.
+reference: '18067'
+titles: [Super Dragon Jr.]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-54, 22, 10, 18, 15]
+  - [-40, 24, 11, 20, 17]
+  - [-24, 25, 11, 21, 18, 14, 25]
+  - [-6, 25, 11, 21, 18, 15, 28]
+  - [12, 24, 10, 20, 15, 11, 22]
+  - [30, 23, 9, 19, 13]
+  - [48, 20, 6, 16, 9]
+  - [62, 13, 3, 10, 5]
+pods:
+  # The two rear fins, rising towards the tail.
+  - x: 21
+    stations:
+      - [-56, 3, 29, 16]
+      - [-42, 4, 26, 14]
+      - [-20, 3, 19, 12]

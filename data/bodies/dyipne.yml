@@ -1,0 +1,24 @@
+# Dyipne (FM-A, 2019 Asia Challenge): a Philippine jeepney. A tall flat-roofed
+# passenger box running from the tail to just behind the front wheels, a near
+# vertical windscreen, then a long flat bonnet with an upright chrome grille
+# and a round headlight either side of it.
+name: Dyipne
+reference: '18717'
+titles: [Dyipne]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-66, 25, 6, 24, 10, 23, 41]
+  - [-58, 26, 6, 25, 10, 24, 42]
+  - [-30, 27, 6, 26, 10, 25, 42]
+  - [0, 27, 6, 26, 10, 25, 42]
+  - [26, 27, 6, 26, 10, 25, 42]
+  - [30, 26, 6, 24, 21]
+  - [44, 25, 6, 23, 21]
+  - [58, 24, 6, 22, 22]
+  - [68, 22, 6, 20, 15]
+pods:
+  # The round headlights either side of the upright grille.
+  - x: 17
+    stations:
+      - [50, 4, 24, 15]
+      - [60, 4, 24, 15]

@@ -1,0 +1,32 @@
+# Ray Spear (VZ, 2023): a needle-nosed prototype racer that runs between its
+# wheels. A long spear of a nose tapering to a point, a low tinted canopy over
+# the middle, winglets either side of the nose, and twin tail fins carrying a
+# wide rear wing over the engine bay.
+name: Ray Spear
+reference: '18099'
+titles: [Ray Spear]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-56, 24, 10, 20, 14]
+  - [-42, 26, 12, 22, 16, 14, 22]
+  - [-26, 26, 12, 22, 16, 15, 24]
+  - [-8, 25, 12, 21, 15, 15, 24]
+  - [10, 24, 11, 20, 14, 12, 21]
+  - [26, 22, 9, 18, 12]
+  - [44, 19, 7, 15, 9]
+  - [60, 13, 5, 10, 6]
+  - [68, 7, 3, 5, 4]
+pods:
+  # The tail fins that hold the wing up.
+  - x: 26
+    stations:
+      - [-52, 3, 24, 12]
+      - [-40, 3, 23, 12]
+      - [-28, 2, 16, 12]
+  # The winglets along the nose.
+  - x: 22
+    stations:
+      - [28, 6, 12, 6]
+      - [42, 7, 14, 6]
+      - [52, 5, 12, 6]
+wing: { z: -48, halfWidth: 29, height: 26, chord: 14, pylons: 18 }

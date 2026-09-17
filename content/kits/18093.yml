@@ -50,6 +50,7 @@ colours:
   wheel: "#f2c230"
   tire: "#2f9e4f"
   source: scraped
+body: koala-racer
 priceJpy: 1210
 priceJpyExTax: 1100
 priceHkd: 110

@@ -50,6 +50,7 @@ colours:
   wheel: "#f2c230"
   tire: "#1f2124"
   source: scraped
+body: blitzer-sonic
 priceJpy: 858
 priceJpyExTax: 780
 priceHkd: 78

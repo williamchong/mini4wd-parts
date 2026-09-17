@@ -1,0 +1,26 @@
+# Avante X (MS, 2012): a sharp open-wheel racer in the Avante line. A narrow
+# body between the wheels, a pointed low nose with winglets spread over the
+# front corners, a dark slot canopy down the middle, and a tall wing on a
+# single central stalk above the tail.
+name: Avante X
+reference: '18616'
+titles: [Avante X]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-60, 20, 8, 15, 14]
+  - [-44, 24, 10, 19, 17]
+  - [-28, 27, 11, 22, 19, 11, 24]
+  - [-10, 28, 11, 22, 19, 12, 26]
+  - [8, 27, 10, 21, 18, 10, 23]
+  - [26, 25, 9, 19, 15, 6, 17]
+  - [44, 23, 6, 18, 11]
+  - [60, 20, 4, 15, 7]
+  - [68, 14, 3, 10, 5]
+pods:
+  # The winglets spread over the front corners.
+  # z, halfWidth, top, bottom
+  - x: 26
+    stations:
+      - [40, 4, 10, 2]
+      - [64, 5, 9, 1]
+wing: { z: -48, halfWidth: 30, height: 33, chord: 14, pylons: 2 }

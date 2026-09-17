@@ -47,6 +47,7 @@ colours:
   wheel: "#d4a93a"
   tire: "#1f2124"
   source: scraped
+body: festa-jaune
 priceJpy: 1320
 priceJpyExTax: 1200
 releaseDate: 2016-11-12

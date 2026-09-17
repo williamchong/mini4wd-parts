@@ -49,6 +49,7 @@ colours:
   wheel: "#2f5fc4"
   tire: "#1f2124"
   source: override
+body: dual-ridge-jr
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

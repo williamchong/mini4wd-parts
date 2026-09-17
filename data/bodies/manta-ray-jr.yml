@@ -1,0 +1,25 @@
+# Manta Ray Jr. (VS, 1988 original): a flat wedge whose nose spreads sideways
+# into two low blades, a dark canopy down the middle, scooped rear haunches
+# and a wide wing on pylons at the tail.
+name: Manta Ray Jr.
+reference: '18053'
+titles: [Manta Ray Jr.]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-58, 24, 8, 19, 13]
+  - [-44, 26, 10, 21, 16]
+  - [-28, 26, 11, 22, 18, 14, 23]
+  - [-8, 25, 11, 21, 17, 15, 25]
+  - [10, 24, 10, 20, 15, 12, 19]
+  - [28, 23, 8, 18, 10]
+  - [46, 21, 6, 16, 7]
+  - [60, 16, 4, 12, 5]
+  - [70, 8, 3, 6, 3]
+pods:
+  # The low blades either side of the nose.
+  - x: 21
+    stations:
+      - [30, 6, 9, 3]
+      - [48, 7, 8, 3]
+      - [60, 5, 7, 3]
+wing: { z: -52, halfWidth: 25, height: 34, chord: 13, pylons: 11 }

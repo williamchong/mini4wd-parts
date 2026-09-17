@@ -1,0 +1,27 @@
+# Bigwig Jr. (the Racing Mini 4WD buggy, re-released on Super-II as Bigwig RS):
+# an open-cockpit racer running between exposed wheels. A long tapered nose,
+# side pods along the flanks, a driver sitting in an open tub under a tall roll
+# bar, and a wide wing over the tail.
+name: Bigwig Jr.
+reference: '95308'
+titles: [Bigwig Jr.]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-56, 22, 10, 18, 16]
+  - [-42, 24, 12, 20, 20]
+  - [-28, 25, 12, 21, 21, 16, 33]
+  - [-12, 25, 12, 21, 16]
+  - [4, 24, 11, 20, 15, 14, 19]
+  - [22, 22, 9, 18, 13]
+  - [42, 19, 7, 15, 11]
+  - [58, 14, 5, 10, 9]
+  - [68, 8, 3, 5, 7]
+pods:
+  # The side pods along each flank, between the wheels.
+  # z, halfWidth, top, bottom
+  - x: 24
+    stations:
+      - [-20, 5, 14, 2]
+      - [0, 6, 15, 2]
+      - [16, 5, 12, 2]
+wing: { z: -52, halfWidth: 26, height: 33, chord: 16, pylons: 10 }

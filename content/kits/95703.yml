@@ -52,6 +52,7 @@ colours:
   wheel: "#eef0f2"
   tire: "#1f2124"
   source: override
+body: zenperor-3
 priceJpy: 1650
 priceJpyExTax: 1500
 priceHkd: 150

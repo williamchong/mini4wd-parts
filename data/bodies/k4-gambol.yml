@@ -4,6 +4,7 @@
 name: K4 Gambol
 reference: '18718'
 titles: [K4 Gambol]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
 hull:
   - [-62, 35, 14, 34, 19]
   - [-6, 36, 14, 35, 20]

@@ -1,0 +1,26 @@
+# Cross Spear 01 (VZ, 2022): a very low open-wheeler. A slim central pod with a
+# clear bubble canopy set forward, long side arms that sweep from the nose back
+# over the flanks, a needle nose, and a low wide wing across the tail.
+name: Cross Spear 01
+reference: '18103'
+titles: [Cross Spear 01]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-60, 20, 8, 15, 11]
+  - [-44, 22, 9, 17, 12]
+  - [-26, 23, 9, 18, 13, 13, 17]
+  - [-8, 23, 9, 18, 13, 14, 18]
+  - [10, 22, 8, 17, 12, 12, 15]
+  - [26, 20, 7, 15, 11]
+  - [44, 16, 6, 12, 9]
+  - [58, 11, 4, 8, 6]
+  - [68, 6, 3, 4, 4]
+pods:
+  # The side arms, arching along each flank.
+  - x: 25
+    stations:
+      - [-30, 3, 13, 6]
+      - [0, 4, 18, 7]
+      - [24, 4, 17, 6]
+      - [46, 3, 11, 4]
+wing: { z: -56, halfWidth: 24, height: 21, chord: 12, pylons: 12 }

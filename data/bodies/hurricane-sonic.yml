@@ -1,0 +1,27 @@
+# Hurricane Sonic (AR re-release of the 1996 car): a full-bodied racer with a
+# long low nose over covered front wheels, twin intake nacelles either side of
+# a small dark canopy, flared rear fenders, and a very wide two-tier rear wing
+# set high over the tail.
+name: Hurricane Sonic
+reference: '19441'
+titles: [Hurricane Sonic]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-60, 28, 9, 22, 14]
+  - [-46, 34, 11, 28, 17]
+  - [-28, 36, 11, 29, 18, 16, 21]
+  - [-8, 35, 11, 28, 17, 18, 24]
+  - [10, 34, 10, 27, 16, 16, 22]
+  - [28, 34, 10, 27, 13]
+  - [46, 32, 8, 25, 11]
+  - [60, 25, 6, 18, 8]
+  - [68, 15, 4, 11, 5]
+arches: 16
+pods:
+  # The intake nacelles that run either side of the canopy, back to the wing.
+  - x: 22
+    stations:
+      - [-30, 6, 24, 17]
+      - [-12, 7, 25, 17]
+      - [8, 6, 22, 16]
+wing: { z: -48, halfWidth: 30, height: 26, chord: 18, pylons: 18 }

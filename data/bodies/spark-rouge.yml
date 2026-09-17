@@ -1,0 +1,20 @@
+# Spark Rouge (MA, 2015): a wide road coupe that covers its wheels. A low
+# scooped nose, a long bonnet with a raised centre, a dark cabin set back over
+# the middle, a short fastback tail, and a straight rear wing standing above
+# the roofline on the tail's shoulders.
+name: Spark Rouge
+reference: '18642'
+titles: [Spark Rouge]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-64, 31, 9, 25, 15]
+  - [-50, 34, 10, 28, 18, 20, 22]
+  - [-34, 36, 11, 29, 19, 21, 25]
+  - [-14, 37, 11, 30, 19, 21, 25]
+  - [6, 36, 10, 29, 18, 18, 23]
+  - [24, 34, 9, 27, 16, 12, 18]
+  - [44, 31, 8, 24, 13]
+  - [58, 26, 6, 19, 10]
+  - [68, 17, 4, 11, 6]
+arches: 16
+wing: { z: -56, halfWidth: 32, height: 27, chord: 11 }

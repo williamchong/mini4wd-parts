@@ -49,6 +49,7 @@ colours:
   wheel: "#c9ced6"
   tire: "#eef0f2"
   source: scraped
+body: manta-ray-mk2
 priceJpy: 1210
 priceJpyExTax: 1100
 priceHkd: 110

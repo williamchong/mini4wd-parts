@@ -1,0 +1,20 @@
+# Rayvolf (MS, 2010): a 1970s Le Mans racer, sister to the Exflowly but longer
+# and lower in the nose. A very long shallow bonnet with sunken headlights, a
+# small bubble canopy, broad rear haunches over covered wheels, and a big flat
+# rear wing with deep end plates squared off across the tail.
+name: Rayvolf
+reference: '18611'
+titles: [Rayvolf]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-66, 31, 10, 26, 19]
+  - [-52, 34, 11, 29, 20, 24, 22]
+  - [-34, 35, 12, 30, 18, 22, 22]
+  - [-14, 35, 12, 29, 16, 19, 22]
+  - [4, 34, 11, 28, 14, 15, 19]
+  - [22, 33, 10, 27, 12]
+  - [40, 32, 9, 26, 10]
+  - [56, 28, 7, 22, 8]
+  - [68, 20, 5, 15, 6]
+arches: 15
+wing: { z: -60, halfWidth: 31, height: 27, chord: 16 }

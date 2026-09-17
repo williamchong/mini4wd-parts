@@ -1,0 +1,26 @@
+# Iron Beak (VZ, 2021): a Le Mans prototype. A long narrow beak of a nose held
+# low ahead of fenders that cover the front wheels, a shallow canopy over the
+# middle, and twin fins at the tail carrying a wing between them.
+name: Iron Beak
+reference: '18098'
+titles: [Iron Beak]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-62, 26, 8, 20, 14]
+  - [-48, 30, 10, 24, 16, 16, 20]
+  - [-32, 31, 11, 25, 17, 18, 24]
+  - [-12, 31, 11, 25, 17, 17, 23]
+  - [4, 30, 10, 24, 16, 14, 19]
+  - [20, 29, 9, 23, 14]
+  - [38, 27, 8, 21, 12]
+  - [54, 20, 6, 15, 9]
+  - [68, 9, 4, 6, 5]
+arches: 15
+pods:
+  # The twin fins either side of the tail.
+  - x: 22
+    stations:
+      - [-56, 2, 27, 16]
+      - [-44, 3, 26, 16]
+      - [-30, 2, 22, 16]
+wing: { z: -54, halfWidth: 24, height: 27, chord: 10, pylons: 18 }

@@ -1,0 +1,37 @@
+# Cannon "D" Ball (MA, 2020): an angular anime racer. A faceted arrowhead nose
+# with two cannon barrels lying along it, wide sharp canards over the front
+# wheels, a small dark canopy set low between shoulder blades, and swept fins
+# either side of the tail. The wheels stay open.
+name: Cannon D Ball
+reference: '18649'
+titles: [Cannon D Ball]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-62, 24, 9, 19, 14]
+  - [-46, 27, 11, 22, 18, 14, 24]
+  - [-28, 28, 12, 23, 19, 16, 27]
+  - [-8, 27, 12, 22, 18, 16, 28]
+  - [10, 24, 10, 19, 16, 12, 22]
+  - [28, 20, 8, 16, 13]
+  - [46, 16, 6, 12, 10]
+  - [60, 11, 4, 8, 7]
+  - [68, 6, 3, 4, 5]
+pods:
+  # Swept fins standing either side of the tail.
+  - x: 24
+    stations:
+      - [-58, 2, 28, 15]
+      - [-44, 3, 28, 15]
+      - [-28, 2, 22, 14]
+  # The cannon barrels lying either side of the narrow nose.
+  - x: 19
+    stations:
+      - [22, 4, 13, 4]
+      - [46, 5, 13, 3]
+      - [66, 4, 11, 3]
+  # Wide canards over the front wheels.
+  - x: 31
+    stations:
+      - [20, 7, 14, 6]
+      - [42, 8, 13, 4]
+      - [58, 6, 11, 4]

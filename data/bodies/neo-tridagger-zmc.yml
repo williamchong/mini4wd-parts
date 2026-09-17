@@ -1,0 +1,29 @@
+# Neo-Tridagger ZMC (Super-II, 2022): a wide low wedge with heavy fenders over
+# all four wheels, arches cut so the tires show. A very low pointed nose, a
+# small gold canopy running down the centre line, canards off the front
+# fenders, and a large flat wing on short pylons over the tail.
+name: Neo-Tridagger ZMC
+reference: '95508'
+titles: [Neo-Tridagger ZMC]
+# The clear and spare body sets Tamiya sells for this car.
+parts: ['15480']
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-62, 30, 8, 24, 15]
+  - [-48, 34, 10, 28, 18]
+  - [-32, 36, 11, 29, 19, 16, 25]
+  - [-12, 36, 11, 29, 19, 18, 28]
+  - [6, 35, 11, 28, 18, 16, 26]
+  - [24, 34, 10, 27, 16, 12, 20]
+  - [42, 32, 9, 25, 14]
+  - [58, 26, 7, 20, 10]
+  - [68, 17, 4, 13, 6]
+arches: 15
+pods:
+  # Canards standing off the front fenders.
+  - x: 33
+    stations:
+      - [28, 5, 18, 10]
+      - [42, 6, 19, 9]
+      - [54, 5, 16, 8]
+wing: { z: -52, halfWidth: 27, height: 30, chord: 14, pylons: 8 }

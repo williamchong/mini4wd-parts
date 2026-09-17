@@ -1,0 +1,29 @@
+# Mad Laser (MA, 2017): a very low full-bodied supercar. A pointed central nose
+# sunk between two raised headlight fenders, a long tinted canopy running most
+# of the roof, deep side scoops ahead of the rear wheels, and a flat rear wing
+# whose end plates sit down on the rear fenders.
+name: Mad Laser
+reference: '18648'
+titles: [Mad Laser]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-66, 33, 6, 27, 13]
+  - [-52, 36, 8, 30, 15]
+  - [-36, 37, 9, 30, 16, 17, 21]
+  - [-16, 37, 10, 30, 17, 19, 22]
+  - [2, 36, 9, 29, 16, 18, 21]
+  - [20, 35, 8, 28, 15, 13, 18]
+  - [40, 32, 7, 25, 13]
+  - [56, 26, 6, 20, 11]
+  - [68, 16, 4, 11, 6]
+arches: 16
+pods:
+  # The raised headlight fenders either side of the sunken nose.
+  # z, halfWidth, top, bottom
+  - x: 28
+    stations:
+      - [34, 8, 15, 8]
+      - [48, 8, 16, 7]
+      - [60, 6, 13, 6]
+      - [67, 3, 8, 5]
+wing: { z: -58, halfWidth: 33, height: 22, chord: 11 }

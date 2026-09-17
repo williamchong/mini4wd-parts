@@ -1,0 +1,27 @@
+# Beak Spider (Super-II, Fully Cowled series): a wide full-cowl car with a very
+# long low beak of a nose, fenders cut open over all four wheels, a small gold
+# canopy set well forward, and a tall slotted rear wing between two fins that
+# rise off the tail.
+name: Beak Spider
+reference: '19439'
+titles: [Beak Spider]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-62, 24, 9, 19, 15]
+  - [-48, 27, 10, 22, 18]
+  - [-32, 29, 11, 24, 20, 14, 24]
+  - [-14, 30, 11, 25, 19, 17, 26]
+  - [4, 30, 10, 25, 17, 14, 22]
+  - [22, 29, 9, 24, 14]
+  - [40, 28, 8, 23, 11]
+  - [56, 22, 6, 17, 8]
+  - [68, 12, 4, 9, 4]
+arches: 14
+pods:
+  # The two fins at the tail's corners that the wing spans.
+  - x: 23
+    # z, halfWidth, top, bottom
+    stations:
+      - [-58, 3, 29, 16]
+      - [-46, 3, 27, 16]
+wing: { z: -52, halfWidth: 28, height: 30, chord: 18, pylons: 10 }

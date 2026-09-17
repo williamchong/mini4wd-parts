@@ -1,0 +1,19 @@
+# Rowdy Bull (FM-A, 2019): an American muscle coupe. A long flat bonnet with a
+# scoop, a blunt wide nose, a narrow greenhouse set well back, a fastback roof
+# running into a short ducktail, and swollen fenders cut open over the wheels.
+# The FM-A Balanced Spec starter pack is the same shell in a smoked body.
+name: Rowdy Bull
+reference: '18707'
+titles: [Rowdy Bull, Mini 4WD Starter Pack FM-A Balanced Spec]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-64, 31, 10, 25, 16]
+  - [-50, 35, 12, 28, 19, 17, 23]
+  - [-34, 36, 12, 30, 20, 20, 27]
+  - [-16, 37, 12, 30, 20, 21, 29]
+  - [0, 36, 12, 29, 20, 19, 28]
+  - [16, 36, 11, 29, 20]
+  - [36, 35, 11, 28, 19]
+  - [54, 34, 10, 27, 17]
+  - [66, 28, 8, 22, 13]
+arches: 16

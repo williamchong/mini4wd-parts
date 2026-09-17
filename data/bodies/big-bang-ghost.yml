@@ -1,0 +1,26 @@
+# Big Bang Ghost (VS, 1996): a low narrow racer between four exposed wheels.
+# A long silver teardrop canopy running almost the whole length of the body,
+# twin blade fins swept up off the front flanks, and a flat black wing lying
+# across the tail on end plates.
+name: Big Bang Ghost
+reference: '19513'
+titles: [Big Bang Ghost]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-56, 22, 9, 18, 13]
+  - [-42, 25, 10, 20, 16]
+  - [-26, 26, 11, 21, 18, 13, 22]
+  - [-6, 26, 11, 21, 18, 15, 24]
+  - [12, 25, 11, 20, 17, 14, 23]
+  - [30, 24, 10, 19, 15, 11, 19]
+  - [46, 22, 9, 17, 13]
+  - [58, 18, 7, 14, 9]
+  - [68, 11, 4, 8, 5]
+pods:
+  # The blade fins swept up off the front flanks.
+  - x: 25
+    stations:
+      - [20, 3, 24, 12]
+      - [34, 3.5, 28, 11]
+      - [48, 3, 20, 10]
+wing: { z: -48, halfWidth: 24, height: 26, chord: 14 }

@@ -1,0 +1,25 @@
+# Nitro Force (MS, 2005): one of the two kits the MS chassis launched on. A low
+# sleek shell between the wheels with a blunt rounded nose, a raised spine down
+# the bonnet, a slim canopy just behind the middle, and a rear wing standing on
+# two posts over the tail.
+name: Nitro Force
+reference: '18602'
+titles: [Nitro Force]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-60, 24, 8, 19, 12]
+  - [-46, 26, 10, 21, 16]
+  - [-30, 28, 11, 23, 18, 14, 26]
+  - [-12, 27, 11, 22, 18, 15, 28]
+  - [6, 26, 10, 21, 17, 12, 24]
+  - [22, 24, 10, 19, 16, 8, 20]
+  - [40, 22, 9, 18, 13, 6, 16]
+  - [56, 19, 7, 15, 10]
+  - [68, 13, 4, 10, 6]
+pods:
+  # The two prongs the nose splits into ahead of the front wheels.
+  - x: 17
+    stations:
+      - [56, 5, 9, 2]
+      - [72, 4, 8, 2]
+wing: { z: -54, halfWidth: 24, height: 33, chord: 12, pylons: 16 }

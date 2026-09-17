@@ -1,0 +1,20 @@
+# Aero Manta Ray (AR, 2015): a manta, flat and very wide. The shell spreads into
+# wings either side of a raised central spine that runs from the pointed nose
+# back to the tail, the flanks are cut away over the wheels, and a broad wing
+# stands on two pylons at the back.
+name: Aero Manta Ray
+reference: '18703'
+titles: [Aero Manta Ray]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-58, 24, 6, 19, 11]
+  - [-44, 30, 7, 24, 13, 13, 17]
+  - [-26, 36, 8, 29, 15, 15, 21]
+  - [-6, 40, 8, 32, 15, 14, 22]
+  - [12, 39, 8, 31, 14, 12, 20]
+  - [30, 35, 7, 28, 12, 9, 16]
+  - [46, 28, 6, 22, 10]
+  - [60, 20, 4, 15, 7]
+  - [70, 10, 3, 7, 4]
+arches: 13
+wing: { z: -50, halfWidth: 30, height: 32, chord: 16, pylons: 18 }

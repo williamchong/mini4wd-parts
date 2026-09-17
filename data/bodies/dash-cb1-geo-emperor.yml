@@ -1,0 +1,25 @@
+# Dash-CB1 Geo-Emperor (Super-II, 1991): a very low, broad Emperor. A flat
+# wedge nose, a shallow green canopy sat over the middle, two chrome headlight
+# pods standing on the bonnet either side of it, and a flat name-plate wing
+# lying across the tail. The wheels stand clear of the body.
+name: Dash-CB1 Geo-Emperor
+reference: '95277'
+titles: [Dash-CB1 Geo-Emperor]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-56, 23, 8, 19, 15]
+  - [-42, 26, 10, 22, 17]
+  - [-26, 27, 10, 23, 18, 14, 21]
+  - [-8, 27, 10, 23, 18, 16, 23]
+  - [10, 27, 10, 23, 17, 15, 22]
+  - [26, 26, 9, 22, 16, 12, 19]
+  - [42, 25, 8, 21, 14]
+  - [56, 21, 6, 17, 11]
+  - [66, 15, 4, 11, 7]
+pods:
+  # The chrome headlight pods standing on the bonnet.
+  - x: 16
+    stations:
+      - [20, 3.5, 24, 16]
+      - [31, 3.5, 24, 16]
+wing: { z: -50, halfWidth: 24, height: 22, chord: 14 }

@@ -52,6 +52,7 @@ colours:
   wheel: "#f2c230"
   tire: "#4fae5a"
   source: override
+body: racer-gt-no-wing
 priceJpy: 1320
 priceJpyExTax: 1200
 releaseDate: 2020-08-29

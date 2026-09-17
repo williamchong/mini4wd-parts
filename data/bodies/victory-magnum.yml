@@ -1,0 +1,21 @@
+# Victory Magnum (Super-II re-release of the 1997 V1 machine): the arrow. A
+# sharp central blade runs out well ahead of the fender crowns and back over a
+# black canopy, the flanks fall away from it in flat facets, the fenders are
+# cut open over all four wheels, and a straight plank wing stands on tall twin
+# pylons over the tail.
+name: Victory Magnum
+reference: '19434'
+titles: [Victory Magnum]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-66, 28, 7, 22, 12]
+  - [-54, 32, 9, 25, 16]
+  - [-38, 34, 10, 27, 19, 12, 23]
+  - [-20, 33, 10, 26, 18, 15, 29]
+  - [0, 31, 10, 24, 16, 13, 27]
+  - [18, 31, 9, 24, 13, 7, 21]
+  - [38, 34, 8, 27, 11, 5, 16]
+  - [58, 26, 6, 18, 9, 4, 12]
+  - [70, 10, 3, 6, 7]
+arches: 15
+wing: { z: -56, halfWidth: 34, height: 31, chord: 12, pylons: 20 }

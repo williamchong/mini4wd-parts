@@ -1,0 +1,27 @@
+# Spin-Viper (VS, 1998): a wide body split by an open engine bay. Big fenders
+# over all four wheels, a low cowl with headlight panels each side of the nose,
+# the motor left exposed in the middle, and two tall fins rising and leaning
+# back out of the centre of the car.
+name: Spin-Viper
+reference: '19429'
+titles: [Spin-Viper]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-62, 28, 8, 22, 12]
+  - [-46, 33, 9, 26, 15]
+  - [-30, 35, 10, 28, 16, 17, 20]
+  - [-12, 35, 10, 28, 16, 16, 19]
+  - [6, 34, 9, 27, 14]
+  - [24, 34, 9, 27, 14, 14, 17]
+  - [42, 34, 8, 26, 13]
+  - [58, 29, 6, 22, 10]
+  - [68, 18, 4, 12, 6]
+arches: 15
+pods:
+  # The twin fins standing out of the middle of the car, leaning back.
+  - x: 21
+    # z, halfWidth, top, bottom
+    stations:
+      - [-28, 3, 21, 13]
+      - [-12, 4, 25, 12]
+      - [4, 3, 22, 11]

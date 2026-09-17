@@ -1,0 +1,18 @@
+# Top-Force Jr. (VS, re-release of the 1991 buggy): a slim smoked body running
+# between open wheels. A low pointed nose, a long sloping canopy over the
+# middle, a short flat rear deck, and a very tall two-plane wing on posts above
+# the tail.
+name: Top-Force Jr.
+reference: '18054'
+titles: [Top-Force Jr.]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-56, 21, 10, 17, 16]
+  - [-40, 24, 11, 20, 19]
+  - [-24, 25, 11, 21, 20, 14, 25]
+  - [-6, 25, 10, 21, 19, 16, 28]
+  - [12, 24, 8, 20, 16, 11, 21]
+  - [30, 22, 6, 18, 12]
+  - [48, 19, 4, 15, 8]
+  - [64, 14, 3, 10, 5]
+wing: { z: -54, halfWidth: 28, height: 39, chord: 18, pylons: 22 }

@@ -50,6 +50,7 @@ colours:
   wheel: "#1f2124"
   tire: "#7a4bb5"
   source: scraped
+body: lupine-racer
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

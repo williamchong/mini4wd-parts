@@ -1,0 +1,19 @@
+# TRF-Racer Jr. (MS, 2012): a touring-car saloon, wide enough to cover its
+# wheels. A long low bonnet with a grille and swept headlights, a tinted cabin
+# set back over the rear half, a fastback tail with a small ducktail lip, and
+# fenders cut open over the wheels.
+name: TRF-Racer Jr.
+reference: '18613'
+titles: [TRF-Racer Jr.]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-62, 30, 8, 24, 15]
+  - [-50, 34, 10, 28, 18, 24, 21]
+  - [-38, 36, 11, 30, 19, 22, 26]
+  - [-20, 36, 11, 30, 19, 21, 27]
+  - [-2, 35, 11, 29, 18, 18, 25]
+  - [16, 34, 10, 28, 16]
+  - [36, 33, 9, 27, 14]
+  - [54, 30, 7, 24, 11]
+  - [68, 22, 5, 16, 8]
+arches: 16

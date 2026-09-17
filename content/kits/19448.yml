@@ -53,6 +53,7 @@ colours:
   wheel: "#c9ced6"
   tire: "#1f2124"
   source: scraped
+body: proto-saber-evolution
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 110

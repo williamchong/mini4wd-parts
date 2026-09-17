@@ -49,6 +49,7 @@ colours:
   wheel: "#ec6fa8"
   tire: "#eef0f2"
   source: scraped
+body: aero-manta-ray
 priceJpy: 1100
 priceJpyExTax: 1000
 releaseDate: 2017-01-21

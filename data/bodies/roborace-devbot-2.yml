@@ -1,0 +1,32 @@
+# Roborace DevBot 2.0 (MA, 2021): the driverless racer. A very low slab body
+# full width over the wheels, a small grey sensor blister where a cockpit would
+# be, a stepped shoulder line along the flanks, and an open tubular roll
+# structure standing at the rear carrying a flat wing across it.
+name: Roborace DevBot 2.0
+reference: '18656'
+kits: ['18656']
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-64, 33, 10, 27, 18]
+  - [-50, 36, 12, 30, 20]
+  - [-34, 36, 12, 30, 20, 16, 23]
+  - [-14, 36, 12, 30, 19, 14, 25]
+  - [2, 35, 11, 29, 18, 12, 23]
+  - [20, 34, 10, 27, 15]
+  - [38, 32, 9, 25, 13]
+  - [56, 27, 7, 20, 10]
+  - [68, 18, 5, 13, 8]
+pods:
+  # The open roll hoop posts behind the sensor blister.
+  - x: 24
+    stations:
+      - [-36, 3, 29, 20]
+      - [-26, 3, 29, 20]
+  # Low front fender humps either side of the flat nose.
+  - x: 29
+    stations:
+      - [24, 7, 16, 11]
+      - [40, 8, 17, 10]
+      - [54, 6, 14, 9]
+arches: 16
+wing: { z: -31, halfWidth: 24, height: 29, chord: 9, pylons: 21 }

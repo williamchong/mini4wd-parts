@@ -24,6 +24,7 @@ colours:
   wheel: "#8e949c"
   tire: "#1f2124"
   source: override
+body: ray-stinger
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 110

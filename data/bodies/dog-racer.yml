@@ -1,0 +1,30 @@
+# Mini 4WD Dog Racer (Super-II, 2018): an open-cockpit buggy that runs between
+# its wheels — a long pointed nose, a cowl, an open tub with the driver sitting
+# in it under a tubular roll cage that runs along either side, and a big rear
+# wing standing on two posts over the tail.
+name: Mini 4WD Dog Racer
+reference: '18086'
+titles: [Mini 4WD Dog Racer]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-56, 20, 8, 15, 12]
+  - [-42, 24, 10, 19, 16]
+  - [-28, 25, 11, 20, 18, 16, 22]
+  - [-14, 26, 11, 21, 14, 13, 20]
+  - [2, 27, 10, 22, 13, 12, 19]
+  - [18, 27, 9, 22, 15]
+  - [36, 25, 7, 20, 12]
+  - [54, 19, 5, 14, 9]
+  - [70, 10, 3, 7, 6]
+pods:
+  # The main roll hoop, standing behind the driver's head.
+  - x: 13
+    stations:
+      - [-22, 2, 29, 15]
+      - [-14, 2, 29, 15]
+  # The cage rails running forward from it to the cowl, either side of the tub.
+  - x: 13
+    stations:
+      - [-12, 2, 24, 20]
+      - [6, 2, 21, 17]
+wing: { z: -52, halfWidth: 24, height: 31, chord: 12, pylons: 14 }

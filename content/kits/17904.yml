@@ -53,6 +53,7 @@ colours:
   wheel: "#eef0f2"
   tire: "#1f2124"
   source: scraped
+body: silwolf
 priceJpy: 1980
 priceJpyExTax: 1800
 priceHkd: 180

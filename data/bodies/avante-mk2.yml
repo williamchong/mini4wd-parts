@@ -1,0 +1,33 @@
+# Avante Mk.II (MS, 2005 reissue): the 1989 Avante's successor. A narrow arrow
+# that runs between the wheels — a long pointed nose with canards either side,
+# a low canopy, and the family's signature: a very tall swept rear wing
+# standing on twin tail fins high above the body.
+name: Avante Mk.II
+reference: '18614'
+titles: [Avante Mk.II]
+# The clear and spare body sets Tamiya sells for this car.
+parts: ['15369']
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-56, 22, 9, 18, 14]
+  - [-42, 24, 10, 20, 16]
+  - [-26, 25, 11, 21, 17, 13, 23]
+  - [-8, 25, 11, 21, 17, 14, 24]
+  - [10, 24, 10, 20, 16, 12, 22]
+  - [28, 23, 9, 18, 14]
+  - [46, 20, 8, 15, 11]
+  - [60, 15, 6, 11, 7]
+  - [70, 8, 3, 6, 4]
+pods:
+  # The twin tail fins that lift the wing.
+  - x: 21
+    stations:
+      - [-50, 3, 32, 15]
+      - [-36, 4, 34, 15]
+      - [-22, 3, 24, 15]
+  # The canards either side of the nose.
+  - x: 22
+    stations:
+      - [46, 7, 10, 4]
+      - [62, 7, 10, 4]
+wing: { z: -46, halfWidth: 24, height: 36, chord: 15, pylons: 15 }

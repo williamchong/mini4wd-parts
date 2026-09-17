@@ -1,0 +1,30 @@
+# Dash-X1 Proto-Emperor (Super-II, the black prototype of the Emperor line): a
+# low pointed wedge between open wheels, carrying a tall boxy canopy that ends
+# in a near-vertical front face, with headlight pods on the nose flanks and two
+# big fins raking up and back off the tail corners.
+name: Dash-X1 Proto-Emperor
+reference: '18074'
+titles: [Dash-X1 Proto-Emperor]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-56, 20, 9, 16, 14]
+  - [-42, 25, 11, 20, 18]
+  - [-28, 26, 12, 21, 20, 16, 28]
+  - [-8, 26, 12, 21, 20, 17, 30]
+  - [8, 26, 11, 21, 19, 16, 29]
+  - [20, 27, 10, 22, 16]
+  - [38, 26, 8, 21, 13]
+  - [56, 20, 6, 15, 9]
+  - [70, 11, 4, 8, 6]
+pods:
+  # The rear fins, raked up and outward off the tail.
+  - x: 22
+    stations:
+      - [-58, 3, 35, 16]
+      - [-46, 5, 33, 17]
+      - [-32, 3, 24, 19]
+  # The headlight pods on the nose flanks.
+  - x: 15
+    stations:
+      - [34, 4, 19, 12]
+      - [44, 4, 19, 12]

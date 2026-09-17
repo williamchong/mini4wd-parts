@@ -1,0 +1,33 @@
+# Dash-4 Cannonball (Super-II, the premium re-release of the 1989 Dash car):
+# a torpedo. A long rounded nose between exposed wheels with a pair of cannon
+# tubes lying along each flank, a blue bubble canopy over the middle, and the
+# tail widening into fins at its corners with a wing between them.
+name: Dash-4 Cannonball
+reference: '95225'
+titles: [Dash-4 Cannonball]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-60, 25, 10, 20, 16]
+  - [-46, 27, 11, 22, 19]
+  - [-32, 28, 12, 23, 20, 14, 25]
+  - [-14, 27, 11, 22, 18, 16, 29]
+  - [4, 25, 10, 20, 16, 13, 24]
+  - [22, 23, 8, 18, 13]
+  - [42, 21, 6, 16, 11]
+  - [58, 17, 5, 12, 9]
+  - [68, 9, 3, 6, 6]
+pods:
+  # The cannon tubes lying along each flank of the nose.
+  # z, halfWidth, top, bottom
+  - x: 22
+    stations:
+      - [26, 4, 13, 5]
+      - [46, 4, 12, 4]
+      - [62, 3, 10, 4]
+  # The fins at the tail's corners, carrying the wing between them.
+  - x: 23
+    stations:
+      - [-58, 2, 28, 15]
+      - [-46, 3, 29, 15]
+      - [-34, 2, 22, 14]
+wing: { z: -52, halfWidth: 25, height: 32, chord: 12, pylons: 16 }

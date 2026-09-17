@@ -1,0 +1,27 @@
+# Buster-Sonic (AR re-release of the 1997 car): Beat-Magnum's rival. Rounded
+# pointed front fenders reaching well ahead of the wheels, a low white body
+# with a small dark canopy, upswept rear quarter fins, and a broad wing on
+# short pylons over the tail.
+name: Buster-Sonic
+reference: '19445'
+titles: [Buster-Sonic]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-58, 27, 9, 21, 14]
+  - [-44, 32, 10, 26, 17]
+  - [-28, 35, 11, 28, 18, 16, 21]
+  - [-8, 35, 11, 28, 17, 18, 23]
+  - [10, 34, 10, 27, 16, 16, 21]
+  - [28, 34, 10, 27, 13]
+  - [48, 32, 8, 25, 11]
+  - [62, 24, 6, 17, 8]
+  - [68, 14, 4, 10, 5]
+arches: 16
+pods:
+  # The rear quarter fins standing over the back wheels.
+  - x: 31
+    stations:
+      - [-40, 5, 25, 14]
+      - [-24, 6, 27, 14]
+      - [-12, 5, 22, 14]
+wing: { z: -48, halfWidth: 28, height: 30, chord: 16, pylons: 15 }

@@ -1,0 +1,31 @@
+# Dash-2 Burning Sun (MS, 2013 re-release of the 1988 car): a flat wedge buggy
+# on knobby tires. A broad low shovel nose with blades at its front corners, a
+# dark rectangular windscreen laid almost flat on the deck, a stepped engine
+# deck behind it, and twin fins standing at the rear shoulders.
+name: Dash-2 Burning Sun
+reference: '18628'
+titles: [Dash-2 Burning Sun]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-56, 22, 10, 18, 18]
+  - [-40, 25, 12, 21, 21]
+  - [-24, 26, 12, 22, 22, 14, 26]
+  - [-6, 26, 12, 22, 22, 15, 27]
+  - [12, 25, 11, 21, 20, 12, 23]
+  - [30, 24, 10, 20, 17]
+  - [48, 23, 8, 19, 13]
+  - [62, 21, 6, 16, 9]
+  - [68, 16, 4, 12, 6]
+pods:
+  # The fins standing at the rear shoulders.
+  # z, halfWidth, top, bottom
+  - x: 22
+    stations:
+      - [-52, 3, 30, 18]
+      - [-36, 3, 30, 18]
+      - [-22, 2, 24, 20]
+  # The blades at the front corners of the shovel nose.
+  - x: 24
+    stations:
+      - [34, 3, 20, 12]
+      - [52, 3, 18, 10]

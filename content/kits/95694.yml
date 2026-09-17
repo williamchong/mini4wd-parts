@@ -23,6 +23,7 @@ colours:
   wheel: "#f4a9c8"
   tire: "#eef0f2"
   source: override
+body: year-of-the-horse
 priceJpy: 1540
 priceJpyExTax: 1400
 priceHkd: 140

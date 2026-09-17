@@ -50,6 +50,7 @@ colours:
   wheel: "#ff3b3b"
   tire: "#1f2124"
   source: scraped
+body: fire-dragon-jr
 priceJpy: 1100
 priceJpyExTax: 1000
 releaseDate: 2012-07-07

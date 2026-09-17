@@ -1,0 +1,28 @@
+# 2025 New Year's zodiac kit, "Year of the Snake": a rounded open-top roadster
+# with a snake at the wheel. Full teardrop fenders over all four wheels, a long
+# rounded hood carrying two round headlights, a low windscreen across an open
+# cockpit, exhaust pipes along each flank, and a rounded tail with a small lip.
+name: Year of the Snake 2025
+reference: '95679'
+kits: ['95679']
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-62, 26, 10, 21, 15]
+  - [-48, 31, 12, 25, 21]
+  - [-36, 34, 13, 28, 26]
+  - [-22, 35, 13, 29, 17]
+  - [-6, 35, 12, 29, 16, 22, 21]
+  - [12, 34, 11, 28, 19]
+  - [32, 33, 10, 27, 18]
+  - [52, 30, 8, 24, 15]
+  - [66, 22, 5, 16, 11]
+arches: 16
+pods:
+  # The exhaust pipes lying along each flank.
+  # z, halfWidth, top, bottom
+  - x: 31
+    stations:
+      - [-30, 3, 15, 9]
+      - [0, 4, 16, 9]
+      - [26, 3, 14, 9]
+wing: { z: -54, halfWidth: 24, height: 27, chord: 10 }

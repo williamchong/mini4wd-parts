@@ -1,0 +1,32 @@
+# Shooting Proud Star (MA, 2016): a narrow open-wheel racer. A long sharp nose
+# between splitter fins, a bronze bubble canopy running down the centre line,
+# twin angled fins standing at the rear corners, and a wide high wing over the
+# tail. The wheels are fully exposed, so no arches and no fenders.
+name: Shooting Proud Star
+reference: '18641'
+titles: [Shooting Proud Star]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-62, 23, 8, 18, 12]
+  - [-46, 27, 10, 22, 17, 13, 23]
+  - [-28, 28, 11, 23, 18, 15, 26]
+  - [-8, 28, 11, 23, 18, 15, 26]
+  - [12, 27, 10, 22, 16, 13, 22]
+  - [30, 26, 9, 21, 13]
+  - [48, 23, 7, 18, 10]
+  - [62, 17, 5, 12, 7]
+  - [68, 9, 3, 6, 5]
+pods:
+  # The twin fins standing at the rear corners, carrying the wing between them.
+  - x: 24
+    stations:
+      - [-58, 2, 33, 15]
+      - [-46, 3, 35, 15]
+      - [-32, 2, 25, 14]
+  # Flat splitter fins either side of the nose.
+  - x: 30
+    stations:
+      - [30, 6, 9, 3]
+      - [48, 7, 8, 2]
+      - [62, 5, 7, 2]
+wing: { z: -48, halfWidth: 21, height: 32, chord: 13, pylons: 18 }

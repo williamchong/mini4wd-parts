@@ -1,0 +1,30 @@
+# Eleglitter (VZ, 2021): a slim open-cockpit racer. A narrow central body with
+# the driver's helmet showing above a headrest, rounded cycle fenders standing
+# over each of the four wheels, and no wing — just a tapered tail.
+name: Eleglitter
+reference: '18100'
+titles: [Eleglitter]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-58, 20, 8, 15, 12]
+  - [-44, 22, 9, 17, 14]
+  - [-24, 23, 9, 18, 15, 12, 25]
+  - [-4, 23, 9, 18, 15, 13, 21]
+  - [12, 22, 8, 17, 14, 12, 18]
+  - [28, 20, 7, 15, 12]
+  - [42, 17, 6, 13, 10]
+  - [56, 12, 5, 9, 7]
+  - [68, 7, 3, 5, 4]
+pods:
+  # The cycle fenders over the front wheels.
+  - x: 29
+    stations:
+      - [28, 6, 14, 2]
+      - [40, 7, 21, 2]
+      - [52, 6, 14, 2]
+  # And over the rear wheels.
+  - x: 29
+    stations:
+      - [-52, 6, 14, 2]
+      - [-40, 7, 21, 2]
+      - [-28, 6, 14, 2]

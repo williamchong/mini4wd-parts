@@ -1,0 +1,31 @@
+# Tridagger XX (MS, 2014): a wide racer whose nose narrows to an open centre
+# bay with exposed pipes, flanked by two squared fender blocks carrying the
+# headlights. A low dark canopy sits behind them, the rear fenders flare wide
+# and a flat black wing stands on pylons over the tail.
+name: Tridagger XX
+reference: '18629'
+titles: [Tridagger XX]
+# The clear and spare body sets Tamiya sells for this car.
+parts: ['15447']
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-62, 30, 9, 24, 14]
+  - [-48, 34, 11, 27, 18, 16, 21]
+  - [-30, 36, 12, 29, 19, 20, 25]
+  - [-12, 35, 12, 28, 19, 20, 26]
+  - [6, 33, 11, 26, 18, 14, 21]
+  - [24, 30, 9, 24, 16]
+  - [42, 26, 8, 20, 13]
+  - [58, 23, 6, 18, 11]
+  - [68, 18, 4, 13, 8]
+arches: 15
+pods:
+  # The squared fender blocks either side of the open nose, headlights on their
+  # front faces.
+  - x: 29
+    stations:
+      - [22, 8, 20, 12]
+      - [40, 9, 24, 11]
+      - [58, 8, 23, 12]
+      - [68, 5, 17, 13]
+wing: { z: -54, halfWidth: 27, height: 34, chord: 15, pylons: 17 }

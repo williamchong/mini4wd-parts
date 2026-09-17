@@ -23,6 +23,7 @@ colours:
   wheel: "#eef0f2"
   tire: "#d0312d"
   source: override
+body: lupine-racer
 priceJpy: 1540
 priceJpyExTax: 1400
 priceHkd: 140

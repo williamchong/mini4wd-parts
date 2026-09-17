@@ -1,0 +1,17 @@
+# Super Sabre Jr. (VS re-release of the 1988 car): a faceted 1980s wedge that
+# runs between the wheels — a long low bonnet, a big angular greenhouse with
+# tall side windows over the rear half, and a short squared-off tail deck.
+name: Super Sabre Jr.
+reference: '18061'
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+titles: [Super Sabre Jr.]
+hull:
+  - [-62, 21, 9, 17, 15]
+  - [-52, 23, 10, 19, 17, 17, 24]
+  - [-38, 25, 10, 21, 17, 19, 28]
+  - [-20, 25, 10, 21, 16, 19, 28]
+  - [-2, 24, 9, 20, 14, 16, 24]
+  - [16, 23, 8, 19, 11]
+  - [38, 22, 7, 18, 9]
+  - [58, 19, 5, 15, 7]
+  - [68, 12, 3, 9, 4]

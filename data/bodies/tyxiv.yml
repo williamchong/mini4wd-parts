@@ -1,0 +1,32 @@
+# TYXIV (ME, 2026): a very low, wide racer — 33 mm tall over the canopy. A long
+# canopy running from the middle right down to the nose, huge curved fender
+# blades standing over the front wheels clear of the body, covers over the rear
+# wheels, and a low rear wing between them.
+name: TYXIV
+reference: '18664'
+kits: ['18664']
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-58, 24, 8, 20, 12]
+  - [-44, 27, 10, 22, 14]
+  - [-28, 28, 10, 23, 14, 18, 18]
+  - [-10, 28, 10, 23, 14, 18, 19]
+  - [8, 27, 10, 22, 13, 17, 18]
+  - [26, 26, 9, 21, 12]
+  - [44, 24, 8, 19, 10]
+  - [58, 20, 6, 16, 8]
+  - [68, 13, 4, 10, 5]
+pods:
+  # The front fender blades, standing clear above and outside the nose.
+  - x: 31
+    stations:
+      - [22, 5, 16, 4]
+      - [38, 7, 19, 3]
+      - [52, 6, 15, 4]
+  # The covers over the rear wheels.
+  - x: 31
+    stations:
+      - [-52, 6, 16, 6]
+      - [-38, 7, 18, 5]
+      - [-24, 6, 15, 6]
+wing: { z: -50, halfWidth: 28, height: 19, chord: 10, pylons: 14 }

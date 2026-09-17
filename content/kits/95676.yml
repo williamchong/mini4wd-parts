@@ -52,6 +52,7 @@ colours:
   wheel: "#5fe84a"
   tire: "#1f2124"
   source: override
+body: cyclone-magnum
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

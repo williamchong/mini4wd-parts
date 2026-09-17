@@ -20,6 +20,7 @@ colours:
   wheel: "#eef0f2"
   tire: "#1f2124"
   source: override
+body: dcr-01
 priceJpy: 1430
 priceJpyExTax: 1300
 releaseDate: 2023-03

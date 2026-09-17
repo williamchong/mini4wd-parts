@@ -1,0 +1,19 @@
+# Daihatsu Kopen XMZ (Super-II, 2017): a kei roadster, and the only road car
+# of its batch. A short rounded bonnet with an upright grille, fenders bulging
+# over all four wheels, an open two-seat cockpit behind a steeply raked
+# windscreen, and a stubby boot deck.
+name: Daihatsu Kopen XMZ
+reference: '18082'
+titles: [Daihatsu Kopen XMZ]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-62, 30, 10, 25, 20]
+  - [-48, 35, 12, 29, 24]
+  - [-32, 37, 12, 30, 26, 22, 30]
+  - [-16, 37, 12, 30, 26, 24, 34]
+  - [4, 36, 12, 30, 26, 22, 33]
+  - [20, 35, 11, 29, 26]
+  - [38, 34, 10, 28, 23]
+  - [54, 32, 9, 27, 19]
+  - [66, 28, 8, 23, 14]
+arches: 16

@@ -1,0 +1,32 @@
+# Dash-3 Shooting Star (MS, 2013 re-release of the 1988 car): a single-seater
+# racer, very narrow between big slick tires. A long tapering nose, a dark
+# elongated cockpit bubble on top, an air box behind the driver's head, side
+# pods along the flanks, and a wing carried on twin tall rear fins.
+name: Dash-3 Shooting Star
+reference: '18630'
+titles: [Dash-3 Shooting Star]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-58, 20, 10, 16, 16]
+  - [-42, 23, 11, 19, 19]
+  - [-26, 24, 11, 20, 20, 8, 28]
+  - [-8, 23, 11, 19, 19, 10, 26]
+  - [10, 21, 10, 17, 16, 9, 22]
+  - [28, 19, 8, 15, 12]
+  - [46, 17, 6, 13, 9]
+  - [60, 15, 4, 11, 7]
+  - [68, 11, 3, 8, 5]
+pods:
+  # The twin rear fins that carry the wing.
+  # z, halfWidth, top, bottom
+  - x: 21
+    stations:
+      - [-56, 2, 30, 16]
+      - [-42, 3, 30, 16]
+      - [-28, 2, 24, 18]
+  # The side pods along the flanks.
+  - x: 22
+    stations:
+      - [-22, 4, 13, 2]
+      - [6, 5, 12, 1]
+wing: { z: -52, halfWidth: 24, height: 31, chord: 12 }

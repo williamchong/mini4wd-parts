@@ -53,6 +53,7 @@ colours:
   wheel: "#1f2124"
   tire: "#1f2124"
   source: override
+body: honda-e
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 110

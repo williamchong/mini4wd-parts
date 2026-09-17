@@ -52,6 +52,7 @@ colours:
   wheel: "#e6f53a"
   tire: "#eef0f2"
   source: scraped
+body: racer-gt
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

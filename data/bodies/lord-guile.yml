@@ -1,0 +1,32 @@
+# Lord Guile (FM-A, 2019): a classic open-wheel-look roadster. A narrow bonnet
+# with an upright chrome grille, big separate swooping front fenders carrying
+# round headlights on top, a low cabin set well back, and a rounded tail over
+# bulged rear haunches.
+name: Lord Guile
+reference: '18712'
+titles: [Lord Guile]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-62, 26, 8, 21, 10]
+  - [-48, 31, 9, 25, 13]
+  - [-32, 34, 10, 27, 15, 20, 22]
+  - [-14, 35, 10, 28, 15, 21, 24]
+  - [2, 34, 9, 27, 14, 16, 20]
+  - [16, 26, 8, 21, 14]
+  - [34, 22, 8, 18, 15]
+  - [52, 20, 8, 16, 16]
+  - [64, 18, 7, 14, 13]
+arches: [12, 16]
+pods:
+  # The swooping front fenders, standing clear of the narrow bonnet.
+  - x: 30
+    stations:
+      - [16, 8, 8, 0]
+      - [32, 9, 17, 0]
+      - [46, 9, 19, 0]
+      - [58, 7, 15, 0]
+  # The round headlights sitting on top of those fenders.
+  - x: 26
+    stations:
+      - [40, 5, 23, 16]
+      - [50, 5, 23, 16]

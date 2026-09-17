@@ -1,0 +1,31 @@
+# Raizzan (ME, 2026): a mid-engine supercar, full-bodied over its wheels. Tall
+# arched front fenders standing well above a low pointed nose, a dark canopy
+# sunk between them, high rear haunches and a fastback tail with a ducktail lip.
+name: Raizzan
+reference: '18663'
+titles: [Raizzan]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-64, 28, 8, 22, 14]
+  - [-52, 34, 10, 28, 19]
+  - [-36, 37, 12, 30, 21, 22, 25]
+  - [-16, 36, 12, 29, 20, 22, 26]
+  - [2, 35, 11, 28, 19, 20, 24]
+  - [20, 34, 10, 27, 16]
+  - [38, 33, 9, 26, 13]
+  - [54, 30, 8, 24, 11]
+  - [68, 22, 6, 17, 7]
+pods:
+  # The front fender arches, standing proud of the sunken nose.
+  - x: 30
+    stations:
+      - [18, 7, 20, 11]
+      - [34, 8, 23, 10]
+      - [50, 7, 19, 11]
+  # The rear haunch blisters.
+  - x: 30
+    stations:
+      - [-48, 7, 22, 13]
+      - [-34, 8, 24, 12]
+      - [-20, 7, 21, 13]
+arches: 16

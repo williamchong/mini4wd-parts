@@ -1,0 +1,27 @@
+# Toyota Gazoo Racing TS050 Hybrid (MA, 2019): an LMP1 prototype. A very low
+# pointed nose slung between two raised front fender humps, a short glasshouse
+# cabin over the middle, a long flat engine deck, and a wide rear wing on
+# pylons. Full width over the wheels, with arches cut for them.
+name: Toyota Gazoo Racing TS050 Hybrid
+reference: '18652'
+titles: [Toyota Gazoo Racing TS050 Hybrid]
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-64, 33, 9, 27, 19]
+  - [-52, 36, 11, 30, 21]
+  - [-34, 36, 12, 30, 21, 17, 27]
+  - [-14, 36, 12, 30, 21, 17, 27]
+  - [4, 35, 11, 28, 19, 13, 23]
+  - [22, 34, 10, 26, 15]
+  - [40, 32, 9, 24, 12]
+  - [56, 27, 7, 20, 10]
+  - [68, 18, 5, 13, 8]
+pods:
+  # The raised front fender humps either side of the low nose.
+  - x: 29
+    stations:
+      - [24, 7, 17, 11]
+      - [40, 8, 19, 10]
+      - [54, 6, 16, 9]
+arches: 16
+wing: { z: -58, halfWidth: 30, height: 27, chord: 14, pylons: 20 }

@@ -1,0 +1,32 @@
+# Ray Stinger Premium (Super-II, Fully Cowled series): a narrow spined racer
+# with a long pointed canopy down the middle and four big upswept fender
+# blades. The rear pair carry the twin booster barrels that are the car's
+# signature; the front pair sweep forward past the nose. No rear wing.
+name: Ray Stinger
+reference: '19438'
+kits: ['19438']
+# z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
+hull:
+  - [-64, 20, 8, 16, 12]
+  - [-50, 24, 10, 19, 17]
+  - [-34, 25, 10, 20, 19, 12, 24]
+  - [-16, 24, 10, 19, 18, 13, 28]
+  - [4, 23, 9, 18, 16, 11, 24]
+  - [22, 22, 8, 17, 13]
+  - [40, 21, 7, 16, 10]
+  - [56, 17, 6, 13, 7]
+  - [68, 11, 4, 8, 4]
+pods:
+  # The rear fender housings with the booster barrels on top.
+  - x: 30
+    # z, halfWidth, top, bottom
+    stations:
+      - [-52, 7, 20, 5]
+      - [-40, 9, 24, 5]
+      - [-26, 6, 15, 4]
+  # The front fender blades, swept up and forward.
+  - x: 28
+    stations:
+      - [24, 5, 13, 4]
+      - [40, 8, 21, 4]
+      - [58, 6, 14, 4]
