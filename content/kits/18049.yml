@@ -45,6 +45,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Vanquish Jr.
+colours:
+  body: "#1f2124"
+  wheel: "#eef0f2"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 770
 priceJpyExTax: 700
 status: current

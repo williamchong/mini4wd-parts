@@ -45,6 +45,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Blazing-Max
+colours:
+  body: "#3f7fd6"
+  wheel: "#d0312d"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 858
 priceJpyExTax: 780
 priceHkd: 78

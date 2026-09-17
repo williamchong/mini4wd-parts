@@ -47,6 +47,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Rayvolf
+colours:
+  body: "#6f8fd8"
+  wheel: "#c9ced6"
+  tire: "#1f2124"
+  source: override
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 130

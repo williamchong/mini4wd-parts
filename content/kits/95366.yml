@@ -47,6 +47,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Mini 4WD Dog Racer GT
+colours:
+  body: "#f3a1c6"
+  wheel: "#7a4bb5"
+  tire: "#e9658f"
+  source: scraped
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

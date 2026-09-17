@@ -48,6 +48,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Hurricane Sonic
+colours:
+  body: "#eceae4"
+  wheel: "#f2c230"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 110

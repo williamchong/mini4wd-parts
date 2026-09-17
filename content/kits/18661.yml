@@ -48,6 +48,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Lexus LBX Morizo RR
+colours:
+  body: "#2f5fc4"
+  wheel: "#565b62"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

@@ -43,6 +43,9 @@ classLegality:
   junior: legal
   source: derived
 specs: {}
+colours:
+  primary: "#d0312d"
+  source: override
 priceJpy: 528
 priceJpyExTax: 480
 releaseDate: 2010-07-10

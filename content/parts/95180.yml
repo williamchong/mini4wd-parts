@@ -37,6 +37,9 @@ classLegality:
   source: derived
 specs:
   plateMaterial: carbon
+colours:
+  primary: "#2a2c30"
+  source: derived
 priceJpy: 1056
 priceJpyExTax: 960
 priceHkd: 96

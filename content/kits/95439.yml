@@ -44,6 +44,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Gun Bluster XTO
+colours:
+  body: "#b0d9f4"
+  wheel: "#eef0f2"
+  tire: "#7cc0ec"
+  source: override
 priceJpy: 1650
 priceJpyExTax: 1500
 priceHkd: 120

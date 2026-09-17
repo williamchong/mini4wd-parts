@@ -47,6 +47,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Grasshopper Jr.
+colours:
+  body: "#2a2c30"
+  wheel: "#e6f53a"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 130

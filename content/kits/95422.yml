@@ -47,6 +47,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Mini 4WD Owl Racer GT
+colours:
+  body: "#f3a971"
+  wheel: "#1f2124"
+  tire: "#ec7a24"
+  source: scraped
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

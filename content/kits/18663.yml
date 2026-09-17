@@ -48,6 +48,11 @@ stockLoadout:
       source: tamiya
 loadoutSource: fandom
 loadoutSourceTitle: Raizzan
+colours:
+  body: "#d0312d"
+  wheel: "#b8892a"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 1650
 priceJpyExTax: 1500
 priceHkd: 150

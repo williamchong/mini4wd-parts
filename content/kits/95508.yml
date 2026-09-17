@@ -47,6 +47,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Neo-Tridagger ZMC
+colours:
+  body: "#2a2c30"
+  wheel: "#2a2c30"
+  tire: "#d0312d"
+  source: scraped
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 130

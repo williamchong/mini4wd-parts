@@ -48,6 +48,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Mini 4WD Cat Racer
+colours:
+  body: "#ec7a24"
+  wheel: "#f2c230"
+  tire: "#2f5fc4"
+  source: scraped
 priceJpy: 1540
 priceJpyExTax: 1400
 priceHkd: 110

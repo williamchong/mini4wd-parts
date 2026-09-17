@@ -25,6 +25,9 @@ classLegality:
   source: derived
   notes: 非車體零件，不適用比賽規則
 specs: {}
+colours:
+  primary: "#1f2124"
+  source: override
 priceJpy: 1760
 priceJpyExTax: 1600
 priceHkd: 130

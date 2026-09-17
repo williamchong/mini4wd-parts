@@ -44,6 +44,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Heat Edge
+colours:
+  body: "#565b62"
+  wheel: "#5fe84a"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 1100
 priceJpyExTax: 1000
 releaseDate: 2017-01-21

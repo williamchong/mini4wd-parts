@@ -38,6 +38,9 @@ classLegality:
 specs:
   plateThicknessMm: 3
   plateMaterial: carbon
+colours:
+  primary: "#2a2c30"
+  source: derived
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

@@ -44,6 +44,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Thunder Shot Mk.II
+colours:
+  body: "#f4a9c8"
+  wheel: "#eef0f2"
+  tire: "#ec6fa8"
+  source: scraped
 priceJpy: 1210
 priceJpyExTax: 1100
 priceHkd: 110

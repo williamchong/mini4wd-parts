@@ -45,6 +45,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: TRF-Racer Jr.
+colours:
+  body: "#eef0f2"
+  wheel: "#eef0f2"
+  tire: "#1f2124"
+  source: override
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 100

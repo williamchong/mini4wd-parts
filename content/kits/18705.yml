@@ -45,6 +45,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Flame Astute
+colours:
+  body: "#d0312d"
+  wheel: "#1f2124"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 90

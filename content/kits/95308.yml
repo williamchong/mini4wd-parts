@@ -44,6 +44,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Bigwig Jr.
+colours:
+  body: "#233f8f"
+  wheel: "#c9ced6"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 1100
 priceJpyExTax: 1000
 priceHkd: 100

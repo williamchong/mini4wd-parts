@@ -47,6 +47,11 @@ stockLoadout:
       source: tamiya
 loadoutSource: fandom
 loadoutSourceTitle: Iron Beak
+colours:
+  body: "#4a4d52"
+  wheel: "#1f2124"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 1540
 priceJpyExTax: 1400
 priceHkd: 140

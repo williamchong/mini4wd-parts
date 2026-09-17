@@ -19,6 +19,11 @@ stockLoadout:
         zh-HK: 1/32 迷你四驅車 Roborace DevBot 2.0 (MA底盤)
       source: tamiya
 loadoutSource: chassis
+colours:
+  body: "#1f2124"
+  wheel: "#1f2124"
+  tire: "#1f2124"
+  source: override
 priceJpy: 1210
 priceJpyExTax: 1100
 priceHkd: 110

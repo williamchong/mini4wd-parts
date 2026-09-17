@@ -47,6 +47,11 @@ stockLoadout:
       source: tamiya
 loadoutSource: fandom
 loadoutSourceTitle: Zenperor 3 Polycarbonate Body Special
+colours:
+  body: "#2440a8"
+  wheel: "#eef0f2"
+  tire: "#1f2124"
+  source: override
 priceJpy: 1650
 priceJpyExTax: 1500
 priceHkd: 150

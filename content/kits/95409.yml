@@ -47,6 +47,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Variatron
+colours:
+  body: "#2f5fc4"
+  wheel: "#eef0f2"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 990
 priceJpyExTax: 900
 priceHkd: 90

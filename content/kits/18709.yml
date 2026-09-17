@@ -16,6 +16,11 @@ stockLoadout:
         en: BARON VIENTO (FM-A CHASSIS)
       source: tamiya
 loadoutSource: chassis
+colours:
+  body: "#5fb3a8"
+  wheel: "#eef0f2"
+  tire: "#1f2124"
+  source: override
 priceJpy: 1210
 priceJpyExTax: 1100
 priceHkd: 110

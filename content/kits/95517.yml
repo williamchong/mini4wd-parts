@@ -44,6 +44,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Hyundai i20 Coupe WRC
+colours:
+  body: "#9fe0e8"
+  wheel: "#ff3b3b"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

@@ -50,14 +50,14 @@ const { data: catalog } = await useAsyncData('build-catalog', async () => {
       .all(),
     queryCollection('parts')
       .select('id', 'stem', 'names', 'category', 'slots', 'isCarPart',
-        'chassisCompat', 'classLegality', 'specs', 'priceJpy', 'thumbnail')
+        'chassisCompat', 'classLegality', 'specs', 'colours', 'priceJpy', 'thumbnail')
       .all(),
     // `releaseDate` is selected but deliberately not shipped: it orders the
     // picker and nothing renders it, so it is dropped again below.
     queryCollection('kits')
       .select('id', 'stem', 'names', 'chassis', 'status', 'gearRatio',
         'releaseDate', 'thumbnail',
-        'loadoutSource', 'loadoutSourceTitle', 'stockLoadout')
+        'loadoutSource', 'loadoutSourceTitle', 'stockLoadout', 'colours')
       .all()
   ])
   // Normalise before comparing anything to anything: @nuxt/content overwrites
@@ -487,6 +487,7 @@ useHead(() => ({
         :key="shownChassis.id"
         :chassis="shownChassis.id"
         :kit="kit?.id ?? null"
+        :kit-colours="kit?.colours ?? null"
         :slots="slots"
         :parts="partsById"
         :open-slot-id="openSlotId"

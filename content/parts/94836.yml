@@ -23,6 +23,9 @@ classLegality:
   junior: legal
   source: derived
 specs: {}
+colours:
+  primary: "#1f2124"
+  source: derived
 priceJpy: 242
 priceJpyExTax: 220
 status: current

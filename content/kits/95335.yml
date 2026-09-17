@@ -44,6 +44,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Proto-Emperor ZX
+colours:
+  body: "#7a4bb5"
+  wheel: "#7a4bb5"
+  tire: "#eef0f2"
+  source: scraped
 priceJpy: 1100
 priceJpyExTax: 1000
 priceHkd: 100

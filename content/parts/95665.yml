@@ -46,6 +46,10 @@ classLegality:
   junior: legal
   source: derived
 specs: {}
+colours:
+  primary: "#d4a93a"
+  tire: "#d0312d"
+  source: derived
 priceJpy: 396
 priceJpyExTax: 360
 priceHkd: 36

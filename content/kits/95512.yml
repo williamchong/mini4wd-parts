@@ -44,6 +44,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Brocken Gigant
+colours:
+  body: "#4a4d52"
+  wheel: "#8e949c"
+  tire: "#d0312d"
+  source: scraped
 priceJpy: 1430
 priceJpyExTax: 1300
 releaseDate: 2026-12

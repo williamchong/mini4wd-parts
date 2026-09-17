@@ -45,6 +45,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Egress Jr.
+colours:
+  body: "#c9ced6"
+  wheel: "#c9ced6"
+  tire: "#7cc0ec"
+  source: scraped
 priceJpy: 1100
 priceJpyExTax: 1000
 priceHkd: 100

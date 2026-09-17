@@ -45,6 +45,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Mach-Bullet
+colours:
+  body: "#35bfd4"
+  wheel: "#b8892a"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 1210
 priceJpyExTax: 1100
 priceHkd: 110

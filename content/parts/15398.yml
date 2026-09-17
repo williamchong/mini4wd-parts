@@ -48,6 +48,9 @@ classLegality:
 specs:
   rollerDiameterMm: 13
   rollerType: aluminium
+colours:
+  primary: "#c9ced6"
+  source: derived
 priceJpy: 1210
 priceJpyExTax: 1100
 priceHkd: 110

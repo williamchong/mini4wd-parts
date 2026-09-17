@@ -28,6 +28,9 @@ classLegality:
 specs:
   rollerDiameterMm: 5
   rollerType: aluminium
+colours:
+  primary: "#c9a24a"
+  source: override
 priceJpy: 154
 priceJpyExTax: 140
 priceHkd: 14

@@ -44,6 +44,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Rowdy Bull
+colours:
+  body: "#1f2124"
+  wheel: "#c9ced6"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 1430
 priceJpyExTax: 1300
 releaseDate: 2020-04-04

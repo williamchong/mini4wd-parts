@@ -45,6 +45,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Savanna Leo
+colours:
+  body: "#f2c230"
+  wheel: "#565b62"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 990
 priceJpyExTax: 900
 releaseDate: 2007-12-08

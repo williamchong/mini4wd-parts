@@ -45,6 +45,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Neo-VQS
+colours:
+  body: "#1f2124"
+  wheel: "#d0312d"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 110

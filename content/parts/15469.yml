@@ -29,6 +29,9 @@ classLegality:
   junior: legal
   source: derived
 specs: {}
+colours:
+  primary: "#b7bcc2"
+  source: override
 priceJpy: 484
 priceJpyExTax: 440
 priceHkd: 44

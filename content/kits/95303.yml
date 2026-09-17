@@ -47,6 +47,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Mini 4WD Panda Racer GT
+colours:
+  body: "#78c08d"
+  wheel: "#5fe84a"
+  tire: "#f2c230"
+  source: scraped
 priceJpy: 1320
 priceJpyExTax: 1200
 releaseDate: 2016-12-17

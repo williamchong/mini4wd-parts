@@ -32,6 +32,10 @@ classLegality:
   source: derived
 specs:
   wheelDiameterMm: 26
+colours:
+  primary: "#2a2c30"
+  tire: "#8e949b"
+  source: derived
 priceJpy: 352
 priceJpyExTax: 320
 priceHkd: 32

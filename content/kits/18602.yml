@@ -45,6 +45,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Nitro Force
+colours:
+  body: "#2f9e4f"
+  wheel: "#eef0f2"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 880
 priceJpyExTax: 800
 status: current

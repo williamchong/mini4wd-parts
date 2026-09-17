@@ -42,6 +42,9 @@ classLegality:
   junior: legal
   source: derived
 specs: {}
+colours:
+  primary: "#c9ced6"
+  source: derived
 priceJpy: 308
 priceJpyExTax: 280
 releaseDate: 2020-08-22

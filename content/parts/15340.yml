@@ -27,6 +27,9 @@ classLegality:
   notes: 需個別確認馬達規則
 specs:
   motorShaft: single
+colours:
+  primary: "#c9ced6"
+  source: derived
 priceJpy: 330
 priceJpyExTax: 300
 status: current

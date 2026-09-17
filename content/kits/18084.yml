@@ -45,6 +45,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Mini 4WD Panda Racer
+colours:
+  body: "#ec7a24"
+  wheel: "#eef0f2"
+  tire: "#35bfd4"
+  source: scraped
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

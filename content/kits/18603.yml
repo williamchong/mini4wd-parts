@@ -45,6 +45,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Nitro Thunder
+colours:
+  body: "#f2c230"
+  wheel: "#eef0f2"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 880
 priceJpyExTax: 800
 status: current

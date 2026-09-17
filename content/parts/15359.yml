@@ -45,6 +45,10 @@ classLegality:
   junior: legal
   source: derived
 specs: {}
+colours:
+  primary: "#eef0f2"
+  tire: "#1f2124"
+  source: override
 priceJpy: 352
 priceJpyExTax: 320
 status: current

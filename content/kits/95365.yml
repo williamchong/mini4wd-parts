@@ -47,6 +47,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Mini 4WD Lupine Racer GT
+colours:
+  body: "#a98acf"
+  wheel: "#f2c230"
+  tire: "#233f8f"
+  source: scraped
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

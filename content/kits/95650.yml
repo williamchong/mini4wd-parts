@@ -47,6 +47,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Mini 4WD New Year's Edition - Year of the Dragon 2024
+colours:
+  body: "#eef0f2"
+  wheel: "#eef0f2"
+  tire: "#d0312d"
+  source: scraped
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

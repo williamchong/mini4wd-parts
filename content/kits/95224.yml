@@ -44,6 +44,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Shadow Shark
+colours:
+  body: "#d0312d"
+  wheel: "#2a2c30"
+  tire: "#2f9e4f"
+  source: scraped
 priceJpy: 1100
 priceJpyExTax: 1000
 priceHkd: 100

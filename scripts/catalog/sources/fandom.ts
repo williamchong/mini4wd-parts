@@ -176,6 +176,10 @@ export interface FandomKitVariant {
   /** Wheels and tires as one phrase; the wiki splits each across two fields. */
   wheel?: string
   tire?: string
+  /** The colours each is moulded in, as the wiki writes them ("Clear Blue", "Silver Plated"). */
+  bodyColour?: string
+  wheelColour?: string
+  tireColour?: string
 }
 
 /** "[[VS Chassis|VS]]" -> "VS". Chassis and materials are usually linked. */
@@ -213,7 +217,10 @@ export function parseKitArticle(title: string, wikitext: string): FandomKitVaria
       gearRatio: plain(fields.gear),
       motor: plain(fields.motor),
       wheel: phrase('wheel size', 'wheel type'),
-      tire: phrase('tire size', 'tire type')
+      tire: phrase('tire size', 'tire type'),
+      bodyColour: plain(fields['body color']),
+      wheelColour: plain(fields['wheel color']),
+      tireColour: plain(fields['tire color'])
     }
   })
 }

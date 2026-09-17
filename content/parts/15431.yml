@@ -35,6 +35,9 @@ classLegality:
   source: derived
 specs:
   plateMaterial: frp
+colours:
+  primary: "#3a3d42"
+  source: derived
 priceJpy: 286
 priceJpyExTax: 260
 priceHkd: 26

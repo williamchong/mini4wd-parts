@@ -47,6 +47,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Mini 4WD Elephant Racer
+colours:
+  body: "#2f9e4f"
+  wheel: "#b8703f"
+  tire: "#f2c230"
+  source: scraped
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 130

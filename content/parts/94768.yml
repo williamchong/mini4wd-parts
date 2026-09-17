@@ -25,6 +25,9 @@ classLegality:
   source: derived
 specs:
   rollerType: bearing
+colours:
+  primary: "#c9ced6"
+  source: override
 priceJpy: 220
 priceJpyExTax: 200
 priceHkd: 20

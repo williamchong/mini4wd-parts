@@ -47,6 +47,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Copperfang
+colours:
+  body: "#2a2c30"
+  wheel: "#2a2c30"
+  tire: "#2f9e4f"
+  source: scraped
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

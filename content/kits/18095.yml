@@ -48,6 +48,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Honda e
+colours:
+  body: "#c8e03a"
+  wheel: "#1f2124"
+  tire: "#1f2124"
+  source: override
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 110

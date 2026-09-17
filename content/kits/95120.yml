@@ -44,6 +44,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Baron Viento
+colours:
+  body: "#1f2124"
+  wheel: "#ec6fa8"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 1210
 priceJpyExTax: 1100
 priceHkd: 110

@@ -15,6 +15,11 @@ stockLoadout:
         en: DCR-01 BLUE METALLIC BODY (MA CHASSIS)
       source: tamiya
 loadoutSource: chassis
+colours:
+  body: "#3f7fd6"
+  wheel: "#eef0f2"
+  tire: "#1f2124"
+  source: override
 priceJpy: 1430
 priceJpyExTax: 1300
 releaseDate: 2023-03

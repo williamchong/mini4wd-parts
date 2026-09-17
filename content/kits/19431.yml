@@ -48,6 +48,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Magnum Saber
+colours:
+  body: "#eef0f2"
+  wheel: "#5fe84a"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 100

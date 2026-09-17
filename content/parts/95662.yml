@@ -31,6 +31,9 @@ classLegality:
 specs:
   rollerDiameterMm: 13
   rollerType: plastic
+colours:
+  primary: "#d0312d"
+  source: derived
 priceJpy: 242
 priceJpyExTax: 220
 priceHkd: 22

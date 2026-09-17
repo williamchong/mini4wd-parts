@@ -18,6 +18,11 @@ stockLoadout:
         zh-HK: 1/32 迷你四驅車 Raikiri 雷切 粉紅色特別版 (聚碳酸酯車殼/MS底盤)
       source: tamiya
 loadoutSource: chassis
+colours:
+  body: "#ec6fa8"
+  wheel: "#1f2124"
+  tire: "#8e949b"
+  source: override
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 130

@@ -45,6 +45,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Boomerang Jr.
+colours:
+  body: "#eef0f2"
+  wheel: "#c9ced6"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 880
 priceJpyExTax: 800
 releaseDate: 2005-04-29

@@ -45,6 +45,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Astralster
+colours:
+  body: "#1f2124"
+  wheel: "#1f2124"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 1210
 priceJpyExTax: 1100
 priceHkd: 110

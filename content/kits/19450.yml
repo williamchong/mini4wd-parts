@@ -48,6 +48,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Spin Cobra
+colours:
+  body: "#2f5fc4"
+  wheel: "#b8892a"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 110

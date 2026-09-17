@@ -45,6 +45,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Mini 4WD Koala Racer
+colours:
+  body: "#9bcf3f"
+  wheel: "#f2c230"
+  tire: "#2f9e4f"
+  source: scraped
 priceJpy: 1210
 priceJpyExTax: 1100
 priceHkd: 110

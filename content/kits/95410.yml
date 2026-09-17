@@ -44,6 +44,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Synchro-Master Z9
+colours:
+  body: "#d0312d"
+  wheel: "#eef0f2"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 990
 priceJpyExTax: 900
 priceHkd: 90

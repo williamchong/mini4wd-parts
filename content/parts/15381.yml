@@ -47,6 +47,9 @@ classLegality:
   source: derived
 specs:
   rollerType: plastic
+colours:
+  primary: "#b595dc"
+  source: override
 priceJpy: 220
 priceJpyExTax: 200
 priceHkd: 20

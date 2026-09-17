@@ -18,6 +18,11 @@ stockLoadout:
         zh-HK: 1/32 迷你四驅車 聖誕老人賽車 Santa Claus (紅色賽車版)
       source: tamiya
 loadoutSource: chassis
+colours:
+  body: "#d0312d"
+  wheel: "#eef0f2"
+  tire: "#d0312d"
+  source: override
 priceJpy: 1540
 priceJpyExTax: 1400
 priceHkd: 140

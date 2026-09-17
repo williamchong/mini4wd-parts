@@ -6,9 +6,10 @@ import { readJsonFile, readYamlFile, readYamlFileIfPresent } from './io.ts'
 import { thumbnailIds } from './thumbnails.ts'
 import { thumbnailPath, type ThumbCollection } from '../../shared/catalog/thumbnails.ts'
 import { partSchema, chassisSchema, kitSchema, CHASSIS_IDS, chassisIdFor } from '../../shared/catalog/schema.ts'
-import type { ChassisId, KitOverride, LabelNames, Loadout, PartOverride } from '../../shared/catalog/schema.ts'
+import type { ChassisId, Kit, KitOverride, LabelNames, Loadout, PartCategory, PartColours, PartOverride, PartSpecs } from '../../shared/catalog/schema.ts'
 import { compact, deriveCategory, deriveLegality, deriveSlots, deriveSpecs, isPlainObject, normalise } from './taxonomy.ts'
 import { labelFor, neutralLabel } from './labels.ts'
+import { colourOf, coloursIn } from './colours.ts'
 import { GENRE_SERIES, KIT_GENRE_SERIES, type JpItem, type KitGenreCode, type PartGenreCode } from './sources/tamiya-jp.ts'
 import type { HkItem } from './sources/tamiya-hk.ts'
 import type { FandomKitVariant, FandomPart } from './sources/fandom.ts'
@@ -87,6 +88,53 @@ for (const article of fandomParts) {
   }
 }
 
+/** Item number -> the wiki's variant label for it ("Ringless Blue"), which often names its colour. */
+const fandomVariantById = new Map<string, string>()
+for (const article of fandomParts) {
+  for (const item of article.items) {
+    if (item.variant && !fandomVariantById.has(item.id)) fandomVariantById.set(item.id, item.variant)
+  }
+}
+
+/**
+ * What a part looks like when its name does not say: the material's own
+ * colour. Carbon is near-black, FRP a dark grey, bare aluminium or stainless
+ * steel silver, and a tire black — the colour nearly every tire comes in, so a
+ * tire's name only mentions its colour when it is another one. Anything else is left for a human to set from the
+ * photo in data/overrides/parts.yml.
+ */
+const MATERIAL_COLOUR = {
+  carbon: '#2a2c30',
+  frp: '#3a3d42',
+  metal: '#c9ced6',
+  rubber: '#1f2124'
+} as const
+
+/**
+ * A part's colours, derived: the colour its Tamiya name says, else the one its
+ * wiki variant says, else its material's. A wheel-and-tire set names two
+ * components, so its name is split at the tire and each half read on its own
+ * ("RED SLICK TIRES & GOLD COLOR PLATED WHEELS").
+ */
+function deriveColours(names: { ja: string, en?: string }, category: PartCategory, specs: PartSpecs, id: string): PartColours | undefined {
+  if (category === 'wheel-tire-set') {
+    const en = names.en ?? ''
+    const segments = en.split(/\s*(?:&|\bw\/|\(|\))\s*/i).filter(Boolean)
+    const wheel = segments.filter(seg => /wheel/i.test(seg)).map(seg => coloursIn(seg)[0]).find(Boolean)
+      ?? (/carbon/i.test(en) ? MATERIAL_COLOUR.carbon : /aluminum/i.test(en) ? MATERIAL_COLOUR.metal : undefined)
+    const tire = segments.filter(seg => !/wheel/i.test(seg)).map(seg => coloursIn(seg)[0]).find(Boolean)
+      ?? MATERIAL_COLOUR.rubber
+    return wheel ? { primary: wheel, tire, source: 'derived' } : undefined
+  }
+  const primary = colourOf(names.en) ?? colourOf(names.ja) ?? colourOf(fandomVariantById.get(id))
+    ?? (specs.plateMaterial === 'carbon' ? MATERIAL_COLOUR.carbon
+      : specs.plateMaterial === 'frp' ? MATERIAL_COLOUR.frp
+        : specs.rollerType === 'aluminium' || /\b(aluminum|stainless)\b/i.test(names.en ?? '') ? MATERIAL_COLOUR.metal
+          : category === 'tire' ? MATERIAL_COLOUR.rubber
+            : undefined)
+  return primary ? { primary, source: 'derived' } : undefined
+}
+
 /** Item numbers Tamiya lists on each chassis' compatibility page. */
 const compatByItem = new Map<string, string[]>()
 for (const [chassisId, ids] of Object.entries(compat)) {
@@ -143,6 +191,8 @@ function buildPart(item: JpItem<PartGenreCode>) {
     'zh-HK': hk?.nameZhHk
   })
 
+  const specs = deriveSpecs(item, category)
+
   const record = {
     id: item.id,
     names,
@@ -160,7 +210,8 @@ function buildPart(item: JpItem<PartGenreCode>) {
     slots: deriveSlots(category),
     chassisCompat: { include, other, source: 'scraped' },
     classLegality: { ...deriveLegality(category, isCarPart), source: 'derived' },
-    specs: deriveSpecs(item, category),
+    specs,
+    colours: deriveColours(names, override.category ?? category, specs, item.id),
     priceJpy: item.priceJpy,
     priceJpyExTax: item.priceJpyExTax,
     priceHkd: hk?.priceHkd,
@@ -185,6 +236,9 @@ function buildPart(item: JpItem<PartGenreCode>) {
   }
   if (override.chassisCompat) {
     merged.chassisCompat = { ...merged.chassisCompat, source: 'override' }
+  }
+  if (override.colours) {
+    merged.colours = { ...merged.colours, source: 'override' } as PartColours
   }
   if (override.category && !override.slots) merged.slots = deriveSlots(merged.category)
 
@@ -308,6 +362,12 @@ function buildKit(item: JpItem<KitGenreCode>, chassis: ChassisId) {
     stockLoadout,
     loadoutSource: wiki ? 'fandom' : 'chassis',
     loadoutSourceTitle: wiki?.title,
+    colours: wiki && compact<NonNullable<Kit['colours']>>({
+      body: colourOf(wiki.bodyColour),
+      wheel: colourOf(wiki.wheelColour),
+      tire: colourOf(wiki.tireColour),
+      source: 'scraped'
+    }),
     priceJpy: item.priceJpy,
     priceJpyExTax: item.priceJpyExTax,
     priceHkd: hk?.priceHkd,
@@ -322,7 +382,9 @@ function buildKit(item: JpItem<KitGenreCode>, chassis: ChassisId) {
     scrapedAt: item.scrapedAt
   }
 
-  return deepMerge(compact(record), override)
+  const merged = deepMerge(compact(record), override)
+  if (override.colours) merged.colours = { ...merged.colours, source: 'override' }
+  return merged
 }
 
 async function writeCollection(dir: string, files: Map<string, unknown>) {

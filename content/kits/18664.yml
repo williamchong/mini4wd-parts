@@ -24,6 +24,11 @@ stockLoadout:
         zh-TW: 3.5:1
       source: tamiya
 loadoutSource: chassis
+colours:
+  body: "#5fe84a"
+  wheel: "#1f2124"
+  tire: "#1f2124"
+  source: override
 priceJpy: 1650
 priceJpyExTax: 1500
 releaseDate: 2026-10-24

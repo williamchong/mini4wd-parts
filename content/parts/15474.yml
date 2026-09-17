@@ -44,6 +44,9 @@ classLegality:
   source: derived
   notes: 非車體零件，不適用比賽規則
 specs: {}
+colours:
+  primary: "#2aa39a"
+  source: override
 priceJpy: 616
 priceJpyExTax: 560
 priceHkd: 50

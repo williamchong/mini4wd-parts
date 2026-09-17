@@ -30,6 +30,9 @@ classLegality:
   source: derived
 specs:
   gearRatio: 3.7:1
+colours:
+  primary: "#f2c230"
+  source: override
 priceJpy: 352
 priceJpyExTax: 320
 priceHkd: 32

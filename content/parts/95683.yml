@@ -47,6 +47,9 @@ classLegality:
 specs:
   rollerDiameterMm: 13
   rollerType: bearing
+colours:
+  primary: "#c9ced6"
+  source: derived
 priceJpy: 924
 priceJpyExTax: 840
 priceHkd: 84

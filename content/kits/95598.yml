@@ -50,6 +50,11 @@ stockLoadout:
       source: tamiya
 loadoutSource: fandom
 loadoutSourceTitle: Neo-VQS Advanced Pack
+colours:
+  body: "#2a2c30"
+  wheel: "#f2c230"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 3080
 priceJpyExTax: 2800
 priceHkd: 280

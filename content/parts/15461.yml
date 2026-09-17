@@ -46,6 +46,9 @@ classLegality:
 specs:
   rollerDiameterMm: 19
   rollerType: bearing
+colours:
+  primary: "#2f5fc4"
+  source: derived
 priceJpy: 726
 priceJpyExTax: 660
 releaseDate: 2013-06-08

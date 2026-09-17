@@ -45,6 +45,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Manta Ray Mk.II
+colours:
+  body: "#c9ced6"
+  wheel: "#d0312d"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 990
 priceJpyExTax: 900
 priceHkd: 90

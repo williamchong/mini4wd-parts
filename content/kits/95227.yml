@@ -44,6 +44,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Mini 4WD Shirokumakko
+colours:
+  body: "#eef0f2"
+  wheel: "#d4a93a"
+  tire: "#2f5fc4"
+  source: scraped
 priceJpy: 1540
 priceJpyExTax: 1400
 priceHkd: 140

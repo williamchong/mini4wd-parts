@@ -41,6 +41,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Raikiri
+colours:
+  body: "#ec6fa8"
+  wheel: "#565b62"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 1320
 priceJpyExTax: 1200
 releaseDate: 2018-03-31

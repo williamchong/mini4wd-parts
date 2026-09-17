@@ -44,6 +44,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: DCR-02
+colours:
+  body: "#5fe84a"
+  wheel: "#c9ced6"
+  tire: "#2f9e4f"
+  source: scraped
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

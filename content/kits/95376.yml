@@ -44,6 +44,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Aero Avante
+colours:
+  body: "#4a4d52"
+  wheel: "#ff5fae"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 1100
 priceJpyExTax: 1000
 releaseDate: 2018-02-10

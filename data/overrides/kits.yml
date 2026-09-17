@@ -36,7 +36,7 @@
 '18647': { stockLoadout: { motor: [{ partId: '15487', source: override }] } }  # MA   Torque-Tuned 2 PRO
 '18706': { stockLoadout: { motor: [{ partId: '15485', source: override }] } }  # AR   Rev-Tuned 2
 '18710': { stockLoadout: { motor: [{ partId: '15486', source: override }] } }  # FM-A Atomic-Tuned 2
-'95281': { stockLoadout: { motor: [{ partId: '15488', source: override }] } }  # MA   Rev-Tuned 2 PRO
+'95281': { stockLoadout: { motor: [{ partId: '15488', source: override }] }, colours: { body: '#1f2124' } }  # MA   Rev-Tuned 2 PRO
 '95302': { stockLoadout: { motor: [{ partId: '15487', source: override }] } }  # MA   Torque-Tuned 2 PRO
 '95303': { stockLoadout: { motor: [{ partId: '15487', source: override }] } }  # MA   Torque-Tuned 2 PRO
 '95304': { stockLoadout: { motor: [{ partId: '15487', source: override }] } }  # MA   Torque-Tuned 2 PRO
@@ -46,5 +46,55 @@
 '95422': { stockLoadout: { motor: [{ partId: '15487', source: override }] } }  # MA   Torque-Tuned 2 PRO
 '95480': { stockLoadout: { motor: [{ partId: '15487', source: override }] } }  # MA   Torque-Tuned 2 PRO
 '95598': { stockLoadout: { motor: [{ partId: '15455', source: override }] } }  # VZ   Light-Dash Motor
-'95616': { stockLoadout: { motor: [{ partId: '15488', source: override }] } }  # MA   Rev-Tuned 2 PRO
-'95621': { stockLoadout: { motor: [{ partId: '15484', source: override }] } }  # FM-A Torque-Tuned 2
+'95616': { stockLoadout: { motor: [{ partId: '15488', source: override }] }, colours: { body: '#1f2124' } }  # MA   Rev-Tuned 2 PRO
+'95621': { stockLoadout: { motor: [{ partId: '15484', source: override }] }, colours: { body: '#9bcf3f' } }  # FM-A Torque-Tuned 2
+
+# --- Colours ---------------------------------------------------------------
+#
+# A kit's body, wheel and tire colours come from the same wiki row as its
+# loadout. These entries set them where that row cannot, checked against the
+# box art; 95281, 95616 and 95621 carry theirs in their motor entries above.
+
+# No wiki row covers these kits.
+'18656': { colours: { body: '#1f2124', wheel: '#1f2124', tire: '#1f2124' } }  # ロボレース デボット2.0
+'18662': { colours: { body: '#1f2124', wheel: '#d0312d', tire: '#1f2124' } }  # アバンテMk.III ネロ アドバンスパック
+'18664': { colours: { body: '#5fe84a', wheel: '#1f2124', tire: '#1f2124' } }  # ティクシヴ
+'18709': { colours: { body: '#5fb3a8', wheel: '#eef0f2', tire: '#1f2124' } }  # バロンビエント
+'19427': { colours: { body: '#2f5fc4', wheel: '#f2c230', tire: '#1f2124' } }  # ディオスパーダ GPA
+'19438': { colours: { body: '#c9ced6', wheel: '#8e949c', tire: '#1f2124' } }  # レイスティンガー プレミアム
+'95161': { colours: { body: '#3f7fd6', wheel: '#eef0f2', tire: '#1f2124' } }  # DCR-01 ブルーメッキボディ
+'95486': { colours: { body: '#ec6fa8', wheel: '#1f2124', tire: '#8e949b' } }  # ライキリ ピンクスペシャル
+'95678': { colours: { body: '#2f9e4f', wheel: '#eef0f2', tire: '#d0312d' } }  # サンタクロース
+'95679': { colours: { body: '#d0312d', wheel: '#eef0f2', tire: '#1f2124' } }  # 干支 巳年
+'95691': { colours: { body: '#f3b07c', wheel: '#ec7a24', tire: '#1f2124' } }  # エストゥーラ クリヤーオレンジ
+'95694': { colours: { body: '#d0312d', wheel: '#f4a9c8', tire: '#eef0f2' } }  # 干支 午年
+'95698': { colours: { body: '#d0312d', wheel: '#eef0f2', tire: '#d0312d' } }  # サンタクロース（レッドレーサー）
+
+# The wiki row that claims this item number first is the wrong box, or its
+# colour name is further from the box than its hex.
+'18095': { colours: { body: '#c8e03a' } }  # Honda e — the wiki's plain Yellow is a lime
+'18640': { colours: { body: '#1f2124', wheel: '#565b62', tire: '#1f2124' } }  # ライキリ — the wiki files its Pink Special row under 18640 as well, and that row comes first
+
+# The wiki's "Clear" is a polycarbonate shell sold unpainted, which a clear
+# proxy draws as a grey ghost that resembles nothing on the box. These take the
+# colour the box art paints them. A "Clear Special" whose identity is being
+# clear stays as the wiki says, tinted where it is tinted.
+'95062': { colours: { body: '#c0a6e6' } }  # エアロアバンテ バイオレットスペシャル — clear violet
+'95603': { colours: { body: '#eef0f2' } }  # ハリケーンソニック ポリカ
+'95676': { colours: { body: '#eef0f2' } }  # サイクロンマグナム ポリカ
+'95439': { colours: { body: '#b0d9f4' } }  # ガンブラスターXTO ライトブルー — clear light blue
+'18652': { colours: { body: '#eef0f2' } }  # TS050 2018
+'95533': { colours: { body: '#eef0f2' } }  # TS050 2019
+'18609': { colours: { body: '#d0312d' } }  # トルクルーザー
+'18610': { colours: { body: '#c9ced6' } }  # ベルダーガ
+'18611': { colours: { body: '#c9ced6' } }  # レイボルフ
+'18612': { colours: { body: '#2f5fc4' } }  # エクスフローリー
+'18613': { colours: { body: '#eef0f2' } }  # TRFレーサーJr.
+'95061': { colours: { body: '#f2a3c4' } }  # アバンテMk.II ピンク — clear pink
+'95485': { colours: { body: '#8fd67a' } }  # フェスタジョーヌ L グリーン — clear green
+'95550': { colours: { body: '#1f2124' } }  # TRFレーサーJr. ブラック
+'95571': { colours: { body: '#4b4468' } }  # エクスフローリー ポリカ
+'95572': { colours: { body: '#6f8fd8' } }  # レイボルフ ポリカ
+'95633': { colours: { body: '#2f5fc4' } }  # ネオVQS ポリカ
+'95143': { colours: { body: '#7cc0ec' } }  # デュアルリッジJr. J-CUP 2021
+'95703': { colours: { body: '#2440a8' } }  # ゼンペラー3 ポリカ

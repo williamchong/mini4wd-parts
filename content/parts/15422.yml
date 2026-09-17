@@ -43,6 +43,9 @@ classLegality:
   source: derived
   notes: 非車體零件，不適用比賽規則
 specs: {}
+colours:
+  primary: "#3aa6e0"
+  source: override
 priceJpy: 1650
 priceJpyExTax: 1500
 releaseDate: 2011-02-26

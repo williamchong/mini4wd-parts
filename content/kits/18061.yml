@@ -45,6 +45,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Super Sabre Jr.
+colours:
+  body: "#c9ced6"
+  wheel: "#c9ced6"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 880
 priceJpyExTax: 800
 releaseDate: 2005-06

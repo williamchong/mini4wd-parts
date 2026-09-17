@@ -47,6 +47,11 @@ stockLoadout:
       source: tamiya
 loadoutSource: fandom
 loadoutSourceTitle: Cross Spear 01
+colours:
+  body: "#eef0f2"
+  wheel: "#ff7a2a"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 130

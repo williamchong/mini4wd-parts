@@ -27,6 +27,10 @@ classLegality:
   junior: legal
   source: derived
 specs: {}
+colours:
+  primary: "#b8892a"
+  tire: "#1f2124"
+  source: override
 priceJpy: 440
 priceJpyExTax: 400
 releaseDate: 2026-10-10

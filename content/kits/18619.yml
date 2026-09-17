@@ -45,6 +45,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Nitrage Jr.
+colours:
+  body: "#565b62"
+  wheel: "#eef0f2"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 990
 priceJpyExTax: 900
 releaseDate: 2007-06-30

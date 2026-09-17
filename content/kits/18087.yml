@@ -45,6 +45,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Mini 4WD Hawk Racer
+colours:
+  body: "#eef0f2"
+  wheel: "#f2c230"
+  tire: "#eef0f2"
+  source: scraped
 priceJpy: 1210
 priceJpyExTax: 1100
 priceHkd: 110

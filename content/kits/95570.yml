@@ -44,6 +44,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Mini 4WD Penguin Racer
+colours:
+  body: "#9cc8ee"
+  wheel: "#d4a93a"
+  tire: "#eef0f2"
+  source: scraped
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 130

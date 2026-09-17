@@ -44,6 +44,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Tri Gale
+colours:
+  body: "#ec7a24"
+  wheel: "#c9ced6"
+  tire: "#eef0f2"
+  source: scraped
 priceJpy: 1100
 priceJpyExTax: 1000
 priceHkd: 100

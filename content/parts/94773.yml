@@ -31,6 +31,9 @@ classLegality:
   source: derived
 specs:
   pieces: 10
+colours:
+  primary: "#ec7a24"
+  source: derived
 priceJpy: 176
 priceJpyExTax: 160
 priceHkd: 16

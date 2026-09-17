@@ -48,6 +48,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Beak Spider
+colours:
+  body: "#1f2124"
+  wheel: "#1f2124"
+  tire: "#eef0f2"
+  source: scraped
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 110

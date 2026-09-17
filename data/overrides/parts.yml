@@ -19,75 +19,91 @@
 '15484': # トルクチューン2モーター
   specs: { motorShaft: single }
   classLegality: { open: legal, stockBmax: legal, junior: legal }
+  colours: { primary: '#ec7a24' }
 '15485': # レブチューン2モーター
   specs: { motorShaft: single }
   classLegality: { open: legal, stockBmax: legal, junior: legal }
+  colours: { primary: '#2f5fc4' }
 '15486': # アトミックチューン2モーター
   specs: { motorShaft: single }
   classLegality: { open: legal, stockBmax: legal, junior: legal }
+  colours: { primary: '#1f2124' }
 '15455': # ライトダッシュモーター
   specs: { motorShaft: single }
   classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }
+  colours: { primary: '#f2c230' }
 '15477': # ハイパーダッシュ3モーター
   specs: { motorShaft: single }
   classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }
+  colours: { primary: '#d0312d' }
 '15317': # パワーダッシュモーター
   specs: { motorShaft: single }
   classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }
+  colours: { primary: '#2a8f7a' }
 '15318': # スプリントダッシュモーター
   specs: { motorShaft: single }
   classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }
+  colours: { primary: '#9aa0a8' }
 '15307': # ウルトラダッシュモーター
   specs: { motorShaft: single }
   classLegality: { open: illegal, stockBmax: illegal, junior: illegal, notes: 田宮公認競技會不可使用 }
+  colours: { primary: '#1f2124' }
 '15186': # プラズマダッシュモーター
   specs: { motorShaft: single }
   classLegality: { open: illegal, stockBmax: illegal, junior: illegal, notes: 田宮公認競技會不可使用 }
+  colours: { primary: '#1f2124' }
 
 # --- Double-shaft PRO motors (MS / MA / ME) ----------------------------------
 '15487': # トルクチューン2モーターPRO
   specs: { motorShaft: double }
   classLegality: { open: legal, stockBmax: legal, junior: legal }
+  colours: { primary: '#ec7a24' }
 '15488': # レブチューン2モーターPRO
   specs: { motorShaft: double }
   classLegality: { open: legal, stockBmax: legal, junior: legal }
+  colours: { primary: '#2f5fc4' }
 '15489': # アトミックチューン2モーターPRO
   specs: { motorShaft: double }
   classLegality: { open: legal, stockBmax: legal, junior: legal }
+  colours: { primary: '#1f2124' }
 '15402': # ライトダッシュモーターPRO
   specs: { motorShaft: double }
   classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }
+  colours: { primary: '#f2c230' }
 '15375': # ハイパーダッシュモーターPRO
   specs: { motorShaft: double }
   classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }
+  colours: { primary: '#d0312d' }
 '15433': # マッハダッシュモーターPRO
   specs: { motorShaft: double }
   classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }
+  colours: { primary: '#d0312d' }
 
 # --- Japan Cup / limited motor colourways ------------------------------------
 # Same motor, limited packaging (docs/research/concepts-and-rules.md §3), so they
 # inherit the legality of their base item.
-'95158': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 } } # ハイパーダッシュ3 J-CUP 2023
-'95169': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 } } # ハイパーダッシュ3 J-CUP 2024
-'95174': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 } } # ハイパーダッシュ3 J-CUP 2025
-'95182': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 } } # ハイパーダッシュ3 J-CUP 2026
-'95159': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 } } # ハイパーダッシュPRO J-CUP 2023
-'95170': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 } } # ハイパーダッシュPRO J-CUP 2024
-'95175': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 } } # ハイパーダッシュPRO J-CUP 2025
-'95183': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 } } # ハイパーダッシュPRO J-CUP 2026
-'95171': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: legal } } # トルクチューン2 J-CUP 2024
-'95176': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: legal } } # トルクチューン2 J-CUP 2025
-'95184': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: legal } } # トルクチューン2 J-CUP 2026
-'95172': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: legal } } # トルクチューン2 PRO J-CUP 2024
-'95177': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: legal } } # トルクチューン2 PRO J-CUP 2025
-'95185': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: legal } } # トルクチューン2 PRO J-CUP 2026
-'95188': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: legal } } # アトミックチューン2 40周年記念
-'95189': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: legal } } # アトミックチューン2 PRO 40周年記念
+'95158': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }, colours: { primary: '#d0312d' } } # ハイパーダッシュ3 J-CUP 2023
+'95169': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }, colours: { primary: '#d0312d' } } # ハイパーダッシュ3 J-CUP 2024
+'95174': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }, colours: { primary: '#d0312d' } } # ハイパーダッシュ3 J-CUP 2025
+'95182': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }, colours: { primary: '#d0312d' } } # ハイパーダッシュ3 J-CUP 2026
+'95159': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }, colours: { primary: '#d0312d' } } # ハイパーダッシュPRO J-CUP 2023
+'95170': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }, colours: { primary: '#d0312d' } } # ハイパーダッシュPRO J-CUP 2024
+'95175': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }, colours: { primary: '#d0312d' } } # ハイパーダッシュPRO J-CUP 2025
+'95183': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }, colours: { primary: '#d0312d' } } # ハイパーダッシュPRO J-CUP 2026
+'95171': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: legal }, colours: { primary: '#ec7a24' } } # トルクチューン2 J-CUP 2024
+'95176': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: legal }, colours: { primary: '#ec7a24' } } # トルクチューン2 J-CUP 2025
+'95184': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: legal }, colours: { primary: '#ec7a24' } } # トルクチューン2 J-CUP 2026
+'95172': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: legal }, colours: { primary: '#ec7a24' } } # トルクチューン2 PRO J-CUP 2024
+'95177': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: legal }, colours: { primary: '#ec7a24' } } # トルクチューン2 PRO J-CUP 2025
+'95185': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: legal }, colours: { primary: '#ec7a24' } } # トルクチューン2 PRO J-CUP 2026
+'95188': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: legal }, colours: { primary: '#1f2124' } } # アトミックチューン2 40周年記念
+'95189': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: legal }, colours: { primary: '#1f2124' } } # アトミックチューン2 PRO 40周年記念
 
 # --- Kit motor ---------------------------------------------------------------
 '94380': # AO-1001 FA-130タイプノーマルモーター — the motor every kit ships with.
   specs: { motorShaft: single }
   classLegality: { open: legal, stockBmax: legal, junior: legal }
+  colours: { primary: '#eef0f2' }
 
 # --- Kit propeller shaft ------------------------------------------------------
 # AO-1004 is the stock shaft of the Super-1 lineage, and Tamiya's own page tags
@@ -100,12 +116,13 @@
 # tagged for it.
 '94382': # AO-1004 プロペラシャフトA
   chassisCompat: { include: [ar, vz, super-2, vs] }
+  colours: { primary: '#c9ced6' }
 
 # --- Reviewed, genuinely uncategorised ---------------------------------------
 # Real car parts that fit none of our slots; kept as "other" on purpose so the
 # report stops flagging them.
-'10320': { category: other } # ゴムパイプ 3.5×60mm — brake and damper tuning material
-'94387': { category: other } # プラズマダッシュブラシホルダーセット — motor spare
+'10320': { category: other, colours: { primary: '#1f2124' } } # ゴムパイプ 3.5×60mm — brake and damper tuning material
+'94387': { category: other, colours: { primary: '#c9ced6' } } # プラズマダッシュブラシホルダーセット — motor spare
 # Was mis-derived as a sticker (シールド contains シール). With that rule anchored
 # it falls through to the モーター rule instead, which is worse — a cooling shield
 # would show up in the motor picker. It is a real car part with no slot of its own.
@@ -115,10 +132,189 @@
 # Parts whose names contain シャフト but which are not shafts. Surfaced by the
 # Fandom wiki cross-reference; see scripts/catalog/crossref.ts.
 '10308': { category: spacer } # AO-1037 アルミシャフトストッパー — axle locking collar
-'94809': { category: screw }  # AO-1024 2×38mm両ネジシャフト — double-threaded stud
+'94809': { category: screw, colours: { primary: '#c9ced6' } }  # AO-1024 2×38mm両ネジシャフト — double-threaded stud
 # Parts whose names contain ホイール but which are not wheels, or not only wheels.
 # A bushing is a hub insert for aluminium wheels, a small fitting like the shaft
 # stopper above. 15504's tire is a ハードスリック, which the タイヤ regex cannot see.
 '10306': { category: spacer } # AO-1035 ミニ四駆ホイールブッシュ(白/8個)
 '94774': { category: spacer } # AO-1020 ミニ四駆アルミホイール用ブッシュ(黒8個入り)
-'15504': { category: wheel-tire-set } # スーパーX・XX大径5本スポークホイール&ハードスリック(レッド)
+'15504': { category: wheel-tire-set, colours: { primary: '#eef0f2', tire: '#d0312d' } } # スーパーX・XX大径5本スポークホイール&ハードスリック(レッド)
+
+# --- Colours ---------------------------------------------------------------
+# What each part is drawn in (shared/catalog/schema.ts `partColours`). The
+# generator reads a colour from the name, the wiki variant or the material;
+# these are the parts where that reads nothing or reads wrong, set by looking
+# at the product photo. Parts that already had an entry above carry theirs
+# there — every motor among them. A motor's colour is its end bell, not its
+# can: every can is silver, and "the red one" is how a racer tells a Hyper-Dash
+# from a Torque-Tuned.
+
+# Mass dampers are brass weights; the plates and screws around them are not
+# what the eye goes to.
+'15343': { colours: { primary: '#a9aeb5' } }  # マルチセッティングウェイト — zinc, not brass
+'15392': { colours: { primary: '#c9a24a' } }  # マスダンパーセット
+'15401': { colours: { primary: '#c9a24a' } }  # マスダンパーセット(ヘビー)
+'15427': { colours: { primary: '#c9a24a' } }  # マスダンパー スクエア 6×6
+'15428': { colours: { primary: '#c9a24a' } }  # マスダンパー スクエア 8×8
+'15459': { colours: { primary: '#c9a24a' } }  # ARシャーシ サイドマスダンパー
+'15478': { colours: { primary: '#c9a24a' } }  # ボールリンクマスダンパー
+'15490': { colours: { primary: '#c9a24a' } }  # MAシャーシ サイドマスダンパー
+'15501': { colours: { primary: '#c9a24a' } }  # スリムマスダンパー
+'15515': { colours: { primary: '#c9a24a' } }  # スクエア ショート 6x6
+'15517': { colours: { primary: '#c9a24a' } }  # スクエア ショート 8x8
+'95324': { colours: { primary: '#c9a24a' } }  # アジャストマスダンパー
+
+# A wheel-and-tire set carries the wheel as `primary` and its tire as `tire`.
+# The name says one of the two at most, so each was read off the photo.
+'15219': { colours: { primary: '#c9ced6', tire: '#1f2124' } }  # 小径メッキスポーク + レストンスポンジ
+'15239': { colours: { primary: '#5fe84a', tire: '#4a4d52' } }  # 中空ゴム小径タイヤ
+'15358': { colours: { primary: '#b8892a', tire: '#1f2124' } }  # ローハイト (フィン)
+'15359': { colours: { primary: '#eef0f2', tire: '#1f2124' } }  # ローハイト (ディッシュ)
+'15366': { colours: { primary: '#2a2c30', tire: '#c7cdd2' } }  # 大径カーボン + ソフトスリック
+'15387': { colours: { primary: '#565b62', tire: '#1f2124' } }  # 大径ワンウェイWT
+'15414': { colours: { primary: '#2a2c30', tire: '#eef0f2' } }  # X・XX カーボン大径ナロー + バレル(白)
+'15442': { colours: { primary: '#eef0f2', tire: '#1f2124' } }  # X・XX ローハイト
+'15443': { colours: { primary: '#3a3d42', tire: '#1f2124' } }  # ローハイト + ワンウェイ
+'15444': { colours: { primary: '#2a2c30', tire: '#1f2124' } }  # X・XX 大径ワンウェイ
+'15445': { colours: { primary: '#eef0f2', tire: '#1f2124' } }  # 大径ローハイト
+'15446': { colours: { primary: '#4a4d52', tire: '#4a4d52' } }  # X・XX 大径ローハイト — grey on grey
+'15483': { colours: { primary: '#eef0f2', tire: '#1f2124' } }  # ローハイト (Yスポーク)
+'15491': { colours: { primary: '#c9ced6', tire: '#1f2124' } }  # 大径Vスポークナロー
+'15507': { colours: { primary: '#1f2124', tire: '#1f2124' } }  # HG 低反発スポンジタイヤ — tires only
+'15511': { colours: { primary: '#eef0f2', tire: '#1f2124' } }  # 大径ローハイト 6本スポーク
+'15513': { colours: { primary: '#eef0f2', tire: '#1f2124' } }  # ローハイト 5本スポーク
+'15547': { colours: { primary: '#1f2124', tire: '#1f2124' } }  # EZ スパイク
+'15552': { colours: { primary: '#b8892a', tire: '#1f2124' } }  # EZ 大径ワイドトレッド
+'95162': { colours: { primary: '#c9ced6', tire: '#1f2124' } }  # スパイラル J-CUP2023
+'95640': { colours: { primary: '#4cd65a', tire: '#1f2124' } }  # 40周年 12本スポーク
+'95649': { colours: { primary: '#c9ced6', tire: '#7b2230' } }  # ローフリクション小径ナロー + シルバーメッキ
+
+# Parts the 3D pane draws, whose name says no colour or says the wrong one.
+'15352': { colours: { primary: '#c9ced6' } }  # トルクルーザースペアボディ
+'15353': { colours: { primary: '#2f6fc4' } }  # ベルダーガスペアボディ
+'15198': { colours: { primary: '#1f2124' } }  # リヤースライドダンパー・ブレーキ
+'15399': { colours: { primary: '#1f2124' } }  # MS マルチブレーキ
+'15413': { colours: { primary: '#1f2124' } }  # ゴムブレーキ
+'15441': { colours: { primary: '#8e949b' } }  # ブレーキスポンジ (3種)
+'15458': { colours: { primary: '#8e949b' } }  # AR ブレーキ
+'15362': { colours: { primary: '#a9aeb5' } }  # MS リヤダブルローラーステー
+'15373': { colours: { primary: '#d0312d' } }  # ローラー角度調整プレート
+'15377': { colours: { primary: '#1f2124' } }  # スライド・ワイドローラーステー
+'94835': { colours: { primary: '#d0312d' } }  # EXサイドステー
+'15113': { colours: { primary: '#8e949b' } }  # リヤーブレーキ・ローラー
+'15139': { colours: { primary: '#8e949b' } }  # フロントスライドダンパーローラー
+'15158': { colours: { primary: '#2f9e4f' } }  # ショートスタビローラー
+'15230': { colours: { primary: '#c9ced6' } }  # ローラーワイドマウント
+'15251': { colours: { primary: '#b595dc' } }  # 19mm プラリング付 — lilac ring
+'15344': { colours: { primary: '#c9ced6' } }  # 9mm ベアリング
+'15345': { colours: { primary: '#c9ced6' } }  # 11mm ベアリング
+'15381': { colours: { primary: '#b595dc' } }  # 低摩擦プラローラー — lilac and orange
+'15408': { colours: { primary: '#1f2124' } }  # ロングスタビ低摩擦プラローラー
+'15475': { colours: { primary: '#9aa0a8' } }  # 13mm ベアリングII
+'15520': { colours: { primary: '#c9ced6' } }  # リヤスキッドローラー
+'95160': { colours: { primary: '#2f5fc4' } }  # 19mm J-CUP 2023
+'94768': { colours: { primary: '#c9ced6' } }  # ベアリングローラー用スペーサー
+'94792': { colours: { primary: '#1f2124' } }  # 17・19mm ゴムリング
+'94801': { colours: { primary: '#c9a24a' } }  # 2段アルミローラー用5mmパイプ
+'94812': { colours: { primary: '#1f2124' } }  # 13-12mm ゴムリング
+'10305': { colours: { primary: '#c9ced6' } }  # スライドダンパースプリング
+'10321': { colours: { primary: '#c9ced6' } }  # スライドダンパー2スプリング
+'15467': { colours: { primary: '#b7bcc2' } }  # リヤワイドスライドダンパー
+'15469': { colours: { primary: '#b7bcc2' } }  # フロントワイドスライドダンパー
+'15120': { colours: { primary: '#2f5fc4' } }  # ナローワンウェイホイール
+'15213': { colours: { primary: '#eef0f2' } }  # ナローワンウェイ (ワイドトレッド)
+'15238': { colours: { primary: '#ec7a24' } }  # スーパーX ナローワンウェイ
+'15410': { colours: { primary: '#d0312d' } }  # アルミディスク (ストライプ)
+
+# Parts the pane does not draw yet, set from the photo so the catalog is
+# complete when it does. Cases are clear plastic; bearings, screws and shafts
+# are the steel they are made of.
+'10304': { colours: { primary: '#eef0f2' } }  # 両面テープ
+'10310': { colours: { primary: '#ec7a24' } }  # ジャンプ台
+'10313': { colours: { primary: '#eef0f2' } }  # サーキットジョイント
+'15163': { colours: { primary: '#dfe6ea' } }  # パーツケース
+'15208': { colours: { primary: '#dfe6ea' } }  # モーターケース
+'15354': { colours: { primary: '#dfe6ea' } }  # レーサーズボックス
+'15383': { colours: { primary: '#2f5fc4' } }  # Fグリス
+'15389': { colours: { primary: '#dfe6ea' } }  # マルチケース
+'15423': { colours: { primary: '#dfe6ea' } }  # バッテリーケース
+'15424': { colours: { primary: '#8e949b' } }  # ポータブルピット
+'15460': { colours: { primary: '#dfe6ea' } }  # パーツケースセット
+'15465': { colours: { primary: '#1f2124' } }  # オイルペン
+'15468': { colours: { primary: '#2f5fc4' } }  # メンテナンスマット
+'15471': { colours: { primary: '#d0312d' } }  # スライドダンパーグリス
+'15474': { colours: { primary: '#2aa39a' } }  # キャッチャー
+'15505': { colours: { primary: '#dfe6ea' } }  # モーターケース2
+'15521': { colours: { primary: '#dfe6ea' } }  # バッテリーケース2
+'15531': { colours: { primary: '#eef0f2' } }  # ベアリングオイル
+'95514': { colours: { primary: '#1f2124' } }  # HGメンテナンスベース
+'10324': { colours: { primary: '#c9a24a' } }  # はとめ
+'15111': { colours: { primary: '#c9ced6' } }  # 丸穴ボールベアリング
+'15287': { colours: { primary: '#c9ced6' } }  # 六角穴ボールベアリング
+'15393': { colours: { primary: '#6b7078' } }  # フッソコート620
+'15519': { colours: { primary: '#c9ced6' } }  # HG 丸穴ボールベアリング
+'94381': { colours: { primary: '#b08d57' } }  # メタル軸受け
+'94386': { colours: { primary: '#c9ced6' } }  # 830ベアリング
+'94389': { colours: { primary: '#c9ced6' } }  # 620ベアリング
+'94392': { colours: { primary: '#3a3d42' } }  # 850ベアリング
+'94752': { colours: { primary: '#c9ced6' } }  # 520ボールベアリング
+'15356': { colours: { primary: '#1f2124' } }  # MS ボディ用アダプター
+'15406': { colours: { primary: '#1f2124' } }  # クイックボディキャッチ
+'15470': { colours: { primary: '#b9bec4' } }  # AR サイドボディキャッチ
+'15258': { colours: { primary: '#f5a060' } }  # ステアリングシステム
+'15382': { colours: { primary: '#6b7078' } }  # N-03・T-03バンパーレス
+'15384': { colours: { primary: '#726a5e' } }  # バンパーレス LED(赤) — the LED is red, the unit is not
+'15405': { colours: { primary: '#565b62' } }  # フロントアンダーガード
+'15435': { colours: { primary: '#2f5fc4' } }  # ファーストトライ — its rollers
+'15450': { colours: { primary: '#2f9e4f' } }  # AR ファーストトライ
+'15476': { colours: { primary: '#f2c230' } }  # MA ファーストトライ
+'15514': { colours: { primary: '#d0312d' } }  # FM-A ファーストトライ
+'15526': { colours: { primary: '#ec7a24' } }  # VZ ファーストトライ
+'15367': { colours: { primary: '#1f2124' } }  # N-02・T-01強化ユニット
+'15374': { colours: { primary: '#8e949b' } }  # MS 軽量センターシャーシ
+'15132': { colours: { primary: '#f2c230' } }  # 超速ギヤー
+'15187': { colours: { primary: '#c8c4d4' } }  # 軽量超速ギヤー
+'15236': { colours: { primary: '#1f2124' } }  # ハイスピードカウンターギヤー
+'15289': { colours: { primary: '#c9ced6' } }  # 8Tピニオン 真ちゅう/プラ
+'15347': { colours: { primary: '#c9ced6' } }  # PRO ギヤベアリング
+'15349': { colours: { primary: '#2f9e4f' } }  # PRO 超速ギヤ
+'15355': { colours: { primary: '#2f5fc4' } }  # PRO ハイスピードギヤ
+'15390': { colours: { primary: '#6b7078' } }  # フッソコートギヤシャフト(ストレート)
+'15400': { colours: { primary: '#8e949b' } }  # フッソコートギヤシャフト(ツバ付)
+'15429': { colours: { primary: '#f2c230' } }  # PRO ハイスピードEX
+'15432': { colours: { primary: '#35bfd4' } }  # XX・II 超速ギヤ
+'15434': { colours: { primary: '#2f9e4f' } }  # ハイスピードEXカウンター
+'15456': { colours: { primary: '#1f2124' } }  # AR セッティングギヤ
+'15516': { colours: { primary: '#2f5fc4' } }  # FM-A セッティングギヤ
+'15363': { colours: { primary: '#1f2124' } }  # PRO 強化ギヤカバー
+'15438': { colours: { primary: '#3a3d42' } }  # 強化ギヤ＆ワンロックギヤカバー
+'10319': { colours: { primary: '#c9ced6' } }  # プロペラシャフトC
+'15205': { colours: { primary: '#c9ced6' } }  # 1.4mm中空プロペラシャフト
+'15206': { colours: { primary: '#c9ced6' } }  # 2.0mm中空プロペラシャフト
+'15234': { colours: { primary: '#c9ced6' } }  # スーパーX 中空プロペラシャフト
+'94383': { colours: { primary: '#c9ced6' } }  # プロペラシャフトB
+'10307': { colours: { primary: '#c9ced6' } }  # スプリングワッシャー
+'10309': { colours: { primary: '#c9ced6' } }  # ワッシャー小
+'10323': { colours: { primary: '#c9ced6' } }  # 2x8mm トラスビス
+'15232': { colours: { primary: '#c9ced6' } }  # ビスセットA
+'15233': { colours: { primary: '#c9ced6' } }  # ビスセットB
+'15454': { colours: { primary: '#1f2124' } }  # キャップスクリュー
+'94385': { colours: { primary: '#c9ced6' } }  # ロングビス・ロックナット
+'94690': { colours: { primary: '#c9ced6' } }  # ロックナット
+'94802': { colours: { primary: '#c9ced6' } }  # 2x5mm トラスビス
+'95280': { colours: { primary: '#4a4d52' } }  # チェックボックス — smoked
+'10314': { colours: { primary: '#c9ced6' } }  # 2×72mm六角シャフト
+'15348': { colours: { primary: '#c9ced6' } }  # 60mm HG強化シャフト
+'15395': { colours: { primary: '#c9ced6' } }  # 六角マウント
+'15506': { colours: { primary: '#1f2124' } }  # 軽量プラスペーサー
+'15059': { colours: { primary: '#c9a24a' } }  # スタビライザーポール
+'15361': { colours: { primary: '#2f5fc4' } }  # アンダースタビヘッド
+'15385': { colours: { primary: '#8e949b' } }  # ボールスタビキャップ (モノクロ)
+'15386': { colours: { primary: '#d0312d' } }  # ボールスタビキャップ (ブライト)
+'15391': { colours: { primary: '#eef0f2' } }  # 大径スタビヘッド 11・15mm
+'15436': { colours: { primary: '#2f5fc4' } }  # 大径スタビヘッド 17mm
+'15261': { colours: { primary: '#e8d8b8' } }  # パッシングシール
+'15439': { colours: { primary: '#eef0f2' } }  # ロゴステッカー
+'15533': { colours: { primary: '#e9ecd0' } }  # スキッドシール2
+'15183': { colours: { primary: '#6b7078' } }  # スピードチェッカー
+'15422': { colours: { primary: '#3aa6e0' } }  # ピニオンプーラー

@@ -45,6 +45,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: BisonMagnum
+colours:
+  body: "#eef0f2"
+  wheel: "#5fe84a"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 990
 priceJpyExTax: 900
 priceHkd: 90

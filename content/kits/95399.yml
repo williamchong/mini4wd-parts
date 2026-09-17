@@ -44,6 +44,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Keen Hawk Jr.
+colours:
+  body: "#a98acf"
+  wheel: "#e6f53a"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 1210
 priceJpyExTax: 1100
 priceHkd: 110

@@ -22,6 +22,9 @@ classLegality:
   notes: 需個別確認馬達規則
 specs:
   motorShaft: single
+colours:
+  primary: "#eef0f2"
+  source: override
 priceJpy: 165
 priceJpyExTax: 150
 status: current

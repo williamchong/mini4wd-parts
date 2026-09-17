@@ -28,6 +28,9 @@ classLegality:
 specs:
   rollerDiameterMm: 19
   rollerType: plastic
+colours:
+  primary: "#1f2124"
+  source: override
 priceJpy: 110
 priceJpyExTax: 100
 priceHkd: 10

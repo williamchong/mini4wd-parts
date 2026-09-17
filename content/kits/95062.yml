@@ -44,6 +44,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Aero Avante
+colours:
+  body: "#c0a6e6"
+  wheel: "#1f2124"
+  tire: "#8a5cc9"
+  source: override
 priceJpy: 1320
 priceJpyExTax: 1200
 releaseDateRaw: 2015年 6月6日(土)発売

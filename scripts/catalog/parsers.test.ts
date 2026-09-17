@@ -195,6 +195,11 @@ test('a kit article yields one variant per box', () => {
   assert.equal(standard!.tire, 'Small Low-Profile Slick')
   assert.equal(standard!.gearRatio, '3.5:1')
   assert.deepEqual(standard!.ids, ['18014'])
+  // Colours are kept as the wiki writes them; scripts/catalog/colours.ts reads them.
+  assert.equal(standard!.bodyColour, 'Blue')
+  assert.equal(standard!.wheelColour, 'White')
+  assert.equal(special!.bodyColour, 'Smoke')
+  assert.equal(special!.wheelColour, undefined)
 
   // A re-release shares one row, so a row can name several item numbers.
   assert.deepEqual(special!.ids, ['18506', '95501'])

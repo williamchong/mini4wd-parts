@@ -45,6 +45,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Saint Dragon Jr.
+colours:
+  body: "#eef0f2"
+  wheel: "#ff7a2a"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 1100
 priceJpyExTax: 1000
 releaseDate: 2012-05-26

@@ -45,6 +45,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: K4 Gambol
+colours:
+  body: "#ec7a24"
+  wheel: "#1f2124"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 1210
 priceJpyExTax: 1100
 releaseDate: 2021-12-11

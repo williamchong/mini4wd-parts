@@ -45,6 +45,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Torcruiser
+colours:
+  body: "#d0312d"
+  wheel: "#eef0f2"
+  tire: "#1f2124"
+  source: override
 priceJpy: 792
 priceJpyExTax: 720
 releaseDate: 2005-12

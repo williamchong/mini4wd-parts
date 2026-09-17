@@ -33,6 +33,9 @@ specs:
   motorRpmMax: 14500
   motorTorqueMin: 1.6
   motorTorqueMax: 1.8
+colours:
+  primary: "#1f2124"
+  source: override
 priceJpy: 462
 priceJpyExTax: 420
 priceHkd: 42

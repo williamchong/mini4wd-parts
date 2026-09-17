@@ -44,6 +44,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Little Ryan Mini 4WD Special
+colours:
+  body: "#7cc0ec"
+  wheel: "#eef0f2"
+  tire: "#dfe6ea"
+  source: scraped
 priceJpy: 2310
 priceJpyExTax: 2100
 releaseDate: 2022-06-04

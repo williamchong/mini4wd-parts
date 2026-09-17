@@ -48,6 +48,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Dash-X1 Proto-Emperor
+colours:
+  body: "#7a4bb5"
+  wheel: "#1f2124"
+  tire: "#7a4bb5"
+  source: scraped
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 110

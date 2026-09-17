@@ -44,6 +44,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Festa Jaune
+colours:
+  body: "#8fd67a"
+  wheel: "#1f2124"
+  tire: "#8e949b"
+  source: override
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

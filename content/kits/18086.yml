@@ -45,6 +45,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Mini 4WD Dog Racer
+colours:
+  body: "#eef0f2"
+  wheel: "#eef0f2"
+  tire: "#35bfd4"
+  source: scraped
 priceJpy: 1540
 priceJpyExTax: 1400
 priceHkd: 120

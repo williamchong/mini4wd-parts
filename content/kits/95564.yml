@@ -44,6 +44,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Geo Glider
+colours:
+  body: "#4a4d52"
+  wheel: "#2a2c30"
+  tire: "#7b2230"
+  source: scraped
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

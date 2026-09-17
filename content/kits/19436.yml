@@ -45,6 +45,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Shining Scorpion
+colours:
+  body: "#eef0f2"
+  wheel: "#f2c230"
+  tire: "#2f5fc4"
+  source: scraped
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 110

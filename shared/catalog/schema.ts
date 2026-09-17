@@ -195,6 +195,23 @@ export const partSpecs = z.object({
   pieces: z.number().optional()
 })
 
+/** A flat sRGB colour, `#rrggbb`. */
+const hex = z.string().regex(/^#[0-9a-f]{6}$/)
+
+/**
+ * The colour a part is drawn in (docs/PLAN.md §5.6): what a reader would call
+ * it — "the blue rollers", "the gold nut" — not a measured swatch. `primary`
+ * is the part itself; `tire` is the second component a wheel-and-tire set
+ * carries, since one set fills both slots. `derived` means it was read from
+ * the part's name, its wiki variant or its material; `override` that it was
+ * set by looking at the product photo in data/overrides/parts.yml.
+ */
+export const partColours = z.object({
+  primary: hex,
+  tire: hex.optional(),
+  source: provenance
+})
+
 export const partSchema = z.object({
   /** Tamiya item number, e.g. "15549". The catalog's primary key. */
   id: z.string().regex(/^\d{4,5}$/),
@@ -238,6 +255,7 @@ export const partSchema = z.object({
   }),
 
   specs: partSpecs.default({}),
+  colours: partColours.optional(),
 
   priceJpy: z.number().optional(),
   priceJpyExTax: z.number().optional(),
@@ -413,6 +431,19 @@ export const kitSchema = z.object({
    * site-wide attribution page.
    */
   loadoutSourceTitle: z.string().optional(),
+  /**
+   * What the box's body, wheels and tires are moulded in, from the same wiki
+   * row as the loadout (`Body color`, `Wheel color`, `Tire color`). The body
+   * is its plastic, not its stickers: a "Clear" or "Smoke" special is drawn
+   * clear or smoked. `scraped` from the wiki, `override` where
+   * data/overrides/kits.yml corrects it or fills a kit the wiki has no row for.
+   */
+  colours: z.object({
+    body: hex.optional(),
+    wheel: hex.optional(),
+    tire: hex.optional(),
+    source: provenance
+  }).optional(),
 
   priceJpy: z.number().optional(),
   priceJpyExTax: z.number().optional(),
@@ -432,6 +463,7 @@ export const kitSchema = z.object({
 
 export type Part = z.infer<typeof partSchema>
 export type PartSpecs = z.infer<typeof partSpecs>
+export type PartColours = z.infer<typeof partColours>
 export type Chassis = z.infer<typeof chassisSchema>
 export type Kit = z.infer<typeof kitSchema>
 export type Loadout = z.infer<typeof loadout>

@@ -44,6 +44,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Mini 4WD Kumamon Version
+colours:
+  body: "#1f2124"
+  wheel: "#d0312d"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 1540
 priceJpyExTax: 1400
 priceHkd: 140

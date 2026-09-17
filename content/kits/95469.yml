@@ -44,6 +44,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Avante Mk.III
+colours:
+  body: "#eef0f2"
+  wheel: "#eef0f2"
+  tire: "#7cc0ec"
+  source: scraped
 priceJpy: 1210
 priceJpyExTax: 1100
 priceHkd: 110

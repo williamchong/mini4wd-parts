@@ -29,15 +29,17 @@ import { chassisPieces } from '#shared/scene/generators/chassis'
 import * as parts from '#shared/scene/generators/parts'
 import { cylinder, Triangles } from '#shared/scene/generators/mesh'
 import type { ResolvedSlot } from '#shared/catalog/build'
-import type { ChassisId, PartSpecs } from '#shared/catalog/schema'
+import type { ChassisId, Kit, PartColours, PartSpecs } from '#shared/catalog/schema'
 
 const props = defineProps<{
   chassis: ChassisId
   /** The kit the build started from, whose box art the body shell is drawn after. */
   kit: string | null
+  /** What that kit's body, wheels and tires are moulded in, from the catalog. */
+  kitColours: Kit['colours'] | null
   slots: ResolvedSlot[]
-  /** The catalog by item number, read only for the specs that size a proxy. */
-  parts: ReadonlyMap<string, { specs: PartSpecs }>
+  /** The catalog by item number, read for the specs that size a proxy and the colour it is drawn in. */
+  parts: ReadonlyMap<string, { specs: PartSpecs; colours?: PartColours }>
   /** The slot whose picker is open; its proxy stays lit until it closes. */
   openSlotId: string | null
 }>()
@@ -174,15 +176,14 @@ const HIT: Record<Solid, (mm: number) => BufferGeometry> = {
 }
 
 /**
- * A changed part is orange and an empty slot grey, as before (§5.5). A stock
- * part used to be blue as well; now that it has a shape it takes the colour
- * the real thing mostly comes in, so a stock kit reads as a car and the
- * orange still says what the reader changed. The body's colour is its kit's.
+ * An empty slot is grey. Everything else is drawn in the colour of what fills
+ * it: a catalog part in its own recorded colour, stock or changed alike, and a
+ * kit's moulded body, wheels and tires in the kit's. Changed parts used to be
+ * orange (§5.5), which made the pane say *that* the reader changed a part and
+ * never *which* one — a blue roller swapped for a red one looked the same.
+ * The list row already says what was changed; the pane now shows the car.
  */
-const COLOUR: Record<Exclude<ProxyState, 'stock'>, number> = {
-  changed: 0xe8842a,
-  empty: 0xb8bcc2
-}
+const EMPTY_COLOUR = 0xb8bcc2
 /** What a material is besides its colour: the four finishes a proxy can have. */
 const FINISH: Record<ProxyKind, 'shell' | 'rubber' | 'metal' | 'plastic'> = {
   body: 'shell',
@@ -205,6 +206,13 @@ const STOCK_TINT: Record<ProxyKind, number> = {
   'side-stay': 0x2a2d31,
   brake: 0x3a3d42,
   damper: 0xb9bec6
+}
+
+/** A catalog colour, `#rrggbb`, as the number three takes. */
+function hexColour(hex: string): number
+function hexColour(hex: string | undefined): number | undefined
+function hexColour(hex: string | undefined) {
+  return hex ? parseInt(hex.slice(1), 16) : undefined
 }
 
 /** The pixel distance under which a pointer down/up pair is a tap, not an orbit. */
@@ -271,10 +279,9 @@ onMounted(() => {
    * scene, so there is nothing for it to sort against.
    */
   const shell = new MeshStandardMaterial({ roughness: 0.55, metalness: 0.1, transparent: true })
-  function styleShell(state: Exclude<ProxyState, 'empty'>, highlight: Highlight, tint: number) {
-    const colour = state === 'stock' ? tint : COLOUR[state]
-    shell.color.setHex(colour)
-    shell.emissive.setHex(colour)
+  function styleShell(highlight: Highlight, tint: number) {
+    shell.color.setHex(tint)
+    shell.emissive.setHex(tint)
     shell.emissiveIntensity = highlight === 'open' ? 0.6 : highlight === 'hover' ? 0.3 : 0
     return shell
   }
@@ -299,17 +306,19 @@ onMounted(() => {
     // An empty slot is an outline, not a ghost: a translucent solid read as a
     // part that was half there. Everything else is opaque, the body included —
     // what it covers is reached by lifting it.
-    if (kind === 'body' && state !== 'empty') return styleShell(state, highlight, tint)
-    const colour = state === 'stock' ? tint : COLOUR[state]
+    if (kind === 'body' && state !== 'empty') return styleShell(highlight, tint)
+    const empty = state === 'empty'
+    const colour = empty ? EMPTY_COLOUR : tint
     const finish = FINISH[kind]
-    const key = `${state}:${highlight}:${colour}:${finish}`
+    // Stock and changed draw alike now, so only emptiness splits the cache.
+    const key = `${empty}:${highlight}:${colour}:${finish}`
     let found = materials.get(key)
     if (!found) {
       found = new MeshStandardMaterial({
         color: colour,
         roughness: finish === 'rubber' ? 0.9 : 0.55,
         metalness: finish === 'metal' ? 0.5 : 0.1,
-        wireframe: state === 'empty',
+        wireframe: empty,
         emissive: colour,
         emissiveIntensity: highlight === 'open' ? 0.6 : highlight === 'hover' ? 0.3 : 0
       })
@@ -443,13 +452,24 @@ onMounted(() => {
     slotId === props.openSlotId ? 'open' : slotId === hovered ? 'hover' : 'none'
 
   /**
-   * The colour a stock part is drawn in: the kit's own for the body, and for
-   * the wheels and rollers when the kit's livery says they differ (white fin
-   * wheels, blue rollers); the category default otherwise.
+   * The colour a proxy is drawn in, most specific first. A slot holding a
+   * catalog part takes that part's colour — a wheel-and-tire set gives the
+   * tire socket its `tire` — whether the kit shipped it or the reader chose
+   * it. A kit's own moulded body, wheels and tires have no item number and
+   * take the kit's recorded colours, as long as the slot is still the kit's.
+   * Then the silhouette's livery (the only record of a kit's roller colour),
+   * then the category's natural colour.
    */
-  function stockTint(kind: ProxyKind, bodySilhouette: string, livery: Silhouette): number {
-    if (kind === 'body') return silhouetteFor(bodySilhouette).colour
-    if (kind === 'wheel') return livery.wheelColour ?? STOCK_TINT.wheel
+  function tintFor(kind: ProxyKind, slot: ResolvedSlot, livery: Silhouette): number {
+    const partId = slot.entries[0]?.partId
+    const part = partId ? props.parts.get(partId)?.colours : undefined
+    const own = kind === 'tire' ? part?.tire ?? part?.primary : part?.primary
+    if (own) return hexColour(own)
+    if (slot.swapped) return STOCK_TINT[kind]
+    const kit = props.kitColours
+    if (kind === 'body') return hexColour(kit?.body) ?? livery.colour
+    if (kind === 'wheel') return hexColour(kit?.wheel) ?? livery.wheelColour ?? STOCK_TINT.wheel
+    if (kind === 'tire') return hexColour(kit?.tire) ?? STOCK_TINT.tire
     if (kind === 'roller') return livery.rollerColour ?? STOCK_TINT.roller
     return STOCK_TINT[kind]
   }
@@ -479,7 +499,7 @@ onMounted(() => {
         silhouette: socket.kind === 'body' ? silhouetteId(slot.swapped ? null : props.kit) : '',
         towardNose: socket.kind === 'stay' ? (socket.position[2] < 0 ? -1 : 1) : 0
       }
-      const tint = stockTint(socket.kind, shape.silhouette, livery)
+      const tint = tintFor(socket.kind, slot, livery)
       const data: ProxyData = { slotId: socket.slotId, state, kind: socket.kind, tint }
       const table = state === 'empty' ? OUTLINE : VISIBLE
       const visibleGeometry = socket.kind === 'body'

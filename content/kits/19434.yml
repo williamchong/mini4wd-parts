@@ -48,6 +48,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Victory Magnum
+colours:
+  body: "#eef0f2"
+  wheel: "#eef0f2"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 1540
 priceJpyExTax: 1400
 priceHkd: 120

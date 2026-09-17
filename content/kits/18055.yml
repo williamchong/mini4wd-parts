@@ -45,6 +45,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Super Avante
+colours:
+  body: "#eef0f2"
+  wheel: "#ff7a2a"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 770
 priceJpyExTax: 700
 status: current

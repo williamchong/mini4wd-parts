@@ -45,6 +45,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Toyota Gazoo Racing TS050 Hybrid
+colours:
+  body: "#eef0f2"
+  wheel: "#1f2124"
+  tire: "#1f2124"
+  source: override
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 130

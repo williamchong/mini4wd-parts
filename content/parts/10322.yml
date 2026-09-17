@@ -24,6 +24,9 @@ classLegality:
   notes: 非車體零件，不適用比賽規則
 specs:
   pieces: 3
+colours:
+  primary: "#dfe6ea"
+  source: derived
 priceJpy: 396
 priceJpyExTax: 360
 releaseDate: 2019-12-07

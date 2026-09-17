@@ -4,6 +4,11 @@
  * body, wheels and rollers come in. Kits that share a body (recolours, chassis
  * re-releases) share an entry.
  *
+ * The body and wheel colours here are a fallback now: every kit record carries
+ * its own `colours` (shared/catalog/schema.ts), which the scene reads first,
+ * so a recolour sharing this shape is still drawn in its own colour. The
+ * roller colour has no other source yet.
+ *
  * A TypeScript constant for now, like the socket table, while the station
  * format is still being judged against the first few shells. Once it settles
  * the table moves under data/, keyed by a body id a kit names through

@@ -44,6 +44,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Avante Mk.II
+colours:
+  body: "#f2a3c4"
+  wheel: "#ec6fa8"
+  tire: "#eef0f2"
+  source: override
 priceJpy: 1320
 priceJpyExTax: 1200
 releaseDate: 2015-05-02

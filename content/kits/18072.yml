@@ -45,6 +45,11 @@ stockLoadout:
       source: fandom
 loadoutSource: fandom
 loadoutSourceTitle: Fire Dragon Jr.
+colours:
+  body: "#d0312d"
+  wheel: "#ff3b3b"
+  tire: "#1f2124"
+  source: scraped
 priceJpy: 1100
 priceJpyExTax: 1000
 releaseDate: 2012-07-07
