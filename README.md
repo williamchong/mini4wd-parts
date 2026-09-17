@@ -68,6 +68,18 @@ npm run catalog:crossref   # 與 Fandom Wiki 分類對照 audit categories again
 
 CI 在部署前會執行 `npm test`、`npm run typecheck` 及 `npm run catalog:verify`。CI runs tests, type checks and catalog verification before every deploy.
 
+## 授權 Licence
+
+- **原始碼 Source code** — [GNU GPL v3.0 或更新版本 or later](LICENSE)：`app/`、`shared/`、`scripts/`、`i18n/` 及設定檔，包括在瀏覽器中產生 3D 模型的程式碼。`app/`, `shared/`, `scripts/`, `i18n/` and the config files, including the code that generates the 3D models in the browser.
+- **素材 Assets** — [CC BY-SA 4.0](LICENSE-ASSETS)：本站撰寫的文字（`content/zh-Hant/`、`content/en/`、`docs/`）、本站整理的零件資料（`data/chassis/`、`data/overrides/`、`data/taxonomy/` 及其產生的 `content/parts/`、`content/chassis/`、`content/kits/`），以及 `public/images/` 與 `public/favicon.png`。Our own text (`content/zh-Hant/`, `content/en/`, `docs/`), our compiled catalog (`data/chassis/`, `data/overrides/`, `data/taxonomy/` and the `content/parts/`, `content/chassis/`, `content/kits/` generated from them), and `public/images/` and `public/favicon.png`.
+
+以下不在上述授權範圍內 Not covered by either licence:
+
+- `public/thumbs/` 的產品縮圖版權屬田宮所有。The product thumbnails in `public/thumbs/` are © TAMIYA.
+- 取自 Mini 4WD Fandom Wiki 的套件內容及零件系列（`loadoutSourceTitle`、`fandomTitle`）沿用該 Wiki 的 [CC BY-SA](https://www.fandom.com/licensing) 條款。Kit contents and part families taken from the Mini 4WD Fandom Wiki (`loadoutSourceTitle`, `fandomTitle`) stay under the wiki's own [CC BY-SA](https://www.fandom.com/licensing) terms.
+- `data/raw/` 為第三方網站的抓取快取。`data/raw/` is a scrape cache of third-party sites.
+- 「ミニ四駆 / Mini 4WD」及田宮商標。The "Mini 4WD" name and TAMIYA trademarks.
+
 ## 免責聲明 Disclaimer
 
 本站為非官方的同好網站，與田宮（TAMIYA）無任何關係。「ミニ四駆 / Mini 4WD」為田宮的註冊商標。本站僅收錄產品編號、價格、尺寸、相容性等事實資訊，以及本站自行撰寫的說明；產品縮圖版權屬田宮所有，並附上原廠產品頁連結。
