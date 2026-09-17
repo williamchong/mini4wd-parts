@@ -776,7 +776,24 @@ Three workstreams. The catalog and builder ones are independent of the asset one
 
 This is the milestone's long pole and the one most likely to slip. The fallback that protects the date is the 2D builder, which is already built and already works on all eight chassis: if the meshes or the raycast work run over, M1 ships list-first with the 3D pane view-only, and selection moves into the canvas when it is ready.
 
-**M1 is done when:** a beginner can open `/build`, pick the kit box on their desk, change the motor and rollers, ~~see a warning that the motor is Open-only~~ see a warning when the motor is not allowed in the class they picked (reworded 2026-09-16: no part is Open-only in the data, see the rule engine above), ~~see the cost of what they still need to buy,~~ watch the car update in 3D, and send the link to a friend — in Traditional Chinese and en. (Cost clause removed 2026-09-16 by the owner; see Totals above.)
+**M1 is done when:** a beginner can open ~~`/build`~~ `/`, pick the kit box on their desk, change the motor and rollers, ~~see a warning that the motor is Open-only~~ see a warning when the motor is not allowed in the class they picked (reworded 2026-09-16: no part is Open-only in the data, see the rule engine above), ~~see the cost of what they still need to buy,~~ watch the car update in 3D, and send the link to a friend — in Traditional Chinese and en. (Cost clause removed 2026-09-16 by the owner; see Totals above.)
+
+**Run end to end on 2026-09-17, in Chrome with phone emulation (390×844 and 360×780, touch), against the generated site — and it passes.** A cold `/` opens on the empty car; the kit picker finds 17901 by item number; a tap on the car opens the motor picker, and a Hyper-Dash PRO and a pair of 15529 front rollers go on, both turning orange in the pane; Open and Stock Class report nothing, Junior reports one error on the motor, and switching class leaves the hash alone; a reload restores the build; copy link writes the URL and says so; the link opened in a fresh browser context on `/en` at 360 px shows both swaps with Revert, checks against that reader's own class (Open), has no horizontal scroll and logs nothing to the console. What emulation cannot say is how a thumb feels, so **a real phone is still owed**; everything below is measured with synthetic touch taps sent every 6 px across the pane (8 px at 360), recording which picker each one opened.
+
+| Slot, MA kit at 390 px | Shell seated | Shell lifted |
+|---|---|---|
+| Front roller | 60×60 | 60×60 |
+| Front stay | 84×60 | 84×60 |
+| Side roller, damper, front tire | 42–48 | 42–48 |
+| Front wheel | 30×42 | 30×42 |
+| Motor | covered | 66×18 → **66×48** after the fix below |
+| Rear tire, rear wheel, brake, rear stay | 6–24 | 18–30 |
+
+VS at 360 px has the same shape: the transverse motor is 56×48 lifted, the near side comfortable, the far side small. Three things worth keeping:
+
+- **A lifted shell still took the taps it was lifted to uncover.** It fades to 35% so it hides nothing, but it stayed the nearest raycast hit, and raised it covers *more* of the pane (216×84) than seated, leaving the motor an 18 px strip. While lifted, any other part under the finger now wins and the shell takes a tap only where nothing else is (`proxyAt` in `Scene.client.vue`); seated behaviour is unchanged. Motor 25 → 68 grid cells, brake and rear stay roughly doubled, and the shell keeps a 216×72 area to seat it by.
+- **The far side is still an orbit away**, as §5.5 accepted: rear wheel, rear tire, brake and rear stay are under 30 px from the home view. Not changed.
+- **The roller picker opens on accessories.** `partsForSlot` ranks by legality, then price, and the `roller` category holds O-rings, 5 mm spacers and roller mounts beside the rollers, so the cheapest rows — four of the first six — are not rollers. A beginner who tapped a roller to change it sees rubber rings first. Not fixed here: it is a ranking or taxonomy decision (plates share their slot with slide dampers the same way), not a tap bug.
 
 **Explicitly not in M1:** the wizard, votes, accounts, short links, OG images, D1, ~~per-kit body shapes~~ (in M1 since 2026-09-16 as silhouettes, §5.6; per-kit *meshes* stay out), ~~chassis other than MA in 3D~~ (in M1 since 2026-09-16, §5.6), build cost totals. Still on GitHub Pages, still fully static. (Click-to-select in 3D was on this list until 2026-09-09 and is now M1c.)
 

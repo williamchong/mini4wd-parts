@@ -528,6 +528,10 @@ onMounted(() => {
     )
     raycaster.setFromCamera(pointer, camera)
     const along = raycaster.intersectObjects(hits, false).map(hit => hit.object.userData as ProxyData)
+    // A lifted shell fades so it hides nothing, so it must not take the taps
+    // aimed at what it uncovered either: it wins only where nothing else is.
+    // Seated, it is opaque and the nearest hit is what the reader sees.
+    if (lifted.value) return along.find(proxy => proxy.kind !== 'body') ?? along[0] ?? null
     return along[0] ?? null
   }
 
