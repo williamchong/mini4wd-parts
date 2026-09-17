@@ -23,7 +23,9 @@ import type { ChassisId, Slot } from '#shared/catalog/schema'
 
 definePageMeta({ layout: 'content' })
 
-const { t } = useI18n()
+const { t, locale } = useI18n()
+const localePath = useLocalePath()
+const siteUrl = useRuntimeConfig().public.siteUrl
 const { resolve, isFallback } = useCatalogName()
 const { term, slotLabel } = useTerm()
 const { build, buildClass, pending, start, swap, revert } = useBuild()
@@ -444,7 +446,29 @@ watch(buildClass, (value) => {
   catch {}
 })
 
-useHead(() => ({ title: `${t('build.title')} — ${t('site.title')}` }))
+const title = computed(() => `${t('build.title')} — ${t('site.title')}`)
+
+// The root of the site, so it also carries `WebSite`: that is where Google
+// takes the site name it prints above a result, for every page under it.
+useHead(() => ({
+  title: title.value,
+  meta: [
+    { name: 'description', content: t('build.description') },
+    { property: 'og:title', content: title.value },
+    { property: 'og:description', content: t('build.description') }
+  ],
+  script: [{
+    type: 'application/ld+json',
+    innerHTML: JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      'name': t('site.title'),
+      // A CreativeWork property, so it belongs here and not on a part's Product.
+      'inLanguage': locale.value,
+      'url': `${siteUrl}${localePath('/')}`
+    })
+  }]
+}))
 </script>
 
 <template>

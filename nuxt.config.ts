@@ -18,10 +18,10 @@ const partFiles = ymlNames(PARTS_DIR)
  * a link stopped rendering. The filenames are the ids, so parts and chassis
  * need no YAML parsed.
  */
-const partRoutes = partFiles.map(name => `/parts/${name.slice(0, -'.yml'.length)}`)
+const partRoutes = partFiles.map(name => `/parts/${name.slice(0, -'.yml'.length)}/`)
 
 const chassisRoutes = ymlNames(new URL('content/chassis', import.meta.url))
-  .map(name => `/chassis/${name.slice(0, -'.yml'.length)}`)
+  .map(name => `/chassis/${name.slice(0, -'.yml'.length)}/`)
 
 /**
  * Category pages, from the categories that actually have members — **not** from
@@ -33,7 +33,7 @@ const categoryRoutes = [...new Set(partFiles.map(name =>
   /^category: (.+)$/m.exec(readFileSync(new URL(name, PARTS_DIR), 'utf8'))?.[1]))]
   .filter(category => category !== undefined)
   .sort()
-  .map(category => `/parts/category/${category}`)
+  .map(category => `/parts/category/${category}/`)
 
 const catalogRoutes = [...partRoutes, ...categoryRoutes, ...chassisRoutes]
 
@@ -45,7 +45,19 @@ export default defineNuxtConfig({
   // The sitemap module's own notion of the site's origin. Same value as
   // `runtimeConfig.public.siteUrl`, which the pages use for absolute og:image
   // and JSON-LD URLs; this one is read at build time by the module.
-  site: { url: SITE_URL },
+  site: { url: SITE_URL, trailingSlash: true },
+
+  // **Every URL ends in a slash**, because that is the one GitHub Pages serves.
+  // A route prerenders to `<route>/index.html`, and Pages answers `/about` with
+  // a 301 to `http://…/about/`, which a second 301 sends back to https. With
+  // the slash left off, every canonical, hreflang, og:url, breadcrumb and
+  // sitemap URL on the site named that redirect chain rather than a page.
+  // Writing `about.html` instead would keep the bare URLs, but it would 404 the
+  // slash URLs the redirect has been handing out and search engines have been
+  // indexing. The three settings answer to three modules — this one for the
+  // sitemap, `i18n.trailingSlash` for the canonical and alternates, and the
+  // `nuxtLink` default for every internal link the crawler follows — and
+  // they have to agree.
 
   // Every route is prerendered, so the module has the complete list without
   // crawling anything (docs/PLAN.md §6 M1b). One file rather than a per-locale
@@ -67,7 +79,7 @@ export default defineNuxtConfig({
     discoverImages: false,
     // `/build` is a redirect document standing in for a 301 we cannot send,
     // and a sitemap is a list of pages to index, not of forwarding addresses.
-    exclude: ['/build', '/*/build']
+    exclude: ['/build/', '/*/build/']
   },
 
   // The site is one set of Traditional Chinese pages at the root plus English
@@ -87,7 +99,8 @@ export default defineNuxtConfig({
     // GitHub Pages serves static files and cannot redirect, so detection would
     // only swap the page client-side after the correct one had already painted.
     detectBrowserLanguage: false,
-    baseUrl: SITE_URL
+    baseUrl: SITE_URL,
+    trailingSlash: true
   },
 
   runtimeConfig: {
@@ -99,6 +112,7 @@ export default defineNuxtConfig({
   },
 
   experimental: {
+    defaults: { nuxtLink: { trailingSlash: 'append' } },
     // Nothing here depends on route rules, and it saves a request per page.
     appManifest: false
   },
@@ -112,8 +126,8 @@ export default defineNuxtConfig({
     prerender: {
       crawlLinks: true,
       routes: [
-        '/', '/about', '/guides', '/parts', '/chassis', '/build',
-        '/en', '/en/about', '/en/guides', '/en/parts', '/en/chassis', '/en/build',
+        '/', '/about/', '/guides/', '/parts/', '/chassis/', '/build/',
+        '/en/', '/en/about/', '/en/guides/', '/en/parts/', '/en/chassis/', '/en/build/',
         ...catalogRoutes,
         ...catalogRoutes.map(route => `/en${route}`)
       ]
@@ -129,7 +143,10 @@ export default defineNuxtConfig({
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
         { property: 'og:image', content: `${SITE_URL}/images/4wd.png` },
-        { property: 'og:type', content: 'website' }
+        { property: 'og:type', content: 'website' },
+        // `summary`, not `summary_large_image`: the largest picture any page
+        // shares is 600×372, and a large card stretches it.
+        { name: 'twitter:card', content: 'summary' }
       ],
       link: [
         { rel: 'icon', type: 'image/png', href: '/favicon.png' }

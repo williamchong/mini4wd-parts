@@ -6,7 +6,13 @@
 </template>
 
 <script setup>
-definePageMeta({ layout: 'content' })
+// The file name's own pattern is `/:slug(.*)*`, which reads `/about/` as
+// `['about', '']`. Every URL on the site ends in a slash (nuxt.config.ts), and
+// @nuxtjs/i18n rebuilds the canonical, the alternates and the locale menu from
+// these params, so that empty segment came back as `/about//` — which the
+// prerender crawler followed to `/about///`, and on until it ran out of memory.
+// A segment that cannot be empty lets the trailing slash fall to the router.
+definePageMeta({ layout: 'content', path: '/:slug([^/]+)*' })
 
 const route = useRoute()
 const { t, te, locale } = useI18n()
@@ -31,6 +37,22 @@ const { data: page } = await useAsyncData(
 if (!page.value) {
   throw createError({ statusCode: 404, statusMessage: t('error.notFound'), fatal: true })
 }
+
+// @nuxt/content fills `title` from the first heading and `description` from
+// the first paragraph when the front matter names neither, so a page needs no
+// front matter to have its own head.
+const title = computed(() =>
+  page.value?.title ? `${page.value.title} — ${t('site.title')}` : t('site.title'))
+const description = computed(() => page.value?.description || t('site.description'))
+
+useHead(() => ({
+  title: title.value,
+  meta: [
+    { name: 'description', content: description.value },
+    { property: 'og:title', content: title.value },
+    { property: 'og:description', content: description.value }
+  ]
+}))
 
 // A prose page's trail is the one place the hierarchy *is* the path, so it is
 // read off it rather than declared. The locale prefix is not a level — it is

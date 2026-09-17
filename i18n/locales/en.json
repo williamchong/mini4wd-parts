@@ -19,6 +19,7 @@
   },
   "build": {
     "title": "Build list",
+    "description": "A Mini 4WD build planner: start from a kit or a bare chassis, swap in Tamiya Grade-Up Parts slot by slot, check the car against a race class, and share it as a link.",
     "base": "Kit / chassis",
     "bareChassis": "Bare chassis",
     "noBase": "No kit or chassis chosen",

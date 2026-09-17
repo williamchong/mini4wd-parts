@@ -5,7 +5,14 @@
  * has to be called somewhere that wraps every route. layouts/content.vue is not
  * that place — a page is free to opt out of it.
  */
-const { t, locale } = useI18n()
+const { t, locale, locales } = useI18n()
+
+/**
+ * Open Graph wants `language_TERRITORY`; the page reads in Hong Kong wording.
+ * Keyed by the configured locale codes, so a locale added without an entry is a
+ * type error — unhead drops a meta whose content is undefined without a word.
+ */
+const OG_LOCALES: Record<typeof locale.value, string> = { 'zh-Hant': 'zh_HK', 'en': 'en_US' }
 const i18nHead = useLocaleHead()
 
 const zhHref = computed(() =>
@@ -34,15 +41,19 @@ useHead(() => ({
   ],
 
   meta: [
-    ...(i18nHead.value.meta ?? []),
+    ...(i18nHead.value.meta ?? []).filter(meta =>
+      meta.property !== 'og:locale' && meta.property !== 'og:locale:alternate'),
     { name: 'description', content: t('site.description') },
     { property: 'og:title', content: t('site.title') },
     { property: 'og:description', content: t('site.description') },
-    // The module derives og:locale from the language tag, giving `zh_Hant`,
-    // which is not one of the values Open Graph consumers know.
-    ...(locale.value === 'zh-Hant'
-      ? [{ property: 'og:locale', content: 'zh_HK' }]
-      : [])
+    { property: 'og:site_name', content: t('site.title') },
+    // The module derives og:locale from the language tag, giving `zh_Hant` and
+    // a bare `en`, neither of which is a value Open Graph consumers know — on
+    // the current locale or as the other page's alternate.
+    { property: 'og:locale', content: OG_LOCALES[locale.value] },
+    ...locales.value
+      .filter(entry => entry.code !== locale.value)
+      .map(entry => ({ property: 'og:locale:alternate', content: OG_LOCALES[entry.code] }))
   ]
 }))
 </script>

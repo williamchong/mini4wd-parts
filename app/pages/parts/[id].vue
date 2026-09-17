@@ -19,7 +19,7 @@ import type { IconName } from '~/utils/icons'
 definePageMeta({ layout: 'content' })
 
 const route = useRoute()
-const { t, locale } = useI18n()
+const { t } = useI18n()
 const localePath = useLocalePath()
 const { resolve, isFallback } = useCatalogName()
 const { term, slotTypeLabel, categoryIntro } = useTerm()
@@ -197,7 +197,6 @@ useHead(() => ({
       'sku': part.value.id,
       'category': category.value,
       'brand': { '@type': 'Brand', 'name': 'TAMIYA' },
-      'inLanguage': locale.value,
       ...(image.value ? { image: image.value } : {}),
       'url': `${siteUrl}${localePath(`/parts/${part.value.id}`)}`
     })
