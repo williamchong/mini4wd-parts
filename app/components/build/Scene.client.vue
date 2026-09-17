@@ -64,24 +64,31 @@ type Highlight = 'none' | 'hover' | 'open'
  * What sizes a shape: `mm` is what `diameterFor` finds for the kind — a round
  * part's diameter, a plate's thickness — `wheelMm` the wheel a tire sits on,
  * `silhouette` which table entry a body is lofted from, and `towardNose`
- * which end a stay faces. Each field is zero for the kinds that ignore it, so
+ * which end a stay or a gear faces. Each field is zero for the kinds that ignore it, so
  * the cache key built from them holds one geometry per shape that actually
- * differs. The motor is the one shape keyed by nothing here: it depends on
- * the chassis alone — its end bell and sticker are paint, not shape — and the
- * page remounts this component per chassis, so a cache never outlives one
- * answer. The shapes themselves come from shared/scene/generators (§5.6).
+ * differs. The motor and the gears are keyed by less than they depend on:
+ * the chassis decides their layout — the paint is not shape — and the page
+ * remounts this component per chassis, so a cache never outlives one answer.
+ * The shapes themselves come from shared/scene/generators (§5.6).
  */
 type Shape = { mm: number; wheelMm: number; silhouette: string; towardNose: 1 | -1 | 0 }
 const shapeKey = (kind: ProxyKind, s: Shape) => `${kind}:${s.mm}:${s.wheelMm}:${s.silhouette}:${s.towardNose}`
 /** The kinds whose hit volume scales with `mm`; the others are fixed boxes. */
 const ROUND: ReadonlySet<ProxyKind> = new Set(['wheel', 'tire', 'roller'])
+const GEARS: ReadonlySet<ProxyKind> = new Set(['gear', 'counter-gear'])
+/** The kinds drawn differently at the front and the rear. */
+const TOWARD_NOSE: ReadonlySet<ProxyKind> = new Set(['stay', 'gear', 'counter-gear'])
 
 /** Every kind but the body, whose shell is lofted per kit and held apart from these tables. */
 type Solid = Exclude<ProxyKind, 'body'>
 
+// An FA-130 lies across the car and has one shaft; a PRO motor lies along it with two.
+const shafts = () => layoutFor(props.chassis).motor.across ? 1 : 2
+
 const VISIBLE: Record<Solid, (shape: Shape) => BufferGeometry> = {
-  // An FA-130 lies across the car and has one shaft; a PRO motor lies along it with two.
-  motor: () => parts.motor(layoutFor(props.chassis).motor.across ? 1 : 2),
+  motor: () => parts.motor(shafts()),
+  gear: shape => parts.gearSet(shafts(), shape.towardNose || 1),
+  'counter-gear': shape => parts.counterGear(shape.towardNose || 1),
   wheel: shape => parts.wheel(shape.mm),
   tire: shape => parts.tire(shape.wheelMm, shape.mm - shape.wheelMm),
   roller: shape => parts.roller(shape.mm),
@@ -111,6 +118,13 @@ const outlineRing = (r: number, w: number, axis: 'x' | 'y') => {
 }
 const OUTLINE: Record<Solid, (shape: Shape) => BufferGeometry> = {
   motor: () => outlineBox(20, 15, 25),
+  // The gear a reader would look for: the PRO axle spur or the single-shaft
+  // crown gear, and the counter gear beside the motor. Centres and widths are
+  // those gears' in generators/parts.ts; HIT's boxes around them are looser.
+  gear: () => shafts() === 1
+    ? outlineRing(9, 3.5, 'x').translate(5.5, 0, 0)
+    : outlineRing(7.5, 3, 'x').translate(-7.5, 0, 0),
+  'counter-gear': shape => outlineRing(7, 3.5, 'x').translate(19.75, 5.5, 7.5 * (shape.towardNose || 1)),
   wheel: shape => outlineRing(shape.mm / 2, 10, 'x'),
   tire: shape => outlineRing(shape.mm / 2, 9, 'x'),
   roller: shape => outlineRing(shape.mm / 2, 4, 'y'),
@@ -168,12 +182,21 @@ function diameterFor(kind: ProxyKind, slot: ResolvedSlot, bySlot: Map<string, Re
  * taps aimed at the wheels behind it; now the shell is opaque, whatever the
  * reader sees under their finger is what they get, and lifting the shell is
  * how they reach what it covers.
+ *
+ * The gears sit beside the motor's hit box rather than centred on their
+ * sockets, so theirs are moved off it: a PRO train reaches in from the axle
+ * toward the motor, a crown gear stands outboard of its housing, and a counter
+ * gear's box starts where the turned motor's ends, at x = 17.
  */
-const HIT: Record<Solid, (mm: number) => BufferGeometry> = {
+const HIT: Record<Solid, (shape: Shape) => BufferGeometry> = {
   motor: () => new BoxGeometry(34, 19, 24),
-  wheel: mm => new CylinderGeometry(mm / 2, mm / 2, 12, 16).rotateZ(Math.PI / 2),
-  tire: mm => new CylinderGeometry(mm / 2 + 2, mm / 2 + 2, 9, 16).rotateZ(Math.PI / 2),
-  roller: mm => new SphereGeometry(mm, 12, 8),
+  gear: shape => shafts() === 1
+    ? new BoxGeometry(16, 20, 16).translate(6, 0, 4 * (shape.towardNose || 1))
+    : new BoxGeometry(14, 22, 30).translate(-4, 3, -6 * (shape.towardNose || 1)),
+  'counter-gear': shape => new BoxGeometry(7, 20, 20).translate(20.5, 5, 7 * (shape.towardNose || 1)),
+  wheel: ({ mm }) => new CylinderGeometry(mm / 2, mm / 2, 12, 16).rotateZ(Math.PI / 2),
+  tire: ({ mm }) => new CylinderGeometry(mm / 2 + 2, mm / 2 + 2, 9, 16).rotateZ(Math.PI / 2),
+  roller: ({ mm }) => new SphereGeometry(mm, 12, 8),
   stay: () => new BoxGeometry(60, 8, 22),
   'side-stay': () => new BoxGeometry(22, 8, 40),
   brake: () => new BoxGeometry(40, 8, 16),
@@ -194,6 +217,8 @@ type Finish = 'shell' | 'rubber' | 'metal' | 'plastic'
 const FINISH: Record<ProxyKind, Finish> = {
   body: 'shell',
   motor: 'metal',
+  gear: 'plastic',
+  'counter-gear': 'plastic',
   wheel: 'plastic',
   tire: 'rubber',
   roller: 'metal',
@@ -206,6 +231,10 @@ const FINISH: Record<ProxyKind, Finish> = {
 const STOCK_TINT: Record<ProxyKind, number> = {
   body: 0xd8dbe0,
   motor: 0xeef0f2,
+  // A kit's gears have no item number and no recorded colour, so a neutral
+  // moulding until a catalog gear set is put in.
+  gear: 0xd9d4c5,
+  'counter-gear': 0xd9d4c5,
   wheel: 0x3a3d42,
   tire: 0x1d1f22,
   roller: 0xc9ced6,
@@ -227,8 +256,9 @@ const TAP_SLOP_PX = 6
 
 /**
  * `paints` is set for a shape drawn in more than one colour, one per draw group
- * of its geometry — only the motor, whose end bell and sticker are what tell
- * one motor from another. `tint` is then its end bell.
+ * of its geometry: the motor, whose end bell and sticker are what tell one
+ * motor from another, with `tint` its end bell; and the gears, in `tint` on
+ * steel pins.
  */
 type ProxyData = { slotId: string; state: ProxyState; kind: ProxyKind; tint: number; paints?: readonly parts.Paint[] }
 
@@ -525,11 +555,12 @@ onMounted(() => {
         mm,
         wheelMm: socket.kind === 'tire' ? wheelUnder(slot, bySlot) : 0,
         silhouette: socket.kind === 'body' ? silhouetteId(slot.swapped ? null : props.kit) : '',
-        towardNose: socket.kind === 'stay' ? (socket.position[2] < 0 ? -1 : 1) : 0
+        towardNose: TOWARD_NOSE.has(socket.kind) ? (socket.position[2] < 0 ? -1 : 1) : 0
       }
       const tint = tintFor(socket.kind, slot, livery)
       const data: ProxyData = { slotId: socket.slotId, state, kind: socket.kind, tint }
       if (socket.kind === 'motor') data.paints = motorPaintsFor(slot, tint)
+      if (GEARS.has(socket.kind)) data.paints = parts.gearPaints(tint)
       const table = state === 'empty' ? OUTLINE : VISIBLE
       const visibleGeometry = socket.kind === 'body'
         ? bodyFor(shape.silhouette)
@@ -542,8 +573,9 @@ onMounted(() => {
         group.add(visible)
         hits.push(visible)
       } else {
-        const hitMm = ROUND.has(socket.kind) ? mm : 0
-        const hit = new Mesh(geometry(HIT, socket.kind, hitMm, `h:${socket.kind}:${hitMm}`))
+        // Only a round part's size and a gear's end change its hit volume.
+        const hitShape: Shape = { mm: ROUND.has(socket.kind) ? mm : 0, wheelMm: 0, silhouette: '', towardNose: GEARS.has(socket.kind) ? shape.towardNose : 0 }
+        const hit = new Mesh(geometry(HIT, socket.kind, hitShape, `h:${shapeKey(socket.kind, hitShape)}`))
         hit.visible = false
         hit.userData = data
         group.add(visible, hit)

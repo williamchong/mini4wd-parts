@@ -8,12 +8,25 @@ import { bodyGeometry, FLOOR_MM } from './body.ts'
 import { BLACK, chassisPieces, STEEL } from './chassis.ts'
 import { layoutFor, socketsFor } from '../sockets.ts'
 import { plate, Triangles } from './mesh.ts'
-import { brake, damper, motor, MOTOR_GROUPS, motorPaints, roller, sideStay, stay, tire, wheel } from './parts.ts'
+import { brake, counterGear, damper, GEAR_GROUPS, gearSet, motor, MOTOR_GROUPS, motorPaints, roller, sideStay, stay, tire, wheel } from './parts.ts'
 import type { MotorGroup, Paint } from './parts.ts'
 
 const size = (geometry: BufferGeometry) => {
   geometry.computeBoundingBox()
   return geometry.boundingBox!.getSize(new Vector3())
+}
+
+/** Each draw group of a grouped geometry as a geometry of its own, to test one piece at a time. */
+function piecesOf(geometry: BufferGeometry): BufferGeometry[] {
+  const position = geometry.getAttribute('position')
+  const p = new Vector3()
+  return geometry.groups.map(group => {
+    const piece = new Triangles()
+    const points: [number, number, number][] = []
+    for (let i = group.start; i < group.start + group.count; i++) points.push(p.fromBufferAttribute(position, i).toArray())
+    for (let i = 0; i < points.length; i += 3) piece.tri(points[i]!, points[i + 1]!, points[i + 2]!)
+    return piece.geometry()
+  })
 }
 
 const near = (actual: number, expected: number, message: string) =>
@@ -98,16 +111,12 @@ test('a motor is a flat-sided can, one draw group per piece, each winding outwar
     assert.equal(geometry.groups.length, MOTOR_GROUPS.length, `${shafts}: groups`)
     const position = geometry.getAttribute('position')
     let covered = 0
-    for (const group of geometry.groups) {
+    const pieces = piecesOf(geometry)
+    for (const [index, group] of geometry.groups.entries()) {
       assert.equal(group.start, covered, 'groups are contiguous')
       covered += group.count
       assert.ok(group.count > 0, `${MOTOR_GROUPS[group.materialIndex!]} has triangles`)
-      const piece = new Triangles()
-      const p = new Vector3()
-      const points: [number, number, number][] = []
-      for (let i = group.start; i < group.start + group.count; i++) points.push(p.fromBufferAttribute(position, i).toArray())
-      for (let i = 0; i < points.length; i += 3) piece.tri(points[i]!, points[i + 1]!, points[i + 2]!)
-      assert.ok(signedVolume(piece.geometry()) > 0, `${shafts}: ${MOTOR_GROUPS[group.materialIndex!]} outward`)
+      assert.ok(signedVolume(pieces[index]!) > 0, `${shafts}: ${MOTOR_GROUPS[group.materialIndex!]} outward`)
     }
     assert.equal(covered, position.count, 'every triangle is in a group')
   }
@@ -214,5 +223,38 @@ test('every roller socket has a post under it', () => {
       }
       assert.ok(found, `${id} ${socket.name} has no post`)
     }
+  }
+})
+
+test('a gear set and a counter gear wind outward, a draw group per colour, and sit where their socket says', () => {
+  for (const end of [1, -1] as const) {
+    for (const [name, geometry] of [['PRO', gearSet(2, end)], ['single-shaft', gearSet(1, end)], ['counter', counterGear(end)]] as const) {
+      assert.equal(geometry.groups.length, GEAR_GROUPS.length, name)
+      for (const [index, piece] of piecesOf(geometry).entries()) {
+        if (!piece.getAttribute('position').count) continue
+        assert.ok(signedVolume(piece) > 0, `${name} ${end}: ${GEAR_GROUPS[index]} outward`)
+      }
+    }
+    // The PRO train reaches in toward the motor, never out past the axle toward the bumper.
+    const pro = gearSet(2, end); pro.computeBoundingBox()
+    const inward = end === 1 ? pro.boundingBox!.min.z : -pro.boundingBox!.max.z
+    assert.ok(inward < -19, `PRO pinion reaches the motor shaft: ${inward}`)
+    assert.ok(Math.abs(end === 1 ? pro.boundingBox!.max.z : pro.boundingBox!.min.z) < 8, 'PRO axle spur is the outermost gear')
+  }
+  // A single-shaft crown gear clears the propeller shaft's bevel at x ±4.
+  const crown = gearSet(1, 1); crown.computeBoundingBox()
+  assert.ok(crown.boundingBox!.min.x >= 4, `crown clears the bevel: ${crown.boundingBox!.min.x}`)
+  // The counter gear clears the motor cradle (x 14.5–17.5) and the inner face of every wheel it sits beside.
+  const counter = counterGear(-1); counter.computeBoundingBox()
+  for (const id of CHASSIS_IDS) {
+    const l = layoutFor(id)
+    if (!l.motor.across) {
+      // gearSet(2, …) is placed for the mid motor on an 80 mm wheelbase.
+      assert.equal(l.wheelbaseMm, 80, `${id} wheelbase`)
+      assert.deepEqual(l.motor.position, [0, 18, 0], `${id} motor`)
+      continue
+    }
+    const wheelFace = Math.min(l.treadFrontMm, l.treadRearMm) / 2 - 5.75
+    assert.ok(counter.boundingBox!.min.x >= 16 && counter.boundingBox!.max.x < wheelFace, `${id} counter gear between cradle and wheel`)
   }
 })

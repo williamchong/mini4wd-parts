@@ -7,12 +7,12 @@ import { layoutFor, socketsFor } from './sockets.ts'
 
 /**
  * The slots every chassis has (data/taxonomy/slots.yml: `standard` adds only
- * counter-gear and propeller-shaft over `pro`, neither of which draws), because
+ * counter-gear and propeller-shaft over `pro`, and only counter-gear draws), because
  * a socket naming a slot the chassis lacks would sit there forever empty and
  * un-openable: the scene looks the slot up by id and silently skips a miss.
  */
 const SLOTS = new Map<string, { mirror: boolean }>([
-  ['body', { mirror: false }], ['motor', { mirror: false }], ['gear-set', { mirror: false }],
+  ['body', { mirror: false }], ['motor', { mirror: false }], ['gear-set', { mirror: false }], ['counter-gear', { mirror: false }],
   ['terminal', { mirror: false }], ['switch', { mirror: false }], ['axle', { mirror: true }],
   ['bearing', { mirror: true }], ['wheel-front', { mirror: true }], ['wheel-rear', { mirror: true }],
   ['tire-front', { mirror: true }], ['tire-rear', { mirror: true }], ['front-stay', { mirror: false }],
@@ -29,9 +29,12 @@ test('every socket names a slot the chassis has, and socket names are unique', (
   }
 })
 
-test('every chassis shows the same fourteen slots, so the tap measurements carry over', () => {
+test('every chassis shows the same fifteen slots, plus the counter gear where the motor lies across, so the tap measurements carry over', () => {
   const ma = new Set(socketsFor('ma').map(s => s.name))
-  for (const id of CHASSIS_IDS) assert.deepEqual(new Set(socketsFor(id).map(s => s.name)), ma, id)
+  for (const id of CHASSIS_IDS) {
+    const expected = layoutFor(id).motor.across ? new Set([...ma, 'counter-gear']) : ma
+    assert.deepEqual(new Set(socketsFor(id).map(s => s.name)), expected, id)
+  }
 })
 
 test('a mirrored slot gets a -l and a -r socket at mirrored x', () => {

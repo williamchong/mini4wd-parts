@@ -16,14 +16,16 @@
  * tread are on its record, the regulation envelope (105 × 165 × 70) bounds the
  * rest, and a shape drawn for an impression does not need to be truer than that.
  *
- * Only slots you can see get a socket (§5.4): gear-set, terminal, switch, axle,
- * bearing and fastener draw nothing and are picked from the list.
+ * Only slots you can see get a socket (§5.4): terminal, switch, axle, bearing,
+ * fastener and propeller-shaft draw nothing and are picked from the list. The
+ * gears are seen once the shell is lifted, so gear-set has a socket at each
+ * axle, and a single-shaft chassis' counter-gear one at its motor.
  */
 import type { ChassisId } from '../catalog/chassis.ts'
 
 /** The proxy shape drawn in a socket until a part has a generator. */
 export type ProxyKind =
-  | 'body' | 'motor' | 'wheel' | 'tire' | 'roller' | 'stay' | 'side-stay' | 'brake' | 'damper'
+  | 'body' | 'motor' | 'gear' | 'counter-gear' | 'wheel' | 'tire' | 'roller' | 'stay' | 'side-stay' | 'brake' | 'damper'
 
 export type SceneSocket = {
   /** Unique within the chassis; `-l`/`-r` suffixed for mirrored slots (§5.4). */
@@ -83,6 +85,11 @@ function sockets(l: Layout): SceneSocket[] {
   return [
     single('body', 'body', [0, BODY_Y, 0]),
     { ...single('motor', 'motor', l.motor.position), rotateY: l.motor.across ? Math.PI / 2 : undefined },
+    // One gear set, drawn at both axles; numbered like the brake and dampers.
+    single('gear-set', 'gear', [0, AXLE_Y, halfWheelbase], 'gear-set-1'),
+    single('gear-set', 'gear', [0, AXLE_Y, -halfWheelbase], 'gear-set-2'),
+    // Only a motor across the car turns a counter gear; a PRO chassis has no such slot.
+    ...(l.motor.across ? [single('counter-gear', 'counter-gear', l.motor.position)] : []),
     ...mirrored('wheel-front', 'wheel', [front, AXLE_Y, halfWheelbase]),
     ...mirrored('wheel-rear', 'wheel', [rear, AXLE_Y, -halfWheelbase]),
     ...mirrored('tire-front', 'tire', [front, AXLE_Y, halfWheelbase]),

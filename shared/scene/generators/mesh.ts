@@ -17,6 +17,16 @@ export type Point2 = readonly [x: number, y: number]
 export const mirrorX = (right: readonly Point2[]): Point2[] =>
   right.map(([x, y]) => [-x, y] as const).reverse()
 
+/**
+ * A point in a (u, v, h) frame placed on an axis — h along it, u and v across
+ * — offset by `origin`. The swap is cyclic, so a ring wound counter-clockwise
+ * in (u, v) and listed toward +h winds outward on any axis.
+ */
+export function onAxis(axis: 'x' | 'y' | 'z', [ox, oy, oz]: Point3, [u, v, h]: Point3): Point3 {
+  const [x, y, z]: Point3 = axis === 'x' ? [h, u, v] : axis === 'y' ? [v, h, u] : [u, v, h]
+  return [x + ox, y + oy, z + oz]
+}
+
 export class Triangles {
   private readonly positions: number[] = []
 
@@ -69,13 +79,10 @@ export class Triangles {
    * fan at each end and no zero-area triangles: half of what a naive sweep
    * of the same profile would emit.
    */
-  revolve(profile: readonly Point2[], segments: number, axis: 'x' | 'y' | 'z', [ox, oy, oz]: Point3 = [0, 0, 0]) {
+  revolve(profile: readonly Point2[], segments: number, axis: 'x' | 'y' | 'z', origin: Point3 = [0, 0, 0]) {
     const place = (r: number, h: number, i: number): Point3 => {
       const a = (i / segments) * Math.PI * 2
-      const u = r * Math.cos(a)
-      const v = r * Math.sin(a)
-      const [x, y, z]: Point3 = axis === 'x' ? [h, u, v] : axis === 'y' ? [v, h, u] : [u, v, h]
-      return [x + ox, y + oy, z + oz]
+      return onAxis(axis, origin, [r * Math.cos(a), r * Math.sin(a), h])
     }
     const ring = ([r, h]: Point2): Point3[] => Array.from({ length: segments }, (_, i) => place(r, h, i))
     for (let k = 0; k < profile.length; k++) {

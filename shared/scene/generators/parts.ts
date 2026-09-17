@@ -19,7 +19,7 @@
  */
 import type { BufferGeometry } from 'three'
 import { STEEL } from './chassis.ts'
-import { cylinder, plate, Triangles } from './mesh.ts'
+import { cylinder, onAxis, plate, Triangles } from './mesh.ts'
 import type { Point2, Point3 } from './mesh.ts'
 
 /**
@@ -231,4 +231,96 @@ export function motorPaints({ cap, sticker, can = STEEL }: { cap: number; sticke
     vents: { colour: VENT, finish: 'plastic' }
   }
   return MOTOR_GROUPS.map(group => paints[group])
+}
+
+/**
+ * `count` teeth about an axis, each a small prism standing from radius `r0`
+ * out to `r1` and from `h0` to `h1` along the axis, narrower at the tip than
+ * the root. Radial teeth on a disc make a spur gear; a ring of them standing
+ * on one face makes a crown gear.
+ */
+function teeth(t: Triangles, count: number, r0: number, r1: number, h0: number, h1: number, axis: 'x' | 'y' | 'z', origin: Point3) {
+  // At the root a tooth fills half its pitch, the gap the other half.
+  const half = Math.PI / count / 2
+  for (let i = 0; i < count; i++) {
+    const a = (i / count) * Math.PI * 2
+    const footprint: Point2[] = [[r0, a - half], [r1, a - half * 0.55], [r1, a + half * 0.55], [r0, a + half]]
+      .map(([r, angle]) => [r! * Math.cos(angle!), r! * Math.sin(angle!)] as const)
+    const ring = (h: number) => footprint.map(([u, v]) => onAxis(axis, origin, [u, v, h]))
+    t.solid([ring(h0), ring(h1)])
+  }
+}
+
+/** A spur gear: a disc of `count` teeth whose tips reach `r`, from `h0` to `h1` along its axis. */
+function spur(t: Triangles, count: number, r: number, h0: number, h1: number, axis: 'x' | 'y' | 'z', origin: Point3) {
+  const depth = Math.min(1.2, r * 0.25)
+  // The disc a little past the teeth's root, so no seam shows between them.
+  t.revolve(cylinder(r - depth + 0.3, h0, h1), count, axis, origin)
+  teeth(t, count, r - depth, r, h0, h1, axis, origin)
+}
+
+/**
+ * The draw groups of `gearSet()` and `counterGear()`: the moulded gears,
+ * whose colour is what a gear set is sold by, and the steel pins they turn on.
+ */
+export const GEAR_GROUPS = ['gears', 'pins'] as const
+
+/**
+ * The gear set at one axle, drawn from its socket on the axle's centre line.
+ * `towardNose` is +1 at the front axle and -1 at the rear, which says which
+ * way the motor lies.
+ *
+ * PRO (`shafts` 2): the motor lies along the car and each end of its shaft
+ * carries a pinion, which turns the crown face of a counter gear, whose small
+ * spur turns the spur gear on the axle — the whole train, between the two
+ * housings the chassis draws. Positions follow the socket table's mid motor
+ * (shaft tips 21 mm either side of centre, 6 mm above the axles) on the
+ * 80 mm wheelbase all three PRO chassis share.
+ *
+ * Single-shaft (`shafts` 1): the propeller shaft's bevel meets a crown gear on
+ * the axle, beside the housing; the motor pinion and counter gear are the
+ * counter-gear slot's, at the motor (`counterGear()`).
+ */
+export function gearSet(shafts: 1 | 2, towardNose: 1 | -1): BufferGeometry {
+  const gears = new Triangles()
+  const pins = new Triangles()
+  if (shafts === 2) {
+    // The motor is toward the car's middle: -z at the front axle, +z at the rear.
+    const inward = -towardNose
+    spur(gears, 14, 7.5, -9, -6, 'x', [0, 0, 0])
+    const counter: Point3 = [0, 6, 12 * inward]
+    spur(gears, 10, 5.5, -9, -6, 'x', counter)
+    gears.revolve(cylinder(7.5, -6, -4.5), 14, 'x', counter)
+    teeth(gears, 14, 5.5, 7.5, -4.5, -3, 'x', counter)
+    pins.revolve(cylinder(1, -10.5, -1.5), 6, 'x', counter)
+    // The pinion on the motor shaft, against the crown face.
+    const [z0, z1] = [17 * inward, 20 * inward].sort((a, b) => a - b)
+    spur(gears, 6, 2.2, z0!, z1!, 'z', [0, 6, 0])
+  } else {
+    gears.revolve(cylinder(9, 5.2, 6.7), 16, 'x')
+    teeth(gears, 16, 6.5, 9, 4, 5.2, 'x', [0, 0, 0])
+    gears.revolve(cylinder(2.5, 6.7, 8.7), 8, 'x')
+  }
+  return Triangles.grouped([gears, pins])
+}
+
+/**
+ * A single-shaft chassis' counter gear, drawn from the motor socket before the
+ * socket turns the motor across the car, so the motor's shaft runs along +x
+ * here: the pinion on the shaft and the counter gear it turns, on a steel pin,
+ * toward the axle the motor is nearer (`towardNose`).
+ */
+export function counterGear(towardNose: 1 | -1): BufferGeometry {
+  const gears = new Triangles()
+  const pins = new Triangles()
+  spur(gears, 8, 2.4, 18, 21, 'x', [0, 0, 0])
+  const counter: Point3 = [0, 5.5, 7.5 * towardNose]
+  spur(gears, 16, 7, 18, 21.5, 'x', counter)
+  pins.revolve(cylinder(1, 16, 23.5), 6, 'x', counter)
+  return Triangles.grouped([gears, pins])
+}
+
+/** The paint for each of `GEAR_GROUPS`: the gears in their colour, the pins in steel. */
+export function gearPaints(colour: number): Paint[] {
+  return [{ colour, finish: 'plastic' }, { colour: STEEL, finish: 'metal' }]
 }
