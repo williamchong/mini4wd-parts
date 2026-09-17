@@ -49,6 +49,7 @@ colours:
   wheel: "#ff5fae"
   tire: "#1f2124"
   source: scraped
+body: aero-avante
 priceJpy: 1100
 priceJpyExTax: 1000
 releaseDate: 2018-02-10

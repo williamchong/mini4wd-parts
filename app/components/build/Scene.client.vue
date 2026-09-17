@@ -22,7 +22,7 @@ import type { BufferGeometry } from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { layoutFor, socketsFor } from '#shared/scene/sockets'
 import type { ProxyKind } from '#shared/scene/sockets'
-import { silhouetteFor, silhouetteId } from '#shared/scene/bodies'
+import { DEFAULT_SILHOUETTE } from '#shared/scene/bodies'
 import { bodyGeometry } from '#shared/scene/generators/body'
 import type { Silhouette } from '#shared/scene/generators/body'
 import { chassisPieces } from '#shared/scene/generators/chassis'
@@ -33,13 +33,13 @@ import type { ChassisId, Kit, PartColours, PartSpecs } from '#shared/catalog/sch
 
 const props = defineProps<{
   chassis: ChassisId
-  /** The kit the build started from, whose box art the body shell is drawn after. */
-  kit: string | null
-  /** What that kit's body, wheels and tires are moulded in, from the catalog. */
+  /** The body shell the kit the build started from draws, when it has one (§5.6). */
+  kitBody: string | null
+  /** What that kit's body, wheels, tires and rollers are moulded in, from the catalog. */
   kitColours: Kit['colours'] | null
   slots: ResolvedSlot[]
-  /** The catalog by item number, read for the specs that size a proxy and the colour it is drawn in. */
-  parts: ReadonlyMap<string, { specs: PartSpecs; colours?: PartColours }>
+  /** The catalog by item number, read for the specs that size a proxy, the colour it is drawn in and a body part's shell. */
+  parts: ReadonlyMap<string, { specs: PartSpecs; colours?: PartColours; body?: string }>
   /** The slot whose picker is open; its proxy stays lit until it closes. */
   openSlotId: string | null
 }>()
@@ -63,7 +63,7 @@ type Highlight = 'none' | 'hover' | 'open'
 /**
  * What sizes a shape: `mm` is what `diameterFor` finds for the kind — a round
  * part's diameter, a plate's thickness — `wheelMm` the wheel a tire sits on,
- * `silhouette` which table entry a body is lofted from, and `towardNose`
+ * `silhouette` which body shell a body is lofted from, and `towardNose`
  * which end a stay or a gear faces. Each field is zero for the kinds that ignore it, so
  * the cache key built from them holds one geometry per shape that actually
  * differs. The motor and the gears are keyed by less than they depend on:
@@ -262,6 +262,16 @@ const TAP_SLOP_PX = 6
  */
 type ProxyData = { slotId: string; state: ProxyState; kind: ProxyKind; tint: number; paints?: readonly parts.Paint[] }
 
+/**
+ * The body shells, one lazily imported JSON file each, generated from
+ * data/bodies by `npm run catalog:generate` (§5.6). A shell is fetched when a
+ * kit or body part that draws it is chosen, so the 3D chunk carries none of
+ * the 196 and the page payload only their ids. Loaded shapes are plain numbers
+ * and outlive a remount; geometry is built from them per scene.
+ */
+const SHAPE_FILES = import.meta.glob<Silhouette>('../../../content/bodies/*.json', { import: 'default' })
+const shapes = new Map<string, Silhouette>([['default', DEFAULT_SILHOUETTE]])
+
 let cleanup: (() => void) | undefined
 let resetCamera = () => {}
 
@@ -300,10 +310,10 @@ onMounted(() => {
    * shell a reader had browsed past. One slot, disposed when the kit changes.
    */
   let body: { id: string; geometry: BufferGeometry } | undefined
-  function bodyFor(id: string) {
+  function bodyFor(id: string, silhouette: Silhouette) {
     if (body?.id !== id) {
       body?.geometry.dispose()
-      const geometry = bodyGeometry(silhouetteFor(id))
+      const geometry = bodyGeometry(silhouette)
       // The shell is its own hit volume, and a long thin shell's bounding box
       // rejects most rays before its triangles are tested; its sphere would not.
       geometry.computeBoundingBox()
@@ -506,20 +516,37 @@ onMounted(() => {
    * tire socket its `tire` — whether the kit shipped it or the reader chose
    * it. A kit's own moulded body, wheels and tires have no item number and
    * take the kit's recorded colours, as long as the slot is still the kit's.
-   * Then the silhouette's livery (the only record of a kit's roller colour),
-   * then the category's natural colour.
+   * Then the category's natural colour.
    */
-  function tintFor(kind: ProxyKind, slot: ResolvedSlot, livery: Silhouette): number {
+  function tintFor(kind: ProxyKind, slot: ResolvedSlot): number {
     const part = coloursOf(slot)
     const own = kind === 'tire' ? part?.tire ?? part?.primary : part?.primary
     if (own) return hexColour(own)
     if (slot.swapped) return STOCK_TINT[kind]
     const kit = props.kitColours
-    if (kind === 'body') return hexColour(kit?.body) ?? livery.colour
-    if (kind === 'wheel') return hexColour(kit?.wheel) ?? livery.wheelColour ?? STOCK_TINT.wheel
-    if (kind === 'tire') return hexColour(kit?.tire) ?? STOCK_TINT.tire
-    if (kind === 'roller') return livery.rollerColour ?? STOCK_TINT.roller
-    return STOCK_TINT[kind]
+    const moulded = kind === 'body' || kind === 'wheel' || kind === 'tire' || kind === 'roller' ? kit?.[kind] : undefined
+    return hexColour(moulded) ?? STOCK_TINT[kind]
+  }
+
+  /**
+   * The shell a body slot draws: a swapped-in body part's own, else the kit's,
+   * else the wedge. `undefined` while its file is still loading, and the scene
+   * repopulates when it lands; a shell that fails to load draws the wedge.
+   */
+  let disposed = false
+  const loading = new Set<string>()
+  function silhouetteFor(slot: ResolvedSlot): { id: string; silhouette?: Silhouette } {
+    const partId = slot.entries[0]?.partId
+    const id = (slot.swapped ? partId && props.parts.get(partId)?.body : props.kitBody) || 'default'
+    const loaded = shapes.get(id)
+    const load = SHAPE_FILES[`../../../content/bodies/${id}.json`]
+    if (loaded || !load) return { id: loaded ? id : 'default', silhouette: loaded ?? DEFAULT_SILHOUETTE }
+    if (loading.has(id)) return { id }
+    loading.add(id)
+    load()
+      .then(shape => shapes.set(id, shape), () => shapes.set(id, DEFAULT_SILHOUETTE))
+      .then(() => disposed || populate())
+    return { id }
   }
 
   /**
@@ -535,7 +562,6 @@ onMounted(() => {
   /** The attach step: for each socket, clear it and add what its slot holds. */
   function populate() {
     const bySlot = new Map(props.slots.map(slot => [slot.id, slot]))
-    const livery = silhouetteFor(props.kit)
     hits = []
     proxies = []
     let lift = 0
@@ -550,20 +576,24 @@ onMounted(() => {
       // and a wireframe loft over the whole car was the one outline that read
       // as a tangle rather than a slot.
       if (socket.kind === 'body' && state === 'empty') continue
+      const shell = socket.kind === 'body' ? silhouetteFor(slot) : undefined
+      // A shell still loading draws nothing yet, as an empty body does.
+      if (shell && !shell.silhouette) continue
       const mm = diameterFor(socket.kind, slot, bySlot)
       const shape: Shape = {
         mm,
         wheelMm: socket.kind === 'tire' ? wheelUnder(slot, bySlot) : 0,
-        silhouette: socket.kind === 'body' ? silhouetteId(slot.swapped ? null : props.kit) : '',
+        silhouette: shell?.id ?? '',
         towardNose: TOWARD_NOSE.has(socket.kind) ? (socket.position[2] < 0 ? -1 : 1) : 0
       }
-      const tint = tintFor(socket.kind, slot, livery)
+      const tint = tintFor(socket.kind, slot)
       const data: ProxyData = { slotId: socket.slotId, state, kind: socket.kind, tint }
       if (socket.kind === 'motor') data.paints = motorPaintsFor(slot, tint)
       if (GEARS.has(socket.kind)) data.paints = parts.gearPaints(tint)
       const table = state === 'empty' ? OUTLINE : VISIBLE
+      // `shell` is set and loaded for every body that reaches here (see above).
       const visibleGeometry = socket.kind === 'body'
-        ? bodyFor(shape.silhouette)
+        ? bodyFor(shell!.id, shell!.silhouette!)
         : geometry(table, socket.kind, shape, `${table === OUTLINE ? 'o' : 'v'}:${shapeKey(socket.kind, shape)}`)
       const visible = new Mesh(visibleGeometry, materialsFor(data, highlightFor(socket.slotId)))
       visible.userData = data
@@ -705,6 +735,7 @@ onMounted(() => {
   }
 
   cleanup = () => {
+    disposed = true
     cancelAnimationFrame(frame)
     controls.removeEventListener('change', requestRender)
     stopSlots()

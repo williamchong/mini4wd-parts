@@ -13,6 +13,7 @@
     "catalog:generate": "node scripts/catalog/generate.ts",
     "catalog:thumbs": "node scripts/catalog/thumbs.ts",
     "catalog:report": "node scripts/catalog/report.ts",
+    "catalog:bodies": "node scripts/catalog/body-sheet.ts",
     "catalog:crossref": "node scripts/catalog/crossref.ts",
     "catalog:verify": "node scripts/catalog/verify.ts",
     "test": "node --test '{scripts,shared}/**/*.test.ts'",

@@ -7,6 +7,10 @@ import { partSchema, chassisSchema, kitSchema } from '../../shared/catalog/schem
 import type { Chassis, Loadout, Slot } from '../../shared/catalog/schema.ts'
 import { newBuild, resolveBuild } from '../../shared/catalog/build.ts'
 import { checkBuild } from '../../shared/catalog/rules.ts'
+import { bodyForKit, bodyProblems, loadBodies, silhouetteOf } from './bodies.ts'
+import { readJsonFile } from './io.ts'
+import { ROOT } from './fetch.ts'
+import { join } from 'node:path'
 
 /**
  * Validates the committed catalog on its own, without Nuxt. `nuxt generate`
@@ -143,10 +147,40 @@ for (const kit of kits) {
   checkStock(`kits/${kit.id}`, host, kit)
 }
 
+/**
+ * Bodies (docs/PLAN.md §5.6): every id a kit or part names is authored, every
+ * kit and part a body lists exists, every article it matches reaches a kit,
+ * content/bodies is what data/bodies generates, and each shell is outward,
+ * inside the regulation envelope and in line with its kits' printed size.
+ */
+const bodies = loadBodies()
+errors.push(...bodies.errors)
+for (const kit of kits) {
+  if (kit.body !== bodyForKit(bodies, kit)) errors.push(`kits/${kit.id}: body is ${kit.body ?? 'unset'}, data/bodies says ${bodyForKit(bodies, kit) ?? 'none'} — run npm run catalog:generate`)
+}
+for (const part of parts) {
+  if (part.body !== bodies.byPart.get(part.id)) errors.push(`parts/${part.id}: body is ${part.body ?? 'unset'}, data/bodies says ${bodies.byPart.get(part.id) ?? 'none'} — run npm run catalog:generate`)
+}
+const kitsById = new Map(kits.map(kit => [kit.id, kit]))
+const titles = new Set(kits.map(kit => kit.loadoutSourceTitle))
+for (const [id, body] of bodies.byId) {
+  const label = `bodies/${id}`
+  if (!kitsById.has(body.reference)) errors.push(`${label}: reference kit ${body.reference} is not in the catalog`)
+  for (const kit of body.kits) if (!kitsById.has(kit)) errors.push(`${label}: kit ${kit} is not in the catalog`)
+  for (const part of body.parts) if (!partsById.get(part)?.category.startsWith('body')) errors.push(`${label}: part ${part} is not a body in the catalog`)
+  for (const title of body.titles) if (!titles.has(title)) errors.push(`${label}: no kit's loadout comes from the article "${title}"`)
+  if (!existsSync(join(ROOT, `content/bodies/${id}.json`)) || JSON.stringify(readJsonFile(`content/bodies/${id}.json`)) !== JSON.stringify(silhouetteOf(body))) {
+    errors.push(`${label}: content/bodies/${id}.json is stale — run npm run catalog:generate`)
+  }
+  const drawnBy = kits.filter(kit => kit.body === id)
+  for (const problem of bodyProblems(silhouetteOf(body), drawnBy)) errors.push(`${label}: ${problem}`)
+}
+
 if (errors.length) {
   console.error(`Catalog invalid — ${errors.length} problem(s):`)
   for (const error of errors) console.error(`  ${error}`)
   process.exit(1)
 }
 
-console.log(`Catalog OK: ${parts.length} parts, ${chassis.length} chassis, ${kits.length} kits`)
+console.log(`Catalog OK: ${parts.length} parts, ${chassis.length} chassis, ${kits.length} kits, `
+  + `${bodies.byId.size} bodies drawn by ${kits.filter(kit => kit.body).length} kits`)

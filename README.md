@@ -61,6 +61,7 @@ npm run typecheck    # scripts/ + app/ 型別檢查 type checks
 npm run scrape             # 更新 data/raw/（有節流與快取 throttled, cached）
 npm run catalog:generate   # data/ → content/
 npm run catalog:thumbs     # 產生縮圖 product thumbnails
+npm run catalog:bodies     # 車殼輪廓對照圖 body shells beside their box art, into .cache/
 npm run catalog:verify     # 驗證 content/ validate the committed YAML
 npm run catalog:report     # 列出需人手處理的項目 what still needs a human
 npm run catalog:crossref   # 與 Fandom Wiki 分類對照 audit categories against the wiki
@@ -71,7 +72,7 @@ CI 在部署前會執行 `npm test`、`npm run typecheck` 及 `npm run catalog:v
 ## 授權 Licence
 
 - **原始碼 Source code** — [GNU GPL v3.0 或更新版本 or later](LICENSE)：`app/`、`shared/`、`scripts/`、`i18n/` 及設定檔，包括在瀏覽器中產生 3D 模型的程式碼。`app/`, `shared/`, `scripts/`, `i18n/` and the config files, including the code that generates the 3D models in the browser.
-- **素材 Assets** — [CC BY-SA 4.0](LICENSE-ASSETS)：本站撰寫的文字（`content/zh-Hant/`、`content/en/`、`docs/`）、本站整理的零件資料（`data/chassis/`、`data/overrides/`、`data/taxonomy/` 及其產生的 `content/parts/`、`content/chassis/`、`content/kits/`），以及 `public/images/` 與 `public/favicon.png`。Our own text (`content/zh-Hant/`, `content/en/`, `docs/`), our compiled catalog (`data/chassis/`, `data/overrides/`, `data/taxonomy/` and the `content/parts/`, `content/chassis/`, `content/kits/` generated from them), and `public/images/` and `public/favicon.png`.
+- **素材 Assets** — [CC BY-SA 4.0](LICENSE-ASSETS)：本站撰寫的文字（`content/zh-Hant/`、`content/en/`、`docs/`）、本站整理的零件資料（`data/chassis/`、`data/overrides/`、`data/taxonomy/`、`data/bodies/` 及其產生的 `content/parts/`、`content/chassis/`、`content/kits/`、`content/bodies/`），以及 `public/images/` 與 `public/favicon.png`。Our own text (`content/zh-Hant/`, `content/en/`, `docs/`), our compiled catalog (`data/chassis/`, `data/overrides/`, `data/taxonomy/`, `data/bodies/` and the `content/parts/`, `content/chassis/`, `content/kits/`, `content/bodies/` generated from them), and `public/images/` and `public/favicon.png`.
 
 以下不在上述授權範圍內 Not covered by either licence:
 

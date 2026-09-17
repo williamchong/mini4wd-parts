@@ -10,6 +10,7 @@ import type { ChassisId, Kit, KitOverride, LabelNames, Loadout, PartCategory, Pa
 import { compact, deriveCategory, deriveLegality, deriveSlots, deriveSpecs, isPlainObject, normalise } from './taxonomy.ts'
 import { labelFor, neutralLabel } from './labels.ts'
 import { colourOf, coloursIn } from './colours.ts'
+import { bodyForKit, loadBodies, writeBodies } from './bodies.ts'
 import { GENRE_SERIES, KIT_GENRE_SERIES, type JpItem, type KitGenreCode, type PartGenreCode } from './sources/tamiya-jp.ts'
 import type { HkItem } from './sources/tamiya-hk.ts'
 import type { FandomKitVariant, FandomPart } from './sources/fandom.ts'
@@ -34,6 +35,7 @@ const fandomKits = readJsonFile<FandomKitVariant[]>('data/raw/fandom-kits.json')
 const fandomParts = readJsonFile<FandomPart[]>('data/raw/fandom-parts.json')
 const overrides = readYamlFileIfPresent<Record<string, PartOverride>>('data/overrides/parts.yml', {})
 const kitOverrides = readYamlFileIfPresent<Record<string, KitOverride>>('data/overrides/kits.yml', {})
+const bodies = loadBodies()
 const slotProfiles = readYamlFile<{ profiles: Record<string, unknown[]> }>('data/taxonomy/slots.yml').profiles
 
 const hkById = new Map(hkItems.map(item => [item.id, item]))
@@ -224,6 +226,7 @@ function buildPart(item: JpItem<PartGenreCode>) {
     detailThumbnail: detailThumbnailFor('parts', item.id),
     hkStoreUrl: hk?.url,
     fandomTitle: fandomTitleById.get(item.id),
+    body: bodies.byPart.get(item.id),
     specsRaw: item.specsRaw,
     scrapedAt: item.scrapedAt
   }
@@ -368,6 +371,7 @@ function buildKit(item: JpItem<KitGenreCode>, chassis: ChassisId) {
       tire: colourOf(wiki.tireColour),
       source: 'scraped'
     }),
+    body: bodyForKit(bodies, { id: item.id, loadoutSourceTitle: wiki?.title }),
     priceJpy: item.priceJpy,
     priceJpyExTax: item.priceJpyExTax,
     priceHkd: hk?.priceHkd,
@@ -461,6 +465,8 @@ for (const id of CHASSIS_IDS) {
   chassisFiles.set(`${id}.yml`, result.data)
 }
 
+failures.push(...bodies.errors)
+
 if (failures.length) {
   console.error('Schema validation failed — nothing written:')
   for (const failure of failures) console.error(`  ${failure}`)
@@ -470,10 +476,13 @@ if (failures.length) {
 await writeCollection('parts', partFiles)
 await writeCollection('chassis', chassisFiles)
 await writeCollection('kits', kitFiles)
+await writeBodies(bodies)
 
 console.log(`${jpItems.length} parts scraped -> ${partFiles.size} parts, ${chassisFiles.size} chassis written`)
 console.log(`${jpKits.length} kits scraped -> ${kitFiles.size} kits written `
   + `(${offScopeChassis.length} on chassis outside the v1 set)`)
+const shelled = [...kitFiles.values()].filter(kit => (kit as Kit).body).length
+console.log(`${bodies.byId.size} bodies written; ${shelled} of ${kitFiles.size} kits draw one`)
 if (untaggedKits.length) {
   console.log(`\n${untaggedKits.length} kits carry no chassis tag at all:`)
   for (const line of untaggedKits.slice(0, 15)) console.log(`  ${line}`)

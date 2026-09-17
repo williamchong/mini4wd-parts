@@ -46,6 +46,7 @@ colours:
   wheel: "#565b62"
   tire: "#1f2124"
   source: scraped
+body: raikiri
 priceJpy: 1320
 priceJpyExTax: 1200
 releaseDate: 2018-03-31

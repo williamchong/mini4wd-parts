@@ -98,3 +98,7 @@
 '95633': { colours: { body: '#2f5fc4' } }  # ネオVQS ポリカ
 '95143': { colours: { body: '#7cc0ec' } }  # デュアルリッジJr. J-CUP 2021
 '95703': { colours: { body: '#2440a8' } }  # ゼンペラー3 ポリカ
+
+# Rollers. The wiki has no roller colour field, so a kit's moulded rollers are
+# drawn in the stock tint unless an entry here reads them off the box art.
+'18635': { colours: { roller: '#3d63d8' } }  # ブラストアロー — blue plastic rollers

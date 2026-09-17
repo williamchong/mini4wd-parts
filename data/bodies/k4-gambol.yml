@@ -1,0 +1,14 @@
+# K4 Gambol (FM-A, 2021): a kei pickup truck. A tall square cab over the front
+# wheels, a flat load bed behind it with its rim at the waist, and fenders
+# cut open over all four wheels.
+name: K4 Gambol
+reference: '18718'
+titles: [K4 Gambol]
+hull:
+  - [-62, 35, 14, 34, 19]
+  - [-6, 36, 14, 35, 20]
+  - [-4, 36, 16, 34, 24, 32, 46]
+  - [46, 36, 18, 34, 26, 30, 46]
+  - [56, 35, 16, 33, 22, 28, 36]
+  - [62, 33, 10, 31, 16]
+arches: 16

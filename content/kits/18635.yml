@@ -52,7 +52,9 @@ colours:
   body: "#eef0f2"
   wheel: "#eef0f2"
   tire: "#1f2124"
-  source: scraped
+  roller: "#3d63d8"
+  source: override
+body: blast-arrow
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 100

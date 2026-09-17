@@ -1,0 +1,22 @@
+# Aero Avante (AR, 2012): the Avante as an AR-era racer. A narrow body between
+# the wheels, a long canopy, fins standing up at the nose's corners, and a
+# wide wing on two red pylons behind the rear axle.
+name: Aero Avante
+reference: '18701'
+titles: [Aero Avante]
+hull:
+  - [-56, 16, 6, 12, 12]
+  - [-40, 22, 8, 16, 15]
+  - [-24, 28, 9, 20, 17, 10, 22]
+  - [-6, 29, 9, 20, 17, 12, 26]
+  - [12, 26, 8, 18, 15, 10, 22]
+  - [30, 22, 6, 14, 12, 5, 14]
+  - [48, 20, 4, 14, 8]
+  - [64, 18, 3, 14, 5]
+pods:
+  - x: 19
+    stations:
+      - [40, 2, 18, 4]
+      - [54, 2, 14, 4]
+      - [64, 2, 6, 4]
+wing: { z: -56, halfWidth: 30, height: 32, chord: 14, pylons: 10 }

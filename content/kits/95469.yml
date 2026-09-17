@@ -49,6 +49,7 @@ colours:
   wheel: "#eef0f2"
   tire: "#7cc0ec"
   source: scraped
+body: avante-mk3
 priceJpy: 1210
 priceJpyExTax: 1100
 priceHkd: 110

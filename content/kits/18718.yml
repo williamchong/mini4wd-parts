@@ -50,6 +50,7 @@ colours:
   wheel: "#1f2124"
   tire: "#1f2124"
   source: scraped
+body: k4-gambol
 priceJpy: 1210
 priceJpyExTax: 1100
 releaseDate: 2021-12-11

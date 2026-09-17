@@ -3,8 +3,8 @@ import { test } from 'node:test'
 import { Vector3 } from 'three'
 import type { BufferGeometry } from 'three'
 import { CHASSIS_IDS } from '../../catalog/chassis.ts'
-import { DEFAULT_SILHOUETTE, silhouetteFor } from '../bodies.ts'
-import { bodyGeometry, FLOOR_MM } from './body.ts'
+import { DEFAULT_SILHOUETTE } from '../bodies.ts'
+import { AXLE_Z, bodyGeometry, FLOOR_MM } from './body.ts'
 import { BLACK, chassisPieces, STEEL } from './chassis.ts'
 import { layoutFor, socketsFor } from '../sockets.ts'
 import { plate, Triangles } from './mesh.ts'
@@ -162,7 +162,7 @@ test('a body loft spans its hull, floor FLOOR_MM below the socket, every face ou
 
 test('pods and a wing add to the volume, so they wind outward too', () => {
   const hull = signedVolume(bodyGeometry(DEFAULT_SILHOUETTE))
-  const pods = { x: 29, stations: [{ z: 20, halfWidth: 6, top: 10, bottom: 2 }, { z: 60, halfWidth: 6, top: 10, bottom: 2 }] }
+  const pods = [{ x: 29, stations: [[20, 6, 10, 2], [60, 6, 10, 2]] as const }]
   const withPods = signedVolume(bodyGeometry({ ...DEFAULT_SILHOUETTE, pods }))
   // Two pods of a 6-cornered section, 40 long: well over the hull alone.
   assert.ok(withPods > hull + 2 * 40 * 8 * 6, `pods add volume: ${withPods - hull}`)
@@ -173,17 +173,24 @@ test('pods and a wing add to the volume, so they wind outward too', () => {
   near(winged.boundingBox!.max.y, 35.5 - FLOOR_MM, 'wing top'); near(winged.boundingBox!.max.x, 40, 'wing span')
 })
 
-test('the Blast Arrow silhouette is a closed outward shell', () => {
-  const geometry = bodyGeometry(silhouetteFor('18635'))
-  assert.ok(signedVolume(geometry) > 50_000, 'a car-sized volume')
+test('an arch lifts the flank over its axle and nowhere else, and takes volume away', () => {
+  const hull = [[-60, 36, 6, 30, 20], [60, 36, 6, 30, 20]] as const
+  const plain = bodyGeometry({ hull })
+  const arched = bodyGeometry({ hull, arches: [15, 0] })
+  assert.ok(signedVolume(arched) > 0, 'still outward')
+  assert.ok(signedVolume(arched) < signedVolume(plain), 'the arch is cut out')
+  // The lowest point on the outer flank at the front axle is the arch's crown.
+  const p = arched.getAttribute('position')
+  let crown = Infinity
+  let rearFlank = Infinity
+  for (let i = 0; i < p.count; i++) {
+    if (Math.abs(p.getX(i)) < 35) continue
+    if (Math.abs(p.getZ(i) - AXLE_Z) < 0.01) crown = Math.min(crown, p.getY(i) + FLOOR_MM)
+    if (Math.abs(p.getZ(i) + AXLE_Z) < 1) rearFlank = Math.min(rearFlank, p.getY(i) + FLOOR_MM)
+  }
+  near(crown, 13, 'crown: radius less the axle below the floor')
+  assert.equal(rearFlank, Infinity, 'no section added at the rear axle, which has no arch')
 })
-
-test('every kit without an entry gets the default silhouette', () => {
-  assert.equal(silhouetteFor('00000'), DEFAULT_SILHOUETTE)
-  assert.equal(silhouetteFor(null), DEFAULT_SILHOUETTE)
-  assert.notEqual(silhouetteFor('18635'), DEFAULT_SILHOUETTE)
-})
-
 test('every chassis winds outward, stays inside the regulation envelope and under the triangle budget', () => {
   for (const id of CHASSIS_IDS) {
     const pieces = chassisPieces(id)

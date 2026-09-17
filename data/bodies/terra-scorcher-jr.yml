@@ -1,0 +1,17 @@
+# Terra Scorcher Jr. (VS, 1990s re-release on Super-II): an off-road racer on
+# big tires, narrow between the wheels, a long low nose, a bubble canopy, and
+# a tall flat tail rising to a spoiler over the rear axle.
+name: Terra Scorcher Jr.
+reference: '18050'
+titles: [Terra Scorcher Jr.]
+hull:
+  - [-60, 22, 12, 18, 18]
+  - [-44, 24, 12, 21, 20]
+  - [-28, 25, 12, 22, 20, 14, 23]
+  - [-12, 25, 10, 22, 18, 16, 27]
+  - [8, 24, 9, 20, 16, 12, 23]
+  - [26, 22, 7, 18, 13]
+  - [46, 20, 5, 16, 10]
+  - [64, 16, 3, 12, 6]
+# The raised tail flap, a wing with no pylons sitting on the tail.
+wing: { z: -50, halfWidth: 24, height: 32, chord: 22 }

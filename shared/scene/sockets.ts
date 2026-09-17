@@ -59,7 +59,7 @@ export type Layout = {
 
 /** Wheel centres' height for a ⌀24 wheel; a larger tire lifts the whole car (§5.5). */
 export const AXLE_Y = 12
-const BODY_Y = 32
+export const BODY_Y = 32
 const ROLLER_Y = 12
 const STAY_Y = 8
 

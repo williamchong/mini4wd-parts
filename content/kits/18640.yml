@@ -50,6 +50,7 @@ colours:
   wheel: "#565b62"
   tire: "#1f2124"
   source: override
+body: raikiri
 priceJpy: 1210
 priceJpyExTax: 1100
 priceHkd: 110

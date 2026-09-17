@@ -305,6 +305,11 @@ export const partSchema = z.object({
    * 382 parts — the wiki covers Grade-Up Parts, not the AO spares range.
    */
   fandomTitle: z.string().optional(),
+  /**
+   * The shell a body part draws in the 3D pane, for the clear and spare body
+   * sets: the id of a data/bodies file, set there under `parts`.
+   */
+  body: z.string().optional(),
 
   /** Free-text 【基本スペック】 from Tamiya, kept for later spec parsing. */
   specsRaw: z.string().optional(),
@@ -450,8 +455,16 @@ export const kitSchema = z.object({
     body: hex.optional(),
     wheel: hex.optional(),
     tire: hex.optional(),
+    /** Only from data/overrides/kits.yml: the wiki has no roller colour field. */
+    roller: hex.optional(),
     source: provenance
   }).optional(),
+  /**
+   * The shell the 3D pane draws for this kit: the id of a data/bodies file,
+   * matched by the wiki article the loadout came from or listed there by item
+   * number (docs/PLAN.md §5.6). Absent while the car has no silhouette.
+   */
+  body: z.string().optional(),
 
   priceJpy: z.number().optional(),
   priceJpyExTax: z.number().optional(),
@@ -469,6 +482,47 @@ export const kitSchema = z.object({
   scrapedAt: z.string()
 })
 
+/**
+ * A body shell's shape (docs/PLAN.md §5.6), as shared/scene/generators/body.ts
+ * draws it: rows rather than objects, because this is what ships to the
+ * browser and the keys would be most of the bytes. Mirrors `Silhouette` there,
+ * which cannot import Zod.
+ */
+const mm = z.number().finite()
+const station = z.union([
+  z.tuple([mm, mm, mm, mm, mm]),
+  z.tuple([mm, mm, mm, mm, mm, mm, mm])
+])
+export const silhouetteSchema = z.object({
+  hull: z.array(station).min(2)
+    .refine(rows => rows.every((row, i) => i === 0 || row[0] > rows[i - 1]![0]), 'stations must run tail to nose')
+    .refine(rows => rows.every(([, halfWidth, shoulder, halfDeck, deck, halfTop, height]) =>
+      halfDeck <= halfWidth && shoulder <= deck && (halfTop === undefined || (halfTop <= halfDeck && height! >= deck))),
+    'each station narrows and rises: deck inside the floor, shoulder under the deck, cabin inside and on top of the deck'),
+  arches: z.union([mm.nonnegative(), z.tuple([mm.nonnegative(), mm.nonnegative()])]).optional(),
+  pods: z.array(z.object({
+    x: mm,
+    stations: z.array(z.tuple([mm, mm, mm, mm])).min(2)
+      .refine(rows => rows.every((row, i) => i === 0 || row[0] > rows[i - 1]![0]), 'pod stations must run tail to nose')
+  }).strict()).optional(),
+  wing: z.object({ z: mm, halfWidth: mm, height: mm, chord: mm, pylons: mm.optional() }).strict().optional()
+}).strict()
+
+/**
+ * An authored body, data/bodies/<id>.yml: the silhouette plus which kits and
+ * parts draw it. A kit is matched by `titles` (the wiki article its loadout
+ * came from) unless some body lists it under `kits`, which is also how the
+ * kits no article covers are reached. `reference` is the kit whose box art the
+ * numbers were read from.
+ */
+export const bodySchema = silhouetteSchema.extend({
+  name: z.string(),
+  reference: z.string().regex(/^\d{4,5}$/),
+  titles: z.array(z.string()).default([]),
+  kits: z.array(z.string().regex(/^\d{4,5}$/)).default([]),
+  parts: z.array(z.string()).default([])
+}).strict()
+
 export type Part = z.infer<typeof partSchema>
 export type PartSpecs = z.infer<typeof partSpecs>
 export type PartColours = z.infer<typeof partColours>
@@ -479,6 +533,7 @@ export type LoadoutEntry = z.infer<typeof loadoutEntry>
 export type LabelNames = z.infer<typeof labelNames>
 export type PartCategory = Part['category']
 export type Slot = Part['slots'][number]
+export type BodySource = z.infer<typeof bodySchema>
 
 /**
  * A hand-authored entry in one of the data/overrides files. Typed against the

@@ -49,6 +49,7 @@ colours:
   wheel: "#1f2124"
   tire: "#1f2124"
   source: scraped
+body: aero-avante
 priceJpy: 1100
 priceJpyExTax: 1000
 priceHkd: 100
