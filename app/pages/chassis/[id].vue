@@ -21,7 +21,7 @@ definePageMeta({ layout: 'content' })
 const route = useRoute()
 const { t, locale } = useI18n()
 const { term, slotLabel } = useTerm()
-const { resolve, isFallback, label: labelFor } = useCatalogName()
+const { resolve } = useCatalogName()
 const localePath = useLocalePath()
 const siteUrl = useRuntimeConfig().public.siteUrl
 
@@ -54,16 +54,22 @@ const { data } = await useAsyncData(() => `chassis-${locale.value}-${id.value}`,
   // `compatibleParts` is taken for the tally and dropped: 235 item numbers in
   // every payload to render 25 links would be the whole point of column
   // discipline thrown away one field at a time. `slots` keeps only what the
-  // page reads — `mirror` and `required` belong to the rule engine — and a
-  // loadout entry's `source` is provenance for the generator, not the reader.
+  // page reads — `mirror` and `required` belong to the rule engine — and the
+  // loadout keeps only the entries that name a real part. The rest are labels
+  // such as 'Kit standard gears' on every chassis alike, twelve rows that told
+  // a reader nothing, so they are counted into one line instead.
   const { compatibleParts, slots, defaultLoadout, notes, ...rest } = fromContent('chassis')(doc)
+  const loadoutEntries = Object.entries(defaultLoadout)
 
   const chassis = {
     ...rest,
     notes: locale.value === 'en' ? undefined : notes,
     slots: slots.map(({ id: slotId, type, maxCount }) => ({ id: slotId, type, maxCount })),
-    defaultLoadout: Object.fromEntries(Object.entries(defaultLoadout).map(([slotId, entries]) =>
-      [slotId, entries.map(({ partId, label }) => ({ partId, label }))]))
+    defaultLoadout: Object.fromEntries(loadoutEntries
+      .map(([slotId, entries]) => [slotId, entries.flatMap(({ partId }) => partId ? [partId] : [])] as const)
+      .filter(([, partIds]) => partIds.length)),
+    // Slots the runner fills with nothing that is sold on its own.
+    stockSlotCount: loadoutEntries.filter(([, entries]) => entries.every(entry => !entry.partId)).length
   }
 
   const compatible = new Set(compatibleParts)
@@ -76,9 +82,7 @@ const { data } = await useAsyncData(() => `chassis-${locale.value}-${id.value}`,
   // propeller shaft, the other three name nothing — so this is one extra query
   // on five of the sixteen routes rather than a `names` column on 382 rows of
   // all of them. The length guard keeps the other three at none.
-  const loadoutIds = [...new Set(Object.values(chassis.defaultLoadout).flat()
-    .map(entry => entry.partId)
-    .filter(partId => partId !== undefined))]
+  const loadoutIds = [...new Set(Object.values(chassis.defaultLoadout).flat())]
 
   const loadoutDocs = loadoutIds.length
     ? await queryCollection('parts').select('id', 'stem', 'names')
@@ -130,24 +134,18 @@ const specs = computed(() => {
 })
 
 /**
- * The bare runner's contents in the chassis' own slot order, which is the order
- * the builder lists them in. A slot the runner does not fill — the body, most
- * of the stays — is left out rather than printed empty.
+ * The real parts on the bare runner, in the chassis' own slot order, which is
+ * the order the builder lists them in. Empty on MA, MS and ME, whose runners
+ * name no part sold on its own, and the section goes with it.
  */
 const loadout = computed(() =>
   chassis.value.slots
     .map(slot => ({
       slot,
-      entries: (chassis.value.defaultLoadout[slot.id] ?? []).map((entry) => {
-        const names = entry.partId ? data.value?.loadoutNames[entry.partId] : undefined
-        // A catalog part marks its fallback the way every part row does; a bare
-        // label carries its own, since it may have no locale we serve at all.
-        if (names) {
-          return { partId: entry.partId, text: resolve(names).value, fallback: isFallback(names) }
-        }
-        const label = entry.label && labelFor(entry.label)
+      entries: (chassis.value.defaultLoadout[slot.id] ?? []).map((partId) => {
+        const names = data.value?.loadoutNames[partId]
         // An item number we hold no record for still names itself.
-        return { partId: entry.partId, text: label?.value ?? entry.partId, fallback: !!label?.fallback }
+        return { partId, text: names ? resolve(names).value : partId }
       })
     }))
     .filter(row => row.entries.length))
@@ -243,19 +241,20 @@ useHead(() => ({
           <dt>{{ slotLabel(row.slot) }}</dt>
           <dd>
             <ul class="loadout-entries">
-              <li v-for="(entry, index) in row.entries" :key="entry.partId ?? index">
-                <NuxtLink v-if="entry.partId" :to="localePath(`/parts/${entry.partId}`)">
+              <li v-for="entry in row.entries" :key="entry.partId">
+                <NuxtLink :to="localePath(`/parts/${entry.partId}`)">
                   {{ entry.text }}
                 </NuxtLink>
-                <!-- Most of what comes on a runner is moulded plastic Tamiya
-                     never sold separately, so a label with no item number is
-                     the normal case rather than a gap (§4.7). -->
-                <span v-else :class="{ fallback: entry.fallback }">{{ entry.text }}</span>
               </li>
             </ul>
           </dd>
         </template>
       </dl>
+      <!-- Most of what comes on a runner is moulded plastic Tamiya never sold
+           separately (§4.7), so it is counted rather than listed. -->
+      <p v-if="chassis.stockSlotCount" class="part-note">
+        {{ $t('chassis.loadoutStock', { count: chassis.stockSlotCount }) }}
+      </p>
     </section>
 
     <section class="part-section">
