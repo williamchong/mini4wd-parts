@@ -67,9 +67,9 @@ type Highlight = 'none' | 'hover' | 'open'
  * which end a stay faces. Each field is zero for the kinds that ignore it, so
  * the cache key built from them holds one geometry per shape that actually
  * differs. The motor is the one shape keyed by nothing here: it depends on
- * the chassis alone, and the page remounts this component per chassis, so a
- * cache never outlives one answer. The shapes themselves come from
- * shared/scene/generators (§5.6).
+ * the chassis alone — its end bell and sticker are paint, not shape — and the
+ * page remounts this component per chassis, so a cache never outlives one
+ * answer. The shapes themselves come from shared/scene/generators (§5.6).
  */
 type Shape = { mm: number; wheelMm: number; silhouette: string; towardNose: 1 | -1 | 0 }
 const shapeKey = (kind: ProxyKind, s: Shape) => `${kind}:${s.mm}:${s.wheelMm}:${s.silhouette}:${s.towardNose}`
@@ -110,7 +110,7 @@ const outlineRing = (r: number, w: number, axis: 'x' | 'y') => {
   return t.geometry()
 }
 const OUTLINE: Record<Solid, (shape: Shape) => BufferGeometry> = {
-  motor: () => outlineBox(20, 20, 25),
+  motor: () => outlineBox(20, 15, 25),
   wheel: shape => outlineRing(shape.mm / 2, 10, 'x'),
   tire: shape => outlineRing(shape.mm / 2, 9, 'x'),
   roller: shape => outlineRing(shape.mm / 2, 4, 'y'),
@@ -133,6 +133,11 @@ const TIRE_BAND_MM = DEFAULT_DIAMETER_MM.tire - DEFAULT_DIAMETER_MM.wheel
 function specsOf(slot: ResolvedSlot | undefined): PartSpecs | undefined {
   const id = slot?.entries[0]?.partId
   return id ? props.parts.get(id)?.specs : undefined
+}
+
+function coloursOf(slot: ResolvedSlot): PartColours | undefined {
+  const id = slot.entries[0]?.partId
+  return id ? props.parts.get(id)?.colours : undefined
 }
 
 /** The wheel a tire socket's tire sits on: the wheel slot at the same end. */
@@ -185,7 +190,8 @@ const HIT: Record<Solid, (mm: number) => BufferGeometry> = {
  */
 const EMPTY_COLOUR = 0xb8bcc2
 /** What a material is besides its colour: the four finishes a proxy can have. */
-const FINISH: Record<ProxyKind, 'shell' | 'rubber' | 'metal' | 'plastic'> = {
+type Finish = 'shell' | 'rubber' | 'metal' | 'plastic'
+const FINISH: Record<ProxyKind, Finish> = {
   body: 'shell',
   motor: 'metal',
   wheel: 'plastic',
@@ -196,9 +202,10 @@ const FINISH: Record<ProxyKind, 'shell' | 'rubber' | 'metal' | 'plastic'> = {
   brake: 'plastic',
   damper: 'metal'
 }
+/** A motor's is its end bell: AO-1001's white, the motor a kit ships with. */
 const STOCK_TINT: Record<ProxyKind, number> = {
   body: 0xd8dbe0,
-  motor: 0x9aa0a8,
+  motor: 0xeef0f2,
   wheel: 0x3a3d42,
   tire: 0x1d1f22,
   roller: 0xc9ced6,
@@ -218,7 +225,12 @@ function hexColour(hex: string | undefined) {
 /** The pixel distance under which a pointer down/up pair is a tap, not an orbit. */
 const TAP_SLOP_PX = 6
 
-type ProxyData = { slotId: string; state: ProxyState; kind: ProxyKind; tint: number }
+/**
+ * `paints` is set for a shape drawn in more than one colour, one per draw group
+ * of its geometry — only the motor, whose end bell and sticker are what tell
+ * one motor from another. `tint` is then its end bell.
+ */
+type ProxyData = { slotId: string; state: ProxyState; kind: ProxyKind; tint: number; paints?: readonly parts.Paint[] }
 
 let cleanup: (() => void) | undefined
 let resetCamera = () => {}
@@ -302,14 +314,13 @@ onMounted(() => {
    * so repopulating a socket allocates a mesh and nothing else. Highlight is an
    * emissive lift of the same colour, which reads as "lit" without a post pass.
    */
-  function material(state: ProxyState, highlight: Highlight, kind: ProxyKind, tint: number) {
+  function material(state: ProxyState, highlight: Highlight, kind: ProxyKind, tint: number, finish: Finish = FINISH[kind]) {
     // An empty slot is an outline, not a ghost: a translucent solid read as a
     // part that was half there. Everything else is opaque, the body included —
     // what it covers is reached by lifting it.
     if (kind === 'body' && state !== 'empty') return styleShell(highlight, tint)
     const empty = state === 'empty'
     const colour = empty ? EMPTY_COLOUR : tint
-    const finish = FINISH[kind]
     // Stock and changed draw alike now, so only emptiness splits the cache.
     const key = `${empty}:${highlight}:${colour}:${finish}`
     let found = materials.get(key)
@@ -325,6 +336,14 @@ onMounted(() => {
       materials.set(key, found)
     }
     return found
+  }
+
+  /** A proxy's material, or one per draw group when it is painted in several; an empty slot's outline has no groups. */
+  function materialsFor(data: ProxyData, highlight: Highlight) {
+    if (data.paints && data.state !== 'empty') {
+      return data.paints.map(paint => material(data.state, highlight, data.kind, paint.colour, paint.finish))
+    }
+    return material(data.state, highlight, data.kind, data.tint)
   }
 
   const renderer = new WebGLRenderer({ canvas: element, antialias: true, alpha: true })
@@ -461,8 +480,7 @@ onMounted(() => {
    * then the category's natural colour.
    */
   function tintFor(kind: ProxyKind, slot: ResolvedSlot, livery: Silhouette): number {
-    const partId = slot.entries[0]?.partId
-    const part = partId ? props.parts.get(partId)?.colours : undefined
+    const part = coloursOf(slot)
     const own = kind === 'tire' ? part?.tire ?? part?.primary : part?.primary
     if (own) return hexColour(own)
     if (slot.swapped) return STOCK_TINT[kind]
@@ -472,6 +490,16 @@ onMounted(() => {
     if (kind === 'tire') return hexColour(kit?.tire) ?? STOCK_TINT.tire
     if (kind === 'roller') return livery.rollerColour ?? STOCK_TINT.roller
     return STOCK_TINT[kind]
+  }
+
+  /**
+   * A motor's paint: its end bell in `tint`, and its sticker and can from the
+   * catalog record. A motor with no record — a PRO chassis' stock motor is a
+   * label — is drawn as the bare kit motor.
+   */
+  function motorPaintsFor(slot: ResolvedSlot, tint: number) {
+    const colours = coloursOf(slot)
+    return parts.motorPaints({ cap: tint, sticker: hexColour(colours?.sticker), can: hexColour(colours?.can) })
   }
 
   /** The attach step: for each socket, clear it and add what its slot holds. */
@@ -501,11 +529,12 @@ onMounted(() => {
       }
       const tint = tintFor(socket.kind, slot, livery)
       const data: ProxyData = { slotId: socket.slotId, state, kind: socket.kind, tint }
+      if (socket.kind === 'motor') data.paints = motorPaintsFor(slot, tint)
       const table = state === 'empty' ? OUTLINE : VISIBLE
       const visibleGeometry = socket.kind === 'body'
         ? bodyFor(shape.silhouette)
         : geometry(table, socket.kind, shape, `${table === OUTLINE ? 'o' : 'v'}:${shapeKey(socket.kind, shape)}`)
-      const visible = new Mesh(visibleGeometry, material(state, highlightFor(socket.slotId), socket.kind, tint))
+      const visible = new Mesh(visibleGeometry, materialsFor(data, highlightFor(socket.slotId)))
       visible.userData = data
       proxies.push(visible)
       // The shell is its own hit volume; everything else gets an oversized one.
@@ -532,7 +561,7 @@ onMounted(() => {
   function restyle() {
     for (const visible of proxies) {
       const data = visible.userData as ProxyData
-      visible.material = material(data.state, highlightFor(data.slotId), data.kind, data.tint)
+      visible.material = materialsFor(data, highlightFor(data.slotId))
     }
     requestRender()
   }

@@ -205,10 +205,18 @@ const hex = z.string().regex(/^#[0-9a-f]{6}$/)
  * carries, since one set fills both slots. `derived` means it was read from
  * the part's name, its wiki variant or its material; `override` that it was
  * set by looking at the product photo in data/overrides/parts.yml.
+ *
+ * A motor is the exception to "one colour": every Mini 4WD motor is the same
+ * can in one of two shaft layouts, and what tells two apart is the end bell
+ * (`primary`) and the sticker on the can's flat top — a Japan Cup edition is
+ * its base motor with a new sticker. `sticker` is absent on a bare can
+ * (AO-1001), and `can` only where the can is not plated steel.
  */
 export const partColours = z.object({
   primary: hex,
   tire: hex.optional(),
+  sticker: hex.optional(),
+  can: hex.optional(),
   source: provenance
 })
 

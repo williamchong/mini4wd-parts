@@ -35,6 +35,7 @@ specs:
   motorTorqueMax: 1.9
 colours:
   primary: "#d0312d"
+  sticker: "#232427"
   source: override
 priceJpy: 528
 priceJpyExTax: 480

@@ -14,90 +14,95 @@
 #
 # Specs (RPM, torque) are parsed from Tamiya's own 【基本スペック】 block and are
 # deliberately not repeated here.
+#
+# A motor's colours are read from its product photo: `primary` is the end bell,
+# `sticker` the background of the sticker on the can's flat top, and `can` only
+# where the can is not plated steel. The limited editions differ from their
+# base motor in the sticker alone.
 
 # --- Single-shaft motors (VS / VZ / AR / FM-A / Super-II …) -------------------
 '15484': # トルクチューン2モーター
   specs: { motorShaft: single }
   classLegality: { open: legal, stockBmax: legal, junior: legal }
-  colours: { primary: '#ec7a24' }
+  colours: { primary: '#ec7a24', sticker: '#e4e2dc' }
 '15485': # レブチューン2モーター
   specs: { motorShaft: single }
   classLegality: { open: legal, stockBmax: legal, junior: legal }
-  colours: { primary: '#2f5fc4' }
+  colours: { primary: '#2f5fc4', sticker: '#e4e2dc' }
 '15486': # アトミックチューン2モーター
   specs: { motorShaft: single }
   classLegality: { open: legal, stockBmax: legal, junior: legal }
-  colours: { primary: '#1f2124' }
+  colours: { primary: '#1f2124', sticker: '#e6dccb' }
 '15455': # ライトダッシュモーター
   specs: { motorShaft: single }
   classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }
-  colours: { primary: '#f2c230' }
+  colours: { primary: '#f2c230', sticker: '#eceef0' }
 '15477': # ハイパーダッシュ3モーター
   specs: { motorShaft: single }
   classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }
-  colours: { primary: '#d0312d' }
+  colours: { primary: '#d0312d', sticker: '#dcdcd8' }
 '15317': # パワーダッシュモーター
   specs: { motorShaft: single }
   classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }
-  colours: { primary: '#2a8f7a' }
+  colours: { primary: '#2a8f7a', sticker: '#c9ccd0' }
 '15318': # スプリントダッシュモーター
   specs: { motorShaft: single }
   classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }
-  colours: { primary: '#9aa0a8' }
+  colours: { primary: '#9aa0a8', sticker: '#c9ccd0' }
 '15307': # ウルトラダッシュモーター
   specs: { motorShaft: single }
   classLegality: { open: illegal, stockBmax: illegal, junior: illegal, notes: 田宮公認競技會不可使用 }
-  colours: { primary: '#1f2124' }
+  colours: { primary: '#1f2124', sticker: '#e2d6b0', can: '#c9b47a' }
 '15186': # プラズマダッシュモーター
   specs: { motorShaft: single }
   classLegality: { open: illegal, stockBmax: illegal, junior: illegal, notes: 田宮公認競技會不可使用 }
-  colours: { primary: '#1f2124' }
+  colours: { primary: '#6b6f75', sticker: '#1f2124', can: '#1f2124' }
 
 # --- Double-shaft PRO motors (MS / MA / ME) ----------------------------------
 '15487': # トルクチューン2モーターPRO
   specs: { motorShaft: double }
   classLegality: { open: legal, stockBmax: legal, junior: legal }
-  colours: { primary: '#ec7a24' }
+  colours: { primary: '#ec7a24', sticker: '#e4e2dc' }
 '15488': # レブチューン2モーターPRO
   specs: { motorShaft: double }
   classLegality: { open: legal, stockBmax: legal, junior: legal }
-  colours: { primary: '#2f5fc4' }
+  colours: { primary: '#2f5fc4', sticker: '#e4e2dc' }
 '15489': # アトミックチューン2モーターPRO
   specs: { motorShaft: double }
   classLegality: { open: legal, stockBmax: legal, junior: legal }
-  colours: { primary: '#1f2124' }
+  colours: { primary: '#1f2124', sticker: '#e6dccb' }
 '15402': # ライトダッシュモーターPRO
   specs: { motorShaft: double }
   classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }
-  colours: { primary: '#f2c230' }
+  colours: { primary: '#f2c230', sticker: '#eceef0' }
 '15375': # ハイパーダッシュモーターPRO
   specs: { motorShaft: double }
   classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }
-  colours: { primary: '#d0312d' }
+  colours: { primary: '#d0312d', sticker: '#dcdcd8' }
 '15433': # マッハダッシュモーターPRO
   specs: { motorShaft: double }
   classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }
-  colours: { primary: '#d0312d' }
+  colours: { primary: '#d0312d', sticker: '#e8dc4a' }
 
 # --- Japan Cup / limited motor colourways ------------------------------------
 # Same motor, limited packaging (docs/research/concepts-and-rules.md §3), so they
 # inherit the legality of their base item.
-'95158': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }, colours: { primary: '#d0312d' } } # ハイパーダッシュ3 J-CUP 2023
-'95169': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }, colours: { primary: '#d0312d' } } # ハイパーダッシュ3 J-CUP 2024
-'95174': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }, colours: { primary: '#d0312d' } } # ハイパーダッシュ3 J-CUP 2025
-'95182': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }, colours: { primary: '#d0312d' } } # ハイパーダッシュ3 J-CUP 2026
-'95159': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }, colours: { primary: '#d0312d' } } # ハイパーダッシュPRO J-CUP 2023
-'95170': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }, colours: { primary: '#d0312d' } } # ハイパーダッシュPRO J-CUP 2024
-'95175': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }, colours: { primary: '#d0312d' } } # ハイパーダッシュPRO J-CUP 2025
-'95183': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }, colours: { primary: '#d0312d' } } # ハイパーダッシュPRO J-CUP 2026
-'95171': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: legal }, colours: { primary: '#ec7a24' } } # トルクチューン2 J-CUP 2024
-'95176': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: legal }, colours: { primary: '#ec7a24' } } # トルクチューン2 J-CUP 2025
-'95184': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: legal }, colours: { primary: '#ec7a24' } } # トルクチューン2 J-CUP 2026
-'95172': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: legal }, colours: { primary: '#ec7a24' } } # トルクチューン2 PRO J-CUP 2024
-'95177': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: legal }, colours: { primary: '#ec7a24' } } # トルクチューン2 PRO J-CUP 2025
-'95185': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: legal }, colours: { primary: '#ec7a24' } } # トルクチューン2 PRO J-CUP 2026
-'95188': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: legal }, colours: { primary: '#1f2124' } } # アトミックチューン2 40周年記念
-'95189': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: legal }, colours: { primary: '#1f2124' } } # アトミックチューン2 PRO 40周年記念
+'95158': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }, colours: { primary: '#d0312d', sticker: '#2e9a52' } } # ハイパーダッシュ3 J-CUP 2023
+'95169': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }, colours: { primary: '#d0312d', sticker: '#d23a2a' } } # ハイパーダッシュ3 J-CUP 2024
+'95174': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }, colours: { primary: '#d0312d', sticker: '#3848b8' } } # ハイパーダッシュ3 J-CUP 2025
+'95182': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }, colours: { primary: '#d0312d', sticker: '#232427' } } # ハイパーダッシュ3 J-CUP 2026
+'95159': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }, colours: { primary: '#d0312d', sticker: '#e6dccb' } } # ハイパーダッシュPRO J-CUP 2023
+'95170': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }, colours: { primary: '#d0312d', sticker: '#2a2622' } } # ハイパーダッシュPRO J-CUP 2024
+'95175': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }, colours: { primary: '#d0312d', sticker: '#ece6d2' } } # ハイパーダッシュPRO J-CUP 2025
+'95183': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: illegal, notes: 少年組僅限 Tune 系列馬達 }, colours: { primary: '#d0312d', sticker: '#232427' } } # ハイパーダッシュPRO J-CUP 2026
+'95171': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: legal }, colours: { primary: '#ec7a24', sticker: '#ee8a3a' } } # トルクチューン2 J-CUP 2024
+'95176': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: legal }, colours: { primary: '#ec7a24', sticker: '#2fa8d8' } } # トルクチューン2 J-CUP 2025
+'95184': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: legal }, colours: { primary: '#ec7a24', sticker: '#f0f0ee' } } # トルクチューン2 J-CUP 2026
+'95172': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: legal }, colours: { primary: '#ec7a24', sticker: '#d9c08a' } } # トルクチューン2 PRO J-CUP 2024
+'95177': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: legal }, colours: { primary: '#ec7a24', sticker: '#232427' } } # トルクチューン2 PRO J-CUP 2025
+'95185': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: legal }, colours: { primary: '#ec7a24', sticker: '#e4e2dc' } } # トルクチューン2 PRO J-CUP 2026
+'95188': { specs: { motorShaft: single }, classLegality: { open: legal, stockBmax: legal, junior: legal }, colours: { primary: '#1f2124', sticker: '#232427' } } # アトミックチューン2 40周年記念
+'95189': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: legal }, colours: { primary: '#1f2124', sticker: '#d9c08a' } } # アトミックチューン2 PRO 40周年記念
 
 # --- Kit motor ---------------------------------------------------------------
 '94380': # AO-1001 FA-130タイプノーマルモーター — the motor every kit ships with.

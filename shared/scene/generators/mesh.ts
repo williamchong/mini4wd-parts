@@ -136,6 +136,24 @@ export class Triangles {
     geometry.computeVertexNormals()
     return geometry
   }
+
+  /**
+   * Several sets of triangles as one geometry with a draw group each, in
+   * order, for a mesh drawn with one material per group: a shape with more
+   * than one colour that is still one proxy to hit, cache and dispose. An
+   * empty set is an empty group, so group indices never shift.
+   */
+  static grouped(sets: readonly Triangles[]): BufferGeometry {
+    const all = new Triangles()
+    const geometry = new BufferGeometry()
+    for (const [index, set] of sets.entries()) {
+      geometry.addGroup(all.positions.length / 3, set.positions.length / 3, index)
+      for (const value of set.positions) all.positions.push(value)
+    }
+    geometry.setAttribute('position', new Float32BufferAttribute(all.positions, 3))
+    geometry.computeVertexNormals()
+    return geometry
+  }
 }
 
 /** A plate on its own, for a part that is nothing else. */

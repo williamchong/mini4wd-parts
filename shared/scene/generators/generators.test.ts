@@ -8,7 +8,8 @@ import { bodyGeometry, FLOOR_MM } from './body.ts'
 import { BLACK, chassisPieces, STEEL } from './chassis.ts'
 import { layoutFor, socketsFor } from '../sockets.ts'
 import { plate, Triangles } from './mesh.ts'
-import { brake, damper, motor, roller, sideStay, stay, tire, wheel } from './parts.ts'
+import { brake, damper, motor, MOTOR_GROUPS, motorPaints, roller, sideStay, stay, tire, wheel } from './parts.ts'
+import type { MotorGroup, Paint } from './parts.ts'
 
 const size = (geometry: BufferGeometry) => {
   geometry.computeBoundingBox()
@@ -81,6 +82,56 @@ test('every revolved part winds outward', () => {
   for (const [name, geometry] of [['roller', roller(13)], ['wheel', wheel(24)], ['tire', tire(24, 6)], ['motor', motor()], ['single-shaft motor', motor(1)], ['damper', damper()], ['brake', brake()]] as const) {
     assert.ok(signedVolume(geometry) > 0, name)
   }
+})
+
+test('a motor is a flat-sided can, one draw group per piece, each winding outward', () => {
+  for (const shafts of [1, 2] as const) {
+    const geometry = motor(shafts)
+    const s = size(geometry)
+    // A 20.1 mm can, and the vents standing a little proud of its sides.
+    assert.ok(s.x > 20.1 && s.x < 21, `width ${s.x}`)
+    // The flats are 15.1 mm apart; the clip and the terminal tabs stand above the top one.
+    assert.ok(s.y > 15 && s.y < 20, `height ${s.y}`)
+    geometry.computeBoundingBox()
+    // The bottom flat, with the crimp lip standing 0.15 mm proud of it.
+    assert.ok(Math.abs(geometry.boundingBox!.min.y + 7.6) < 0.15, `bottom flat ${geometry.boundingBox!.min.y}`)
+    assert.equal(geometry.groups.length, MOTOR_GROUPS.length, `${shafts}: groups`)
+    const position = geometry.getAttribute('position')
+    let covered = 0
+    for (const group of geometry.groups) {
+      assert.equal(group.start, covered, 'groups are contiguous')
+      covered += group.count
+      assert.ok(group.count > 0, `${MOTOR_GROUPS[group.materialIndex!]} has triangles`)
+      const piece = new Triangles()
+      const p = new Vector3()
+      const points: [number, number, number][] = []
+      for (let i = group.start; i < group.start + group.count; i++) points.push(p.fromBufferAttribute(position, i).toArray())
+      for (let i = 0; i < points.length; i += 3) piece.tri(points[i]!, points[i + 1]!, points[i + 2]!)
+      assert.ok(signedVolume(piece.geometry()) > 0, `${shafts}: ${MOTOR_GROUPS[group.materialIndex!]} outward`)
+    }
+    assert.equal(covered, position.count, 'every triangle is in a group')
+  }
+  // The PRO shaft leaves both ends; the FA-130's only the front.
+  const single = motor(1); single.computeBoundingBox()
+  const double = motor(2); double.computeBoundingBox()
+  assert.ok(double.boundingBox!.min.z < single.boundingBox!.min.z - 5, 'a second shaft out of the end bell')
+  near(double.boundingBox!.max.z, single.boundingBox!.max.z, 'the same front shaft')
+})
+
+test('a motor is painted by its end bell and sticker, and a bare can hides its sticker', () => {
+  const stickered = motorPaints({ cap: 0xec7a24, sticker: 0x2fa8d8 })
+  const at = (paints: Paint[], group: MotorGroup) => paints[MOTOR_GROUPS.indexOf(group)]!
+  assert.equal(stickered.length, MOTOR_GROUPS.length)
+  assert.equal(at(stickered, 'cap').colour, 0xec7a24)
+  assert.equal(at(stickered, 'sticker').colour, 0x2fa8d8)
+  assert.notEqual(at(stickered, 'print').colour, at(stickered, 'sticker').colour)
+  // Dark print on a light sticker, light print on a dark one.
+  assert.ok(at(motorPaints({ cap: 0, sticker: 0xf0f0ee }), 'print').colour < 0x404040)
+  assert.ok(at(motorPaints({ cap: 0, sticker: 0x232427 }), 'print').colour > 0xc0c0c0)
+  const bare = motorPaints({ cap: 0xeef0f2 })
+  assert.equal(at(bare, 'sticker').colour, at(bare, 'can').colour)
+  assert.equal(at(bare, 'print').colour, at(bare, 'can').colour)
+  assert.equal(at(motorPaints({ cap: 0, sticker: 0, can: 0xc9b47a }), 'can').colour, 0xc9b47a)
 })
 
 test('the fixed-size parts have plausible extents', () => {
