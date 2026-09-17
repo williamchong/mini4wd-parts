@@ -2,6 +2,10 @@ import { readdirSync, readFileSync } from 'node:fs'
 
 const SITE_URL = 'https://mini4wd.parts'
 const GA_MEASUREMENT_ID = 'G-GJ34BG7E3W'
+// PostHog's *project* API key, public by design: it can only write events
+// into this project. Prerendered output has no server to read an env var at
+// runtime anyway, so it sits beside the GA id rather than in `.env`.
+const POSTHOG_API_KEY = 'phc_tAY3onBYUoZPu78wMTfTYpTLGNivkjrKLJyDd9aDcsnR'
 
 const PARTS_DIR = new URL('content/parts/', import.meta.url)
 
@@ -40,7 +44,7 @@ const catalogRoutes = [...partRoutes, ...categoryRoutes, ...chassisRoutes]
 export default defineNuxtConfig({
   compatibilityDate: '2026-09-08',
   devtools: { enabled: true },
-  modules: ['@nuxt/content', '@nuxtjs/i18n', '@nuxtjs/sitemap'],
+  modules: ['@nuxt/content', '@nuxtjs/i18n', '@nuxtjs/sitemap', '@nuxt/scripts'],
 
   // The sitemap module's own notion of the site's origin. Same value as
   // `runtimeConfig.public.siteUrl`, which the pages use for absolute og:image
@@ -150,21 +154,93 @@ export default defineNuxtConfig({
       ],
       link: [
         { rel: 'icon', type: 'image/png', href: '/favicon.png' }
-      ],
-      script: [
-        {
-          src: `https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`,
-          async: true
-        },
-        {
-          innerHTML: `
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', '${GA_MEASUREMENT_ID}');
-          `
-        }
       ]
+    }
+  },
+
+  /**
+   * Both tags go through @nuxt/scripts rather than a hand-written `<script>` in
+   * `app.head`, so they load *after* hydration (`trigger: 'onNuxtReady'`)
+   * instead of blocking the first render, and so calling them from a component
+   * is typed — `useScriptGoogleAnalytics().proxy.gtag(...)` and
+   * `useScriptPostHog().proxy.posthog.capture(...)` queue their calls until the
+   * tag has actually loaded, which is what the builder's funnel events need
+   * (docs/PLAN.md §4.1; they go through `app/composables/useAnalytics.ts`).
+   *
+   * A registry entry with no `trigger` only prepares the composable and never
+   * loads the script, so both carry one.
+   *
+   * **`proxy: false` on both, because GitHub Pages cannot answer a proxy
+   * route.** The module's first-party mode would send every beacon to
+   * `/_scripts/p/**` and anonymize it in a Nitro handler; `nuxt generate`
+   * output has no Nitro. The module detects static output and turns proxying
+   * off by itself, but it is written down here so the day this moves to
+   * Cloudflare Workers (docs/PLAN.md §4, M2) turning it on is a decision rather
+   * than a silent change of where reader IPs go.
+   */
+  scripts: {
+    registry: {
+      googleAnalytics: {
+        id: GA_MEASUREMENT_ID,
+        trigger: 'onNuxtReady',
+        proxy: false,
+        // Bundling *does* work on Pages — it is a build-time download written
+        // into `.output/public/_scripts/assets/<hash>.js`, a static file like
+        // any other. It is off because of what the file is, not where it is
+        // served from: a copy of Google's script, which we have no licence to
+        // redistribute, frozen at build time on a tag Google expects to update
+        // itself (owner, 2026-09-18). So gtag.js keeps coming from
+        // googletagmanager.com, exactly as the inline snippet fetched it.
+        bundle: false
+      },
+      posthog: {
+        apiKey: POSTHOG_API_KEY,
+        trigger: 'onNuxtReady',
+        proxy: false,
+        // PostHog Cloud US, the region the project key was issued for. With the
+        // proxy off this is what `api_host` ends up as, verified in the built
+        // output rather than assumed — the module injects its own `apiHost`
+        // when first-party mode is live.
+        region: 'us',
+        // Nuxt never reloads the document, so the page-load default would
+        // record one pageview per session. `history_change` watches the History
+        // API and compares `pathname` only, which is what this site needs: the
+        // build and the category page's chassis filter both live in the
+        // `#hash` (§4.6, and `useBuildLink` writes it with `replaceState`), and
+        // neither of those is a new page.
+        capturePageview: 'history_change',
+        /**
+         * **Off**, which also ends `$rageclick` and the PostHog toolbar's click
+         * stats — everything that reads `$autocapture`. Heatmaps are *not* in
+         * that list, contrary to the usual summary: they ride on `$$heatmap`,
+         * a separate capture that keeps firing (verified 2026-09-18).
+         *
+         * The trade is deliberate. What autocapture can name here is
+         * `button.link` and `a[href^="/parts/"]`, because the actions worth
+         * counting are `@click` handlers on generic buttons: it cannot tell a
+         * roller swap from a tire swap, which slot was tapped, or which rule
+         * fired. The ten events in `app/composables/useAnalytics.ts` carry
+         * `slot`, `part`, `rule` and `chassis` and answer the questions
+         * docs/PLAN.md §4.1 actually asks — and on a builder this click-heavy,
+         * `$autocapture` would otherwise be the whole event bill.
+         */
+        autocapture: false,
+        // Passed straight to `posthog.init()`. Each of these three otherwise
+        // pulls another script from PostHog's CDN on every page:
+        config: {
+          // Dead clicks cannot say *what* was clicked once autocapture is off,
+          // which is the only thing that would make the report actionable.
+          capture_dead_clicks: false,
+          // Core Web Vitals for a prerendered site are better read from Search
+          // Console, and here they would mostly measure the 3D pane, which
+          // reports its own timing through `scene_ready`.
+          capture_performance: false,
+          // Nothing asks beginners anything yet. This is the one of the three
+          // worth turning back on, once there is a question worth interrupting
+          // someone mid-build for.
+          disable_surveys: true
+        }
+      }
     }
   },
 

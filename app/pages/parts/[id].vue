@@ -24,6 +24,7 @@ const localePath = useLocalePath()
 const { resolve, isFallback } = useCatalogName()
 const { term, slotTypeLabel, categoryIntro } = useTerm()
 const { pending } = useBuild()
+const { track } = useAnalytics()
 const siteUrl = useRuntimeConfig().public.siteUrl
 
 const id = computed(() => String(route.params.id))
@@ -150,6 +151,9 @@ const buildable = computed(() =>
   part.value.isCarPart && part.value.slots.some(slot => slot !== 'none'))
 
 function addToBuild() {
+  // The head of a two-page funnel: the builder answers with `part_swap` when
+  // the part lands, or `part_no_slot` when nothing on that chassis takes it.
+  track('part_to_builder', { part: part.value.id, category: part.value.category })
   pending.value = part.value.id
   return navigateTo(localePath('/'))
 }

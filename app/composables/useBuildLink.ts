@@ -21,6 +21,7 @@ export function useBuildLink(catalog: () => ShareCatalog | undefined) {
   const { t } = useI18n()
   const route = useRoute()
   const { build } = useBuild()
+  const { track } = useAnalytics()
   const copied = ref(false)
   /**
    * The last link opened lost something on the way in — a part no longer in
@@ -34,6 +35,9 @@ export function useBuildLink(catalog: () => ShareCatalog | undefined) {
    * otherwise writes the build back over whatever the hash holds, so the
    * address bar keeps linking to what is on screen.
    */
+  /** The last hash that produced a `build_start`; see the guard below. */
+  let countedHash: string | undefined
+
   function readHash(hash: string) {
     const shared = parseBuild(hash)
     const known = catalog()
@@ -45,6 +49,22 @@ export function useBuildLink(catalog: () => ShareCatalog | undefined) {
     if (shared && state) {
       linkTrimmed.value = wasTrimmed(shared, state)
       build.value = state
+      // Opening someone else's link is the third way a build begins, beside the
+      // two doors of the base picker. Counted here rather than in a watcher on
+      // `build`, which every swap would also trip.
+      //
+      // Guarded on the hash rather than on a "first run" flag because the
+      // watcher is `immediate` and fires twice for one arrival — once empty,
+      // once after Nuxt restores the deferred hash (see `onMounted` below).
+      if (hash !== countedHash) {
+        countedHash = hash
+        track('build_start', {
+          chassis: state.chassis,
+          kit: state.kit,
+          entry: 'link',
+          trimmed: linkTrimmed.value
+        })
+      }
     }
     else writeHash(build.value)
   }
@@ -83,14 +103,25 @@ export function useBuildLink(catalog: () => ShareCatalog | undefined) {
     const hash = linkFor(build.value)
     if (!hash) return
     const url = `${location.origin}${location.pathname}${location.search}${hash}`
+    // The link itself is never a property: it is unbounded, and one report row
+    // per build is no report at all. The swap count says the same thing.
+    const shared = (ok: boolean) => build.value && track('build_share', {
+      chassis: build.value.chassis,
+      kit: build.value.kit,
+      swaps: Object.keys(build.value.swaps).length,
+      ok
+    })
+
     try {
       await navigator.clipboard.writeText(url)
     } catch {
       // No clipboard permission, or not a secure context. Ugly, and it works
       // in every browser.
       window.prompt(t('build.copyLink'), url)
+      shared(false)
       return
     }
+    shared(true)
     copied.value = true
     clearTimeout(timer)
     timer = setTimeout(() => { copied.value = false }, COPIED_MS)

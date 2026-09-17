@@ -29,6 +29,7 @@ const siteUrl = useRuntimeConfig().public.siteUrl
 const { resolve, isFallback } = useCatalogName()
 const { term, slotLabel } = useTerm()
 const { build, buildClass, pending, start, swap, revert } = useBuild()
+const { track } = useAnalytics()
 
 /**
  * Only the columns the builder reads, because this route is prerendered and
@@ -206,7 +207,14 @@ function onMoreToggle(event: Event) {
 const baseOpen = ref(false)
 
 function chooseBase(chassisId: ChassisId, kitId?: string) {
+  // Before `start`, and only when the bench was empty: this button is also the
+  // base row's Swap, and a reader changing their mind about a kit is not a new
+  // build. Counting those would inflate the very ratio the 3D chunk's fate is
+  // measured against (docs/PLAN.md §5.5).
+  const first = !hasBuild.value
+
   start(chassisId, kitId)
+  if (first) track('build_start', { chassis: chassisId, kit: kitId, entry: kitId ? 'kit' : 'chassis' })
   linkTrimmed.value = false
   baseOpen.value = false
   // A reader who arrived from a part page with nothing on the bench had to
@@ -267,6 +275,9 @@ function placePending() {
   const ids = slotIdsFor(part, chassis.value)
   if (!ids.length) {
     notice.value = t('build.cannotAdd', { part: pendingName.value })
+    // A part page offered a button that led nowhere on this chassis. Worth
+    // knowing about: the fix is on the part page, not here.
+    track('part_no_slot', { part: id, chassis: chassis.value.id })
     pending.value = null
     return
   }
@@ -281,6 +292,7 @@ function place(slotId: string) {
   const id = pending.value
   if (!id) return
   swap(slotId, [id])
+  trackSwap(slotId, id, 'part_page')
   const slot = slots.value.find(s => s.id === slotId)
   notice.value = t('build.added', {
     part: pendingName.value,
@@ -312,7 +324,33 @@ const copies = computed(() => new Map(hasBuild.value
 
 function copy(slotId: string) {
   const parts = copies.value.get(slotId)?.partIds
-  if (parts) swap(slotId, parts)
+  if (!parts) return
+  swap(slotId, parts)
+  // The counterpart can hold more than one part; the first is what names the
+  // swap, so `part` stays one bounded id rather than a composite.
+  if (parts[0]) trackSwap(slotId, parts[0], 'copy')
+}
+
+/** Every swap is counted the same way; only `source` differs. */
+function trackSwap(slotId: string, partId: string, source: 'row' | 'scene' | 'copy' | 'part_page') {
+  if (chassis.value) track('part_swap', { chassis: chassis.value.id, slot: slotId, part: partId, source })
+}
+
+/**
+ * Which door the open picker came through, so a swap can say whether the 3D
+ * pane was the selection surface or the list was (docs/PLAN.md §5.4). It is
+ * read once, when the part is chosen, so it only has to survive that long.
+ */
+const pickerSource = ref<'row' | 'scene'>('row')
+
+function openFromRow(slotId: string) {
+  pickerSource.value = 'row'
+  openSlotId.value = slotId
+}
+
+function revertSlot(slotId: string) {
+  revert(slotId)
+  if (chassis.value) track('part_revert', { chassis: chassis.value.id, slot: slotId })
 }
 
 // The slot being filled is held by id, not as a copy of the row: the row it
@@ -329,7 +367,11 @@ const openSlot = computed<ResolvedSlot | null>(() =>
  * in the DOM, so there is no canvas yet and the scene silently never starts.
  */
 const hydrated = ref(false)
-onMounted(() => { hydrated.value = true })
+let sceneMountedAt = 0
+onMounted(() => {
+  hydrated.value = true
+  sceneMountedAt = performance.now()
+})
 
 /**
  * The poster is a screenshot of the empty MA scene at the home view, one per
@@ -341,6 +383,18 @@ onMounted(() => { hydrated.value = true })
  * MA sockets change.
  */
 const sceneReady = ref(false)
+
+/**
+ * How long the reader looked at the poster before the car appeared. The 3D
+ * chunk is the page's largest single cost, so this is the other half of the
+ * evidence for keeping it (docs/PLAN.md §5.5).
+ */
+function onSceneReady() {
+  sceneReady.value = true
+  if (shownChassis.value) {
+    track('scene_ready', { chassis: shownChassis.value.id, ms: Math.round(performance.now() - sceneMountedAt) })
+  }
+}
 const showPoster = computed(() => shownChassis.value?.id === PLACEHOLDER_CHASSIS && !hasBuild.value && !sceneReady.value)
 
 /**
@@ -349,12 +403,21 @@ const showPoster = computed(() => shownChassis.value?.id === PLACEHOLDER_CHASSIS
  * placeholder car there is nothing to swap yet, so a tap asks for the kit.
  */
 function pick(slotId: string) {
+  // Counted before the guard: a tap on the placeholder car is still someone
+  // trying to use the pane as the selection surface, and it is the reader most
+  // worth knowing about — they have not started a build yet.
+  if (shownChassis.value) {
+    track('scene_tap', { chassis: shownChassis.value.id, slot: slotId, has_build: hasBuild.value })
+  }
   if (!hasBuild.value) {
     baseOpen.value = true
     return
   }
   const slot = slots.value.find(s => s.id === slotId)
-  if (slot && swappable.value.has(slot.type)) openSlotId.value = slotId
+  if (slot && swappable.value.has(slot.type)) {
+    pickerSource.value = 'scene'
+    openSlotId.value = slotId
+  }
 }
 
 const candidates = computed(() =>
@@ -372,7 +435,10 @@ const openSlotLabel = computed(() =>
  * that needs one.
  */
 function choose(partId: string) {
-  if (openSlotId.value) swap(openSlotId.value, [partId])
+  if (openSlotId.value) {
+    swap(openSlotId.value, [partId])
+    trackSwap(openSlotId.value, partId, pickerSource.value)
+  }
   openSlotId.value = null
 }
 
@@ -417,6 +483,41 @@ const findingsBySlot = computed(() => {
   return bySlot
 })
 
+/**
+ * Rule-warning frequency (docs/PLAN.md §4.1), counted once per build rather
+ * than once per recompute.
+ *
+ * `findings` recomputes on every swap, revert and class change, so reporting it
+ * straight would measure how much a reader fiddled, not which rules bite. The
+ * set makes each distinct finding cost one event for the life of a build, which
+ * turns the metric into "share of builds where rule X fired" — the only shape
+ * a decision can be made on.
+ *
+ * Keyed by slot as well as rule, so flipping the class from Open to Junior and
+ * turning a motor illegal still registers: that is a different fact about a
+ * different part, not a repeat.
+ */
+const reportedRules = new Set<string>()
+
+// `swap` and `revert` replace `build.value` wholesale, so the ref itself
+// changes on every edit. Only a new chassis or kit is a new build.
+watch(() => build.value && `${build.value.chassis}:${build.value.kit ?? ''}`,
+  () => reportedRules.clear())
+
+watch(findings, (list) => {
+  for (const finding of list) {
+    const key = `${finding.rule}:${finding.slotId ?? ''}`
+    if (reportedRules.has(key)) continue
+    reportedRules.add(key)
+    track('rule_triggered', {
+      rule: finding.rule,
+      severity: finding.severity,
+      slot: finding.slotId,
+      build_class: buildClass.value
+    })
+  }
+})
+
 /** From a finding to its row, opening the folded group first when it is in there. */
 function goToSlot(slotId: string) {
   if (moreSlots.value.some(slot => slot.id === slotId)) moreOpen.value = true
@@ -431,15 +532,27 @@ function goToSlot(slotId: string) {
  */
 const CLASS_KEY = 'build-class'
 
+/** Restoring last visit's class is not the reader choosing one; see below. */
+let restoringClass = false
+
 onMounted(() => {
   try {
     const saved = localStorage.getItem(CLASS_KEY)
-    if (isBuildClass(saved)) buildClass.value = saved
+    if (isBuildClass(saved)) {
+      restoringClass = true
+      buildClass.value = saved
+    }
   }
   catch {}
 })
 
 watch(buildClass, (value) => {
+  // The watcher cannot tell a tap on the class toggle from this page reading
+  // the same value back out of storage, and counting the second would report a
+  // class change for every returning reader on every page load.
+  if (restoringClass) restoringClass = false
+  else track('build_class_set', { build_class: value })
+
   try {
     localStorage.setItem(CLASS_KEY, value)
   }
@@ -492,7 +605,7 @@ useHead(() => ({
         :parts="partsById"
         :open-slot-id="openSlotId"
         @select="pick"
-        @ready="sceneReady = true"
+        @ready="onSceneReady"
       />
     </div>
     <p class="scene-hint">
@@ -562,8 +675,8 @@ useHead(() => ({
         :stock-thumb="stockThumbFor(slot)"
         :copy-from="copies.get(slot.id)?.from"
         :findings="findingsBySlot.get(slot.id)"
-        @open="openSlotId = slot.id"
-        @revert="revert(slot.id)"
+        @open="openFromRow(slot.id)"
+        @revert="revertSlot(slot.id)"
         @copy="copy(slot.id)"
       />
     </ul>
@@ -582,8 +695,8 @@ useHead(() => ({
           :stock-thumb="stockThumbFor(slot)"
           :copy-from="copies.get(slot.id)?.from"
           :findings="findingsBySlot.get(slot.id)"
-          @open="openSlotId = slot.id"
-          @revert="revert(slot.id)"
+          @open="openFromRow(slot.id)"
+          @revert="revertSlot(slot.id)"
           @copy="copy(slot.id)"
         />
       </ul>

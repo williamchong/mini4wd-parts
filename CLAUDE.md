@@ -56,5 +56,5 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Development Notes
 
 - Commit messages follow the existing gitmoji style (see `git log`).
-- Analytics: GA4 (`G-GJ34BG7E3W`) is live; PostHog is planned for builder and wizard funnels.
+- Analytics: GA4 (`G-GJ34BG7E3W`) and PostHog (`phc_tAY3onBYUoZPu78wMTfTYpTLGNivkjrKLJyDd9aDcsnR`, Cloud US) both load through `@nuxt/scripts`, configured in `scripts.registry` in `nuxt.config.ts` — `proxy: false` on both, `bundle: false` on GA, `autocapture: false` on PostHog, for the reasons written there. **Send every event through `useAnalytics().track()`** (`app/composables/useAnalytics.ts`): it fans out to both SDKs with the same name and properties, and its `AnalyticsEvents` map is the list of what exists. Ids, never localised names — a name splits each report in two. A new property is a new GA4 custom dimension to register by hand. PostHog counts pageviews itself; GA gets them from `app/composables/useAnalyticsPageViews.ts`, which also keeps gtag's current page up to date so events are not all filed under the landing page.
 - The site is bilingual today (Traditional Chinese primary, English secondary) and targets Mini 4WD beginners and hobbyists.

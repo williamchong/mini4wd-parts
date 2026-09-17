@@ -1,11 +1,16 @@
 <script setup lang="ts">
 /**
- * This exists for the head. @nuxtjs/i18n only manages `lang`, hreflang and
+ * This exists for the head, and for the one other thing that needs a place
+ * outliving every route. @nuxtjs/i18n only manages `lang`, hreflang and
  * canonical when `experimental.strictSeo` is on, and with it off `useLocaleHead`
  * has to be called somewhere that wraps every route. layouts/content.vue is not
  * that place — a page is free to opt out of it.
  */
 const { t, locale, locales } = useI18n()
+
+// GA only learns about routes after the first one if something tells it, and
+// it is also what keeps gtag's idea of the current page current.
+useAnalyticsPageViews()
 
 /**
  * Open Graph wants `language_TERRITORY`; the page reads in Hong Kong wording.
