@@ -25,7 +25,8 @@ classLegality:
   stockBmax: legal
   junior: legal
   source: derived
-specs: {}
+specs:
+  gearRatio: 3.5:1
 colours:
   primary: "#c8c4d4"
   source: override

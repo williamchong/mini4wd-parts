@@ -185,8 +185,13 @@ export function deriveSpecs(item: JpItem, category: Category): Partial<PartSpecs
     specs.plateMaterial = firstMatch(PLATE_MATERIALS, name)
   }
 
+  // Printed on only three names. 超速 (Super Speed) is the one family whose
+  // name is its ratio: 3.5:1 on every chassis it was made for, which is how
+  // the wiki groups all seven. ハイスピード is not — 4:1 on MS, 4.2:1 as a
+  // counter gear — so those take an override instead.
   if (category === 'gear') {
     specs.gearRatio = /(\d+(?:\.\d+)?\s*:\s*1)/.exec(name)?.[1]?.replace(/\s/g, '')
+      ?? (/超速ギヤ/.test(name) ? '3.5:1' : undefined)
   }
 
   if (category === 'motor') {

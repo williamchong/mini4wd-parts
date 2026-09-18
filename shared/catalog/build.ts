@@ -215,6 +215,31 @@ export function counterpartParts(
 }
 
 /**
+ * The car's final gear ratio, or undefined where the catalog cannot say.
+ *
+ * Untouched, it is the kit's own — the same fact its stock `gear-set` label
+ * spells out — and a bare chassis has none, because "Kit standard gears" names
+ * no ratio. Once either gear slot is swapped, only the swapped parts count: a
+ * gear set or a counter gear set decides the ratio on its own (15434 is a
+ * counter gear and its spur, 3.7:1 whatever else is in the car), and two that
+ * disagree, a spare pinion, a setting set that holds several ratios, or an
+ * emptied slot all leave it unknown. The kit's ratio is no fallback once its
+ * gears are out of the car: a 3.5:1 kit on a 4:1 gear set is a 4:1 car.
+ */
+export function gearRatioOf(
+  slots: ResolvedSlot[],
+  partsById: ReadonlyMap<string, Pick<Part, 'specs'>>,
+  kit: Pick<Kit, 'gearRatio'> | undefined
+): string | undefined {
+  const swapped = slots.filter(slot => slot.swapped && (slot.type === 'gear' || slot.type === 'counter-gear'))
+  if (!swapped.length) return kit?.gearRatio
+  const ratios = new Set(swapped.map(slot => slot.entries.length === 1 && slot.entries[0]!.partId
+    ? partsById.get(slot.entries[0]!.partId)?.specs.gearRatio
+    : undefined))
+  return ratios.size === 1 ? [...ratios][0] : undefined
+}
+
+/**
  * An EMPTY `include` list means the part is not chassis-specific — washers,
  * spacers, AO spares — and the schema is explicit that it never means
  * "unknown". 53 parts are in that state, so reading the list literally would

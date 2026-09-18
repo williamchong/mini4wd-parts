@@ -145,6 +145,13 @@
 '94774': { category: spacer } # AO-1020 ミニ四駆アルミホイール用ブッシュ(黒8個入り)
 '15504': { category: wheel-tire-set, colours: { primary: '#eef0f2', tire: '#d0312d' } } # スーパーX・XX大径5本スポークホイール&ハードスリック(レッド)
 
+# --- Gear ratios -------------------------------------------------------------
+# A gear set whose name prints no ratio and is not a 超速 set (taxonomy.ts reads
+# both). What the builder shows once one is swapped in (gearRatioOf in
+# shared/catalog/build.ts). The two setting gear sets, 15456 and 15516, hold
+# several ratios each and stay without one: which is fitted is the racer's call.
+'15236': { specs: { gearRatio: '4.2:1' }, colours: { primary: '#1f2124' } } # ハイスピードカウンターギヤー — tamiya.hk names it 4.2:1
+
 # --- Colours ---------------------------------------------------------------
 # What each part is drawn in (shared/catalog/schema.ts `partColours`). The
 # generator reads a colour from the name, the wiki variant or the material;
@@ -278,7 +285,6 @@
 '15374': { colours: { primary: '#8e949b' } }  # MS 軽量センターシャーシ
 '15132': { colours: { primary: '#f2c230' } }  # 超速ギヤー
 '15187': { colours: { primary: '#c8c4d4' } }  # 軽量超速ギヤー
-'15236': { colours: { primary: '#1f2124' } }  # ハイスピードカウンターギヤー
 '15289': { colours: { primary: '#c9ced6' } }  # 8Tピニオン 真ちゅう/プラ
 '15347': { colours: { primary: '#c9ced6' } }  # PRO ギヤベアリング
 '15349': { colours: { primary: '#2f9e4f' } }  # PRO 超速ギヤ

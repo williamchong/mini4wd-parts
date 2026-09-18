@@ -12,7 +12,7 @@
  * model is tested without a browser and this file stays about presentation.
  */
 import {
-  counterpartParts, isBuildClass, partsForSlot, resolveBuild, slotIdsFor, swappableSlotTypes
+  counterpartParts, gearRatioOf, isBuildClass, partsForSlot, resolveBuild, slotIdsFor, swappableSlotTypes
 } from '#shared/catalog/build'
 import { orderKits } from '#shared/catalog/kits'
 import { checkBuild } from '#shared/catalog/rules'
@@ -164,6 +164,10 @@ const slots = computed<ResolvedSlot[]>(() => {
   if (chassis.value && build.value) return resolveBuild(chassis.value, kit.value, build.value)
   return (shownChassis.value?.slots ?? []).map(slot => ({ ...slot, entries: [], swapped: false }))
 })
+
+/** The kit's until a gear slot is swapped, then the swapped gears' own, if known. */
+const gearRatio = computed(() =>
+  hasBuild.value ? gearRatioOf(slots.value, partsById.value, kit.value) : undefined)
 
 const swappable = computed(() =>
   shownChassis.value
@@ -688,7 +692,7 @@ useHead(() => ({
               </p>
               <p class="build-subtitle">
                 <span>{{ kit ? resolve(chassis.names).value : $t('build.bareChassis') }}</span>
-                <span v-if="kit?.gearRatio">{{ kit.gearRatio }}</span>
+                <span v-if="gearRatio">{{ gearRatio }}</span>
                 <span v-if="kit?.status === 'limited'" class="kit-status">
                   {{ $t('build.kitStatus.limited') }}
                 </span>

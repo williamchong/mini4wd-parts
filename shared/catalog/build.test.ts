@@ -2,8 +2,8 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { partSchema } from './schema.ts'
 import {
-  BUILD_CLASSES, counterpartParts, isChassisCompatible, newBuild, partsForSlot, resolveBuild, slotIdsFor,
-  swappableSlotTypes
+  BUILD_CLASSES, counterpartParts, gearRatioOf, isChassisCompatible, newBuild, partsForSlot, resolveBuild,
+  slotIdsFor, swappableSlotTypes
 } from './build.ts'
 import type { BuildState } from './build.ts'
 import type { Chassis, Kit, Part } from './schema.ts'
@@ -267,6 +267,36 @@ test('a wheel or tire row can copy the other end only when that changes it', () 
   assert.equal(counterpartParts(front, [front, rearOnly], parts), undefined)
   // Only wheels and tires have a counterpart.
   assert.equal(counterpartParts(wheel('motor', []), [front], parts), undefined)
+})
+
+test('the gear ratio is the kit\'s until a gear slot is swapped, then only the swapped parts\'', () => {
+  const gearSlots = [
+    ...chassis.slots,
+    { id: 'counter-gear', type: 'counter-gear' as const, maxCount: 1, mirror: false, required: false }
+  ]
+  const single = { ...chassis, slots: gearSlots }
+  const parts = new Map([
+    ['15355', part({ id: '15355', slots: ['gear', 'counter-gear'], specs: { gearRatio: '4:1' } })],
+    ['15434', part({ id: '15434', slots: ['gear', 'counter-gear'], specs: { gearRatio: '3.7:1' } })],
+    ['15456', part({ id: '15456', slots: ['gear', 'counter-gear'] })]
+  ])
+  const ratio = (swaps: BuildState['swaps'], from: Pick<Kit, 'gearRatio' | 'stockLoadout'> | undefined = kit) =>
+    gearRatioOf(resolveBuild(single, from, { chassis: 'ma', kit: from && '18700', swaps }), parts, from)
+  const stock = { ...kit, gearRatio: '3.5:1' }
+
+  assert.equal(ratio({}, stock), '3.5:1')
+  // A bare chassis' "Kit standard gears" names no ratio.
+  assert.equal(ratio({}, undefined), undefined)
+  assert.equal(ratio({ 'gear-set': ['15355'] }, stock), '4:1')
+  // A counter gear set decides it on its own.
+  assert.equal(ratio({ 'counter-gear': ['15434'] }, stock), '3.7:1')
+  assert.equal(ratio({ 'gear-set': ['15434'], 'counter-gear': ['15434'] }, stock), '3.7:1')
+  // Two that disagree, a set with no single ratio, and an emptied slot are unknown.
+  assert.equal(ratio({ 'gear-set': ['15355'], 'counter-gear': ['15434'] }, stock), undefined)
+  assert.equal(ratio({ 'gear-set': ['15456'] }, stock), undefined)
+  assert.equal(ratio({ 'gear-set': [] }, stock), undefined)
+  // Swapping something else leaves the kit's ratio standing.
+  assert.equal(ratio({ motor: ['15355'] }, stock), '3.5:1')
 })
 
 test('a part maps to every slot id it fits, in the chassis\' order', () => {
