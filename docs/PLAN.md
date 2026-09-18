@@ -965,6 +965,15 @@ In the pane, `SURFACE` gained three finishes:
 
 Aluminium draws as the existing `metal`. A plated body keeps the one clearcoated shell material and only changes its metalness and roughness, which are uniforms, so a plated kit costs no second shader program. A body takes its part's finish, or the kit's while the slot is still the kit's, the same precedence as its colour and clearness. Carbon stays and brake stays are satin black; the weave is phase 5. **Not done:** steel as its own preset (0.4 against aluminium's 0.3 is not visible at this size), and gold-plated terminals, which repaint the chassis caps rather than drawing a part. **Bytes:** the 3D chunk is 152.1 KB gz (+0.1). The builder payload grew by 252 B gz (+5.2 KB raw), mostly a null `bodyFinish` on 297 kits, since @nuxt/content returns an absent column as null.
 
+**Phase 5 landed (2026-09-19): a carbon plate is woven, and a highlight lights the part's outline.** `shared/scene/shading.ts` is one `onBeforeCompile` hook that every material in the pane shares. It reads object-space position, since the geometry has no UVs.
+
+- **Carbon weave:** 2/2 twill in the plate's own plane, tows 1.6 mm wide. At the home view a millimetre is about five pixels, and a real 1 mm tow shimmers as the camera moves. Each tow is rounded across its width, and warp and weft alternate between glossy and matte (roughness 0.2 against 0.55). That is what makes the studio's panels break into the checker real carbon shows. It applies only to a carbon stay, side stay or brake; a carbon wheel is a moulding.
+- **The rim replaces the emissive wash for hover and an open picker.** The wash tinted a part in its own colour, which on a black tire or a black plate was no highlight at all. The rim is one light blue, strongest at the part's outline, over a faint 20% wash so a wheel seen face-on still reads as lit. An empty slot's wireframe keeps the old lift, since a line a pixel wide has no surface to carry a rim.
+
+The rim is a uniform, and the hook is the same function on every material, chassis materials included. So every opaque material still shares one program, and the weave is a define, one more program for carbon plates. `shading.test.ts` runs the hook over three's own physical shader and fails if any chunk it hangs on is renamed; renaming one was checked to fail it.
+
+**Two effects were planned and not built:** brushed streaks on aluminium and a tread band on tires. At the home view a roller is about 50 px across and a tire's tread face about 15 px, below where either would read as anything but noise, and each would cost a program. **Bytes:** the 3D chunk is 152.7 KB gz (+0.65). The empty car renders pixel-identical, so the posters stand.
+
 **Done when:** from the home view, a stock kit's aluminium rollers, plated or moulded wheels and glossy shell are told apart by how they catch the light, not only by their colour; the car sits on a soft shadow; the 3D chunk is at most about 154 KB gz without the desktop tier; `scene_ready` p90 on phones has not moved by more than the threshold in phase 6; and the posters match the first frame.
 
 ---

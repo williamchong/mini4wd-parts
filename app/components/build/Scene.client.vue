@@ -21,6 +21,7 @@ import {
 import type { BufferGeometry } from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { studioEnvironment } from '#shared/scene/studio'
+import { dress } from '#shared/scene/shading'
 import { layoutFor, socketsFor } from '#shared/scene/sockets'
 import type { Fit, ProxyKind, SceneSocket } from '#shared/scene/sockets'
 import { DEFAULT_SILHOUETTE } from '#shared/scene/bodies'
@@ -355,6 +356,10 @@ const SURFACE: Record<Finish, { roughness: number; metalness: number }> = {
 }
 /** A part record's finish as the pane draws it: an aluminium part is its metal. */
 const PART_SURFACE: Record<PartFinish, parts.PaintFinish> = { plated: 'plated', 'matte-plated': 'matte-plated', aluminium: 'metal', carbon: 'carbon' }
+/** How strongly each highlight lights a part's outline (shared/scene/shading.ts). */
+const RIM: Record<Highlight, number> = { none: 0, hover: 0.9, open: 1.6 }
+/** The kinds a carbon finish is woven sheet on; a carbon wheel is a carbon-filled moulding. */
+const PLATE_KINDS: ReadonlySet<ProxyKind> = new Set(['stay', 'side-stay', 'brake'])
 /** The kinds a part record's finish reaches; the catalog records it on no other (scripts/catalog/finish.ts). */
 const SOLD_AS_MATERIAL: ReadonlySet<ProxyKind> = new Set(['wheel', 'body', 'stay', 'side-stay', 'brake'])
 const FINISH: Record<ProxyKind, Finish> = {
@@ -534,6 +539,7 @@ onMounted(() => {
    * studio's panels reflect in the coat while the colour stays in the base.
    */
   const shell = new MeshPhysicalMaterial({ roughness: 0.4, metalness: 0, clearcoat: 1, clearcoatRoughness: 0.08, transparent: true })
+  const shellRim = dress(shell).rim
   /** The shell's opacity seated, set by `populate`; `tickBody` fades from it as the shell lifts. */
   let seatedOpacity = 1
   function styleShell(highlight: Highlight, tint: number, finish: Finish) {
@@ -541,8 +547,7 @@ onMounted(() => {
     // are uniforms, so a plated kit costs no second shader program.
     Object.assign(shell, SURFACE[finish])
     shell.color.setHex(tint)
-    shell.emissive.setHex(tint)
-    shell.emissiveIntensity = highlight === 'open' ? 0.6 : highlight === 'hover' ? 0.3 : 0
+    shellRim.value = RIM[highlight]
     return shell
   }
 
@@ -556,6 +561,8 @@ onMounted(() => {
     let found = materials.get(key)
     if (!found) {
       found = new MeshStandardMaterial({ color: colour, roughness: 0.6, transparent: clear, opacity: clear ? CLEAR_OPACITY : 1 })
+      // Never highlighted, but dressed all the same, so it shares the parts' program.
+      dress(found)
       materials.set(key, found)
     }
     return found
@@ -563,8 +570,10 @@ onMounted(() => {
 
   /**
    * One material per state and highlight, shared by every proxy in that state,
-   * so repopulating a socket allocates a mesh and nothing else. Highlight is an
-   * emissive lift of the same colour, which reads as "lit" without a post pass.
+   * so repopulating a socket allocates a mesh and nothing else. Highlight is a
+   * rim of light round the part's outline (shared/scene/shading.ts), and an
+   * empty slot's outline, a line a pixel wide with no surface to have a rim,
+   * is lifted in its own colour instead.
    */
   function material(state: ProxyState, highlight: Highlight, kind: ProxyKind, tint: number, finish: Finish = FINISH[kind]) {
     // An empty slot is an outline, not a ghost: a translucent solid read as a
@@ -574,7 +583,8 @@ onMounted(() => {
     const empty = state === 'empty'
     const colour = empty ? EMPTY_COLOUR : tint
     // Stock and changed draw alike now, so only emptiness splits the cache.
-    const key = `${empty}:${highlight}:${colour}:${finish}`
+    const weave = finish === 'carbon' && PLATE_KINDS.has(kind)
+    const key = `${empty}:${highlight}:${colour}:${finish}:${weave}`
     let found = materials.get(key)
     if (!found) {
       found = new MeshStandardMaterial({
@@ -582,8 +592,9 @@ onMounted(() => {
         ...SURFACE[finish],
         wireframe: empty,
         emissive: colour,
-        emissiveIntensity: highlight === 'open' ? 0.6 : highlight === 'hover' ? 0.3 : 0
+        emissiveIntensity: empty ? RIM[highlight] * 0.4 : 0
       })
+      dress(found, { weave }).rim.value = empty ? 0 : RIM[highlight]
       materials.set(key, found)
     }
     return found
