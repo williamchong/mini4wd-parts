@@ -976,6 +976,27 @@ The rim is a uniform, and the hook is the same function on every material, chass
 
 **Phase 6 landed (2026-09-19): the first scene is compiled before it is drawn.** `populate` fills the scene, then `renderer.compileAsync(scene, camera)` hands its programs to the driver. Where the driver has `KHR_parallel_shader_compile`, that happens off the main thread, while the poster still covers the pane. No frame is requested until it settles, and a rejected compile also lets the pane draw, since `render` compiles anything still missing. The resize observer's synchronous first draw waits for the compile too. **What local measurement can and cannot say:** two production builds, with and without the change, served statically, the empty MA at a 390 px phone frame under 4× CPU throttling. Both drew their first frame at 325 ms, with 3 and 4 ms of main-thread time blocked on program status (27 and 61 calls; the extra calls are three polling the parallel compile). The development machine's GPU compiles these programs quickly, Chrome caches compiled shaders on disk between loads, and CPU throttling does not slow the GPU driver. So this measures only that nothing broke; a plated kit renders pixel-identical. **The real check is `scene_ready` in PostHog:** median and p90 `ms` by device type for the week before this change deploys and the week after, against phase 6's +300 ms p90 budget. Still to do after deploy.
 
+**Phase 7 landed (2026-09-19): ambient occlusion on the desktop tier.** `shared/scene/occlusion.ts` puts an `EffectComposer` in front of the renderer: a 4-sample half-float target, `RenderPass`, `GTAOPass` and `OutputPass`. It darkens roller contacts, wheel recesses, the arch round a front wheel and the chassis creases.
+
+- **The tier is `(min-width: 640px)`**, the same media query that serves the 16:9 poster, so each poster matches the first frame of the tier it covers.
+- **No pop-in.** The module is a dynamic import started alongside `compileAsync`, and the first frame waits for both, so occlusion never appears a moment after the poster goes. A failed import leaves the renderer drawing directly.
+- **Transparency survives.** GTAO's blend multiplies alpha by one and `OutputPass` copies it through, so nothing outside the car changes (checked by diffing renders with and without).
+- **Outlines needed a layer.** GTAO's normal pass draws every mesh with one override material that ignores `wireframe`, so the empty car's outlines would have been shaded as solid boxes. They live on `OUTLINE_LAYER`, and GTAO looks through a copy of the camera that sees only layer 0. That constant stays in the scene, since importing a value from the AO module would pull the passes into the main chunk.
+- **Tuned in millimetres:** radius 6, thickness 4, 24 samples, blend 0.85. The denoise was widened (radius 10, 4 rings, 24 samples) because at three's default the sampling noise stayed as grain across a wheel's spokes and dotted every outline.
+
+**A dev-only trap:** the first dynamic import of the post-processing addons is a new dependency to Vite's optimizer, which re-optimizes and reloads the page. That first import fails, and `allSettled` swallows it, so the first dev load after adding the tier draws without occlusion. A production build is unaffected.
+
+**Bytes:** the AO chunk is 9.8 KB gz and is fetched only by the desktop tier; it is not prefetched. Splitting it out moved three's shared core into a chunk of its own, so the phone path is now two prefetched chunks totalling **154.6 KB gz**. That is +1.9 KB over phase 5 for the split, about 0.6 KB past the "about 154" target below, and accepted rather than hand-tuning `manualChunks`. The 16:9 poster was recaptured with occlusion (35 KB); the 4:3 poster is the phone tier's and stands.
+
+**Where the plan stands (2026-09-19).** All seven phases are in:
+
+- Aluminium rollers, plated or moulded wheels, a clearcoated shell, plated kits and carbon plates are told apart by how they catch the light.
+- The car sits on a soft shadow.
+- The posters match their tiers' first frames.
+- The phone path is 154.6 KB gz against the 150.5 it started at.
+
+**Open:** `scene_ready` p90 on phones before and after deploy (phase 6), which only PostHog can answer; and a real thumb on a phone, still open since §5.5.
+
 **Done when:** from the home view, a stock kit's aluminium rollers, plated or moulded wheels and glossy shell are told apart by how they catch the light, not only by their colour; the car sits on a soft shadow; the 3D chunk is at most about 154 KB gz without the desktop tier; `scene_ready` p90 on phones has not moved by more than the threshold in phase 6; and the posters match the first frame.
 
 ---

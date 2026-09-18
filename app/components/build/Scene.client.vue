@@ -22,6 +22,7 @@ import type { BufferGeometry } from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { studioEnvironment } from '#shared/scene/studio'
 import { dress } from '#shared/scene/shading'
+import type { Occlusion } from '#shared/scene/occlusion'
 import { layoutFor, socketsFor } from '#shared/scene/sockets'
 import type { Fit, ProxyKind, SceneSocket } from '#shared/scene/sockets'
 import { DEFAULT_SILHOUETTE } from '#shared/scene/bodies'
@@ -356,6 +357,13 @@ const SURFACE: Record<Finish, { roughness: number; metalness: number }> = {
 }
 /** A part record's finish as the pane draws it: an aluminium part is its metal. */
 const PART_SURFACE: Record<PartFinish, parts.PaintFinish> = { plated: 'plated', 'matte-plated': 'matte-plated', aluminium: 'metal', carbon: 'carbon' }
+/**
+ * The desktop tier (shared/scene/occlusion.ts): the frames the 16:9 poster is
+ * shown in, so each poster matches the first frame of the tier it covers.
+ */
+const OCCLUDED = '(min-width: 640px)'
+/** The layer an empty slot's outline is drawn on, which occlusion does not see. */
+const OUTLINE_LAYER = 1
 /** How strongly each highlight lights a part's outline (shared/scene/shading.ts). */
 const RIM: Record<Highlight, number> = { none: 0, hover: 0.9, open: 1.6 }
 /** The kinds a carbon finish is woven sheet on; a carbon wheel is a carbon-filled moulding. */
@@ -652,6 +660,7 @@ onMounted(() => {
     return Math.max(HALF_WIDTH_MM / Math.sin(halfHorizontal), HALF_HEIGHT_MM / Math.sin(halfVertical))
   }
   camera.position.copy(HOME_DIRECTION).multiplyScalar(homeDistance(1))
+  camera.layers.enable(OUTLINE_LAYER)
 
   // One lamp on top of the studio, for form: it shades the faces the soft
   // panels light alike, and it is the light the ground shadow will come from.
@@ -810,6 +819,8 @@ onMounted(() => {
    * the poster still covers the pane, and nothing is drawn until it settles.
    */
   let compiled = false
+  /** The desktop tier's passes, once loaded; until then, and on a phone, the renderer draws directly. */
+  let occluder: Occlusion | undefined
   function requestRender() {
     if (sized && compiled && !frame) frame = requestAnimationFrame(tick)
   }
@@ -883,7 +894,8 @@ onMounted(() => {
     tickBody()
     tickSpin()
     tickSwitch()
-    renderer.render(scene, camera)
+    if (occluder) occluder.render()
+    else renderer.render(scene, camera)
     if (!drawn) {
       drawn = true
       emit('ready')
@@ -1076,8 +1088,9 @@ onMounted(() => {
       for (const visible of visibles) {
         visible.userData = data
         // An outline would cast a shadow of its wireframe: an empty slot is
-        // not a thing, so it throws none.
+        // not a thing, so it throws none, and occlusion does not see it.
         visible.castShadow = state !== 'empty'
+        if (state === 'empty') visible.layers.set(OUTLINE_LAYER)
         proxies.push(visible)
       }
       // A wheel or tire turns with its axle, an empty one's outline too. The
@@ -1190,6 +1203,7 @@ onMounted(() => {
     const { width, height } = entry!.contentRect
     if (!width || !height) return
     renderer.setSize(width, height, false)
+    occluder?.setSize(width, height)
     camera.aspect = width / height
     camera.updateProjectionMatrix()
     // Refit the home view to the new aspect, and make it what reset returns
@@ -1217,13 +1231,24 @@ onMounted(() => {
   visibility.observe(element)
 
   populate()
-  // Whatever happens, draw: a failed compile is compiled again by `render`.
-  const firstFrame = () => {
+  // The desktop tier is loaded alongside the compile, and the first frame
+  // waits for both, so occlusion never appears a moment after the poster
+  // goes. Whatever happens, draw: a failed compile is compiled again by
+  // `render`, and a failed import leaves the renderer drawing directly.
+  const tier = matchMedia(OCCLUDED).matches
+    ? import('#shared/scene/occlusion').then(({ occlusion }) => {
+      if (disposed) return
+      occluder = occlusion(renderer, scene, camera)
+      // Sized already if the pane was measured first; else the observer will.
+      const { x, y } = renderer.getSize(new Vector2())
+      if (sized) occluder.setSize(x, y)
+    })
+    : undefined
+  Promise.allSettled([renderer.compileAsync(scene, camera), tier]).then(() => {
     if (disposed) return
     compiled = true
     requestRender()
-  }
-  renderer.compileAsync(scene, camera).then(firstFrame, firstFrame)
+  })
 
   const stopSlots = watch(() => props.slots, populate)
   const stopOpen = watch(() => props.openSlotId, restyle)
@@ -1268,6 +1293,7 @@ onMounted(() => {
     body?.geometry.dispose()
     for (const m of materials.values()) m.dispose()
     shell.dispose()
+    occluder?.dispose()
     ground.geometry.dispose()
     ground.material.dispose()
     geometries.clear()
