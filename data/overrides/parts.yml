@@ -185,7 +185,6 @@
 '15446': { colours: { primary: '#4a4d52', tire: '#4a4d52' } }  # X・XX 大径ローハイト — grey on grey
 '15483': { colours: { primary: '#eef0f2', tire: '#1f2124' } }  # ローハイト (Yスポーク)
 '15491': { colours: { primary: '#c9ced6', tire: '#1f2124' } }  # 大径Vスポークナロー
-'15507': { colours: { primary: '#1f2124', tire: '#1f2124' } }  # HG 低反発スポンジタイヤ — tires only
 '15511': { colours: { primary: '#eef0f2', tire: '#1f2124' } }  # 大径ローハイト 6本スポーク
 '15513': { colours: { primary: '#eef0f2', tire: '#1f2124' } }  # ローハイト 5本スポーク
 '15547': { colours: { primary: '#1f2124', tire: '#1f2124' } }  # EZ スパイク

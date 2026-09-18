@@ -25,7 +25,8 @@ classLegality:
   stockBmax: legal
   junior: legal
   source: derived
-specs: {}
+specs:
+  tireDiameterMm: 24
 colours:
   primary: "#ec7a24"
   source: override

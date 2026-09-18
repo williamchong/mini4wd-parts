@@ -8,11 +8,9 @@ nameSources:
 series: gup
 gupNumber: 507
 seriesLabel: ミニ四駆グレードアップパーツ
-category: wheel-tire-set
+category: tire
 categorySource: derived
 slots:
-  - wheel-front
-  - wheel-rear
   - tire-front
   - tire-rear
 isCarPart: true
@@ -48,8 +46,7 @@ specs:
   tireDiameterMm: 31
 colours:
   primary: "#1f2124"
-  tire: "#1f2124"
-  source: override
+  source: derived
 priceJpy: 770
 priceJpyExTax: 700
 priceHkd: 70
@@ -61,6 +58,5 @@ officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/
 thumbnail: /thumbs/parts/15507.webp
 detailThumbnail: /thumbs/parts-detail/15507.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-15507-hg-low-rebound-sponge-tires-for-large-dia-narrow-wheels/
-wheel: large-narrow
 tire: large-narrow-sponge
 scrapedAt: 2026-09-16

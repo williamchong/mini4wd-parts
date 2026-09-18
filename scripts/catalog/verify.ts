@@ -217,14 +217,17 @@ for (const part of parts) {
   if (part.wheel && !Object.hasOwn(WHEELS, part.wheel)) errors.push(`${label}: wheel "${part.wheel}" is not in shared/scene/wheels.ts`)
   if (part.tire && !Object.hasOwn(TIRES, part.tire)) errors.push(`${label}: tire "${part.tire}" is not in shared/scene/wheels.ts`)
   const diameter = part.specs.tireDiameterMm
+  // A wheel records the tire it fits rather than one it draws.
+  const tire = part.tire ?? `tire for ${part.wheel}`
   if (diameter !== undefined && (diameter < 22 || diameter > 35)) {
-    errors.push(`${label}: tire ${part.tire} is ⌀${diameter}, outside the 22-35 mm regulation envelope`)
+    errors.push(`${label}: ${tire} is ⌀${diameter}, outside the 22-35 mm regulation envelope`)
   }
-  // Only on a part that draws a tire: plenty of other names print millimetres,
-  // and they are roller and stay sizes rather than a tire's.
-  const printed = part.tire ? printedTireMm(part.names.en ?? part.names.ja) : undefined
+  // Only on a part that draws a wheel or a tire: plenty of other names print
+  // millimetres, and they are roller and stay sizes rather than a tire's. On a
+  // wheel they are the tire it fits, which is what its diameter records.
+  const printed = part.tire || part.wheel ? printedTireMm(part.names.en ?? part.names.ja) : undefined
   if (printed !== undefined && diameter !== printed) {
-    errors.push(`${label}: Tamiya's name says ⌀${printed}, the ${part.tire} shape says ⌀${diameter ?? 'nothing'}`)
+    errors.push(`${label}: Tamiya's name says ⌀${printed}, the ${tire} shape says ⌀${diameter ?? 'nothing'}`)
   }
 }
 

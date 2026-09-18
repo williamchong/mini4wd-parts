@@ -234,8 +234,11 @@ function buildPart(item: JpItem<PartGenreCode>) {
   const shapeCategory = override.category ?? category
   const shapeName = names.en ?? names.ja
   const shapes = WHEEL_CATEGORIES.has(shapeCategory) ? shapesFor(shapeName) : {}
-  const tire = shapeCategory === 'wheel' ? undefined : shapes.tire
-  if (tire) specs.tireDiameterMm = TIRES[tire]!.diameterMm
+  // A wheel draws no tire, but it is sized by the tire it fits, and that is
+  // the number its spec row prints (app/utils/specs.ts): "…for SMALL DIA.
+  // NARROW TIRES (24mm)" is a ⌀24 wheel to a reader.
+  const drawnTire = shapeCategory === 'wheel' ? undefined : shapes.tire
+  if (shapes.tire) specs.tireDiameterMm = TIRES[shapes.tire]!.diameterMm
 
   const record = {
     id: item.id,
@@ -276,7 +279,7 @@ function buildPart(item: JpItem<PartGenreCode>) {
     fandomTitle: fandomTitleById.get(item.id),
     body: bodies.byPart.get(item.id),
     wheel: shapeCategory === 'tire' ? undefined : shapes.wheel,
-    tire,
+    tire: drawnTire,
     // Only a wheel: a plated roller or a carbon plate is drawn metal by its
     // kind already, and recording it on 87 more parts would be a field the
     // pane never reads in every visitor's payload.

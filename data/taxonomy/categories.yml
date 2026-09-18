@@ -45,14 +45,20 @@
 
 # Tamiya writes these as "大径ナローライトウェイトホイール&ハードバレルタイヤ" —
 # the two words are separated by the variant name, so a substring will not do.
+# Both words in one name are not always a set, though: 用 ("for") marks the one
+# that only says what the part fits. "小径ナロータイヤ (24mm) 用アルミホイール"
+# is a wheel for those tires and "スポンジタイヤ（大径ナローホイール用）" a tire
+# for those wheels, and the size in brackets can sit between the word and 用.
 - category: wheel-tire-set
-  regex: (ホイール.*タイヤ|タイヤ.*ホイール)
+  regex: ^(?!.*(ホイール|タイヤ)\s*(\([^)]*\)\s*)?用).*(ホイール.*タイヤ|タイヤ.*ホイール)
+
+# Above `tire`, so that a wheel for a named tire is a wheel. A tire for a named
+# wheel says ホイール用, and falls through to `tire`.
+- category: wheel
+  regex: ホイール(?!\s*用)
 
 - category: tire
   match: [タイヤ]
-
-- category: wheel
-  match: [ホイール]
 
 - category: gear-cover
   match: [ギヤカバー, ギアカバー]

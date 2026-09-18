@@ -114,6 +114,14 @@ test('wheel and tire sets are one category even when the words are separated', (
   )
 })
 
+test('a wheel for a named tire is a wheel, and a tire for a named wheel is a tire', () => {
+  assert.equal(deriveCategory({ nameJa: 'HG 小径ナロータイヤ (24mm) 用アルミホイール (リバーシブル2本)' }).category, 'wheel')
+  assert.equal(deriveCategory({ nameJa: 'HG ローハイトタイヤ用アルミホイールII (リバーシブル2本)' }).category, 'wheel')
+  assert.equal(deriveCategory({ nameJa: 'HG 低反発スポンジタイヤ（大径ナローホイール用）' }).category, 'tire')
+  // A set whose tire comes in brackets after the wheel is still a set.
+  assert.equal(deriveCategory({ nameJa: '中空ゴム小径タイヤ(ホイール付)' }).category, 'wheel-tire-set')
+})
+
 test('a Mini 4WD Station edition is not a stay', () => {
   assert.equal(deriveCategory({ nameJa: '2段低摩擦プラローラー (19-19mm) レッド (ミニ四駆ステーション)' }).category, 'roller')
   assert.equal(deriveCategory({ nameJa: '低摩擦ハイマウントチューブスタビセット (ホワイト) ミニ四駆ステーション' }).category, 'stabilizer')
