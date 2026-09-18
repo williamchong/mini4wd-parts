@@ -43,7 +43,7 @@ A Traditional-Chinese-first site where beginners browse Tamiya Mini 4WD parts, a
 - @nuxtjs/i18n（`zh-Hant` 預設、`/en/`、之後 `/ja/`）；目前以香港用語為準
 - three.js（組車器 3D 畫面，只在瀏覽器載入並獨立分包）
 - 產品縮圖由本站自行縮小並託管於 `public/thumbs/`，不直接連結田宮圖片
-- 分析工具為 GA4 與 PostHog，經 @nuxt/scripts 於載入完成後才引入，不影響首次繪製。Analytics is GA4 and PostHog, loaded through @nuxt/scripts after hydration so neither is on the critical path.
+- 分析工具為 GA4 與 PostHog，經 @nuxt/scripts 於載入完成後才引入，不影響首次繪製；PostHog 只記錄本站明確送出的事件，不自動擷取點擊。Analytics is GA4 and PostHog, loaded through @nuxt/scripts after hydration so neither is on the critical path; PostHog records only the events this site sends explicitly, with autocapture off.
 - 資料來源：田宮日本官網產品目錄與底盤對應零件頁、tamiya.hk 商店 API、Fandom Wiki（CC-BY-SA，附註出處）
 
 ## 開發 Development

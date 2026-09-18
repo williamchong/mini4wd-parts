@@ -35,8 +35,14 @@ export function useBuildLink(catalog: () => ShareCatalog | undefined) {
    * otherwise writes the build back over whatever the hash holds, so the
    * address bar keeps linking to what is on screen.
    */
-  /** The last hash that produced a `build_start`; see the guard below. */
-  let countedHash: string | undefined
+  /**
+   * The last hash that produced a `build_start`, kept in `useState` rather than
+   * a closure so it outlives this component. A reader who opens a link, taps
+   * through to a part page and comes back would otherwise remount the builder
+   * with the guard cleared, and the same build — still in state, already
+   * counted — would be counted again.
+   */
+  const countedHash = useState<string | undefined>('counted-build-hash', () => undefined)
 
   function readHash(hash: string) {
     const shared = parseBuild(hash)
@@ -56,8 +62,8 @@ export function useBuildLink(catalog: () => ShareCatalog | undefined) {
       // Guarded on the hash rather than on a "first run" flag because the
       // watcher is `immediate` and fires twice for one arrival — once empty,
       // once after Nuxt restores the deferred hash (see `onMounted` below).
-      if (hash !== countedHash) {
-        countedHash = hash
+      if (hash !== countedHash.value) {
+        countedHash.value = hash
         track('build_start', {
           chassis: state.chassis,
           kit: state.kit,
@@ -105,7 +111,9 @@ export function useBuildLink(catalog: () => ShareCatalog | undefined) {
     const url = `${location.origin}${location.pathname}${location.search}${hash}`
     // The link itself is never a property: it is unbounded, and one report row
     // per build is no report at all. The swap count says the same thing.
-    const shared = (ok: boolean) => build.value && track('build_share', {
+    // Not `shared`: that name already means the parsed incoming build in
+    // `readHash`, a few lines up.
+    const trackShare = (ok: boolean) => build.value && track('build_share', {
       chassis: build.value.chassis,
       kit: build.value.kit,
       swaps: Object.keys(build.value.swaps).length,
@@ -118,10 +126,10 @@ export function useBuildLink(catalog: () => ShareCatalog | undefined) {
       // No clipboard permission, or not a secure context. Ugly, and it works
       // in every browser.
       window.prompt(t('build.copyLink'), url)
-      shared(false)
+      trackShare(false)
       return
     }
-    shared(true)
+    trackShare(true)
     copied.value = true
     clearTimeout(timer)
     timer = setTimeout(() => { copied.value = false }, COPIED_MS)

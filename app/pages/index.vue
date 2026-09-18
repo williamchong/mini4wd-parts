@@ -20,6 +20,7 @@ import { flagThumbnail, thumbnailSrc } from '#shared/catalog/thumbnails'
 import type { ResolvedSlot } from '#shared/catalog/build'
 import type { Finding } from '#shared/catalog/rules'
 import type { ChassisId, Slot } from '#shared/catalog/schema'
+import type { AnalyticsEvents } from '~/composables/useAnalytics'
 
 definePageMeta({ layout: 'content' })
 
@@ -332,7 +333,7 @@ function copy(slotId: string) {
 }
 
 /** Every swap is counted the same way; only `source` differs. */
-function trackSwap(slotId: string, partId: string, source: 'row' | 'scene' | 'copy' | 'part_page') {
+function trackSwap(slotId: string, partId: string, source: AnalyticsEvents['part_swap']['source']) {
   if (chassis.value) track('part_swap', { chassis: chassis.value.id, slot: slotId, part: partId, source })
 }
 
@@ -372,6 +373,12 @@ onMounted(() => {
   hydrated.value = true
   sceneMountedAt = performance.now()
 })
+
+// The pane is keyed by chassis, so choosing a different one destroys and
+// rebuilds it and it emits `ready` again. Without this the second car would
+// report how long the reader had been on the page, not how long it took to
+// draw — and `pre` flush puts this before the remount.
+watch(() => shownChassis.value?.id, () => { sceneMountedAt = performance.now() })
 
 /**
  * The poster is a screenshot of the empty MA scene at the home view, one per
@@ -497,18 +504,40 @@ const findingsBySlot = computed(() => {
  * turning a motor illegal still registers: that is a different fact about a
  * different part, not a repeat.
  */
-const reportedRules = new Set<string>()
+/**
+ * What has already been reported, and which build it belongs to.
+ *
+ * In `useState`, not a local, for the same reason `countedHash` is: this page
+ * unmounts whenever the reader follows a part link and mounts again when they
+ * come back, which the add-to-builder funnel makes a routine move. Component
+ * scope would forget on every round trip and re-report every standing finding.
+ * A record rather than a `Set` so it survives the payload as plain JSON.
+ */
+const reportedRules = useState<Record<string, true>>('reported-rules', () => ({}))
+const reportedFor = useState<string | undefined>('reported-rules-build', () => undefined)
 
-// `swap` and `revert` replace `build.value` wholesale, so the ref itself
-// changes on every edit. Only a new chassis or kit is a new build.
-watch(() => build.value && `${build.value.chassis}:${build.value.kit ?? ''}`,
-  () => reportedRules.clear())
-
+/**
+ * The comparison lives *inside* the findings watcher rather than in a watcher
+ * of its own. Both would be `pre` jobs on the same component, so Vue runs them
+ * in the order reactivity reaches them, not the order they are written — and on
+ * the `null` to a kit transition, which is how nearly every session starts,
+ * `findings` is reached first. Clearing from a second watcher therefore wiped
+ * the record immediately *after* its events fired, and every build's opening
+ * findings went out twice.
+ */
 watch(findings, (list) => {
+  const current = build.value ? `${build.value.chassis}:${build.value.kit ?? ''}` : undefined
+  // `swap` and `revert` replace `build.value` wholesale, so only a new chassis
+  // or kit is a new build.
+  if (current !== reportedFor.value) {
+    reportedFor.value = current
+    reportedRules.value = {}
+  }
+
   for (const finding of list) {
     const key = `${finding.rule}:${finding.slotId ?? ''}`
-    if (reportedRules.has(key)) continue
-    reportedRules.add(key)
+    if (reportedRules.value[key]) continue
+    reportedRules.value[key] = true
     track('rule_triggered', {
       rule: finding.rule,
       severity: finding.severity,
@@ -538,7 +567,11 @@ let restoringClass = false
 onMounted(() => {
   try {
     const saved = localStorage.getItem(CLASS_KEY)
-    if (isBuildClass(saved)) {
+    // The equality test is load-bearing. Assigning the value it already holds
+    // — `open`, the default, is also the commonest thing to have saved — does
+    // not fire the watcher, so the flag would stay armed for the life of the
+    // page and swallow the reader's next real change instead of this one.
+    if (isBuildClass(saved) && saved !== buildClass.value) {
       restoringClass = true
       buildClass.value = saved
     }

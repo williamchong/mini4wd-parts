@@ -10,6 +10,8 @@
  * **Ids, never names.** `resolve(part.names)` would give the same item two
  * different values in `zh-Hant` and `en` and split every report in half. Item
  * numbers, slot ids and chassis ids are already stable, bounded vocabularies.
+ * Nothing here may carry the build hash either, for the same reason: it is
+ * unbounded, and one report row per build is no report at all.
  *
  * **Every property is a GA4 custom dimension** that has to be registered by
  * hand in the GA4 admin before it shows up in a standard report — PostHog
@@ -19,6 +21,7 @@
 import type { BuildClass } from '#shared/catalog/build'
 import type { ChassisId } from '#shared/catalog/chassis'
 import type { RuleId, Severity } from '#shared/catalog/rules'
+import type { PartCategory } from '#shared/catalog/schema'
 
 /**
  * The events, and what each one carries. Types only — erased before a byte is
@@ -39,7 +42,7 @@ export type AnalyticsEvents = {
   rule_triggered: { rule: RuleId, severity: Severity, slot?: string, build_class: BuildClass }
   build_class_set: { build_class: BuildClass }
   /** A part page handed an item number to the builder. */
-  part_to_builder: { part: string, category: string }
+  part_to_builder: { part: string, category: PartCategory }
   /** …and no slot on this chassis would take it: a button that led nowhere. */
   part_no_slot: { part: string, chassis: ChassisId }
   scene_ready: { chassis: ChassisId, ms: number }
@@ -57,13 +60,10 @@ export function useAnalytics() {
     if (import.meta.server) return
 
     ga.gtag('event', event, props)
-    // posthog-js stamps `$current_url` from `location.href`, which on this site
-    // carries a whole build in the hash. Overridden, or every insight grouped
-    // by URL becomes one row per build.
-    ph.posthog.capture(event, {
-      ...props,
-      $current_url: `${location.origin}${location.pathname}${location.search}`
-    })
+    // No `$current_url` override here: `disable_capture_url_hashes` in
+    // nuxt.config.ts strips the build out of the URL for *every* PostHog event,
+    // including the `$pageview` and `$$heatmap` this could never have reached.
+    ph.posthog.capture(event, props)
   }
 
   return { track }

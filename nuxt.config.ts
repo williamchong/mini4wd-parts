@@ -228,8 +228,22 @@ export default defineNuxtConfig({
         // Passed straight to `posthog.init()`. Each of these three otherwise
         // pulls another script from PostHog's CDN on every page:
         config: {
+          /**
+           * **The build must not reach PostHog's own URL property.** `track()`
+           * controls what the ten custom events carry, but `$pageview`,
+           * `$pageleave` and `$$heatmap` are built by the SDK and stamp
+           * `$current_url` from `location.href` — which `useBuildLink` has
+           * rewritten to hold a whole build. Left on, the highest-volume events
+           * split `/` into one row per shared build, which is no report at all.
+           * posthog-js only defaults this on for `defaults >= '2026-06-25'`,
+           * and the module passes no `defaults`.
+           */
+          disable_capture_url_hashes: true,
           // Dead clicks cannot say *what* was clicked once autocapture is off,
           // which is the only thing that would make the report actionable.
+          // Note this flag alone does not stop the script downloading: the
+          // heatmap collector builds its own dead-click detector that ignores
+          // it, so `capture_heatmaps` governs that too.
           capture_dead_clicks: false,
           // Core Web Vitals for a prerendered site are better read from Search
           // Console, and here they would mostly measure the 3D pane, which
