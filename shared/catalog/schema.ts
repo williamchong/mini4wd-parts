@@ -241,6 +241,12 @@ export const partSchema = z.object({
    * meaningful class legality, and only car parts appear in the builder.
    */
   isCarPart: z.boolean(),
+  /**
+   * True when the part goes with the thing its slot is named for rather than
+   * being it — a roller O-ring, a spare pinion, a damper spring. It still fills
+   * the slot; the picker lists it after the rest. Written only when true.
+   */
+  isAddOn: z.boolean().optional(),
 
   chassisCompat: z.object({
     /**

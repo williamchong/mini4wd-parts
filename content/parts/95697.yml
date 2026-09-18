@@ -9,12 +9,12 @@ nameSources:
   zh-HK: tamiya.hk
 series: special
 seriesLabel: ミニ四駆特別企画商品（パーツ）
-category: plate
+category: roller
 categorySource: derived
 slots:
-  - front-stay
-  - rear-stay
-  - side-stay
+  - roller-front
+  - roller-rear
+  - roller-side
 isCarPart: true
 chassisCompat:
   include:
@@ -28,7 +28,9 @@ classLegality:
   stockBmax: legal
   junior: legal
   source: derived
-specs: {}
+specs:
+  rollerDiameterMm: 19
+  rollerType: plastic
 colours:
   primary: "#d0312d"
   source: derived

@@ -48,6 +48,7 @@
     "pickPart": "Choose {slot}",
     "searchParts": "Search by name or item number",
     "candidates": "{count} parts fit",
+    "addOns": "Add-ons and spares",
     "close": "Close",
     "swap": "Swap",
     "copyLink": "Copy link",

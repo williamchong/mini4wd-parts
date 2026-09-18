@@ -36,7 +36,7 @@ type HasThumbnail = { hasThumbnail?: boolean }
  * who only wanted to change a motor.
  */
 export type BuildablePart = Pick<Part,
-  'id' | 'names' | 'category' | 'slots' | 'isCarPart' | 'chassisCompat'
+  'id' | 'names' | 'category' | 'slots' | 'isCarPart' | 'isAddOn' | 'chassisCompat'
   | 'classLegality' | 'specs' | 'colours' | 'body' | 'priceJpy'> & HasThumbnail
 
 export type BuildableChassis = Pick<Chassis, 'id' | 'slots' | 'defaultLoadout' | 'motorShaft'>
@@ -289,7 +289,14 @@ export type SlotCandidate = {
  * What the user may put in a slot. Class legality is returned rather than
  * filtered on: a beginner learns more from a Sprint Dash marked "Open only"
  * than from one that silently does not appear. Ordering is a sensible default
- * — usable first, then cheapest — and the picker is free to re-sort.
+ * — the thing the slot is named for before its add-ons, then usable first,
+ * then cheapest — and the picker is free to re-sort.
+ *
+ * Add-ons rank below every part rather than being filtered out, because they
+ * do fill the slot and a link may carry one. Ranked on price alone, the three
+ * cheapest rows of the roller picker were two O-ring packs and a pipe. They
+ * rank below even an illegal part so that they form one block at the foot of
+ * the list, which the picker heads with a divider.
  */
 export function partsForSlot(
   parts: BuildablePart[],
@@ -305,7 +312,8 @@ export function partsForSlot(
 
   const rank = { legal: 0, unknown: 1, illegal: 2 }
   return candidates.sort((a, b) =>
-    rank[a.legality] - rank[b.legality]
+    Number(a.part.isAddOn ?? false) - Number(b.part.isAddOn ?? false)
+    || rank[a.legality] - rank[b.legality]
     // Tamiya prices every current item, but discontinued ones can lack a price;
     // those sort last rather than as if they were free.
     || (a.part.priceJpy ?? Infinity) - (b.part.priceJpy ?? Infinity)

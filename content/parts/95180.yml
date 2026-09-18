@@ -9,12 +9,10 @@ nameSources:
   zh-HK: tamiya.hk
 series: limited
 seriesLabel: ミニ四駆限定販売商品（パーツ）
-category: plate
+category: mass-damper
 categorySource: derived
 slots:
-  - front-stay
-  - rear-stay
-  - side-stay
+  - damper
 isCarPart: true
 chassisCompat:
   include:
@@ -35,8 +33,7 @@ classLegality:
   stockBmax: legal
   junior: legal
   source: derived
-specs:
-  plateMaterial: carbon
+specs: {}
 colours:
   primary: "#2a2c30"
   source: derived

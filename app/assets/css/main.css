@@ -730,6 +730,18 @@ button.link {
   background: #f6f8fa;
 }
 
+.picker-divider {
+  padding: 0.9rem 0.5rem 0.4rem;
+  border-top: 1px solid #d8dee4;
+}
+
+.picker-divider h3 {
+  margin: 0;
+  font-size: 0.85em;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
 /* Part card */
 
 /* Picture on the left of the whole card — spanning the name and the specs —

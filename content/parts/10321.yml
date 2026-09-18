@@ -14,6 +14,7 @@ slots:
   - front-stay
   - rear-stay
 isCarPart: true
+isAddOn: true
 chassisCompat:
   include:
     - ma

@@ -7,7 +7,7 @@ import { thumbnailIds } from './thumbnails.ts'
 import { thumbnailPath, type ThumbCollection } from '../../shared/catalog/thumbnails.ts'
 import { partSchema, chassisSchema, kitSchema, CHASSIS_IDS, chassisIdFor } from '../../shared/catalog/schema.ts'
 import type { ChassisId, Kit, KitOverride, LabelNames, Loadout, PartCategory, PartColours, PartOverride, PartSpecs } from '../../shared/catalog/schema.ts'
-import { compact, deriveCategory, deriveLegality, deriveSlots, deriveSpecs, isPlainObject, normalise } from './taxonomy.ts'
+import { compact, deriveAddOn, deriveCategory, deriveLegality, deriveSlots, deriveSpecs, isPlainObject, normalise } from './taxonomy.ts'
 import { labelFor, neutralLabel } from './labels.ts'
 import { colourOf, coloursIn } from './colours.ts'
 import { bodyForKit, loadBodies, writeBodies } from './bodies.ts'
@@ -224,6 +224,12 @@ function buildPart(item: JpItem<PartGenreCode>) {
     category,
     categorySource: 'derived',
     isCarPart,
+    // Only when true, like `finish`. The payload is the same either way — an
+    // absent column comes back from @nuxt/content as null — but a `false` would
+    // be 357 lines of YAML that say nothing.
+    // `shapeCategory` is the category after any override, which is the one
+    // whose `addOn` question applies.
+    isAddOn: deriveAddOn(shapeCategory, item) || undefined,
     slots: deriveSlots(category),
     chassisCompat: { include, other, source: 'scraped' },
     classLegality: { ...deriveLegality(category, isCarPart), source: 'derived' },

@@ -9,6 +9,14 @@
 # `match` entries are plain substrings tested against the NFKC-normalised
 # Japanese name, then the English name. Anything that still lands wrong belongs
 # in data/overrides/parts.yml, not in a more baroque rule here.
+#
+# `addOn` is a second question, asked only of a part the rule has already
+# claimed: is this the thing its slot is named for, or something that goes with
+# it? A roller O-ring is filed with the rollers and fills a roller slot, but a
+# reader who opens the roller picker is looking for rollers, so the picker lists
+# add-ons after the rest (shared/catalog/build.ts). The pattern is scoped to its
+# own rule on purpose: ローラー用 means "for rollers" on an O-ring and on two
+# FRP plates alike, and only the O-ring is a roller's add-on.
 
 - category: setting-tool
   carPart: false
@@ -49,8 +57,11 @@
 - category: gear-cover
   match: [ギヤカバー, ギアカバー]
 
+# A gear set is what the slot is for. Single AO gears (G-13, G-22), pinions,
+# gear shafts and gear bearings are spares that rebuild or re-ratio one.
 - category: gear
   match: [ギヤ, ギア, ピニオン, クラウン]
+  addOn: \bG-?\d|ピニオン|ギヤシャフト|ギヤベアリング
 
 - category: motor-mount
   match: [モーターマウント, モーターサポート]
@@ -81,11 +92,23 @@
 - category: body
   match: [ボディ, キャノピー, ポリカ]
 
-- category: plate
-  match: [プレート, ステー, ブレース, 補強]
+# Above `plate`: a ball-link mass damper sold with its carbon plate
+# (ボールリンクマスダンパー（スクエア/カーボンプレート）) is a mass damper.
+- category: mass-damper
+  match: [マスダンパー, ウエイト, ウェイト, バランサー]
 
+# ステー is a substring of ステーション, and every Mini 4WD Station limited
+# edition carries that word, so a bare match filed a 19 mm roller and a tube
+# stabilizer as plates — the シール/シールド failure above, in a new place.
+- category: plate
+  match: [プレート, ブレース, 補強]
+  regex: ステー(?!ション)
+
+# O-rings, pipes, spacers and bearings "for rollers" (ローラー用), and the
+# mount that moves one outward. "With rubber rings" (ゴムリング付) is a roller.
 - category: roller
   match: [ローラー]
+  addOn: ローラー用|マウント
 
 - category: bearing
   match: [ベアリング, ハトメ, はとめ, 軸受け]
@@ -95,12 +118,11 @@
 
 - category: slide-damper
   match: [スライドダンパー]
-
-- category: mass-damper
-  match: [マスダンパー, ウエイト, ウェイト, バランサー]
+  addOn: スプリング
 
 - category: stabilizer
   match: [スタビ]
+  addOn: キャップ
 
 - category: bumper
   match: [バンパー, ステアリング, アンダーガード]

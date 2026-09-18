@@ -13,6 +13,7 @@ slots:
   - gear
   - counter-gear
 isCarPart: true
+isAddOn: true
 chassisCompat:
   include: []
   other: []

@@ -6,7 +6,7 @@ import { parseDetail, parseListPage } from './sources/tamiya-jp.ts'
 import { parseCompatPage } from './sources/tamiya-compat.ts'
 import { parseChassisImages } from './sources/tamiya-chassis.ts'
 import { mapStoreProduct } from './sources/tamiya-hk.ts'
-import { deriveCategory, deriveSpecs } from './taxonomy.ts'
+import { deriveAddOn, deriveCategory, deriveSpecs } from './taxonomy.ts'
 import {
   GUP_TEMPLATE, KIT_TEMPLATE, parseGupArticle, parseKitArticle, parseTemplate,
   parseTemplates, splitParams, templatePattern
@@ -112,6 +112,35 @@ test('wheel and tire sets are one category even when the words are separated', (
     deriveCategory({ nameJa: '大径ナローライトウェイトホイール&ハードバレルタイヤ' }).category,
     'wheel-tire-set'
   )
+})
+
+test('a Mini 4WD Station edition is not a stay', () => {
+  assert.equal(deriveCategory({ nameJa: '2段低摩擦プラローラー (19-19mm) レッド (ミニ四駆ステーション)' }).category, 'roller')
+  assert.equal(deriveCategory({ nameJa: '低摩擦ハイマウントチューブスタビセット (ホワイト) ミニ四駆ステーション' }).category, 'stabilizer')
+  assert.equal(deriveCategory({ nameJa: 'FRPマルチワイドステー' }).category, 'plate')
+})
+
+test('a mass damper sold with its carbon plate is a mass damper', () => {
+  assert.equal(deriveCategory({ nameJa: 'HG ボールリンクマスダンパー （スクエア/カーボンプレート）' }).category, 'mass-damper')
+})
+
+test('what goes with a roller or a gear set is an add-on, and the part itself is not', () => {
+  const addOn = (nameJa: string) => deriveAddOn(deriveCategory({ nameJa }).category, { nameJa })
+  assert.equal(addOn('AO-1021 17・19mmローラー用ゴムリング(6個)'), true)
+  assert.equal(addOn('ローラーワイドマウントセット'), true)
+  // "With rubber rings" is a roller that comes with them.
+  assert.equal(addOn('ゴムリング付2段低摩擦プラローラーセット (赤・青13-12mm)'), false)
+  // ローラー用 on a plate: the pattern belongs to the roller rule alone.
+  assert.equal(deriveCategory({ nameJa: '13･19mmローラー用FRPマルチ補強プレート' }).category, 'plate')
+  assert.equal(addOn('13･19mmローラー用FRPマルチ補強プレート'), false)
+  // Full-width Ｇ folds to G before the pattern sees it.
+  assert.equal(addOn('AO-1019 ミニ四駆Ｇ-2ギヤ（オレンジ10個入り）'), true)
+  assert.equal(addOn('8Tピニオンギヤ （真ちゅう/プラスチック・各4個）'), true)
+  assert.equal(addOn('超速ギヤーセット'), false)
+  assert.equal(addOn('AO-1034 ミニ四駆 スライドダンパースプリングセット'), true)
+  assert.equal(addOn('ボールスタビキャップ （モノクロ）'), true)
+  // A category with no pattern has no add-ons.
+  assert.equal(addOn('マスダンパーセット'), false)
 })
 
 test('tools and gauges are not car parts', () => {

@@ -15,6 +15,7 @@ categorySource: derived
 slots:
   - damper
 isCarPart: true
+isAddOn: true
 chassisCompat:
   include:
     - ma

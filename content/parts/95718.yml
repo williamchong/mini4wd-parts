@@ -7,12 +7,10 @@ nameSources:
   en: tamiya.com
 series: special
 seriesLabel: ミニ四駆特別企画商品（パーツ）
-category: plate
+category: stabilizer
 categorySource: derived
 slots:
-  - front-stay
-  - rear-stay
-  - side-stay
+  - damper
 isCarPart: true
 chassisCompat:
   include:

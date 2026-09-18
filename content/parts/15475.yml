@@ -17,6 +17,7 @@ slots:
   - roller-rear
   - roller-side
 isCarPart: true
+isAddOn: true
 chassisCompat:
   include:
     - ma

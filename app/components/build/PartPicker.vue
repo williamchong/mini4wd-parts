@@ -25,6 +25,10 @@ const query = ref('')
 // the kit picker needs exactly the same one and two copies would drift.
 const matches = computed(() =>
   props.candidates.filter(({ part }) => matchesQuery(query.value, part.id, part.names)))
+
+// `partsForSlot` ranks add-ons as one block at the foot, so a single divider
+// before the first of them heads all of them.
+const firstAddOn = computed(() => matches.value.findIndex(({ part }) => part.isAddOn))
 </script>
 
 <template>
@@ -45,21 +49,28 @@ const matches = computed(() =>
       <p class="picker-count">{{ $t('build.candidates', { count: matches.length }) }}</p>
 
       <ul class="picker-list">
-        <li v-for="candidate in matches" :key="candidate.part.id">
-          <button type="button" @click="emit('select', candidate.part.id)">
-            <PartCard
-              :part="candidate.part"
-              :slot-type="slotType"
-              :verdict="{ legality: candidate.legality, buildClass }"
-            />
-          </button>
-          <!-- Beside the button, never inside it: an anchor nested in a button
-               is invalid, and the two do different things — one fills the slot,
-               one leaves the builder to read about the part. -->
-          <NuxtLink class="link picker-details" :to="localePath(`/parts/${candidate.part.id}`)">
-            {{ $t('build.details') }}
-          </NuxtLink>
-        </li>
+        <template v-for="(candidate, i) in matches" :key="candidate.part.id">
+          <!-- Presentation, not a row: a screen reader's list count and item
+               navigation should reach parts only, and the heading below it. -->
+          <li v-if="i === firstAddOn" class="picker-divider" role="presentation">
+            <h3>{{ $t('build.addOns') }}</h3>
+          </li>
+          <li>
+            <button type="button" @click="emit('select', candidate.part.id)">
+              <PartCard
+                :part="candidate.part"
+                :slot-type="slotType"
+                :verdict="{ legality: candidate.legality, buildClass }"
+              />
+            </button>
+            <!-- Beside the button, never inside it: an anchor nested in a button
+                 is invalid, and the two do different things — one fills the slot,
+                 one leaves the builder to read about the part. -->
+            <NuxtLink class="link picker-details" :to="localePath(`/parts/${candidate.part.id}`)">
+              {{ $t('build.details') }}
+            </NuxtLink>
+          </li>
+        </template>
       </ul>
     </div>
   </div>

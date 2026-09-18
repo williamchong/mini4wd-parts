@@ -8,13 +8,22 @@ interface CategoryRule {
   carPart?: boolean
   match?: string[]
   regex?: string
+  addOn?: string
 }
 
 const RULES = readYamlFile<CategoryRule[]>('data/taxonomy/categories.yml')
 
+const ADD_ON = new Map<Category, RegExp>()
+
 for (const rule of RULES) {
   if (!PART_CATEGORIES.includes(rule.category)) {
     throw new Error(`Unknown category "${rule.category}" in categories.yml`)
+  }
+  if (rule.addOn) {
+    if (ADD_ON.has(rule.category)) {
+      throw new Error(`Two addOn patterns for "${rule.category}" in categories.yml`)
+    }
+    ADD_ON.set(rule.category, new RegExp(rule.addOn))
   }
 }
 
@@ -43,8 +52,13 @@ export interface CategoryResult {
   matched: boolean
 }
 
-export function deriveCategory(item: { nameJa: string, nameEn?: string }): CategoryResult {
-  const haystack = `${normalise(item.nameJa)} ${normalise(item.nameEn ?? '')}`
+type Named = { nameJa: string, nameEn?: string }
+
+/** Both names, normalised: what every rule's `match`, `regex` and `addOn` is tested against. */
+const haystackOf = (item: Named) => `${normalise(item.nameJa)} ${normalise(item.nameEn ?? '')}`
+
+export function deriveCategory(item: Named): CategoryResult {
+  const haystack = haystackOf(item)
   for (const rule of RULES) {
     const hit = rule.match?.some(keyword => haystack.includes(normalise(keyword)))
       || (rule.regex ? new RegExp(rule.regex).test(haystack) : false)
@@ -53,6 +67,16 @@ export function deriveCategory(item: { nameJa: string, nameEn?: string }): Categ
     }
   }
   return { category: 'other', isCarPart: true, matched: false }
+}
+
+/**
+ * Whether a part goes *with* the thing its slot is named for rather than being
+ * it: a roller O-ring, a spare pinion, a slide damper spring. Asked of the
+ * part's final category, so an override that moves a part is asked the new
+ * category's question.
+ */
+export function deriveAddOn(category: Category, item: Named): boolean {
+  return ADD_ON.get(category)?.test(haystackOf(item)) ?? false
 }
 
 /** Which builder sockets a category can fill (docs/PLAN.md §4.2). */

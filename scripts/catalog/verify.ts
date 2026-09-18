@@ -5,7 +5,7 @@ import { thumbnailFile } from './thumbnails.ts'
 import { thumbnailPath, type ThumbCollection, type ThumbVariant } from '../../shared/catalog/thumbnails.ts'
 import { partSchema, chassisSchema, kitSchema } from '../../shared/catalog/schema.ts'
 import type { Chassis, Loadout, Slot } from '../../shared/catalog/schema.ts'
-import { newBuild, resolveBuild } from '../../shared/catalog/build.ts'
+import { newBuild, partsForSlot, resolveBuild } from '../../shared/catalog/build.ts'
 import { checkBuild } from '../../shared/catalog/rules.ts'
 import { bodyForKit, bodyProblems, loadBodies, silhouetteOf } from './bodies.ts'
 import { entryShapeId, TIRES, WHEELS } from '../../shared/scene/wheels.ts'
@@ -134,6 +134,20 @@ function checkStock(label: string, host: Chassis, kit?: (typeof kits)[number]) {
   }
 }
 
+/**
+ * An `addOn` pattern in data/taxonomy/categories.yml that is too broad would
+ * push a whole picker below the fold of its own divider. Every slot that offers
+ * anything must offer at least one part that is not an add-on.
+ */
+function checkAddOns(host: Chassis) {
+  for (const slot of host.slots) {
+    const candidates = partsForSlot(parts, slot.type, host, 'open')
+    if (candidates.length && candidates.every(({ part }) => part.isAddOn)) {
+      errors.push(`chassis/${host.id}: every part for ${slot.id} is an add-on — check the addOn pattern in data/taxonomy/categories.yml`)
+    }
+  }
+}
+
 const chassisById = new Map(chassis.map(entry => [entry.id, entry]))
 
 for (const entry of chassis) {
@@ -145,6 +159,7 @@ for (const entry of chassis) {
   checkThumbnail('chassis', entry.id, entry.thumbnail)
   checkThumbnail('chassis', entry.id, entry.detailThumbnail, 'detail')
   checkStock(`chassis/${entry.id}`, entry)
+  checkAddOns(entry)
 }
 
 const kitIds = new Set<string>()

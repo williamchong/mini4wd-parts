@@ -51,7 +51,7 @@ const { data: catalog } = await useAsyncData('build-catalog', async () => {
         'motorShaft', 'motorPosition', 'releaseYear', 'notes', 'thumbnail')
       .all(),
     queryCollection('parts')
-      .select('id', 'stem', 'names', 'category', 'slots', 'isCarPart',
+      .select('id', 'stem', 'names', 'category', 'slots', 'isCarPart', 'isAddOn',
         'chassisCompat', 'classLegality', 'specs', 'colours', 'body', 'wheel', 'tire', 'finish',
         'priceJpy', 'thumbnail')
       .all(),

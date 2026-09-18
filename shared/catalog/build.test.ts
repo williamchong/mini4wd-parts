@@ -169,6 +169,24 @@ test('the picker offers illegal parts rather than hiding them, ranked last', () 
     ['15484', '15486', '15487'])
 })
 
+test('add-ons follow the parts they go with, however cheap', () => {
+  const parts = [
+    part({ id: '94792', slots: ['roller-front'], isAddOn: true, priceJpy: 110 }),
+    part({ id: '15437', slots: ['roller-front'], priceJpy: 770 }),
+    part({ id: '15381', slots: ['roller-front'], priceJpy: 220 }),
+    part({ id: '15180', slots: ['roller-front'], isAddOn: true, priceJpy: 550 })
+  ]
+  assert.deepEqual(partsForSlot(parts, 'roller-front', chassis, 'open').map(c => c.part.id),
+    ['15381', '15437', '94792', '15180'])
+
+  // The add-ons stay one block at the foot, below even an illegal part, so the
+  // picker's divider has a single place to go.
+  parts[1] = { ...parts[1]!, classLegality: { ...parts[1]!.classLegality, junior: 'illegal' } }
+  parts[0] = { ...parts[0]!, classLegality: { ...parts[0]!.classLegality, junior: 'illegal' } }
+  assert.deepEqual(partsForSlot(parts, 'roller-front', chassis, 'junior').map(c => c.part.id),
+    ['15381', '15437', '15180', '94792'])
+})
+
 test('the picker drops parts that are not for this chassis, and non-car parts', () => {
   const parts = [
     part({ id: '15512', slots: ['front-stay'], chassisCompat: { include: ['ar'], other: [], source: 'scraped' } }),
