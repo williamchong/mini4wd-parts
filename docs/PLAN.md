@@ -678,6 +678,143 @@ The owner asked for a button in the pane that switches the car on, so the wheels
 
 **Step 2 landed the same day: 開動 switches the car on.** The button is bottom-right in the pane, on every chassis and on the empty outline car. Measured in Chrome on MA (Stier, a 120 Hz display): 0 frames a second idle, one a display frame while on, and after 停車 the car coasts for about 1.7 s and the pane goes back to 0. Scrolled out of view it draws nothing while on, and picks up where it was when it returns. What the measuring changed: at the planned 0.8 s time constant, and a stop at 0.005 turns a second, a coast took 3.8 s of the pane drawing a crawl, so it is 0.5 s and 0.02. The switch slider is a chassis piece of its own now, keeping the A parts' colour, and slides 4 mm toward the nose. `scene_power { chassis }` counts switch-ons. **Not done:** `prefers-reduced-motion` is not consulted, since nothing moves until the reader asks for it; the 3D chunk was not re-measured for the ~40 lines this adds; and the single-shaft counter gear's direction is still a choice rather than a check, since the crown it drives is not drawn.
 
+#### The rest of the parts (planned 2026-09-18)
+
+With the bodies, wheels, tires, motors, gears and chassis drawn from what each record says, what is left is what §5.4 called "the rest of the parametric library", which M3 was holding. **Several kinds still share one shape between all their parts.** Every roller is the same ring on a post, whether it is a plastic 9 mm, a double aluminium 13-12 or a spoked 19 mm ball-race. Every stay is one trapezoid, whether it is a stock-width reinforcing plate or a wide carbon front plate. Every brake is a box. Everything in the damper slot, stabiliser poles included, is one cylinder on the centre line. The owner asked for the rest of the parts to be modelled; this is the plan for doing it.
+
+**What is left, counted from `content/parts` on 2026-09-18:**
+
+| Group | Parts | Today | What it becomes |
+|---|---:|---|---|
+| Rollers | 50 (9 add-ons) | one ring and hub at the record's diameter | a row per roller type |
+| Plates | 42 | one trapezoid, or one side-stay rectangle | a row per outline, carrying its roller holes |
+| Bumpers | 5 | drawn as a plate | MS bumperless units swap the chassis ends; the under guard and the VS steering set are outlines |
+| Slide dampers | 4 | a plate, or a damper cylinder | a plate row with springs; the 2 spring sets are add-ons |
+| Mass dampers | 14 | one cylinder, first entry only, on the centre line | a row per weight, mounted where the row says |
+| Stabilisers | 10 | the same damper cylinder | poles and heads at the corners |
+| Brakes | 7 | one box | a stay with a sponge, the sponge in its own colour |
+| Axles, bearings, propeller shafts, terminals | 28 | no socket; the chassis draws a steel propeller shaft and terminal plates | fixed-place shapes, painted from the part |
+| Gear covers, MS chassis units, motor support, cooling shield | 12 | **no slot at all**, so they cannot be put in a build | two new slots, then drawn as a repaint or a piece swap |
+| Screws, nuts, washers, spacers, O-rings, body catches, tubing, brush holder | 42 | no socket | **stay list-only** |
+| Super FM chassis sets | 3 | no slot | out: Super FM is not a v1 chassis |
+
+Stickers, tools, accessories and bundles (39) are not car parts and draw nothing. Of the 172 parts that get a shape, only the rollers show on a stock kit. Every chassis' `defaultLoadout` puts "Kit standard plastic rollers" front and rear, and no kit's loadout names a stay, damper or brake. So most of what this plan draws appears when a reader **swaps something in**, and that is the moment the MVP is about (§6: "watch a 3D model of the result update").
+
+**Owner decisions (2026-09-18):**
+
+- **A stay carries its rollers.** This is §5.2's cascade (chassis → plate → roller), which was designed but never built. A plate row lists its roller holes. When a plate fills `front-stay`, `rear-stay` or `side-stay`, the matching roller sockets move off the chassis posts onto those holes, so a wide plate pushes the rollers out and a double-roller stay draws an upper and a lower pair. With no plate in the slot, the rollers stay on the posts, as they are today.
+- **Fixed-place parts are drawn; parts whose place depends on the setup are not.** Axles run through the wheels, bearings sit in the hubs, terminals at the cells, the propeller shaft between the crowns, and gear covers and chassis units are the chassis itself. Each of these has one true position. A screw, nut, spacer, O-ring or body catch goes wherever a reader's setup puts it, so a socket for it would be a guess. Those stay in the list, as §5.5 already has fasteners.
+- **A damper-slot shape picks its own mount.** The slot does not split, and the link format does not change. Each row says `end`, `side` or `corner`, and the pane draws **every** entry in the slot (up to its `maxCount` of 4) at the mount its row names. Today the slot draws `entries[0]` only.
+
+**Phase 0 — settle the formats on a dozen parts (3–4 h).** Pick parts that differ from each other:
+
+- rollers: 19 mm ringless ball-race (15464), plastic double 13-12 (15457), aluminium double with rubber rings (15418), a 13 mm bearing used as a roller (15180);
+- plates: FRP wide front (15472), carbon rear double-roller stay with three attachment points (15412), HG carbon brake stay (15550);
+- damper slot: mass damper set (15392), 8×8×32 block (15428), 17 mm stabiliser head set (15436);
+- one wide rear slide damper (15467).
+
+Things to judge:
+
+- whether a two-tier roller reads as two at pane size;
+- whether carbon and FRP need a finish of their own or only their recorded colour;
+- whether a plate's cut-outs can be built from convex pieces. `Triangles.fan` is convex-only, the same as `Chassis.bumper`'s crossbar, arms and rib. An ear-clipper is about 40 lines and would be measured before it is taken, the way `ExtrudeGeometry`'s 8 KB was;
+- whether a roller on a wide plate still gets its own tap, given how far out it now sits.
+
+The formats freeze at the end of this phase, for the same reason the body and wheel formats did.
+
+**Phase 1 — the tables, the cascade and the wiring (6–8 h).**
+
+- **`shared/scene/fittings.ts`**, beside `wheels.ts` and like it free of three.js and Zod, holds a row type per group:
+  - `RollerShape`: tier diameters, height, ring, spokes, taper, and whether a bearing race shows.
+  - `PlateShape`: a half outline as convex pieces, a default thickness for when `plateThicknessMm` is missing, `holes` (x, z and the tier heights of each roller mount), an optional brake-sponge seat, and `replacesBumper`.
+  - `DamperShape`: the mount, a body of cylinder, block, pole or tube, and its dimensions.
+  - `BrakeShape`.
+- **The rows are code and ride the 3D chunk.** They have no locale, no reader-facing text and no lazy load. This is §5.6's wheel reasoning, which measured 1.7 KB gz for 74 rows.
+- **`scripts/catalog/fittings.ts` resolves a part's name to its row**, most specific first and falling back a word at a time, the way `scripts/catalog/wheels.ts` does. The row id goes onto the record as a `fitting` field, beside `wheel` and `tire`, with `data/overrides/parts.yml` for the names that say nothing. 15373 "roller angle adjuster", 15150 "mount plate set" and 15372 "support plate set" are each a bag of small plates with no single place, so each is assigned the nearest outline. The stock rollers work like the stock wheels: each chassis' `defaultLoadout` roller entry carries a `shape`, authored by eye from that chassis' kit photos.
+- **The cascade.** `socketsFor(chassis)` becomes `socketsFor(chassis, plates)`, where `plates` is the resolved `PlateShape` in each stay slot. It stays memoised, keyed by the plate ids. The roller sockets come from the holes when there is a plate and from `Layout.rollers` when there is not, and each tier past the first becomes a socket of its own (`roller-rear-l-2`) that opens the same picker. Two knock-on effects:
+  - `Scene.client.vue` builds its socket groups once, from the chassis, so it now rebuilds them whenever a stay changes.
+  - The roller slot keeps `maxCount 2`, meaning one part per side. A double-roller stay draws that part at every hole on its side, so the pane shows four rollers while the list names one. That matches what the reader bought; the count the rule engine sees is a separate question and is not changed here.
+- **Mounts for the damper slot.** `end` uses the existing `damper-1`/`-2` sockets. `side` gets a mirrored pair at the side guards. `corner` uses the outermost plate hole when a plate is fitted, and the bumper's roller posts otherwise.
+- **`catalog:verify`** fails on four things:
+  - a part in one of these categories that resolves to no row, unless it is one of the list-only 42;
+  - a `fitting` id that no row defines;
+  - an outline that winds inward (`generators.test.ts`' signed-volume test);
+  - a plate whose outermost hole plus the largest roller it accepts is wider than the 105 mm envelope. That last check is new, and it is real: a wide plate with 19 mm rollers is exactly the setup that fails scrutineering.
+- **Finish:** `rollerType` decides metal or plastic, where `FINISH.roller` today makes every roller metal. `plateMaterial` decides carbon or FRP if phase 0 finds they need to differ. A plastic roller ring and a brake sponge are second draw groups, painted from `colours.ring` and `colours.sponge`, which `data/overrides/parts.yml` sets from the product photo where the name gives no colour.
+
+**Phase 2 — rollers (4–5 h), because they are the one group every car shows.** Rows in the order of parts reached:
+
+- single ball-race aluminium: ringless, tapered, bowl, dish, and spoked with a plastic ring (3, 5 and 6 spokes and aero);
+- double aluminium (9-8, 13-12, with and without rubber rings);
+- plastic double (13-12, 13-13, 19-19);
+- low-friction plastic;
+- a plain small bearing used as a roller (9, 11, 13 mm);
+- the chassis-standard plastic roller.
+
+Some roller-category parts are more than a roller: two stabilising-pole-and-roller sets, a rear skid roller, a progressive down-thrust roller, a side-extension mount, a brake-and-roller set and a sliding-damper roller. Each gets a row composed from the pieces above. The add-ons draw what they are: an O-ring draws a ring, a 5 mm pipe a sleeve and a spacer a washer. That way a link that fills a roller slot with one still shows something truthful.
+
+**Phase 3 — plates and bumpers (6–8 h).** About 16 outlines:
+
+- wide front, in generic, AR, VZ and fully-cowled versions;
+- wide rear, in generic and AR versions;
+- rear double-roller stay, in MS, three-point and 19 mm-roller versions;
+- multi-roller setting stay, front and rear;
+- reinforcing plate, in full, short and 13/19 mm versions;
+- rear roller stay;
+- brake stay;
+- side-extension mount;
+- bumper plate, front and rear;
+- the PRO FRP wide plate set (15357).
+
+The two Super X plates (15242, 15243) take the nearest outline. The **MS bumperless units** set `replacesBumper`. They swap the chassis' `ends` piece for one without the moulded bumper, which MS's `split()` already keeps separate, so this costs one flag on the MS generator, not a second chassis. The **front under guard** is a thin outline under the nose. The **VS steering set** is a front unit, drawn as its plate until someone asks for the linkage.
+
+**Phase 4 — the damper slot, slide dampers and brakes (5–6 h).**
+
+- Mass dampers:
+  - the cylinder sets, standard and heavy, at `end`;
+  - the slimline set;
+  - the 6×6 and 8×8 blocks in 32 and 14 mm lengths;
+  - the MA and AR side sets at `side`;
+  - the ball-connector blocks on a carbon plate;
+  - the adjustable 2.5 g stack;
+  - the balance weight.
+- Stabilisers, all at `corner`:
+  - short and long poles;
+  - 11, 15 and 17 mm heads;
+  - ball caps;
+  - the hi-mount tube in four colours;
+  - the underside head.
+- Slide dampers: the wide front and rear are plate rows with a sprung sub-plate and their own holes, so they carry rollers too. The two spring sets are add-ons that draw a spring pair at the end mount.
+- Brakes: a stay with a sponge seat at the rear, the rubber brake, the MS multi-brake and the AR set. The three sponge sets alone draw a sponge, 1, 2 or 3 mm thick, on whatever brake is fitted, or on the moulded bumper when none is.
+
+**Phase 5 — the fixed-place hidden parts (5–7 h).** §5.5 said these draw nothing; that changes here.
+
+- **`axle`** gets a mirrored socket at each axle. The shaft runs through both wheels at the part's length (60 or 72 mm), hex or round, hollow or black.
+- **`bearing`** gets four sockets, one inboard of each wheel: a ball race, a plastic bushing or a metal bearing, from the row.
+- **`propeller-shaft`** gets a socket on the single-shaft chassis. The steel shaft `singleShaftDrive()` bakes into the chassis moves to that socket, so a hollow shaft draws in its own colour.
+- **`terminal`** moves the terminal plates the chassis draws beside the cells into a socket group, so gold-plated terminals are gold.
+- **Two new slots, appended to `SHARE_SLOTS`,** which is append-only, so old links still decode:
+  - `gear-cover`, on both profiles;
+  - `chassis-unit`, on both profiles, which compatibility narrows per chassis.
+
+  `SLOTS_BY_CATEGORY` gains them, and the MS units, the lightweight centre and the MS colour sets **repaint** the chassis pieces (`ends`, `frame`, `aParts`) rather than draw a new shape; only the bumperless units change geometry (phase 3). The aluminium motor support (Super-II) and the cooling shield (MS, Super-II) are also `chassis-unit` parts, drawn at the motor socket. `catalog:verify`'s rule that no slot offers only add-ons has to allow a slot with **no** candidates at all, which `chassis-unit` is on six of the eight chassis (only MS and Super-II have one). One data slip was found while counting: 95682 is ミニ四駆ステーション's MS colour chassis set, but its English name is a gear cover's. It gets an override.
+
+**Phase 6 — review and measure (2–3 h).**
+
+- Extend `scripts/catalog/body-sheet.ts` with a fittings sheet: every row drawn at the pane's camera beside its product photo, fetched once into `.cache/` and never committed. Add a cascade sheet: one build per chassis with the widest front and rear plates fitted.
+- Re-run §5.5's tap grid on one of those builds, since rollers on a wide plate sit further out and a two-tier roller doubles the targets at each corner.
+- Measure what §5.6 measures every time: the 3D chunk before and after, the payload (a `fitting` id on about 170 records; the wheel columns cost +1.1 KB gz on 53), triangles per row, and that no route loads Zod.
+- Re-capture the posters if the empty MA car changed. It should not, since an empty stay slot keeps the rollers on the posts.
+
+**Risks.**
+
+- The cascade makes the socket set depend on the build. The chassis-only posters and every §5.5 measurement were taken on a fixed set, so phase 6 re-measures rather than assumes.
+- Tamiya names a plate by its role, not its outline. "FRP REINFORCING PLATE SET" is three plates, and the shape table picks the one a reader would fit first. That is a judgement, and each one is marked `?` beside its row the way uncertain spoke counts are.
+- The roller count the pane draws on a double-roller stay and the count the list records will disagree until the roller slots model tiers. That is a rule-engine question, deliberately out of scope here.
+- Most of these parts are dark FRP, carbon or black plastic on a black chassis. Colour alone will not separate them, so an outline that differs is what a swap has to show, and phase 0's first job is to check it does.
+
+**Total: 31–41 h.** Every phase from 2 on is a table a reader sees on the next swap, and each phase is a place to stop.
+
 ---
 
 ## 6. Roadmap
@@ -959,7 +1096,7 @@ Move to Cloudflare Workers with static assets; DNS to Cloudflare; D1 and R2. Sho
 
 ### M3 — Full 3D builder (6–10 weeks)
 
-~~The remaining seven chassis,~~ (M1c since 2026-09-16, §5.6) ~~per-kit bodies where they are worth modelling~~ ~~the silhouette table for the kits outside MA~~ (M1c since 2026-09-18, §5.6), and the rest of the parametric library — which is what actually lets the 2D list stop being the primary surface on anything but MA. Swap animation and camera presets (not the switch-on spin, which is M1c since 2026-09-18, §5.6: that turns the wheels and gears in place, a swap animation moves a part into its socket). 3D preview on share pages; AR, if wanted, by bringing model-viewer back on share pages only, against a baked export (it leaves the site in M1c, §5.5). The raycast proxies, click-to-select, hover highlight and touch tuning that used to live here moved to M1c on 2026-09-09.
+~~The remaining seven chassis,~~ (M1c since 2026-09-16, §5.6) ~~per-kit bodies where they are worth modelling~~ ~~the silhouette table for the kits outside MA~~ (M1c since 2026-09-18, §5.6), ~~and the rest of the parametric library~~ (planned into M1c 2026-09-18, §5.6 "The rest of the parts") — which is what actually lets the 2D list stop being the primary surface on anything but MA. Swap animation and camera presets (not the switch-on spin, which is M1c since 2026-09-18, §5.6: that turns the wheels and gears in place, a swap animation moves a part into its socket). 3D preview on share pages; AR, if wanted, by bringing model-viewer back on share pages only, against a baked export (it leaves the site in M1c, §5.5). The raycast proxies, click-to-select, hover highlight and touch tuning that used to live here moved to M1c on 2026-09-09.
 
 ### M4 — Wizard, identity, community (ongoing)
 
