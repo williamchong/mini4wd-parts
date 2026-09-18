@@ -292,9 +292,9 @@ function fitOf(bySlot: ReadonlyMap<string, ResolvedSlot>): Fit {
  * What the raycast actually tests: invisible volumes larger than the visible
  * shapes, because a 13 mm roller on a 165 mm car filling a phone screen is
  * about 28 px, under the 44 px minimum tap target. The roller's is a sphere
- * twice its diameter. The wheel's face sits proud of the tire's, so a tap on
- * the hub is the wheel and one on the band is the tire; whether a thumb can
- * tell them apart is what the phone test decides.
+ * twice its diameter, up to a 13 mm roller's. The wheel's face sits proud of
+ * the tire's, so a tap on the hub is the wheel and one on the band is the
+ * tire; whether a thumb can tell them apart is what the phone test decides.
  *
  * The body is the exception: its hit volume is its own shell, exactly what is
  * drawn. While the body was a translucent box (§5.5) a box-sized hit stole
@@ -316,7 +316,8 @@ const HIT: Record<Exclude<Solid, Hidden>, (shape: Shape) => BufferGeometry> = {
   'counter-gear': shape => new BoxGeometry(7, 20, 20).translate(20.5, 5, 7 * (shape.towardNose || 1)),
   wheel: ({ mm }) => new CylinderGeometry(mm / 2, mm / 2, 12, 16).rotateZ(Math.PI / 2),
   tire: ({ mm }) => new CylinderGeometry(mm / 2 + 2, mm / 2 + 2, 9, 16).rotateZ(Math.PI / 2),
-  roller: ({ mm }) => new SphereGeometry(mm, 12, 8),
+  // Capped at the default roller's: a 19 mm roller's 38 mm sphere took the front tire's taps (§5.6).
+  roller: ({ mm }) => new SphereGeometry(Math.min(mm, rollerRow(DEFAULT_ROLLER).mm), 12, 8),
   stay: () => new BoxGeometry(60, 8, 22),
   'side-stay': () => new BoxGeometry(22, 8, 40),
   brake: () => new BoxGeometry(40, 8, 16),

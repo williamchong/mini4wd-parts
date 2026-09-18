@@ -844,8 +844,17 @@ All seven phases landed the same day. **Every part the builder can fit now draws
   - The hi-mount tube is short and wide.
 - **Bytes.** The **3D chunk went 146.1 → 150.5 KB gz**, for eight tables, their generators and the cascade. The **payload went 90.1 → 93.0 KB gz**: 1.5 KB for the `fitting` column, and the rest for the 12 gear covers, MS units, motor support and cooling shield, which now have a slot. JavaScript modulepreloaded on `/` is unchanged (138.2 → 138.3 KB gz), and no route loads Zod.
 - **What the review pass caught.** The scene never copied a bumper piece's `end` into its mesh data, so a bumperless unit drew over a moulded bumper that was still there. A screenshot taken before the fix had looked right from the front three-quarter view. The review also caught a bearing's finish being read from its id string rather than its row.
+- **The tap grid on wide plates (re-run 2026-09-18).** §5.5's grid was re-run on wide-plate builds: a tap every 6 px at 390 (8 px at 360), each position raycast in both the seated and the lifted state. **It found the front tire losing to the rollers.** A roller's hit volume is a sphere twice its diameter, so a 19 mm roller's is 38 mm across, and on a wide front plate it reached back over the tire. The sphere is now capped at the default 13 mm roller's (`HIT` in `Scene.client.vue`), so a larger roller is still easier to tap than it looks, only no more so than the stock one. The table gives grid cells per slot, before → after the cap:
+
+  | Build | Front tire, seated | Front tire, lifted | Front rollers (each side) |
+  |---|---|---|---|
+  | MA 17901, HG carbon wide front plate 15498, 19 mm rollers 15404, 390 px | 25 → 37 | 48 → 61 | 124 → 59 (≈ 52 px) |
+  | MA 17901, FRP multi roller stays 15394 and 15430 (two tiers), 19 mm rollers front and rear, 390 px | 16 → 26 | 36 → 48 | 174 → 95 (≈ 66 px) |
+  | VS 18049, the same two-tier build, 360 px | 21 → 29 | 24 → 32 | 81 → 44 (≈ 59 px) |
+
+  Each side's stacked rollers count as one target, because the upper socket opens the same picker as the lower. All three builds keep the rollers above the 44 px minimum. Lifted, the tire gets back to its §5.5 figure (53 px equivalent at 390). The cap changes nothing on a car with 13 mm rollers or smaller, which covers every kit's stock rollers. The seated body took back some of the cells the rollers gave up (295 from 265 on the MA two-tier build), as expected for a clear shell.
 - **Not done:**
-  - A real thumb has still not tried the pane on a phone, and §5.5's tap grid was not re-run on a wide-plate build. A tap on an upper-tier roller was checked in Chrome only.
+  - A real thumb has still not tried the pane on a phone. The grid above measures the raycast, not a finger.
   - The roller count the pane draws on a double-roller stay (four) and the count the list records (one per side) still disagree, as the plan expected.
   - The fittings sheet has had one pass, not an owner pass.
 
