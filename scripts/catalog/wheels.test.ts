@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { TIRES, WHEELS, shapeId } from '../../shared/scene/wheels.ts'
-import { finishFor, printedTireMm, shapesFor } from './wheels.ts'
+import { printedTireMm, shapesFor } from './wheels.ts'
 
 test('a product name resolves to the wheel and tire its words describe', () => {
   const cases: [string, string | undefined, string | undefined][] = [
@@ -36,13 +36,6 @@ test('every shape a name resolves to is one the tables define', () => {
     assert.ok(!wheel || Object.hasOwn(WHEELS, wheel), `${name}: wheel ${wheel}`)
     assert.ok(!tire || Object.hasOwn(TIRES, tire), `${name}: tire ${tire}`)
   }
-})
-
-test('the material is the product only where the name says so', () => {
-  assert.equal(finishFor('LARGE DIA. CARBON WHEEL SET (w/SOFT SLICK TIRES)'), 'metal')
-  assert.equal(finishFor('HG ALUMINUM WHEELS for LOW PROFILE TIRES II (REVERSIBLE, 2PCS.)'), 'metal')
-  assert.equal(finishFor('RED SPIKE TIRE & SILVER COLOR PLATED WHEEL SET'), 'metal')
-  assert.equal(finishFor('LOW-PROFILE TIRE & WHEEL SET (5-SPOKE)'), undefined)
 })
 
 test('the millimetres in a name are the tire\'s, and only where they are bracketed', () => {

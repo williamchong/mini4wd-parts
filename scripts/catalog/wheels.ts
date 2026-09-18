@@ -109,14 +109,6 @@ export const printedTireMm = (name: string): number | undefined =>
   Number(/\((\d{2})\s*mm/i.exec(normalise(name))?.[1]) || undefined
 
 /**
- * Whether the rim itself is the product. Plated, aluminium and carbon wheels
- * are sold as the material, and drawing one in a plastic finish loses what a
- * reader paid for; a moulded wheel says nothing and stays plastic.
- */
-export const finishFor = (name: string): 'metal' | undefined =>
-  /plated|aluminum|aluminium|carbon|メッキ|アルミ|カーボン/i.test(normalise(name)) ? 'metal' : undefined
-
-/**
  * The shapes a wheel, tire or wheel-and-tire set draws. A set names both, and
  * its two halves are read from the same name: the words before and after the
  * `&` when it has one, since "LARGE DIA. 1-WAY WHEELS WT w/OFFSET TREAD TIRES"

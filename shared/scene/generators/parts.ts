@@ -170,7 +170,13 @@ export function motor(shafts: 1 | 2 = 2): BufferGeometry {
 }
 
 /** How one draw group is painted: a colour and whether it is metal. */
-export type Paint = { colour: number; finish: 'metal' | 'plastic' }
+/**
+ * What a painted piece is made of, which decides how it meets the light: the
+ * two a moulding or a steel pin is, and the three a part can be sold as
+ * (docs/PLAN.md §5.6, "Materials and light", phase 4).
+ */
+export type PaintFinish = 'metal' | 'plastic' | 'plated' | 'matte-plated' | 'carbon'
+export type Paint = { colour: number; finish: PaintFinish }
 
 const BRASS = 0xc9a24e
 const CLIP = 0xe8eae4

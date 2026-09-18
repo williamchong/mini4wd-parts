@@ -61,7 +61,7 @@ const { data: catalog } = await useAsyncData('build-catalog', async () => {
     queryCollection('kits')
       .select('id', 'stem', 'names', 'chassis', 'status', 'gearRatio',
         'releaseDate', 'thumbnail',
-        'loadoutSource', 'loadoutSourceTitle', 'stockLoadout', 'colours', 'body')
+        'loadoutSource', 'loadoutSourceTitle', 'stockLoadout', 'colours', 'body', 'bodyFinish')
       .all()
   ])
   // Normalise before comparing anything to anything: @nuxt/content overwrites
@@ -646,6 +646,7 @@ useHead(() => ({
         :chassis="shownChassis.id"
         :kit-body="kit?.body ?? null"
         :kit-colours="kit?.colours ?? null"
+        :kit-body-finish="kit?.bodyFinish ?? null"
         :slots="slots"
         :parts="partsById"
         :open-slot-id="openSlotId"

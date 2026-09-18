@@ -948,6 +948,23 @@ The map is redrawn only when `populate` runs or the shell moves (`shadowMap.auto
 
 Flipping the normal's sign fails both. **Bytes:** 3D chunk 151.9 KB gz (+0.3). The posters were recaptured, since the empty car's cells and posts are revolves.
 
+**Phase 4 landed (2026-09-19): a part sold as its material is drawn in it.** `scripts/catalog/finish.ts` reads a finish from the English and Japanese names together: `plated`, `matte-plated`, `aluminium` or `carbon`. It replaces the wheel-only `metal` flag in `wheels.ts`. It reads both names because they disagree: a plated kit is メッキ in Japanese and "METALLIC" in English, and Tamiya also uses "metallic" for paint. It is recorded on wheels, bodies and plates, the parts the pane reads it on: 5 aluminium wheels, 4 plated wheel sets, 10 carbon wheel sets, 21 HG carbon plates and one plated body set, 41 parts where 18 wheels had `metal` before. Kits gain `bodyFinish`: 6 plated and 2 matte plated, all from their Japanese names. Two traps are written into the rules and tested:
+
+- "POLYCARBONATE" is a clear body, not carbon.
+- "CARBON REINFORCED" / カーボン強化 is a moulding with fibre in the plastic, not a carbon plate: one roller stay and two pinions.
+
+Tamiya's "carbon wheels" are carbon-filled mouldings too. They had been drawn as mirror metal, which the studio made plainly wrong, so they are now `carbon`.
+
+In the pane, `SURFACE` gained three finishes:
+
+| Finish | Roughness | Metalness |
+|---|---:|---:|
+| plated | 0.1 | 1 |
+| matte plated | 0.38 | 1 |
+| carbon | 0.32 | 0 |
+
+Aluminium draws as the existing `metal`. A plated body keeps the one clearcoated shell material and only changes its metalness and roughness, which are uniforms, so a plated kit costs no second shader program. A body takes its part's finish, or the kit's while the slot is still the kit's, the same precedence as its colour and clearness. Carbon stays and brake stays are satin black; the weave is phase 5. **Not done:** steel as its own preset (0.4 against aluminium's 0.3 is not visible at this size), and gold-plated terminals, which repaint the chassis caps rather than drawing a part. **Bytes:** the 3D chunk is 152.1 KB gz (+0.1). The builder payload grew by 252 B gz (+5.2 KB raw), mostly a null `bodyFinish` on 297 kits, since @nuxt/content returns an absent column as null.
+
 **Done when:** from the home view, a stock kit's aluminium rollers, plated or moulded wheels and glossy shell are told apart by how they catch the light, not only by their colour; the car sits on a soft shadow; the 3D chunk is at most about 154 KB gz without the desktop tier; `scene_ready` p90 on phones has not moved by more than the threshold in phase 6; and the posters match the first frame.
 
 ---

@@ -203,6 +203,10 @@ export const partSpecs = z.object({
 export const KIT_CLEAR = ['body', 'chassis', 'aParts'] as const
 export type KitClear = typeof KIT_CLEAR[number]
 
+/** What a part can be made of where that is the product, not its kind's moulding (see `finish`). */
+export const PART_FINISHES = ['plated', 'matte-plated', 'aluminium', 'carbon'] as const
+export type PartFinish = (typeof PART_FINISHES)[number]
+
 /** A flat sRGB colour, `#rrggbb`. */
 const hex = z.string().regex(/^#[0-9a-f]{6}$/)
 
@@ -338,11 +342,13 @@ export const partSchema = z.object({
   tire: z.string().optional(),
   /**
    * The material the 3D pane shades this part in, where the material *is* the
-   * product: a plated, aluminium or carbon wheel is sold as metal, and drawing
-   * it in moulded plastic loses what the buyer paid for. Absent means plastic,
-   * which is what every wheel a kit ships is.
+   * product: a plated or aluminium wheel, a plated body, a carbon plate or
+   * carbon wheel. Drawing one as its kind's moulding loses what the buyer paid
+   * for. Read from the name by scripts/catalog/finish.ts, on wheels, bodies and
+   * plates only, the parts the pane reads it on. Absent means the kind's own
+   * moulding, which is what every wheel a kit ships is.
    */
-  finish: z.enum(['metal']).optional(),
+  finish: z.enum(PART_FINISHES).optional(),
   /**
    * The row of shared/scene/fittings.ts this part draws as in the 3D pane: a
    * roller's, a plate's, a damper's, a brake's or a hidden fitting's (§5.6,
@@ -527,6 +533,12 @@ export const kitSchema = z.object({
    * number (docs/PLAN.md §5.6). Absent while the car has no silhouette.
    */
   body: z.string().optional(),
+  /**
+   * A body sold plated rather than painted, read from the kit's Japanese name
+   * (メッキ; the English says "METALLIC", which Tamiya also uses for paint).
+   * The pane draws it as coloured chrome in `colours.body`.
+   */
+  bodyFinish: z.enum(['plated', 'matte-plated']).optional(),
 
   priceJpy: z.number().optional(),
   priceJpyExTax: z.number().optional(),

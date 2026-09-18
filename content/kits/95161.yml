@@ -21,6 +21,7 @@ colours:
   tire: "#1f2124"
   source: override
 body: dcr-01
+bodyFinish: plated
 priceJpy: 1430
 priceJpyExTax: 1300
 releaseDate: 2023-03

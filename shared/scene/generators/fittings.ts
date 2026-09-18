@@ -17,7 +17,7 @@ import { STEEL } from './chassis.ts'
 import { cylinder, Triangles } from './mesh.ts'
 import type { Point2 } from './mesh.ts'
 import { teeth } from './parts.ts'
-import type { Paint } from './parts.ts'
+import type { Paint, PaintFinish } from './parts.ts'
 import type {
   AxleShape, BearingShape, BrakeShape, ChassisUnitShape, DamperShape, PlateShape, PropellerShape, RollerShape
 } from '../fittings.ts'
@@ -45,7 +45,7 @@ const grouped = (g: Groups) => Triangles.grouped(FITTING_GROUPS.map(group => g[g
  * the product: dark plastic, or a brake's sponge, whose colour a sponge set
  * that is only a sponge paints as its body instead.
  */
-export function fittingPaints(colour: number, finish: 'metal' | 'plastic', trim = TRIM): Paint[] {
+export function fittingPaints(colour: number, finish: PaintFinish, trim = TRIM): Paint[] {
   return [
     { colour, finish },
     { colour: trim, finish: 'plastic' },
@@ -54,7 +54,7 @@ export function fittingPaints(colour: number, finish: 'metal' | 'plastic', trim 
   ]
 }
 /** A brake's trim is its sponge. */
-export const brakePaints = (colour: number) => fittingPaints(colour, 'plastic', SPONGE)
+export const brakePaints = (colour: number, finish: PaintFinish = 'plastic') => fittingPaints(colour, finish, SPONGE)
 /** Bare aluminium, the roller under a coloured ring. */
 const ALUMINIUM = 0xc9ced6
 /** A roller's paint: its own colour, or a bare aluminium roller in a ring of that colour. */

@@ -49,6 +49,7 @@ colours:
   aParts: "#b9bec4"
   source: scraped
 body: silwolf
+bodyFinish: plated
 priceJpy: 1210
 priceJpyExTax: 1100
 releaseDate: 2018-03-31

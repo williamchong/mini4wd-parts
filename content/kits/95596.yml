@@ -52,6 +52,7 @@ colours:
   aParts: "#1f2124"
   source: scraped
 body: rowdy-bull
+bodyFinish: plated
 priceJpy: 1430
 priceJpyExTax: 1300
 releaseDate: 2020-04-04

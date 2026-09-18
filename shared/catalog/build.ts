@@ -73,7 +73,7 @@ export type BuildableKit = Pick<Kit, 'stockLoadout'>
  */
 export type PickableKit = Pick<Kit,
   'id' | 'names' | 'chassis' | 'status' | 'gearRatio'
-  | 'loadoutSource' | 'loadoutSourceTitle' | 'stockLoadout' | 'colours' | 'body'> & HasThumbnail
+  | 'loadoutSource' | 'loadoutSourceTitle' | 'stockLoadout' | 'colours' | 'body' | 'bodyFinish'> & HasThumbnail
 
 /**
  * The rulesets a build can be checked against (docs/PLAN.md §2.1).

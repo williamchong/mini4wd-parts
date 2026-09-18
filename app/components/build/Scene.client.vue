@@ -38,7 +38,7 @@ import { DEFAULT_TIRE, DEFAULT_WHEEL, entryShapeId, TIRES, WHEELS } from '#share
 import type { TireShape, WheelShape } from '#shared/scene/wheels'
 import { cylinder, Triangles } from '#shared/scene/generators/mesh'
 import type { ResolvedSlot } from '#shared/catalog/build'
-import type { ChassisId, Kit, KitClear, PartColours, PartSpecs } from '#shared/catalog/schema'
+import type { ChassisId, Kit, KitClear, PartColours, PartFinish, PartSpecs } from '#shared/catalog/schema'
 
 const props = defineProps<{
   chassis: ChassisId
@@ -46,6 +46,8 @@ const props = defineProps<{
   kitBody: string | null
   /** What that kit's body, wheels, tires and rollers are moulded in, from the catalog. */
   kitColours: Kit['colours'] | null
+  /** Whether that kit's body is plated rather than painted. */
+  kitBodyFinish: Kit['bodyFinish'] | null
   slots: ResolvedSlot[]
   /**
    * The catalog by item number, read for the specs that size a proxy, the
@@ -58,7 +60,7 @@ const props = defineProps<{
     body?: string
     wheel?: string
     tire?: string
-    finish?: 'metal'
+    finish?: PartFinish
     fitting?: string
   }>
   /** The slot whose picker is open; its proxy stays lit until it closes. */
@@ -334,18 +336,27 @@ const HIT: Record<Exclude<Solid, Hidden>, (shape: Shape) => BufferGeometry> = {
  * The list row already says what was changed; the pane now shows the car.
  */
 const EMPTY_COLOUR = 0xb8bcc2
-/** What a material is besides its colour: the four finishes a proxy can have. */
-type Finish = 'shell' | 'rubber' | 'metal' | 'plastic'
+/** What a material is besides its colour: a painted piece's finish, or a shell or a tire. */
+type Finish = parts.PaintFinish | 'shell' | 'rubber'
 /**
  * How each finish meets the studio's light. Metal is fully metallic: all its
  * colour comes from what it reflects, which the studio is there to give it.
  */
 const SURFACE: Record<Finish, { roughness: number; metalness: number }> = {
-  shell: { roughness: 0.5, metalness: 0 },
+  shell: { roughness: 0.4, metalness: 0 },
   rubber: { roughness: 0.9, metalness: 0 },
   metal: { roughness: 0.3, metalness: 1 },
-  plastic: { roughness: 0.5, metalness: 0 }
+  plastic: { roughness: 0.5, metalness: 0 },
+  // A mirror in the part's colour: silver, gold, or a kit's blue.
+  plated: { roughness: 0.1, metalness: 1 },
+  'matte-plated': { roughness: 0.38, metalness: 1 },
+  // Black and satin, whether woven sheet or a carbon-filled moulding.
+  carbon: { roughness: 0.32, metalness: 0 }
 }
+/** A part record's finish as the pane draws it: an aluminium part is its metal. */
+const PART_SURFACE: Record<PartFinish, parts.PaintFinish> = { plated: 'plated', 'matte-plated': 'matte-plated', aluminium: 'metal', carbon: 'carbon' }
+/** The kinds a part record's finish reaches; the catalog records it on no other (scripts/catalog/finish.ts). */
+const SOLD_AS_MATERIAL: ReadonlySet<ProxyKind> = new Set(['wheel', 'body', 'stay', 'side-stay', 'brake'])
 const FINISH: Record<ProxyKind, Finish> = {
   body: 'shell',
   motor: 'metal',
@@ -525,7 +536,10 @@ onMounted(() => {
   const shell = new MeshPhysicalMaterial({ roughness: 0.4, metalness: 0, clearcoat: 1, clearcoatRoughness: 0.08, transparent: true })
   /** The shell's opacity seated, set by `populate`; `tickBody` fades from it as the shell lifts. */
   let seatedOpacity = 1
-  function styleShell(highlight: Highlight, tint: number) {
+  function styleShell(highlight: Highlight, tint: number, finish: Finish) {
+    // Plated or painted, it is the one shell material: metalness and roughness
+    // are uniforms, so a plated kit costs no second shader program.
+    Object.assign(shell, SURFACE[finish])
     shell.color.setHex(tint)
     shell.emissive.setHex(tint)
     shell.emissiveIntensity = highlight === 'open' ? 0.6 : highlight === 'hover' ? 0.3 : 0
@@ -556,7 +570,7 @@ onMounted(() => {
     // An empty slot is an outline, not a ghost: a translucent solid read as a
     // part that was half there. Everything else is opaque, the body included —
     // what it covers is reached by lifting it — unless the body is clear plastic.
-    if (kind === 'body' && state !== 'empty') return styleShell(highlight, tint)
+    if (kind === 'body' && state !== 'empty') return styleShell(highlight, tint, finish)
     const empty = state === 'empty'
     const colour = empty ? EMPTY_COLOUR : tint
     // Stock and changed draw alike now, so only emptiness splits the cache.
@@ -896,14 +910,19 @@ onMounted(() => {
   }
 
   /**
-   * A plated, aluminium or carbon wheel is sold as its material, so it is drawn
-   * as metal rather than in the moulded finish every kit wheel has. Nothing
-   * else overrides its kind's material.
+   * A part sold as its material is drawn in it rather than in its kind's
+   * moulding: a plated, aluminium or carbon wheel, a plated body, a carbon
+   * plate or brake stay. A roller's or a weight's metal is its fitting row's.
    */
-  function finishFor(kind: ProxyKind, slot: ResolvedSlot): Finish | undefined {
-    if (kind !== 'wheel') return undefined
+  function finishFor(kind: ProxyKind, slot: ResolvedSlot): parts.PaintFinish | undefined {
+    if (!SOLD_AS_MATERIAL.has(kind)) return undefined
     const partId = slot.entries[0]?.partId
-    return partId ? props.parts.get(partId)?.finish : undefined
+    const own = partId ? props.parts.get(partId)?.finish : undefined
+    if (own) return PART_SURFACE[own]
+    // A body is plated by its own record, else by the kit's while the slot is
+    // still the kit's: the same precedence as its colour and its clearness.
+    if (kind === 'body' && !slot.swapped && props.kitBodyFinish) return props.kitBodyFinish
+    return undefined
   }
 
   /**
@@ -1009,14 +1028,15 @@ onMounted(() => {
         span: socket.span ?? 0
       }
       const tint = tintFor(socket.kind, slot, entry)
-      const data: ProxyData = { slotId: socket.slotId, state, kind: socket.kind, tint, finish: finishFor(socket.kind, slot) }
+      const finish = finishFor(socket.kind, slot)
+      const data: ProxyData = { slotId: socket.slotId, state, kind: socket.kind, tint, finish }
       if (socket.kind === 'body') seatedOpacity = clearFor(slot) ? CLEAR_OPACITY : 1
       if (socket.kind === 'motor') data.paints = motorPaintsFor(slot, tint)
       if (GEARS.has(socket.kind)) data.paints = parts.gearPaints(tint)
       if (FITTINGS.has(socket.kind)) {
-        data.paints = socket.kind === 'brake' ? fittings.brakePaints(tint)
+        data.paints = socket.kind === 'brake' ? fittings.brakePaints(tint, finish ?? 'plastic')
           : socket.kind === 'roller' ? fittings.rollerPaints(rollerRow(fitting), tint)
-            : fittings.fittingPaints(tint, fittingFinish(socket.kind, fitting))
+            : fittings.fittingPaints(tint, finish ?? fittingFinish(socket.kind, fitting))
       }
       const key = shapeKey(socket.kind, shape)
       const kind = socket.kind

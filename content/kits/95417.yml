@@ -49,6 +49,7 @@ colours:
   aParts: "#b9bec4"
   source: scraped
 body: raikiri
+bodyFinish: matte-plated
 priceJpy: 1320
 priceJpyExTax: 1200
 releaseDate: 2018-03-31

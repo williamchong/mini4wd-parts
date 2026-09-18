@@ -11,7 +11,8 @@ import { compact, deriveAddOn, deriveCategory, deriveLegality, deriveSlots, deri
 import { labelFor, neutralLabel } from './labels.ts'
 import { colourOf, coloursIn, isClear } from './colours.ts'
 import { bodyForKit, loadBodies, writeBodies } from './bodies.ts'
-import { finishFor, shapesFor, WHEEL_CATEGORIES } from './wheels.ts'
+import { shapesFor, WHEEL_CATEGORIES } from './wheels.ts'
+import { finishFor } from './finish.ts'
 import { fittingFor } from './fittings.ts'
 import { TIRES } from '../../shared/scene/wheels.ts'
 import { partRollersPerSide } from '../../shared/scene/fittings.ts'
@@ -282,10 +283,10 @@ function buildPart(item: JpItem<PartGenreCode>) {
     body: bodies.byPart.get(item.id),
     wheel: shapeCategory === 'tire' ? undefined : shapes.wheel,
     tire: drawnTire,
-    // Only a wheel: a plated roller or a carbon plate is drawn metal by its
-    // kind already, and recording it on 87 more parts would be a field the
-    // pane never reads in every visitor's payload.
-    finish: shapes.wheel ? finishFor(shapeName) : undefined,
+    // Only where the pane reads it: a wheel, a body and a plate. A roller's or
+    // a weight's metal is its fitting row's, and recording it on every other
+    // part would be a field nobody reads in every visitor's payload.
+    finish: shapes.wheel || FINISHED_CATEGORIES.has(shapeCategory) ? finishFor(names.en, names.ja) : undefined,
     // The roller, plate, damper, brake or hidden fitting it draws as (§5.6).
     fitting: fittingFor(shapeCategory, names),
     specsRaw: item.specsRaw,
@@ -352,6 +353,19 @@ function kitChassis(item: JpItem<KitGenreCode>): ChassisId | 'ambiguous' | undef
   const tagged = [...new Set(item.chassisCodes.map(chassisIdFor).filter(Boolean))] as ChassisId[]
   if (tagged.length === 1) return tagged[0]
   return tagged.length ? 'ambiguous' : undefined
+}
+
+/** Besides wheels, the categories whose finish the pane reads: a body's plating, a plate's carbon. */
+const FINISHED_CATEGORIES: ReadonlySet<PartCategory> = new Set(['body', 'plate'])
+
+/**
+ * A kit's body finish: plated or matte plated, from the same names a part's is
+ * read from. Nothing else a kit's name says is about its shell, so a "carbon
+ * reinforced" chassis in a kit's name is not taken for its body.
+ */
+function kitBodyFinish(names: { ja: string, en?: string }): Kit['bodyFinish'] {
+  const finish = finishFor(names.en, names.ja)
+  return finish === 'plated' || finish === 'matte-plated' ? finish : undefined
 }
 
 function buildKit(item: JpItem<KitGenreCode>, chassis: ChassisId) {
@@ -438,6 +452,7 @@ function buildKit(item: JpItem<KitGenreCode>, chassis: ChassisId) {
     loadoutSourceTitle: wiki?.title,
     colours: wiki && kitColours(wiki),
     body: bodyForKit(bodies, { id: item.id, loadoutSourceTitle: wiki?.title }),
+    bodyFinish: kitBodyFinish(names),
     priceJpy: item.priceJpy,
     priceJpyExTax: item.priceJpyExTax,
     priceHkd: hk?.priceHkd,

@@ -49,6 +49,7 @@ colours:
   aParts: "#2f5fc4"
   source: scraped
 body: heat-edge
+bodyFinish: matte-plated
 priceJpy: 1210
 priceJpyExTax: 1100
 releaseDate: 2018-03-31
