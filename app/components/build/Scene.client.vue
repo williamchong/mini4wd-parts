@@ -802,8 +802,16 @@ onMounted(() => {
    */
   let frame = 0
   let sized = false
+  /**
+   * Whether the first scene's shaders are built. Physical materials, shadows
+   * and the environment make programs large enough that compiling them inside
+   * the first `render` stalls a phone's main thread; `compileAsync` hands them
+   * to the driver first (KHR_parallel_shader_compile where it has it) while
+   * the poster still covers the pane, and nothing is drawn until it settles.
+   */
+  let compiled = false
   function requestRender() {
-    if (sized && !frame) frame = requestAnimationFrame(tick)
+    if (sized && compiled && !frame) frame = requestAnimationFrame(tick)
   }
   let drawn = false
 
@@ -1196,6 +1204,7 @@ onMounted(() => {
     // and a draw inside the observer callback lands in this frame's paint,
     // where a requested one would leave a blank frame first.
     sized = true
+    if (!compiled) return
     cancelAnimationFrame(frame)
     tick()
   })
@@ -1208,6 +1217,13 @@ onMounted(() => {
   visibility.observe(element)
 
   populate()
+  // Whatever happens, draw: a failed compile is compiled again by `render`.
+  const firstFrame = () => {
+    if (disposed) return
+    compiled = true
+    requestRender()
+  }
+  renderer.compileAsync(scene, camera).then(firstFrame, firstFrame)
 
   const stopSlots = watch(() => props.slots, populate)
   const stopOpen = watch(() => props.openSlotId, restyle)
