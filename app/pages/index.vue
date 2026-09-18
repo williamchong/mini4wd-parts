@@ -403,6 +403,9 @@ function onSceneReady() {
     track('scene_ready', { chassis: shownChassis.value.id, ms: Math.round(performance.now() - sceneMountedAt) })
   }
 }
+function onScenePower() {
+  if (shownChassis.value) track('scene_power', { chassis: shownChassis.value.id })
+}
 const showPoster = computed(() => shownChassis.value?.id === PLACEHOLDER_CHASSIS && !hasBuild.value && !sceneReady.value)
 
 /**
@@ -640,6 +643,7 @@ useHead(() => ({
         :open-slot-id="openSlotId"
         @select="pick"
         @ready="onSceneReady"
+        @power="onScenePower"
       />
     </div>
     <p class="scene-hint">

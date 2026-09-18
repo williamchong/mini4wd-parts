@@ -47,6 +47,8 @@ export type AnalyticsEvents = {
   part_no_slot: { part: string, chassis: ChassisId }
   scene_ready: { chassis: ChassisId, ms: number }
   scene_tap: { chassis: ChassisId, slot: string, has_build: boolean }
+  /** The car switched on in the pane (docs/PLAN.md §5.6). */
+  scene_power: { chassis: ChassisId }
 }
 
 export function useAnalytics() {

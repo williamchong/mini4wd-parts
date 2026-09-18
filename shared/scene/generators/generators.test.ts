@@ -267,9 +267,18 @@ test('a chassis is drawn in the mouldings a kit colours, black until one does', 
     assert.ok(roles.includes('frame') && roles.includes('aParts'), id)
     // Only MS is three units; every other frame carries its own bumpers.
     assert.equal(roles.includes('ends'), id === 'ms', id)
-    for (const piece of pieces.filter(piece => ['frame', 'ends', 'aParts'].includes(piece.role))) {
+    for (const piece of pieces.filter(piece => ['frame', 'ends', 'aParts', 'switch'].includes(piece.role))) {
       assert.equal(piece.colour, BLACK, `${id} ${piece.role}`)
     }
+  }
+})
+
+test('every chassis has one switch slider, a piece of its own so it can slide on', () => {
+  for (const id of CHASSIS_IDS) {
+    const slider = chassisPieces(id).filter(piece => piece.role === 'switch')
+    assert.equal(slider.length, 1, id)
+    const s = size(slider[0]!.geometry)
+    assert.ok(s.x === 8 && s.y === 4 && s.z === 12, `${id}: one slider, not a sprue (${s.toArray()})`)
   }
 })
 

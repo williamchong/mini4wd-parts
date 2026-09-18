@@ -289,7 +289,8 @@ button.link {
 }
 
 .scene-reset,
-.scene-lift {
+.scene-lift,
+.scene-power {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
@@ -308,7 +309,13 @@ button.link {
   left: 0.5rem;
 }
 
-.scene-lift[aria-pressed="true"] {
+.scene-power {
+  top: auto;
+  bottom: 0.5rem;
+}
+
+.scene-lift[aria-pressed="true"],
+.scene-power[aria-pressed="true"] {
   background: #2c3e50;
   color: #fff;
   border-color: #2c3e50;

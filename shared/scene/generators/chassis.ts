@@ -24,9 +24,10 @@ import type { Point2 } from './mesh.ts'
  * What a piece is on the real car, which is what a kit's colours are keyed by:
  * the frame, an MS chassis' nose and tail units, and the A-parts sprue (gear
  * covers, motor cover, switch) are moulded per box; the cells, their caps and
- * the steel are the same in every one.
+ * the steel are the same in every one. The switch is moulded on the A parts
+ * sprue but is a piece of its own, because it slides when the car is on.
  */
-export type ChassisRole = 'frame' | 'ends' | 'aParts' | 'cells' | 'caps' | 'steel'
+export type ChassisRole = 'frame' | 'ends' | 'aParts' | 'switch' | 'cells' | 'caps' | 'steel'
 export type ChassisPiece = { geometry: BufferGeometry; colour: number; role: ChassisRole }
 
 export const BLACK = 0x26292e
@@ -49,6 +50,7 @@ class Chassis {
    */
   ends = this.frame
   readonly aParts = new Triangles()
+  readonly switchSlider = new Triangles()
   readonly cells = new Triangles()
   readonly caps = new Triangles()
   readonly steel = new Triangles()
@@ -69,6 +71,7 @@ class Chassis {
     const groups: [Triangles, number, ChassisRole][] = [
       [this.frame, BLACK, 'frame'],
       [this.aParts, BLACK, 'aParts'],
+      [this.switchSlider, BLACK, 'switch'],
       [this.cells, CELL, 'cells'],
       [this.caps, CELL_CAP, 'caps'],
       [this.steel, STEEL, 'steel']
@@ -195,9 +198,9 @@ class Chassis {
     for (const z of [-halfWheelbase + 8, halfWheelbase - 8]) this.steel.revolve(cylinder(4, z - 1, z + 1), 8, 'z', [0, AXLE_Y, 0])
   }
 
-  /** The switch slider, wherever the chassis keeps it; an A part. */
+  /** The switch slider, wherever the chassis keeps it, in the off position; an A part. */
   switch(z: number) {
-    this.aParts.boxAt(8, 4, 12, 0, 9, z)
+    this.switchSlider.boxAt(8, 4, 12, 0, 9, z)
   }
 
   /** A PRO chassis' motor cover over the middle: a clip, or a cage of `bars` cross bars; an A part. */

@@ -14,7 +14,7 @@
  * Nothing here runs during prerender.
  */
 import {
-  AmbientLight, BoxGeometry, CylinderGeometry, DirectionalLight, Group, Mesh,
+  AmbientLight, BoxGeometry, CylinderGeometry, DirectionalLight, Group, Mesh, Object3D,
   MeshStandardMaterial, PerspectiveCamera, Raycaster, Scene, SphereGeometry,
   Vector2, Vector3, WebGLRenderer
 } from 'three'
@@ -60,6 +60,8 @@ const props = defineProps<{
 
 const emit = defineEmits<{
   select: [slotId: string]
+  /** The reader switched the car on. */
+  power: []
   /** The first frame is on the canvas; whatever stood in for it can go. */
   ready: []
 }>()
@@ -357,6 +359,29 @@ const LIFTED_OPACITY = 0.35
 const CLEAR_OPACITY = 0.65
 
 /**
+ * The car switched on (docs/PLAN.md §5.6): the axles ease up to `SPIN_RPS`
+ * and every wheel, tire and gear turns with them at its own rate; switched
+ * off, they coast to a stop. Slow on purpose: the 6-tooth PRO pinion turns
+ * 3.3 times for each axle turn, and at 0.6 it moves under 30° a frame even at
+ * 30 fps, below where its 60° tooth pitch starts to strobe backwards.
+ */
+const powered = ref(false)
+const SPIN_RPS = 0.6
+/**
+ * Time constants of the ease: a motor spins up faster than a car coasts
+ * down. With the stop below, a coast from full speed takes ln(30) × 0.5 ≈
+ * 1.7 s; at 0.8 and 0.005 it was 3.8 s of the pane drawing a crawl.
+ */
+const SPIN_UP_S = 0.4
+const COAST_S = 0.5
+/** Below this a coasting car has stopped, and the pane stops drawing. */
+const STOPPED_RPS = 0.02
+/** The longest step one frame may take, so a tab coming back does not jump. */
+const MAX_STEP_S = 0.1
+/** How far the switch slider moves toward the nose when the car is on. */
+const SWITCH_TRAVEL_MM = 4
+
+/**
  * The chassis pieces a kit moulds in its own colours: which of the kit's
  * colours each takes, and which `clear` entry makes it see-through. MS's nose
  * and tail units take the frame's unless the kit gives them a colour of their
@@ -365,7 +390,8 @@ const CLEAR_OPACITY = 0.65
 const KIT_MOULDED: Partial<Record<ChassisRole, { colour: (colours: NonNullable<Kit['colours']>) => string | undefined; clear: KitClear }>> = {
   frame: { colour: colours => colours.chassis, clear: 'chassis' },
   ends: { colour: colours => colours.chassisEnds ?? colours.chassis, clear: 'chassis' },
-  aParts: { colour: colours => colours.aParts, clear: 'aParts' }
+  aParts: { colour: colours => colours.aParts, clear: 'aParts' },
+  switch: { colour: colours => colours.aParts, clear: 'aParts' }
 }
 
 onMounted(() => {
@@ -591,24 +617,60 @@ onMounted(() => {
    */
   const bodyGroup = groups.get('body')
   const bodyRestY = bodyGroup?.position.y ?? 0
+
+  /** One frame of an ease toward `target`, requesting the next while it is further off than `within`. */
+  function easeToward(current: number, target: number, factor: number, within: number) {
+    const remaining = target - current
+    if (Math.abs(remaining) <= within) return target
+    requestRender()
+    return current + remaining * factor
+  }
+
   function tickBody() {
     if (!bodyGroup) return
-    const target = bodyRestY + (lifted.value ? LIFT_MM : 0)
-    const remaining = target - bodyGroup.position.y
-    if (Math.abs(remaining) > 0.05) {
-      bodyGroup.position.y += remaining * 0.18
-      requestRender()
-    } else {
-      bodyGroup.position.y = target
-    }
+    bodyGroup.position.y = easeToward(bodyGroup.position.y, bodyRestY + (lifted.value ? LIFT_MM : 0), 0.18, 0.05)
     const progress = (bodyGroup.position.y - bodyRestY) / LIFT_MM
     shell.opacity = seatedOpacity - progress * (seatedOpacity - Math.min(seatedOpacity, LIFTED_OPACITY))
+  }
+
+  /**
+   * The drive: one axle speed and one axle angle for the whole car, each
+   * spinner turned to the angle times its rate. The angle is the scene's,
+   * not a mesh's, so a kit swap mid-spin rebuilds the meshes without
+   * resetting them; it is never wrapped, because the rates are not whole
+   * numbers and a wrap would jump every gear but the axle's. While the car is
+   * on or still coasting, each frame requests the next — unless the pane is
+   * scrolled away, when it stops and the next frame on screen starts the
+   * clock again from a zero step.
+   */
+  let speed = 0
+  let turned = 0
+  let lastSpin = 0
+  let onScreen = true
+  function tickSpin() {
+    const now = performance.now()
+    const step = lastSpin ? Math.min((now - lastSpin) / 1000, MAX_STEP_S) : 0
+    const on = powered.value
+    speed += ((on ? SPIN_RPS : 0) - speed) * (1 - Math.exp(-step / (on ? SPIN_UP_S : COAST_S)))
+    if (!on && speed < STOPPED_RPS) speed = 0
+    turned += speed * step * Math.PI * 2
+    for (const { object, axis, rate } of spinners) object.rotation[axis] = turned * rate
+    lastSpin = (on || speed) && onScreen ? now : 0
+    if (lastSpin) requestRender()
+  }
+
+  /** The switch slider eases to on or off the way the shell eases up and down. */
+  const slider = chassis.children.find(piece => (piece.userData as { role: ChassisRole }).role === 'switch')
+  function tickSwitch() {
+    if (slider) slider.position.z = easeToward(slider.position.z, powered.value ? SWITCH_TRAVEL_MM : 0, 0.35, 0.02)
   }
 
   function tick() {
     frame = 0
     controls.update()
     tickBody()
+    tickSpin()
+    tickSwitch()
     renderer.render(scene, camera)
     if (!drawn) {
       drawn = true
@@ -619,6 +681,8 @@ onMounted(() => {
 
   let hits: Mesh[] = []
   let proxies: Mesh[] = []
+  /** What turns when the car is on, rebuilt with the meshes by `populate`. */
+  let spinners: { object: Object3D; axis: 'x' | 'z'; rate: number }[] = []
   let hovered: string | null = null
 
   const highlightFor = (slotId: string): Highlight =>
@@ -706,6 +770,7 @@ onMounted(() => {
     }
     hits = []
     proxies = []
+    spinners = []
     let lift = 0
     for (const socket of sockets) {
       const group = groups.get(socket.name)
@@ -752,6 +817,7 @@ onMounted(() => {
       else if (isTrain(kind)) visibles = train(kind, shape, `t:${key}`).map(rotor => {
         const mesh = new Mesh(rotor.geometry, paint)
         mesh.position.set(...rotor.pivot)
+        if (rotor.rate) spinners.push({ object: mesh, axis: rotor.axis, rate: rotor.rate })
         return mesh
       })
       else visibles = [new Mesh(geometry(VISIBLE, kind, shape, `v:${key}`), paint)]
@@ -759,6 +825,9 @@ onMounted(() => {
         visible.userData = data
         proxies.push(visible)
       }
+      // A wheel or tire turns with its axle, an empty one's outline too. The
+      // left wheel's socket is turned 180°, so in its own frame it turns back.
+      if (kind === 'wheel' || kind === 'tire') spinners.push({ object: visibles[0]!, axis: 'x', rate: Math.cos(socket.rotateY ?? 0) })
       // The shell is its own hit volume; everything else gets an oversized one.
       if (kind === 'body') {
         // Last among the transparent: a clear chassis seen from below is nearer.
@@ -880,11 +949,21 @@ onMounted(() => {
   })
   resize.observe(element)
 
+  const visibility = new IntersectionObserver(([entry]) => {
+    onScreen = !!entry?.isIntersecting
+    if (onScreen) requestRender()
+  })
+  visibility.observe(element)
+
   populate()
 
   const stopSlots = watch(() => props.slots, populate)
   const stopOpen = watch(() => props.openSlotId, restyle)
   const stopLift = watch(lifted, requestRender)
+  const stopPower = watch(powered, on => {
+    requestRender()
+    if (on) emit('power')
+  })
 
   // Damping keeps applying the last drag's momentum after `reset()`, so a
   // reset pressed while the view is still coasting would drift off home.
@@ -904,7 +983,9 @@ onMounted(() => {
     stopSlots()
     stopOpen()
     stopLift()
+    stopPower()
     resize.disconnect()
+    visibility.disconnect()
     for (const [type, handler] of listeners) element.removeEventListener(type, handler)
     controls.dispose()
     // dispose() drops the caches but keeps the GL context; the canvas is
@@ -939,6 +1020,9 @@ onBeforeUnmount(() => cleanup?.())
     </button>
     <button type="button" class="scene-lift" :aria-pressed="lifted" @click="lifted = !lifted">
       {{ $t(lifted ? 'build.scene.fitBody' : 'build.scene.liftBody') }}
+    </button>
+    <button type="button" class="scene-power" :aria-pressed="powered" @click="powered = !powered">
+      {{ $t(powered ? 'build.scene.powerOff' : 'build.scene.powerOn') }}
     </button>
   </div>
 </template>
