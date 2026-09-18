@@ -14,12 +14,13 @@
  * Nothing here runs during prerender.
  */
 import {
-  AmbientLight, BoxGeometry, CylinderGeometry, DirectionalLight, Group, Mesh, Object3D,
-  MeshStandardMaterial, PerspectiveCamera, Raycaster, Scene, SphereGeometry,
-  Vector2, Vector3, WebGLRenderer
+  BoxGeometry, CylinderGeometry, DirectionalLight, Group, Mesh, Object3D,
+  MeshPhysicalMaterial, MeshStandardMaterial, NeutralToneMapping, PerspectiveCamera,
+  Raycaster, Scene, SphereGeometry, Vector2, Vector3, WebGLRenderer
 } from 'three'
 import type { BufferGeometry } from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
+import { studioEnvironment } from '#shared/scene/studio'
 import { layoutFor, socketsFor } from '#shared/scene/sockets'
 import type { Fit, ProxyKind, SceneSocket } from '#shared/scene/sockets'
 import { DEFAULT_SILHOUETTE } from '#shared/scene/bodies'
@@ -335,6 +336,16 @@ const HIT: Record<Exclude<Solid, Hidden>, (shape: Shape) => BufferGeometry> = {
 const EMPTY_COLOUR = 0xb8bcc2
 /** What a material is besides its colour: the four finishes a proxy can have. */
 type Finish = 'shell' | 'rubber' | 'metal' | 'plastic'
+/**
+ * How each finish meets the studio's light. Metal is fully metallic: all its
+ * colour comes from what it reflects, which the studio is there to give it.
+ */
+const SURFACE: Record<Finish, { roughness: number; metalness: number }> = {
+  shell: { roughness: 0.5, metalness: 0 },
+  rubber: { roughness: 0.9, metalness: 0 },
+  metal: { roughness: 0.3, metalness: 1 },
+  plastic: { roughness: 0.5, metalness: 0 }
+}
 const FINISH: Record<ProxyKind, Finish> = {
   body: 'shell',
   motor: 'metal',
@@ -507,8 +518,11 @@ onMounted(() => {
    * a transparent material draws identically. The only other transparent
    * thing is a kit's clear chassis, and the shell's `renderOrder` draws it
    * after that from every angle, not only the ones where it is nearer.
+   *
+   * Clearcoated, so a painted shell reads as paint under a gloss layer: the
+   * studio's panels reflect in the coat while the colour stays in the base.
    */
-  const shell = new MeshStandardMaterial({ roughness: 0.55, metalness: 0.1, transparent: true })
+  const shell = new MeshPhysicalMaterial({ roughness: 0.4, metalness: 0, clearcoat: 1, clearcoatRoughness: 0.08, transparent: true })
   /** The shell's opacity seated, set by `populate`; `tickBody` fades from it as the shell lifts. */
   let seatedOpacity = 1
   function styleShell(highlight: Highlight, tint: number) {
@@ -527,7 +541,7 @@ onMounted(() => {
     const key = `chassis:${colour}:${clear}`
     let found = materials.get(key)
     if (!found) {
-      found = new MeshStandardMaterial({ color: colour, roughness: 0.75, transparent: clear, opacity: clear ? CLEAR_OPACITY : 1 })
+      found = new MeshStandardMaterial({ color: colour, roughness: 0.6, transparent: clear, opacity: clear ? CLEAR_OPACITY : 1 })
       materials.set(key, found)
     }
     return found
@@ -551,8 +565,7 @@ onMounted(() => {
     if (!found) {
       found = new MeshStandardMaterial({
         color: colour,
-        roughness: finish === 'rubber' ? 0.9 : 0.55,
-        metalness: finish === 'metal' ? 0.5 : 0.1,
+        ...SURFACE[finish],
         wireframe: empty,
         emissive: colour,
         emissiveIntensity: highlight === 'open' ? 0.6 : highlight === 'hover' ? 0.3 : 0
@@ -573,7 +586,19 @@ onMounted(() => {
   const renderer = new WebGLRenderer({ canvas: element, antialias: true, alpha: true })
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 
+  // Khronos PBR Neutral: the tone curve that leaves base colours where they
+  // are, and the kits' colours were matched to box art by eye (§5.6).
+  renderer.toneMapping = NeutralToneMapping
+
   const scene = new Scene()
+  // The light is what the materials reflect, not lamps: a studio of glowing
+  // panels, prefiltered once per mount (docs/PLAN.md §5.6, "Materials and
+  // light"). The map belongs to this renderer's context, so it is made here
+  // and disposed with it, not kept across remounts.
+  scene.environment = studioEnvironment(renderer)
+  // Below 1, so the key light below has room to shade a white shell: at full
+  // strength the panels light a body from every side and its facets read alike.
+  scene.environmentIntensity = 0.75
   const camera = new PerspectiveCamera(35, 1, 10, 2000)
   /**
    * The home view: a three-quarter angle from the front-right, at whatever
@@ -597,12 +622,11 @@ onMounted(() => {
   }
   camera.position.copy(HOME_DIRECTION).multiplyScalar(homeDistance(1))
 
-  scene.add(new AmbientLight(0xffffff, 0.9))
-  const key = new DirectionalLight(0xffffff, 1.6)
+  // One lamp on top of the studio, for form: it shades the faces the soft
+  // panels light alike, and it is the light the ground shadow will come from.
+  const key = new DirectionalLight(0xffffff, 1.2)
   key.position.set(120, 200, 160)
-  const fill = new DirectionalLight(0xffffff, 0.5)
-  fill.position.set(-100, 80, -120)
-  scene.add(key, fill)
+  scene.add(key)
 
   const car = new Group()
   // The chassis itself is not a slot, so it is drawn once under the sockets

@@ -858,6 +858,83 @@ All seven phases landed the same day. **Every part the builder can fit now draws
   - A real thumb has still not tried the pane on a phone. The grid above measures the raycast, not a finger.
   - The fittings sheet has had one pass, not an owner pass.
 
+#### Materials and light (planned 2026-09-18)
+
+The owner asked for the pane to look more real: physically based materials and shader tricks, for a first look that makes a reader stop. The shapes are done (above). What still gives the pane away as a proxy view is its **light**. It is lit by an `AmbientLight` at 0.9 and two directional lights, and has no environment, no tone mapping and no shadow. Every material is a `MeshStandardMaterial` in one of four finishes (`FINISH` in `Scene.client.vue`). In that setup:
+
+- **Metal cannot look like metal.** A metallic surface shows almost nothing except its reflections, and there is nothing for it to reflect. At `metalness: 0.5` an aluminium roller, a motor can and a plated wheel are all the same dull grey.
+- **The car floats.** Nothing ties it to the frame's `#e9edf1` background, so it reads as a cut-out.
+- **Everything curved is faceted.** `mesh.ts` gives every generated solid flat normals. That was chosen for the low-poly look, and it holds up under diffuse light. Under reflections, a 16-segment roller or tire turns into a row of flat mirrors.
+
+The shapes stay as they are: stylised, with no decals and no textures. Realism here means how light meets the surface, so none of this moves the part closer to a reproduction (§5.1's IP position holds). The pane still draws only when something changes (§5.5), so every technique below either costs nothing on a still frame or is kept off phones.
+
+**Measured before starting (2026-09-18).** Each option was added to a minimal three 0.186 scene that matches the pane's imports, and bundled with esbuild (minified, gzip -9). The baseline is 136.1 KB gz, and the 3D chunk today is 150.5.
+
+| Addition | KB gz | Verdict |
+|---|---:|---|
+| `PMREMGenerator` + `RoomEnvironment` (image-based light), tone mapping | +1.8 | take (the environment is our own scene, see phase 1) |
+| `MeshPhysicalMaterial` (clearcoat, sheen, specular) | +0.7 | take |
+| Shadow map + `ShadowMaterial` ground | +0.0 | take (the renderer already ships the shadow code) |
+| Contact shadow (depth render + blur shaders) | +0.4 | fallback if the shadow map looks hard |
+| `toCreasedNormals` | +0.8 | not taken: `revolve` already knows its rings, so the smooth normals are ours to write |
+| `EffectComposer` + `RenderPass` + `OutputPass` | +2.5 | only for the desktop tier |
+| … + `GTAOPass` (ambient occlusion) | +9.5 | desktop tier, in its own lazy chunk |
+| … + `UnrealBloomPass` | +4.4 | not taken: nothing on a Mini 4WD glows |
+| … + `OutlinePass` | +5.3 | not taken: a fresnel rim does the highlight for nothing (phase 5) |
+| … + `SMAAPass` | +40.0 | not taken: its lookup textures are inlined. Use a multisampled render target, which costs nothing on WebGL2 |
+
+**Phases, highest value first.** After each phase: recapture the posters (§5.6, second cut), because a poster that does not match the scene shows as a jump when the canvas fades in. Re-measure the chunk. Check that no route loads Zod.
+
+1. **Light the car from a studio, not a room.** Build a small environment scene in code, `shared/scene/studio.ts`. It holds a few emissive rectangles as softboxes: a long one overhead, two strip lights at the sides, and a gradient floor. `PMREMGenerator` turns it into `scene.environment` once per mount. Three's `RoomEnvironment` is the same idea with fixed boxes. Our own layout is what draws the long clean highlight streaks along a glossy body that car photography is known for, and it is code, so no HDRI file ships. An HDRI would be a 1–2 MB download with a licence to track. Then:
+   - Set `toneMapping = NeutralToneMapping`, the Khronos PBR Neutral curve in three since r162. ACES and AgX would shift hue and saturation, and the kit colours were checked by eye against box art (§5.6). Neutral is the curve built to leave base colours alone.
+   - Remove the ambient light: the environment replaces it. Keep the key directional light, turned down, for form and for the shadow in phase 2.
+   - Retune `FINISH` against the new light. The palette is then checked on the bodies sheet against box art, the same way it was authored.
+2. **Put the car on the ground.** Turn on the key light's shadow map, 1024², PCF soft, with the car casting. Add a `ShadowMaterial` plane at the tires' contact height. It is transparent apart from the shadow, so it composites over the frame's background exactly as the canvas does today. **Orbiting does not redraw the shadow.** The light is fixed to the world and the car does not move while the camera does, so `shadowMap.autoUpdate = false`, and `needsUpdate` is set only by `populate`, a lift frame and a spin frame. A still or orbiting pane pays nothing for its shadow. Self-shadowing (the shell over the chassis) is tried with a tuned `normalBias`. If flat-faced acne cannot be tuned out, only the ground receives shadow.
+3. **Smooth what turns.** `revolve` writes one normal per vertex, around the axis: smooth across the segments, hard between profile steps, so a roller's flange edge stays crisp. Rollers, wheels, tires, the motor can, axles and gear discs are all revolves, and they are what reflect. Lofts and prisms (bodies, plates, the chassis) keep flat faces and their low-poly look. `generators.test.ts` gains a check that each revolved normal points away from the axis.
+4. **Materials that say what the part is made of.** The part record's `finish` grows from `metal` to a small enum, derived from names in `scripts/catalog/` the way `finishFor` is today. Only non-default values are written, so the payload grows by a few hundred bytes. There are about 42 carbon parts and 13 plated ones. Each finish maps to one preset:
+
+   | Finish | Material | Where |
+   |---|---|---|
+   | painted shell | physical, clearcoat 1, clearcoat roughness ~0.1, base roughness ~0.45 | every opaque body |
+   | clear shell | the same, with `opacity` as today and specular turned up | clear and smoked bodies, clear chassis |
+   | plated | metal 1, roughness ~0.08 | plated wheels, gold terminals |
+   | aluminium | metal 1, roughness ~0.3, brushed (phase 5) | rollers, weights, aluminium wheels |
+   | steel | metal 1, roughness ~0.4 | axles, pins, motor can |
+   | carbon | physical, clearcoat 1, twill weave (phase 5) | carbon plates |
+   | FRP / moulding | dielectric, roughness ~0.6 | plates, chassis, stock wheels |
+   | rubber | dielectric, roughness ~0.9, a little sheen | tires, brake sponges |
+
+   Clear shells stay on opacity and are **not** given `transmission`. Transmission renders the opaque scene again into a texture every frame, and the shell's opacity is animated through a lift (§5.6, second cut), so every lift frame would pay twice.
+5. **Detail from the shader, not from textures.** Generated geometry has no UVs, so a texture has nothing to be mapped by. One `onBeforeCompile` hook reads the object-space position instead, with a `customProgramCacheKey` per effect:
+   - **carbon:** twill checker in the plate's own plane, in the normal and the roughness;
+   - **aluminium:** fine streaks around the rotation axis;
+   - **tires:** a faint tread band.
+
+   The same hook replaces the emissive highlight with a **fresnel rim** in the highlight colour. Hover and an open picker then light the part's outline, not a flat wash over the whole part, and the part keeps its own colour. Each effect is a separate shader program, so three effects at most.
+6. **Compile before the first frame.** Physical materials, shadows and the environment all make bigger shaders. On a phone the first frame can stall while they compile. Call `renderer.compileAsync(scene, camera)` before the first `render`, so `KHR_parallel_shader_compile` spreads the work. The poster covers the wait. **The measure is `scene_ready.ms`, already in PostHog (§6 M0):** compare its median and p90 by device before and after each phase, and if p90 grows by more than about 300 ms, cut back.
+7. **Desktop only: ambient occlusion.** Only on a wide frame with a real GPU: pointer `fine`, a 16:9 frame, and a first frame under a threshold. There, an `EffectComposer` with a 4-sample render target, `GTAOPass` and `OutputPass` darkens the creases: roller posts, arches, the gap under the shell. It is a dynamic import, so phones never download its 12 KB. With the composer, the canvas's own `antialias` stops applying and the multisampled target takes over, and tone mapping moves to `OutputPass`. **Known trap:** the canvas is transparent (`alpha: true`), and the composer's targets must keep alpha through every pass, or the frame's background turns black. Test that first.
+
+**Not in this plan:** HDRI files; a reflective floor (`Reflector` renders the scene twice); bloom; depth of field; decals or any texture of Tamiya artwork; changing the camera or adding an intro dolly. The last is M3's camera presets.
+
+**Owner decisions (2026-09-18):**
+
+- **Smooth what turns** (phase 3 as written). Revolves get smooth normals around their axis; lofts and prisms stay faceted.
+- **There is a desktop tier** (phase 7 as written). Two looks, so both posters are checked against their tier's first frame.
+- **Studio or room** (phase 1): the owner asked to see the two side by side before choosing. **Compared 2026-09-18** on three MA kits, an opaque red (Spark Rouge 18642), a smoked clear (Tri Gale Black Special 95413) and a white (Blast Arrow 18635), at the home view. Each environment used the same retuned finishes: metal fully metallic at roughness 0.3, and the shell a clearcoat. The switch was a temporary `?env=room|studio` query on the scene.
+  - **`RoomEnvironment`** is the liveliest on paint. A large soft highlight rolls across several facets of a red hood, and the smoked shell reads as glass. It is also about a stop too bright for the `#e9edf1` frame: the grey chassis and the rollers wash out to near-white, a red goes toward pink, and a white body loses its shape. Its boxes reflect in a clear shell as bright square patches.
+  - **The soft-box studio** (`shared/scene/studio.ts`: walls 0.2, floor 0.45, an overhead strip, two flank strips, a front-right key, a kicker) keeps colours at their box-art values and the chassis grey. Its highlight is a single sharp facet, so it looks more graphic and less glossy. **The long streaks it was designed for do not appear**, and they cannot while the body is faceted: a flat face is a flat mirror, so it either catches a panel whole or misses it. A streak needs normals that vary along the face, which only phase 3's revolves will have.
+  - The finding that matters for either choice: **with faceted bodies, the size of the light sources decides the look, more than where they are.** Large sources spread a highlight over neighbouring facets, which is the room's strength; small ones light one facet at a time.
+
+**Phase 1 landed (2026-09-18): the car is lit by the studio.** `shared/scene/studio.ts` is the environment. After the comparison its panels were made about twice the size and half the brightness: overhead 14 × 28 at 3, flank panels 5 high at 1.8, the key 9 × 8 at 1.4, walls 0.2, floor 0.45. The ambient light and the fill light are gone. What the tuning changed:
+
+- **A white shell needed the environment below full strength.** With panels that large the environment lights a body from every side, and at full strength a white shell's facets all read the same bright white. `scene.environmentIntensity` is 0.75 and the key light went 0.8 → 1.2, which leaves room for the key to shade the faces.
+- **The clearcoat shell was pulled forward from phase 4**, because the comparison was judged with it: the shell is a `MeshPhysicalMaterial` (roughness 0.4, clearcoat 1, clearcoat roughness 0.08). Phase 4 still owns the finish enum and the rest of the presets.
+- Metal is fully metallic at roughness 0.3, moulding is dielectric at 0.5 and the chassis at 0.6, so the proxy materials already sit where phase 4's table puts them.
+
+**Bytes.** The 3D chunk went **150.5 → 151.4 KB gz**, measured against `HEAD` built in a scratch worktree: the PMREM generator, the physical material and the tone curve, with no `RoomEnvironment`. It is still prefetched, not modulepreloaded, the modulepreload list on `/` is unchanged (31 entries), and no route loads Zod. Both posters were recaptured at the home view, 16:9 at a 1100 px window and 4:3 at a 420 px emulated phone (the 356 px pane the 712 × 534 file was cut from), with the pane's buttons hidden: **36 KB and 16 KB**, up from 32 and 13, because a lit chassis has more gradients to encode. **Not measured:** `scene_ready` on phones, which waits for phase 6 (`compileAsync`) so both land in one comparison.
+
+**Done when:** from the home view, a stock kit's aluminium rollers, plated or moulded wheels and glossy shell are told apart by how they catch the light, not only by their colour; the car sits on a soft shadow; the 3D chunk is at most about 154 KB gz without the desktop tier; `scene_ready` p90 on phones has not moved by more than the threshold in phase 6; and the posters match the first frame.
+
 ---
 
 ## 6. Roadmap
