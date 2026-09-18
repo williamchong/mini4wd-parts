@@ -941,6 +941,13 @@ The shapes stay as they are: stylised, with no decals and no textures. Realism h
 
 The map is redrawn only when `populate` runs or the shell moves (`shadowMap.autoUpdate = false`), because the light is fixed to the world and an orbit moves only the camera. An empty slot's wireframe outline casts nothing, since three copies `wireframe` into the shadow's depth material. A lifted shell casts nothing either, or a car-sized shadow would sit under a shell that is barely there. **Bytes:** the 3D chunk is 151.7 KB gz (+0.3). Both posters were recaptured, and they now show the empty chassis on its shadow (35 and 16 KB).
 
+**Phase 3 landed (2026-09-19): what turns is round.** `Triangles` now keeps a normal per corner instead of leaving them to `computeVertexNormals`. A plain `tri` stores its face's normal, which is what three computed before, so lofts, prisms, plates and bodies are unchanged. `revolve` passes each corner its profile edge's outward normal, turned to that corner's angle. That makes a revolve smooth around its axis and creased at every profile corner: a roller's side is a cylinder, and its flange stays a crisp step. The change reaches every revolve, 41 call sites across rollers, wheels, tires, the motor can, axles, gear discs, the cells and the roller posts, and it happens in the one helper they share. Two tests hold it:
+
+- a cylinder's side normals point straight out from the axis while its caps point along it;
+- every generated shape's corner normals face the way their faces do.
+
+Flipping the normal's sign fails both. **Bytes:** 3D chunk 151.9 KB gz (+0.3). The posters were recaptured, since the empty car's cells and posts are revolves.
+
 **Done when:** from the home view, a stock kit's aluminium rollers, plated or moulded wheels and glossy shell are told apart by how they catch the light, not only by their colour; the car sits on a soft shadow; the 3D chunk is at most about 154 KB gz without the desktop tier; `scene_ready` p90 on phones has not moved by more than the threshold in phase 6; and the posters match the first frame.
 
 ---

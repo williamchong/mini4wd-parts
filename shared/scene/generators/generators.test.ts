@@ -157,6 +157,63 @@ test('every revolved part winds outward', () => {
   }
 })
 
+/**
+ * The least agreement, over every corner, between the corner's normal and its
+ * face's: a smooth normal leans off its face but never past it, so this stays
+ * above zero on a surface that is lit from the side it faces. Also checks
+ * each normal is unit length, which the lighting assumes.
+ */
+function worstNormal(geometry: BufferGeometry): number {
+  const p = geometry.getAttribute('position')
+  const n = geometry.getAttribute('normal')
+  const a = new Vector3(); const b = new Vector3(); const c = new Vector3(); const corner = new Vector3()
+  let worst = 1
+  for (let i = 0; i < p.count; i += 3) {
+    a.fromBufferAttribute(p, i); b.fromBufferAttribute(p, i + 1); c.fromBufferAttribute(p, i + 2)
+    const face = b.clone().sub(a).cross(c.clone().sub(a))
+    if (face.lengthSq() < 1e-12) continue
+    face.normalize()
+    for (let k = 0; k < 3; k++) {
+      corner.fromBufferAttribute(n, i + k)
+      near(corner.length(), 1, 'a unit normal')
+      worst = Math.min(worst, corner.dot(face))
+    }
+  }
+  return worst
+}
+
+test('a revolve is smooth around its axis and creased at each profile corner', () => {
+  const t = new Triangles()
+  t.revolve([[0, 0], [5, 0], [5, 2], [0, 2]], 16, 'y')
+  const geometry = t.geometry()
+  const p = geometry.getAttribute('position')
+  const n = geometry.getAttribute('normal')
+  let side = 0
+  for (let i = 0; i < p.count; i++) {
+    // The side's corners point straight out from the axis, whatever face they
+    // are on; the caps' point straight along it, so the rim stays a crease.
+    if (Math.abs(n.getY(i)) < 1e-6) {
+      side++
+      near(n.getX(i) * 5, p.getX(i), 'radial x'); near(n.getZ(i) * 5, p.getZ(i), 'radial z')
+    } else near(Math.abs(n.getY(i)), 1, 'a cap faces along the axis')
+  }
+  assert.equal(side, 16 * 6, 'every side corner is radial')
+})
+
+test('every generated shape\'s normals face the way its faces do', () => {
+  const shapes: [string, BufferGeometry][] = [
+    ...Object.entries(ROLLERS).map(([id, shape]) => [`roller ${id}`, fittings.roller(shape, 13)] as [string, BufferGeometry]),
+    ...Object.entries(WHEELS).map(([id, shape]) => [`wheel ${id}`, wheel(shape)] as [string, BufferGeometry]),
+    ...Object.entries(TIRES).map(([id, shape]) => [`tire ${id}`, tire(shape, WHEELS[DEFAULT_WHEEL]!)] as [string, BufferGeometry]),
+    ...Object.entries(AXLES).map(([id, shape]) => [`axle ${id}`, fittings.axle(shape, 60)] as [string, BufferGeometry]),
+    ...Object.entries(BEARINGS).map(([id, shape]) => [`bearing ${id}`, fittings.bearing(shape)] as [string, BufferGeometry]),
+    ...Object.entries(DAMPERS).map(([id, shape]) => [`damper ${id}`, fittings.damper(shape)] as [string, BufferGeometry]),
+    ...CHASSIS_IDS.flatMap(id => chassisPieces(id).map(piece => [`${id} ${piece.role}`, piece.geometry] as [string, BufferGeometry])),
+    ['motor', motor()], ['body', bodyGeometry(DEFAULT_SILHOUETTE)], ['plate', fittings.plate(PLATES['default']!, 2, 1)]
+  ]
+  for (const [name, geometry] of shapes) assert.ok(worstNormal(geometry) > 0, name)
+})
+
 test('a motor is a flat-sided can, one draw group per piece, each winding outward', () => {
   for (const shafts of [1, 2] as const) {
     const geometry = motor(shafts)

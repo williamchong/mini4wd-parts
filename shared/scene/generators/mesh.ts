@@ -6,7 +6,10 @@
  *
  * Both return flat-shaded, non-indexed triangles: every face gets its own
  * normal, which is the low-poly look, and also what stops a shape lofted from
- * a dozen numbers looking like it is trying to be smooth.
+ * a dozen numbers looking like it is trying to be smooth. A revolve is the one
+ * exception: it is smooth around its axis (docs/PLAN.md §5.6, "Materials and
+ * light", phase 3), because what turns is what reflects the studio, and a
+ * 16-sided roller shaded flat reflects it as 16 separate mirrors.
  */
 import { BufferGeometry, Float32BufferAttribute } from 'three'
 
@@ -27,15 +30,37 @@ export function onAxis(axis: 'x' | 'y' | 'z', [ox, oy, oz]: Point3, [u, v, h]: P
   return [x + ox, y + oy, z + oz]
 }
 
+/** `v` scaled to unit length, or left at zero: a degenerate face gets no direction, as in three. */
+function unit([x, y, z]: Point3): Point3 {
+  const length = Math.hypot(x, y, z)
+  return length ? [x / length, y / length, z / length] : [0, 0, 0]
+}
+
 export class Triangles {
   private readonly positions: number[] = []
+  private readonly normals: number[] = []
 
   get empty() {
     return this.positions.length === 0
   }
 
-  tri(a: Point3, b: Point3, c: Point3) {
+  /**
+   * One triangle, with a normal at each corner: given, for a surface that is
+   * smooth across its edges, or else the face's own, which is exactly what
+   * three's `computeVertexNormals` gives a non-indexed mesh.
+   */
+  tri(a: Point3, b: Point3, c: Point3, normals?: readonly [Point3, Point3, Point3]) {
     this.positions.push(...a, ...b, ...c)
+    if (normals) {
+      for (const n of normals) this.normals.push(...n)
+      return
+    }
+    const face = unit([
+      (b[1] - a[1]) * (c[2] - a[2]) - (b[2] - a[2]) * (c[1] - a[1]),
+      (b[2] - a[2]) * (c[0] - a[0]) - (b[0] - a[0]) * (c[2] - a[2]),
+      (b[0] - a[0]) * (c[1] - a[1]) - (b[1] - a[1]) * (c[0] - a[0])
+    ])
+    this.normals.push(...face, ...face, ...face)
   }
 
   /** A fan over a convex polygon, wound so its normal is `flip ? -n : n` for a counter-clockwise outline. */
@@ -78,30 +103,44 @@ export class Triangles {
    * is one apex, not a ring of coincident points, so a capped cylinder is a
    * fan at each end and no zero-area triangles: half of what a naive sweep
    * of the same profile would emit.
+   *
+   * Shaded smooth around the axis and hard between profile edges: each
+   * corner's normal is its profile edge's outward normal turned to that
+   * corner's angle, so a roller's side is round while its flange stays a
+   * crisp step. For a profile listed counter-clockwise, an edge running
+   * (dr, dh) faces out along (dh, -dr).
    */
   revolve(profile: readonly Point2[], segments: number, axis: 'x' | 'y' | 'z', origin: Point3 = [0, 0, 0]) {
-    const place = (r: number, h: number, i: number): Point3 => {
-      const a = (i / segments) * Math.PI * 2
-      return onAxis(axis, origin, [r * Math.cos(a), r * Math.sin(a), h])
-    }
+    const angle = (i: number) => (i / segments) * Math.PI * 2
+    const place = (r: number, h: number, i: number): Point3 =>
+      onAxis(axis, origin, [r * Math.cos(angle(i)), r * Math.sin(angle(i)), h])
     const ring = ([r, h]: Point2): Point3[] => Array.from({ length: segments }, (_, i) => place(r, h, i))
     for (let k = 0; k < profile.length; k++) {
       const a = profile[k]!
       const b = profile[(k + 1) % profile.length]!
       if (a[0] === 0 && b[0] === 0) continue
+      const [nr, nh] = unit([b[1] - a[1], a[0] - b[0], 0])
+      const normal = (i: number) => onAxis(axis, [0, 0, 0], [nr * Math.cos(angle(i)), nr * Math.sin(angle(i)), nh])
       if (a[0] > 0 && b[0] > 0) {
-        this.loft([ring(a), ring(b)])
+        const [ringA, ringB] = [ring(a), ring(b)]
+        for (let i = 0; i < segments; i++) {
+          const n = (i + 1) % segments
+          this.tri(ringA[i]!, ringA[n]!, ringB[n]!, [normal(i), normal(n), normal(n)])
+          this.tri(ringA[i]!, ringB[n]!, ringB[i]!, [normal(i), normal(n), normal(i)])
+        }
         continue
       }
       // One end on the axis: the same quads as the loft with the degenerate
-      // ring collapsed to its apex, which keeps the winding the loft has.
+      // ring collapsed to its apex, which keeps the winding the loft has. The
+      // apex has no angle of its own, so it takes the middle of its triangle's.
       const [apexProfile, rimProfile] = a[0] === 0 ? [a, b] : [b, a]
       const apex = place(0, apexProfile[1], 0)
       const rim = ring(rimProfile)
       for (let i = 0; i < segments; i++) {
         const n = (i + 1) % segments
-        if (a[0] === 0) this.tri(apex, rim[n]!, rim[i]!)
-        else this.tri(rim[i]!, rim[n]!, apex)
+        const tip = normal(i + 0.5)
+        if (a[0] === 0) this.tri(apex, rim[n]!, rim[i]!, [tip, normal(n), normal(i)])
+        else this.tri(rim[i]!, rim[n]!, apex, [normal(i), normal(n), tip])
       }
     }
   }
@@ -140,7 +179,7 @@ export class Triangles {
   geometry(): BufferGeometry {
     const geometry = new BufferGeometry()
     geometry.setAttribute('position', new Float32BufferAttribute(this.positions, 3))
-    geometry.computeVertexNormals()
+    geometry.setAttribute('normal', new Float32BufferAttribute(this.normals, 3))
     return geometry
   }
 
@@ -158,9 +197,10 @@ export class Triangles {
       if (set.empty) continue
       geometry.addGroup(all.positions.length / 3, set.positions.length / 3, index)
       for (const value of set.positions) all.positions.push(value)
+      for (const value of set.normals) all.normals.push(value)
     }
     geometry.setAttribute('position', new Float32BufferAttribute(all.positions, 3))
-    geometry.computeVertexNormals()
+    geometry.setAttribute('normal', new Float32BufferAttribute(all.normals, 3))
     return geometry
   }
 }
