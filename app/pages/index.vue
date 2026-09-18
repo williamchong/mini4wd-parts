@@ -52,7 +52,7 @@ const { data: catalog } = await useAsyncData('build-catalog', async () => {
       .all(),
     queryCollection('parts')
       .select('id', 'stem', 'names', 'category', 'slots', 'isCarPart', 'isAddOn',
-        'chassisCompat', 'classLegality', 'specs', 'colours', 'body', 'wheel', 'tire', 'finish',
+        'chassisCompat', 'classLegality', 'specs', 'colours', 'body', 'wheel', 'tire', 'finish', 'fitting',
         'priceJpy', 'thumbnail')
       .all(),
     // `releaseDate` is selected but deliberately not shipped: it orders the
@@ -184,10 +184,11 @@ const listedSlots = computed(() => slots.value.filter(slot => swappable.value.ha
 /**
  * Slots a beginner rarely changes, folded under one summary at the end of the
  * list. The summary names them, so a reader looking for gold terminals still
- * sees where they are without opening it. None has a socket in the 3D pane, so
- * a tap on the car never needs a row in here.
+ * sees where they are without opening it. The pane draws some of them — gold
+ * terminals, a coloured gear cover, the axles — but gives none a hit volume,
+ * so a tap on the car never needs a row in here.
  */
-const MORE_SLOT_TYPES = new Set<Slot>(['terminal', 'shaft', 'fastener'])
+const MORE_SLOT_TYPES = new Set<Slot>(['terminal', 'shaft', 'fastener', 'gear-cover', 'chassis-unit'])
 
 const mainSlots = computed(() => listedSlots.value.filter(slot => !MORE_SLOT_TYPES.has(slot.type)))
 const moreSlots = computed(() => listedSlots.value.filter(slot => MORE_SLOT_TYPES.has(slot.type)))

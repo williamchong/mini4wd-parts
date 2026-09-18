@@ -12,7 +12,7 @@ seriesLabel: ミニ四駆特別企画商品（パーツ）
 category: chassis-set
 categorySource: derived
 slots:
-  - none
+  - chassis-unit
 isCarPart: true
 chassisCompat:
   include:
@@ -39,5 +39,6 @@ officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95695/956
 thumbnail: /thumbs/parts/95695.webp
 detailThumbnail: /thumbs/parts-detail/95695.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-95695-reinforced-n-04-t-04-units-white/
+fitting: ms-ends
 specsRaw: 強度の高いポリカABS樹脂製。3タイプの軸受けパーツを用意して、セッティングが可能
 scrapedAt: 2026-09-16

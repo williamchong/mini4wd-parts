@@ -96,6 +96,8 @@
       "brake": "剎車",
       "damper": "制震器",
       "fastener": "螺絲配件",
+      "gear-cover": "齒輪蓋",
+      "chassis-unit": "底盤部件",
       "gear": "齒輪",
       "shaft": "車軸"
     },

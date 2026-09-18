@@ -96,6 +96,8 @@
       "brake": "Brake",
       "damper": "Damper",
       "fastener": "Fasteners",
+      "gear-cover": "Gear cover",
+      "chassis-unit": "Chassis parts",
       "gear": "Gear",
       "shaft": "Axle"
     },

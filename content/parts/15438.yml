@@ -13,7 +13,7 @@ seriesLabel: ミニ四駆グレードアップパーツ
 category: gear-cover
 categorySource: derived
 slots:
-  - none
+  - gear-cover
 isCarPart: true
 chassisCompat:
   include:
@@ -57,4 +57,5 @@ thumbnail: /thumbs/parts/15438.webp
 detailThumbnail: /thumbs/parts-detail/15438.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-15438-reinforces-gears-w-easy-locking-gear-cover-for-mini-4wd/
 fandomTitle: Reinforced Gears with Easy Locking Gear Cover
+fitting: gear-cover
 scrapedAt: 2026-09-16

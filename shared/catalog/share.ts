@@ -39,7 +39,7 @@ export const SHARE_SLOTS: readonly string[] = [
   'body', 'motor', 'gear-set', 'counter-gear', 'propeller-shaft', 'terminal', 'switch',
   'axle', 'bearing', 'wheel-front', 'wheel-rear', 'tire-front', 'tire-rear', 'front-stay',
   'rear-stay', 'side-stay', 'roller-front', 'roller-rear', 'roller-side', 'brake', 'damper',
-  'fastener'
+  'fastener', 'gear-cover', 'chassis-unit'
 ]
 
 const MAX_ID = 0xFFFFFF

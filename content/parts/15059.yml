@@ -45,7 +45,7 @@ classLegality:
   source: derived
 specs: {}
 colours:
-  primary: "#c9a24a"
+  primary: "#efe6d2"
   source: override
 priceJpy: 308
 priceJpyExTax: 280
@@ -56,5 +56,6 @@ officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/
 thumbnail: /thumbs/parts/15059.webp
 detailThumbnail: /thumbs/parts-detail/15059.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-15059-1-32-mini-4wd-stabilizing-pole-set/
+fitting: stabilizer-pole
 specsRaw: スタビライザーポール2本をセット
 scrapedAt: 2026-09-16

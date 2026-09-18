@@ -13,7 +13,7 @@ seriesLabel: ミニ四駆グレードアップパーツ
 category: chassis-set
 categorySource: derived
 slots:
-  - none
+  - chassis-unit
 isCarPart: true
 chassisCompat:
   include:
@@ -38,4 +38,5 @@ officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/
 thumbnail: /thumbs/parts/15374.webp
 detailThumbnail: /thumbs/parts-detail/15374.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-15374-lightweight-center-chassis-ms-chassis/
+fitting: ms-centre
 scrapedAt: 2026-09-16

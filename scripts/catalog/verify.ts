@@ -10,6 +10,8 @@ import { checkBuild } from '../../shared/catalog/rules.ts'
 import { bodyForKit, bodyProblems, loadBodies, silhouetteOf } from './bodies.ts'
 import { entryShapeId, TIRES, WHEELS } from '../../shared/scene/wheels.ts'
 import { printedTireMm } from './wheels.ts'
+import { FITTING_CATEGORIES } from './fittings.ts'
+import { FITTING_TABLES } from '../../shared/scene/fittings.ts'
 import { readJsonFile } from './io.ts'
 import { ROOT } from './fetch.ts'
 import { join } from 'node:path'
@@ -228,6 +230,25 @@ for (const part of parts) {
   const printed = part.tire || part.wheel ? printedTireMm(part.names.en ?? part.names.ja) : undefined
   if (printed !== undefined && diameter !== printed) {
     errors.push(`${label}: Tamiya's name says ⌀${printed}, the ${tire} shape says ⌀${diameter ?? 'nothing'}`)
+  }
+}
+
+/**
+ * Rollers, plates, dampers, brakes and the hidden fittings (docs/PLAN.md §5.6,
+ * "The rest of the parts"): every `fitting` a part names is a row the pane can
+ * draw, and every part a chassis can be fitted with names one, so a name the
+ * reader in scripts/catalog/fittings.ts no longer understands fails here
+ * rather than quietly drawing its socket's default.
+ */
+for (const part of parts) {
+  const label = `parts/${part.id}`
+  const tables = part.slots.map(slot => FITTING_TABLES[slot]).filter(Boolean)
+  if (part.fitting && !tables.some(table => Object.hasOwn(table!, part.fitting!))) {
+    errors.push(`${label}: fitting "${part.fitting}" is not a row of the shared/scene/fittings.ts table any of its slots (${part.slots.join(', ')}) draws from`)
+  }
+  const offered = part.chassisCompat.include.length > 0 && !part.slots.includes('none')
+  if (!part.fitting && offered && FITTING_CATEGORIES.has(part.category) && part.category !== 'other') {
+    errors.push(`${label}: a ${part.category} with no fitting row — teach scripts/catalog/fittings.ts its name`)
   }
 }
 

@@ -11,7 +11,7 @@ seriesLabel: ミニ四駆グレードアップパーツ
 category: chassis-set
 categorySource: derived
 slots:
-  - none
+  - chassis-unit
 isCarPart: true
 chassisCompat:
   include:
@@ -36,4 +36,5 @@ officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/
 thumbnail: /thumbs/parts/15367.webp
 detailThumbnail: /thumbs/parts-detail/15367.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-15367-reinforced-n-02-t-01-units/
+fitting: ms-ends
 scrapedAt: 2026-09-16

@@ -54,6 +54,16 @@ slots:
     maxCount: 1
     mirror: false
     required: true
+  - id: gear-cover
+    type: gear-cover
+    maxCount: 1
+    mirror: false
+    required: false
+  - id: chassis-unit
+    type: chassis-unit
+    maxCount: 3
+    mirror: false
+    required: false
   - id: axle
     type: shaft
     maxCount: 2

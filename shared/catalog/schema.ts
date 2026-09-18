@@ -150,6 +150,8 @@ export const SLOTS = [
   'switch',
   'body',
   'fastener',
+  'gear-cover',
+  'chassis-unit',
   'none'
 ] as const
 
@@ -339,6 +341,13 @@ export const partSchema = z.object({
    * which is what every wheel a kit ships is.
    */
   finish: z.enum(['metal']).optional(),
+  /**
+   * The row of shared/scene/fittings.ts this part draws as in the 3D pane: a
+   * roller's, a plate's, a damper's, a brake's or a hidden fitting's (§5.6,
+   * "The rest of the parts"), read from its name by scripts/catalog/
+   * fittings.ts. Absent on a part that draws its socket's default.
+   */
+  fitting: z.string().optional(),
 
   /** Free-text 【基本スペック】 from Tamiya, kept for later spec parsing. */
   specsRaw: z.string().optional(),

@@ -71,6 +71,9 @@ const GLYPH_FOR: Record<IconName, Glyph> = {
   'switch': 'switch',
   'body': 'body',
   'fastener': 'fastener',
+  // Both are the chassis itself: a gear cover is an A part, a unit a piece of the frame.
+  'gear-cover': 'chassis',
+  'chassis-unit': 'chassis',
   'chassis': 'chassis',
   // A part that fills nothing reaches no picker, but the type allows it.
   'none': 'generic'

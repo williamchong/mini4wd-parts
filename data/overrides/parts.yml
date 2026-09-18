@@ -131,7 +131,16 @@
 # Was mis-derived as a sticker (シールド contains シール). With that rule anchored
 # it falls through to the モーター rule instead, which is worse — a cooling shield
 # would show up in the motor picker. It is a real car part with no slot of its own.
-'15340': { category: other } # モータークーリングシールド — motor heatsink
+# Tamiya's English page names this MS colour chassis set as the gear cover
+# 95681 beside it; its Japanese name and its photo are a chassis set.
+'95682': { names: { en: MS CHASSIS SET (FLUORESCENT ORANGE) MINI 4WD STATION } }
+# Super FM chassis sets: a chassis-set like the MS units, but for a chassis
+# outside v1 (docs/PLAN.md §2.2), so no build can take one and the builder
+# payload should not carry them.
+'95239': { slots: [none] }
+'95710': { slots: [none] }
+'95711': { slots: [none] }
+'15340': { category: other, slots: [chassis-unit] } # モータークーリングシールド — motor heatsink; sits over the motor like a chassis unit
 
 # --- Category corrections from catalog:crossref -------------------------------
 # Parts whose names contain シャフト but which are not shafts. Surfaced by the
@@ -317,7 +326,7 @@
 '15348': { colours: { primary: '#c9ced6' } }  # 60mm HG強化シャフト
 '15395': { colours: { primary: '#c9ced6' } }  # 六角マウント
 '15506': { colours: { primary: '#1f2124' } }  # 軽量プラスペーサー
-'15059': { colours: { primary: '#c9a24a' } }  # スタビライザーポール
+'15059': { colours: { primary: '#efe6d2' } }  # スタビライザーポール — the ball on top, which is what shows on the car
 '15361': { colours: { primary: '#2f5fc4' } }  # アンダースタビヘッド
 '15385': { colours: { primary: '#8e949b' } }  # ボールスタビキャップ (モノクロ)
 '15386': { colours: { primary: '#d0312d' } }  # ボールスタビキャップ (ブライト)

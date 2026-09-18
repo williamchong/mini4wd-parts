@@ -12,7 +12,7 @@ seriesLabel: ミニ四駆ステーション限定
 category: gear-cover
 categorySource: derived
 slots:
-  - none
+  - gear-cover
 isCarPart: true
 chassisCompat:
   include:
@@ -39,5 +39,6 @@ officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/
 thumbnail: /thumbs/parts/95701.webp
 detailThumbnail: /thumbs/parts-detail/95701.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-95701-reinforced-gear-cover-for-ms-chassis-yellow-green-mini-4wd-station/
+fitting: gear-cover
 specsRaw: ギヤカバーと電池おさえパーツに加えて、取り付け用のビス、ワッシャーもセット
 scrapedAt: 2026-09-16

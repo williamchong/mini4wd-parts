@@ -8,8 +8,10 @@ import { AXLE_Z, bodyGeometry, FLOOR_MM } from './body.ts'
 import { BLACK, chassisPieces, STEEL } from './chassis.ts'
 import { layoutFor, socketsFor } from '../sockets.ts'
 import { DEFAULT_TIRE, DEFAULT_WHEEL, TIRES, WHEELS } from '../wheels.ts'
+import { AXLES, BEARINGS, BRAKES, CHASSIS_UNITS, DAMPERS, PLATES, PROPELLERS, ROLLERS } from '../fittings.ts'
 import { plate, Triangles } from './mesh.ts'
-import { brake, counterGear, damper, GEAR_GROUPS, gearSet, motor, MOTOR_GROUPS, motorPaints, roller, sideStay, stay, tire, wheel } from './parts.ts'
+import { counterGear, GEAR_GROUPS, gearSet, motor, MOTOR_GROUPS, motorPaints, tire, wheel } from './parts.ts'
+import * as fittings from './fittings.ts'
 import type { MotorGroup, Paint, Rotor } from './parts.ts'
 
 const size = (geometry: BufferGeometry) => {
@@ -56,12 +58,24 @@ test('a box, a prism and a plate wind outward', () => {
   near(signedVolume(plate([[0, 0], [0, 2], [3, 2], [3, 0]], 0, 1)), 6, 'plate volume')
 })
 
-test('a roller is its recorded diameter across, and spins about y', () => {
-  for (const mm of [9, 13, 19]) {
-    const s = size(roller(mm))
-    near(s.x, mm, 'x'); near(s.z, mm, 'z')
-    assert.ok(s.y < mm, 'thinner than it is wide')
+test('every roller row is its diameter across, a ring standing proud of it, and winds outward', () => {
+  for (const [id, shape] of Object.entries(ROLLERS)) {
+    for (const mm of [9, 13, 19]) {
+      const geometry = fittings.roller(shape, mm)
+      const s = size(geometry)
+      near(s.x, s.z, `${id} ⌀${mm} is round`)
+      assert.ok(s.x >= mm - 0.01 && s.x <= mm + 2 * (shape.ringMm ?? 0) + 0.01, `${id} ⌀${mm} is ${s.x} across`)
+      assert.ok(signedVolume(geometry) > 0, `${id} ⌀${mm} outward`)
+      assert.equal(geometry.groups.length > 0, true, id)
+    }
   }
+  // A double roller is two tiers: the lower smaller by the row's step.
+  const double = fittings.roller(ROLLERS['aluminium-double']!, 13)
+  double.computeBoundingBox()
+  const p = double.getAttribute('position')
+  let lowest = 0
+  for (let i = 0; i < p.count; i++) if (p.getY(i) < -1) lowest = Math.max(lowest, Math.hypot(p.getX(i), p.getZ(i)))
+  near(lowest, 6, 'the lower tier of a 13-12 is ⌀12')
 })
 
 test('a wheel is its shape\'s diameter tall and its width wide, and spins about x', () => {
@@ -99,22 +113,46 @@ test('every tire clears the wheel it seats on, even a mismatched pair', () => {
   }
 })
 
-test('a stay is a plate of its recorded thickness, lying on top of the socket, either end', () => {
-  for (const t of [1.5, 3]) {
-    for (const end of [1, -1] as const) {
-      const geometry = stay(t, end)
-      near(size(geometry).y, t, 'thickness')
-      geometry.computeBoundingBox()
-      assert.ok(geometry.boundingBox!.min.y >= 1, 'above the bumper')
-      assert.ok(signedVolume(geometry) > 0, `outward at ${end}`)
+test('every plate row lies on top of its socket, either end, winds outward and stays inside 105 mm', () => {
+  for (const [id, shape] of Object.entries(PLATES)) {
+    for (const t of [1.5, 3]) {
+      for (const end of [1, -1] as const) {
+        const geometry = fittings.plate(shape, t, end)
+        assert.ok(signedVolume(geometry) > 0, `${id} ${t} mm outward at ${end}`)
+        geometry.computeBoundingBox()
+        const box = geometry.boundingBox!
+        // Only a deck authored below — a brake tab, an under guard — reaches under the bumper.
+        if (!shape.layers?.some(deck => deck.y < 1)) near(box.min.y, 1, `${id} on the bumper`)
+        assert.ok(box.min.x >= -52.5 && box.max.x <= 52.5, `${id} within 105 mm`)
+        // A plate faces the end it is on: its widest point, where the rollers go, is out past the socket.
+        if (!shape.side) {
+          const p = geometry.getAttribute('position')
+          let widest = 0
+          for (let i = 0; i < p.count; i++) if (Math.abs(p.getX(i)) > Math.abs(p.getX(widest))) widest = i
+          assert.ok(p.getZ(widest) * end > 0, `${id} faces out at ${end}`)
+        }
+      }
     }
   }
-  near(size(sideStay(2)).y, 2, 'side stay thickness')
-  assert.ok(signedVolume(sideStay(2)) > 0, 'side stay outward')
+  near(size(fittings.plate(PLATES['default']!, 2, 1)).y, 2, 'thickness')
+})
+
+test('every other fitting row winds outward', () => {
+  const rows: [string, BufferGeometry][] = [
+    ...Object.entries(DAMPERS).map(([id, shape]) => [`damper ${id}`, fittings.damper(shape)] as [string, BufferGeometry]),
+    ...Object.entries(BRAKES).map(([id, shape]) => [`brake ${id}`, fittings.brake(shape)] as [string, BufferGeometry]),
+    ...Object.entries(AXLES).map(([id, shape]) => [`axle ${id}`, fittings.axle(shape, 60)] as [string, BufferGeometry]),
+    ...Object.entries(BEARINGS).map(([id, shape]) => [`bearing ${id}`, fittings.bearing(shape)] as [string, BufferGeometry]),
+    ...Object.entries(PROPELLERS).map(([id, shape]) => [`propeller ${id}`, fittings.propellerShaft(shape, 64)] as [string, BufferGeometry]),
+    ...Object.entries(CHASSIS_UNITS).filter(([, shape]) => shape.piece).map(([id, shape]) => [`unit ${id}`, fittings.chassisUnit(shape)] as [string, BufferGeometry])
+  ]
+  for (const [name, geometry] of rows) assert.ok(signedVolume(geometry) > 0, name)
+  // An axle spans what it is told, turning about x.
+  near(size(fittings.axle(AXLES['round']!, 59.5)).x, 59.5, 'axle span')
 })
 
 test('every revolved part winds outward', () => {
-  for (const [name, geometry] of [['roller', roller(13)], ['wheel', wheel(WHEELS[DEFAULT_WHEEL]!)], ['tire', tire(TIRES[DEFAULT_TIRE]!, WHEELS[DEFAULT_WHEEL]!)], ['motor', motor()], ['single-shaft motor', motor(1)], ['damper', damper()], ['brake', brake()]] as const) {
+  for (const [name, geometry] of [['wheel', wheel(WHEELS[DEFAULT_WHEEL]!)], ['tire', tire(TIRES[DEFAULT_TIRE]!, WHEELS[DEFAULT_WHEEL]!)], ['motor', motor()], ['single-shaft motor', motor(1)]] as const) {
     assert.ok(signedVolume(geometry) > 0, name)
   }
 })
@@ -168,8 +206,11 @@ test('a motor is painted by its end bell and sticker, and a bare can hides its s
 test('the fixed-size parts have plausible extents', () => {
   const m = size(motor())
   assert.ok(m.z > m.x && m.z > m.y, 'a motor lies along the car')
-  assert.ok(size(brake()).x > size(brake()).y, 'a brake is flat')
-  assert.ok(size(damper()).y > size(damper()).x, 'a damper stands up')
+  assert.ok(size(fittings.brake(BRAKES['brake-set']!)).x > size(fittings.brake(BRAKES['brake-set']!)).y, 'a brake is flat')
+  assert.ok(size(fittings.damper(DAMPERS['stabilizer-pole']!)).y > size(fittings.damper(DAMPERS['stabilizer-pole']!)).x, 'a pole stands up')
+  // An end-mounted mass damper is a pair across the car; a side one is one block.
+  assert.ok(size(fittings.damper(DAMPERS['mass-damper']!)).x > 30, 'a pair across the end')
+  near(size(fittings.damper(DAMPERS['side-mass-damper']!)).x, DAMPERS['side-mass-damper']!.w, 'one at a side')
 })
 
 test('a body loft spans its hull, floor FLOOR_MM below the socket, every face outward', () => {
@@ -232,10 +273,27 @@ test('every chassis winds outward, stays inside the regulation envelope and unde
   }
 })
 
-test('a chassis whose motor lies across the car draws its propeller shaft in steel; a PRO chassis does not', () => {
+test('a chassis whose motor lies across the car has a propeller shaft socket; a PRO chassis does not', () => {
   for (const id of CHASSIS_IDS) {
-    const steel = chassisPieces(id).some(p => p.colour === STEEL)
-    assert.equal(steel, layoutFor(id).motor.across, id)
+    const socket = socketsFor(id).find(s => s.kind === 'propeller-shaft')
+    assert.equal(!!socket, layoutFor(id).motor.across, id)
+    // Between the crown gears, which stand 8 mm inside each axle.
+    if (socket) assert.equal(socket.span, layoutFor(id).wheelbaseMm - 16, id)
+    assert.ok(!chassisPieces(id).some(p => p.colour === STEEL), `${id}: the shaft is the socket's now, not the chassis'`)
+  }
+})
+
+test('each end\'s bumper is a piece of its own, carrying that end\'s roller posts, so a bumperless unit can take it away', () => {
+  for (const id of CHASSIS_IDS) {
+    const pieces = chassisPieces(id)
+    for (const end of [1, -1] as const) {
+      const bumper = pieces.filter(piece => piece.end === end)
+      assert.equal(bumper.length, 1, `${id} ${end}`)
+      assert.equal(bumper[0]!.role, id === 'ms' ? 'ends' : 'frame', `${id} ${end}: moulded with the ${id === 'ms' ? 'unit' : 'frame'}`)
+      const box = bumper[0]!.geometry.boundingBox ?? (bumper[0]!.geometry.computeBoundingBox(), bumper[0]!.geometry.boundingBox!)
+      assert.ok(end > 0 ? box.min.z > 50 : box.max.z < -50, `${id} ${end}: out at its end`)
+      assert.ok(box.max.y > 12.9, `${id} ${end}: posts included`)
+    }
   }
 })
 
@@ -263,7 +321,8 @@ test('a chassis is drawn in the mouldings a kit colours, black until one does', 
   for (const id of CHASSIS_IDS) {
     const pieces = chassisPieces(id)
     const roles = pieces.map(piece => piece.role)
-    assert.equal(new Set(roles).size, roles.length, `${id}: one piece per role`)
+    const keys = pieces.map(piece => `${piece.role}:${piece.end ?? 0}`)
+    assert.equal(new Set(keys).size, keys.length, `${id}: one piece per role, and per end for a bumper`)
     assert.ok(roles.includes('frame') && roles.includes('aParts'), id)
     // Only MS is three units; every other frame carries its own bumpers.
     assert.equal(roles.includes('ends'), id === 'ms', id)

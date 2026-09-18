@@ -1,12 +1,14 @@
 /**
- * The shapes the 3D pane draws for parts, generated from the part's specs
- * (docs/PLAN.md §5.6). One function per proxy kind, not per item: a 19 mm
- * aluminium roller and a 19 mm plastic one are the same call.
+ * The shapes the 3D pane draws for wheels, tires, motors and gears, generated
+ * from the part's specs (docs/PLAN.md §5.6). One function per proxy kind, not
+ * per item: two wheels of one shape are the same call. Rollers, plates,
+ * dampers, brakes and the hidden fittings are ./fittings.ts, drawn from the
+ * rows in ../fittings.ts.
  *
  * Every shape is low-poly and dimensionally plausible, nothing more — the pane
  * is for an impression of the build, and the only reference we hold for any
  * part is one product photo. Units are millimetres, Y up, the car's nose
- * toward +Z. Wheels and tires spin about X, rollers about Y, and each shape's
+ * toward +Z. Wheels and tires spin about X, and each shape's
  * origin is the socket it goes in (docs/PLAN.md §5.5).
  *
  * Everything is built on ./mesh.ts rather than three's primitives: a revolve
@@ -19,21 +21,9 @@
  */
 import type { BufferGeometry } from 'three'
 import { STEEL } from './chassis.ts'
-import { cylinder, onAxis, plate, Triangles } from './mesh.ts'
+import { cylinder, onAxis, Triangles } from './mesh.ts'
 import type { Point2, Point3 } from './mesh.ts'
 import type { TireShape, WheelShape } from '../wheels.ts'
-
-/**
- * A roller: a ring with a raised hub, so it reads as a bearing on a post
- * rather than a coin. `diameterMm` is the catalog's `rollerDiameterMm`.
- */
-export function roller(diameterMm: number): BufferGeometry {
-  const r = diameterMm / 2
-  const t = new Triangles()
-  t.revolve(cylinder(r, -2, 2), 16, 'y')
-  t.revolve(cylinder(r * 0.4, -3.25, 3.25), 10, 'y')
-  return t.geometry()
-}
 
 /**
  * A wheel: a rim barrel with a face recessed inside it, its spokes standing
@@ -91,43 +81,6 @@ export function tire(shape: TireShape, wheel: WheelShape): BufferGeometry {
     [outer - chamfer, halfWidth],
     [inner, halfWidth]
   ], 16, 'x')
-  return t.geometry()
-}
-
-/**
- * A front or rear stay: a wide FRP plate, broader at the roller end, sitting on
- * the moulded bumper. `thicknessMm` is `plateThicknessMm` when the part has
- * one. `towardNose` is +1 at the front and -1 at the rear, so the wide edge
- * faces outward on both.
- */
-export function stay(thicknessMm: number, towardNose: 1 | -1): BufferGeometry {
-  const out = 9 * towardNose
-  const back = -9 * towardNose
-  // Counter-clockwise from above either way round: the order flips with the end.
-  const outline: Point2[] = [[-40, out], [-30, back], [30, back], [40, out]]
-  if (towardNose > 0) outline.reverse()
-  // On top of the bumper the socket marks, not through it.
-  return plate(outline, 1, 1 + thicknessMm)
-}
-
-/** A side stay: a narrow plate along the car, holding a side roller. */
-export function sideStay(thicknessMm: number): BufferGeometry {
-  return plate([[-9, -22], [-9, 22], [9, 22], [9, -22]], 1, 1 + thicknessMm)
-}
-
-/** A brake: a plate with a sponge pad under it, both in one shape. */
-export function brake(): BufferGeometry {
-  const t = new Triangles()
-  t.box(-20, -1, -7, 20, 1, 7)
-  t.box(-18, -4, -6, 18, -1, 6)
-  return t.geometry()
-}
-
-/** A mass damper: a cylindrical weight on a post. */
-export function damper(): BufferGeometry {
-  const t = new Triangles()
-  t.revolve(cylinder(4.5, -5, 5), 12, 'y')
-  t.revolve(cylinder(1, -6, 10), 6, 'y')
   return t.geometry()
 }
 
@@ -263,7 +216,7 @@ export function motorPaints({ cap, sticker, can = STEEL }: { cap: number; sticke
  * the root. Radial teeth on a disc make a spur gear; a ring of them standing
  * on one face makes a crown gear.
  */
-function teeth(t: Triangles, count: number, r0: number, r1: number, h0: number, h1: number, axis: 'x' | 'y' | 'z', origin: Point3) {
+export function teeth(t: Triangles, count: number, r0: number, r1: number, h0: number, h1: number, axis: 'x' | 'y' | 'z', origin: Point3) {
   // At the root a tooth fills half its pitch, the gap the other half.
   const half = Math.PI / count / 2
   for (let i = 0; i < count; i++) {

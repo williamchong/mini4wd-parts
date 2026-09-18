@@ -12,6 +12,7 @@ import { labelFor, neutralLabel } from './labels.ts'
 import { colourOf, coloursIn, isClear } from './colours.ts'
 import { bodyForKit, loadBodies, writeBodies } from './bodies.ts'
 import { finishFor, shapesFor, WHEEL_CATEGORIES } from './wheels.ts'
+import { fittingFor } from './fittings.ts'
 import { TIRES } from '../../shared/scene/wheels.ts'
 import { GENRE_SERIES, KIT_GENRE_SERIES, type JpItem, type KitGenreCode, type PartGenreCode } from './sources/tamiya-jp.ts'
 import type { HkItem } from './sources/tamiya-hk.ts'
@@ -284,6 +285,8 @@ function buildPart(item: JpItem<PartGenreCode>) {
     // kind already, and recording it on 87 more parts would be a field the
     // pane never reads in every visitor's payload.
     finish: shapes.wheel ? finishFor(shapeName) : undefined,
+    // The roller, plate, damper, brake or hidden fitting it draws as (§5.6).
+    fitting: fittingFor(shapeCategory, names),
     specsRaw: item.specsRaw,
     scrapedAt: item.scrapedAt
   }

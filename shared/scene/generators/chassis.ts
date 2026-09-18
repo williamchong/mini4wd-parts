@@ -23,12 +23,17 @@ import type { Point2 } from './mesh.ts'
 /**
  * What a piece is on the real car, which is what a kit's colours are keyed by:
  * the frame, an MS chassis' nose and tail units, and the A-parts sprue (gear
- * covers, motor cover, switch) are moulded per box; the cells, their caps and
- * the steel are the same in every one. The switch is moulded on the A parts
- * sprue but is a piece of its own, because it slides when the car is on.
+ * covers, motor cover, switch) are moulded per box; the cells and their
+ * terminal caps are the same in every one. The switch is moulded on the A
+ * parts sprue but is a piece of its own, because it slides when the car is on.
  */
-export type ChassisRole = 'frame' | 'ends' | 'aParts' | 'switch' | 'cells' | 'caps' | 'steel'
-export type ChassisPiece = { geometry: BufferGeometry; colour: number; role: ChassisRole }
+export type ChassisRole = 'frame' | 'ends' | 'aParts' | 'switch' | 'cells' | 'caps'
+/**
+ * `end` marks the moulded bumper at the front (+1) or the rear (-1), with its
+ * roller posts: a piece of its own, so a bumperless unit in that end's stay
+ * slot can take it away (../fittings.ts, `replacesBumper`).
+ */
+export type ChassisPiece = { geometry: BufferGeometry; colour: number; role: ChassisRole; end?: 1 | -1 }
 
 export const BLACK = 0x26292e
 const CELL = 0xb9bec6
@@ -52,8 +57,10 @@ class Chassis {
   readonly aParts = new Triangles()
   readonly switchSlider = new Triangles()
   readonly cells = new Triangles()
+  /** The terminal plates at the cells' ends, which a terminal part repaints. */
   readonly caps = new Triangles()
-  readonly steel = new Triangles()
+  /** Each end's moulded bumper and its roller posts, in the frame's or the ends' colour. */
+  readonly bumpers = { 1: new Triangles(), [-1]: new Triangles() }
   readonly layout: Layout
 
   // A plain field, not a parameter property: Node strips types and no more.
@@ -66,18 +73,20 @@ class Chassis {
     this.ends = new Triangles()
   }
 
-  /** One piece per group that has anything in it: a PRO chassis has no steel. */
+  /** One piece per group that has anything in it. */
   pieces(): ChassisPiece[] {
-    const groups: [Triangles, number, ChassisRole][] = [
+    const bumperRole: ChassisRole = this.ends === this.frame ? 'frame' : 'ends'
+    const groups: [Triangles, number, ChassisRole, (1 | -1)?][] = [
       [this.frame, BLACK, 'frame'],
+      [this.bumpers[1], BLACK, bumperRole, 1],
+      [this.bumpers[-1], BLACK, bumperRole, -1],
       [this.aParts, BLACK, 'aParts'],
       [this.switchSlider, BLACK, 'switch'],
       [this.cells, CELL, 'cells'],
-      [this.caps, CELL_CAP, 'caps'],
-      [this.steel, STEEL, 'steel']
+      [this.caps, CELL_CAP, 'caps']
     ]
     if (this.ends !== this.frame) groups.splice(1, 0, [this.ends, BLACK, 'ends'])
-    return groups.filter(([t]) => !t.empty).map(([t, colour, role]) => ({ geometry: t.geometry(), colour, role }))
+    return groups.filter(([t]) => !t.empty).map(([t, colour, role, end]) => ({ geometry: t.geometry(), colour, role, ...(end ? { end } : {}) }))
   }
 
   /** A solid floor between two stations, the width of the tub. */
@@ -132,7 +141,7 @@ class Chassis {
     for (const shape of shapes) {
       const outline = shape.map(([x, z]) => [x, z * towardNose] as const)
       if (towardNose < 0) outline.reverse()
-      this.ends.plate(outline, PLATE_Y0, PLATE_Y1)
+      this.bumpers[towardNose].plate(outline, PLATE_Y0, PLATE_Y1)
     }
   }
 
@@ -141,8 +150,8 @@ class Chassis {
     const { front, rear, side } = this.layout.rollers
     const at = (into: Triangles, x: number, z: number) => into.revolve(cylinder(2, 4, 13), 8, 'y', [x, 0, z])
     for (const sign of [-1, 1]) {
-      at(this.ends, sign * front[0], front[1])
-      at(this.ends, sign * rear[0], -rear[1])
+      at(this.bumpers[1], sign * front[0], front[1])
+      at(this.bumpers[-1], sign * rear[0], -rear[1])
       at(this.frame, sign * side, 0)
     }
   }
@@ -182,8 +191,9 @@ class Chassis {
 
   /**
    * The single-shaft drivetrain the pane cannot otherwise show: a cradle for
-   * the FA-130 lying across the car, a crown-gear housing on each axle, and the
-   * propeller shaft between them with a bevel at each end.
+   * the FA-130 lying across the car and a crown-gear housing on each axle. The
+   * propeller shaft between them is a slot of its own, drawn at its socket
+   * (../sockets.ts) in whatever shaft is fitted.
    */
   singleShaftDrive() {
     const [, , mz] = this.layout.motor.position
@@ -194,8 +204,6 @@ class Chassis {
     // right of the shaft at the front and left at the rear (parts.ts, gearSide).
     this.gearHousings(halfWheelbase, [-4])
     this.gearHousings(-halfWheelbase, [4])
-    this.steel.revolve(cylinder(1.2, -halfWheelbase + 8, halfWheelbase - 8), 6, 'z', [0, AXLE_Y, 0])
-    for (const z of [-halfWheelbase + 8, halfWheelbase - 8]) this.steel.revolve(cylinder(4, z - 1, z + 1), 8, 'z', [0, AXLE_Y, 0])
   }
 
   /** The switch slider, wherever the chassis keeps it, in the off position; an A part. */

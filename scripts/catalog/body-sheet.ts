@@ -11,11 +11,15 @@ import { DEFAULT_TIRE, DEFAULT_WHEEL, entryShapeId, TIRES, WHEELS } from '../../
 import type { Bodies } from './bodies.ts'
 import { CHASSIS_IDS } from '../../shared/catalog/chassis.ts'
 import type { ChassisId } from '../../shared/catalog/chassis.ts'
-import type { Kit } from '../../shared/catalog/schema.ts'
+import type { Kit, Part } from '../../shared/catalog/schema.ts'
 import { DEFAULT_SILHOUETTE } from '../../shared/scene/bodies.ts'
 import { bodyGeometry } from '../../shared/scene/generators/body.ts'
 import { chassisPieces } from '../../shared/scene/generators/chassis.ts'
 import * as generators from '../../shared/scene/generators/parts.ts'
+import * as fittings from '../../shared/scene/generators/fittings.ts'
+import {
+  AXLES, BEARINGS, BRAKES, CHASSIS_UNITS, DAMPERS, DEFAULT_ROLLER, PLATES, PROPELLERS, ROLLERS
+} from '../../shared/scene/fittings.ts'
 import { BODY_Y, socketsFor } from '../../shared/scene/sockets.ts'
 
 /**
@@ -28,6 +32,9 @@ import { BODY_Y, socketsFor } from '../../shared/scene/sockets.ts'
  *   node scripts/catalog/body-sheet.ts --only=avante-mk3,blast-arrow
  *   node scripts/catalog/body-sheet.ts --todo          the cars still on the wedge, in authoring order
  *   node scripts/catalog/body-sheet.ts --art=18635,19446   fetch box art to read before authoring
+ *   node scripts/catalog/body-sheet.ts --fittings      every roller, plate, damper, brake and hidden
+ *                                                      fitting row beside a product photo, and each
+ *                                                      chassis with wide plates carrying its rollers
  *
  * The box art is fetched once through the scraper's throttled, disk-cached
  * fetch and never leaves .cache (§3.3). The render is a flat-shaded painter's
@@ -39,7 +46,8 @@ const { values } = parseArgs({
   options: {
     only: { type: 'string' },
     todo: { type: 'boolean', default: false },
-    art: { type: 'string' }
+    art: { type: 'string' },
+    fittings: { type: 'boolean', default: false }
   }
 })
 
@@ -113,7 +121,7 @@ function carTriangles(chassis: ChassisId, geometry: BufferGeometry, kit: Kit | u
   const tireShape = TIRES[shapeOf(kit, 'tire-front') ?? DEFAULT_TIRE] ?? TIRES[DEFAULT_TIRE]!
   const wheel = generators.wheel(wheelShape)
   const tire = generators.tire(tireShape, wheelShape)
-  const roller = generators.roller(13)
+  const roller = fittings.roller(ROLLERS[DEFAULT_ROLLER]!, 13)
   for (const socket of socketsFor(chassis)) {
     const at = socket.position as Vec
     if (socket.kind === 'wheel') tris.push(...trianglesOf(wheel, colourOf(kit?.colours?.wheel, 0x3a3d42), at))
@@ -218,6 +226,80 @@ function todo(bodies: Bodies) {
       || b.kits.length - a.kits.length
       || Number(b.kits.some(k => k.status === 'current')) - Number(a.kits.some(k => k.status === 'current'))
       || a.title.localeCompare(b.title))
+}
+
+// --- Fittings (docs/PLAN.md §5.6, "The rest of the parts") -----------------
+
+const FITTINGS_OUT = join(ROOT, '.cache/fittings')
+
+/** A part's product photo as a local file, fetched once, like the box art. */
+async function photoFile(part: Part): Promise<string | undefined> {
+  if (!part.officialImage) return undefined
+  const file = join(FITTINGS_OUT, 'photo', `${part.id}.jpg`)
+  await mkdir(join(FITTINGS_OUT, 'photo'), { recursive: true })
+  await writeFile(file, await fetchBytes(part.officialImage))
+  return file
+}
+
+/**
+ * Every row of every fittings table drawn at the pane's three-quarter angle,
+ * in the colour of the first part that draws it, beside that part's photo;
+ * then each chassis with a wide front plate and a double-roller rear stay, so
+ * the cascade can be read from above. One sheet for the owner's pass.
+ */
+async function fittingSheet() {
+  const parts = readYamlDir<Part>('content/parts').map(({ data }) => data)
+  const first = (id: string) => parts.find(part => part.fitting === id)
+  const colour = (part: Part | undefined, fallback: number) => colourOf(part?.colours?.primary, fallback)
+  const rows: (readonly [string, string, (part: Part | undefined) => BufferGeometry])[] = [
+    ...Object.entries(ROLLERS).map(([id, row]) => ['roller', id, (part: Part | undefined) => fittings.roller(row, part?.specs.rollerDiameterMm ?? row.mm)] as const),
+    ...Object.entries(PLATES).map(([id, row]) => ['plate', id, (part: Part | undefined) => fittings.plate(row, part?.specs.plateThicknessMm ?? row.thicknessMm, 1)] as const),
+    ...Object.entries(DAMPERS).map(([id, row]) => ['damper', id, () => fittings.damper(row)] as const),
+    ...Object.entries(BRAKES).map(([id, row]) => ['brake', id, () => fittings.brake(row)] as const),
+    ...Object.entries(AXLES).map(([id, row]) => ['axle', id, () => fittings.axle(row, 60)] as const),
+    ...Object.entries(BEARINGS).map(([id, row]) => ['bearing', id, () => fittings.bearing(row)] as const),
+    ...Object.entries(PROPELLERS).map(([id, row]) => ['propeller', id, () => fittings.propellerShaft(row, 64)] as const),
+    ...Object.entries(CHASSIS_UNITS).filter(([, row]) => row.piece).map(([id, row]) => ['unit', id, () => fittings.chassisUnit(row)] as const)
+  ]
+  await mkdir(join(FITTINGS_OUT, 'render'), { recursive: true })
+  const figures: string[] = []
+  for (const [kind, id, make] of rows) {
+    const part = first(id)
+    const tris = trianglesOf(make(part), colour(part, 0x8e949b), [0, 0, 0])
+    const view = svgOf(tris, { eye: [150, 110, 190], target: [0, 0, 0] }, `${kind} ${id}${part ? ` · ${part.id}` : ' · no part draws it'}`)
+    const panels: OverlayOptions[] = [{ input: Buffer.from(view), left: PANEL.w, top: 0 }]
+    const photo = part && await photoFile(part).catch(() => undefined)
+    if (photo) panels.push({ input: await sharp(photo).resize(PANEL.w, PANEL.h, { fit: 'contain', background: '#ffffff' }).toBuffer(), left: 0, top: 0 })
+    await sharp({ create: { width: PANEL.w * 2, height: PANEL.h, channels: 3, background: '#ffffff' } })
+      .composite(panels).png().toFile(join(FITTINGS_OUT, 'render', `${kind}-${id}.png`))
+    figures.push(`<figure><img src="render/${kind}-${id}.png" loading="lazy"><figcaption>${kind} <b>${id}</b> · ${parts.filter(p => p.fitting === id).map(p => p.id).join(' ') || 'default only'}</figcaption></figure>`)
+  }
+  // The cascade: the widest plates on each chassis, rollers in their holes.
+  const fit = { plates: { 'front-stay': PLATES['wide-front']!, 'rear-stay': PLATES['rear-double-roller']! } } as const
+  for (const chassis of CHASSIS_IDS) {
+    const tris: Tri[] = []
+    for (const piece of chassisPieces(chassis)) tris.push(...trianglesOf(piece.geometry, piece.colour, [0, 0, 0]))
+    for (const socket of socketsFor(chassis, fit)) {
+      const at = socket.position as Vec
+      if (socket.kind === 'roller') tris.push(...trianglesOf(fittings.roller(ROLLERS['ball-race']!, 19), 0xc9ced6, at))
+      if (socket.kind === 'stay') tris.push(...trianglesOf(fittings.plate(fit.plates[socket.slotId as 'front-stay' | 'rear-stay'], 1.5, at[2] > 0 ? 1 : -1), 0x2a2c30, at))
+    }
+    const quarter = svgOf(tris, { eye: [150, 110, 190], target: [0, 10, 0] }, `${chassis}: wide front, double-roller rear, 19 mm rollers`)
+    const top = svgOf(tris, { eye: [0, 300, 0], target: [0, 0, 0], ortho: 2.3, up: [-1, 0, 0] }, 'top, nose left; guides at ±40 and ±80, 105 mm is ±52.5 across', true)
+    await sharp({ create: { width: PANEL.w * 2, height: PANEL.h, channels: 3, background: '#ffffff' } })
+      .composite([{ input: Buffer.from(quarter), left: 0, top: 0 }, { input: Buffer.from(top), left: PANEL.w, top: 0 }])
+      .png().toFile(join(FITTINGS_OUT, 'render', `cascade-${chassis}.png`))
+    figures.push(`<figure><img src="render/cascade-${chassis}.png" loading="lazy"><figcaption>cascade on <b>${chassis}</b></figcaption></figure>`)
+  }
+  await writeFile(join(FITTINGS_OUT, 'sheet.html'), `<!doctype html><meta charset="utf-8"><title>Fittings</title>`
+    + `<style>body{font:14px sans-serif;margin:16px}figure{margin:0 0 24px}img{width:100%;max-width:1200px}</style>`
+    + `<h1>${rows.length} fitting rows, and the cascade on ${CHASSIS_IDS.length} chassis</h1>${figures.join('')}`, 'utf8')
+  console.log(`${rows.length} rows; sheet in .cache/fittings/sheet.html`)
+}
+
+if (values.fittings) {
+  await fittingSheet()
+  process.exit(0)
 }
 
 if (values.art) {

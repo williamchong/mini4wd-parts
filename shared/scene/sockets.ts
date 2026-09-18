@@ -16,16 +16,31 @@
  * tread are on its record, the regulation envelope (105 × 165 × 70) bounds the
  * rest, and a shape drawn for an impression does not need to be truer than that.
  *
- * Only slots you can see get a socket (§5.4): terminal, switch, axle, bearing,
- * fastener and propeller-shaft draw nothing and are picked from the list. The
- * gears are seen once the shell is lifted, so gear-set has a socket at each
- * axle, and a single-shaft chassis' counter-gear one at its motor.
+ * Only slots you can see get a socket (§5.4). The gears are seen once the
+ * shell is lifted, so gear-set has a socket at each axle, and a single-shaft
+ * chassis' counter-gear one at its motor. The fittings with one true place
+ * — axles, bearings, the propeller shaft, a piece at the motor — have sockets
+ * too, since 2026-09-18 (§5.6, "The rest of the parts"), but no hit volume:
+ * they sit inside the wheels and under the motor, where a tap belongs to what
+ * is in front of them, and the list is how they are changed. Terminals,
+ * gear covers and chassis units repaint the chassis instead of drawing, and
+ * the switch and fasteners draw nothing.
+ *
+ * **A plate carries its rollers** (§5.2's cascade, chassis → plate → roller).
+ * With no plate in a stay slot, or one that bolts over the bumper, that end's
+ * rollers sit on the chassis' posts; with a plate whose row lists roller
+ * holes, they sit in the holes, and a hole with an upper deck carries a
+ * second roller above the first. So the socket set depends on the build, and
+ * `socketsFor` takes what is fitted.
  */
 import type { ChassisId } from '../catalog/chassis.ts'
+import { UPPER_ROLLER_MM } from './fittings.ts'
+import type { Hole, Mount, PlateShape } from './fittings.ts'
 
 /** The proxy shape drawn in a socket until a part has a generator. */
 export type ProxyKind =
   | 'body' | 'motor' | 'gear' | 'counter-gear' | 'wheel' | 'tire' | 'roller' | 'stay' | 'side-stay' | 'brake' | 'damper'
+  | 'axle' | 'bearing' | 'propeller-shaft' | 'chassis-unit'
 
 export type SceneSocket = {
   /** Unique within the chassis; `-l`/`-r` suffixed for mirrored slots (§5.4). */
@@ -36,6 +51,22 @@ export type SceneSocket = {
   position: readonly [x: number, y: number, z: number]
   /** Turn about y, in radians: a single-shaft motor lies across the car, not along it. */
   rotateY?: number
+  /** Which of the slot's entries this socket draws, where each entry has a place of its own (the damper slot); else the first. */
+  entry?: number
+  /** How long a shaft here is: an axle spans its tread, the propeller shaft the gap between its crowns. */
+  span?: number
+}
+
+/** The stay slots whose plate can move rollers; a side stay leaves the side rollers on their posts. */
+export type StaySlot = 'front-stay' | 'rear-stay'
+
+/**
+ * What is fitted that moves a socket: the plate in each stay slot, and the
+ * mount of each entry in the damper slot, in order.
+ */
+export type Fit = {
+  plates?: Partial<Record<StaySlot, PlateShape>>
+  dampers?: readonly Mount[]
 }
 
 /**
@@ -62,6 +93,9 @@ export const AXLE_Y = 12
 export const BODY_Y = 32
 const ROLLER_Y = 12
 const STAY_Y = 8
+const DAMPER_Y = 18
+/** On top of a stay or bumper, where a stabiliser stands. */
+const CORNER_Y = 10.5
 
 /**
  * A mirrored slot is one slot and two sockets, both opening the same picker;
@@ -82,10 +116,64 @@ const single = (
   slotId: string, kind: ProxyKind, position: readonly [number, number, number], name = slotId
 ): SceneSocket => ({ name, slotId, kind, position })
 
-function sockets(l: Layout): SceneSocket[] {
+/**
+ * The rollers at one end: in the plate's holes when it has any, else on the
+ * posts — which are a hole too, in the stay's own frame, so both are one path.
+ * The first roller each side keeps the plain `-l`/`-r` name, so the tap
+ * measurements and every test that names it still find it; the rest are
+ * numbered, and all of them open the same picker.
+ */
+function rollers(slotId: string, towardNose: 1 | -1, l: Layout, plate?: PlateShape): SceneSocket[] {
+  const [postX, postZ] = towardNose > 0 ? l.rollers.front : l.rollers.rear
+  const holes: readonly Hole[] = plate?.holes ?? [[postX, postZ - l.stayZ]]
+  const found: SceneSocket[] = []
+  for (const [x, z, tiers = 1] of holes) {
+    for (let tier = 0; tier < tiers; tier++) {
+      const n = found.length / 2
+      const suffix = n ? `-${n + 1}` : ''
+      for (const side of [-1, 1]) {
+        found.push({
+          name: `${slotId}-${side < 0 ? 'l' : 'r'}${suffix}`, slotId, kind: 'roller',
+          position: [side * x, ROLLER_Y + tier * UPPER_ROLLER_MM, towardNose * (l.stayZ + z)]
+        })
+      }
+    }
+  }
+  return found
+}
+
+/**
+ * The damper slot's sockets: one per entry, at the mount its row names, each
+ * end or corner used once before any is used twice, the rear first — where a
+ * first mass damper goes. An empty slot outlines a damper at each end, as it
+ * always has, so the poster and the tap measurements stand.
+ */
+function dampers(l: Layout, mounts: readonly Mount[] | undefined, corners: Record<1 | -1, readonly [number, number]>): SceneSocket[] {
+  const end = (towardNose: 1 | -1): readonly [number, number, number] => [0, DAMPER_Y, towardNose * (l.stayZ - 10)]
+  if (!mounts?.length) return [single('damper', 'damper', end(1), 'damper-1'), single('damper', 'damper', end(-1), 'damper-2')]
+  const used = { end: 0, side: 0, corner: 0 }
+  return mounts.flatMap((mount, entry): SceneSocket[] => {
+    const towardNose = used[mount]++ % 2 ? 1 : -1
+    const name = `damper-${entry + 1}`
+    if (mount === 'end') return [{ ...single('damper', 'damper', end(towardNose), name), entry }]
+    const at: readonly [number, number, number] = mount === 'side'
+      ? [l.sideStayX + 2, 12, towardNose * 20]
+      : [corners[towardNose][0] - 12, CORNER_Y, towardNose * (corners[towardNose][1] - 4)]
+    return mirrored('damper', 'damper', at).map(socket => ({ ...socket, name: socket.name.replace('damper', name), entry }))
+  })
+}
+
+function sockets(l: Layout, fit: Fit): SceneSocket[] {
   const halfWheelbase = l.wheelbaseMm / 2
   const front = l.treadFrontMm / 2
   const rear = l.treadRearMm / 2
+  const plates = fit.plates ?? {}
+  const frontRollers = rollers('roller-front', 1, l, plates['front-stay'])
+  const rearRollers = rollers('roller-rear', -1, l, plates['rear-stay'])
+  // Where a stabiliser stands at each end: inboard of that end's outer roller.
+  const outer = (found: SceneSocket[]) => found.reduce((a, b) => b.position[0] > a.position[0] ? b : a).position
+  const corners = { 1: [outer(frontRollers)[0], Math.abs(outer(frontRollers)[2])], [-1]: [outer(rearRollers)[0], Math.abs(outer(rearRollers)[2])] } as const
+  const brakeZ = plates['rear-stay']?.brakeZ
   return [
     single('body', 'body', [0, BODY_Y, 0]),
     { ...single('motor', 'motor', l.motor.position), rotateY: l.motor.across ? Math.PI / 2 : undefined },
@@ -100,16 +188,24 @@ function sockets(l: Layout): SceneSocket[] {
     ...mirrored('tire-rear', 'tire', [rear, AXLE_Y, -halfWheelbase]),
     single('front-stay', 'stay', [0, STAY_Y, l.stayZ]),
     single('rear-stay', 'stay', [0, STAY_Y, -l.stayZ]),
-    ...mirrored('side-stay', 'side-stay', [l.sideStayX, STAY_Y, 0]),
-    ...mirrored('roller-front', 'roller', [l.rollers.front[0], ROLLER_Y, l.rollers.front[1]]),
-    ...mirrored('roller-rear', 'roller', [l.rollers.rear[0], ROLLER_Y, -l.rollers.rear[1]]),
+    // Turned to face out, since a side stay is authored with x outward.
+    ...mirrored('side-stay', 'side-stay', [l.sideStayX, STAY_Y, 0], true),
+    ...frontRollers,
+    ...rearRollers,
     ...mirrored('roller-side', 'roller', [l.rollers.side, ROLLER_Y, 0]),
-    // Not mirrored in the slot profile (maxCount 2 and 4, mirror false), so the
-    // sockets are numbered rather than sided; one rear brake and a damper at
-    // each end is what a beginner's first setup actually looks like.
-    single('brake', 'brake', [0, 4, -(l.stayZ - 4)], 'brake-1'),
-    single('damper', 'damper', [0, 18, l.stayZ - 10], 'damper-1'),
-    single('damper', 'damper', [0, 18, -(l.stayZ - 10)], 'damper-2')
+    // Not mirrored in the slot profile (maxCount 2, mirror false), so the
+    // socket is numbered rather than sided; one rear brake is what a
+    // beginner's first setup actually looks like. A brake stay carries it
+    // further out, under its tab.
+    single('brake', 'brake', [0, 4, -(brakeZ === undefined ? l.stayZ - 4 : l.stayZ + brakeZ)], 'brake-1'),
+    ...dampers(l, fit.dampers, corners),
+    // The fittings with one true place, drawn but not tapped (see above).
+    { ...single('axle', 'axle', [0, AXLE_Y, halfWheelbase], 'axle-1'), span: l.treadFrontMm },
+    { ...single('axle', 'axle', [0, AXLE_Y, -halfWheelbase], 'axle-2'), span: l.treadRearMm },
+    ...mirrored('bearing', 'bearing', [front - 7, AXLE_Y, halfWheelbase]),
+    ...mirrored('bearing', 'bearing', [rear - 7, AXLE_Y, -halfWheelbase]).map(s => ({ ...s, name: `${s.name}-2` })),
+    ...(l.motor.across ? [{ ...single('propeller-shaft', 'propeller-shaft', [0, AXLE_Y, 0]), span: l.wheelbaseMm - 16 }] : []),
+    single('chassis-unit', 'chassis-unit', l.motor.position)
   ]
 }
 
@@ -163,10 +259,17 @@ export const layoutFor = (chassis: ChassisId): Layout => LAYOUTS[chassis]
 
 const SOCKETS = new Map<ChassisId, readonly SceneSocket[]>()
 
-export function socketsFor(chassis: ChassisId): readonly SceneSocket[] {
+/**
+ * A chassis' sockets with `fit` fitted. The bare set — nothing moving a
+ * roller or a damper — is what almost every build draws, so it is the one
+ * kept; a fitted set is thirty-odd small objects, rebuilt when the build is.
+ */
+export function socketsFor(chassis: ChassisId, fit?: Fit): readonly SceneSocket[] {
+  const bare = !fit || (!fit.dampers?.length && !Object.values(fit.plates ?? {}).some(Boolean))
+  if (!bare) return sockets(LAYOUTS[chassis], fit)
   let found = SOCKETS.get(chassis)
   if (!found) {
-    found = sockets(LAYOUTS[chassis])
+    found = sockets(LAYOUTS[chassis], {})
     SOCKETS.set(chassis, found)
   }
   return found

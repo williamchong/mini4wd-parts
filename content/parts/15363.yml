@@ -13,7 +13,7 @@ seriesLabel: ミニ四駆グレードアップパーツ
 category: gear-cover
 categorySource: derived
 slots:
-  - none
+  - gear-cover
 isCarPart: true
 chassisCompat:
   include:
@@ -38,4 +38,5 @@ officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/
 thumbnail: /thumbs/parts/15363.webp
 detailThumbnail: /thumbs/parts-detail/15363.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-15363-enhanced-gear-cover-mini-4wd-pro-ms-chassis/
+fitting: gear-cover
 scrapedAt: 2026-09-16

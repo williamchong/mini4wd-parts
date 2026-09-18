@@ -21,13 +21,18 @@ import {
 import type { BufferGeometry } from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { layoutFor, socketsFor } from '#shared/scene/sockets'
-import type { ProxyKind } from '#shared/scene/sockets'
+import type { Fit, ProxyKind, SceneSocket } from '#shared/scene/sockets'
 import { DEFAULT_SILHOUETTE } from '#shared/scene/bodies'
 import { bodyGeometry } from '#shared/scene/generators/body'
 import type { Silhouette } from '#shared/scene/generators/body'
 import { chassisPieces } from '#shared/scene/generators/chassis'
 import type { ChassisRole } from '#shared/scene/generators/chassis'
 import * as parts from '#shared/scene/generators/parts'
+import * as fittings from '#shared/scene/generators/fittings'
+import {
+  AXLES, BEARINGS, BRAKES, CHASSIS_UNITS, DAMPERS, DEFAULT_AXLE, DEFAULT_BEARING, DEFAULT_BRAKE, DEFAULT_DAMPER,
+  DEFAULT_PLATE, DEFAULT_PROPELLER, DEFAULT_ROLLER, DEFAULT_SIDE_PLATE, PLATES, PROPELLERS, ROLLERS
+} from '#shared/scene/fittings'
 import { DEFAULT_TIRE, DEFAULT_WHEEL, entryShapeId, TIRES, WHEELS } from '#shared/scene/wheels'
 import type { TireShape, WheelShape } from '#shared/scene/wheels'
 import { cylinder, Triangles } from '#shared/scene/generators/mesh'
@@ -53,6 +58,7 @@ const props = defineProps<{
     wheel?: string
     tire?: string
     finish?: 'metal'
+    fitting?: string
   }>
   /** The slot whose picker is open; its proxy stays lit until it closes. */
   openSlotId: string | null
@@ -97,8 +103,12 @@ type Shape = {
   id: string
   silhouette: string
   towardNose: 1 | -1 | 0
+  /** The row of shared/scene/fittings.ts a roller, plate, damper, brake or hidden fitting draws from. */
+  fitting: string
+  /** A shaft's length, from its socket. */
+  span: number
 }
-const shapeKey = (kind: ProxyKind, s: Shape) => `${kind}:${s.mm}:${s.id}:${s.silhouette}:${s.towardNose}`
+const shapeKey = (kind: ProxyKind, s: Shape) => `${kind}:${s.mm}:${s.id}:${s.silhouette}:${s.towardNose}:${s.fitting}:${s.span}`
 
 /**
  * A wheel or tire as the numbers its generator actually reads, not as the row
@@ -122,6 +132,16 @@ const TOWARD_NOSE: ReadonlySet<ProxyKind> = new Set(['stay', 'gear', 'counter-ge
 
 /** Every kind but the body, whose shell is lofted per kit and held apart from these tables. */
 type Solid = Exclude<ProxyKind, 'body'>
+/**
+ * The fittings with one true place (sockets.ts): drawn, and drawn nothing for
+ * when empty — an outline of an axle inside a wheel is a line nobody reads —
+ * and with no hit volume, since what is in front of them takes the tap.
+ */
+type Hidden = 'axle' | 'bearing' | 'propeller-shaft' | 'chassis-unit'
+const HIDDEN: ReadonlySet<ProxyKind> = new Set<Hidden>(['axle', 'bearing', 'propeller-shaft', 'chassis-unit'])
+const isHidden = (kind: ProxyKind): kind is Hidden => HIDDEN.has(kind)
+/** The kinds drawn from a row of shared/scene/fittings.ts, in `fittings.FITTING_GROUPS`' draw groups. */
+const FITTINGS: ReadonlySet<ProxyKind> = new Set(['roller', 'stay', 'side-stay', 'damper', 'brake', ...HIDDEN])
 /** The kinds drawn as a gear train, one mesh per rotor, rather than as one shape. */
 type Train = 'gear' | 'counter-gear'
 
@@ -136,18 +156,37 @@ const TRAINS: Record<Train, (shape: Shape) => parts.Rotor[]> = {
   'counter-gear': shape => parts.counterGear(shape.towardNose || 1)
 }
 
+/**
+ * A row by id, or its table's default: a part no row names — a fitting the
+ * name reader did not place, a link from before it existed — draws its
+ * socket's ordinary shape, the way a kit with no silhouette draws the wedge.
+ * A side stay and an end stay share one table but not their outlines, so each
+ * socket only takes a row authored for it.
+ */
+const row = <T,>(table: Record<string, T>, id: string, fallback: string): T => table[id] ?? table[fallback]!
+const rollerRow = (id: string) => row(ROLLERS, id, DEFAULT_ROLLER)
+const plateRow = (kind: 'stay' | 'side-stay', id: string) => {
+  const found = PLATES[id]
+  return found && !!found.side === (kind === 'side-stay') ? found : PLATES[kind === 'stay' ? DEFAULT_PLATE : DEFAULT_SIDE_PLATE]!
+}
+const damperRow = (id: string) => row(DAMPERS, id, DEFAULT_DAMPER)
+/** The damper-slot forms that are a metal weight; the rest are moulded stabilisers and springs' plastic. */
+const WEIGHTS: ReadonlySet<string> = new Set(['weights', 'blocks', 'stack', 'plate-weight'])
+
 const VISIBLE: Record<Exclude<Solid, Train>, (shape: Shape) => BufferGeometry> = {
   motor: () => parts.motor(shafts()),
   wheel: shape => parts.wheel(shape.wheel!),
   tire: shape => parts.tire(shape.tire!, shape.wheel!),
-  roller: shape => parts.roller(shape.mm),
-  stay: shape => parts.stay(shape.mm, shape.towardNose || 1),
-  'side-stay': shape => parts.sideStay(shape.mm),
-  brake: () => parts.brake(),
-  damper: () => parts.damper()
+  roller: shape => fittings.roller(rollerRow(shape.fitting), shape.mm),
+  stay: shape => fittings.plate(plateRow('stay', shape.fitting), shape.mm, shape.towardNose || 1),
+  'side-stay': shape => fittings.plate(plateRow('side-stay', shape.fitting), shape.mm, 1),
+  brake: shape => fittings.brake(row(BRAKES, shape.fitting, DEFAULT_BRAKE)),
+  damper: shape => fittings.damper(damperRow(shape.fitting)),
+  axle: shape => fittings.axle(row(AXLES, shape.fitting, DEFAULT_AXLE), shape.span),
+  bearing: shape => fittings.bearing(row(BEARINGS, shape.fitting, DEFAULT_BEARING)),
+  'propeller-shaft': shape => fittings.propellerShaft(row(PROPELLERS, shape.fitting, DEFAULT_PROPELLER), shape.span),
+  'chassis-unit': shape => fittings.chassisUnit(CHASSIS_UNITS[shape.fitting] ?? {})
 }
-
-const DEFAULT_PLATE_MM = 1.5
 
 /**
  * What an empty slot shows: the simplest outline of the shape that would go
@@ -165,7 +204,7 @@ const outlineRing = (r: number, w: number, axis: 'x' | 'y') => {
   t.revolve(cylinder(r, -w / 2, w / 2), 8, axis)
   return t.geometry()
 }
-const OUTLINE: Record<Solid, (shape: Shape) => BufferGeometry> = {
+const OUTLINE: Record<Exclude<Solid, Hidden>, (shape: Shape) => BufferGeometry> = {
   motor: () => outlineBox(20, 15, 25),
   // The gear a reader would look for: the PRO axle spur or the single-shaft
   // crown gear, and the counter gear beside the motor. Centres and widths are
@@ -183,16 +222,9 @@ const OUTLINE: Record<Solid, (shape: Shape) => BufferGeometry> = {
   damper: () => outlineBox(9, 10, 9)
 }
 
-/**
- * The diameter a roller is drawn at: its own record's when the catalog has one
- * (41 rollers), else the size the taps were measured at (§5.5). A wheel and a
- * tire are sized by their shape instead (§5.6).
- */
-const DEFAULT_ROLLER_MM = 13
-
 /** The row a wheel or tire draws from, or the default for a shape with none. */
-const wheelShape = (id: string) => WHEELS[id] ?? WHEELS[DEFAULT_WHEEL]!
-const tireShape = (id: string) => TIRES[id] ?? TIRES[DEFAULT_TIRE]!
+const wheelShape = (id: string) => row(WHEELS, id, DEFAULT_WHEEL)
+const tireShape = (id: string) => row(TIRES, id, DEFAULT_TIRE)
 
 /**
  * Which shape a wheel or tire socket draws, most specific first: a part in the
@@ -214,23 +246,46 @@ const rowFor = {
   tire: (slot: ResolvedSlot | undefined) => tireShape(shapeIdFor('tire', slot))
 }
 
-function specsOf(slot: ResolvedSlot | undefined): PartSpecs | undefined {
-  const id = slot?.entries[0]?.partId
-  return id ? props.parts.get(id)?.specs : undefined
+/** The catalog record of the part in a slot's `entry`th place, when it is a catalog part. */
+function partIn(slot: ResolvedSlot | undefined, entry = 0) {
+  const id = slot?.entries[entry]?.partId
+  return id ? props.parts.get(id) : undefined
 }
+const specsOf = (slot: ResolvedSlot | undefined, entry = 0): PartSpecs | undefined => partIn(slot, entry)?.specs
+const coloursOf = (slot: ResolvedSlot | undefined, entry = 0): PartColours | undefined => partIn(slot, entry)?.colours
+/** The fittings row a part names, or '' for a kit's moulding or a part with none: its table's default. */
+const fittingIn = (slot: ResolvedSlot | undefined, entry = 0) => partIn(slot, entry)?.fitting ?? ''
 
-function coloursOf(slot: ResolvedSlot): PartColours | undefined {
-  const id = slot.entries[0]?.partId
-  return id ? props.parts.get(id)?.colours : undefined
-}
-
-/** The size of what is not a wheel or a tire; those are their row's diameter. */
-function diameterFor(kind: ProxyKind, slot: ResolvedSlot): number {
+/**
+ * The size of what is not a wheel or a tire; those are their row's diameter.
+ * A roller is its record's `rollerDiameterMm` where the catalog has one (42
+ * rollers), else its row's, whose default is the 13 mm the taps were measured
+ * at (§5.5); a plate its record's thickness, else its row's.
+ */
+function diameterFor(kind: ProxyKind, slot: ResolvedSlot, entry: number, fitting: string): number {
   switch (kind) {
-    case 'roller': return specsOf(slot)?.rollerDiameterMm ?? DEFAULT_ROLLER_MM
-    case 'stay': case 'side-stay': return specsOf(slot)?.plateThicknessMm ?? DEFAULT_PLATE_MM
+    case 'roller': return specsOf(slot, entry)?.rollerDiameterMm ?? rollerRow(fitting).mm
+    case 'stay': case 'side-stay': return specsOf(slot, entry)?.plateThicknessMm ?? plateRow(kind, fitting).thicknessMm
     default: return 0
   }
+}
+
+/**
+ * What in the build moves a socket (shared/scene/sockets.ts): an end plate
+ * whose row carries roller holes, and where each damper-slot part mounts.
+ * Only a plate authored for an end moves that end's rollers; a side row or
+ * one with no holes leaves them on the posts, which `socketsFor` does anyway.
+ */
+function fitOf(bySlot: ReadonlyMap<string, ResolvedSlot>): Fit {
+  const plates: NonNullable<Fit['plates']> = {}
+  for (const slotId of ['front-stay', 'rear-stay'] as const) {
+    const slot = bySlot.get(slotId)
+    const plate = slot?.entries.length ? plateRow('stay', fittingIn(slot)) : undefined
+    // Only a plate that moves a socket: any other keeps the chassis' own set, which `socketsFor` keeps.
+    if (plate?.holes || plate?.brakeZ !== undefined) plates[slotId] = plate
+  }
+  const damper = bySlot.get('damper')
+  return { plates, dampers: damper?.entries.map((_, entry) => damperRow(fittingIn(damper, entry)).mount) }
 }
 
 /**
@@ -253,7 +308,7 @@ function diameterFor(kind: ProxyKind, slot: ResolvedSlot): number {
  * toward the motor, a crown gear stands outboard of its housing, and a counter
  * gear's box starts where the turned motor's ends, at x = 17.
  */
-const HIT: Record<Solid, (shape: Shape) => BufferGeometry> = {
+const HIT: Record<Exclude<Solid, Hidden>, (shape: Shape) => BufferGeometry> = {
   motor: () => new BoxGeometry(34, 19, 24),
   gear: shape => shafts() === 1
     ? new BoxGeometry(16, 20, 16).translate(6 * gearSide(shape), 0, 4 * (shape.towardNose || 1))
@@ -290,7 +345,11 @@ const FINISH: Record<ProxyKind, Finish> = {
   stay: 'plastic',
   'side-stay': 'plastic',
   brake: 'plastic',
-  damper: 'metal'
+  damper: 'metal',
+  axle: 'metal',
+  bearing: 'plastic',
+  'propeller-shaft': 'metal',
+  'chassis-unit': 'metal'
 }
 /** A motor's is its end bell: AO-1001's white, the motor a kit ships with. */
 const STOCK_TINT: Record<ProxyKind, number> = {
@@ -306,7 +365,12 @@ const STOCK_TINT: Record<ProxyKind, number> = {
   stay: 0x2a2d31,
   'side-stay': 0x2a2d31,
   brake: 0x3a3d42,
-  damper: 0xb9bec6
+  damper: 0xb9bec6,
+  // A kit's axles and propeller shaft are bare steel; its bushings dark moulding.
+  axle: 0xc9ced6,
+  bearing: 0x3a3d42,
+  'propeller-shaft': 0xc9ced6,
+  'chassis-unit': 0xc9ced6
 }
 
 /** A catalog colour, `#rrggbb`, as the number three takes. */
@@ -396,7 +460,6 @@ const KIT_MOULDED: Partial<Record<ChassisRole, { colour: (colours: NonNullable<K
 
 onMounted(() => {
   const element = canvas.value
-  const sockets = socketsFor(props.chassis)
   if (!element) return
 
   // Per instance, not per module: the caches are disposed with the scene that
@@ -547,7 +610,7 @@ onMounted(() => {
   const chassis = new Group()
   for (const piece of chassisPieces(props.chassis)) {
     const mesh = new Mesh(piece.geometry, chassisMaterial(piece.colour))
-    mesh.userData = { colour: piece.colour, role: piece.role }
+    mesh.userData = { colour: piece.colour, role: piece.role, end: piece.end }
     chassis.add(mesh)
   }
   car.add(chassis)
@@ -557,27 +620,75 @@ onMounted(() => {
    * the box has them in, see-through where they are clear plastic, and black
    * for a bare chassis or a kit the wiki has no row for. Repainted with every
    * populate, because a kit change on the same chassis does not remount.
+   *
+   * The parts that *are* the chassis paint over the kit (§5.6, "The rest of
+   * the parts"): gold terminals repaint the terminal caps, a gear cover the A
+   * parts, an MS unit or colour chassis set its frame or its ends — in the
+   * order the slots are listed, the later winning. A bumperless unit in a
+   * stay slot takes that end's moulded bumper away.
    */
-  function paintChassis() {
+  function paintChassis(bySlot: ReadonlyMap<string, ResolvedSlot>) {
     const colours = props.kitColours
+    const own = new Map<ChassisRole, number>()
+    const terminal = hexColour(coloursOf(bySlot.get('terminal'))?.primary)
+    if (terminal !== undefined) own.set('caps', terminal)
+    for (const slot of [bySlot.get('gear-cover'), bySlot.get('chassis-unit')]) {
+      slot?.entries.forEach((_, entry) => {
+        const colour = hexColour(coloursOf(slot, entry)?.primary)
+        if (colour === undefined) return
+        for (const role of CHASSIS_UNITS[fittingIn(slot, entry)]?.repaint ?? []) own.set(role, colour)
+      })
+    }
+    const bare = {
+      1: !!PLATES[fittingIn(bySlot.get('front-stay'))]?.replacesBumper,
+      [-1]: !!PLATES[fittingIn(bySlot.get('rear-stay'))]?.replacesBumper
+    }
     for (const mesh of chassis.children) {
       if (!(mesh instanceof Mesh)) continue
-      const { colour, role } = mesh.userData as { colour: number; role: ChassisRole }
+      const { colour, role, end } = mesh.userData as { colour: number; role: ChassisRole; end?: 1 | -1 }
+      mesh.visible = !(end && bare[end])
       const kit = KIT_MOULDED[role]
       const moulded = colours && kit ? kit.colour(colours) : undefined
-      const clear = !!kit && !!colours?.clear?.includes(kit.clear)
-      mesh.material = chassisMaterial(hexColour(moulded) ?? colour, clear)
+      const clear = !own.has(role) && !!kit && !!colours?.clear?.includes(kit.clear)
+      mesh.material = chassisMaterial(own.get(role) ?? hexColour(moulded) ?? colour, clear)
     }
   }
+
+  /**
+   * One group per socket, named for it. The set follows the build — a plate
+   * with roller holes moves that end's rollers, each damper-slot part has a
+   * place of its own (shared/scene/sockets.ts) — so each populate places the
+   * groups it needs and drops the rest. A group that stays is only moved if
+   * its socket did: the body's is animated by the lift, and resetting it to
+   * rest mid-lift would jump.
+   */
   const groups = new Map<string, Group>()
-  for (const socket of sockets) {
-    const group = new Group()
-    group.name = socket.name
-    group.position.set(...socket.position)
-    if (socket.rotateY) group.rotation.y = socket.rotateY
-    groups.set(socket.name, group)
-    car.add(group)
+  function placeSockets(sockets: readonly SceneSocket[]) {
+    const live = new Set(sockets.map(socket => socket.name))
+    for (const [name, group] of groups) {
+      if (live.has(name)) continue
+      car.remove(group)
+      groups.delete(name)
+    }
+    for (const socket of sockets) {
+      let group = groups.get(socket.name)
+      if (!group) {
+        group = new Group()
+        group.name = socket.name
+        groups.set(socket.name, group)
+        car.add(group)
+      }
+      // By value: a fitted socket set is rebuilt each time, its positions new arrays.
+      const at = `${socket.position}:${socket.rotateY ?? 0}`
+      if (group.userData.at !== at) {
+        group.userData.at = at
+        group.position.set(...socket.position)
+        group.rotation.y = socket.rotateY ?? 0
+      }
+    }
   }
+  let sockets = socketsFor(props.chassis)
+  placeSockets(sockets)
   scene.add(car)
 
   const controls = new OrbitControls(camera, element)
@@ -696,8 +807,8 @@ onMounted(() => {
    * take the kit's recorded colours, as long as the slot is still the kit's.
    * Then the category's natural colour.
    */
-  function tintFor(kind: ProxyKind, slot: ResolvedSlot): number {
-    const part = coloursOf(slot)
+  function tintFor(kind: ProxyKind, slot: ResolvedSlot, entry = 0): number {
+    const part = coloursOf(slot, entry)
     const own = kind === 'tire' ? part?.tire ?? part?.primary : part?.primary
     if (own) return hexColour(own)
     if (slot.swapped) return STOCK_TINT[kind]
@@ -725,6 +836,21 @@ onMounted(() => {
     if (kind !== 'wheel') return undefined
     const partId = slot.entries[0]?.partId
     return partId ? props.parts.get(partId)?.finish : undefined
+  }
+
+  /**
+   * Whether a fitting is the metal it is sold as or a moulding, from its row:
+   * an aluminium roller and a brass weight are metal, a plastic roller, a
+   * stabiliser head and every plate — FRP and carbon are read by their
+   * recorded colour — are not.
+   */
+  function fittingFinish(kind: ProxyKind, fitting: string): 'metal' | 'plastic' {
+    switch (kind) {
+      case 'damper': return WEIGHTS.has(damperRow(fitting).form) ? 'metal' : 'plastic'
+      case 'bearing': return row(BEARINGS, fitting, DEFAULT_BEARING).finish
+      case 'stay': case 'side-stay': case 'brake': return 'plastic'
+      default: return 'metal'
+    }
   }
 
   /**
@@ -760,8 +886,10 @@ onMounted(() => {
 
   /** The attach step: for each socket, clear it and add what its slot holds. */
   function populate() {
-    paintChassis()
     const bySlot = new Map(props.slots.map(slot => [slot.id, slot]))
+    paintChassis(bySlot)
+    sockets = socketsFor(props.chassis, fitOf(bySlot))
+    placeSockets(sockets)
     const rims = new Map<string, WheelShape>()
     const rimAt = (wheelSlotId: string) => {
       let found = rims.get(wheelSlotId)
@@ -782,7 +910,16 @@ onMounted(() => {
       // the body is chosen from the list, so there is no target to outline,
       // and a wireframe loft over the whole car was the one outline that read
       // as a tangle rather than a slot.
-      if (socket.kind === 'body' && state === 'empty') continue
+      // Nor does an empty hidden fitting: an outlined axle inside a wheel is a
+      // line nobody reads, and the list says the slot is empty.
+      if ((socket.kind === 'body' || isHidden(socket.kind)) && state === 'empty') continue
+      // Each damper-slot part has a socket of its own; a chassis-unit socket
+      // draws the first unit that adds a piece, the rest only repaint.
+      const entry = socket.kind === 'chassis-unit'
+        ? slot.entries.findIndex((_, i) => CHASSIS_UNITS[fittingIn(slot, i)]?.piece)
+        : socket.entry ?? 0
+      if (entry < 0) continue
+      const fitting = FITTINGS.has(socket.kind) ? fittingIn(slot, entry) : ''
       const shell = socket.kind === 'body' ? silhouetteFor(slot) : undefined
       // A shell still loading draws nothing yet, as an empty body does.
       if (shell && !shell.silhouette) continue
@@ -792,20 +929,27 @@ onMounted(() => {
         ? rimAt(socket.kind === 'wheel' ? slot.id : slot.id.replace('tire', 'wheel'))
         : undefined
       const tire = socket.kind === 'tire' ? rowFor.tire(slot) : undefined
-      const mm = wheel && socket.kind === 'wheel' ? wheel.diameterMm : tire ? tire.diameterMm : diameterFor(socket.kind, slot)
+      const mm = wheel && socket.kind === 'wheel' ? wheel.diameterMm : tire ? tire.diameterMm : diameterFor(socket.kind, slot, entry, fitting)
       const shape: Shape = {
         mm,
         wheel,
         tire,
         id: sign(socket.kind, wheel, tire),
         silhouette: shell?.id ?? '',
-        towardNose: TOWARD_NOSE.has(socket.kind) ? (socket.position[2] < 0 ? -1 : 1) : 0
+        towardNose: TOWARD_NOSE.has(socket.kind) ? (socket.position[2] < 0 ? -1 : 1) : 0,
+        fitting,
+        span: socket.span ?? 0
       }
-      const tint = tintFor(socket.kind, slot)
+      const tint = tintFor(socket.kind, slot, entry)
       const data: ProxyData = { slotId: socket.slotId, state, kind: socket.kind, tint, finish: finishFor(socket.kind, slot) }
       if (socket.kind === 'body') seatedOpacity = clearFor(slot) ? CLEAR_OPACITY : 1
       if (socket.kind === 'motor') data.paints = motorPaintsFor(slot, tint)
       if (GEARS.has(socket.kind)) data.paints = parts.gearPaints(tint)
+      if (FITTINGS.has(socket.kind)) {
+        data.paints = socket.kind === 'brake' ? fittings.brakePaints(tint)
+          : socket.kind === 'roller' ? fittings.rollerPaints(rollerRow(fitting), tint)
+            : fittings.fittingPaints(tint, fittingFinish(socket.kind, fitting))
+      }
       const key = shapeKey(socket.kind, shape)
       const kind = socket.kind
       const paint = materialsFor(data, highlightFor(socket.slotId))
@@ -813,7 +957,8 @@ onMounted(() => {
       // A gear train is a mesh per rotor, each at its pivot so it can turn in place.
       let visibles: Mesh[]
       if (kind === 'body') visibles = [new Mesh(bodyFor(shell!.id, shell!.silhouette!), paint)]
-      else if (state === 'empty') visibles = [new Mesh(geometry(OUTLINE, kind, shape, `o:${key}`), paint)]
+      // An empty hidden fitting has already gone on (above); the guard is for the type.
+      else if (state === 'empty' && !isHidden(kind)) visibles = [new Mesh(geometry(OUTLINE, kind, shape, `o:${key}`), paint)]
       else if (isTrain(kind)) visibles = train(kind, shape, `t:${key}`).map(rotor => {
         const mesh = new Mesh(rotor.geometry, paint)
         mesh.position.set(...rotor.pivot)
@@ -827,16 +972,20 @@ onMounted(() => {
       }
       // A wheel or tire turns with its axle, an empty one's outline too. The
       // left wheel's socket is turned 180°, so in its own frame it turns back.
-      if (kind === 'wheel' || kind === 'tire') spinners.push({ object: visibles[0]!, axis: 'x', rate: Math.cos(socket.rotateY ?? 0) })
-      // The shell is its own hit volume; everything else gets an oversized one.
+      // The axle through them too, whose socket is never turned.
+      if (kind === 'wheel' || kind === 'tire' || kind === 'axle') spinners.push({ object: visibles[0]!, axis: 'x', rate: Math.cos(socket.rotateY ?? 0) })
+      // The shell is its own hit volume; a hidden fitting has none, since what
+      // is in front of it takes the tap; everything else gets an oversized one.
       if (kind === 'body') {
         // Last among the transparent: a clear chassis seen from below is nearer.
         visibles[0]!.renderOrder = 1
         group.add(...visibles)
         hits.push(...visibles)
+      } else if (isHidden(kind)) {
+        group.add(...visibles)
       } else {
         // Only a round part's size and a gear's end change its hit volume.
-        const hitShape: Shape = { mm: ROUND.has(kind) ? mm : 0, id: '', silhouette: '', towardNose: GEARS.has(kind) ? shape.towardNose : 0 }
+        const hitShape: Shape = { mm: ROUND.has(kind) ? mm : 0, id: '', silhouette: '', towardNose: GEARS.has(kind) ? shape.towardNose : 0, fitting: '', span: 0 }
         const hit = new Mesh(geometry(HIT, kind, hitShape, `h:${shapeKey(kind, hitShape)}`))
         hit.visible = false
         hit.userData = data

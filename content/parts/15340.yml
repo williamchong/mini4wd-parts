@@ -11,7 +11,7 @@ seriesLabel: ミニ四駆グレードアップパーツ
 category: other
 categorySource: override
 slots:
-  - none
+  - chassis-unit
 isCarPart: true
 chassisCompat:
   include:
@@ -38,4 +38,5 @@ officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/
 thumbnail: /thumbs/parts/15340.webp
 detailThumbnail: /thumbs/parts-detail/15340.webp
 fandomTitle: Motor Cooling Shield
+fitting: cooling-shield
 scrapedAt: 2026-09-16

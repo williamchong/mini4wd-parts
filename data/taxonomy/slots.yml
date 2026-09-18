@@ -24,6 +24,12 @@ profiles:
     - { id: propeller-shaft, type: propeller-shaft, maxCount: 1, required: true }
     - { id: terminal, type: terminal, maxCount: 1, required: true }
     - { id: switch, type: switch, maxCount: 1, required: true }
+    # A gear cover, and the parts that are the chassis itself — an MS unit, a
+    # colour chassis set, a motor support — which the pane draws by repainting
+    # the chassis or adding a piece at the motor (docs/PLAN.md §5.6). Only the
+    # chassis Tamiya sells one for offer any; the list hides the rest.
+    - { id: gear-cover, type: gear-cover, maxCount: 1 }
+    - { id: chassis-unit, type: chassis-unit, maxCount: 3 }
     - { id: axle, type: shaft, maxCount: 2, mirror: true, required: true }
     - { id: bearing, type: bearing, maxCount: 4, mirror: true }
     - { id: wheel-front, type: wheel-front, maxCount: 2, mirror: true, required: true }
@@ -45,6 +51,8 @@ profiles:
     - { id: gear-set, type: gear, maxCount: 1, required: true }
     - { id: terminal, type: terminal, maxCount: 1, required: true }
     - { id: switch, type: switch, maxCount: 1, required: true }
+    - { id: gear-cover, type: gear-cover, maxCount: 1 }
+    - { id: chassis-unit, type: chassis-unit, maxCount: 3 }
     - { id: axle, type: shaft, maxCount: 2, mirror: true, required: true }
     - { id: bearing, type: bearing, maxCount: 4, mirror: true }
     - { id: wheel-front, type: wheel-front, maxCount: 2, mirror: true, required: true }

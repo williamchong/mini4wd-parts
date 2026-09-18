@@ -427,7 +427,7 @@ Two more things, found reading `@tresjs/nuxt` 5.7.0's module source rather than 
 
 §5.2 puts the sockets in the chassis GLB as named empties. Until that file exists the spike builds the same object in code: one `Group` per socket, **named by slot id**, positioned from a hand-authored table for MA. `wheelbaseMm` (80) and `treadFrontMm` (59.5) are already on the chassis record, and the regulation envelope (105 × 165 × 70) bounds the rest; nothing needs measuring. Mirrored slots get `-l`/`-r` groups exactly as §5.4 specifies (`roller-front-l`, `roller-front-r`), and both map back to the one slot id on click. The table is a TypeScript constant beside the component, **not** catalog data: ~~it is a stand-in for the GLB's empties and is deleted when they land~~ it was a stand-in for the GLB's empties, and since no GLB is coming (§5.6, 2026-09-16) it is the permanent socket source, one table per chassis beside that chassis' generator; putting it in `data/chassis/ma.yml` would create precisely the second data model §5.4 says not to have. The attach code — find the group by slot id, clear it, add the proxy — is what the GLB will use unchanged. The only thing that swaps later is where the groups come from.
 
-Only slots you can see get a socket: `body`, `motor`, `wheel-front`/`-rear`, `tire-front`/`-rear`, `front-stay`, `rear-stay`, `side-stay`, `roller-front`/`-rear`/`-side`, `brake`, `damper` — 14 slot ids, about 24 sockets. `gear-set`, `terminal`, `switch`, `axle`, `bearing` and `fastener` draw nothing and stay list-only, which §5.4 already says. ~~`gear-set`~~ **Amended 2026-09-18 (owner):** the gears draw, because a lifted shell shows them; `gear-set` has a socket at each axle and a single-shaft chassis' `counter-gear` one at its motor. Wheel and tire share a position, so the tire proxy is a ring around the wheel proxy and the two are the first thing the touch test judges: if a phone cannot tell them apart, a tap on a wheel offers a two-button choice (wheel / tire) before the picker opens. That pattern is needed later anyway for a stay that carries rollers.
+Only slots you can see get a socket: `body`, `motor`, `wheel-front`/`-rear`, `tire-front`/`-rear`, `front-stay`, `rear-stay`, `side-stay`, `roller-front`/`-rear`/`-side`, `brake`, `damper` — 14 slot ids, about 24 sockets. `gear-set`, `terminal`, `switch`, `axle`, `bearing` and `fastener` draw nothing and stay list-only, which §5.4 already says. ~~`gear-set`~~ **Amended 2026-09-18 (owner):** the gears draw, because a lifted shell shows them; `gear-set` has a socket at each axle and a single-shaft chassis' `counter-gear` one at its motor. **Amended again 2026-09-18 (§5.6, "The rest of the parts"):** `axle`, `bearing` and `propeller-shaft` draw too, with no hit volume, and `terminal` repaints the chassis; only `switch` and `fastener` draw nothing. Wheel and tire share a position, so the tire proxy is a ring around the wheel proxy and the two are the first thing the touch test judges: if a phone cannot tell them apart, a tap on a wheel offers a two-button choice (wheel / tire) before the picker opens. That pattern is needed later anyway for a stay that carries rollers.
 
 Proxy sizes are **category defaults** in the spike (roller ⌀13 × 5, wheel ⌀24, tire ring ⌀26, stay 60 × 2 × 20, motor 20 × 15 × 30, body a 150 × 35 × 40 ghost). Sizing from `specs` — `rollerDiameterMm` is on 41 parts, `wheelDiameterMm` on 9 — is a one-line upgrade afterwards; it changes how the pane looks, not what the spike risks.
 
@@ -814,6 +814,40 @@ The two Super X plates (15242, 15243) take the nearest outline. The **MS bumperl
 - Most of these parts are dark FRP, carbon or black plastic on a black chassis. Colour alone will not separate them, so an outline that differs is what a swap has to show, and phase 0's first job is to check it does.
 
 **Total: 31–41 h.** Every phase from 2 on is a table a reader sees on the next swap, and each phase is a place to stop.
+
+#### Built and measured (2026-09-18): every part draws its own shape
+
+All seven phases landed the same day. **Every part the builder can fit now draws as its own row:** 84 rows across eight tables in `shared/scene/fittings.ts`, drawn by `shared/scene/generators/fittings.ts`. A part names its row in a `fitting` field, which `scripts/catalog/fittings.ts` reads out of its name. The one-shape proxies for the roller, stay, brake and damper are gone from `parts.ts`.
+
+- **What each table holds.**
+
+  | Table | Rows | Triangles (median) |
+  |---|---:|---|
+  | Rollers | 24 | 152–536 (280) |
+  | Plates | 24 | 12–456 (64) |
+  | Damper slot | 19 | 12–384 (84) |
+  | Brakes | 4 | 12–24 |
+  | Axles, bearings, propeller shafts and motor pieces | 13 | 24–176 (88) |
+
+  Every one of the 172 parts in the plan resolves to a row with no per-item override. The rules are ordered and the first match wins, the way `categories.yml` files a part, and they read the English and Japanese names together. `catalog:verify` fails a part that a chassis can be fitted with but that has no row. It also fails an id that is missing from the table of every slot the part fills. Checking against all the tables at once, as first written, would have passed an id that only another kind's table holds.
+- **The cascade is built.** `socketsFor(chassis, fit)` takes the plate in each end's stay slot and the mount of each damper-slot part. A plate whose row lists holes carries that end's rollers. A hole with an upper deck adds a numbered second socket (`roller-rear-l-2`) that opens the same picker, which was checked with a tap in Chrome. A test holds every plate on every chassis to a 19 mm roller inside 105 mm. That check went in `sockets.test.ts` rather than `catalog:verify`, because it tests the table, not the catalog.
+- **The scene follows the build.** The scene rebuilds its socket groups on each populate, since a stay or damper change moves sockets. A group that stays is only moved when its socket did, so a mid-lift shell does not jump. Only a plate that moves a socket counts as a fit: a reinforcing plate, or any kit moulding, keeps the chassis' cached socket set.
+- **Hidden fittings have no hit volume.** Axles (which turn with the wheels when the car is on), bearings, the propeller shaft and a piece at the motor are drawn but not tapped. They sit inside the wheels and under the motor, so the fold of rarely changed slots still never needs to open for a tap. Empty, they draw nothing, so the empty-car posters stand. The propeller shaft moved out of the chassis' steel group into its own socket.
+- **Repaints.** Gold terminals repaint the chassis' terminal caps. A gear cover repaints the A parts, and an MS unit or colour chassis set repaints the frame or the ends. Each end's moulded bumper and posts are now a chassis piece of their own (`end: ±1`), which a bumperless unit hides.
+- **Two slots, appended.** `gear-cover` and `chassis-unit` are on both profiles and at the end of `SHARE_SLOTS`, so old links still decode. The risk the plan raised did not exist: `catalog:verify` only fails a slot whose candidates are all add-ons, and the list already hides a slot with none. Two data slips were found on the way:
+  - The three Super FM chassis sets would have been slotted for a chassis outside v1. They now carry `slots: [none]`, so they stay out of the payload.
+  - 95682's English name is its neighbour's; it has an override.
+- **What the owner pass on the fittings sheet changed.** `npm run catalog:bodies -- --fittings` draws every row beside its product photo, plus each chassis with wide plates. Reading it against the photos changed four things:
+  - A coloured ring roller is **silver aluminium in a coloured ring** (15461 and 95513, read off their photos), so the part's colour goes on the ring (`colourOnRing`).
+  - A double roller is a **spool**, a flange over a flange with a deep waist, not two stacked discs.
+  - The stabilising pole is a steel rod with a ball on top, and 15059's colour is the ball's.
+  - The hi-mount tube is short and wide.
+- **Bytes.** The **3D chunk went 146.1 → 150.5 KB gz**, for eight tables, their generators and the cascade. The **payload went 90.1 → 93.0 KB gz**: 1.5 KB for the `fitting` column, and the rest for the 12 gear covers, MS units, motor support and cooling shield, which now have a slot. JavaScript modulepreloaded on `/` is unchanged (138.2 → 138.3 KB gz), and no route loads Zod.
+- **What the review pass caught.** The scene never copied a bumper piece's `end` into its mesh data, so a bumperless unit drew over a moulded bumper that was still there. A screenshot taken before the fix had looked right from the front three-quarter view. The review also caught a bearing's finish being read from its id string rather than its row.
+- **Not done:**
+  - A real thumb has still not tried the pane on a phone, and §5.5's tap grid was not re-run on a wide-plate build. A tap on an upper-tier roller was checked in Chrome only.
+  - The roller count the pane draws on a double-roller stay (four) and the count the list records (one per side) still disagree, as the plan expected.
+  - The fittings sheet has had one pass, not an owner pass.
 
 ---
 

@@ -1,7 +1,7 @@
 id: "95682"
 names:
   ja: MSカラーシャーシセット (蛍光オレンジ)ミニ四駆ステーション
-  en: REINFORCED GEAR COVER (for MS CHASSIS) FLUORESCENT ORANGE MINI 4WD STATION
+  en: MS CHASSIS SET (FLUORESCENT ORANGE) MINI 4WD STATION
   zh-HK: MS底盤套裝 (螢光橙色/Mini 4WD Station限定)
 nameSources:
   ja: tamiya.com
@@ -12,7 +12,7 @@ seriesLabel: ミニ四駆ステーション限定
 category: chassis-set
 categorySource: derived
 slots:
-  - none
+  - chassis-unit
 isCarPart: true
 chassisCompat:
   include:
@@ -39,5 +39,6 @@ officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/
 thumbnail: /thumbs/parts/95682.webp
 detailThumbnail: /thumbs/parts-detail/95682.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-95682-ms-chassis-set-fluorescent-orange-mini-4wd-station/
+fitting: ms-set
 specsRaw: 軽量センターシャーシ・N-02/T-01ユニット・Aパーツを1台分セット
 scrapedAt: 2026-09-16
