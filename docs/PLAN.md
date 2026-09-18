@@ -955,7 +955,7 @@ Move to Cloudflare Workers with static assets; DNS to Cloudflare; D1 and R2. Sho
 
 ### M3 — Full 3D builder (6–10 weeks)
 
-~~The remaining seven chassis,~~ (M1c since 2026-09-16, §5.6) ~~per-kit bodies where they are worth modelling~~ ~~the silhouette table for the kits outside MA~~ (M1c since 2026-09-18, §5.6), and the rest of the parametric library — which is what actually lets the 2D list stop being the primary surface on anything but MA. Swap animation and camera presets. 3D preview on share pages; AR, if wanted, by bringing model-viewer back on share pages only, against a baked export (it leaves the site in M1c, §5.5). The raycast proxies, click-to-select, hover highlight and touch tuning that used to live here moved to M1c on 2026-09-09.
+~~The remaining seven chassis,~~ (M1c since 2026-09-16, §5.6) ~~per-kit bodies where they are worth modelling~~ ~~the silhouette table for the kits outside MA~~ (M1c since 2026-09-18, §5.6), and the rest of the parametric library — which is what actually lets the 2D list stop being the primary surface on anything but MA. Swap animation and camera presets (not the switch-on spin, which is M1c since 2026-09-18, §5.6: that turns the wheels and gears in place, a swap animation moves a part into its socket). 3D preview on share pages; AR, if wanted, by bringing model-viewer back on share pages only, against a baked export (it leaves the site in M1c, §5.5). The raycast proxies, click-to-select, hover highlight and touch tuning that used to live here moved to M1c on 2026-09-09.
 
 ### M4 — Wizard, identity, community (ongoing)
 
