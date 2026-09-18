@@ -34,6 +34,7 @@ classLegality:
   source: derived
 specs:
   plateMaterial: frp
+  rollersPerSide: 2
 colours:
   primary: "#3a3d42"
   source: derived

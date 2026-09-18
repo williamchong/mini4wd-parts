@@ -4,7 +4,7 @@ import { test } from 'node:test'
 import { parse } from 'yaml'
 import { CHASSIS_IDS } from '../catalog/chassis.ts'
 import { layoutFor, socketsFor } from './sockets.ts'
-import { DAMPERS, HALF_WIDTH_MM, LARGEST_ROLLER_MM, PLATES, UPPER_ROLLER_MM } from './fittings.ts'
+import { DAMPERS, HALF_WIDTH_MM, LARGEST_ROLLER_MM, PLATES, rollersPerSide, UPPER_ROLLER_MM } from './fittings.ts'
 
 /**
  * The slots every chassis has (data/taxonomy/slots.yml: `standard` adds only
@@ -85,6 +85,20 @@ test('with every plate on every chassis, a 19 mm front or rear roller stays insi
       }
     }
   }
+})
+
+// The build list prints `rollersPerSide`, so it must count what the pane draws.
+test('every end plate puts as many rollers on each side as rollersPerSide says', () => {
+  for (const id of CHASSIS_IDS) {
+    for (const [plateId, plate] of Object.entries(PLATES)) {
+      if (plate.side) continue
+      const left = socketsFor(id, { plates: { 'rear-stay': plate } }).filter(s => s.slotId === 'roller-rear' && s.position[0] < 0)
+      assert.equal(left.length, rollersPerSide(plateId), `${id} ${plateId}`)
+    }
+  }
+  assert.equal(rollersPerSide('rear-double-roller'), 2)
+  assert.equal(rollersPerSide('side-extension'), 1)
+  assert.equal(rollersPerSide(undefined), 1)
 })
 
 test('each damper-slot part has a socket at its own mount, the rear first', () => {

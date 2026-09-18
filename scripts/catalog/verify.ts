@@ -11,7 +11,7 @@ import { bodyForKit, bodyProblems, loadBodies, silhouetteOf } from './bodies.ts'
 import { entryShapeId, TIRES, WHEELS } from '../../shared/scene/wheels.ts'
 import { printedTireMm } from './wheels.ts'
 import { FITTING_CATEGORIES } from './fittings.ts'
-import { FITTING_TABLES } from '../../shared/scene/fittings.ts'
+import { FITTING_TABLES, partRollersPerSide } from '../../shared/scene/fittings.ts'
 import { readJsonFile } from './io.ts'
 import { ROOT } from './fetch.ts'
 import { join } from 'node:path'
@@ -249,6 +249,12 @@ for (const part of parts) {
   const offered = part.chassisCompat.include.length > 0 && !part.slots.includes('none')
   if (!part.fitting && offered && FITTING_CATEGORIES.has(part.category) && part.category !== 'other') {
     errors.push(`${label}: a ${part.category} with no fitting row — teach scripts/catalog/fittings.ts its name`)
+  }
+  // The list prints this count and the pane draws the plate row's, so a row
+  // edited without a regenerate would have the two disagree.
+  const perSide = partRollersPerSide(part)
+  if ((part.specs.rollersPerSide ?? 1) !== perSide) {
+    errors.push(`${label}: records ${part.specs.rollersPerSide ?? 1} roller(s) per side, its plate row "${part.fitting}" carries ${perSide} — run catalog:generate`)
   }
 }
 

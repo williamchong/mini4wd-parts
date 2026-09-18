@@ -3,7 +3,7 @@ import { test } from 'node:test'
 import { partSchema } from './schema.ts'
 import {
   BUILD_CLASSES, counterpartParts, gearRatioOf, isChassisCompatible, newBuild, partsForSlot, resolveBuild,
-  slotIdsFor, swappableSlotTypes
+  rollersPerSideIn, slotIdsFor, swappableSlotTypes
 } from './build.ts'
 import type { BuildState } from './build.ts'
 import type { Chassis, Kit, Part } from './schema.ts'
@@ -297,6 +297,38 @@ test('the gear ratio is the kit\'s until a gear slot is swapped, then only the s
   assert.equal(ratio({ 'gear-set': [] }, stock), undefined)
   // Swapping something else leaves the kit's ratio standing.
   assert.equal(ratio({ motor: ['15355'] }, stock), '3.5:1')
+})
+
+test('a roller slot counts the rollers its end\'s stay carries each side, where that is more than one', () => {
+  const rollerSlots = [
+    ...chassis.slots,
+    { id: 'front-stay', type: 'front-stay' as const, maxCount: 1, mirror: false, required: false },
+    { id: 'rear-stay', type: 'rear-stay' as const, maxCount: 1, mirror: false, required: false },
+    { id: 'roller-front', type: 'roller-front' as const, maxCount: 2, mirror: true, required: true },
+    { id: 'roller-rear', type: 'roller-rear' as const, maxCount: 2, mirror: true, required: true }
+  ]
+  const rollerChassis = {
+    ...chassis,
+    slots: rollerSlots,
+    defaultLoadout: {
+      ...chassis.defaultLoadout,
+      'roller-front': [{ label: { en: 'Kit standard plastic rollers' }, source: 'chassis' as const }],
+      'roller-rear': [{ label: { en: 'Kit standard plastic rollers' }, source: 'chassis' as const }]
+    }
+  }
+  const parts = new Map([
+    ['15412', part({ id: '15412', slots: ['front-stay', 'rear-stay'], specs: { rollersPerSide: 2 } })],
+    ['15498', part({ id: '15498', slots: ['front-stay', 'rear-stay'] })]
+  ])
+  const counts = (swaps: BuildState['swaps']) =>
+    Object.fromEntries(rollersPerSideIn(resolveBuild(rollerChassis, undefined, { chassis: 'ma', swaps }), parts))
+
+  assert.deepEqual(counts({}), {})
+  // Only the end the double-roller stay is on, and a stock roller counts as much as a swapped one.
+  assert.deepEqual(counts({ 'rear-stay': ['15412'] }), { 'roller-rear': 2 })
+  assert.deepEqual(counts({ 'front-stay': ['15412'], 'rear-stay': ['15498'] }), { 'roller-front': 2 })
+  // No rollers in the slot, none to count.
+  assert.deepEqual(counts({ 'rear-stay': ['15412'], 'roller-rear': [] }), {})
 })
 
 test('a part maps to every slot id it fits, in the chassis\' order', () => {

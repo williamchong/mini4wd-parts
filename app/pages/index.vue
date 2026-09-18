@@ -12,7 +12,8 @@
  * model is tested without a browser and this file stays about presentation.
  */
 import {
-  counterpartParts, gearRatioOf, isBuildClass, partsForSlot, resolveBuild, slotIdsFor, swappableSlotTypes
+  counterpartParts, gearRatioOf, isBuildClass, partsForSlot, resolveBuild, rollersPerSideIn, slotIdsFor,
+  swappableSlotTypes
 } from '#shared/catalog/build'
 import { orderKits } from '#shared/catalog/kits'
 import { checkBuild } from '#shared/catalog/rules'
@@ -168,6 +169,8 @@ const slots = computed<ResolvedSlot[]>(() => {
 /** The kit's until a gear slot is swapped, then the swapped gears' own, if known. */
 const gearRatio = computed(() =>
   hasBuild.value ? gearRatioOf(slots.value, partsById.value, kit.value) : undefined)
+
+const rollersPerSide = computed(() => rollersPerSideIn(slots.value, partsById.value))
 
 const swappable = computed(() =>
   shownChassis.value
@@ -718,6 +721,7 @@ useHead(() => ({
         :stock-thumb="stockThumbFor(slot)"
         :copy-from="copies.get(slot.id)?.from"
         :findings="findingsBySlot.get(slot.id)"
+        :rollers-per-side="rollersPerSide.get(slot.id)"
         @open="openFromRow(slot.id)"
         @revert="revertSlot(slot.id)"
         @copy="copy(slot.id)"
@@ -738,6 +742,7 @@ useHead(() => ({
           :stock-thumb="stockThumbFor(slot)"
           :copy-from="copies.get(slot.id)?.from"
           :findings="findingsBySlot.get(slot.id)"
+          :rollers-per-side="rollersPerSide.get(slot.id)"
           @open="openFromRow(slot.id)"
           @revert="revertSlot(slot.id)"
           @copy="copy(slot.id)"

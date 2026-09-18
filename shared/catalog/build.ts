@@ -239,6 +239,31 @@ export function gearRatioOf(
   return ratios.size === 1 ? [...ratios][0] : undefined
 }
 
+/** The stay whose plate places each end's rollers (shared/scene/sockets.ts). */
+const ROLLER_STAY: Partial<Record<Slot, Slot>> = { 'roller-front': 'front-stay', 'roller-rear': 'rear-stay' }
+
+/**
+ * The roller slots holding more than one roller each side, and how many. The
+ * slot names one part, but a double-roller stay carries an upper and a lower
+ * pair, and the pane draws all four; without the count the list would say
+ * two. An empty roller slot has none to count, and a stock stay is moulded
+ * plastic with no record, so it keeps the one per side its posts hold.
+ */
+export function rollersPerSideIn(
+  slots: ResolvedSlot[],
+  partsById: ReadonlyMap<string, Pick<Part, 'specs'>>
+): Map<string, number> {
+  const counts = new Map<string, number>()
+  for (const slot of slots) {
+    const stayType = ROLLER_STAY[slot.type]
+    if (!stayType || !slot.entries.length) continue
+    const stay = slots.find(s => s.type === stayType)?.entries[0]?.partId
+    const perSide = stay && partsById.get(stay)?.specs.rollersPerSide
+    if (perSide && perSide > 1) counts.set(slot.id, perSide)
+  }
+  return counts
+}
+
 /**
  * An EMPTY `include` list means the part is not chassis-specific — washers,
  * spacers, AO spares — and the schema is explicit that it never means

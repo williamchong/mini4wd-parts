@@ -632,6 +632,12 @@ button.link {
   opacity: 0.5;
 }
 
+.slot-note {
+  margin: 0.35rem 0 0;
+  font-size: 0.85em;
+  opacity: 0.75;
+}
+
 .slot-actions {
   display: flex;
   flex-wrap: wrap;

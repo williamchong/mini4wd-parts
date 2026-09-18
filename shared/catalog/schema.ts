@@ -184,6 +184,8 @@ export const partSpecs = z.object({
   rollerType: z.enum(['plastic', 'aluminium', 'bearing', 'other']).optional(),
   plateThicknessMm: z.number().optional(),
   plateMaterial: z.enum(['frp', 'carbon', 'aluminium', 'other']).optional(),
+  /** On a stay whose plate carries more than one roller each side: a double-roller stay's 2 (§5.6). */
+  rollersPerSide: z.number().optional(),
   gearRatio: z.string().optional(),
   motorShaft: z.enum(['single', 'double']).optional(),
   motorRpmMin: z.number().optional(),

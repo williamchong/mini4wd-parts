@@ -58,6 +58,7 @@
     "moreSlots": "Other parts: {slots}",
     "listSeparator": ", ",
     "empty": "Empty",
+    "rollersPerSide": "{n} per side on the stay",
     "motorPosition": {
       "front": "Front motor",
       "mid": "Mid motor",

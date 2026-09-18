@@ -14,6 +14,7 @@ import { bodyForKit, loadBodies, writeBodies } from './bodies.ts'
 import { finishFor, shapesFor, WHEEL_CATEGORIES } from './wheels.ts'
 import { fittingFor } from './fittings.ts'
 import { TIRES } from '../../shared/scene/wheels.ts'
+import { partRollersPerSide } from '../../shared/scene/fittings.ts'
 import { GENRE_SERIES, KIT_GENRE_SERIES, type JpItem, type KitGenreCode, type PartGenreCode } from './sources/tamiya-jp.ts'
 import type { HkItem } from './sources/tamiya-hk.ts'
 import type { FandomKitVariant, FandomPart } from './sources/fandom.ts'
@@ -304,6 +305,10 @@ function buildPart(item: JpItem<PartGenreCode>) {
     merged.colours = { ...merged.colours, source: 'override' } as PartColours
   }
   if (override.category && !override.slots) merged.slots = deriveSlots(merged.category)
+  // Read off the merged `fitting`, so an override that changes the row changes
+  // the count; the build list prints it and cannot read the plate table (§5.6).
+  const perSide = partRollersPerSide(merged)
+  if (perSide > 1) merged.specs = { ...merged.specs, rollersPerSide: perSide }
 
   return { record: merged, matched }
 }

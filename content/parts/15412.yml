@@ -38,6 +38,7 @@ classLegality:
   source: derived
 specs:
   plateMaterial: carbon
+  rollersPerSide: 2
 colours:
   primary: "#2a2c30"
   source: derived

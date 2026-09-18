@@ -13,7 +13,7 @@
  *
  * This module holds no three.js and no Zod: the scene imports it into the 3D
  * chunk, sockets.ts reads the plates' roller holes from it, and
- * `catalog:verify` imports it in Node.
+ * `catalog:generate` and `catalog:verify` import it in Node.
  *
  * **Plates are authored from the front.** Millimetres from the stay socket,
  * x to the right and z toward the end of the car the plate is on, so one row
@@ -235,6 +235,24 @@ export const PLATES: Record<string, PlateShape> = {
 }
 export const DEFAULT_PLATE = 'default'
 export const DEFAULT_SIDE_PLATE = 'side-default'
+
+/**
+ * How many rollers the plate in an end's stay slot carries on each side: one
+ * per tier of each hole, or the one on the chassis' post when the row has no
+ * holes, is a side stay, or is not a plate. The pane draws a roller at each
+ * (sockets.ts), and the build list prints the count, so that four rollers
+ * drawn on a double-roller stay are not listed as two. The list cannot import
+ * this table, so `catalog:generate` writes the count onto the part record.
+ */
+export function rollersPerSide(fitting: string | undefined): number {
+  const plate = fitting ? PLATES[fitting] : undefined
+  if (!plate?.holes || plate.side) return 1
+  return plate.holes.reduce((n, [, , tiers = 1]) => n + tiers, 0)
+}
+
+/** A part's count as its record carries it: its plate's, if it goes in an end's stay slot. */
+export const partRollersPerSide = (part: { slots: readonly string[]; fitting?: string }): number =>
+  part.slots.includes('front-stay') || part.slots.includes('rear-stay') ? rollersPerSide(part.fitting) : 1
 
 /**
  * Where a damper-slot part mounts. `end`: across the car at the front or
