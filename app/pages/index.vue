@@ -15,12 +15,13 @@ import {
   counterpartParts, gearRatioOf, isBuildClass, partsForSlot, resolveBuild, rollersPerSideIn, slotIdsFor,
   swappableSlotTypes
 } from '#shared/catalog/build'
+import { byChassisOrder } from '#shared/catalog/chassis'
 import { orderKits } from '#shared/catalog/kits'
 import { checkBuild } from '#shared/catalog/rules'
 import { flagThumbnail, thumbnailSrc } from '#shared/catalog/thumbnails'
 import type { ResolvedSlot } from '#shared/catalog/build'
 import type { Finding } from '#shared/catalog/rules'
-import type { ChassisId, Slot } from '#shared/catalog/schema'
+import type { ChassisId, PartCategory, Slot } from '#shared/catalog/schema'
 import type { AnalyticsEvents } from '~/composables/useAnalytics'
 
 definePageMeta({ layout: 'content' })
@@ -102,6 +103,46 @@ const { data: catalog } = await useAsyncData('build-catalog', async () => {
 
 const partsById = computed(() =>
   new Map((catalog.value?.parts ?? []).map(part => [part.id, part])))
+
+/**
+ * The categories a first upgrade reaches for, in the order a beginner meets
+ * them, for the section under the builder that tells a reader — and a crawler —
+ * what the site is (docs/PLAN.md §6 M1b). Its own query rather than a tally
+ * over `catalog.parts`: the builder drops parts that fill no slot, and the
+ * First Try Parts Sets in `bundle` are exactly those. Five rows reach the
+ * payload, not the parts behind them.
+ */
+const HOME_CATEGORIES = ['roller', 'motor', 'gear', 'wheel-tire-set', 'bundle'] as const satisfies readonly PartCategory[]
+
+const { data: homeCategoryCounts } = await useAsyncData('home-categories', async () => {
+  const docs = await queryCollection('parts')
+    .where('category', 'IN', [...HOME_CATEGORIES])
+    .select('category', 'slots')
+    .all()
+  return HOME_CATEGORIES.map((category) => {
+    const group = docs.filter(doc => doc.category === category)
+    return { category, count: group.length, icon: commonestSlot(group) }
+  })
+})
+
+const homeCategories = computed(() => (homeCategoryCounts.value ?? [])
+  .map(entry => ({ ...entry, label: term(entry.category, `part.category.${entry.category}`) })))
+
+// Everything a chassis card shows is already in the builder's payload; the
+// kit count is the one number that tells a beginner which chassis is common.
+const homeChassis = computed(() => {
+  const kitCounts = new Map<string, number>()
+  for (const entry of catalog.value?.kits ?? []) {
+    kitCounts.set(entry.chassis, (kitCounts.get(entry.chassis) ?? 0) + 1)
+  }
+  return [...(catalog.value?.chassis ?? [])].sort(byChassisOrder).map(entry => ({
+    ...entry,
+    thumbnail: thumbnailSrc('chassis', entry),
+    kitCount: kitCounts.get(entry.id)
+  }))
+})
+
+const FAQ = ['classes', 'motors', 'limits'] as const
 
 const { canShare, copied, copyLink, linkTrimmed, shareLink } = useBuildLink(() => catalog.value && {
   chassis: catalog.value.chassis,
@@ -610,7 +651,9 @@ watch(buildClass, (value) => {
   catch {}
 })
 
-const title = computed(() => `${t('build.title')} — ${t('site.title')}`)
+// Leads with what a reader comes to do rather than with the list's own name,
+// which stays the <h1> beside its share buttons.
+const title = computed(() => `${t('build.pageTitle')} — ${t('site.title')}`)
 
 // The root of the site, so it also carries `WebSite`: that is where Google
 // takes the site name it prints above a result, for every page under it.
@@ -785,6 +828,39 @@ useHead(() => ({
          generated from Tamiya's product photos (docs/PLAN.md §6 M1b). Credited
          on the page that shows them, list and pickers alike, rather than only
          on a site-wide attribution page. -->
+    <!-- What the site is, for a reader who scrolls past the builder and for a
+         crawler, which only ever sees the empty one: the build lives in the
+         hash. Below the builder so the first screen stays the builder, and
+         open rather than collapsed (docs/PLAN.md §6 M1b). Above the credit,
+         which covers the chassis pictures here too. -->
+    <section class="home-about">
+      <h2>{{ $t('home.title') }}</h2>
+      <p>{{ $t('home.intro') }}</p>
+      <h3>{{ $t('home.steps.title') }}</h3>
+      <ol class="home-steps">
+        <li>{{ $t('home.steps.pick') }}</li>
+        <li>{{ $t('home.steps.swap') }}</li>
+        <li>{{ $t('home.steps.check') }}</li>
+      </ol>
+
+      <h2>{{ $t('home.chassis.title') }}</h2>
+      <p>{{ $t('home.chassis.intro') }}</p>
+      <ChassisLinkList :chassis="homeChassis" />
+
+      <h2>{{ $t('home.parts.title') }}</h2>
+      <p>{{ $t('home.parts.intro') }}</p>
+      <CategoryLinkGrid :categories="homeCategories" />
+      <p>
+        <NuxtLink :to="localePath('/parts')">{{ $t('home.parts.all') }}</NuxtLink>
+      </p>
+
+      <h2>{{ $t('home.faq.title') }}</h2>
+      <template v-for="key in FAQ" :key="key">
+        <h3>{{ $t(`home.faq.${key}.q`) }}</h3>
+        <p>{{ $t(`home.faq.${key}.a`) }}</p>
+      </template>
+    </section>
+
     <ImageCredit />
 
     <LazyBuildBasePicker

@@ -9,8 +9,6 @@ import { byChassisOrder } from '#shared/catalog/chassis'
 definePageMeta({ layout: 'content' })
 
 const { t } = useI18n()
-const { resolve } = useCatalogName()
-const localePath = useLocalePath()
 
 const { data } = await useAsyncData('chassis-index', async () => {
   const docs = await queryCollection('chassis')
@@ -48,19 +46,7 @@ useHead(() => ({
     <h1>{{ $t('chassis.title') }}</h1>
     <p class="browse-intro">{{ $t('chassis.intro', count) }}</p>
 
-    <ul class="part-link-list">
-      <li v-for="entry in data!" :key="entry.id">
-        <NuxtLink :to="localePath(`/chassis/${entry.id}`)">
-          <CatalogThumb :src="entry.thumbnail" icon="chassis" />
-          <span class="part-link-name">{{ resolve(entry.names).value }}</span>
-          <span class="part-id">
-            {{ $t(`build.motorPosition.${entry.motorPosition}`) }}
-            <template v-if="entry.kitGearRatio"> · {{ entry.kitGearRatio }}</template>
-            · {{ entry.releaseYear }}
-          </span>
-        </NuxtLink>
-      </li>
-    </ul>
+    <ChassisLinkList :chassis="data!" />
 
     <ImageCredit />
   </div>

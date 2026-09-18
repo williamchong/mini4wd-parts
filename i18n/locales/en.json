@@ -19,7 +19,8 @@
   },
   "build": {
     "title": "Build list",
-    "description": "A Mini 4WD build planner: start from a kit or a bare chassis, swap in Tamiya Grade-Up Parts slot by slot, check the car against a race class, and share it as a link.",
+    "pageTitle": "Pick parts, build your Mini 4WD",
+    "description": "Pick parts and build your Mini 4WD: start from your kit or a bare chassis, swap in Tamiya Grade-Up Parts slot by slot, check the car against Open or Stock Class / B-MAX rules, and share it as a link.",
     "base": "Kit / chassis",
     "bareChassis": "Bare chassis",
     "noBase": "No kit or chassis chosen",
@@ -142,6 +143,40 @@
       "shaft": {
         "single": "single-shaft",
         "double": "double-shaft"
+      }
+    }
+  },
+  "home": {
+    "title": "Building a Mini 4WD starts here",
+    "intro": "Mini 4WD Beginner's Guide is an unofficial fan site that catalogs Tamiya Mini 4WD kits, chassis and Grade-Up Parts. The builder above starts from the kit on your desk or from a bare chassis, lets you swap in upgrades one slot at a time, and checks the whole car against the race rules as you go.",
+    "steps": {
+      "title": "Three steps",
+      "pick": "Choose a kit or chassis: search by kit name or item number, or start from a bare chassis.",
+      "swap": "Swap parts slot by slot: tap a row in the list, or the part on the 3D car, to choose rollers, motors, gears and more. The picker lists only the parts that fit your chassis.",
+      "check": "Check and share: pick Open, Stock Class / B-MAX or Junior, see which parts break the rules, then send the build to a friend as a link."
+    },
+    "chassis": {
+      "title": "Start from a chassis",
+      "intro": "The chassis decides where the motor sits, whether it takes a single- or double-shaft motor, and which parts fit. Each chassis page lists its specs, stock parts and the kits built on it."
+    },
+    "parts": {
+      "title": "Parts beginners change first",
+      "intro": "Most first upgrades are rollers, a motor and gears, and several chassis have a starter upgrade set of their own.",
+      "all": "See every category"
+    },
+    "faq": {
+      "title": "Common questions",
+      "classes": {
+        "q": "What is the difference between Open and Stock Class / B-MAX?",
+        "a": "Open is Tamiya's official race regulation: use Tamiya parts, stay inside the size limits, and most modifications are allowed. Stock Class is Tamiya's entry-level class, run since 2025. It keeps the Open rules and adds more: no cutting the chassis, no new screw holes and no modifying the parts themselves. B-MAX GP unified its modification rules with Stock Class in December 2025. Before a race, check the rules the organiser publishes."
+      },
+      "motors": {
+        "q": "What is the difference between single-shaft and double-shaft motors?",
+        "a": "A double-shaft motor has a shaft at each end and sits in the middle of the chassis, driving the front and rear wheels at once. The PRO chassis (MA, MS and ME) take one. Every other chassis takes a single-shaft motor at the front or the rear. The two do not swap, so know your chassis before you buy a motor. The builder only lists the kind that fits."
+      },
+      "limits": {
+        "q": "What size and weight does a race car have to be?",
+        "a": "Tamiya's rules allow a car at most 105 mm wide, 165 mm long and 70 mm tall, weighing at least 90 g with batteries and motor, on tires 22 to 35 mm in diameter, running on two AA batteries. The builder cannot measure size or weight yet, so it lists those two rules as not checked."
       }
     }
   },

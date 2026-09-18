@@ -82,16 +82,6 @@ useHead(() => ({
       </template>
     </i18n-t>
 
-    <ul class="category-grid">
-      <li v-for="entry in categories" :key="entry.category">
-        <NuxtLink :to="localePath(`/parts/category/${entry.category}`)">
-          <SlotIcon :name="entry.icon" />
-          <span class="category-name">{{ entry.label }}</span>
-          <span class="chip-count category-count">
-            {{ $t('browse.parts.count', { count: entry.count }) }}
-          </span>
-        </NuxtLink>
-      </li>
-    </ul>
+    <CategoryLinkGrid :categories="categories" />
   </div>
 </template>

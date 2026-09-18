@@ -1168,6 +1168,64 @@ button.link {
   font-weight: 600;
 }
 
+/* ----------------------------------------------------------- home about */
+
+/* What the site is, under the builder. A rule rather than a card, so it reads
+   as the page going on after the tool rather than as another tool. */
+.home-about {
+  margin-top: 2.5rem;
+  border-top: 1px solid #e3e8ec;
+}
+
+/* Under the builder's 1.25rem <h1>, not over it: the browser's 1.5em would
+   make each of these outrank the heading of the tool they follow. */
+.home-about h2 {
+  font-size: 1.15rem;
+}
+
+.home-about h3 {
+  margin: 1.25rem 0 0.25rem;
+  font-size: 1rem;
+  color: #333;
+}
+
+.home-about h3 + p {
+  margin-top: 0.25rem;
+}
+
+/* Two to a row on a phone. At the indexes' own widths the eight chassis and
+   five categories stack one per row on a 360px screen, 2,500px of scrolling
+   below a tool. On a wide screen the chassis sit four and four, the five
+   categories in one row. */
+.home-about .part-link-list {
+  grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr));
+}
+
+.home-about .category-grid {
+  grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
+}
+
+@media (max-width: 34rem) {
+  .home-about .part-link-list {
+    grid-template-columns: repeat(auto-fill, minmax(8.5rem, 1fr));
+  }
+}
+
+/* "69 款套件" is one fact; a break inside it leaves the unit orphaned. */
+.chassis-kit-count {
+  white-space: nowrap;
+}
+
+.home-steps {
+  padding-left: 1.4rem;
+  line-height: 1.6;
+  color: #444;
+}
+
+.home-steps li + li {
+  margin-top: 0.35rem;
+}
+
 /* --------------------------------------------------------------- browse */
 
 .browse-intro {
