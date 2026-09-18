@@ -330,16 +330,64 @@ button.link {
 .build-list-header {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
-  gap: 0 1rem;
+  gap: 0.5rem 1rem;
+  margin: 1.5rem 0 0.75rem;
 }
 
 .content-container h1.build-list-title {
-  margin: 1.5rem 0 0;
+  margin: 0;
   font-size: 1.25rem;
   border-bottom: none;
-  padding-bottom: 0.5rem;
+  padding-bottom: 0;
+}
+
+/* The build's main action, so real buttons rather than a text link. */
+.build-share-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.build-share-actions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  min-height: 2.25rem;
+  padding: 0 0.85rem;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  white-space: nowrap;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.build-share-actions button.primary {
+  color: #fff;
+  background: #2c3e50;
+  border: 1px solid #2c3e50;
+}
+
+.build-share-actions button.secondary {
+  color: #2c3e50;
+  background: #fff;
+  border: 1px solid #9fb2c4;
+}
+
+.build-share-actions button:hover {
+  filter: brightness(1.1);
+}
+
+.build-share-actions svg {
+  width: 1em;
+  height: 1em;
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 
 /* Chassis picker */

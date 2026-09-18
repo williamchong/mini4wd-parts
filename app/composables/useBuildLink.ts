@@ -88,7 +88,15 @@ export function useBuildLink(catalog: () => ShareCatalog | undefined) {
     history.replaceState(history.state, '', `${location.pathname}${location.search}${hash}`)
   }
 
+  /**
+   * Whether the browser has a share sheet (most phones, Safari, Chrome on
+   * Windows and macOS). Read after mount so the prerendered page and the first
+   * client render agree; until then the page offers copying alone.
+   */
+  const canShare = ref(false)
+
   onMounted(() => {
+    canShare.value = typeof navigator.share === 'function'
     // The route's hash, not `location.hash`, and watched rather than read once.
     // A prerendered page opened at `/#…` hydrates against its payload path `/`:
     // Nuxt strips the hash from the URL until `app:suspense:resolve`, which
@@ -105,37 +113,66 @@ export function useBuildLink(catalog: () => ShareCatalog | undefined) {
 
   let timer: ReturnType<typeof setTimeout> | undefined
 
-  async function copyLink() {
-    const hash = linkFor(build.value)
-    if (!hash) return
-    const url = `${location.origin}${location.pathname}${location.search}${hash}`
-    // The link itself is never a property: it is unbounded, and one report row
-    // per build is no report at all. The swap count says the same thing.
-    // Not `shared`: that name already means the parsed incoming build in
-    // `readHash`, a few lines up.
-    const trackShare = (ok: boolean) => build.value && track('build_share', {
+  function urlFor(state: BuildState | null) {
+    const hash = linkFor(state)
+    return hash && `${location.origin}${location.pathname}${location.search}${hash}`
+  }
+
+  // The link itself is never a property: it is unbounded, and one report row
+  // per build is no report at all. The swap count says the same thing.
+  // Not `shared`: that name already means the parsed incoming build in
+  // `readHash`, a few lines up.
+  function trackShare(method: 'share' | 'copy', ok: boolean) {
+    if (!build.value) return
+    track('build_share', {
       chassis: build.value.chassis,
       kit: build.value.kit,
       swaps: Object.keys(build.value.swaps).length,
+      method,
       ok
     })
+  }
 
+  async function copyLink() {
+    const url = urlFor(build.value)
+    if (!url) return
     try {
       await navigator.clipboard.writeText(url)
     } catch {
       // No clipboard permission, or not a secure context. Ugly, and it works
       // in every browser.
-      window.prompt(t('build.copyLink'), url)
-      trackShare(false)
+      window.prompt(t('build.share.copy'), url)
+      trackShare('copy', false)
       return
     }
-    trackShare(true)
+    trackShare('copy', true)
     copied.value = true
     clearTimeout(timer)
     timer = setTimeout(() => { copied.value = false }, COPIED_MS)
   }
 
+  /**
+   * Hands the link to the system share sheet, so it goes straight into a chat
+   * app instead of through the clipboard. `name` is the kit or chassis, for
+   * the targets that show a title above the link.
+   */
+  async function shareLink(name: string) {
+    const url = urlFor(build.value)
+    if (!url) return
+    try {
+      await navigator.share({ title: name, text: t('build.share.text', { name }), url })
+    } catch (error) {
+      // The reader closed the sheet: nothing was shared and nothing is wrong.
+      if (error instanceof DOMException && error.name === 'AbortError') return
+      // Refused outright — a policy, a sheet already open. The link still has
+      // to go somewhere.
+      await copyLink()
+      return
+    }
+    trackShare('share', true)
+  }
+
   onBeforeUnmount(() => clearTimeout(timer))
 
-  return { copied, copyLink, linkTrimmed }
+  return { canShare, copied, copyLink, linkTrimmed, shareLink }
 }

@@ -51,8 +51,12 @@
     "addOns": "搭配及補充零件",
     "close": "關閉",
     "swap": "更換",
-    "copyLink": "複製連結",
-    "linkCopied": "已複製連結",
+    "share": {
+      "send": "分享",
+      "copy": "複製分享連結",
+      "copied": "已複製連結",
+      "text": "我的{name}改裝清單"
+    },
     "revert": "還原",
     "copyFrom": "複製{slot}",
     "moreSlots": "其他零件：{slots}",

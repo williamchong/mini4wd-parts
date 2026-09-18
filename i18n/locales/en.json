@@ -51,8 +51,12 @@
     "addOns": "Add-ons and spares",
     "close": "Close",
     "swap": "Swap",
-    "copyLink": "Copy link",
-    "linkCopied": "Link copied",
+    "share": {
+      "send": "Share",
+      "copy": "Copy share link",
+      "copied": "Link copied",
+      "text": "My {name} build"
+    },
     "revert": "Revert",
     "copyFrom": "Copy {slot}",
     "moreSlots": "Other parts: {slots}",

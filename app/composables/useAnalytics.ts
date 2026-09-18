@@ -36,8 +36,10 @@ export type AnalyticsEvents = {
    *  really the selection surface it was built to be (§5.4). */
   part_swap: { chassis: ChassisId, slot: string, part: string, source: 'row' | 'scene' | 'copy' | 'part_page' }
   part_revert: { chassis: ChassisId, slot: string }
-  /** `ok: false` is the `window.prompt` fallback — no clipboard permission. */
-  build_share: { chassis: ChassisId, kit?: string, swaps: number, ok: boolean }
+  /** `method` is the share sheet or the copy button; a closed sheet is not
+   *  counted. `ok: false` is the `window.prompt` fallback — no clipboard
+   *  permission. */
+  build_share: { chassis: ChassisId, kit?: string, swaps: number, method: 'share' | 'copy', ok: boolean }
   /** Rule-warning frequency (§4.1), deduped per build by the caller. */
   rule_triggered: { rule: RuleId, severity: Severity, slot?: string, build_class: BuildClass }
   build_class_set: { build_class: BuildClass }
