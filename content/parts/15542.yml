@@ -47,7 +47,7 @@ classLegality:
   junior: legal
   source: derived
 specs:
-  wheelDiameterMm: 26
+  tireDiameterMm: 26
 colours:
   primary: "#2a2c30"
   tire: "#1f2124"
@@ -63,5 +63,8 @@ officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/15542/155
 thumbnail: /thumbs/parts/15542.webp
 detailThumbnail: /thumbs/parts-detail/15542.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-15542-super-hard-small-dia-low-profile-tires-26mm-carbon-wheels-y-spoke/
+wheel: small-low-profile-y-spoke
+tire: small-low-profile
+finish: metal
 specsRaw: スーパーハード小径ローハイトタイヤ (26mm) とカーボン強化ホイール (Yスポーク)を1台分セット
 scrapedAt: 2026-09-16

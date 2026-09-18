@@ -21,6 +21,7 @@ import type { BufferGeometry } from 'three'
 import { STEEL } from './chassis.ts'
 import { cylinder, onAxis, plate, Triangles } from './mesh.ts'
 import type { Point2, Point3 } from './mesh.ts'
+import type { TireShape, WheelShape } from '../wheels.ts'
 
 /**
  * A roller: a ring with a raised hub, so it reads as a bearing on a post
@@ -35,29 +36,52 @@ export function roller(diameterMm: number): BufferGeometry {
 }
 
 /**
- * A wheel: a rim with a dished face and an axle stub. Width is the common
- * narrow-wheel width; the catalog records no wheel width.
+ * A wheel: a rim barrel with a face recessed inside it, its spokes standing
+ * from that face out to the lip, and an axle stub through the middle. One
+ * revolve draws the barrel, the dish and the bore, so the shape a reader sees
+ * — how deep the face sits and how many spokes cross it — is the two numbers
+ * `WheelShape` carries for it and nothing else.
+ *
+ * Drawn with the face toward +x, which is the outboard side of the right-hand
+ * wheel; the left socket turns 180° about y (`sockets.ts`) so both faces look
+ * out of the car.
  */
-export function wheel(diameterMm: number): BufferGeometry {
-  const r = diameterMm / 2
+export function wheel(shape: WheelShape): BufferGeometry {
+  const r = shape.diameterMm / 2
+  const hw = shape.widthMm / 2
+  // The rim wall, and the hub the spokes stand on: fractions of the radius so
+  // a ⌀17.5 small wheel and a ⌀26.5 large one keep the same proportions.
+  const ri = r - Math.max(1.6, r * 0.11)
+  const hub = Math.max(2.6, r * 0.22)
+  const face = hw - shape.dishMm
   const t = new Triangles()
-  t.revolve(cylinder(r, -5, 5), 16, 'x')
-  t.revolve(cylinder(r * 0.55, -5.75, 5.75), 12, 'x')
-  t.revolve(cylinder(1.5, -7, 7), 6, 'x')
+  // Inboard back, outer barrel, outboard lip, and down the inside to the face.
+  t.revolve([[hub, -hw], [r, -hw], [r, hw], [ri, hw], [ri, face], [hub, face]], 16, 'x')
+  if (shape.spokes) teeth(t, shape.spokes, hub, ri, face, hw, 'x', [0, 0, 0])
+  t.revolve(cylinder(1.5, -hw - 1, hw + 1), 6, 'x')
   return t.geometry()
 }
 
 /**
- * A tire: an annulus around its wheel, revolved from a rectangular profile
- * with a small chamfer so the shoulder catches light. `wheelDiameterMm` is
- * the wheel it sits on; the band is what §5.5 sizes when no tire has a
- * diameter.
+ * A tire: an annulus around the wheel it seats on, chamfered at the shoulder.
+ * `shape` is the tire's own size — Tamiya's ⌀24, ⌀26 or ⌀31, not a band added
+ * to the rim — so a reader who puts large tires on small wheels sees a tall
+ * sidewall rather than a tire that moved. The shoulder is what separates an
+ * arched tire from a slick at this size.
+ *
+ * `wheel` is the rim under it, which decides two things: where the inner face
+ * seats, and that the tire is at least a little wider than the rim, the way a
+ * real one covers it. Without that last part a ⌀12 rim in a ⌀12 tire puts the
+ * lip and the sidewall on the same plane, and the two flicker against each
+ * other as the car turns.
  */
-export function tire(wheelDiameterMm: number, bandMm: number): BufferGeometry {
-  const inner = wheelDiameterMm / 2 - 0.5
-  const outer = wheelDiameterMm / 2 + bandMm / 2
-  const halfWidth = 4.75
-  const chamfer = Math.min(1, bandMm / 4)
+export function tire(shape: TireShape, wheel: WheelShape): BufferGeometry {
+  const inner = wheel.diameterMm / 2 - 0.5
+  // A tire smaller than the wheel under it is a mismatched pair, not a shape:
+  // keep a visible sidewall rather than turning the profile inside out.
+  const outer = Math.max(shape.diameterMm / 2, inner + 1)
+  const halfWidth = Math.max(shape.widthMm, wheel.widthMm + 0.6) / 2
+  const chamfer = Math.min(shape.shoulderMm, (outer - inner) * 0.8, halfWidth * 0.8)
   const t = new Triangles()
   t.revolve([
     [inner, -halfWidth],

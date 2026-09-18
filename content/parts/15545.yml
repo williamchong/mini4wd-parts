@@ -31,7 +31,7 @@ classLegality:
   junior: legal
   source: derived
 specs:
-  wheelDiameterMm: 26
+  tireDiameterMm: 26
 colours:
   primary: "#2a2c30"
   tire: "#8e949b"
@@ -47,5 +47,8 @@ officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/15545/155
 thumbnail: /thumbs/parts/15545.webp
 detailThumbnail: /thumbs/parts-detail/15545.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-15545-hard-small-dia-low-profile-tires-26mm-gray-carbon-wheels-dish-for-super-x-xx-chassis/
+wheel: small-low-profile-dish-type
+tire: small-low-profile
+finish: metal
 specsRaw: ハード小径タイヤ(26mm)とカーボン強化ホイール(ディッシュ)を1台分セット
 scrapedAt: 2026-09-16

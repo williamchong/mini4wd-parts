@@ -47,7 +47,7 @@ classLegality:
   junior: legal
   source: derived
 specs:
-  wheelDiameterMm: 26
+  tireDiameterMm: 26
 colours:
   primary: "#2a2c30"
   tire: "#1f2124"
@@ -64,5 +64,8 @@ thumbnail: /thumbs/parts/15534.webp
 detailThumbnail: /thumbs/parts-detail/15534.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-15534-small-dia-low-friction-low-profile-tires-26mm-carbon-wheels-fin/
 fandomTitle: Low Friction Tires
+wheel: small-low-profile-fin-type
+tire: small-low-profile
+finish: metal
 specsRaw: タイヤ×4、ホイール×4 のセット、タイヤの外径26mm
 scrapedAt: 2026-09-16

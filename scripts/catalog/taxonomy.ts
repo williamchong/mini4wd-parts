@@ -181,9 +181,12 @@ export function deriveSpecs(item: JpItem, category: Category): Partial<PartSpecs
     }
   }
 
-  if (category === 'wheel' || category === 'wheel-tire-set' || category === 'tire') {
-    specs.wheelDiameterMm = number(/(\d{2}(?:\.\d)?)\s*mm/.exec(name)?.[1])
-  }
+  // No wheel or tire spec is read from the name here. The millimetres Tamiya
+  // prints on one — "LOW-PROFILE TIRES (26mm) & CARBON WHEELS" — are the
+  // *tire's* outer diameter, so reading them as `wheelDiameterMm` recorded a
+  // ⌀26 rim for a ⌀21 one and the pane banded a ⌀32 tire around it. The size
+  // now comes from the shape the name resolves to (scripts/catalog/wheels.ts),
+  // which knows which of the two numbers it is holding.
 
   const pieces = /(\d+)\s*(?:個|本|枚)入/.exec(name) ?? /(\d+)\s*(?:個|本|枚)入/.exec(spec)
   if (pieces) specs.pieces = Number(pieces[1])

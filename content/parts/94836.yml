@@ -22,7 +22,8 @@ classLegality:
   stockBmax: legal
   junior: legal
   source: derived
-specs: {}
+specs:
+  tireDiameterMm: 31
 colours:
   primary: "#1f2124"
   source: derived
@@ -33,4 +34,5 @@ officialUrl: https://www.tamiya.com/japan/products/94836/index.html
 officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/94836/94836_1.jpg
 thumbnail: /thumbs/parts/94836.webp
 detailThumbnail: /thumbs/parts-detail/94836.webp
+tire: large-arched
 scrapedAt: 2026-09-16

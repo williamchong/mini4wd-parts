@@ -14,8 +14,14 @@
  *
  * Deliberately absent, because they could never fire or have no data yet:
  * slot capacity (the picker writes one part per swap and `reconcileBuild` cuts
- * a link to `maxCount`), and tire diameter, weight and overall size (no part
- * records a tire diameter or a weight). The page lists those as not checked.
+ * a link to `maxCount`), and weight and overall size (no part records a
+ * weight). The page lists those as not checked.
+ *
+ * Tire diameter left that list on 2026-09-18 (§5.6). Every wheel, tire and set
+ * now records one, taken from the shape it draws, and `catalog:verify` fails
+ * the build if any of them is outside the 22-35 mm envelope — so a rule here
+ * could not fire on a build assembled from this catalog, and the page no
+ * longer tells the reader it went unchecked.
  */
 import { isChassisCompatible, isShaftCompatible } from './build.ts'
 import type { BuildableChassis, BuildablePart, BuildClass, ResolvedSlot } from './build.ts'

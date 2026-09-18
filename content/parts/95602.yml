@@ -46,7 +46,8 @@ classLegality:
   stockBmax: legal
   junior: legal
   source: derived
-specs: {}
+specs:
+  tireDiameterMm: 26
 colours:
   primary: "#c9ced6"
   tire: "#1f2124"
@@ -63,5 +64,8 @@ thumbnail: /thumbs/parts/95602.webp
 detailThumbnail: /thumbs/parts-detail/95602.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-95602-hg-aluminum-wheels-2pcs/
 fandomTitle: Aluminum Wheel Set
+wheel: small-low-profile
+tire: small-low-profile
+finish: metal
 specsRaw: アルミ削り出し製ホイール2本とホイールブッシュ4個をセット
 scrapedAt: 2026-09-16

@@ -46,7 +46,8 @@ classLegality:
   stockBmax: legal
   junior: legal
   source: derived
-specs: {}
+specs:
+  tireDiameterMm: 26
 colours:
   primary: "#4cd65a"
   tire: "#1f2124"
@@ -62,5 +63,7 @@ officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95640/956
 thumbnail: /thumbs/parts/95640.webp
 detailThumbnail: /thumbs/parts-detail/95640.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-95640-mini4wd-40th-anniversary-super-hard-low-profile-tire-wheel-set-12-spoke/
+wheel: small-low-profile-12-spoke
+tire: small-low-profile
 specsRaw: ミニ四駆40周年の記念ロゴをホワイトプリントしたスーパーハードローハイトタイヤと蛍光グリーンカラーの12本スポークホイールをセット
 scrapedAt: 2026-09-16

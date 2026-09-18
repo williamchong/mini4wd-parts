@@ -47,15 +47,19 @@ defaultLoadout:
       source: chassis
   wheel-front:
     - label: { zh-HK: 套件標準輪框, en: Kit standard wheels }
+      shape: large-ms-ii
       source: chassis
   wheel-rear:
     - label: { zh-HK: 套件標準輪框, en: Kit standard wheels }
+      shape: large-ms-ii
       source: chassis
   tire-front:
     - label: { zh-HK: 套件標準輪胎, en: Kit standard tires }
+      shape: large-avante-type-slick
       source: chassis
   tire-rear:
     - label: { zh-HK: 套件標準輪胎, en: Kit standard tires }
+      shape: large-avante-type-slick
       source: chassis
   roller-front:
     - label: { zh-HK: 套件標準塑膠導輪, en: Kit standard plastic rollers }

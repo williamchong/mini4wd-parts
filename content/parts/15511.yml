@@ -46,7 +46,8 @@ classLegality:
   stockBmax: legal
   junior: legal
   source: derived
-specs: {}
+specs:
+  tireDiameterMm: 31
 colours:
   primary: "#eef0f2"
   tire: "#1f2124"
@@ -63,4 +64,6 @@ thumbnail: /thumbs/parts/15511.webp
 detailThumbnail: /thumbs/parts-detail/15511.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-15511-jr-lg-dia-lp-tires-6-sp-wheels-large-diameter-low-profile/
 fandomTitle: Large Diameter Low-Profile 6-Spoke Wheel Set
+wheel: large-low-profile-6-spoke
+tire: large-low-profile
 scrapedAt: 2026-09-16

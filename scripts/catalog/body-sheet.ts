@@ -7,6 +7,7 @@ import type { BufferGeometry } from 'three'
 import { fetchBytes, ROOT } from './fetch.ts'
 import { readYamlDir } from './io.ts'
 import { bodyForKit, loadBodies, printedSize, silhouetteOf } from './bodies.ts'
+import { DEFAULT_TIRE, DEFAULT_WHEEL, entryShapeId, TIRES, WHEELS } from '../../shared/scene/wheels.ts'
 import type { Bodies } from './bodies.ts'
 import { CHASSIS_IDS } from '../../shared/catalog/chassis.ts'
 import type { ChassisId } from '../../shared/catalog/chassis.ts'
@@ -94,12 +95,24 @@ function trianglesOf(geometry: BufferGeometry, colour: number, [ox, oy, oz]: Vec
 const hex = (n: number) => `#${n.toString(16).padStart(6, '0')}`
 const colourOf = (value: string | undefined, fallback: number) => value ? Number.parseInt(value.slice(1), 16) : fallback
 
+/**
+ * What a kit's stock loadout draws in one of its wheel or tire slots. Through
+ * `entryShapeId`, because a kit's entry carries the wiki phrase and not a
+ * shape — reading `.shape` alone found nothing on any kit and drew every car
+ * on the default wheel.
+ */
+const shapeOf = (kit: Kit | undefined, slot: string) => entryShapeId(kit?.stockLoadout[slot]?.[0])
+
 /** The car as the pane draws a stock kit: chassis, wheels, tires, rollers and the shell. */
 function carTriangles(chassis: ChassisId, geometry: BufferGeometry, kit: Kit | undefined): Tri[] {
   const tris: Tri[] = []
   for (const piece of chassisPieces(chassis)) tris.push(...trianglesOf(piece.geometry, piece.colour, [0, 0, 0]))
-  const wheel = generators.wheel(20)
-  const tire = generators.tire(20, 6)
+  // The kit's own wheels and tires, so the sheet shows the car the pane draws
+  // rather than a stand-in: a large-diameter kit sits taller than a small one.
+  const wheelShape = WHEELS[shapeOf(kit, 'wheel-front') ?? DEFAULT_WHEEL] ?? WHEELS[DEFAULT_WHEEL]!
+  const tireShape = TIRES[shapeOf(kit, 'tire-front') ?? DEFAULT_TIRE] ?? TIRES[DEFAULT_TIRE]!
+  const wheel = generators.wheel(wheelShape)
+  const tire = generators.tire(tireShape, wheelShape)
   const roller = generators.roller(13)
   for (const socket of socketsFor(chassis)) {
     const at = socket.position as Vec

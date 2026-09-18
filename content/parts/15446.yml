@@ -28,7 +28,8 @@ classLegality:
   stockBmax: legal
   junior: legal
   source: derived
-specs: {}
+specs:
+  tireDiameterMm: 31
 colours:
   primary: "#4a4d52"
   tire: "#4a4d52"
@@ -43,4 +44,6 @@ officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/
 thumbnail: /thumbs/parts/15446.webp
 detailThumbnail: /thumbs/parts-detail/15446.webp
 fandomTitle: Large Diameter Low-Profile Tire and Wheel Set
+wheel: large-low-profile
+tire: large-low-profile
 scrapedAt: 2026-09-16

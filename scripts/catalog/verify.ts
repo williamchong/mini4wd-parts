@@ -8,6 +8,8 @@ import type { Chassis, Loadout, Slot } from '../../shared/catalog/schema.ts'
 import { newBuild, resolveBuild } from '../../shared/catalog/build.ts'
 import { checkBuild } from '../../shared/catalog/rules.ts'
 import { bodyForKit, bodyProblems, loadBodies, silhouetteOf } from './bodies.ts'
+import { entryShapeId, TIRES, WHEELS } from '../../shared/scene/wheels.ts'
+import { printedTireMm } from './wheels.ts'
 import { readJsonFile } from './io.ts'
 import { ROOT } from './fetch.ts'
 import { join } from 'node:path'
@@ -53,6 +55,9 @@ for (const part of parts) {
  * the other through the chassis profile is the whole point of this check —
  * comparing the two directly would let almost anything through.
  */
+const WHEEL_SLOTS: ReadonlySet<Slot> = new Set(['wheel-front', 'wheel-rear'])
+const TIRE_SLOTS: ReadonlySet<Slot> = new Set(['tire-front', 'tire-rear'])
+
 function checkLoadout(label: string, entries: Loadout, host: Chassis) {
   const typeOf = new Map(host.slots.map(slot => [slot.id, slot.type]))
 
@@ -63,6 +68,16 @@ function checkLoadout(label: string, entries: Loadout, host: Chassis) {
       continue
     }
     for (const entry of filled) {
+      // What the pane will draw for a wheel or tire nobody sells: the entry's
+      // own shape on a chassis default, else the kit's phrase slugged. A
+      // phrase with no row would silently fall back to the default wheel on
+      // every kit that ships it, which is exactly what nobody would notice.
+      const table = WHEEL_SLOTS.has(type) ? WHEELS : TIRE_SLOTS.has(type) ? TIRES : undefined
+      if (table && !entry.partId) {
+        const shape = entryShapeId(entry)
+        if (!shape) errors.push(`${label}: ${slotId} names no shape for the 3D pane`)
+        else if (!Object.hasOwn(table, shape)) errors.push(`${label}: ${slotId} draws "${shape}", which shared/scene/wheels.ts does not define`)
+      }
       if (!entry.partId) continue
       const slots = partSlots.get(entry.partId)
       if (!slots) {
@@ -174,6 +189,28 @@ for (const [id, body] of bodies.byId) {
   }
   const drawnBy = kits.filter(kit => kit.body === id)
   for (const problem of bodyProblems(silhouetteOf(body), drawnBy)) errors.push(`${label}: ${problem}`)
+}
+
+/**
+ * Wheels and tires (docs/PLAN.md §5.6): every shape a part names is defined,
+ * and every tire it draws is inside the 22-35 mm the regulations allow — the
+ * one rule §4.3 lists as unchecked for want of data, now that the shape a name
+ * resolves to is where `tireDiameterMm` comes from.
+ */
+for (const part of parts) {
+  const label = `parts/${part.id}`
+  if (part.wheel && !Object.hasOwn(WHEELS, part.wheel)) errors.push(`${label}: wheel "${part.wheel}" is not in shared/scene/wheels.ts`)
+  if (part.tire && !Object.hasOwn(TIRES, part.tire)) errors.push(`${label}: tire "${part.tire}" is not in shared/scene/wheels.ts`)
+  const diameter = part.specs.tireDiameterMm
+  if (diameter !== undefined && (diameter < 22 || diameter > 35)) {
+    errors.push(`${label}: tire ${part.tire} is ⌀${diameter}, outside the 22-35 mm regulation envelope`)
+  }
+  // Only on a part that draws a tire: plenty of other names print millimetres,
+  // and they are roller and stay sizes rather than a tire's.
+  const printed = part.tire ? printedTireMm(part.names.en ?? part.names.ja) : undefined
+  if (printed !== undefined && diameter !== printed) {
+    errors.push(`${label}: Tamiya's name says ⌀${printed}, the ${part.tire} shape says ⌀${diameter ?? 'nothing'}`)
+  }
 }
 
 if (errors.length) {

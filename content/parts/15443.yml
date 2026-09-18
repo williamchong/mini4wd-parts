@@ -44,7 +44,8 @@ classLegality:
   stockBmax: legal
   junior: legal
   source: derived
-specs: {}
+specs:
+  tireDiameterMm: 26
 colours:
   primary: "#3a3d42"
   tire: "#1f2124"
@@ -61,4 +62,6 @@ thumbnail: /thumbs/parts/15443.webp
 detailThumbnail: /thumbs/parts-detail/15443.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-15443-low-profile-tire-1-way-wheel-set/
 fandomTitle: One-Way Wheel Set
+wheel: small-low-profile
+tire: small-low-profile
 scrapedAt: 2026-09-16

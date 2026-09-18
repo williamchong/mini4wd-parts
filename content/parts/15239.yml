@@ -44,7 +44,8 @@ classLegality:
   stockBmax: legal
   junior: legal
   source: derived
-specs: {}
+specs:
+  tireDiameterMm: 24
 colours:
   primary: "#5fe84a"
   tire: "#4a4d52"
@@ -58,4 +59,6 @@ officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/
 thumbnail: /thumbs/parts/15239.webp
 detailThumbnail: /thumbs/parts-detail/15239.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-15239-small-dia-semi-pneumatic-tires-w-wheels/
+wheel: small
+tire: small-semi-pneumatic
 scrapedAt: 2026-09-16

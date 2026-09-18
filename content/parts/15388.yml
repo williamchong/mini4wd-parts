@@ -44,7 +44,8 @@ classLegality:
   stockBmax: legal
   junior: legal
   source: derived
-specs: {}
+specs:
+  tireDiameterMm: 24
 colours:
   primary: "#1f2124"
   source: derived
@@ -57,4 +58,5 @@ officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/
 thumbnail: /thumbs/parts/15388.webp
 detailThumbnail: /thumbs/parts-detail/15388.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-15388-narrow-reston-sponge-tires-black/
+tire: small-narrow-sponge
 scrapedAt: 2026-09-16

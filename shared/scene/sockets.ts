@@ -66,11 +66,15 @@ const STAY_Y = 8
 /**
  * A mirrored slot is one slot and two sockets, both opening the same picker;
  * `x` is the right-hand offset and the left is its negation.
+ *
+ * `faceOut` turns the left socket to look the other way, for a shape with a
+ * front and a back: a wheel's spokes are on its outboard face, so without it
+ * the left wheel of every car would show a reader its back.
  */
 const mirrored = (
-  slotId: string, kind: ProxyKind, [x, y, z]: readonly [number, number, number]
+  slotId: string, kind: ProxyKind, [x, y, z]: readonly [number, number, number], faceOut = false
 ): SceneSocket[] => [
-  { name: `${slotId}-l`, slotId, kind, position: [-x, y, z] },
+  { name: `${slotId}-l`, slotId, kind, position: [-x, y, z], rotateY: faceOut ? Math.PI : undefined },
   { name: `${slotId}-r`, slotId, kind, position: [x, y, z] }
 ]
 
@@ -90,8 +94,8 @@ function sockets(l: Layout): SceneSocket[] {
     single('gear-set', 'gear', [0, AXLE_Y, -halfWheelbase], 'gear-set-2'),
     // Only a motor across the car turns a counter gear; a PRO chassis has no such slot.
     ...(l.motor.across ? [single('counter-gear', 'counter-gear', l.motor.position)] : []),
-    ...mirrored('wheel-front', 'wheel', [front, AXLE_Y, halfWheelbase]),
-    ...mirrored('wheel-rear', 'wheel', [rear, AXLE_Y, -halfWheelbase]),
+    ...mirrored('wheel-front', 'wheel', [front, AXLE_Y, halfWheelbase], true),
+    ...mirrored('wheel-rear', 'wheel', [rear, AXLE_Y, -halfWheelbase], true),
     ...mirrored('tire-front', 'tire', [front, AXLE_Y, halfWheelbase]),
     ...mirrored('tire-rear', 'tire', [rear, AXLE_Y, -halfWheelbase]),
     single('front-stay', 'stay', [0, STAY_Y, l.stayZ]),

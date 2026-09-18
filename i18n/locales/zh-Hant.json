@@ -126,7 +126,6 @@
         "summary": "尚未檢查的規則",
         "size": "車身尺寸：闊 105 mm、長 165 mm、高 70 mm 以內。",
         "weight": "重量：連電池及{motor}不少於 90 g。",
-        "tire": "輪胎直徑：22 至 35 mm。",
         "modification": "基礎賽／B-MAX 的改裝限制，例如不可切削底盤、不可鑽新螺絲孔。",
         "organiser": "以上以田宮公佈的規則為準，參加比賽前請再核對主辦單位的規則。"
       },
@@ -258,7 +257,6 @@
     "rollerType": "材質",
     "plateThickness": "厚度",
     "plateMaterial": "材質",
-    "wheelDiameter": "輪框直徑",
     "tireDiameter": "輪胎直徑",
     "tireHardness": "硬度",
     "gearRatio": "齒輪比",

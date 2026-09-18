@@ -47,7 +47,7 @@ classLegality:
   junior: legal
   source: derived
 specs:
-  wheelDiameterMm: 24
+  tireDiameterMm: 24
 colours:
   primary: "#c9ced6"
   tire: "#1f2124"
@@ -63,5 +63,8 @@ officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/
 thumbnail: /thumbs/parts/95680.webp
 detailThumbnail: /thumbs/parts-detail/95680.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-95680-hg-aluminum-wheels-for-small-dia-narrow-tires-24mm-reversible-2pcs/
+wheel: small-narrow
+tire: small-narrow
+finish: metal
 specsRaw: アルミ削り出し製ホイール2本とホイールブッシュ4個をセット ★交換用ブッシュはAO-1035 (白･8個）を使用してください。
 scrapedAt: 2026-09-16

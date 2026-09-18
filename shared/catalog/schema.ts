@@ -310,6 +310,20 @@ export const partSchema = z.object({
    * sets: the id of a data/bodies file, set there under `parts`.
    */
   body: z.string().optional(),
+  /**
+   * The wheel and tire shapes this part draws in the 3D pane: keys of `WHEELS`
+   * and `TIRES` in shared/scene/wheels.ts (§5.6). A wheel-and-tire set fills
+   * four slots and carries both; a bare wheel or tire carries one.
+   */
+  wheel: z.string().optional(),
+  tire: z.string().optional(),
+  /**
+   * The material the 3D pane shades this part in, where the material *is* the
+   * product: a plated, aluminium or carbon wheel is sold as metal, and drawing
+   * it in moulded plastic loses what the buyer paid for. Absent means plastic,
+   * which is what every wheel a kit ships is.
+   */
+  finish: z.enum(['metal']).optional(),
 
   /** Free-text 【基本スペック】 from Tamiya, kept for later spec parsing. */
   specsRaw: z.string().optional(),
@@ -344,6 +358,17 @@ export const loadoutEntry = z.object({
   label: labelNames.refine(names => Object.values(names).some(Boolean), {
     message: 'needs at least one locale'
   }).optional(),
+  /**
+   * For a wheel or tire entry, which shape the 3D pane draws it as: a key of
+   * `WHEELS` or `TIRES` in shared/scene/wheels.ts (§5.6).
+   *
+   * Only a chassis' `defaultLoadout` sets it. A kit says what it ships as a
+   * phrase, and `shapeId` turns that phrase straight into the key, so storing
+   * the slug beside the label would be the same string twice in every
+   * visitor's payload; "Kit standard wheels" names no shape, which is what
+   * this field is for and what the 13 kits no wiki row reaches fall back to.
+   */
+  shape: z.string().optional(),
   source: z.enum(['fandom', 'tamiya', 'chassis', 'override'])
 }).refine(entry => entry.partId !== undefined || entry.label !== undefined, {
   message: 'needs a partId or a label'

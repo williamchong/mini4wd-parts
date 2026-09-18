@@ -29,7 +29,8 @@ classLegality:
   stockBmax: legal
   junior: legal
   source: derived
-specs: {}
+specs:
+  tireDiameterMm: 31
 colours:
   primary: "#2a2c30"
   tire: "#1f2124"
@@ -46,4 +47,6 @@ thumbnail: /thumbs/parts/15444.webp
 detailThumbnail: /thumbs/parts-detail/15444.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-15444-jr-lg-diameter-1-way-wheel-set-super-x-xx-chassis/
 fandomTitle: One-Way Wheel Set
+wheel: large
+tire: large
 scrapedAt: 2026-09-16

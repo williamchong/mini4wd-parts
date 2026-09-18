@@ -42,7 +42,8 @@ classLegality:
   stockBmax: legal
   junior: legal
   source: derived
-specs: {}
+specs:
+  tireDiameterMm: 24
 colours:
   primary: "#2f5fc4"
   source: derived
@@ -55,4 +56,5 @@ officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/
 thumbnail: /thumbs/parts/15117.webp
 detailThumbnail: /thumbs/parts-detail/15117.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-15117-1-32-mini-4wd-parts-reston-sponge-tires-blue/
+tire: small-sponge
 scrapedAt: 2026-09-16

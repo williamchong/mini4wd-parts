@@ -44,7 +44,8 @@ classLegality:
   stockBmax: legal
   junior: legal
   source: derived
-specs: {}
+specs:
+  tireDiameterMm: 26
 colours:
   primary: "#eef0f2"
   tire: "#1f2124"
@@ -56,4 +57,6 @@ officialUrl: https://www.tamiya.com/japan/products/15359/index.html
 officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15359/15359_1.jpg
 thumbnail: /thumbs/parts/15359.webp
 detailThumbnail: /thumbs/parts-detail/15359.webp
+wheel: small-low-profile-dish-type
+tire: small-low-profile
 scrapedAt: 2026-09-16

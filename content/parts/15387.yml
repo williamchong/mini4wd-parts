@@ -44,7 +44,8 @@ classLegality:
   stockBmax: legal
   junior: legal
   source: derived
-specs: {}
+specs:
+  tireDiameterMm: 31
 colours:
   primary: "#565b62"
   tire: "#1f2124"
@@ -57,4 +58,6 @@ officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/
 thumbnail: /thumbs/parts/15387.webp
 detailThumbnail: /thumbs/parts-detail/15387.webp
 fandomTitle: One-Way Wheel Set
+wheel: large
+tire: large-offset
 scrapedAt: 2026-09-16

@@ -30,7 +30,7 @@ classLegality:
   junior: legal
   source: derived
 specs:
-  wheelDiameterMm: 24
+  tireDiameterMm: 24
 colours:
   primary: "#2a2c30"
   tire: "#1f2124"
@@ -46,5 +46,8 @@ officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/15543/155
 thumbnail: /thumbs/parts/15543.webp
 detailThumbnail: /thumbs/parts-detail/15543.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-15543-super-hard-small-dia-narrow-tires-24mm-carbon-wheels-3-spoke-for-super-x-xx-chassis/
+wheel: small-narrow-3-spoke
+tire: small-narrow
+finish: metal
 specsRaw: スーパーハード小径タイヤ(24mm)とカーボン強化ホイール(3本スポーク)を1台分セット
 scrapedAt: 2026-09-16

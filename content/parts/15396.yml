@@ -42,7 +42,8 @@ classLegality:
   stockBmax: legal
   junior: legal
   source: derived
-specs: {}
+specs:
+  tireDiameterMm: 24
 colours:
   primary: "#1f2124"
   source: derived
@@ -53,4 +54,5 @@ officialUrl: https://www.tamiya.com/japan/products/15396/index.html
 officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15396/15396_1.jpg
 thumbnail: /thumbs/parts/15396.webp
 detailThumbnail: /thumbs/parts-detail/15396.webp
+tire: small-offset
 scrapedAt: 2026-09-16

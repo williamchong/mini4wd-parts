@@ -44,7 +44,8 @@ classLegality:
   stockBmax: legal
   junior: legal
   source: derived
-specs: {}
+specs:
+  tireDiameterMm: 31
 colours:
   primary: "#2a2c30"
   tire: "#c7cdd2"
@@ -56,4 +57,7 @@ officialUrl: https://www.tamiya.com/japan/products/15366/index.html
 officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/1/15366/15366_1.jpg
 thumbnail: /thumbs/parts/15366.webp
 detailThumbnail: /thumbs/parts-detail/15366.webp
+wheel: large
+tire: large
+finish: metal
 scrapedAt: 2026-09-16

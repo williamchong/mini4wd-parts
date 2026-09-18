@@ -30,7 +30,8 @@ classLegality:
   stockBmax: legal
   junior: legal
   source: derived
-specs: {}
+specs:
+  tireDiameterMm: 31
 colours:
   primary: "#2a2c30"
   tire: "#eef0f2"
@@ -44,4 +45,6 @@ officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/
 thumbnail: /thumbs/parts/15414.webp
 detailThumbnail: /thumbs/parts-detail/15414.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-15414-1-32-mini-4wd-parts-large-diameter-narrow-wheels-w-arched-tires-set/
+wheel: large-narrow
+tire: large-narrow-arched
 scrapedAt: 2026-09-16

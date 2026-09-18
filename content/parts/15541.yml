@@ -47,7 +47,7 @@ classLegality:
   junior: legal
   source: derived
 specs:
-  wheelDiameterMm: 24
+  tireDiameterMm: 24
 colours:
   primary: "#2a2c30"
   tire: "#1f2124"
@@ -64,5 +64,8 @@ thumbnail: /thumbs/parts/15541.webp
 detailThumbnail: /thumbs/parts-detail/15541.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-15541-small-dia-low-friction-narrow-tires-24mm-carbon-wheels-3-spoke/
 fandomTitle: Low Friction Tires
+wheel: small-narrow-3-spoke
+tire: small-narrow
+finish: metal
 specsRaw: 低摩擦タイヤを使用した小径ローハイトタイヤとホイールを1台分セット。※硬いタイヤのため、強く押し込んで装着します。
 scrapedAt: 2026-09-16

@@ -44,7 +44,8 @@ classLegality:
   stockBmax: legal
   junior: legal
   source: derived
-specs: {}
+specs:
+  tireDiameterMm: 24
 colours:
   primary: "#c9ced6"
   tire: "#1f2124"
@@ -56,4 +57,7 @@ officialUrl: https://www.tamiya.com/japan/products/15219/index.html
 officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/15219/15219_1.jpg
 thumbnail: /thumbs/parts/15219.webp
 detailThumbnail: /thumbs/parts-detail/15219.webp
+wheel: small
+tire: small-sponge
+finish: metal
 scrapedAt: 2026-09-16

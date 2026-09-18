@@ -27,7 +27,8 @@ classLegality:
   stockBmax: legal
   junior: legal
   source: derived
-specs: {}
+specs:
+  tireDiameterMm: 24
 colours:
   primary: "#2a2c30"
   tire: "#eef0f2"
@@ -41,4 +42,7 @@ officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/
 thumbnail: /thumbs/parts/15415.webp
 detailThumbnail: /thumbs/parts-detail/15415.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-15415-small-dia-carbon-wheel-white-arched-tires-for-super-x-xx-chassis/
+wheel: small
+tire: small-arched
+finish: metal
 scrapedAt: 2026-09-16

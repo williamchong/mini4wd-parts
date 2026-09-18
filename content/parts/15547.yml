@@ -28,7 +28,8 @@ classLegality:
   stockBmax: legal
   junior: legal
   source: derived
-specs: {}
+specs:
+  tireDiameterMm: 25
 colours:
   primary: "#1f2124"
   tire: "#1f2124"
@@ -44,5 +45,7 @@ officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/15547/155
 thumbnail: /thumbs/parts/15547.webp
 detailThumbnail: /thumbs/parts-detail/15547.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-15547-spike-tire-wheel-set-for-ez-chassis/
+wheel: small
+tire: small-spike
 specsRaw: タイヤとホイールを4本ずつ、1台分をセット
 scrapedAt: 2026-09-16

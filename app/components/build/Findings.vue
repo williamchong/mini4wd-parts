@@ -67,7 +67,6 @@ const clean = computed(() => !props.findings.some(f => f.severity !== 'note'))
       <ul>
         <li>{{ $t('build.rules.notChecked.size') }}</li>
         <li>{{ $t('build.rules.notChecked.weight', { motor: term('motor') }) }}</li>
-        <li>{{ $t('build.rules.notChecked.tire') }}</li>
         <li>{{ $t('build.rules.notChecked.modification') }}</li>
       </ul>
       <p>{{ $t('build.rules.notChecked.organiser') }}</p>

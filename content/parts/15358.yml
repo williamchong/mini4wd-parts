@@ -44,7 +44,8 @@ classLegality:
   stockBmax: legal
   junior: legal
   source: derived
-specs: {}
+specs:
+  tireDiameterMm: 26
 colours:
   primary: "#b8892a"
   tire: "#1f2124"
@@ -57,4 +58,6 @@ officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/
 thumbnail: /thumbs/parts/15358.webp
 detailThumbnail: /thumbs/parts-detail/15358.webp
 fandomTitle: Fin-type Low-Profile Wheels
+wheel: small-low-profile-fin-type
+tire: small-low-profile
 scrapedAt: 2026-09-16

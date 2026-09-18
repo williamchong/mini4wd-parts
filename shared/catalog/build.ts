@@ -118,6 +118,8 @@ export type EntryOrigin = 'chassis' | 'kit' | 'user'
 export type ResolvedEntry = {
   partId?: string
   label?: LabelNames
+  /** Which wheel or tire shape the 3D pane draws for a stock entry (§5.6). */
+  shape?: string
   origin: EntryOrigin
 }
 
@@ -133,7 +135,7 @@ export type ResolvedSlot = {
 }
 
 const fromLoadout = (entries: LoadoutEntry[], origin: EntryOrigin): ResolvedEntry[] =>
-  entries.map(entry => ({ partId: entry.partId, label: entry.label, origin }))
+  entries.map(entry => ({ partId: entry.partId, label: entry.label, shape: entry.shape, origin }))
 
 /**
  * The chassis' slot list is authoritative: a loadout key naming a slot the

@@ -24,7 +24,8 @@ classLegality:
   stockBmax: legal
   junior: legal
   source: derived
-specs: {}
+specs:
+  tireDiameterMm: 26
 colours:
   primary: "#7b2230"
   source: derived
@@ -40,5 +41,6 @@ thumbnail: /thumbs/parts/95208.webp
 detailThumbnail: /thumbs/parts-detail/95208.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-95208-jr-low-friction-tire-low-profile-maroon-2pcs/
 fandomTitle: Low Friction Tires
+tire: small-low-profile
 specsRaw: タイヤ2本のセット、ホイール装着時の外径26mm
 scrapedAt: 2026-09-16

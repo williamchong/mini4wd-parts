@@ -7,6 +7,7 @@ import { DEFAULT_SILHOUETTE } from '../bodies.ts'
 import { AXLE_Z, bodyGeometry, FLOOR_MM } from './body.ts'
 import { BLACK, chassisPieces, STEEL } from './chassis.ts'
 import { layoutFor, socketsFor } from '../sockets.ts'
+import { DEFAULT_TIRE, DEFAULT_WHEEL, TIRES, WHEELS } from '../wheels.ts'
 import { plate, Triangles } from './mesh.ts'
 import { brake, counterGear, damper, GEAR_GROUPS, gearSet, motor, MOTOR_GROUPS, motorPaints, roller, sideStay, stay, tire, wheel } from './parts.ts'
 import type { MotorGroup, Paint } from './parts.ts'
@@ -63,18 +64,39 @@ test('a roller is its recorded diameter across, and spins about y', () => {
   }
 })
 
-test('a wheel is its recorded diameter tall, and spins about x', () => {
-  for (const mm of [20, 24, 31]) {
-    const s = size(wheel(mm))
-    near(s.y, mm, 'y'); near(s.z, mm, 'z')
-    assert.ok(s.x < mm, 'narrower than it is tall')
+test('a wheel is its shape\'s diameter tall and its width wide, and spins about x', () => {
+  for (const [id, shape] of Object.entries(WHEELS)) {
+    const s = size(wheel(shape))
+    near(s.y, shape.diameterMm, `${id} y`); near(s.z, shape.diameterMm, `${id} z`)
+    // Plus the axle stub, which stands 1 mm proud of each face.
+    near(s.x, shape.widthMm + 2, `${id} width`)
   }
 })
 
-test('a tire is a band around its wheel, wider in diameter by the band', () => {
-  const s = size(tire(24, 6))
-  near(s.y, 30, 'y'); near(s.z, 30, 'z')
-  assert.ok(s.x < 10, 'no wider than the wheel')
+test('a tire is its own diameter, whatever wheel it is seated on', () => {
+  const shape = TIRES[DEFAULT_TIRE]!
+  // Every rim a ⌀26 tire is actually sold to fit; a larger one is the
+  // mismatched pair the next test covers.
+  for (const rim of ['small', 'small-low-profile-dish-type'] as const) {
+    const s = size(tire(shape, WHEELS[rim]!))
+    near(s.y, shape.diameterMm, `on ${rim}`); near(s.z, shape.diameterMm, `on ${rim}`)
+  }
+  // Its own width, since every rim is authored narrower than its tire.
+  near(size(tire(shape, WHEELS[DEFAULT_WHEEL]!)).x, shape.widthMm, 'width')
+})
+
+test('every tire clears the wheel it seats on, even a mismatched pair', () => {
+  for (const [id, shape] of Object.entries(TIRES)) {
+    // A ⌀26.5 low-profile rim under a ⌀24 tire is representable and wrong; the
+    // shape has to stay a ring rather than turn itself inside out.
+    for (const rim of ['small', 'large-low-profile-6-spoke'] as const) {
+      const wheel = WHEELS[rim]!
+      const geometry = tire(shape, wheel)
+      assert.ok(signedVolume(geometry) > 0, `${id} on ${rim} winds outward`)
+      assert.ok(size(geometry).y >= wheel.diameterMm, `${id} on ${rim} is no smaller than its wheel`)
+      assert.ok(size(geometry).x > wheel.widthMm, `${id} covers the ${rim} rim's width`)
+    }
+  }
 })
 
 test('a stay is a plate of its recorded thickness, lying on top of the socket, either end', () => {
@@ -92,7 +114,7 @@ test('a stay is a plate of its recorded thickness, lying on top of the socket, e
 })
 
 test('every revolved part winds outward', () => {
-  for (const [name, geometry] of [['roller', roller(13)], ['wheel', wheel(24)], ['tire', tire(24, 6)], ['motor', motor()], ['single-shaft motor', motor(1)], ['damper', damper()], ['brake', brake()]] as const) {
+  for (const [name, geometry] of [['roller', roller(13)], ['wheel', wheel(WHEELS[DEFAULT_WHEEL]!)], ['tire', tire(TIRES[DEFAULT_TIRE]!, WHEELS[DEFAULT_WHEEL]!)], ['motor', motor()], ['single-shaft motor', motor(1)], ['damper', damper()], ['brake', brake()]] as const) {
     assert.ok(signedVolume(geometry) > 0, name)
   }
 })

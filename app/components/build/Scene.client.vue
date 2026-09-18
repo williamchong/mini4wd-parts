@@ -27,6 +27,8 @@ import { bodyGeometry } from '#shared/scene/generators/body'
 import type { Silhouette } from '#shared/scene/generators/body'
 import { chassisPieces } from '#shared/scene/generators/chassis'
 import * as parts from '#shared/scene/generators/parts'
+import { DEFAULT_TIRE, DEFAULT_WHEEL, entryShapeId, TIRES, WHEELS } from '#shared/scene/wheels'
+import type { TireShape, WheelShape } from '#shared/scene/wheels'
 import { cylinder, Triangles } from '#shared/scene/generators/mesh'
 import type { ResolvedSlot } from '#shared/catalog/build'
 import type { ChassisId, Kit, PartColours, PartSpecs } from '#shared/catalog/schema'
@@ -38,8 +40,19 @@ const props = defineProps<{
   /** What that kit's body, wheels, tires and rollers are moulded in, from the catalog. */
   kitColours: Kit['colours'] | null
   slots: ResolvedSlot[]
-  /** The catalog by item number, read for the specs that size a proxy, the colour it is drawn in and a body part's shell. */
-  parts: ReadonlyMap<string, { specs: PartSpecs; colours?: PartColours; body?: string }>
+  /**
+   * The catalog by item number, read for the specs that size a proxy, the
+   * colour it is drawn in, a body part's shell, and — for a wheel, a tire or a
+   * set — which shape of each it draws and whether its rim is metal.
+   */
+  parts: ReadonlyMap<string, {
+    specs: PartSpecs
+    colours?: PartColours
+    body?: string
+    wheel?: string
+    tire?: string
+    finish?: 'metal'
+  }>
   /** The slot whose picker is open; its proxy stays lit until it closes. */
   openSlotId: string | null
 }>()
@@ -62,7 +75,8 @@ type Highlight = 'none' | 'hover' | 'open'
 
 /**
  * What sizes a shape: `mm` is what `diameterFor` finds for the kind — a round
- * part's diameter, a plate's thickness — `wheelMm` the wheel a tire sits on,
+ * part's diameter, a plate's thickness — `wheelId` the wheel a tire seats on,
+ * `id` which row of shared/scene/wheels.ts a wheel or tire is drawn from,
  * `silhouette` which body shell a body is lofted from, and `towardNose`
  * which end a stay or a gear faces. Each field is zero for the kinds that ignore it, so
  * the cache key built from them holds one geometry per shape that actually
@@ -71,8 +85,32 @@ type Highlight = 'none' | 'hover' | 'open'
  * remounts this component per chassis, so a cache never outlives one answer.
  * The shapes themselves come from shared/scene/generators (§5.6).
  */
-type Shape = { mm: number; wheelMm: number; silhouette: string; towardNose: 1 | -1 | 0 }
-const shapeKey = (kind: ProxyKind, s: Shape) => `${kind}:${s.mm}:${s.wheelMm}:${s.silhouette}:${s.towardNose}`
+type Shape = {
+  mm: number
+  /** A wheel's own row, and the rim a tire seats on. */
+  wheel?: WheelShape
+  tire?: TireShape
+  /** What those rows come to as a cache key; see `sign`. */
+  id: string
+  silhouette: string
+  towardNose: 1 | -1 | 0
+}
+const shapeKey = (kind: ProxyKind, s: Shape) => `${kind}:${s.mm}:${s.id}:${s.silhouette}:${s.towardNose}`
+
+/**
+ * A wheel or tire as the numbers its generator actually reads, not as the row
+ * it came from. Eleven of the 46 wheel rows are the same four numbers under
+ * different Tamiya names — `large-ms-ii`, `large-teardrop-type` and
+ * `large-fm-type` are one shape — and a tire reads only its rim's diameter and
+ * width, of which the 46 rows hold ten. Keying the geometry cache by the row
+ * id instead would hold a tire geometry per (tire, wheel) *name* pair: 1288
+ * entries where 230 differ, and the same 14 KB buffer built again for every
+ * one of the thirteen 21×11 rims a reader tries.
+ */
+const sign = (kind: ProxyKind, wheel?: WheelShape, tire?: TireShape) =>
+  kind === 'wheel' && wheel ? `${wheel.diameterMm}/${wheel.widthMm}/${wheel.spokes}/${wheel.dishMm}`
+    : kind === 'tire' && tire && wheel ? `${tire.diameterMm}/${tire.widthMm}/${tire.shoulderMm}@${wheel.diameterMm}/${wheel.widthMm}`
+      : ''
 /** The kinds whose hit volume scales with `mm`; the others are fixed boxes. */
 const ROUND: ReadonlySet<ProxyKind> = new Set(['wheel', 'tire', 'roller'])
 const GEARS: ReadonlySet<ProxyKind> = new Set(['gear', 'counter-gear'])
@@ -89,8 +127,8 @@ const VISIBLE: Record<Solid, (shape: Shape) => BufferGeometry> = {
   motor: () => parts.motor(shafts()),
   gear: shape => parts.gearSet(shafts(), shape.towardNose || 1),
   'counter-gear': shape => parts.counterGear(shape.towardNose || 1),
-  wheel: shape => parts.wheel(shape.mm),
-  tire: shape => parts.tire(shape.wheelMm, shape.mm - shape.wheelMm),
+  wheel: shape => parts.wheel(shape.wheel!),
+  tire: shape => parts.tire(shape.tire!, shape.wheel!),
   roller: shape => parts.roller(shape.mm),
   stay: shape => parts.stay(shape.mm, shape.towardNose || 1),
   'side-stay': shape => parts.sideStay(shape.mm),
@@ -135,14 +173,35 @@ const OUTLINE: Record<Solid, (shape: Shape) => BufferGeometry> = {
 }
 
 /**
- * The diameter a round proxy is drawn at, in millimetres. A roller or wheel
- * is sized from its own record when the catalog has one (41 rollers, 9
- * wheels); no tire records a diameter, so a tire is a band around whatever
- * wheel sits in its socket. The defaults are the sizes the taps were measured
- * at (§5.5), so a slot with no spec looks exactly as it did.
+ * The diameter a roller is drawn at: its own record's when the catalog has one
+ * (41 rollers), else the size the taps were measured at (§5.5). A wheel and a
+ * tire are sized by their shape instead (§5.6).
  */
-const DEFAULT_DIAMETER_MM = { roller: 13, wheel: 20, tire: 26 } as const
-const TIRE_BAND_MM = DEFAULT_DIAMETER_MM.tire - DEFAULT_DIAMETER_MM.wheel
+const DEFAULT_ROLLER_MM = 13
+
+/** The row a wheel or tire draws from, or the default for a shape with none. */
+const wheelShape = (id: string) => WHEELS[id] ?? WHEELS[DEFAULT_WHEEL]!
+const tireShape = (id: string) => TIRES[id] ?? TIRES[DEFAULT_TIRE]!
+
+/**
+ * Which shape a wheel or tire socket draws, most specific first: a part in the
+ * slot names its own — a wheel-and-tire set names one for each of the four
+ * sockets it fills — then a chassis default's authored shape, then the kit's
+ * own phrase, which *is* the key once slugged (§5.6). `catalog:verify` holds
+ * every phrase in the catalog to a row, so the last fallback is for a build
+ * that arrived from a URL, not for the catalog.
+ */
+function shapeIdFor(kind: 'wheel' | 'tire', slot: ResolvedSlot | undefined): string {
+  const entry = slot?.entries[0]
+  // `||`, not `??`: an entry with an empty label resolves to an empty id, and
+  // that is a miss like any other rather than a shape of its own.
+  return (entry?.partId ? props.parts.get(entry.partId)?.[kind] : entryShapeId(entry)) || ''
+}
+
+const rowFor = {
+  wheel: (slot: ResolvedSlot | undefined) => wheelShape(shapeIdFor('wheel', slot)),
+  tire: (slot: ResolvedSlot | undefined) => tireShape(shapeIdFor('tire', slot))
+}
 
 function specsOf(slot: ResolvedSlot | undefined): PartSpecs | undefined {
   const id = slot?.entries[0]?.partId
@@ -154,17 +213,11 @@ function coloursOf(slot: ResolvedSlot): PartColours | undefined {
   return id ? props.parts.get(id)?.colours : undefined
 }
 
-/** The wheel a tire socket's tire sits on: the wheel slot at the same end. */
-function wheelUnder(slot: ResolvedSlot, bySlot: Map<string, ResolvedSlot>): number {
-  return specsOf(bySlot.get(slot.id.replace('tire', 'wheel')))?.wheelDiameterMm ?? DEFAULT_DIAMETER_MM.wheel
-}
-
-function diameterFor(kind: ProxyKind, slot: ResolvedSlot, bySlot: Map<string, ResolvedSlot>): number {
+/** The size of what is not a wheel or a tire; those are their row's diameter. */
+function diameterFor(kind: ProxyKind, slot: ResolvedSlot): number {
   switch (kind) {
-    case 'roller': return specsOf(slot)?.rollerDiameterMm ?? DEFAULT_DIAMETER_MM.roller
+    case 'roller': return specsOf(slot)?.rollerDiameterMm ?? DEFAULT_ROLLER_MM
     case 'stay': case 'side-stay': return specsOf(slot)?.plateThicknessMm ?? DEFAULT_PLATE_MM
-    case 'wheel': return specsOf(slot)?.wheelDiameterMm ?? DEFAULT_DIAMETER_MM.wheel
-    case 'tire': return specsOf(slot)?.tireDiameterMm ?? wheelUnder(slot, bySlot) + TIRE_BAND_MM
     default: return 0
   }
 }
@@ -258,9 +311,10 @@ const TAP_SLOP_PX = 6
  * `paints` is set for a shape drawn in more than one colour, one per draw group
  * of its geometry: the motor, whose end bell and sticker are what tell one
  * motor from another, with `tint` its end bell; and the gears, in `tint` on
- * steel pins.
+ * steel pins. `finish` overrides the kind's own material for a part whose
+ * material is the product — a plated or aluminium wheel against a moulded one.
  */
-type ProxyData = { slotId: string; state: ProxyState; kind: ProxyKind; tint: number; paints?: readonly parts.Paint[] }
+type ProxyData = { slotId: string; state: ProxyState; kind: ProxyKind; tint: number; finish?: Finish; paints?: readonly parts.Paint[] }
 
 /**
  * The body shells, one lazily imported JSON file each, generated from
@@ -383,7 +437,7 @@ onMounted(() => {
     if (data.paints && data.state !== 'empty') {
       return data.paints.map(paint => material(data.state, highlight, data.kind, paint.colour, paint.finish))
     }
-    return material(data.state, highlight, data.kind, data.tint)
+    return material(data.state, highlight, data.kind, data.tint, data.finish)
   }
 
   const renderer = new WebGLRenderer({ canvas: element, antialias: true, alpha: true })
@@ -529,6 +583,17 @@ onMounted(() => {
   }
 
   /**
+   * A plated, aluminium or carbon wheel is sold as its material, so it is drawn
+   * as metal rather than in the moulded finish every kit wheel has. Nothing
+   * else overrides its kind's material.
+   */
+  function finishFor(kind: ProxyKind, slot: ResolvedSlot): Finish | undefined {
+    if (kind !== 'wheel') return undefined
+    const partId = slot.entries[0]?.partId
+    return partId ? props.parts.get(partId)?.finish : undefined
+  }
+
+  /**
    * The shell a body slot draws: a swapped-in body part's own, else the kit's,
    * else the wedge. `undefined` while its file is still loading, and the scene
    * repopulates when it lands; a shell that fails to load draws the wedge.
@@ -562,6 +627,12 @@ onMounted(() => {
   /** The attach step: for each socket, clear it and add what its slot holds. */
   function populate() {
     const bySlot = new Map(props.slots.map(slot => [slot.id, slot]))
+    const rims = new Map<string, WheelShape>()
+    const rimAt = (wheelSlotId: string) => {
+      let found = rims.get(wheelSlotId)
+      if (!found) rims.set(wheelSlotId, found = rowFor.wheel(bySlot.get(wheelSlotId)))
+      return found
+    }
     hits = []
     proxies = []
     let lift = 0
@@ -579,15 +650,23 @@ onMounted(() => {
       const shell = socket.kind === 'body' ? silhouetteFor(slot) : undefined
       // A shell still loading draws nothing yet, as an empty body does.
       if (shell && !shell.silhouette) continue
-      const mm = diameterFor(socket.kind, slot, bySlot)
+      // A tire seats on the wheel at its own end, so both sockets resolve the
+      // same rim; `rims` keeps that to one lookup per end rather than per socket.
+      const wheel = socket.kind === 'wheel' || socket.kind === 'tire'
+        ? rimAt(socket.kind === 'wheel' ? slot.id : slot.id.replace('tire', 'wheel'))
+        : undefined
+      const tire = socket.kind === 'tire' ? rowFor.tire(slot) : undefined
+      const mm = wheel && socket.kind === 'wheel' ? wheel.diameterMm : tire ? tire.diameterMm : diameterFor(socket.kind, slot)
       const shape: Shape = {
         mm,
-        wheelMm: socket.kind === 'tire' ? wheelUnder(slot, bySlot) : 0,
+        wheel,
+        tire,
+        id: sign(socket.kind, wheel, tire),
         silhouette: shell?.id ?? '',
         towardNose: TOWARD_NOSE.has(socket.kind) ? (socket.position[2] < 0 ? -1 : 1) : 0
       }
       const tint = tintFor(socket.kind, slot)
-      const data: ProxyData = { slotId: socket.slotId, state, kind: socket.kind, tint }
+      const data: ProxyData = { slotId: socket.slotId, state, kind: socket.kind, tint, finish: finishFor(socket.kind, slot) }
       if (socket.kind === 'motor') data.paints = motorPaintsFor(slot, tint)
       if (GEARS.has(socket.kind)) data.paints = parts.gearPaints(tint)
       const table = state === 'empty' ? OUTLINE : VISIBLE
@@ -604,7 +683,7 @@ onMounted(() => {
         hits.push(visible)
       } else {
         // Only a round part's size and a gear's end change its hit volume.
-        const hitShape: Shape = { mm: ROUND.has(socket.kind) ? mm : 0, wheelMm: 0, silhouette: '', towardNose: GEARS.has(socket.kind) ? shape.towardNose : 0 }
+        const hitShape: Shape = { mm: ROUND.has(socket.kind) ? mm : 0, id: '', silhouette: '', towardNose: GEARS.has(socket.kind) ? shape.towardNose : 0 }
         const hit = new Mesh(geometry(HIT, socket.kind, hitShape, `h:${shapeKey(socket.kind, hitShape)}`))
         hit.visible = false
         hit.userData = data

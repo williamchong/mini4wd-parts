@@ -11,6 +11,8 @@ import { compact, deriveCategory, deriveLegality, deriveSlots, deriveSpecs, isPl
 import { labelFor, neutralLabel } from './labels.ts'
 import { colourOf, coloursIn } from './colours.ts'
 import { bodyForKit, loadBodies, writeBodies } from './bodies.ts'
+import { finishFor, shapesFor, WHEEL_CATEGORIES } from './wheels.ts'
+import { TIRES } from '../../shared/scene/wheels.ts'
 import { GENRE_SERIES, KIT_GENRE_SERIES, type JpItem, type KitGenreCode, type PartGenreCode } from './sources/tamiya-jp.ts'
 import type { HkItem } from './sources/tamiya-hk.ts'
 import type { FandomKitVariant, FandomPart } from './sources/fandom.ts'
@@ -195,6 +197,19 @@ function buildPart(item: JpItem<PartGenreCode>) {
 
   const specs = deriveSpecs(item, category)
 
+  // Which wheel and tire the pane draws for this part, and the one spec the
+  // shape settles: a tire's outer diameter is Tamiya's own fitment size, and
+  // until now no part carried it, which is why §4.3's 22-35 mm rule had
+  // nothing to check.
+  // The override's category, not the derived one: two bushings for aluminium
+  // wheels derive as wheel parts and are corrected to `spacer`, and a spacer
+  // draws no wheel.
+  const shapeCategory = override.category ?? category
+  const shapeName = names.en ?? names.ja
+  const shapes = WHEEL_CATEGORIES.has(shapeCategory) ? shapesFor(shapeName) : {}
+  const tire = shapeCategory === 'wheel' ? undefined : shapes.tire
+  if (tire) specs.tireDiameterMm = TIRES[tire]!.diameterMm
+
   const record = {
     id: item.id,
     names,
@@ -213,7 +228,7 @@ function buildPart(item: JpItem<PartGenreCode>) {
     chassisCompat: { include, other, source: 'scraped' },
     classLegality: { ...deriveLegality(category, isCarPart), source: 'derived' },
     specs,
-    colours: deriveColours(names, override.category ?? category, specs, item.id),
+    colours: deriveColours(names, shapeCategory, specs, item.id),
     priceJpy: item.priceJpy,
     priceJpyExTax: item.priceJpyExTax,
     priceHkd: hk?.priceHkd,
@@ -227,6 +242,12 @@ function buildPart(item: JpItem<PartGenreCode>) {
     hkStoreUrl: hk?.url,
     fandomTitle: fandomTitleById.get(item.id),
     body: bodies.byPart.get(item.id),
+    wheel: shapeCategory === 'tire' ? undefined : shapes.wheel,
+    tire,
+    // Only a wheel: a plated roller or a carbon plate is drawn metal by its
+    // kind already, and recording it on 87 more parts would be a field the
+    // pane never reads in every visitor's payload.
+    finish: shapes.wheel ? finishFor(shapeName) : undefined,
     specsRaw: item.specsRaw,
     scrapedAt: item.scrapedAt
   }
@@ -317,6 +338,12 @@ function buildKit(item: JpItem<KitGenreCode>, chassis: ChassisId) {
     // — two calls would be two objects for what the wiki states as one value.
     const wheel = labelFor(wiki.wheel)
     const tire = labelFor(wiki.tire)
+    // No `shape` is written beside these: the phrase *is* the key, `labelFor`
+    // has already reduced the wiki's several spellings of it to one, and the
+    // label is in the payload anyway because the list renders it. Writing the
+    // slug too cost 4.9 KB gzipped of every visitor's payload to say a second
+    // time what `en` says (§5.6). A chassis' `defaultLoadout` does carry one,
+    // because "Kit standard wheels" names no shape.
     fill('wheel-front', wheel, 'fandom')
     fill('wheel-rear', wheel, 'fandom')
     fill('tire-front', tire, 'fandom')

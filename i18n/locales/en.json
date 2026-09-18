@@ -126,7 +126,6 @@
         "summary": "Rules not checked yet",
         "size": "Size: within 105 mm wide, 165 mm long and 70 mm high.",
         "weight": "Weight: at least 90 g with batteries and motor.",
-        "tire": "Tire diameter: 22 to 35 mm.",
         "modification": "Stock Class / B-MAX modification limits, such as no cutting the chassis and no new screw holes.",
         "organiser": "These follow Tamiya's published rules. Check the organiser's rules before a race."
       },
@@ -258,7 +257,6 @@
     "rollerType": "Material",
     "plateThickness": "Thickness",
     "plateMaterial": "Material",
-    "wheelDiameter": "Wheel diameter",
     "tireDiameter": "Tire diameter",
     "tireHardness": "Hardness",
     "gearRatio": "Gear ratio",

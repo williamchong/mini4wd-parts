@@ -43,7 +43,8 @@ classLegality:
   stockBmax: legal
   junior: legal
   source: derived
-specs: {}
+specs:
+  tireDiameterMm: 25
 colours:
   primary: "#c9ced6"
   tire: "#d0312d"
@@ -59,5 +60,8 @@ officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/9/95713/957
 thumbnail: /thumbs/parts/95713.webp
 detailThumbnail: /thumbs/parts-detail/95713.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-95713-mini-4wd-red-spike-tire-silver-color-plated-wheel-set/
+wheel: small
+tire: small-spike
+finish: metal
 specsRaw: シルバーメッキホイールとレッドカラーのスパイクタイヤをセット
 scrapedAt: 2026-09-16

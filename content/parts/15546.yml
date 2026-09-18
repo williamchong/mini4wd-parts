@@ -47,7 +47,7 @@ classLegality:
   junior: legal
   source: derived
 specs:
-  wheelDiameterMm: 31
+  tireDiameterMm: 31
 colours:
   primary: "#2a2c30"
   tire: "#1f2124"
@@ -64,5 +64,8 @@ thumbnail: /thumbs/parts/15546.webp
 detailThumbnail: /thumbs/parts-detail/15546.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-15546-large-dia-low-friction-arched-tires-31mm-carbon-wheels-v-spoke/
 fandomTitle: Low Friction Tires
+wheel: large-v-spoke
+tire: large-arched
+finish: metal
 specsRaw: ローフリクション大径バレルタイヤ(31mm)とカーボン強化ホイール(Vスポーク)を1台分セット
 scrapedAt: 2026-09-16

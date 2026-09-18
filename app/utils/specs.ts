@@ -40,7 +40,11 @@ const tire = (specs: PartSpecs) => [
   specs.tireHardness === undefined ? undefined : { key: 'tireHardness', value: specs.tireHardness }
 ]
 
-const wheel = (specs: PartSpecs) => [mm('wheelDiameter', specs.wheelDiameterMm)]
+// A wheel is sized by the tire that fits it — ⌀24, ⌀26, ⌀31 is how Tamiya
+// names and a reader compares them — and that is the number the record holds.
+// The rim's own diameter is ours, chosen to draw it (shared/scene/wheels.ts),
+// not a Tamiya spec, so it is not printed as one.
+const wheel = (specs: PartSpecs) => [mm('tireDiameter', specs.tireDiameterMm)]
 
 const gear = (specs: PartSpecs) => [
   specs.gearRatio === undefined ? undefined : { key: 'gearRatio', value: specs.gearRatio }

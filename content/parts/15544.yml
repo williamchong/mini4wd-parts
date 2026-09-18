@@ -47,7 +47,7 @@ classLegality:
   junior: legal
   source: derived
 specs:
-  wheelDiameterMm: 31
+  tireDiameterMm: 31
 colours:
   primary: "#2a2c30"
   tire: "#1f2124"
@@ -64,5 +64,8 @@ thumbnail: /thumbs/parts/15544.webp
 detailThumbnail: /thumbs/parts-detail/15544.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-15544-large-dia-low-friction-low-profile-tires-31mm-carbon-wheels-dish/
 fandomTitle: Low Friction Tires
+wheel: large-low-profile-dish-type
+tire: large-low-profile
+finish: metal
 specsRaw: ローフリクション大径ローハイトタイヤ(31mm)とカーボン強化ホイール(ディッシュ)を1台分セット
 scrapedAt: 2026-09-16

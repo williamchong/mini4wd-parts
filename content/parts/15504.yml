@@ -27,7 +27,8 @@ classLegality:
   stockBmax: legal
   junior: legal
   source: derived
-specs: {}
+specs:
+  tireDiameterMm: 31
 colours:
   primary: "#eef0f2"
   tire: "#d0312d"
@@ -43,4 +44,6 @@ officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/
 thumbnail: /thumbs/parts/15504.webp
 detailThumbnail: /thumbs/parts-detail/15504.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-15504-1-32-mini-4wd-jr-lg-dia-5-spoke-wheels-w-hard-red-slick-tires/
+wheel: large-5-spoke
+tire: large
 scrapedAt: 2026-09-16

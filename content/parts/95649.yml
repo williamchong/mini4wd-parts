@@ -29,7 +29,7 @@ classLegality:
   junior: legal
   source: derived
 specs:
-  wheelDiameterMm: 24
+  tireDiameterMm: 24
 colours:
   primary: "#c9ced6"
   tire: "#7b2230"
@@ -46,5 +46,8 @@ thumbnail: /thumbs/parts/95649.webp
 detailThumbnail: /thumbs/parts-detail/95649.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-95649-low-friction-small-dia-narrow-tires-24mm-silver-plated-3-spoke-wheels-for-super-x-xx-chassis/
 fandomTitle: Low Friction Tires
+wheel: small-narrow-3-spoke
+tire: small-narrow
+finish: metal
 specsRaw: 低摩擦素材を使用した小径ローハイトタイヤとホイールの4本セット。※硬いタイヤのため、強く押し込んで装着します。
 scrapedAt: 2026-09-16

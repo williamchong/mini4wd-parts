@@ -46,7 +46,8 @@ classLegality:
   stockBmax: legal
   junior: legal
   source: derived
-specs: {}
+specs:
+  tireDiameterMm: 26
 colours:
   primary: "#eef0f2"
   tire: "#1f2124"
@@ -62,4 +63,6 @@ officialImage: https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/
 thumbnail: /thumbs/parts/15483.webp
 detailThumbnail: /thumbs/parts-detail/15483.webp
 hkStoreUrl: https://tamiya.hk/product/tamiya-15483-low-profile-tire-wheel-set-y-spoke/
+wheel: small-low-profile-y-spoke
+tire: small-low-profile
 scrapedAt: 2026-09-16
