@@ -30,6 +30,8 @@ colours:
   body: "#f3b07c"
   wheel: "#ec7a24"
   tire: "#1f2124"
+  clear:
+    - body
   source: override
 body: estoura
 priceJpy: 1320

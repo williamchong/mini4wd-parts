@@ -52,6 +52,8 @@ colours:
   body: "#7a5232"
   wheel: "#d0312d"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#eef0f2"
   source: scraped
 body: cross-spear-02
 priceJpy: 1320

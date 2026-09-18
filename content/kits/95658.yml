@@ -51,6 +51,8 @@ colours:
   body: "#2a2c30"
   wheel: "#ff7a2a"
   tire: "#1f2124"
+  chassis: "#ff7a2a"
+  aParts: "#eef0f2"
   source: scraped
 body: festa-jaune
 priceJpy: 1320

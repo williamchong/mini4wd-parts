@@ -51,6 +51,8 @@ colours:
   body: "#f2c230"
   wheel: "#ff7a2a"
   tire: "#1f2124"
+  chassis: "#9cc8ee"
+  aParts: "#1f2124"
   source: scraped
 body: dog-racer
 priceJpy: 1320

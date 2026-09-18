@@ -48,6 +48,10 @@ colours:
   body: "#1f2124"
   wheel: "#1f2124"
   tire: "#d0312d"
+  chassis: "#1f2124"
+  aParts: "#8d9197"
+  clear:
+    - aParts
   source: scraped
 body: black-saber
 priceJpy: 1100

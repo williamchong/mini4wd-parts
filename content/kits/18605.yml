@@ -49,6 +49,8 @@ colours:
   body: "#1f2124"
   wheel: "#d0312d"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#8e949b"
   source: scraped
 body: nitro-thunder
 priceJpy: 880

@@ -48,6 +48,9 @@ colours:
   body: "#c9ced6"
   wheel: "#eef0f2"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  chassisEnds: "#d0312d"
+  aParts: "#1f2124"
   source: scraped
 body: dash-1-emperor
 priceJpy: 1320

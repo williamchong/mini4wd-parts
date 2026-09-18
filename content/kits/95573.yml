@@ -51,6 +51,9 @@ colours:
   body: "#7897d9"
   wheel: "#2f5fc4"
   tire: "#1f2124"
+  chassis: "#8e949b"
+  clear:
+    - body
   source: scraped
 body: shooting-proud-star
 priceJpy: 1320

@@ -49,6 +49,8 @@ colours:
   body: "#9bcf3f"
   wheel: "#f2c230"
   tire: "#2f9e4f"
+  chassis: "#eef0f2"
+  aParts: "#2f5fc4"
   source: scraped
 body: koala-racer
 priceJpy: 1210

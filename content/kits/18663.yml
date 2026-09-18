@@ -52,6 +52,7 @@ colours:
   body: "#d0312d"
   wheel: "#b8892a"
   tire: "#1f2124"
+  chassis: "#1f2124"
   source: scraped
 body: raizzan
 priceJpy: 1650

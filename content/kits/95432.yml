@@ -48,6 +48,8 @@ colours:
   body: "#eef0f2"
   wheel: "#1f2124"
   tire: "#f2c230"
+  chassis: "#eef0f2"
+  aParts: "#2f5fc4"
   source: scraped
 body: fighter-magnum-vfx
 priceJpy: 1100

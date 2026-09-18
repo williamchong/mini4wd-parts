@@ -49,6 +49,8 @@ colours:
   body: "#eef0f2"
   wheel: "#f2c230"
   tire: "#2f5fc4"
+  chassis: "#7d838b"
+  aParts: "#2f5fc4"
   source: scraped
 body: shining-scorpion
 priceJpy: 1430

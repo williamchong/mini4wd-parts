@@ -49,6 +49,8 @@ colours:
   body: "#35bfd4"
   wheel: "#b8892a"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#1f2124"
   source: scraped
 body: mach-bullet
 priceJpy: 1210

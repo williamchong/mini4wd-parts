@@ -49,6 +49,8 @@ colours:
   body: "#ec7a24"
   wheel: "#eef0f2"
   tire: "#35bfd4"
+  chassis: "#8e949b"
+  aParts: "#ec7a24"
   source: scraped
 body: panda-racer
 priceJpy: 1320

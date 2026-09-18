@@ -49,6 +49,8 @@ colours:
   body: "#eef0f2"
   wheel: "#5fe84a"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#1f2124"
   source: scraped
 body: avante-x
 priceJpy: 1100

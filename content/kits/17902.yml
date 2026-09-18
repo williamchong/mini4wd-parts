@@ -52,6 +52,10 @@ colours:
   body: "#f3a1c6"
   wheel: "#eef0f2"
   tire: "#1f2124"
+  chassis: "#d0312d"
+  aParts: "#ec6fa8"
+  clear:
+    - body
   source: scraped
 body: raikiri
 priceJpy: 1980

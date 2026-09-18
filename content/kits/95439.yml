@@ -48,6 +48,10 @@ colours:
   body: "#b0d9f4"
   wheel: "#eef0f2"
   tire: "#7cc0ec"
+  chassis: "#35bfd4"
+  aParts: "#7cc0ec"
+  clear:
+    - body
   source: override
 body: gun-bluster-xto
 priceJpy: 1650

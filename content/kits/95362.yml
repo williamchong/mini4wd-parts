@@ -48,6 +48,8 @@ colours:
   body: "#1f2124"
   wheel: "#1f2124"
   tire: "#ec6fa8"
+  chassis: "#ec6fa8"
+  aParts: "#c8307a"
   source: scraped
 body: liberty-emperor
 priceJpy: 1100

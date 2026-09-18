@@ -48,6 +48,8 @@ colours:
   body: "#233f8f"
   wheel: "#c9ced6"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#7d838b"
   source: scraped
 body: bigwig-jr
 priceJpy: 1100

@@ -52,6 +52,8 @@ colours:
   body: "#eef0f2"
   wheel: "#2a2c30"
   tire: "#1f2124"
+  chassis: "#2a2c30"
+  aParts: "#d0312d"
   source: scraped
 body: vanguard-sonic
 priceJpy: 1320

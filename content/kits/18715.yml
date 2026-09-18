@@ -49,6 +49,8 @@ colours:
   body: "#ec7a24"
   wheel: "#c9ced6"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#1f2124"
   source: scraped
 body: copperfang
 priceJpy: 1430

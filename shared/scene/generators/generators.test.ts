@@ -242,15 +242,33 @@ test('a chassis whose motor lies across the car draws its propeller shaft in ste
 test('every roller socket has a post under it', () => {
   const p = new Vector3()
   for (const id of CHASSIS_IDS) {
-    const black = chassisPieces(id).find(p => p.colour === BLACK)!.geometry.getAttribute('position')
+    // The front and rear posts stand on the bumpers, which are an MS chassis' nose and tail units.
+    const moulded = chassisPieces(id).filter(piece => piece.role === 'frame' || piece.role === 'ends')
+      .map(piece => piece.geometry.getAttribute('position'))
     for (const socket of socketsFor(id).filter(s => s.kind === 'roller')) {
       const [x, , z] = socket.position
       let found = false
-      for (let i = 0; i < black.count && !found; i++) {
-        p.fromBufferAttribute(black, i)
-        found = Math.abs(p.x - x) < 2.5 && Math.abs(p.z - z) < 2.5 && p.y > 12.9
+      for (const position of moulded) {
+        for (let i = 0; i < position.count && !found; i++) {
+          p.fromBufferAttribute(position, i)
+          found = Math.abs(p.x - x) < 2.5 && Math.abs(p.z - z) < 2.5 && p.y > 12.9
+        }
       }
       assert.ok(found, `${id} ${socket.name} has no post`)
+    }
+  }
+})
+
+test('a chassis is drawn in the mouldings a kit colours, black until one does', () => {
+  for (const id of CHASSIS_IDS) {
+    const pieces = chassisPieces(id)
+    const roles = pieces.map(piece => piece.role)
+    assert.equal(new Set(roles).size, roles.length, `${id}: one piece per role`)
+    assert.ok(roles.includes('frame') && roles.includes('aParts'), id)
+    // Only MS is three units; every other frame carries its own bumpers.
+    assert.equal(roles.includes('ends'), id === 'ms', id)
+    for (const piece of pieces.filter(piece => ['frame', 'ends', 'aParts'].includes(piece.role))) {
+      assert.equal(piece.colour, BLACK, `${id} ${piece.role}`)
     }
   }
 })

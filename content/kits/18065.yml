@@ -49,6 +49,8 @@ colours:
   body: "#eef0f2"
   wheel: "#c9ced6"
   tire: "#ff7a2a"
+  chassis: "#2f5fc4"
+  aParts: "#7cc0ec"
   source: scraped
 body: super-avante
 priceJpy: 1430

@@ -48,6 +48,10 @@ colours:
   body: "#4a4d52"
   wheel: "#ff5fae"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#1f2124"
+  clear:
+    - body
   source: scraped
 body: aero-avante
 priceJpy: 1100

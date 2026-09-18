@@ -52,6 +52,8 @@ colours:
   body: "#eef0f2"
   wheel: "#5fe84a"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#d0312d"
   source: scraped
 body: magnum-saber
 priceJpy: 1430

@@ -52,6 +52,8 @@ colours:
   body: "#d0312d"
   wheel: "#eef0f2"
   tire: "#1f2124"
+  chassis: "#8e949b"
+  aParts: "#8a5cc9"
   source: scraped
 body: dancing-divine-doll
 priceJpy: 1430

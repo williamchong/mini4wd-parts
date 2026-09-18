@@ -52,6 +52,10 @@ colours:
   body: "#4a4d52"
   wheel: "#c9ced6"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#b9bec4"
+  clear:
+    - body
   source: scraped
 body: rowdy-bull
 priceJpy: 2750

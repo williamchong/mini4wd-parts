@@ -49,6 +49,8 @@ colours:
   body: "#8e949c"
   wheel: "#eef0f2"
   tire: "#1f2124"
+  chassis: "#8e949b"
+  aParts: "#d0312d"
   source: scraped
 body: iron-beak
 priceJpy: 1320

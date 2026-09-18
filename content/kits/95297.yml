@@ -51,6 +51,8 @@ colours:
   body: "#f2c230"
   wheel: "#d4a93a"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#1f2124"
   source: scraped
 body: jolly-joker
 priceJpy: 1100

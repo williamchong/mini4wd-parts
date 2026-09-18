@@ -52,6 +52,8 @@ colours:
   body: "#2f9e4f"
   wheel: "#eef0f2"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#1f2124"
   source: scraped
 body: dash-2-burning-sun
 priceJpy: 1430

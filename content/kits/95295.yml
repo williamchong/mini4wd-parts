@@ -48,6 +48,8 @@ colours:
   body: "#eef0f2"
   wheel: "#ec6fa8"
   tire: "#eef0f2"
+  chassis: "#c8307a"
+  aParts: "#f4a9c8"
   source: scraped
 body: aero-manta-ray
 priceJpy: 1100

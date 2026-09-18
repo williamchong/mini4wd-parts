@@ -48,6 +48,10 @@ colours:
   body: "#f2c230"
   wheel: "#8e949c"
   tire: "#d0312d"
+  chassis: "#4a4d52"
+  aParts: "#f2c230"
+  clear:
+    - chassis
   source: scraped
 body: shadow-shark
 priceJpy: 1100

@@ -52,6 +52,8 @@ colours:
   body: "#233f8f"
   wheel: "#ff7a2a"
   tire: "#233f8f"
+  chassis: "#d0312d"
+  aParts: "#1f2124"
   source: scraped
 body: lupine-racer-2
 priceJpy: 1320

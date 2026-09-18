@@ -49,6 +49,8 @@ colours:
   body: "#565b62"
   wheel: "#eef0f2"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#1f2124"
   source: scraped
 body: nitrage-jr
 priceJpy: 990

@@ -52,6 +52,8 @@ colours:
   body: "#c9ced6"
   wheel: "#c9ced6"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#1f2124"
   source: scraped
 body: dual-ridge-jr
 priceJpy: 1430

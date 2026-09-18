@@ -49,6 +49,10 @@ colours:
   body: "#3f7fd6"
   wheel: "#d0312d"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#dfe6ea"
+  clear:
+    - aParts
   source: scraped
 body: blazing-max
 priceJpy: 858

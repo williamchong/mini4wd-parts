@@ -49,6 +49,11 @@ colours:
   body: "#4a4d52"
   wheel: "#d0312d"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#dfe6ea"
+  clear:
+    - body
+    - aParts
   source: scraped
 body: blitzer-sonic
 priceJpy: 858

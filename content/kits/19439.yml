@@ -52,6 +52,8 @@ colours:
   body: "#1f2124"
   wheel: "#1f2124"
   tire: "#eef0f2"
+  chassis: "#d0312d"
+  aParts: "#1f2124"
   source: scraped
 body: beak-spider
 priceJpy: 1430

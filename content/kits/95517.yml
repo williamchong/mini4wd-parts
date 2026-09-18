@@ -48,6 +48,10 @@ colours:
   body: "#9fe0e8"
   wheel: "#ff3b3b"
   tire: "#1f2124"
+  chassis: "#4a4d52"
+  aParts: "#eef0f2"
+  clear:
+    - chassis
   source: scraped
 body: hyundai-i20-coupe-wrc
 priceJpy: 1320

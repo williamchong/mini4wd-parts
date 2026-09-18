@@ -48,6 +48,8 @@ colours:
   body: "#9cc8ee"
   wheel: "#d4a93a"
   tire: "#eef0f2"
+  chassis: "#b9bec4"
+  aParts: "#c9ced6"
   source: scraped
 body: penguin-racer
 priceJpy: 1430

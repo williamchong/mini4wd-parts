@@ -52,6 +52,8 @@ colours:
   body: "#ec7a24"
   wheel: "#f2c230"
   tire: "#2f5fc4"
+  chassis: "#2f5fc4"
+  aParts: "#eef0f2"
   source: scraped
 body: cat-racer
 priceJpy: 1540

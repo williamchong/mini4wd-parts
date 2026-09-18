@@ -52,6 +52,8 @@ colours:
   body: "#7a4bb5"
   wheel: "#c9ced6"
   tire: "#1f2124"
+  chassis: "#8e949b"
+  aParts: "#7a4bb5"
   source: scraped
 body: proto-saber-evolution
 priceJpy: 1430

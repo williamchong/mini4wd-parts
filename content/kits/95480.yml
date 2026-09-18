@@ -51,6 +51,10 @@ colours:
   body: "#f3a1c6"
   wheel: "#ff5fae"
   tire: "#eef0f2"
+  chassis: "#c8307a"
+  aParts: "#1f2124"
+  clear:
+    - body
   source: scraped
 body: racer-gt
 priceJpy: 1320

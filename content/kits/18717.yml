@@ -48,6 +48,8 @@ colours:
   body: "#d0312d"
   wheel: "#c9ced6"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#d0312d"
   source: scraped
 body: dyipne
 priceJpy: 1210

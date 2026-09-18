@@ -53,6 +53,8 @@ colours:
   wheel: "#eef0f2"
   tire: "#1f2124"
   roller: "#3d63d8"
+  chassis: "#8e949b"
+  aParts: "#2f5fc4"
   source: override
 body: blast-arrow
 priceJpy: 1320

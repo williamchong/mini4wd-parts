@@ -51,6 +51,11 @@ colours:
   body: "#2a2c30"
   wheel: "#ec6fa8"
   tire: "#1f2124"
+  chassis: "#a98acf"
+  aParts: "#eef0f2"
+  clear:
+    - body
+    - chassis
   source: scraped
 body: dcr-02
 priceJpy: 1320

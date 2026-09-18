@@ -49,6 +49,10 @@ colours:
   body: "#1f2124"
   wheel: "#565b62"
   tire: "#1f2124"
+  chassis: "#ec6fa8"
+  aParts: "#ec6fa8"
+  clear:
+    - body
   source: override
 body: raikiri
 priceJpy: 1210

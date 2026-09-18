@@ -51,6 +51,10 @@ colours:
   body: "#4a4d52"
   wheel: "#d4a93a"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#1f2124"
+  clear:
+    - body
   source: scraped
 body: mach-frame
 priceJpy: 1320

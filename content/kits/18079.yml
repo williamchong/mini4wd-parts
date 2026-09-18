@@ -49,6 +49,8 @@ colours:
   body: "#2440a8"
   wheel: "#b595dc"
   tire: "#1f2124"
+  chassis: "#565b62"
+  aParts: "#c9ced6"
   source: scraped
 body: dyna-storm-jr
 priceJpy: 1100

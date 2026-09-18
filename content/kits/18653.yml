@@ -49,6 +49,8 @@ colours:
   body: "#2f9e4f"
   wheel: "#c9ced6"
   tire: "#1f2124"
+  chassis: "#b9bec4"
+  aParts: "#8fd67a"
   source: scraped
 body: hexagonite
 priceJpy: 1320

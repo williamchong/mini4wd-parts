@@ -48,6 +48,10 @@ colours:
   body: "#b395dc"
   wheel: "#b8892a"
   tire: "#1f2124"
+  chassis: "#c9ced6"
+  aParts: "#8a5cc9"
+  clear:
+    - body
   source: scraped
 body: razorback
 priceJpy: 1320

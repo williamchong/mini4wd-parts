@@ -48,6 +48,8 @@ colours:
   body: "#5daa3a"
   wheel: "#565b62"
   tire: "#1f2124"
+  chassis: "#7d838b"
+  aParts: "#565b62"
   source: scraped
 body: dash-4-cannonball
 priceJpy: 1100

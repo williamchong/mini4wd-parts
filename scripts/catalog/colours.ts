@@ -121,6 +121,9 @@ const FLUORESCENT: Record<string, Hex> = {
 
 const CLEAR: Hex = '#dfe6ea'
 const SMOKE: Hex = '#4a4d52'
+/** The words for see-through plastic, in both scripts, as `tidy` leaves them. */
+const CLEAR_WORD = /\bclear\b|\btranslucent\b|クリヤー|クリアー|透明/
+const SMOKE_WORD = /\bsmoke\b|スモーク/
 
 function mix(hex: Hex, toward: Hex, amount: number): Hex {
   const channel = (h: string, i: number) => parseInt(h.slice(1 + i * 2, 3 + i * 2), 16)
@@ -183,8 +186,8 @@ export function colourOf(phrase: string | undefined): Hex | undefined {
   if (!first) {
     if (/\bblack smoke\b/.test(text)) return '#2a2c30'
     if (/\blight smoke\b/.test(text)) return '#8d9197'
-    if (/\bsmoke\b|スモーク/.test(text)) return SMOKE
-    if (/\bclear\b|\btranslucent\b|クリヤー|クリアー|透明/.test(text)) return CLEAR
+    if (SMOKE_WORD.test(text)) return SMOKE
+    if (CLEAR_WORD.test(text)) return CLEAR
     return undefined
   }
   const lead = text.slice(Math.max(0, first.start - 14), first.start)
@@ -192,6 +195,18 @@ export function colourOf(phrase: string | undefined): Hex | undefined {
   if (/\bblack smoke\b/.test(text) && first.word === 'black') return '#2a2c30'
   if (/(clear|translucent|クリヤー|クリアー)\s*$/.test(lead)) return mix(first.hex, '#ffffff', 0.35)
   return first.hex
+}
+
+/**
+ * Whether a phrase says the moulding is see-through: clear, translucent or
+ * smoked plastic. Only the lead colour counts, because the wiki writes a
+ * two-part body dominant first — "White and Black Smoke" is a white body with
+ * a smoked canopy, drawn opaque, where "Clear Blue" is a clear shell.
+ */
+export function isClear(phrase: string | undefined): boolean {
+  if (!phrase) return false
+  const lead = tidy(phrase).split(/\s*(?:,|\/|\band\b|&)\s*/).find(Boolean) ?? ''
+  return CLEAR_WORD.test(lead) || SMOKE_WORD.test(lead)
 }
 
 /** All colours a phrase names, in order — for names that list one per component. */

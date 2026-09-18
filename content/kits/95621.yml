@@ -51,6 +51,10 @@ colours:
   body: "#9bcf3f"
   wheel: "#1f2124"
   tire: "#f2c230"
+  chassis: "#2f9e4f"
+  aParts: "#f2c230"
+  clear:
+    - body
   source: override
 body: koala-racer-gt
 priceJpy: 1320

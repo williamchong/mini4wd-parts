@@ -48,6 +48,8 @@ colours:
   body: "#7cc0ec"
   wheel: "#2f5fc4"
   tire: "#1f2124"
+  chassis: "#233f8f"
+  aParts: "#233f8f"
   source: override
 body: dual-ridge-jr
 priceJpy: 1320

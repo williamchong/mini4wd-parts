@@ -51,6 +51,8 @@ colours:
   body: "#eef0f2"
   wheel: "#f2c230"
   tire: "#1f2124"
+  chassis: "#eef0f2"
+  aParts: "#d0312d"
   source: override
 body: hurricane-sonic
 priceJpy: 1320

@@ -51,6 +51,8 @@ colours:
   body: "#8a5cc9"
   wheel: "#eef0f2"
   tire: "#7b2230"
+  chassis: "#1f2124"
+  aParts: "#8a5cc9"
   source: scraped
 body: manta-ray-mk2
 priceJpy: 1320

@@ -52,6 +52,8 @@ colours:
   body: "#eef0f2"
   wheel: "#c9ced6"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#1f2124"
   source: scraped
 body: yaris-wrc
 priceJpy: 1430

@@ -48,6 +48,10 @@ colours:
   body: "#f2a3c4"
   wheel: "#ec6fa8"
   tire: "#eef0f2"
+  chassis: "#1f2124"
+  aParts: "#ff5fae"
+  clear:
+    - body
   source: override
 body: avante-mk2
 priceJpy: 1320

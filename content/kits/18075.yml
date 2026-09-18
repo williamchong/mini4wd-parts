@@ -49,6 +49,8 @@ colours:
   body: "#eef0f2"
   wheel: "#d4a93a"
   tire: "#1f2124"
+  chassis: "#8e949b"
+  aParts: "#d0312d"
   source: scraped
 body: dash-001-great-emperor
 priceJpy: 1430

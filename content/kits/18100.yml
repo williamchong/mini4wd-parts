@@ -52,6 +52,8 @@ colours:
   body: "#8e949b"
   wheel: "#7cc0ec"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#1f2124"
   source: scraped
 body: eleglitter
 priceJpy: 1320

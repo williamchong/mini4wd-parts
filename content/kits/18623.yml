@@ -49,6 +49,8 @@ colours:
   body: "#f2c230"
   wheel: "#565b62"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#1f2124"
   source: scraped
 body: savanna-leo
 priceJpy: 990

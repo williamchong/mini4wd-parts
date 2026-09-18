@@ -49,6 +49,8 @@ colours:
   body: "#7d838b"
   wheel: "#1f2124"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#1f2124"
   source: scraped
 body: lord-guile
 priceJpy: 1320

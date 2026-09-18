@@ -48,6 +48,10 @@ colours:
   body: "#4a4d52"
   wheel: "#1f2124"
   tire: "#d0312d"
+  chassis: "#d0312d"
+  aParts: "#1f2124"
+  clear:
+    - body
   source: scraped
 body: aero-thunder-shot
 priceJpy: 1100

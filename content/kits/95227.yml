@@ -48,6 +48,8 @@ colours:
   body: "#eef0f2"
   wheel: "#d4a93a"
   tire: "#2f5fc4"
+  chassis: "#2f5fc4"
+  aParts: "#eef0f2"
   source: scraped
 body: shirokumakko
 priceJpy: 1540

@@ -52,6 +52,10 @@ colours:
   body: "#f7d778"
   wheel: "#eef0f2"
   tire: "#1f2124"
+  chassis: "#9cc8ee"
+  aParts: "#eef0f2"
+  clear:
+    - body
   source: scraped
 body: silwolf
 priceJpy: 1980

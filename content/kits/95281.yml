@@ -51,6 +51,10 @@ colours:
   body: "#1f2124"
   wheel: "#f2c230"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#1f2124"
+  clear:
+    - body
   source: override
 body: racer-gt-no-wing
 priceJpy: 1320

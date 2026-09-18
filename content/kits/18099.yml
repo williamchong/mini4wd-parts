@@ -49,6 +49,10 @@ colours:
   body: "#78c08d"
   wheel: "#c9ced6"
   tire: "#1f2124"
+  chassis: "#eef0f2"
+  aParts: "#f2c230"
+  clear:
+    - body
   source: scraped
 body: ray-spear
 priceJpy: 1320

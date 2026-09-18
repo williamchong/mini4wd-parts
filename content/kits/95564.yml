@@ -48,6 +48,10 @@ colours:
   body: "#4a4d52"
   wheel: "#2a2c30"
   tire: "#7b2230"
+  chassis: "#eef0f2"
+  aParts: "#7a4bb5"
+  clear:
+    - body
   source: scraped
 body: geo-glider
 priceJpy: 1320

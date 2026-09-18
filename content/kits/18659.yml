@@ -52,6 +52,8 @@ colours:
   body: "#ec7a24"
   wheel: "#8e949c"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#1f2124"
   source: scraped
 body: estoura
 priceJpy: 1320

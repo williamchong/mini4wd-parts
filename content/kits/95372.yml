@@ -48,6 +48,8 @@ colours:
   body: "#eef0f2"
   wheel: "#c9ced6"
   tire: "#7a4bb5"
+  chassis: "#b9bec4"
+  aParts: "#7a4bb5"
   source: scraped
 body: dcr-01
 priceJpy: 1210

@@ -51,6 +51,8 @@ colours:
   body: "#2a2c30"
   wheel: "#2a2c30"
   tire: "#d0312d"
+  chassis: "#2a2c30"
+  aParts: "#1f2124"
   source: scraped
 body: neo-tridagger-zmc
 priceJpy: 1430

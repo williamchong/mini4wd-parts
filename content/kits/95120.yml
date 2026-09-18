@@ -48,6 +48,8 @@ colours:
   body: "#1f2124"
   wheel: "#ec6fa8"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#eef0f2"
   source: scraped
 body: baron-viento
 priceJpy: 1210

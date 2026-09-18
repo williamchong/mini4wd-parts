@@ -51,6 +51,8 @@ colours:
   body: "#eef0f2"
   wheel: "#eef0f2"
   tire: "#d0312d"
+  chassis: "#d0312d"
+  aParts: "#eef0f2"
   source: scraped
 body: new-years-edition-dragon-2024
 priceJpy: 1320

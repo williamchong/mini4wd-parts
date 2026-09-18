@@ -48,6 +48,10 @@ colours:
   body: "#dfe6ea"
   wheel: "#1f2124"
   tire: "#d0312d"
+  chassis: "#1f2124"
+  aParts: "#eef0f2"
+  clear:
+    - body
   source: scraped
 body: fire-dragon-jr
 priceJpy: 1320

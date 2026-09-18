@@ -52,6 +52,8 @@ colours:
   body: "#f6f7f8"
   wheel: "#1f2124"
   tire: "#1f2124"
+  chassis: "#8e949b"
+  aParts: "#8e949b"
   source: scraped
 body: toyota-gr-yaris
 priceJpy: 1430

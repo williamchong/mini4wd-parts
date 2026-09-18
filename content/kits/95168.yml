@@ -51,6 +51,8 @@ colours:
   body: "#eef0f2"
   wheel: "#e6f53a"
   tire: "#1f2124"
+  chassis: "#9bcf3f"
+  aParts: "#e6f53a"
   source: scraped
 body: ignicion
 priceJpy: 1320

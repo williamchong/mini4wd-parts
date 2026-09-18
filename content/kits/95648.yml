@@ -51,6 +51,10 @@ colours:
   body: "#2a2c30"
   wheel: "#ff5fae"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#c9ced6"
+  clear:
+    - body
   source: scraped
 body: super-avante-jr
 priceJpy: 1320

@@ -51,6 +51,8 @@ colours:
   body: "#2440a8"
   wheel: "#eef0f2"
   tire: "#1f2124"
+  chassis: "#233f8f"
+  aParts: "#eef0f2"
   source: override
 body: zenperor-3
 priceJpy: 1650

@@ -66,7 +66,7 @@
 '95486': { colours: { body: '#ec6fa8', wheel: '#1f2124', tire: '#8e949b' } }  # ライキリ ピンクスペシャル
 '95678': { colours: { body: '#2f9e4f', wheel: '#eef0f2', tire: '#d0312d' } }  # サンタクロース
 '95679': { colours: { body: '#d0312d', wheel: '#eef0f2', tire: '#1f2124' } }  # 干支 巳年
-'95691': { colours: { body: '#f3b07c', wheel: '#ec7a24', tire: '#1f2124' } }  # エストゥーラ クリヤーオレンジ
+'95691': { colours: { body: '#f3b07c', wheel: '#ec7a24', tire: '#1f2124', clear: [body] } }  # エストゥーラ クリヤーオレンジ
 '95694': { colours: { body: '#d0312d', wheel: '#f4a9c8', tire: '#eef0f2' } }  # 干支 午年
 '95698': { colours: { body: '#d0312d', wheel: '#eef0f2', tire: '#d0312d' } }  # サンタクロース（レッドレーサー）
 
@@ -77,27 +77,28 @@
 
 # The wiki's "Clear" is a polycarbonate shell sold unpainted, which a clear
 # proxy draws as a grey ghost that resembles nothing on the box. These take the
-# colour the box art paints them. A "Clear Special" whose identity is being
-# clear stays as the wiki says, tinted where it is tinted.
+# colour the box art paints them, and `clear: []` draws them opaque. A "Clear
+# Special" whose identity is being clear stays as the wiki says, tinted where
+# it is tinted and see-through.
 '95062': { colours: { body: '#c0a6e6' } }  # エアロアバンテ バイオレットスペシャル — clear violet
-'95603': { colours: { body: '#eef0f2' } }  # ハリケーンソニック ポリカ
-'95676': { colours: { body: '#eef0f2' } }  # サイクロンマグナム ポリカ
+'95603': { colours: { body: '#eef0f2', clear: [] } }  # ハリケーンソニック ポリカ
+'95676': { colours: { body: '#eef0f2', clear: [] } }  # サイクロンマグナム ポリカ
 '95439': { colours: { body: '#b0d9f4' } }  # ガンブラスターXTO ライトブルー — clear light blue
-'18652': { colours: { body: '#eef0f2' } }  # TS050 2018
-'95533': { colours: { body: '#eef0f2' } }  # TS050 2019
-'18609': { colours: { body: '#d0312d' } }  # トルクルーザー
-'18610': { colours: { body: '#c9ced6' } }  # ベルダーガ
-'18611': { colours: { body: '#c9ced6' } }  # レイボルフ
-'18612': { colours: { body: '#2f5fc4' } }  # エクスフローリー
-'18613': { colours: { body: '#eef0f2' } }  # TRFレーサーJr.
+'18652': { colours: { body: '#eef0f2', clear: [] } }  # TS050 2018
+'95533': { colours: { body: '#eef0f2', clear: [] } }  # TS050 2019
+'18609': { colours: { body: '#d0312d', clear: [] } }  # トルクルーザー
+'18610': { colours: { body: '#c9ced6', clear: [] } }  # ベルダーガ
+'18611': { colours: { body: '#c9ced6', clear: [] } }  # レイボルフ
+'18612': { colours: { body: '#2f5fc4', clear: [] } }  # エクスフローリー
+'18613': { colours: { body: '#eef0f2', clear: [] } }  # TRFレーサーJr.
 '95061': { colours: { body: '#f2a3c4' } }  # アバンテMk.II ピンク — clear pink
 '95485': { colours: { body: '#8fd67a' } }  # フェスタジョーヌ L グリーン — clear green
-'95550': { colours: { body: '#1f2124' } }  # TRFレーサーJr. ブラック
-'95571': { colours: { body: '#4b4468' } }  # エクスフローリー ポリカ
-'95572': { colours: { body: '#6f8fd8' } }  # レイボルフ ポリカ
-'95633': { colours: { body: '#2f5fc4' } }  # ネオVQS ポリカ
-'95143': { colours: { body: '#7cc0ec' } }  # デュアルリッジJr. J-CUP 2021
-'95703': { colours: { body: '#2440a8' } }  # ゼンペラー3 ポリカ
+'95550': { colours: { body: '#1f2124', clear: [] } }  # TRFレーサーJr. ブラック
+'95571': { colours: { body: '#4b4468', clear: [] } }  # エクスフローリー ポリカ
+'95572': { colours: { body: '#6f8fd8', clear: [] } }  # レイボルフ ポリカ
+'95633': { colours: { body: '#2f5fc4', clear: [] } }  # ネオVQS ポリカ
+'95143': { colours: { body: '#7cc0ec', clear: [] } }  # デュアルリッジJr. J-CUP 2021
+'95703': { colours: { body: '#2440a8', clear: [] } }  # ゼンペラー3 ポリカ
 
 # Rollers. The wiki has no roller colour field, so a kit's moulded rollers are
 # drawn in the stock tint unless an entry here reads them off the box art.

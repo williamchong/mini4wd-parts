@@ -49,6 +49,8 @@ colours:
   body: "#eef0f2"
   wheel: "#c9ced6"
   tire: "#1f2124"
+  chassis: "#ec7a24"
+  aParts: "#ec7a24"
   source: scraped
 body: terra-conqueror-jr
 priceJpy: 1100

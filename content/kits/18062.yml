@@ -49,6 +49,8 @@ colours:
   body: "#1f2124"
   wheel: "#c9ced6"
   tire: "#d0312d"
+  chassis: "#d0312d"
+  aParts: "#d0312d"
   source: scraped
 body: vanquish-jr
 priceJpy: 1100

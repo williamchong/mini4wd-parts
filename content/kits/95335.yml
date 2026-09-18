@@ -48,6 +48,8 @@ colours:
   body: "#7a4bb5"
   wheel: "#7a4bb5"
   tire: "#eef0f2"
+  chassis: "#7a4bb5"
+  aParts: "#eef0f2"
   source: scraped
 body: proto-emperor-zx
 priceJpy: 1100

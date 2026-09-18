@@ -26,12 +26,13 @@ import { DEFAULT_SILHOUETTE } from '#shared/scene/bodies'
 import { bodyGeometry } from '#shared/scene/generators/body'
 import type { Silhouette } from '#shared/scene/generators/body'
 import { chassisPieces } from '#shared/scene/generators/chassis'
+import type { ChassisRole } from '#shared/scene/generators/chassis'
 import * as parts from '#shared/scene/generators/parts'
 import { DEFAULT_TIRE, DEFAULT_WHEEL, entryShapeId, TIRES, WHEELS } from '#shared/scene/wheels'
 import type { TireShape, WheelShape } from '#shared/scene/wheels'
 import { cylinder, Triangles } from '#shared/scene/generators/mesh'
 import type { ResolvedSlot } from '#shared/catalog/build'
-import type { ChassisId, Kit, PartColours, PartSpecs } from '#shared/catalog/schema'
+import type { ChassisId, Kit, KitClear, PartColours, PartSpecs } from '#shared/catalog/schema'
 
 const props = defineProps<{
   chassis: ChassisId
@@ -232,9 +233,10 @@ function diameterFor(kind: ProxyKind, slot: ResolvedSlot): number {
  *
  * The body is the exception: its hit volume is its own shell, exactly what is
  * drawn. While the body was a translucent box (§5.5) a box-sized hit stole
- * taps aimed at the wheels behind it; now the shell is opaque, whatever the
+ * taps aimed at the wheels behind it; now the shell is solid, whatever the
  * reader sees under their finger is what they get, and lifting the shell is
- * how they reach what it covers.
+ * how they reach what it covers. A clear shell is drawn see-through but is
+ * still there to tap: the motor under a clear Avante is reached the same way.
  *
  * The gears sit beside the motor's hit box rather than centred on their
  * sockets, so theirs are moved off it: a PRO train reaches in from the axle
@@ -338,6 +340,25 @@ let resetCamera = () => {}
 const lifted = ref(false)
 const LIFT_MM = 24
 const LIFTED_OPACITY = 0.35
+/**
+ * A clear or smoked moulding — a clear body, a kit's clear chassis — seated.
+ * It is what the plastic is, so it holds on the assembled car too; lifted, a
+ * clear shell fades no further than an opaque one does. Enough to read as a
+ * tinted shell with the chassis behind it: at 0.45 a clear body was a ghost.
+ */
+const CLEAR_OPACITY = 0.65
+
+/**
+ * The chassis pieces a kit moulds in its own colours: which of the kit's
+ * colours each takes, and which `clear` entry makes it see-through. MS's nose
+ * and tail units take the frame's unless the kit gives them a colour of their
+ * own; no wiki row makes them clear apart from it.
+ */
+const KIT_MOULDED: Partial<Record<ChassisRole, { colour: (colours: NonNullable<Kit['colours']>) => string | undefined; clear: KitClear }>> = {
+  frame: { colour: colours => colours.chassis, clear: 'chassis' },
+  ends: { colour: colours => colours.chassisEnds ?? colours.chassis, clear: 'chassis' },
+  aParts: { colour: colours => colours.aParts, clear: 'aParts' }
+}
 
 onMounted(() => {
   const element = canvas.value
@@ -381,10 +402,13 @@ onMounted(() => {
    * animated every frame of a lift, which no shared material may be. It is
    * always transparent, because whether a material is opaque is baked into
    * its shader program and flipping it mid-lift would recompile; at opacity 1
-   * a transparent material draws identically, and it is the only one in the
-   * scene, so there is nothing for it to sort against.
+   * a transparent material draws identically. The only other transparent
+   * thing is a kit's clear chassis, and the shell's `renderOrder` draws it
+   * after that from every angle, not only the ones where it is nearer.
    */
   const shell = new MeshStandardMaterial({ roughness: 0.55, metalness: 0.1, transparent: true })
+  /** The shell's opacity seated, set by `populate`; `tickBody` fades from it as the shell lifts. */
+  let seatedOpacity = 1
   function styleShell(highlight: Highlight, tint: number) {
     shell.color.setHex(tint)
     shell.emissive.setHex(tint)
@@ -392,12 +416,16 @@ onMounted(() => {
     return shell
   }
 
-  /** The chassis' own materials, one per colour, disposed with the rest. */
-  function chassisMaterial(colour: number) {
-    const key = `chassis:${colour}`
+  /**
+   * The chassis' own materials, one per colour, disposed with the rest. A clear
+   * moulding is transparent from the start rather than switched to it, and has
+   * a material of its own for the same shader-program reason as the shell's.
+   */
+  function chassisMaterial(colour: number, clear = false) {
+    const key = `chassis:${colour}:${clear}`
     let found = materials.get(key)
     if (!found) {
-      found = new MeshStandardMaterial({ color: colour, roughness: 0.75 })
+      found = new MeshStandardMaterial({ color: colour, roughness: 0.75, transparent: clear, opacity: clear ? CLEAR_OPACITY : 1 })
       materials.set(key, found)
     }
     return found
@@ -411,7 +439,7 @@ onMounted(() => {
   function material(state: ProxyState, highlight: Highlight, kind: ProxyKind, tint: number, finish: Finish = FINISH[kind]) {
     // An empty slot is an outline, not a ghost: a translucent solid read as a
     // part that was half there. Everything else is opaque, the body included —
-    // what it covers is reached by lifting it.
+    // what it covers is reached by lifting it — unless the body is clear plastic.
     if (kind === 'body' && state !== 'empty') return styleShell(highlight, tint)
     const empty = state === 'empty'
     const colour = empty ? EMPTY_COLOUR : tint
@@ -480,9 +508,29 @@ onMounted(() => {
   // the car group so a lift for large wheels raises it too.
   const chassis = new Group()
   for (const piece of chassisPieces(props.chassis)) {
-    chassis.add(new Mesh(piece.geometry, chassisMaterial(piece.colour)))
+    const mesh = new Mesh(piece.geometry, chassisMaterial(piece.colour))
+    mesh.userData = { colour: piece.colour, role: piece.role }
+    chassis.add(mesh)
   }
   car.add(chassis)
+
+  /**
+   * The chassis in the kit's mouldings: its frame and A parts in the colours
+   * the box has them in, see-through where they are clear plastic, and black
+   * for a bare chassis or a kit the wiki has no row for. Repainted with every
+   * populate, because a kit change on the same chassis does not remount.
+   */
+  function paintChassis() {
+    const colours = props.kitColours
+    for (const mesh of chassis.children) {
+      if (!(mesh instanceof Mesh)) continue
+      const { colour, role } = mesh.userData as { colour: number; role: ChassisRole }
+      const kit = KIT_MOULDED[role]
+      const moulded = colours && kit ? kit.colour(colours) : undefined
+      const clear = !!kit && !!colours?.clear?.includes(kit.clear)
+      mesh.material = chassisMaterial(hexColour(moulded) ?? colour, clear)
+    }
+  }
   const groups = new Map<string, Group>()
   for (const socket of sockets) {
     const group = new Group()
@@ -542,7 +590,7 @@ onMounted(() => {
       bodyGroup.position.y = target
     }
     const progress = (bodyGroup.position.y - bodyRestY) / LIFT_MM
-    shell.opacity = 1 - progress * (1 - LIFTED_OPACITY)
+    shell.opacity = seatedOpacity - progress * (seatedOpacity - Math.min(seatedOpacity, LIFTED_OPACITY))
   }
 
   function tick() {
@@ -580,6 +628,16 @@ onMounted(() => {
     const kit = props.kitColours
     const moulded = kind === 'body' || kind === 'wheel' || kind === 'tire' || kind === 'roller' ? kit?.[kind] : undefined
     return hexColour(moulded) ?? STOCK_TINT[kind]
+  }
+
+  /**
+   * Whether a body is clear plastic, by the same precedence as its colour: a
+   * body part's own record, else the kit's while the slot is still the kit's.
+   */
+  function clearFor(slot: ResolvedSlot): boolean {
+    const part = coloursOf(slot)
+    if (part) return !!part.clear
+    return !slot.swapped && !!props.kitColours?.clear?.includes('body')
   }
 
   /**
@@ -626,6 +684,7 @@ onMounted(() => {
 
   /** The attach step: for each socket, clear it and add what its slot holds. */
   function populate() {
+    paintChassis()
     const bySlot = new Map(props.slots.map(slot => [slot.id, slot]))
     const rims = new Map<string, WheelShape>()
     const rimAt = (wheelSlotId: string) => {
@@ -667,6 +726,7 @@ onMounted(() => {
       }
       const tint = tintFor(socket.kind, slot)
       const data: ProxyData = { slotId: socket.slotId, state, kind: socket.kind, tint, finish: finishFor(socket.kind, slot) }
+      if (socket.kind === 'body') seatedOpacity = clearFor(slot) ? CLEAR_OPACITY : 1
       if (socket.kind === 'motor') data.paints = motorPaintsFor(slot, tint)
       if (GEARS.has(socket.kind)) data.paints = parts.gearPaints(tint)
       const table = state === 'empty' ? OUTLINE : VISIBLE
@@ -679,6 +739,8 @@ onMounted(() => {
       proxies.push(visible)
       // The shell is its own hit volume; everything else gets an oversized one.
       if (socket.kind === 'body') {
+        // Last among the transparent: a clear chassis seen from below is nearer.
+        visible.renderOrder = 1
         group.add(visible)
         hits.push(visible)
       } else {
@@ -720,7 +782,7 @@ onMounted(() => {
     const along = raycaster.intersectObjects(hits, false).map(hit => hit.object.userData as ProxyData)
     // A lifted shell fades so it hides nothing, so it must not take the taps
     // aimed at what it uncovered either: it wins only where nothing else is.
-    // Seated, it is opaque and the nearest hit is what the reader sees.
+    // Seated, it is on the car and the nearest hit, clear or not.
     if (lifted.value) return along.find(proxy => proxy.kind !== 'body') ?? along[0] ?? null
     return along[0] ?? null
   }

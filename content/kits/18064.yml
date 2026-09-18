@@ -52,6 +52,8 @@ colours:
   body: "#2440a8"
   wheel: "#c9ced6"
   tire: "#7cc0ec"
+  chassis: "#ec7a24"
+  aParts: "#eef0f2"
   source: scraped
 body: terra-scorcher-jr
 priceJpy: 1100

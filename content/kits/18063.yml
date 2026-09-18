@@ -49,6 +49,8 @@ colours:
   body: "#c9ced6"
   wheel: "#c9ced6"
   tire: "#7cc0ec"
+  chassis: "#233f8f"
+  aParts: "#233f8f"
   source: scraped
 body: egress-jr
 priceJpy: 1100

@@ -48,6 +48,10 @@ colours:
   body: "#7897d9"
   wheel: "#eef0f2"
   tire: "#2f5fc4"
+  chassis: "#eef0f2"
+  aParts: "#2f5fc4"
+  clear:
+    - body
   source: scraped
 body: astro-boomerang
 priceJpy: 1100

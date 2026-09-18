@@ -51,6 +51,8 @@ colours:
   body: "#c9ced6"
   wheel: "#1f2124"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#1f2124"
   source: scraped
 body: k4-gambol
 priceJpy: 1210

@@ -49,6 +49,8 @@ colours:
   body: "#eef0f2"
   wheel: "#ff7a2a"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#1f2124"
   source: scraped
 body: saint-dragon-jr
 priceJpy: 1100

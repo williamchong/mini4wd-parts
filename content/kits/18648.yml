@@ -49,6 +49,8 @@ colours:
   body: "#a9aeb5"
   wheel: "#d4a93a"
   tire: "#1f2124"
+  chassis: "#8e949b"
+  aParts: "#b9bec4"
   source: scraped
 body: mad-laser
 priceJpy: 1100

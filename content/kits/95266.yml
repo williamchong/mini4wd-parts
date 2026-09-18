@@ -48,6 +48,8 @@ colours:
   body: "#d0312d"
   wheel: "#c9ced6"
   tire: "#1f2124"
+  chassis: "#233f8f"
+  aParts: "#f2c230"
   source: scraped
 body: dash-5-dancing-doll
 priceJpy: 1100

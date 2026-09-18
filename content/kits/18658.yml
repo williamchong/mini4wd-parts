@@ -52,6 +52,8 @@ colours:
   body: "#2b4fb8"
   wheel: "#c9ced6"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#1f2124"
   source: scraped
 body: chevalier
 priceJpy: 1100

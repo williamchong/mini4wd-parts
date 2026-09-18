@@ -48,6 +48,10 @@ colours:
   body: "#4a4d52"
   wheel: "#ec7a24"
   tire: "#1f2124"
+  chassis: "#ec7a24"
+  aParts: "#1f2124"
+  clear:
+    - body
   source: scraped
 body: hexagonite
 priceJpy: 1320

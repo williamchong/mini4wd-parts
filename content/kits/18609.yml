@@ -49,6 +49,8 @@ colours:
   body: "#d0312d"
   wheel: "#eef0f2"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#b9bec4"
   source: override
 body: torcruiser
 priceJpy: 792

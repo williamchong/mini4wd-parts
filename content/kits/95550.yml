@@ -48,6 +48,8 @@ colours:
   body: "#1f2124"
   wheel: "#c9ced6"
   tire: "#1f2124"
+  chassis: "#d3d6da"
+  aParts: "#1f2124"
   source: override
 body: trf-racer-jr
 priceJpy: 1320

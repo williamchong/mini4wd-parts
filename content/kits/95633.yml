@@ -51,6 +51,8 @@ colours:
   body: "#2f5fc4"
   wheel: "#2a2c30"
   tire: "#eef0f2"
+  chassis: "#8fd67a"
+  aParts: "#eef0f2"
   source: override
 body: neo-vqs
 priceJpy: 1320

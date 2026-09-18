@@ -51,6 +51,8 @@ colours:
   body: "#2f9e4f"
   wheel: "#b8703f"
   tire: "#f2c230"
+  chassis: "#eef0f2"
+  aParts: "#d4a93a"
   source: scraped
 body: elephant-racer
 priceJpy: 1430

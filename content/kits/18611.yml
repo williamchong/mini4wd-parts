@@ -49,6 +49,8 @@ colours:
   body: "#c9ced6"
   wheel: "#d0312d"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#b9bec4"
   source: override
 body: rayvolf
 priceJpy: 792

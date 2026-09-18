@@ -27,6 +27,7 @@ classLegality:
 specs: {}
 colours:
   primary: "#dfe6ea"
+  clear: true
   source: derived
 priceJpy: 396
 priceJpyExTax: 360

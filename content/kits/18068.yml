@@ -49,6 +49,8 @@ colours:
   body: "#c9ced6"
   wheel: "#e6f53a"
   tire: "#1f2124"
+  chassis: "#233f8f"
+  aParts: "#233f8f"
   source: scraped
 body: thunder-dragon-jr
 priceJpy: 1100

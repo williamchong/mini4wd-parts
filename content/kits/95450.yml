@@ -48,6 +48,8 @@ colours:
   body: "#1f2124"
   wheel: "#1f2124"
   tire: "#f2c230"
+  chassis: "#f2c230"
+  aParts: "#f2c230"
   source: scraped
 body: dash-x1-proto-emperor
 priceJpy: 1100

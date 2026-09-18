@@ -48,6 +48,9 @@ colours:
   body: "#8fd67a"
   wheel: "#1f2124"
   tire: "#8e949b"
+  aParts: "#2f9e4f"
+  clear:
+    - body
   source: override
 body: festa-jaune
 priceJpy: 1320

@@ -49,6 +49,8 @@ colours:
   body: "#c9ced6"
   wheel: "#eef0f2"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#b9bec4"
   source: scraped
 body: nitro-force
 priceJpy: 880

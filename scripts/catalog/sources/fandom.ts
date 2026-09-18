@@ -180,6 +180,15 @@ export interface FandomKitVariant {
   bodyColour?: string
   wheelColour?: string
   tireColour?: string
+  /**
+   * The chassis' mouldings, colour then material ("Black, ABS"): the frame and
+   * the A-parts sprue. An MS row has no frame field and gives its three units
+   * instead; its tail is not kept, because every row gives it the nose's colour.
+   */
+  frameColour?: string
+  aPartsColour?: string
+  noseColour?: string
+  centerColour?: string
 }
 
 /** "[[VS Chassis|VS]]" -> "VS". Chassis and materials are usually linked. */
@@ -220,7 +229,11 @@ export function parseKitArticle(title: string, wikitext: string): FandomKitVaria
       tire: phrase('tire size', 'tire type'),
       bodyColour: plain(fields['body color']),
       wheelColour: plain(fields['wheel color']),
-      tireColour: plain(fields['tire color'])
+      tireColour: plain(fields['tire color']),
+      frameColour: plain(fields['chassis frame']),
+      aPartsColour: plain(fields['chassis a parts']),
+      noseColour: plain(fields['nose color']),
+      centerColour: plain(fields['center color'])
     }
   })
 }

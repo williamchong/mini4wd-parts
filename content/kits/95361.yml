@@ -48,6 +48,10 @@ colours:
   body: "#4a4d52"
   wheel: "#1f2124"
   tire: "#f2c230"
+  chassis: "#1f2124"
+  aParts: "#1f2124"
+  clear:
+    - body
   source: scraped
 body: festa-jaune
 priceJpy: 1210

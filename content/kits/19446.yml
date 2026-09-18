@@ -52,6 +52,8 @@ colours:
   body: "#eef0f2"
   wheel: "#f2c230"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#1f2124"
   source: scraped
 body: great-blastsonic
 priceJpy: 1430

@@ -49,6 +49,8 @@ colours:
   body: "#2f5fc4"
   wheel: "#d0312d"
   tire: "#1f2124"
+  chassis: "#2f9e4f"
+  aParts: "#2f9e4f"
   source: scraped
 body: lightning-magnum
 priceJpy: 858

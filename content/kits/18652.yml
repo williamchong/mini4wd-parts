@@ -49,6 +49,8 @@ colours:
   body: "#eef0f2"
   wheel: "#1f2124"
   tire: "#1f2124"
+  chassis: "#1f2124"
+  aParts: "#1f2124"
   source: override
 body: toyota-ts050-hybrid
 priceJpy: 1430

@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import test from 'node:test'
-import { colourOf, coloursIn } from './colours.ts'
+import { colourOf, coloursIn, isClear } from './colours.ts'
 
 /**
  * Every phrase here is one the wiki's Technical Info List or a Tamiya product
@@ -40,6 +40,17 @@ test('clear, smoke and fluorescent change the colour rather than hiding it', () 
   const clearBlue = colourOf('Clear Blue')!
   assert.notEqual(clearBlue, colourOf('Blue'))
   assert.notEqual(clearBlue, colourOf('Clear'))
+})
+
+test('a body is see-through when its lead colour is clear or smoked, not when a canopy is', () => {
+  for (const phrase of ['Clear', 'Clear Blue', 'Regine Clear Blue', 'Smoke', 'Black Smoke', 'Translucent White', 'Smoke, ABS', 'AVANTE Mk.II CLEAR BODY SET', 'アバンテMk.II クリヤーボディセット']) {
+    assert.ok(isClear(phrase), phrase)
+  }
+  for (const phrase of ['White and Black Smoke', 'Red and Clear', 'Red, Smoke', 'Tomato Red / / Smoke', 'Black, ABS', 'Blue', undefined]) {
+    assert.ok(!isClear(phrase), String(phrase))
+  }
+  // The wiki's markup can lead a value with a line break, and an empty lead is no lead.
+  assert.ok(isClear('<br>Clear, ABS'))
 })
 
 test('a colour word inside another word is not a colour', () => {

@@ -229,6 +229,13 @@ test('a kit article yields one variant per box', () => {
   assert.equal(standard!.wheelColour, 'White')
   assert.equal(special!.bodyColour, 'Smoke')
   assert.equal(special!.wheelColour, undefined)
+  // The chassis' own colours, frame and A parts, or an MS chassis' three units.
+  assert.equal(standard!.frameColour, 'Black, ABS')
+  assert.equal(standard!.aPartsColour, 'Clear, ABS')
+  assert.equal(premium!.frameColour, undefined)
+  assert.equal(premium!.noseColour, 'Red')
+  assert.equal(premium!.centerColour, 'Black')
+  assert.equal(premium!.aPartsColour, '/ Red, ABS')
 
   // A re-release shares one row, so a row can name several item numbers.
   assert.deepEqual(special!.ids, ['18506', '95501'])

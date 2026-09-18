@@ -48,6 +48,8 @@ colours:
   body: "#eef0f2"
   wheel: "#7cc0ec"
   tire: "#1f2124"
+  chassis: "#7cc0ec"
+  aParts: "#1f2124"
   source: scraped
 body: big-bang-ghost
 priceJpy: 1100

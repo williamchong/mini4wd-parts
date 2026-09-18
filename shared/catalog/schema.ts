@@ -195,6 +195,10 @@ export const partSpecs = z.object({
   pieces: z.number().optional()
 })
 
+/** The mouldings of a kit that can be clear plastic: its body and its chassis'. */
+export const KIT_CLEAR = ['body', 'chassis', 'aParts'] as const
+export type KitClear = typeof KIT_CLEAR[number]
+
 /** A flat sRGB colour, `#rrggbb`. */
 const hex = z.string().regex(/^#[0-9a-f]{6}$/)
 
@@ -217,6 +221,11 @@ export const partColours = z.object({
   tire: hex.optional(),
   sticker: hex.optional(),
   can: hex.optional(),
+  /**
+   * A body moulded in clear or smoked polycarbonate, which the pane draws
+   * see-through even seated on the chassis. Only body parts carry it.
+   */
+  clear: z.literal(true).optional(),
   source: provenance
 })
 
@@ -488,6 +497,17 @@ export const kitSchema = z.object({
     tire: hex.optional(),
     /** Only from data/overrides/kits.yml: the wiki has no roller colour field. */
     roller: hex.optional(),
+    /**
+     * The chassis as this box moulds it: the frame (`Chassis frame`, or an MS
+     * chassis' centre unit), an MS chassis' nose and tail units where they
+     * differ from its centre, and the A-parts sprue — gear covers, motor
+     * cover, switch. Absent, the pane draws the chassis black.
+     */
+    chassis: hex.optional(),
+    chassisEnds: hex.optional(),
+    aParts: hex.optional(),
+    /** Which of the mouldings above are clear or smoked plastic, drawn see-through. */
+    clear: z.array(z.enum(KIT_CLEAR)).optional(),
     source: provenance
   }).optional(),
   /**

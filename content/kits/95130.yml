@@ -51,6 +51,10 @@ colours:
   body: "#dfe6ea"
   wheel: "#2a2c30"
   tire: "#1f2124"
+  chassis: "#e6f53a"
+  aParts: "#e6f53a"
+  clear:
+    - body
   source: scraped
 body: neo-vqs
 priceJpy: 1430

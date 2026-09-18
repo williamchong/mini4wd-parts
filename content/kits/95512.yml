@@ -48,6 +48,10 @@ colours:
   body: "#4a4d52"
   wheel: "#8e949c"
   tire: "#d0312d"
+  chassis: "#eef0f2"
+  aParts: "#1f2124"
+  clear:
+    - body
   source: scraped
 body: brocken-gigant
 priceJpy: 1430

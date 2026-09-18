@@ -51,6 +51,10 @@ colours:
   body: "#2a2c30"
   wheel: "#e6f53a"
   tire: "#1f2124"
+  chassis: "#8e949b"
+  aParts: "#8e949b"
+  clear:
+    - body
   source: scraped
 body: grasshopper-jr
 priceJpy: 1430

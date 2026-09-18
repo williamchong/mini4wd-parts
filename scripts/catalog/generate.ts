@@ -5,11 +5,11 @@ import { ROOT } from './fetch.ts'
 import { readJsonFile, readYamlFile, readYamlFileIfPresent } from './io.ts'
 import { thumbnailIds } from './thumbnails.ts'
 import { thumbnailPath, type ThumbCollection } from '../../shared/catalog/thumbnails.ts'
-import { partSchema, chassisSchema, kitSchema, CHASSIS_IDS, chassisIdFor } from '../../shared/catalog/schema.ts'
+import { partSchema, chassisSchema, kitSchema, CHASSIS_IDS, chassisIdFor, KIT_CLEAR } from '../../shared/catalog/schema.ts'
 import type { ChassisId, Kit, KitOverride, LabelNames, Loadout, PartCategory, PartColours, PartOverride, PartSpecs } from '../../shared/catalog/schema.ts'
 import { compact, deriveAddOn, deriveCategory, deriveLegality, deriveSlots, deriveSpecs, isPlainObject, normalise } from './taxonomy.ts'
 import { labelFor, neutralLabel } from './labels.ts'
-import { colourOf, coloursIn } from './colours.ts'
+import { colourOf, coloursIn, isClear } from './colours.ts'
 import { bodyForKit, loadBodies, writeBodies } from './bodies.ts'
 import { finishFor, shapesFor, WHEEL_CATEGORIES } from './wheels.ts'
 import { TIRES } from '../../shared/scene/wheels.ts'
@@ -136,7 +136,34 @@ function deriveColours(names: { ja: string, en?: string }, category: PartCategor
         : specs.rollerType === 'aluminium' || /\b(aluminum|stainless)\b/i.test(names.en ?? '') ? MATERIAL_COLOUR.metal
           : category === 'tire' ? MATERIAL_COLOUR.rubber
             : undefined)
-  return primary ? { primary, source: 'derived' } : undefined
+  if (!primary) return undefined
+  // A clear body set is sold as the clear shell; its name is what says so.
+  const clear = category === 'body' && (isClear(names.en) || isClear(names.ja)) ? true : undefined
+  return compact<PartColours>({ primary, clear, source: 'derived' })
+}
+
+/**
+ * A kit's colours from its wiki row. The chassis is its frame, or an MS
+ * chassis' centre unit, whose nose and tail are kept only where they differ —
+ * every row that gives them gives the same colour for both. `clear` lists the
+ * mouldings whose lead colour is clear or smoked plastic.
+ */
+function kitColours(wiki: FandomKitVariant): NonNullable<Kit['colours']> {
+  const frame = wiki.frameColour ?? wiki.centerColour
+  const chassis = colourOf(frame)
+  const ends = colourOf(wiki.noseColour)
+  const moulded = { body: wiki.bodyColour, chassis: frame, aParts: wiki.aPartsColour }
+  const clear = KIT_CLEAR.filter(key => isClear(moulded[key]))
+  return compact<NonNullable<Kit['colours']>>({
+    body: colourOf(wiki.bodyColour),
+    wheel: colourOf(wiki.wheelColour),
+    tire: colourOf(wiki.tireColour),
+    chassis,
+    chassisEnds: ends !== chassis ? ends : undefined,
+    aParts: colourOf(wiki.aPartsColour),
+    clear: clear.length ? clear : undefined,
+    source: 'scraped'
+  })
 }
 
 /** Item numbers Tamiya lists on each chassis' compatibility page. */
@@ -398,12 +425,7 @@ function buildKit(item: JpItem<KitGenreCode>, chassis: ChassisId) {
     stockLoadout,
     loadoutSource: wiki ? 'fandom' : 'chassis',
     loadoutSourceTitle: wiki?.title,
-    colours: wiki && compact<NonNullable<Kit['colours']>>({
-      body: colourOf(wiki.bodyColour),
-      wheel: colourOf(wiki.wheelColour),
-      tire: colourOf(wiki.tireColour),
-      source: 'scraped'
-    }),
+    colours: wiki && kitColours(wiki),
     body: bodyForKit(bodies, { id: item.id, loadoutSourceTitle: wiki?.title }),
     priceJpy: item.priceJpy,
     priceJpyExTax: item.priceJpyExTax,
@@ -420,7 +442,11 @@ function buildKit(item: JpItem<KitGenreCode>, chassis: ChassisId) {
   }
 
   const merged = deepMerge(compact(record), override)
-  if (override.colours) merged.colours = { ...merged.colours, source: 'override' }
+  if (override.colours) {
+    // `clear: []` is how an override says a scraped clear shell is painted.
+    const { clear, ...rest } = merged.colours ?? {}
+    merged.colours = { ...rest, ...(clear?.length ? { clear } : {}), source: 'override' }
+  }
   return merged
 }
 

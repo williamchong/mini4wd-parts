@@ -48,6 +48,8 @@ colours:
   body: "#565b62"
   wheel: "#5fe84a"
   tire: "#1f2124"
+  chassis: "#7d838b"
+  aParts: "#1f2124"
   source: scraped
 body: heat-edge
 priceJpy: 1100

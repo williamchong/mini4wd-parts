@@ -48,6 +48,8 @@ colours:
   body: "#eef0f2"
   wheel: "#eef0f2"
   tire: "#7cc0ec"
+  chassis: "#5fe84a"
+  aParts: "#5fe84a"
   source: scraped
 body: avante-mk3
 priceJpy: 1210

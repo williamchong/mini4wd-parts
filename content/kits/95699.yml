@@ -51,6 +51,8 @@ colours:
   body: "#8fd67a"
   wheel: "#f2c230"
   tire: "#e9658f"
+  chassis: "#ff5fae"
+  aParts: "#5fe84a"
   source: scraped
 body: k4tasche
 priceJpy: 1430

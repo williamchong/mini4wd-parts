@@ -48,6 +48,8 @@ colours:
   body: "#c9ced6"
   wheel: "#c9ced6"
   tire: "#1f2124"
+  chassis: "#8e949b"
+  aParts: "#b9bec4"
   source: scraped
 body: tri-gale
 priceJpy: 1320

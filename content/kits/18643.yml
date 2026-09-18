@@ -49,6 +49,8 @@ colours:
   body: "#eef0f2"
   wheel: "#eef0f2"
   tire: "#1f2124"
+  chassis: "#8e949b"
+  aParts: "#b9bec4"
   source: scraped
 body: rise-emperor
 priceJpy: 1430
