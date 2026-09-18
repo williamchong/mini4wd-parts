@@ -15,8 +15,8 @@
  */
 import {
   BoxGeometry, CylinderGeometry, DirectionalLight, Group, Mesh, Object3D,
-  MeshPhysicalMaterial, MeshStandardMaterial, NeutralToneMapping, PerspectiveCamera,
-  Raycaster, Scene, SphereGeometry, Vector2, Vector3, WebGLRenderer
+  MeshPhysicalMaterial, MeshStandardMaterial, NeutralToneMapping, PerspectiveCamera, PlaneGeometry,
+  Raycaster, Scene, ShadowMaterial, SphereGeometry, Vector2, Vector3, VSMShadowMap, WebGLRenderer
 } from 'three'
 import type { BufferGeometry } from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
@@ -589,6 +589,12 @@ onMounted(() => {
   // Khronos PBR Neutral: the tone curve that leaves base colours where they
   // are, and the kits' colours were matched to box art by eye (§5.6).
   renderer.toneMapping = NeutralToneMapping
+  // The shadow's light is fixed to the world and the car only moves when the
+  // build does, so an orbit leaves the shadow where it was: the map is redrawn
+  // on request (`shadowsChanged`), not on every frame the camera moves.
+  renderer.shadowMap.enabled = true
+  renderer.shadowMap.type = VSMShadowMap
+  renderer.shadowMap.autoUpdate = false
 
   const scene = new Scene()
   // The light is what the materials reflect, not lamps: a studio of glowing
@@ -628,6 +634,37 @@ onMounted(() => {
   key.position.set(120, 200, 160)
   scene.add(key)
 
+  /**
+   * The light the floor's shadow comes from, which lights nothing: at zero
+   * intensity it adds nothing to the car, but a `ShadowMaterial` darkens by
+   * every light's shadow whatever its strength. Nearly overhead, so the car
+   * stands in its shadow as a product shot does, where the key's would fall
+   * behind the car from the home view. Its map covers the car's footprint
+   * with the widest plates, and is blurred wide because a shadow that soft is
+   * what reads as contact rather than as a second, darker car on the floor.
+   */
+  const shade = new DirectionalLight(0xffffff, 0)
+  shade.position.set(-30, 300, -40)
+  shade.castShadow = true
+  shade.shadow.mapSize.set(512, 512)
+  Object.assign(shade.shadow.camera, { left: -130, right: 130, top: 130, bottom: -130, near: 100, far: 500 })
+  shade.shadow.radius = 14
+  shade.shadow.blurSamples = 16
+  shade.shadow.bias = -0.002
+  scene.add(shade)
+
+  /**
+   * The floor the car stands on: invisible but for the shadow on it, so it
+   * lays over the frame's own background the way the transparent canvas does.
+   * Tires touch y = 0, and a lift for large wheels raises the car, not this.
+   */
+  const ground = new Mesh(new PlaneGeometry(600, 600).rotateX(-Math.PI / 2), new ShadowMaterial({ opacity: 0.35 }))
+  ground.receiveShadow = true
+  scene.add(ground)
+  function shadowsChanged() {
+    renderer.shadowMap.needsUpdate = true
+  }
+
   const car = new Group()
   // The chassis itself is not a slot, so it is drawn once under the sockets
   // rather than as a proxy (shared/scene/generators/chassis.ts). It rides in
@@ -635,6 +672,7 @@ onMounted(() => {
   const chassis = new Group()
   for (const piece of chassisPieces(props.chassis)) {
     const mesh = new Mesh(piece.geometry, chassisMaterial(piece.colour))
+    mesh.castShadow = true
     mesh.userData = { colour: piece.colour, role: piece.role, end: piece.end }
     chassis.add(mesh)
   }
@@ -764,7 +802,12 @@ onMounted(() => {
 
   function tickBody() {
     if (!bodyGroup) return
-    bodyGroup.position.y = easeToward(bodyGroup.position.y, bodyRestY + (lifted.value ? LIFT_MM : 0), 0.18, 0.05)
+    const from = bodyGroup.position.y
+    bodyGroup.position.y = easeToward(from, bodyRestY + (lifted.value ? LIFT_MM : 0), 0.18, 0.05)
+    // Lifted, the shell is there to be seen through, and a shadow the size of
+    // the car under a shell that is barely there would say otherwise.
+    for (const shellMesh of bodyGroup.children) shellMesh.castShadow = !lifted.value
+    if (bodyGroup.position.y !== from) shadowsChanged()
     const progress = (bodyGroup.position.y - bodyRestY) / LIFT_MM
     shell.opacity = seatedOpacity - progress * (seatedOpacity - Math.min(seatedOpacity, LIFTED_OPACITY))
   }
@@ -993,6 +1036,9 @@ onMounted(() => {
       else visibles = [new Mesh(geometry(VISIBLE, kind, shape, `v:${key}`), paint)]
       for (const visible of visibles) {
         visible.userData = data
+        // An outline would cast a shadow of its wireframe: an empty slot is
+        // not a thing, so it throws none.
+        visible.castShadow = state !== 'empty'
         proxies.push(visible)
       }
       // A wheel or tire turns with its axle, an empty one's outline too. The
@@ -1022,6 +1068,7 @@ onMounted(() => {
       if (socket.kind === 'tire') lift = Math.max(lift, mm / 2 - socket.position[1])
     }
     car.position.y = lift
+    shadowsChanged()
     requestRender()
   }
 
@@ -1174,6 +1221,8 @@ onMounted(() => {
     body?.geometry.dispose()
     for (const m of materials.values()) m.dispose()
     shell.dispose()
+    ground.geometry.dispose()
+    ground.material.dispose()
     geometries.clear()
     trains.clear()
     materials.clear()
