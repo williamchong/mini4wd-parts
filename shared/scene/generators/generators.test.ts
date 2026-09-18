@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { Vector3 } from 'three'
-import type { BufferGeometry } from 'three'
+import { Box3, Vector3 } from 'three'
+import type { BufferAttribute, BufferGeometry } from 'three'
 import { CHASSIS_IDS } from '../../catalog/chassis.ts'
 import { DEFAULT_SILHOUETTE } from '../bodies.ts'
 import { AXLE_Z, bodyGeometry, FLOOR_MM } from './body.ts'
@@ -10,7 +10,7 @@ import { layoutFor, socketsFor } from '../sockets.ts'
 import { DEFAULT_TIRE, DEFAULT_WHEEL, TIRES, WHEELS } from '../wheels.ts'
 import { plate, Triangles } from './mesh.ts'
 import { brake, counterGear, damper, GEAR_GROUPS, gearSet, motor, MOTOR_GROUPS, motorPaints, roller, sideStay, stay, tire, wheel } from './parts.ts'
-import type { MotorGroup, Paint } from './parts.ts'
+import type { MotorGroup, Paint, Rotor } from './parts.ts'
 
 const size = (geometry: BufferGeometry) => {
   geometry.computeBoundingBox()
@@ -273,26 +273,89 @@ test('a chassis is drawn in the mouldings a kit colours, black until one does', 
   }
 })
 
-test('a gear set and a counter gear wind outward, a draw group per colour, and sit where their socket says', () => {
-  for (const end of [1, -1] as const) {
-    for (const [name, geometry] of [['PRO', gearSet(2, end)], ['single-shaft', gearSet(1, end)], ['counter', counterGear(end)]] as const) {
-      assert.equal(geometry.groups.length, GEAR_GROUPS.length, name)
-      for (const [index, piece] of piecesOf(geometry).entries()) {
-        if (!piece.getAttribute('position').count) continue
-        assert.ok(signedVolume(piece) > 0, `${name} ${end}: ${GEAR_GROUPS[index]} outward`)
+/** A rotor's geometry back where its socket draws it, with its pivot added back. */
+const placed = (rotor: Rotor) => rotor.geometry.clone().translate(...rotor.pivot)
+
+/** The bounding box of a whole train, as its socket draws it. */
+function assembled(rotors: readonly Rotor[]): Box3 {
+  const box = new Box3()
+  for (const rotor of rotors) box.union(new Box3().setFromBufferAttribute(placed(rotor).getAttribute('position') as BufferAttribute))
+  return box
+}
+
+const AXES = { x: new Vector3(1, 0, 0), z: new Vector3(0, 0, 1) }
+/** A rotor's angular velocity per unit of axle speed, in its socket's frame. */
+const spinOf = (rotor: Rotor) => AXES[rotor.axis].clone().multiplyScalar(rotor.rate)
+/** How fast a point on a rotor moves, in its socket's frame. */
+const velocityAt = (rotor: Rotor, point: Vector3) => spinOf(rotor).cross(point.clone().sub(new Vector3(...rotor.pivot)))
+
+/** Where two gears touch: halfway between the nearest pair of their vertices. */
+function contact(a: Rotor, b: Rotor): Vector3 {
+  const pa = placed(a).getAttribute('position')
+  const pb = placed(b).getAttribute('position')
+  const u = new Vector3(); const v = new Vector3()
+  let best = Infinity
+  const at = new Vector3()
+  for (let i = 0; i < pa.count; i++) {
+    u.fromBufferAttribute(pa, i)
+    for (let j = 0; j < pb.count; j++) {
+      const d = u.distanceToSquared(v.fromBufferAttribute(pb, j))
+      if (d < best) {
+        best = d
+        at.copy(u).add(v).multiplyScalar(0.5)
       }
     }
-    // The PRO train reaches in toward the motor, never out past the axle toward the bumper.
-    const pro = gearSet(2, end); pro.computeBoundingBox()
-    const inward = end === 1 ? pro.boundingBox!.min.z : -pro.boundingBox!.max.z
-    assert.ok(inward < -19, `PRO pinion reaches the motor shaft: ${inward}`)
-    assert.ok(Math.abs(end === 1 ? pro.boundingBox!.max.z : pro.boundingBox!.min.z) < 8, 'PRO axle spur is the outermost gear')
   }
-  // A single-shaft crown gear clears the propeller shaft's bevel at x ±4.
-  const crown = gearSet(1, 1); crown.computeBoundingBox()
-  assert.ok(crown.boundingBox!.min.x >= 4, `crown clears the bevel: ${crown.boundingBox!.min.x}`)
+  return at
+}
+
+const named = (rotors: readonly Rotor[], name: Rotor['name']) => rotors.find(rotor => rotor.name === name)!
+
+/**
+ * Two gears in mesh: at the point they touch both surfaces move the same way,
+ * and teeth leave one exactly as fast as they arrive at the other. Tooth
+ * counts are the ones the generator draws, so a rate that drifts from them is
+ * teeth sliding through each other on screen.
+ */
+function assertMeshes(label: string, [a, teethA]: [Rotor, number], [b, teethB]: [Rotor, number]) {
+  const at = contact(a, b)
+  const va = velocityAt(a, at); const vb = velocityAt(b, at)
+  assert.ok(va.dot(vb) > 0.5 * va.length() * vb.length(), `${label}: ${a.name} and ${b.name} move together where they touch`)
+  near(Math.abs(a.rate) * teethA, Math.abs(b.rate) * teethB, `${label}: ${a.name}–${b.name} teeth per turn`)
+}
+
+test('a gear train is rotors that wind outward, a draw group per colour, and each turns in place', () => {
+  for (const end of [1, -1] as const) {
+    for (const [name, rotors] of [['PRO', gearSet(2, end)], ['single-shaft', gearSet(1, end)], ['counter', counterGear(end)]] as const) {
+      for (const rotor of rotors) {
+        const label = `${name} ${end} ${rotor.name}`
+        // A turning rotor is all gear and the pins are all pin, so each has one group.
+        assert.deepEqual(rotor.geometry.groups.map(group => GEAR_GROUPS[group.materialIndex!]), [rotor.rate ? 'gears' : 'pins'], label)
+        const [piece] = piecesOf(rotor.geometry)
+        assert.ok(signedVolume(piece!) > 0, `${label} outward`)
+        if (!rotor.rate) continue
+        // Centred on its axis, or it would wobble as it turns.
+        const centre = new Box3().setFromBufferAttribute(rotor.geometry.getAttribute('position') as BufferAttribute).getCenter(new Vector3())
+        const across = centre.clone().sub(AXES[rotor.axis].clone().multiplyScalar(centre.dot(AXES[rotor.axis])))
+        assert.ok(across.length() < 0.1, `${label}: turns about its own axis (${across.toArray()})`)
+      }
+    }
+  }
+})
+
+test('a gear set and a counter gear sit where their socket says', () => {
+  for (const end of [1, -1] as const) {
+    // The PRO train reaches in toward the motor, never out past the axle toward the bumper.
+    const pro = assembled(gearSet(2, end))
+    const inward = end === 1 ? pro.min.z : -pro.max.z
+    assert.ok(inward < -19, `PRO pinion reaches the motor shaft: ${inward}`)
+    assert.ok(Math.abs(end === 1 ? pro.max.z : pro.min.z) < 8, 'PRO axle spur is the outermost gear')
+    // A single-shaft crown gear clears the propeller shaft's bevel at x ±4.
+    const crown = assembled(gearSet(1, end))
+    assert.ok(Math.min(Math.abs(crown.min.x), Math.abs(crown.max.x)) >= 4 && crown.min.x * crown.max.x > 0, `crown clears the bevel: ${crown.min.x}…${crown.max.x}`)
+  }
   // The counter gear clears the motor cradle (x 14.5–17.5) and the inner face of every wheel it sits beside.
-  const counter = counterGear(-1); counter.computeBoundingBox()
+  const counter = assembled(counterGear(-1))
   for (const id of CHASSIS_IDS) {
     const l = layoutFor(id)
     if (!l.motor.across) {
@@ -302,6 +365,49 @@ test('a gear set and a counter gear wind outward, a draw group per colour, and s
       continue
     }
     const wheelFace = Math.min(l.treadFrontMm, l.treadRearMm) / 2 - 5.75
-    assert.ok(counter.boundingBox!.min.x >= 16 && counter.boundingBox!.max.x < wheelFace, `${id} counter gear between cradle and wheel`)
+    assert.ok(counter.min.x >= 16 && counter.max.x < wheelFace, `${id} counter gear between cradle and wheel`)
+  }
+})
+
+test('switched on, every gear train drives both axles forward off one motor', () => {
+  for (const id of CHASSIS_IDS) {
+    const sockets = socketsFor(id)
+    const gearSockets = sockets.filter(socket => socket.kind === 'gear')
+    const towardNose = (z: number) => z < 0 ? -1 as const : 1 as const
+    if (!layoutFor(id).motor.across) {
+      // Both pinions are the one double-shaft motor's, so they must turn as one.
+      const pinions = gearSockets.map(socket => {
+        const rotors = gearSet(2, towardNose(socket.position[2]))
+        const label = `${id} ${socket.name}`
+        assertMeshes(label, [named(rotors, 'axle'), 14], [named(rotors, 'counter'), 10])
+        assertMeshes(label, [named(rotors, 'counter'), 14], [named(rotors, 'pinion'), 6])
+        return spinOf(named(rotors, 'pinion'))
+      })
+      assert.ok(pinions[0]!.distanceTo(pinions[1]!) < 1e-9, `${id}: one motor shaft, turning one way (${pinions.map(p => p.toArray())})`)
+      continue
+    }
+    // Single-shaft: each crown gear turns the propeller shaft through the bevel
+    // at its end (generators/chassis.ts, singleShaftDrive). Both ends have to
+    // ask the shaft to turn the same way.
+    const shaft = gearSockets.map(socket => {
+      const crown = named(gearSet(1, towardNose(socket.position[2])), 'axle')
+      // The bevel's centre, in the gear socket's frame: on the car's centre line, 8 mm in from the axle.
+      const bevel = new Vector3(0, 0, -towardNose(socket.position[2]) * 8)
+      const pa = placed(crown).getAttribute('position')
+      const at = new Vector3(); const v = new Vector3()
+      let best = Infinity
+      for (let i = 0; i < pa.count; i++) {
+        const d = v.fromBufferAttribute(pa, i).distanceToSquared(bevel)
+        if (d < best) { best = d; at.copy(v) }
+      }
+      const bevelSurface = AXES.z.clone().cross(at.clone().sub(new Vector3(0, 0, at.z)))
+      return Math.sign(velocityAt(crown, at).dot(bevelSurface))
+    })
+    assert.equal(shaft[0], shaft[1], `${id}: both crown gears turn the propeller shaft one way`)
+    // The counter gear turns the shaft through a crown the pane does not
+    // draw, so only its own mesh with the pinion is on screen to check.
+    const motorSocket = sockets.find(socket => socket.kind === 'counter-gear')!
+    const rotors = counterGear(towardNose(motorSocket.position[2]))
+    assertMeshes(`${id} counter-gear`, [named(rotors, 'pinion'), 8], [named(rotors, 'counter'), 16])
   }
 })

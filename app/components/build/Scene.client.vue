@@ -120,14 +120,22 @@ const TOWARD_NOSE: ReadonlySet<ProxyKind> = new Set(['stay', 'gear', 'counter-ge
 
 /** Every kind but the body, whose shell is lofted per kit and held apart from these tables. */
 type Solid = Exclude<ProxyKind, 'body'>
+/** The kinds drawn as a gear train, one mesh per rotor, rather than as one shape. */
+type Train = 'gear' | 'counter-gear'
 
 // An FA-130 lies across the car and has one shaft; a PRO motor lies along it with two.
 const shafts = () => layoutFor(props.chassis).motor.across ? 1 : 2
 
-const VISIBLE: Record<Solid, (shape: Shape) => BufferGeometry> = {
-  motor: () => parts.motor(shafts()),
+const gearSide = (shape: Shape) => parts.gearSide(shafts(), shape.towardNose || 1)
+
+const isTrain = (kind: ProxyKind): kind is Train => GEARS.has(kind)
+const TRAINS: Record<Train, (shape: Shape) => parts.Rotor[]> = {
   gear: shape => parts.gearSet(shafts(), shape.towardNose || 1),
-  'counter-gear': shape => parts.counterGear(shape.towardNose || 1),
+  'counter-gear': shape => parts.counterGear(shape.towardNose || 1)
+}
+
+const VISIBLE: Record<Exclude<Solid, Train>, (shape: Shape) => BufferGeometry> = {
+  motor: () => parts.motor(shafts()),
   wheel: shape => parts.wheel(shape.wheel!),
   tire: shape => parts.tire(shape.tire!, shape.wheel!),
   roller: shape => parts.roller(shape.mm),
@@ -160,9 +168,9 @@ const OUTLINE: Record<Solid, (shape: Shape) => BufferGeometry> = {
   // The gear a reader would look for: the PRO axle spur or the single-shaft
   // crown gear, and the counter gear beside the motor. Centres and widths are
   // those gears' in generators/parts.ts; HIT's boxes around them are looser.
-  gear: () => shafts() === 1
-    ? outlineRing(9, 3.5, 'x').translate(5.5, 0, 0)
-    : outlineRing(7.5, 3, 'x').translate(-7.5, 0, 0),
+  gear: shape => shafts() === 1
+    ? outlineRing(9, 3.5, 'x').translate(5.5 * gearSide(shape), 0, 0)
+    : outlineRing(7.5, 3, 'x').translate(7.5 * gearSide(shape), 0, 0),
   'counter-gear': shape => outlineRing(7, 3.5, 'x').translate(19.75, 5.5, 7.5 * (shape.towardNose || 1)),
   wheel: shape => outlineRing(shape.mm / 2, 10, 'x'),
   tire: shape => outlineRing(shape.mm / 2, 9, 'x'),
@@ -246,8 +254,8 @@ function diameterFor(kind: ProxyKind, slot: ResolvedSlot): number {
 const HIT: Record<Solid, (shape: Shape) => BufferGeometry> = {
   motor: () => new BoxGeometry(34, 19, 24),
   gear: shape => shafts() === 1
-    ? new BoxGeometry(16, 20, 16).translate(6, 0, 4 * (shape.towardNose || 1))
-    : new BoxGeometry(14, 22, 30).translate(-4, 3, -6 * (shape.towardNose || 1)),
+    ? new BoxGeometry(16, 20, 16).translate(6 * gearSide(shape), 0, 4 * (shape.towardNose || 1))
+    : new BoxGeometry(14, 22, 30).translate(4 * gearSide(shape), 3, -6 * (shape.towardNose || 1)),
   'counter-gear': shape => new BoxGeometry(7, 20, 20).translate(20.5, 5, 7 * (shape.towardNose || 1)),
   wheel: ({ mm }) => new CylinderGeometry(mm / 2, mm / 2, 12, 16).rotateZ(Math.PI / 2),
   tire: ({ mm }) => new CylinderGeometry(mm / 2 + 2, mm / 2 + 2, 9, 16).rotateZ(Math.PI / 2),
@@ -368,16 +376,20 @@ onMounted(() => {
   // Per instance, not per module: the caches are disposed with the scene that
   // filled them, and the component remounts on every chassis change.
   const geometries = new Map<string, BufferGeometry>()
+  const trains = new Map<string, parts.Rotor[]>()
   const materials = new Map<string, MeshStandardMaterial>()
 
-  function geometry<K extends ProxyKind, T>(table: Record<K, (arg: T) => BufferGeometry>, kind: K, arg: T, key: string) {
-    let found = geometries.get(key)
+  function cached<T>(cache: Map<string, T>, key: string, make: () => T) {
+    let found = cache.get(key)
     if (!found) {
-      found = table[kind](arg)
-      geometries.set(key, found)
+      found = make()
+      cache.set(key, found)
     }
     return found
   }
+  const geometry = <K extends ProxyKind, T>(table: Record<K, (arg: T) => BufferGeometry>, kind: K, arg: T, key: string) =>
+    cached(geometries, key, () => table[kind](arg))
+  const train = (kind: Train, shape: Shape, key: string) => cached(trains, key, () => TRAINS[kind](shape))
 
   /**
    * The body is held apart from the cache: a kit change on the same chassis
@@ -729,27 +741,37 @@ onMounted(() => {
       if (socket.kind === 'body') seatedOpacity = clearFor(slot) ? CLEAR_OPACITY : 1
       if (socket.kind === 'motor') data.paints = motorPaintsFor(slot, tint)
       if (GEARS.has(socket.kind)) data.paints = parts.gearPaints(tint)
-      const table = state === 'empty' ? OUTLINE : VISIBLE
+      const key = shapeKey(socket.kind, shape)
+      const kind = socket.kind
+      const paint = materialsFor(data, highlightFor(socket.slotId))
       // `shell` is set and loaded for every body that reaches here (see above).
-      const visibleGeometry = socket.kind === 'body'
-        ? bodyFor(shell!.id, shell!.silhouette!)
-        : geometry(table, socket.kind, shape, `${table === OUTLINE ? 'o' : 'v'}:${shapeKey(socket.kind, shape)}`)
-      const visible = new Mesh(visibleGeometry, materialsFor(data, highlightFor(socket.slotId)))
-      visible.userData = data
-      proxies.push(visible)
+      // A gear train is a mesh per rotor, each at its pivot so it can turn in place.
+      let visibles: Mesh[]
+      if (kind === 'body') visibles = [new Mesh(bodyFor(shell!.id, shell!.silhouette!), paint)]
+      else if (state === 'empty') visibles = [new Mesh(geometry(OUTLINE, kind, shape, `o:${key}`), paint)]
+      else if (isTrain(kind)) visibles = train(kind, shape, `t:${key}`).map(rotor => {
+        const mesh = new Mesh(rotor.geometry, paint)
+        mesh.position.set(...rotor.pivot)
+        return mesh
+      })
+      else visibles = [new Mesh(geometry(VISIBLE, kind, shape, `v:${key}`), paint)]
+      for (const visible of visibles) {
+        visible.userData = data
+        proxies.push(visible)
+      }
       // The shell is its own hit volume; everything else gets an oversized one.
-      if (socket.kind === 'body') {
+      if (kind === 'body') {
         // Last among the transparent: a clear chassis seen from below is nearer.
-        visible.renderOrder = 1
-        group.add(visible)
-        hits.push(visible)
+        visibles[0]!.renderOrder = 1
+        group.add(...visibles)
+        hits.push(...visibles)
       } else {
         // Only a round part's size and a gear's end change its hit volume.
-        const hitShape: Shape = { mm: ROUND.has(socket.kind) ? mm : 0, id: '', silhouette: '', towardNose: GEARS.has(socket.kind) ? shape.towardNose : 0 }
-        const hit = new Mesh(geometry(HIT, socket.kind, hitShape, `h:${shapeKey(socket.kind, hitShape)}`))
+        const hitShape: Shape = { mm: ROUND.has(kind) ? mm : 0, id: '', silhouette: '', towardNose: GEARS.has(kind) ? shape.towardNose : 0 }
+        const hit = new Mesh(geometry(HIT, kind, hitShape, `h:${shapeKey(kind, hitShape)}`))
         hit.visible = false
         hit.userData = data
-        group.add(visible, hit)
+        group.add(...visibles, hit)
         hits.push(hit)
       }
       // A tire larger than the axle height would sink into the ground: raise
@@ -893,10 +915,12 @@ onMounted(() => {
       if (piece instanceof Mesh) piece.geometry.dispose()
     }
     for (const g of geometries.values()) g.dispose()
+    for (const rotors of trains.values()) for (const rotor of rotors) rotor.geometry.dispose()
     body?.geometry.dispose()
     for (const m of materials.values()) m.dispose()
     shell.dispose()
     geometries.clear()
+    trains.clear()
     materials.clear()
   }
 })

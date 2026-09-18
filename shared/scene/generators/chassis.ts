@@ -187,8 +187,10 @@ class Chassis {
     const halfWheelbase = this.layout.wheelbaseMm / 2
     for (const x of [-16, 16]) this.frame.boxAt(3, 16, 22, x, 10, mz)
     this.frame.boxAt(30, 2, 22, 0, 4, mz)
+    // Each housing on the far side of the shaft from its crown gear, which is
+    // right of the shaft at the front and left at the rear (parts.ts, gearSide).
     this.gearHousings(halfWheelbase, [-4])
-    this.gearHousings(-halfWheelbase, [-4])
+    this.gearHousings(-halfWheelbase, [4])
     this.steel.revolve(cylinder(1.2, -halfWheelbase + 8, halfWheelbase - 8), 6, 'z', [0, AXLE_Y, 0])
     for (const z of [-halfWheelbase + 8, halfWheelbase - 8]) this.steel.revolve(cylinder(4, z - 1, z + 1), 8, 'z', [0, AXLE_Y, 0])
   }

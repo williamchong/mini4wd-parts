@@ -148,12 +148,14 @@ export class Triangles {
    * Several sets of triangles as one geometry with a draw group each, in
    * order, for a mesh drawn with one material per group: a shape with more
    * than one colour that is still one proxy to hit, cache and dispose. An
-   * empty set is an empty group, so group indices never shift.
+   * empty set adds no group, since three still issues a draw for one, but
+   * each group's material index is its set's index, so the paints never shift.
    */
   static grouped(sets: readonly Triangles[]): BufferGeometry {
     const all = new Triangles()
     const geometry = new BufferGeometry()
     for (const [index, set] of sets.entries()) {
+      if (set.empty) continue
       geometry.addGroup(all.positions.length / 3, set.positions.length / 3, index)
       for (const value of set.positions) all.positions.push(value)
     }
