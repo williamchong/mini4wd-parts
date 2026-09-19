@@ -53,15 +53,18 @@ export type RollerShape = {
    * A moulded roller's profile: the rim rounded right over, the face dished
    * round a raised hub. Without it a single roller is flat-sided with square
    * edges, which is what tells aluminium and a bare bearing from plastic.
-   * This and `seal` each replace the whole profile, so a row with either
-   * draws no taper, spokes or second tier.
+   * This and a `bare` seal each replace the whole profile, so a row with
+   * either draws no taper, spokes or second tier.
    */
   rounded?: true
   /**
-   * A bare ball bearing's face: a steel outer ring with its edges broken, the
-   * black rubber seal set back inside it, and the steel inner ring.
+   * The race is a sealed ball bearing and its face shows: an outer ring with
+   * its edges broken, the black rubber seal set back inside it, and the steel
+   * inner ring. `bare` is a bearing bolted on as the roller, its outer ring
+   * the whole roller in the part's own colour; `bore` is a bearing pressed
+   * into a roller's body, in a steel outer ring.
    */
-  seal?: true
+  seal?: 'bare' | 'bore'
   /** A stabilising pole standing up out of the roller, its height. */
   poleMm?: number
   finish: 'metal' | 'plastic'
@@ -76,7 +79,7 @@ export type RollerShape = {
 export const ROLLERS: Record<string, RollerShape> = {
   // The moulded rollers every kit ships, and plain low-friction plastic ones.
   'plastic': { mm: 13, heightMm: 4, spokes: 0, race: false, rounded: true, finish: 'plastic' },
-  'plastic-bearing': { mm: 13, heightMm: 4.5, spokes: 0, race: true, finish: 'plastic' },
+  'plastic-bearing': { mm: 13, heightMm: 4.5, spokes: 0, race: true, seal: 'bore', finish: 'plastic' },
   'plastic-double': { mm: 13, heightMm: 9, lowerMm: 1, spokes: 0, race: false, finish: 'plastic' },
   'plastic-double-even': { mm: 13, heightMm: 9, lowerMm: 0, spokes: 0, race: false, finish: 'plastic' },
   'plastic-double-rubber': { mm: 13, heightMm: 9, lowerMm: 1, ringMm: 0.8, spokes: 0, race: false, finish: 'plastic' },
@@ -94,7 +97,7 @@ export const ROLLERS: Record<string, RollerShape> = {
   'ball-race-aero': { mm: 19, heightMm: 5, spokes: 7, race: true, finish: 'metal' },
   'aluminium-ring': { mm: 19, heightMm: 5, ringMm: 1.2, spokes: 0, race: true, finish: 'metal', colourOnRing: true },
   // A bare ball bearing bolted on as a roller: all race, no body.
-  'bearing': { mm: 13, heightMm: 4, spokes: 0, race: true, seal: true, finish: 'metal' },
+  'bearing': { mm: 13, heightMm: 4, spokes: 0, race: true, seal: 'bare', finish: 'metal' },
   // A roller with a stabilising pole standing out of its top.
   'pole-roller': { mm: 13, heightMm: 4, spokes: 0, race: false, rounded: true, poleMm: 14, finish: 'plastic' },
   // A skid roller rides the track, not the fence, so it is wide and low.

@@ -72,28 +72,43 @@ function wound(points: readonly Point2[]): Point2[] {
   return area > 0 ? [...points].reverse() : [...points]
 }
 
+/** The steel race round the screw, `radius` across, standing just proud of a face `h` from the middle. */
+const raceProfile = (radius: number, h: number): Point2[] => [[1.1, -h - 0.2], [radius, -h - 0.2], [radius, h + 0.2], [1.1, h + 0.2]]
+
+/**
+ * A sealed ball bearing `radius` across the outside, flat-faced and square:
+ * its outer ring in `ring` with the edges broken, the black seal set back
+ * between the rings, which is what reads as a bearing, and the steel inner
+ * ring standing just proud round the screw.
+ */
+function sealedBearing(g: Groups, ring: Triangles, radius: number, h: number) {
+  const seal = radius * 0.8
+  // Never thinner than the screw it turns on can show round.
+  const inner = Math.max(radius * 0.5, 1.6)
+  const edge = Math.min(0.35, h * 0.2, radius * 0.1)
+  ring.revolve([[seal, -h], [radius - edge, -h], [radius, -h + edge], [radius, h - edge], [radius - edge, h], [seal, h]], 16, 'y')
+  g.rubber.revolve([[inner - 0.1, -h + edge], [seal + 0.1, -h + edge], [seal + 0.1, h - edge], [inner - 0.1, h - edge]], 16, 'y')
+  g.steel.revolve(raceProfile(inner, h), 10, 'y')
+}
+
 /**
  * A roller at `mm` across, turning about y on its screw: one tier or two, a
- * taper, a moulded roller's rounded rim or a bare bearing's sealed face, a
- * ring round the outside, spokes across a recessed face, the steel race in
- * its bore, and a pole standing out of it for the kind that has one.
+ * taper, a moulded roller's rounded rim, a ring round the outside, spokes
+ * across a recessed face, the steel race in its bore or a sealed bearing's
+ * face (the whole roller, for a bare one), and a pole standing out of it for
+ * the kind that has one.
  */
 export function roller(shape: RollerShape, mm: number): BufferGeometry {
   const g = groups()
   const r = mm / 2
   const h = shape.heightMm / 2
-  // A bare bearing's inner ring is half its face; a roller's race is a small disc in its bore.
-  const race = shape.race ? Math.min(3.5, r * (shape.seal ? 0.5 : 0.4)) : 0
+  // A sealed bearing in the bore is half the face, as in the photos, so its seal reads.
+  const race = shape.race ? Math.min(3.5, r * (shape.seal === 'bore' ? 0.5 : 0.4)) : 0
   const bore = race || 1
   const top = r - (shape.bowl ? 0 : shape.taperMm ?? 0)
   const bottom = r - (shape.bowl ? shape.taperMm ?? 0 : 0)
-  if (shape.seal) {
-    // Flat faces and square sides, only the outer ring's edges broken; the
-    // black seal set back between the rings is what reads as a bearing.
-    const seal = r * 0.8
-    const edge = Math.min(0.35, h * 0.2)
-    g.body.revolve([[seal, -h], [r - edge, -h], [r, -h + edge], [r, h - edge], [r - edge, h], [seal, h]], 16, 'y')
-    g.rubber.revolve([[bore - 0.1, -h + edge], [seal + 0.1, -h + edge], [seal + 0.1, h - edge], [bore - 0.1, h - edge]], 16, 'y')
+  if (shape.seal === 'bare') {
+    sealedBearing(g, g.body, r, h)
   } else if (shape.rounded) {
     // A moulded roller: the rim rounded right over, top and bottom, and each
     // face dished between it and a raised hub, so it reads soft beside the
@@ -144,7 +159,8 @@ export function roller(shape: RollerShape, mm: number): BufferGeometry {
     const ring = shape.finish === 'metal' ? g.trim : g.rubber
     ring.revolve([[inner, -h * 0.7], [inner + shape.ringMm, -h * 0.7], [inner + shape.ringMm, h * 0.7], [inner, h * 0.7]], 16, 'y')
   }
-  if (race) g.steel.revolve([[1.1, -h - 0.2], [race, -h - 0.2], [race, h + 0.2], [1.1, h + 0.2]], 10, 'y')
+  if (shape.seal === 'bore') sealedBearing(g, g.steel, race, h)
+  else if (race && shape.seal !== 'bare') g.steel.revolve(raceProfile(race, h), 10, 'y')
   // The screw it turns on, standing through it.
   g.steel.revolve(cylinder(1, -h - 1.5, h + 1.5), 6, 'y')
   if (shape.poleMm) g.body.revolve([[0, h], [2.4, h], [2.4, h + shape.poleMm - 1], [1.6, h + shape.poleMm], [0, h + shape.poleMm]], 8, 'y')
