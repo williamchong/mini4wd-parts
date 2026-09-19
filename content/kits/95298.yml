@@ -21,22 +21,22 @@ stockLoadout:
   wheel-front:
     - label:
         en: Small Fully Cowled Mesh-Type
-        zh-HK: 小徑全罩網格輪框
+        zh-HK: 小徑全罩式網狀輪圈
       source: fandom
   wheel-rear:
     - label:
         en: Small Fully Cowled Mesh-Type
-        zh-HK: 小徑全罩網格輪框
+        zh-HK: 小徑全罩式網狀輪圈
       source: fandom
   tire-front:
     - label:
         en: Small High-Profile Slick
-        zh-HK: 小徑高框光頭胎
+        zh-HK: 小徑光面厚胎
       source: fandom
   tire-rear:
     - label:
         en: Small High-Profile Slick
-        zh-HK: 小徑高框光頭胎
+        zh-HK: 小徑光面厚胎
       source: fandom
   gear-set:
     - label:

@@ -13,9 +13,16 @@
 # TERMINOLOGY, and it is a judgement call rather than a citation: Tamiya HK
 # publishes no Traditional Chinese for wheel and tire *types*, so unlike part
 # names (which come from tamiya.hk) these are ours. Hong Kong and Taiwan agree
-# on most of this vocabulary — 小徑, 大徑, 低框, 光頭胎 — so most rows carry only
-# `zh-HK` and the Taiwan reader falls through to it, exactly as `resolveLabel`
-# does for part names. A `zh-TW` appears only where the two genuinely differ.
+# on most of this vocabulary, so most rows carry only `zh-HK` and the Taiwan
+# reader falls through to it, exactly as `resolveLabel` does for part names. A
+# `zh-TW` appears only where the two genuinely differ.
+#
+# The words are the written-Chinese ones both regions read (2026-09-19): 輪圈
+# and 薄胎 as tamiya.hk writes them, 薄胎用 for a wheel made for low-profile
+# tires, 光面 for slick, 尖刺 for spiked, 全罩式 for fully cowled. 小徑 rather
+# than tamiya.hk's 細徑, whose 細 is Cantonese for "small". Car and motor names
+# stay in English, as tamiya.hk prints them, rather than a transliteration only
+# one region would recognise.
 
 # Spellings no mechanical rule reaches: a truncation, a redundant plural, and
 # word order the wiki inverts. Left of the arrow is post-normalisation text.
@@ -32,87 +39,87 @@ aliases:
 labels:
   # — Wheels ————————————————————————————————————————————————————————
   Small:
-    zh-HK: 小徑輪框
+    zh-HK: 小徑輪圈
   Large Lightweight:
-    zh-HK: 大徑輕量輪框
+    zh-HK: 大徑輕量輪圈
   Large Narrow Lightweight:
-    zh-HK: 大徑窄版輕量輪框
+    zh-HK: 大徑窄胎用輕量輪圈
   Large Flat Dish:
-    zh-HK: 大徑平碟輪框
+    zh-HK: 大徑平面碟形輪圈
   Large Low-Profile Dish-Type:
-    zh-HK: 大徑低框碟型輪框
+    zh-HK: 大徑薄胎用碟形輪圈
   Large Low-Profile 6-Spoke:
-    zh-HK: 大徑低框六輻輪框
+    zh-HK: 大徑薄胎用六輻輪圈
   Large Mesh-Type:
-    zh-HK: 大徑網格輪框
+    zh-HK: 大徑網狀輪圈
   Large V-Spoke:
-    zh-HK: 大徑V字輻輪框
+    zh-HK: 大徑 V 型輻條輪圈
   Large Teardrop-Type:
-    zh-HK: 大徑水滴型輪框
+    zh-HK: 大徑水滴形輪圈
   Large FM-Type:
-    zh-HK: 大徑FM型輪框
+    zh-HK: 大徑 FM 型輪圈
   Large TZ-Type:
-    zh-HK: 大徑TZ型輪框
+    zh-HK: 大徑 TZ 型輪圈
   Large TZ Fully Cowled-Type:
-    zh-HK: 大徑TZ全罩型輪框
+    zh-HK: 大徑 TZ 全罩式輪圈
   Large Manta Ray-Type:
-    zh-HK: 大徑魔鬼魚型輪框
+    zh-HK: 大徑魔鬼魚型輪圈
   Large MS I:
-    zh-HK: 大徑MS一代輪框
+    zh-HK: 大徑 MS 一代輪圈
   Large MS II:
-    zh-HK: 大徑MS二代輪框
+    zh-HK: 大徑 MS 二代輪圈
   Small Low-Profile A-Spoke:
-    zh-HK: 小徑低框A字輻輪框
+    zh-HK: 小徑薄胎用 A 型輻條輪圈
   Small Low-Profile T-Spoke:
-    zh-HK: 小徑低框T字輻輪框
+    zh-HK: 小徑薄胎用 T 型輻條輪圈
   Small Low-Profile Y-Spoke:
-    zh-HK: 小徑低框Y字輻輪框
+    zh-HK: 小徑薄胎用 Y 型輻條輪圈
   Small Low-Profile Dish-Type:
-    zh-HK: 小徑低框碟型輪框
+    zh-HK: 小徑薄胎用碟形輪圈
   Small Low-Profile Fin-Type:
-    zh-HK: 小徑低框鰭型輪框
+    zh-HK: 小徑薄胎用鰭形輪圈
   Small Low-Profile Saber-Type:
-    zh-HK: 小徑低框軍刀型輪框
+    zh-HK: 小徑薄胎用軍刀形輪圈
   Small Low-Profile Spiral-Type:
-    zh-HK: 小徑低框螺旋型輪框
+    zh-HK: 小徑薄胎用螺旋形輪圈
   Small Low-Profile Angular-Type:
-    zh-HK: 小徑低框角型輪框
+    zh-HK: 小徑薄胎用角形輪圈
   Small Fully Cowled-Type:
-    zh-HK: 小徑全罩型輪框
+    zh-HK: 小徑全罩式輪圈
   Small Fully Cowled Mesh-Type:
-    zh-HK: 小徑全罩網格輪框
+    zh-HK: 小徑全罩式網狀輪圈
   Small TZ Fully Cowled-Type:
-    zh-HK: 小徑TZ全罩型輪框
+    zh-HK: 小徑 TZ 全罩式輪圈
   Small VS-Type:
-    zh-HK: 小徑VS型輪框
+    zh-HK: 小徑 VS 型輪圈
   Small X Low-Profile:
-    zh-HK: 小徑X型低框輪框
+    zh-HK: 小徑薄胎用 X 型輪圈
 
   # — Tires —————————————————————————————————————————————————————————
   Small Low-Profile:
-    zh-HK: 小徑低框輪胎
+    zh-HK: 小徑薄胎
   Small Low-Profile Slick:
-    zh-HK: 小徑低框光頭胎
+    zh-HK: 小徑光面薄胎
   Small Low-Profile Offset:
-    zh-HK: 小徑低框偏位輪胎
+    zh-HK: 小徑偏紋薄胎
   Small High-Profile Slick:
-    zh-HK: 小徑高框光頭胎
+    zh-HK: 小徑光面厚胎
   Small X Narrow-Type:
-    zh-HK: 小徑X型窄版輪胎
+    zh-HK: 小徑 X 型窄胎
   Small Rally Block:
-    zh-HK: 小徑越野塊狀胎
+    zh-HK: 小徑越野塊紋胎
   Small Treaded Radial:
-    zh-HK: 小徑紋路輻射胎
+    zh-HK: 小徑有紋輻射胎
   Large Low-Profile:
-    zh-HK: 大徑低框輪胎
+    zh-HK: 大徑薄胎
   Large Low-Profile Slick:
-    zh-HK: 大徑低框光頭胎
+    zh-HK: 大徑光面薄胎
   Large Arched:
-    zh-HK: 大徑弧形輪胎
+    zh-HK: 大徑拱形胎
   Large Avante-Type Slick:
-    zh-HK: 大徑阿邦特型光頭胎
+    zh-HK: 大徑 Avante 型光面胎
   Large Avante-Type Spiked:
-    zh-HK: 大徑阿邦特型釘胎
+    zh-HK: 大徑 Avante 型尖刺胎
 
   # — Motors ————————————————————————————————————————————————————————
   # Every motor phrase the wiki uses is a real Grade-Up Part, so all fifteen
@@ -123,20 +130,20 @@ labels:
   # chassis scope, which `normaliseLabel` folds onto these keys by dropping the
   # trailing "Motor".
   Atomic-Tuned 2:
-    zh-HK: 原子加速二代摩打
-    zh-TW: 原子加速二代馬達
+    zh-HK: Atomic-Tuned 2 摩打
+    zh-TW: Atomic-Tuned 2 馬達
   Rev-Tuned 2:
-    zh-HK: 高轉二代摩打
-    zh-TW: 高轉二代馬達
+    zh-HK: Rev-Tuned 2 摩打
+    zh-TW: Rev-Tuned 2 馬達
   Rev-Tuned 2 PRO:
-    zh-HK: 高轉二代摩打 PRO
-    zh-TW: 高轉二代馬達 PRO
+    zh-HK: Rev-Tuned 2 摩打 PRO
+    zh-TW: Rev-Tuned 2 馬達 PRO
   Torque-Tuned 2:
-    zh-HK: 扭力二代摩打
-    zh-TW: 扭力二代馬達
+    zh-HK: Torque-Tuned 2 摩打
+    zh-TW: Torque-Tuned 2 馬達
   Torque-Tuned 2 PRO:
-    zh-HK: 扭力二代摩打 PRO
-    zh-TW: 扭力二代馬達 PRO
+    zh-HK: Torque-Tuned 2 摩打 PRO
+    zh-TW: Torque-Tuned 2 馬達 PRO
   Light-Dash:
-    zh-HK: 輕量衝刺摩打
-    zh-TW: 輕量衝刺馬達
+    zh-HK: Light-Dash 摩打
+    zh-TW: Light-Dash 馬達

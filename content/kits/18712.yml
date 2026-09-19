@@ -19,22 +19,22 @@ stockLoadout:
   wheel-front:
     - label:
         en: Small X Low-Profile
-        zh-HK: 小徑X型低框輪框
+        zh-HK: 小徑薄胎用 X 型輪圈
       source: fandom
   wheel-rear:
     - label:
         en: Small X Low-Profile
-        zh-HK: 小徑X型低框輪框
+        zh-HK: 小徑薄胎用 X 型輪圈
       source: fandom
   tire-front:
     - label:
         en: Small Low-Profile Slick
-        zh-HK: 小徑低框光頭胎
+        zh-HK: 小徑光面薄胎
       source: fandom
   tire-rear:
     - label:
         en: Small Low-Profile Slick
-        zh-HK: 小徑低框光頭胎
+        zh-HK: 小徑光面薄胎
       source: fandom
   gear-set:
     - label:

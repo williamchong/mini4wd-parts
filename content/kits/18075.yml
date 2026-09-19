@@ -19,22 +19,22 @@ stockLoadout:
   wheel-front:
     - label:
         en: Small Fully Cowled-Type
-        zh-HK: 小徑全罩型輪框
+        zh-HK: 小徑全罩式輪圈
       source: fandom
   wheel-rear:
     - label:
         en: Small Fully Cowled-Type
-        zh-HK: 小徑全罩型輪框
+        zh-HK: 小徑全罩式輪圈
       source: fandom
   tire-front:
     - label:
         en: Small Treaded Radial
-        zh-HK: 小徑紋路輻射胎
+        zh-HK: 小徑有紋輻射胎
       source: fandom
   tire-rear:
     - label:
         en: Small Treaded Radial
-        zh-HK: 小徑紋路輻射胎
+        zh-HK: 小徑有紋輻射胎
       source: fandom
   gear-set:
     - label:

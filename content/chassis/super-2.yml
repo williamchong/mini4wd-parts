@@ -15,7 +15,7 @@ treadFrontMm: 64
 treadRearMm: 64
 weightG: 115
 status: current
-notes: Super-1 的現代化版本，仍是每年限定套件常用的底盤，改裝零件選擇多。
+notes: Super-1 底盤的改良版，至今仍常用於每年推出的限定套件，可選的改裝零件很多。
 thumbnail: /thumbs/chassis/super-2.webp
 detailThumbnail: /thumbs/chassis-detail/super-2.webp
 slots:
@@ -146,12 +146,12 @@ defaultLoadout:
   gear-set:
     - label:
         en: Kit standard gears
-        zh-HK: 套件標準齒輪組
+        zh-HK: 原裝齒輪組
       source: chassis
   counter-gear:
     - label:
         en: Kit standard counter gear
-        zh-HK: 套件標準中間齒輪
+        zh-HK: 原裝中間齒輪
       source: chassis
   propeller-shaft:
     - partId: "94382"
@@ -159,56 +159,56 @@ defaultLoadout:
   terminal:
     - label:
         en: Kit standard terminals
-        zh-HK: 套件標準電池金屬片
+        zh-HK: 原裝導電片
       source: chassis
   switch:
     - label:
         en: Kit standard switch
-        zh-HK: 套件標準電源開關
+        zh-HK: 原裝電源開關
       source: chassis
   axle:
     - label:
         en: Kit standard axles
-        zh-HK: 套件標準車軸
+        zh-HK: 原裝車軸
       source: chassis
   bearing:
     - label:
         en: Kit standard plastic bushings
-        zh-HK: 套件標準塑膠軸襯
+        zh-HK: 原裝塑膠軸套
       source: chassis
   wheel-front:
     - label:
         en: Kit standard wheels
-        zh-HK: 套件標準輪框
+        zh-HK: 原裝輪圈
       shape: small-low-profile-dish-type
       source: chassis
   wheel-rear:
     - label:
         en: Kit standard wheels
-        zh-HK: 套件標準輪框
+        zh-HK: 原裝輪圈
       shape: small-low-profile-dish-type
       source: chassis
   tire-front:
     - label:
         en: Kit standard tires
-        zh-HK: 套件標準輪胎
+        zh-HK: 原裝輪胎
       shape: small-low-profile-slick
       source: chassis
   tire-rear:
     - label:
         en: Kit standard tires
-        zh-HK: 套件標準輪胎
+        zh-HK: 原裝輪胎
       shape: small-low-profile-slick
       source: chassis
   roller-front:
     - label:
         en: Kit standard plastic rollers
-        zh-HK: 套件標準塑膠導輪
+        zh-HK: 原裝塑膠導輪
       source: chassis
   roller-rear:
     - label:
         en: Kit standard plastic rollers
-        zh-HK: 套件標準塑膠導輪
+        zh-HK: 原裝塑膠導輪
       source: chassis
 compatibleParts:
   - "10303"

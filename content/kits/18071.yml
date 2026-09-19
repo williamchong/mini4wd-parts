@@ -19,22 +19,22 @@ stockLoadout:
   wheel-front:
     - label:
         en: Large Manta Ray-Type
-        zh-HK: 大徑魔鬼魚型輪框
+        zh-HK: 大徑魔鬼魚型輪圈
       source: fandom
   wheel-rear:
     - label:
         en: Large Manta Ray-Type
-        zh-HK: 大徑魔鬼魚型輪框
+        zh-HK: 大徑魔鬼魚型輪圈
       source: fandom
   tire-front:
     - label:
         en: Large Avante-Type Spiked
-        zh-HK: 大徑阿邦特型釘胎
+        zh-HK: 大徑 Avante 型尖刺胎
       source: fandom
   tire-rear:
     - label:
         en: Large Avante-Type Spiked
-        zh-HK: 大徑阿邦特型釘胎
+        zh-HK: 大徑 Avante 型尖刺胎
       source: fandom
   gear-set:
     - label:

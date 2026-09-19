@@ -50,7 +50,7 @@ test('an alias reaches the same vocabulary row as the spelling it corrects', () 
   const canonical = labelFor('Small Low-Profile Saber-Type')
   assert.deepEqual(labelFor('Small Low-Profile Saber-Typ'), canonical)
   assert.deepEqual(labelFor('Small Saber-Type Low-Profile'), canonical)
-  assert.equal(canonical?.['zh-HK'], '小徑低框軍刀型輪框')
+  assert.equal(canonical?.['zh-HK'], '小徑薄胎用軍刀形輪圈')
 })
 
 test('a phrase with no vocabulary row keeps its English rather than vanishing', () => {

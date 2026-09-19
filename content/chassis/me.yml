@@ -15,7 +15,7 @@ treadFrontMm: 60
 treadRearMm: 66
 weightG: 117
 status: current
-notes: 最新的雙軸底盤，主打「剛性與柔性並存」的傳動設計，2026 年 1 月起列入官方規則。
+notes: 最新的雙軸底盤，傳動設計兼顧剛性與柔性，2026 年 1 月起可以用於官方比賽。
 thumbnail: /thumbs/chassis/me.webp
 detailThumbnail: /thumbs/chassis-detail/me.webp
 slots:
@@ -133,67 +133,67 @@ defaultLoadout:
   motor:
     - label:
         en: Kit standard double-shaft motor
-        zh-HK: 套件標準雙軸摩打
-        zh-TW: 套件標準雙軸馬達
+        zh-HK: 原裝雙軸摩打
+        zh-TW: 原裝雙軸馬達
       source: chassis
   gear-set:
     - label:
         en: Kit standard gears
-        zh-HK: 套件標準齒輪組
+        zh-HK: 原裝齒輪組
       source: chassis
   terminal:
     - label:
         en: Kit standard terminals
-        zh-HK: 套件標準電池金屬片
+        zh-HK: 原裝導電片
       source: chassis
   switch:
     - label:
         en: Kit standard switch
-        zh-HK: 套件標準電源開關
+        zh-HK: 原裝電源開關
       source: chassis
   axle:
     - label:
         en: Kit standard axles
-        zh-HK: 套件標準車軸
+        zh-HK: 原裝車軸
       source: chassis
   bearing:
     - label:
         en: Kit standard plastic bushings
-        zh-HK: 套件標準塑膠軸襯
+        zh-HK: 原裝塑膠軸套
       source: chassis
   wheel-front:
     - label:
         en: Kit standard wheels
-        zh-HK: 套件標準輪框
+        zh-HK: 原裝輪圈
       shape: small-low-profile-dish-type
       source: chassis
   wheel-rear:
     - label:
         en: Kit standard wheels
-        zh-HK: 套件標準輪框
+        zh-HK: 原裝輪圈
       shape: small-low-profile-dish-type
       source: chassis
   tire-front:
     - label:
         en: Kit standard tires
-        zh-HK: 套件標準輪胎
+        zh-HK: 原裝輪胎
       shape: small-low-profile-slick
       source: chassis
   tire-rear:
     - label:
         en: Kit standard tires
-        zh-HK: 套件標準輪胎
+        zh-HK: 原裝輪胎
       shape: small-low-profile-slick
       source: chassis
   roller-front:
     - label:
         en: Kit standard plastic rollers
-        zh-HK: 套件標準塑膠導輪
+        zh-HK: 原裝塑膠導輪
       source: chassis
   roller-rear:
     - label:
         en: Kit standard plastic rollers
-        zh-HK: 套件標準塑膠導輪
+        zh-HK: 原裝塑膠導輪
       source: chassis
 compatibleParts:
   - "15059"

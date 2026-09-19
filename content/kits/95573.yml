@@ -21,22 +21,22 @@ stockLoadout:
   wheel-front:
     - label:
         en: Large MS II
-        zh-HK: 大徑MS二代輪框
+        zh-HK: 大徑 MS 二代輪圈
       source: fandom
   wheel-rear:
     - label:
         en: Large MS II
-        zh-HK: 大徑MS二代輪框
+        zh-HK: 大徑 MS 二代輪圈
       source: fandom
   tire-front:
     - label:
         en: Large Avante-Type Slick
-        zh-HK: 大徑阿邦特型光頭胎
+        zh-HK: 大徑 Avante 型光面胎
       source: fandom
   tire-rear:
     - label:
         en: Large Avante-Type Slick
-        zh-HK: 大徑阿邦特型光頭胎
+        zh-HK: 大徑 Avante 型光面胎
       source: fandom
   gear-set:
     - label:

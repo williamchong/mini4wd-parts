@@ -22,22 +22,22 @@ stockLoadout:
   wheel-front:
     - label:
         en: Large V-Spoke
-        zh-HK: 大徑V字輻輪框
+        zh-HK: 大徑 V 型輻條輪圈
       source: fandom
   wheel-rear:
     - label:
         en: Large V-Spoke
-        zh-HK: 大徑V字輻輪框
+        zh-HK: 大徑 V 型輻條輪圈
       source: fandom
   tire-front:
     - label:
         en: Large Arched
-        zh-HK: 大徑弧形輪胎
+        zh-HK: 大徑拱形胎
       source: fandom
   tire-rear:
     - label:
         en: Large Arched
-        zh-HK: 大徑弧形輪胎
+        zh-HK: 大徑拱形胎
       source: fandom
   gear-set:
     - label:

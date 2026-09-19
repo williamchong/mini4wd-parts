@@ -16,7 +16,7 @@ treadFrontMm: 64
 treadRearMm: 69
 weightG: 113.8
 status: rerelease
-notes: 輕巧短軸距的經典底盤，目前主要以復刻套件形式販售，改裝空間大但剛性較低。
+notes: 輕巧、軸距短的經典底盤，現在主要以復刻套件的形式販售；改裝空間大，但剛性較低。
 
 # What the bare runner puts in each slot before the user changes anything
 # (docs/PLAN.md §4.7). Most of it is molded into the kit and Tamiya sells no
@@ -26,44 +26,44 @@ defaultLoadout:
   motor:
     - { partId: '94380', source: chassis }
   gear-set:
-    - label: { zh-HK: 套件標準齒輪組, en: Kit standard gears }
+    - label: { zh-HK: 原裝齒輪組, en: Kit standard gears }
       source: chassis
   counter-gear:
-    - label: { zh-HK: 套件標準中間齒輪, en: Kit standard counter gear }
+    - label: { zh-HK: 原裝中間齒輪, en: Kit standard counter gear }
       source: chassis
   propeller-shaft:
     - { partId: '94382', source: chassis }
   terminal:
-    - label: { zh-HK: 套件標準電池金屬片, en: Kit standard terminals }
+    - label: { zh-HK: 原裝導電片, en: Kit standard terminals }
       source: chassis
   switch:
-    - label: { zh-HK: 套件標準電源開關, en: Kit standard switch }
+    - label: { zh-HK: 原裝電源開關, en: Kit standard switch }
       source: chassis
   axle:
-    - label: { zh-HK: 套件標準車軸, en: Kit standard axles }
+    - label: { zh-HK: 原裝車軸, en: Kit standard axles }
       source: chassis
   bearing:
-    - label: { zh-HK: 套件標準塑膠軸襯, en: Kit standard plastic bushings }
+    - label: { zh-HK: 原裝塑膠軸套, en: Kit standard plastic bushings }
       source: chassis
   wheel-front:
-    - label: { zh-HK: 套件標準輪框, en: Kit standard wheels }
+    - label: { zh-HK: 原裝輪圈, en: Kit standard wheels }
       shape: small-vs-type
       source: chassis
   wheel-rear:
-    - label: { zh-HK: 套件標準輪框, en: Kit standard wheels }
+    - label: { zh-HK: 原裝輪圈, en: Kit standard wheels }
       shape: small-vs-type
       source: chassis
   tire-front:
-    - label: { zh-HK: 套件標準輪胎, en: Kit standard tires }
+    - label: { zh-HK: 原裝輪胎, en: Kit standard tires }
       shape: small-high-profile-slick
       source: chassis
   tire-rear:
-    - label: { zh-HK: 套件標準輪胎, en: Kit standard tires }
+    - label: { zh-HK: 原裝輪胎, en: Kit standard tires }
       shape: small-high-profile-slick
       source: chassis
   roller-front:
-    - label: { zh-HK: 套件標準塑膠導輪, en: Kit standard plastic rollers }
+    - label: { zh-HK: 原裝塑膠導輪, en: Kit standard plastic rollers }
       source: chassis
   roller-rear:
-    - label: { zh-HK: 套件標準塑膠導輪, en: Kit standard plastic rollers }
+    - label: { zh-HK: 原裝塑膠導輪, en: Kit standard plastic rollers }
       source: chassis

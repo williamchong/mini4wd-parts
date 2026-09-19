@@ -18,22 +18,22 @@ stockLoadout:
   wheel-front:
     - label:
         en: Small
-        zh-HK: 小徑輪框
+        zh-HK: 小徑輪圈
       source: fandom
   wheel-rear:
     - label:
         en: Small
-        zh-HK: 小徑輪框
+        zh-HK: 小徑輪圈
       source: fandom
   tire-front:
     - label:
         en: Small Rally Block
-        zh-HK: 小徑越野塊狀胎
+        zh-HK: 小徑越野塊紋胎
       source: fandom
   tire-rear:
     - label:
         en: Small Rally Block
-        zh-HK: 小徑越野塊狀胎
+        zh-HK: 小徑越野塊紋胎
       source: fandom
   gear-set:
     - label:

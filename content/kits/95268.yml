@@ -18,22 +18,22 @@ stockLoadout:
   wheel-front:
     - label:
         en: Small Low-Profile Saber-Type
-        zh-HK: 小徑低框軍刀型輪框
+        zh-HK: 小徑薄胎用軍刀形輪圈
       source: fandom
   wheel-rear:
     - label:
         en: Small Low-Profile Saber-Type
-        zh-HK: 小徑低框軍刀型輪框
+        zh-HK: 小徑薄胎用軍刀形輪圈
       source: fandom
   tire-front:
     - label:
         en: Small Low-Profile Slick
-        zh-HK: 小徑低框光頭胎
+        zh-HK: 小徑光面薄胎
       source: fandom
   tire-rear:
     - label:
         en: Small Low-Profile Slick
-        zh-HK: 小徑低框光頭胎
+        zh-HK: 小徑光面薄胎
       source: fandom
   gear-set:
     - label:

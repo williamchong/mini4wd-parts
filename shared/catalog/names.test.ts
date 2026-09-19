@@ -68,5 +68,5 @@ test('an English reader falls through Chinese to Japanese', () => {
 
 test('a label with no locale in the chain resolves to nothing rather than a placeholder', () => {
   assert.equal(resolveLabel({}, 'zh-Hant'), undefined)
-  assert.equal(resolveLabel({ 'zh-HK': '小徑低框光頭胎' }, 'en'), undefined)
+  assert.equal(resolveLabel({ 'zh-HK': '小徑光面薄胎' }, 'en'), undefined)
 })

@@ -18,22 +18,22 @@ stockLoadout:
   wheel-front:
     - label:
         en: Large Low-Profile
-        zh-HK: 大徑低框輪胎
+        zh-HK: 大徑薄胎
       source: fandom
   wheel-rear:
     - label:
         en: Large Low-Profile
-        zh-HK: 大徑低框輪胎
+        zh-HK: 大徑薄胎
       source: fandom
   tire-front:
     - label:
         en: Large Low-Profile
-        zh-HK: 大徑低框輪胎
+        zh-HK: 大徑薄胎
       source: fandom
   tire-rear:
     - label:
         en: Large Low-Profile
-        zh-HK: 大徑低框輪胎
+        zh-HK: 大徑薄胎
       source: fandom
   gear-set:
     - label:
