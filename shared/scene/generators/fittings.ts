@@ -74,18 +74,47 @@ function wound(points: readonly Point2[]): Point2[] {
 
 /**
  * A roller at `mm` across, turning about y on its screw: one tier or two, a
- * taper, a ring round the outside, spokes across a recessed face, the steel
- * race in its bore, and a pole standing out of it for the kind that has one.
+ * taper, a moulded roller's rounded rim or a bare bearing's sealed face, a
+ * ring round the outside, spokes across a recessed face, the steel race in
+ * its bore, and a pole standing out of it for the kind that has one.
  */
 export function roller(shape: RollerShape, mm: number): BufferGeometry {
   const g = groups()
   const r = mm / 2
   const h = shape.heightMm / 2
-  const race = shape.race ? Math.min(3.5, r * 0.4) : 0
+  // A bare bearing's inner ring is half its face; a roller's race is a small disc in its bore.
+  const race = shape.race ? Math.min(3.5, r * (shape.seal ? 0.5 : 0.4)) : 0
   const bore = race || 1
   const top = r - (shape.bowl ? 0 : shape.taperMm ?? 0)
   const bottom = r - (shape.bowl ? shape.taperMm ?? 0 : 0)
-  if (shape.lowerMm !== undefined) {
+  if (shape.seal) {
+    // Flat faces and square sides, only the outer ring's edges broken; the
+    // black seal set back between the rings is what reads as a bearing.
+    const seal = r * 0.8
+    const edge = Math.min(0.35, h * 0.2)
+    g.body.revolve([[seal, -h], [r - edge, -h], [r, -h + edge], [r, h - edge], [r - edge, h], [seal, h]], 16, 'y')
+    g.rubber.revolve([[bore - 0.1, -h + edge], [seal + 0.1, -h + edge], [seal + 0.1, h - edge], [bore - 0.1, h - edge]], 16, 'y')
+  } else if (shape.rounded) {
+    // A moulded roller: the rim rounded right over, top and bottom, and each
+    // face dished between it and a raised hub, so it reads soft beside the
+    // square edges of an aluminium roller or a bearing.
+    const round = Math.min(h, r * 0.3)
+    const rim = r - round
+    const dish = Math.min(0.5, h * 0.25)
+    const hub = Math.max(bore + 0.8, r * 0.35)
+    const arc = (y: number, from: number, to: number): Point2[] => Array.from({ length: 4 }, (_, i) => {
+      const a = from + ((to - from) * i) / 3
+      return [rim + round * Math.cos(a), y + round * Math.sin(a)] as const
+    })
+    const outside = [...arc(-h + round, -Math.PI / 2, 0), ...arc(h - round, 0, Math.PI / 2)]
+      // A rim rounded the full height meets itself at the equator: one point, not a zero-length side.
+      .filter((p, k, all) => k === 0 || Math.hypot(p[0] - all[k - 1]![0], p[1] - all[k - 1]![1]) > 1e-6)
+    g.body.revolve([
+      [bore, -h], [hub, -h], [hub + 0.3, -h + dish], [rim - 0.3, -h + dish],
+      ...outside,
+      [rim - 0.3, h - dish], [hub + 0.3, h - dish], [hub, h], [bore, h]
+    ], 16, 'y')
+  } else if (shape.lowerMm !== undefined) {
     // A spool: a flange top and bottom, the lower that much smaller, and a
     // waist between them deep enough to read at pane size.
     const lower = r - shape.lowerMm / 2
