@@ -187,7 +187,7 @@ useHead(() => ({
     { name: 'description', content: description.value },
     { property: 'og:title', content: title.value },
     { property: 'og:description', content: description.value },
-    ...(image.value ? [{ property: 'og:image', content: image.value }] : [])
+    ...(part.value.detailThumbnail ? thumbnailShareMeta(`${siteUrl}${part.value.detailThumbnail}`) : [])
   ],
   script: [{
     type: 'application/ld+json',

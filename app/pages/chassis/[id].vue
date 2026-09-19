@@ -181,15 +181,13 @@ const description = computed(() => t('chassis.pageDescription', {
   kits: data.value?.kits.length ?? 0
 }))
 
-const image = computed(() => photo.value && `${siteUrl}${photo.value}`)
-
 useHead(() => ({
   title: title.value,
   meta: [
     { name: 'description', content: description.value },
     { property: 'og:title', content: title.value },
     { property: 'og:description', content: description.value },
-    ...(image.value ? [{ property: 'og:image', content: image.value }] : [])
+    ...(chassis.value.detailThumbnail ? thumbnailShareMeta(`${siteUrl}${chassis.value.detailThumbnail}`) : [])
   ]
 }))
 </script>

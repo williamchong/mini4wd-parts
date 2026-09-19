@@ -146,11 +146,14 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { property: 'og:image', content: `${SITE_URL}/images/4wd.png` },
+        // The builder's own render, an Avante Mk.III Azure with the shell
+        // lifted, captured from the pane at 1200×630. A part or chassis page
+        // replaces all four with its detail thumbnail (app/utils/shareImage.ts).
+        { property: 'og:image', content: `${SITE_URL}/images/og.jpg` },
+        { property: 'og:image:width', content: '1200' },
+        { property: 'og:image:height', content: '630' },
         { property: 'og:type', content: 'website' },
-        // `summary`, not `summary_large_image`: the largest picture any page
-        // shares is 600×372, and a large card stretches it.
-        { name: 'twitter:card', content: 'summary' }
+        { name: 'twitter:card', content: 'summary_large_image' }
       ],
       link: [
         { rel: 'icon', type: 'image/png', href: '/favicon.png' }
