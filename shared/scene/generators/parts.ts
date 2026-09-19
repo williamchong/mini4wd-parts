@@ -29,8 +29,8 @@ import type { TireShape, WheelShape } from '../wheels.ts'
  * A wheel: a rim barrel with a face recessed inside it, its spokes standing
  * from that face out to the lip, and an axle stub through the middle. One
  * revolve draws the barrel, the dish and the bore, so the shape a reader sees
- * — how deep the face sits and how many spokes cross it — is the two numbers
- * `WheelShape` carries for it and nothing else.
+ * — how deep the face sits, how many spokes cross it and what shape they are
+ * — is what `WheelShape` carries for it and nothing else.
  *
  * Drawn with the face toward +x, which is the outboard side of the right-hand
  * wheel; the left socket turns 180° about y (`sockets.ts`) so both faces look
@@ -47,9 +47,69 @@ export function wheel(shape: WheelShape): BufferGeometry {
   const t = new Triangles()
   // Inboard back, outer barrel, outboard lip, and down the inside to the face.
   t.revolve([[hub, -hw], [r, -hw], [r, hw], [ri, hw], [ri, face], [hub, face]], 16, 'x')
-  if (shape.spokes) teeth(t, shape.spokes, hub, ri, face, hw, 'x', [0, 0, 0])
+  if (shape.spokes && shape.spoke) spokes(t, shape, hub, ri, face, hw)
+  else if (shape.spokes) teeth(t, shape.spokes, hub, ri, face, hw, 'x', [0, 0, 0])
   t.revolve(cylinder(1.5, -hw - 1, hw + 1), 6, 'x')
   return t.geometry()
+}
+
+/** One end of a spoke: its radius, its angle about the axle, and how wide it is there. */
+type SpokeEnd = readonly [r: number, angle: number, width: number]
+
+/**
+ * A straight bar across a wheel's face from one `SpokeEnd` to another,
+ * standing from `h0` to `h1` along x. Its footprint is listed clockwise side
+ * out, then back in on the other side, as `teeth` lists a tooth's.
+ */
+function bar(t: Triangles, [r0, a0, w0]: SpokeEnd, [r1, a1, w1]: SpokeEnd, h0: number, h1: number) {
+  const [u0, v0] = [r0 * Math.cos(a0), r0 * Math.sin(a0)]
+  const [u1, v1] = [r1 * Math.cos(a1), r1 * Math.sin(a1)]
+  const length = Math.hypot(u1 - u0, v1 - v0)
+  const [nu, nv] = [-(v1 - v0) / length, (u1 - u0) / length]
+  const footprint: Point2[] = [
+    [u0 - nu * w0 / 2, v0 - nv * w0 / 2], [u1 - nu * w1 / 2, v1 - nv * w1 / 2],
+    [u1 + nu * w1 / 2, v1 + nv * w1 / 2], [u0 + nu * w0 / 2, v0 + nv * w0 / 2]
+  ]
+  const ring = (h: number) => footprint.map(([u, v]) => onAxis('x', [0, 0, 0], [u, v, h]))
+  t.solid([ring(h0), ring(h1)])
+}
+
+/**
+ * The spokes whose shape, not only their count, is what a wheel is sold by:
+ * a Y or V spoke forking on its way to the rim, a fin, saber or spiral spoke
+ * swept round as it goes out, the broad blades of a carbon 3-spoke, and a
+ * cowled or teardrop face that is nearly closed. Each runs 0.2 mm into the rim so no seam shows.
+ */
+function spokes(t: Triangles, shape: WheelShape, hub: number, rim: number, h0: number, h1: number) {
+  const pitch = (Math.PI * 2) / shape.spokes
+  const out = rim + 0.2
+  // Where a Y forks or a swept spoke bends: a little short of halfway, as in
+  // the photos, so the fork's two arms are long enough to read as two.
+  const mid = hub + (rim - hub) * 0.45
+  // About as wide as a straight spoke's root; never under 1.2 mm, below
+  // which a small rim's spokes vanish at pane size.
+  const width = Math.max(1.2, rim * 0.18)
+  for (let i = 0; i < shape.spokes; i++) {
+    const a = i * pitch
+    if (shape.spoke === 'y') {
+      bar(t, [hub, a, width], [mid, a, width], h0, h1)
+      // Each arm lands under a fifth of a pitch aside, leaving a gap between neighbours' arms.
+      for (const fork of [-1, 1]) bar(t, [mid, a, width * 0.7], [out, a + fork * pitch * 0.18, width * 0.7], h0, h1)
+    } else if (shape.spoke === 'swept') {
+      // Turned through two fifths of a pitch by the rim, tapering as it goes:
+      // enough to read as a curve without one spoke overlapping the next.
+      const sweep = pitch * 0.4
+      bar(t, [hub, a, width * 0.8], [mid, a + sweep / 2, width * 0.7], h0, h1)
+      bar(t, [mid, a + sweep / 2, width * 0.7], [out, a + sweep, width * 0.6], h0, h1)
+    } else {
+      // A blade covers about two fifths of the face, a cowled face nearly all
+      // of it, and neither is wider at the tip than the barrel allows: a
+      // corner past it would stand out of the wheel.
+      const [root, end] = shape.spoke === 'blade' ? [0.3, 0.2] : [0.4, 0.35]
+      const tip = Math.min(2 * rim * Math.sin(pitch * end), 2 * Math.sqrt((shape.diameterMm / 2 - 0.1) ** 2 - out ** 2))
+      bar(t, [hub, a, 2 * hub * Math.sin(pitch * root)], [out, a, tip], h0, h1)
+    }
+  }
 }
 
 /**

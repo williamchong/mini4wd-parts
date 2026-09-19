@@ -117,16 +117,16 @@ const shapeKey = (kind: ProxyKind, s: Shape) => `${kind}:${s.mm}:${s.id}:${s.sil
 
 /**
  * A wheel or tire as the numbers its generator actually reads, not as the row
- * it came from. Eleven of the 46 wheel rows are the same four numbers under
- * different Tamiya names — `large-ms-ii`, `large-teardrop-type` and
- * `large-fm-type` are one shape — and a tire reads only its rim's diameter and
+ * it came from. Ten of the 46 wheel rows repeat another row's numbers under a
+ * different Tamiya name — `large-ms-ii`, `large-fm-type` and `large-5-spoke`
+ * are one shape — and a tire reads only its rim's diameter and
  * width, of which the 46 rows hold ten. Keying the geometry cache by the row
  * id instead would hold a tire geometry per (tire, wheel) *name* pair: 1288
  * entries where 230 differ, and the same 14 KB buffer built again for every
  * one of the thirteen 21×11 rims a reader tries.
  */
 const sign = (kind: ProxyKind, wheel?: WheelShape, tire?: TireShape) =>
-  kind === 'wheel' && wheel ? `${wheel.diameterMm}/${wheel.widthMm}/${wheel.spokes}/${wheel.dishMm}`
+  kind === 'wheel' && wheel ? `${wheel.diameterMm}/${wheel.widthMm}/${wheel.spokes}/${wheel.dishMm}/${wheel.spoke ?? ''}`
     : kind === 'tire' && tire && wheel ? `${tire.diameterMm}/${tire.widthMm}/${tire.shoulderMm}@${wheel.diameterMm}/${wheel.widthMm}`
       : ''
 /** The kinds whose hit volume scales with `mm`; the others are fixed boxes. */
