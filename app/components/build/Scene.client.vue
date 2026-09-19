@@ -444,10 +444,11 @@ let resetCamera = () => {}
 /**
  * The shell lifted off the chassis: the assembled car is what a reader
  * recognises, the lifted one is how they reach the motor and cells under it.
+ * The pane opens lifted, so the first sight is what the build is made of.
  * The toggle is in the pane, beside reset, and the list needs no equivalent
  * because every slot is already a row there.
  */
-const lifted = ref(false)
+const lifted = ref(true)
 const LIFT_MM = 24
 const LIFTED_OPACITY = 0.35
 /**
@@ -835,6 +836,9 @@ onMounted(() => {
    */
   const bodyGroup = groups.get('body')
   const bodyRestY = bodyGroup?.position.y ?? 0
+  // Placed, not eased: the first frame is drawn under the poster, and a shell
+  // rising as the poster fades would be a lift nobody asked for.
+  if (bodyGroup && lifted.value) bodyGroup.position.y = bodyRestY + LIFT_MM
 
   /** One frame of an ease toward `target`, requesting the next while it is further off than `within`. */
   function easeToward(current: number, target: number, factor: number, within: number) {
