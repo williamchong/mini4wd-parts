@@ -12,8 +12,6 @@
  * second, worse category page; as counts per category it is ~25 links that
  * each land somewhere already built.
  */
-import { newBuild } from '#shared/catalog/build'
-import { encodeBuild } from '#shared/catalog/share'
 import type { ChassisId, PartCategory } from '#shared/catalog/schema'
 
 definePageMeta({ layout: 'content' })
@@ -160,17 +158,10 @@ const notes = computed(() => locale.value === 'en' ? undefined : chassis.value.n
 /**
  * A kit row opens the builder on that kit, because kit pages do not exist yet
  * and this is the question a chassis page is actually asked: which box on the
- * shelf has one of these in it. The hash is the builder's own share format, so
- * this reuses `encodeBuild` rather than inventing a second entry point — and
- * Google ignores a hash, so these are an affordance and not internal links.
+ * shelf has one of these in it.
  */
-const kitLinks = computed(() => {
-  const path = localePath('/')
-  return new Map((data.value?.kits ?? []).map(kit =>
-    [kit.id, { path, hash: `#${encodeBuild(newBuild(id.value, kit.id))}` }]))
-})
-
-const buildLink = (kit: { id: string }) => kitLinks.value.get(kit.id) ?? localePath('/')
+const kitBuildLink = useKitBuildLink()
+const buildLink = (kit: { id: string }) => kitBuildLink(id.value, kit.id)
 
 const title = computed(() => `${name.value} — ${t('site.title')}`)
 

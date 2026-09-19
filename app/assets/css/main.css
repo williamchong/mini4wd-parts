@@ -76,25 +76,6 @@ body {
   list-style: none;
 }
 
-/* A section the plan has and the site does not yet. Shown, so the shape of the
-   site is legible, but not offering a click that lands on a placeholder. */
-.nav-link.is-disabled {
-  opacity: 0.45;
-  cursor: not-allowed;
-}
-
-/* Read aloud, never drawn — for text that only repeats what a sighted reader
-   gets from styling or a tooltip. Not `display: none`, which would take it out
-   of the accessibility tree along with the pixels. */
-.visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-  clip-path: inset(50%);
-  white-space: nowrap;
-}
-
 /* ------------------------------------------------------- language menu */
 
 /* At the far end of the bar, away from the sections: it changes which site you
@@ -1224,6 +1205,31 @@ button.link {
 
 .home-steps li + li {
   margin-top: 0.35rem;
+}
+
+/* --------------------------------------------------------------- guides */
+
+/* A guide's way into the builder, in the colours of the build's primary
+   button (.build-share-actions) so it reads as the one thing to do next. */
+.builder-cta {
+  margin: 2rem 0 0;
+}
+
+.builder-cta a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+  padding: 0 1.25rem;
+  font-weight: 600;
+  color: #fff;
+  text-decoration: none;
+  background: #2c3e50;
+  border: 1px solid #2c3e50;
+  border-radius: 6px;
+}
+
+.builder-cta a:hover {
+  filter: brightness(1.1);
 }
 
 /* --------------------------------------------------------------- browse */

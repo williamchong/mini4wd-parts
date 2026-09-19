@@ -1,10 +1,9 @@
 # Mini 4WD Guides
 
-Welcome to the Mini 4WD Guides section! Here you'll find various guides and tutorials related to Mini 4WD.
+- [Getting started: begin with a Starter Pack](/en/guides/starter/): which box to buy first, and how the three Starter Packs differ.
 
 ## Coming Soon
 
-- Beginner's Guide
 - Assembly Tips
 - Tuning Tutorial
 - Racing Rules
