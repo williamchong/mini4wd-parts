@@ -14,7 +14,7 @@
  */
 import type { BufferGeometry } from 'three'
 import { STEEL } from './chassis.ts'
-import { cylinder, Triangles } from './mesh.ts'
+import { cylinder, Triangles, wound } from './mesh.ts'
 import type { Point2 } from './mesh.ts'
 import { teeth } from './parts.ts'
 import type { Paint, PaintFinish } from './parts.ts'
@@ -60,17 +60,6 @@ const ALUMINIUM = 0xc9ced6
 /** A roller's paint: its own colour, or a bare aluminium roller in a ring of that colour. */
 export const rollerPaints = (shape: RollerShape, colour: number) =>
   shape.colourOnRing ? fittingPaints(ALUMINIUM, 'metal', colour) : fittingPaints(colour, shape.finish)
-
-/** An outline wound the way `Triangles.plate` needs, whichever way it was listed. */
-function wound(points: readonly Point2[]): Point2[] {
-  let area = 0
-  for (let k = 0; k < points.length; k++) {
-    const [x0, z0] = points[k]!
-    const [x1, z1] = points[(k + 1) % points.length]!
-    area += x0 * z1 - x1 * z0
-  }
-  return area > 0 ? [...points].reverse() : [...points]
-}
 
 /** The steel race round the screw, `radius` across, standing just proud of a face `h` from the middle. */
 const raceProfile = (radius: number, h: number): Point2[] => [[1.1, -h - 0.2], [radius, -h - 0.2], [radius, h + 0.2], [1.1, h + 0.2]]

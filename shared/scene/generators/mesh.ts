@@ -212,5 +212,16 @@ export function plate(outline: readonly Point2[], y0: number, y1: number): Buffe
   return t.geometry()
 }
 
+/** An outline wound the way `Triangles.plate` needs, whichever way it was listed. */
+export function wound(points: readonly Point2[]): Point2[] {
+  let area = 0
+  for (let k = 0; k < points.length; k++) {
+    const [x0, z0] = points[k]!
+    const [x1, z1] = points[(k + 1) % points.length]!
+    area += x0 * z1 - x1 * z0
+  }
+  return area > 0 ? [...points].reverse() : [...points]
+}
+
 /** The revolve profile of a solid cylinder: radius `r`, from `h0` to `h1` along the axis. */
 export const cylinder = (r: number, h0: number, h1: number): Point2[] => [[0, h0], [r, h0], [r, h1], [0, h1]]

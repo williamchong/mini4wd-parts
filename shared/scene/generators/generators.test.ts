@@ -3,9 +3,11 @@ import { test } from 'node:test'
 import { Box3, Vector3 } from 'three'
 import type { BufferAttribute, BufferGeometry } from 'three'
 import { CHASSIS_IDS } from '../../catalog/chassis.ts'
+import type { ChassisId } from '../../catalog/chassis.ts'
 import { DEFAULT_SILHOUETTE } from '../bodies.ts'
 import { AXLE_Z, bodyGeometry, FLOOR_MM } from './body.ts'
-import { BLACK, chassisPieces, STEEL } from './chassis.ts'
+import { BLACK, chassisPieces, OUTLINES, STEEL } from './chassis.ts'
+import type { ChassisOutlines } from './chassis.ts'
 import { layoutFor, socketsFor } from '../sockets.ts'
 import { DEFAULT_TIRE, DEFAULT_WHEEL, TIRES, WHEELS } from '../wheels.ts'
 import { AXLES, BEARINGS, BRAKES, CHASSIS_UNITS, DAMPERS, PLATES, PROPELLERS, ROLLERS } from '../fittings.ts'
@@ -370,6 +372,37 @@ test('every roller socket has a post under it', () => {
         }
       }
       assert.ok(found, `${id} ${socket.name} has no post`)
+    }
+  }
+})
+
+test('every authored bumper and wing is convex pieces, and carries the roller posts at its end', () => {
+  /** The sign of each corner's turn: all one way for a convex outline, which the plate's fan needs. */
+  const turns = (piece: readonly (readonly [number, number])[]) => piece.map((a, k) => {
+    const b = piece[(k + 1) % piece.length]!
+    const c = piece[(k + 2) % piece.length]!
+    return Math.sign((b[0] - a[0]) * (c[1] - b[1]) - (b[1] - a[1]) * (c[0] - b[0]))
+  }).filter(Boolean)
+  /** On the same side of every edge of some piece as that piece turns: inside it or on its edge. */
+  const inside = (pieces: readonly (readonly (readonly [number, number])[])[], [x, z]: readonly [number, number]) =>
+    pieces.some(piece => {
+      const sign = turns(piece)[0]!
+      return piece.every((a, k) => {
+        const b = piece[(k + 1) % piece.length]!
+        return Math.sign((b[0] - a[0]) * (z - a[1]) - (b[1] - a[1]) * (x - a[0])) !== -sign
+      })
+    })
+  for (const [id, outline] of Object.entries(OUTLINES) as [ChassisId, ChassisOutlines][]) {
+    const { rollers } = layoutFor(id)
+    const ends = [['front', outline.front, rollers.front], ['rear', outline.rear, rollers.rear]] as const
+    for (const [end, pieces, post] of ends) {
+      if (!pieces) continue
+      for (const piece of pieces) assert.equal(new Set(turns(piece)).size, 1, `${id} ${end}: ${JSON.stringify(piece)} is convex`)
+      assert.ok(inside(pieces, post), `${id} ${end}: the post at ${post} stands on the bumper`)
+    }
+    if (outline.wings) {
+      for (const piece of outline.wings) assert.equal(new Set(turns(piece)).size, 1, `${id} wing ${JSON.stringify(piece)} is convex`)
+      assert.ok(inside(outline.wings, [rollers.side, 0]), `${id}: the side post stands on a wing`)
     }
   }
 })
