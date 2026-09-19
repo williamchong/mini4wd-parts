@@ -65,3 +65,15 @@ export function orderKits<T extends Pick<Kit, 'id' | 'releaseDate'>>(kits: T[]):
     return a.id.localeCompare(b.id)
   })
 }
+
+/**
+ * Tamiya's three Starter Packs — MA Power Spec, AR Speed Spec, FM-A Balanced
+ * Spec — in the order `/guides/starter/` recommends them, MA first for a
+ * reader who cannot choose. The empty builder offers them as one-tap starts,
+ * because released in 2017–18 they sit near the bottom of a newest-first
+ * picker of 305 boxes, under the kits a beginner is least likely to want.
+ *
+ * The guide names the same three in its own `:kit-links{ids="…"}`, which
+ * Markdown cannot import; kits.test.ts holds the two lists to each other.
+ */
+export const STARTER_PACKS = ['18647', '18706', '18710'] as const

@@ -16,7 +16,7 @@ import {
   swappableSlotTypes
 } from '#shared/catalog/build'
 import { byChassisOrder } from '#shared/catalog/chassis'
-import { orderKits } from '#shared/catalog/kits'
+import { STARTER_PACKS, orderKits } from '#shared/catalog/kits'
 import { checkBuild } from '#shared/catalog/rules'
 import { flagThumbnail, thumbnailSrc } from '#shared/catalog/thumbnails'
 import type { ResolvedSlot } from '#shared/catalog/build'
@@ -263,7 +263,15 @@ function onMoreToggle(event: Event) {
 
 const baseOpen = ref(false)
 
-function chooseBase(chassisId: ChassisId, kitId?: string) {
+/**
+ * The Starter Packs the empty base row offers as one-tap starts, in the guide's
+ * order (`STARTER_PACKS`). Read out of the kits already in the payload, so they
+ * cost nothing to ship; a pack missing from the catalog just drops out.
+ */
+const starterKits = computed(() => STARTER_PACKS.flatMap(id =>
+  catalog.value?.kits.find(entry => entry.id === id) ?? []))
+
+function chooseBase(chassisId: ChassisId, kitId?: string, entry?: 'starter') {
   // Before `start`, and only when the bench was empty: this button is also the
   // base row's Swap, and a reader changing their mind about a kit is not a new
   // build. Counting those would inflate the very ratio the 3D chunk's fate is
@@ -271,7 +279,7 @@ function chooseBase(chassisId: ChassisId, kitId?: string) {
   const first = !hasBuild.value
 
   start(chassisId, kitId)
-  if (first) track('build_start', { chassis: chassisId, kit: kitId, entry: kitId ? 'kit' : 'chassis' })
+  if (first) track('build_start', { chassis: chassisId, kit: kitId, entry: entry ?? (kitId ? 'kit' : 'chassis') })
   linkTrimmed.value = false
   baseOpen.value = false
   // A reader who arrived from a part page with nothing on the bench had to
@@ -779,6 +787,24 @@ useHead(() => ({
           <button type="button" :class="{ primary: !hasBuild }" @click="baseOpen = true">
             {{ hasBuild ? $t('build.swap') : $t('build.pickBase') }}
           </button>
+        </div>
+        <!-- The boxes the starter guide recommends, one tap from a car, for a
+             reader who has none yet. Only while the bench is empty: once a
+             base is chosen this row is the car's, and Swap is the way out. -->
+        <div v-if="!hasBuild && starterKits.length" class="starter-picks">
+          <p class="starter-heading">
+            {{ $t('build.starter.heading') }}
+            <NuxtLink :to="localePath('/guides/starter')">{{ $t('build.starter.guide') }}</NuxtLink>
+          </p>
+          <ul>
+            <li v-for="entry in starterKits" :key="entry.id">
+              <button type="button" @click="chooseBase(entry.chassis, entry.id, 'starter')">
+                <CatalogThumb :src="thumbnailSrc('kits', entry)" icon="body" />
+                <span class="starter-name">{{ $t(`build.starter.spec.${entry.id}`) }}</span>
+                <span class="part-id">{{ entry.id }}</span>
+              </button>
+            </li>
+          </ul>
         </div>
       </li>
 

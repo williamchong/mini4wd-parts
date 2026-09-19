@@ -30,8 +30,10 @@ import type { PartCategory } from '#shared/catalog/schema'
  */
 export type AnalyticsEvents = {
   /** A build began. The denominator for everything below, and the one number
-   *  the 137 KB 3D chunk's fate rests on (docs/PLAN.md §5.5). */
-  build_start: { chassis: ChassisId, kit?: string, entry: 'kit' | 'chassis' | 'link', trimmed?: boolean }
+   *  the 137 KB 3D chunk's fate rests on (docs/PLAN.md §5.5). `starter` is a
+   *  Starter Pack tapped in the empty base row rather than found in the kit
+   *  picker, kept apart so the shortcut can be judged on its own. */
+  build_start: { chassis: ChassisId, kit?: string, entry: 'kit' | 'chassis' | 'link' | 'starter', trimmed?: boolean }
   /** A part went into a slot. `source` is what says whether the 3D pane is
    *  really the selection surface it was built to be (§5.4). */
   part_swap: { chassis: ChassisId, slot: string, part: string, source: 'row' | 'scene' | 'copy' | 'part_page' }

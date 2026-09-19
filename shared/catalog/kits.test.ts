@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
 import { test } from 'node:test'
-import { fandomArticleUrl, orderKits } from './kits.ts'
+import { STARTER_PACKS, fandomArticleUrl, orderKits } from './kits.ts'
 
 /**
  * Every title asserted on here is a `loadoutSourceTitle` that exists in the
@@ -86,4 +87,16 @@ test('ordering does not mutate the array it was given', () => {
   const kits = [kit('18001', '2015-06-20'), kit('18002', '2024-01-13')]
   orderKits(kits)
   assert.deepEqual(kits.map(k => k.id), ['18001', '18002'])
+})
+
+/**
+ * The builder's one-tap starts and the guide that explains them have to name
+ * the same boxes, and a guide cannot import a constant, so this is the join.
+ */
+test('the builder offers the Starter Packs the guide recommends, in its order', () => {
+  for (const locale of ['zh-Hant', 'en']) {
+    const guide = readFileSync(new URL(`../../content/${locale}/guides/starter.md`, import.meta.url), 'utf8')
+    const ids = guide.match(/:kit-links\{ids="([^"]*)"\}/)?.[1]?.split(/\s+/)
+    assert.deepEqual(ids, [...STARTER_PACKS], locale)
+  }
 })

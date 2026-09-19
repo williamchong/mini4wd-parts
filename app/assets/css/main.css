@@ -381,7 +381,8 @@ button.link {
   list-style: none;
 }
 
-.chassis-list button {
+.chassis-list button,
+.starter-picks button {
   display: flex;
   flex-direction: column;
   gap: 0.35rem;
@@ -396,7 +397,8 @@ button.link {
   cursor: pointer;
 }
 
-.chassis-list button:hover {
+.chassis-list button:hover,
+.starter-picks button:hover {
   border-color: #8a99a8;
 }
 
@@ -690,6 +692,53 @@ button.link {
   cursor: pointer;
 }
 
+/* The empty base row's Starter Packs: under the entry column, and three across
+   even on a 360px phone, so they add one short band to the list rather than
+   three rows. Picture over name, because a pack's name is its chassis and its
+   spec, and the box art is what tells the three cars apart. The card itself is
+   the chassis picker's, above. */
+.starter-picks {
+  grid-column: 2 / -1;
+}
+
+.starter-heading {
+  margin: 0;
+  font-size: 0.9em;
+}
+
+.starter-heading a {
+  margin-left: 0.25rem;
+  white-space: nowrap;
+}
+
+.starter-picks ul {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 10rem));
+  gap: 0.5rem;
+  margin: 0.5rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.starter-picks button {
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.4rem;
+  color: inherit;
+  text-align: center;
+}
+
+.starter-picks .catalog-thumb {
+  width: 4.5rem;
+}
+
+/* Breaks at the space in FM-A 平衡型, not inside 平衡型. */
+.starter-name {
+  font-size: 0.85em;
+  line-height: 1.3;
+  word-break: keep-all;
+}
+
 /* Part picker */
 
 .picker-backdrop {
@@ -855,7 +904,8 @@ button.link {
     grid-template-columns: 1fr auto;
   }
 
-  .slot-label {
+  .slot-label,
+  .starter-picks {
     grid-column: 1 / -1;
   }
 }

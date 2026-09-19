@@ -24,6 +24,15 @@
     "bareChassis": "Bare chassis",
     "noBase": "No kit or chassis chosen",
     "pickBase": "Choose a kit or chassis",
+    "starter": {
+      "heading": "No car yet? Start from a Tamiya Starter Pack:",
+      "guide": "How to choose",
+      "spec": {
+        "18647": "MA Power Spec",
+        "18706": "AR Speed Spec",
+        "18710": "FM-A Balanced Spec"
+      }
+    },
     "pickChassis": "Pick a chassis to start",
     "door": {
       "kit": "From a kit",
