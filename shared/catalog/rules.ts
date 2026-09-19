@@ -23,7 +23,7 @@
  * could not fire on a build assembled from this catalog, and the page no
  * longer tells the reader it went unchecked.
  */
-import { isChassisCompatible, isShaftCompatible } from './build.ts'
+import { BUILD_CLASSES, isChassisCompatible, isShaftCompatible } from './build.ts'
 import type { BuildableChassis, BuildablePart, BuildClass, ResolvedSlot } from './build.ts'
 
 export type Severity = 'error' | 'warning' | 'note'
@@ -95,4 +95,22 @@ export function checkBuild({ slots, chassis, partsById, buildClass, linkTrimmed 
 
   // Array.prototype.sort is stable, so the list order survives within a rank.
   return findings.sort((a, b) => RANK[a.severity] - RANK[b.severity])
+}
+
+/**
+ * Whether the class the build is checked against changes anything: some part
+ * in it is legal in one class and not in another. Most parts are the same in
+ * all three (in the 2026-09 catalog only 15 differ, every one a part Junior
+ * bans), and a class toggle that cannot change a finding is a question with
+ * no answer, so the page shows it only when this is true.
+ */
+export function classDecides(
+  slots: ResolvedSlot[],
+  partsById: BuildCheck['partsById']
+): boolean {
+  return slots.some(slot => slot.entries.some((entry) => {
+    const part = entry.partId ? partsById.get(entry.partId) : undefined
+    if (!part) return false
+    return BUILD_CLASSES.some(cls => part.classLegality[cls] !== part.classLegality.open)
+  }))
 }

@@ -1073,6 +1073,12 @@ button.link {
   font-size: 0.9em;
 }
 
+/* The class toggle is not always there, and the block's top edge should not
+   move with it. */
+.build-findings > :first-child {
+  margin-top: 0;
+}
+
 .findings-class {
   display: flex;
   flex-wrap: wrap;

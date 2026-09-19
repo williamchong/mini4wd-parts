@@ -124,6 +124,7 @@
     "rules": {
       "class": "Class",
       "ok": "No problems found for {class}.",
+      "anyClass": "racing",
       "severity": {
         "error": "Error",
         "warning": "Warning",

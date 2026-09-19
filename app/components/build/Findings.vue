@@ -16,6 +16,10 @@ const props = defineProps<{
   findings: Array<Finding & { text: string }>
   /** False before a base is chosen: there is nothing to check yet. */
   hasBuild: boolean
+  /** Some part in the build is legal in one class and not another. */
+  classDecides: boolean
+  /** The class the findings name, or a word for any race while the class decides nothing. */
+  classLabel: string
 }>()
 
 const buildClass = defineModel<BuildClass>('buildClass', { required: true })
@@ -29,7 +33,9 @@ const clean = computed(() => !props.findings.some(f => f.severity !== 'note'))
 
 <template>
   <section class="build-findings">
-    <div class="findings-class">
+    <!-- Only while the class can change a finding: a toggle whose every
+         position gives the same answer asks the reader a question for nothing. -->
+    <div v-if="classDecides" class="findings-class">
       <span>{{ $t('build.rules.class') }}</span>
       <!-- Toggle buttons with aria-pressed, the same treatment as the base
            picker's two doors, for the same reason. -->
@@ -49,7 +55,7 @@ const clean = computed(() => !props.findings.some(f => f.severity !== 'note'))
 
     <template v-if="hasBuild">
       <p v-if="clean" class="findings-ok">
-        {{ $t('build.rules.ok', { class: $t(`part.class.${buildClass}`) }) }}
+        {{ $t('build.rules.ok', { class: classLabel }) }}
       </p>
       <ul v-if="findings.length" class="findings-list" aria-live="polite">
         <li v-for="(finding, i) in findings" :key="i" :class="`finding-${finding.severity}`">

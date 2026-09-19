@@ -124,6 +124,7 @@
     "rules": {
       "class": "賽制",
       "ok": "以{class}規則檢查，沒有發現問題。",
+      "anyClass": "比賽",
       "severity": {
         "error": "錯誤",
         "warning": "注意",
