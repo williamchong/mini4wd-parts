@@ -5,9 +5,9 @@ import { ogCardFile, thumbnailFile } from './thumbnails.ts'
 import { thumbnailPath, type ThumbCollection, type ThumbVariant } from '../../shared/catalog/thumbnails.ts'
 import { ogCardPath } from '../../shared/catalog/og.ts'
 import { NAME_LOCALES } from '../../shared/catalog/names.ts'
-import { partSchema, chassisSchema, kitSchema } from '../../shared/catalog/schema.ts'
+import { partSchema, chassisSchema, kitSchema, CHASSIS_IDS } from '../../shared/catalog/schema.ts'
 import type { Chassis, Loadout, Slot } from '../../shared/catalog/schema.ts'
-import { newBuild, partsForSlot, resolveBuild } from '../../shared/catalog/build.ts'
+import { isChassisCompatible, newBuild, partsForSlot, resolveBuild, slotsById } from '../../shared/catalog/build.ts'
 import { checkBuild } from '../../shared/catalog/rules.ts'
 import { bodyForKit, bodyProblems, loadBodies, silhouetteOf } from './bodies.ts'
 import { entryShapeId, TIRES, WHEELS } from '../../shared/scene/wheels.ts'
@@ -63,10 +63,10 @@ const WHEEL_SLOTS: ReadonlySet<Slot> = new Set(['wheel-front', 'wheel-rear'])
 const TIRE_SLOTS: ReadonlySet<Slot> = new Set(['tire-front', 'tire-rear'])
 
 function checkLoadout(label: string, entries: Loadout, host: Chassis) {
-  const typeOf = new Map(host.slots.map(slot => [slot.id, slot.type]))
+  const slots = slotsById([host])
 
   for (const [slotId, filled] of Object.entries(entries)) {
-    const type = typeOf.get(slotId)
+    const type = slots.get(slotId)?.type
     if (!type) {
       errors.push(`${label}: "${slotId}" is not a slot on the ${host.id} chassis`)
       continue
@@ -248,6 +248,64 @@ for (const part of parts) {
   const printed = part.tire || part.wheel ? printedTireMm(part.names.en ?? part.names.ja) : undefined
   if (printed !== undefined && diameter !== printed) {
     errors.push(`${label}: Tamiya's name says ⌀${printed}, the ${tire} shape says ⌀${diameter ?? 'nothing'}`)
+  }
+}
+
+/**
+ * A parts set's contents (docs/PLAN.md §4.9): a set is fitted as a whole, so
+ * every row it names has to exist on every chassis it is sold for, and
+ * everything it puts in one has to be a part that row can take.
+ *
+ * The chassis loop is the check that matters. A set is offered wherever its
+ * `slots` say, and `slots` is read off these same keys at generate time, so a
+ * row the chassis does not have would silently vanish from the fit rather than
+ * fail — the reader would buy the box and get four rows of five.
+ */
+/** One item number a set puts in one row, against the row and every chassis the set fits. */
+function checkSetContent(label: string, slotId: string, type: Slot, id: string, hosts: Chassis[]) {
+  const content = partsById.get(id)
+  if (!content) {
+    errors.push(`${label}: contents name ${id}, which is not in the catalog`)
+    return
+  }
+  if (!content.slots.includes(type)) {
+    errors.push(`${label}: ${id} is in ${slotId} but does not fit a ${type} slot`)
+  }
+  // The trap a kit loadout has too (CLAUDE.md, Catalog Pipeline): a part Tamiya
+  // does not list for this chassis is hidden by the picker the moment the
+  // reader swaps it out, so the set could put it on the car and they could
+  // never put it back.
+  const unlisted = hosts.filter(host => !isChassisCompatible(content, host.id))
+  if (unlisted.length) {
+    errors.push(`${label}: ${id} is in ${slotId} but is not listed for the ${unlisted.map(host => host.id).join(', ')} chassis the set fits`
+      + ' — add a chassisCompat override in data/overrides/parts.yml')
+  }
+}
+
+for (const set of parts) {
+  if (!set.contents) continue
+  const label = `parts/${set.id}`
+  const hosts = CHASSIS_IDS.filter(id => isChassisCompatible(set, id))
+    .flatMap(id => chassisById.get(id) ?? [])
+  const slots = slotsById(hosts)
+
+  for (const [slotId, ids] of Object.entries(set.contents)) {
+    // Every row a set fills has to be on every chassis it is sold for, or the
+    // reader buys the box and gets four rows of five with nothing to say so.
+    const missing = hosts.filter(host => !host.slots.some(slot => slot.id === slotId))
+    if (missing.length) {
+      errors.push(`${label}: contents fill "${slotId}", which the ${missing.map(host => host.id).join(', ')} chassis does not have`)
+    }
+    const slot = slots.get(slotId)
+    if (!slot) continue
+
+    if (!set.slots.includes(slot.type)) {
+      errors.push(`${label}: contents fill ${slotId} but the set is not offered for a ${slot.type} slot — run npm run catalog:generate`)
+    }
+    if (ids.length > slot.maxCount) {
+      errors.push(`${label}: contents put ${ids.length} part(s) in ${slotId}, which holds ${slot.maxCount}`)
+    }
+    for (const id of ids) checkSetContent(label, slotId, slot.type, id, hosts)
   }
 }
 

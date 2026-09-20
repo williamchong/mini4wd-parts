@@ -237,6 +237,17 @@ export const partColours = z.object({
   source: provenance
 })
 
+/**
+ * Slot id -> the item numbers that fill it. The shape `loadout` has one layer
+ * down, and named here for the same reason: it is a concept with consumers of
+ * its own (scripts/catalog/generate.ts, the part page), and an inlined
+ * `z.record` leaves each of them restating `Record<string, string[]>` by hand.
+ *
+ * Unlike a loadout entry this holds item numbers and nothing else — see
+ * `contents` on `partSchema` for why it can hold nothing else.
+ */
+export const partContents = z.record(z.string(), z.array(z.string().regex(/^\d{4,5}$/)))
+
 export const partSchema = z.object({
   /** Tamiya item number, e.g. "15549". The catalog's primary key. */
   id: z.string().regex(/^\d{4,5}$/),
@@ -264,6 +275,22 @@ export const partSchema = z.object({
    * the slot; the picker lists it after the rest. Written only when true.
    */
   isAddOn: z.boolean().optional(),
+
+  /**
+   * What a parts set puts on the car: slot **id** -> the item numbers that go
+   * in that row. Only the `bundle` category carries one, and the set's own
+   * `slots` are read back off these keys by scripts/catalog/generate.ts, so the
+   * two can never disagree about where a set is offered.
+   *
+   * Item numbers and nothing else, because that is all a build can hold: a slot
+   * in `BuildState.swaps` is a list of them, with nowhere to put a loose piece
+   * that has no product behind it. Where a piece has no separate SKU — the
+   * chassis-specific FRP plates, the set's own coloured 13mm rollers — the
+   * set's own item number stands in that row, because the set is what you buy
+   * to get that piece. Only the pieces Tamiya's own contents sentence names as
+   * a product become a different item number (data/overrides/parts.yml).
+   */
+  contents: partContents.optional(),
 
   chassisCompat: z.object({
     /**
@@ -603,6 +630,7 @@ export type PartColours = z.infer<typeof partColours>
 export type Chassis = z.infer<typeof chassisSchema>
 export type Kit = z.infer<typeof kitSchema>
 export type Loadout = z.infer<typeof loadout>
+export type PartContents = z.infer<typeof partContents>
 export type LoadoutEntry = z.infer<typeof loadoutEntry>
 export type LabelNames = z.infer<typeof labelNames>
 export type PartCategory = Part['category']

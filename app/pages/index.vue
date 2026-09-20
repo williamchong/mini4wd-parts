@@ -13,13 +13,13 @@
  */
 import {
   counterpartParts, gearRatioOf, isBuildClass, orderParts, partsForSlot, resolveBuild, rollersPerSideIn,
-  slotIdsFor, swappableSlotTypes
+  setContentsFor, slotIdsFor, swappableSlotTypes
 } from '#shared/catalog/build'
 import { byChassisOrder } from '#shared/catalog/chassis'
 import { STARTER_PACKS, orderKits } from '#shared/catalog/kits'
 import { checkBuild, classDecides } from '#shared/catalog/rules'
 import { flagThumbnail, thumbnailSrc } from '#shared/catalog/thumbnails'
-import type { ResolvedSlot } from '#shared/catalog/build'
+import type { BuildablePart, ResolvedSlot } from '#shared/catalog/build'
 import type { Finding } from '#shared/catalog/rules'
 import type { ChassisId, PartCategory, Slot } from '#shared/catalog/schema'
 import type { AnalyticsEvents } from '~/composables/useAnalytics'
@@ -31,7 +31,7 @@ const localePath = useLocalePath()
 const siteUrl = useRuntimeConfig().public.siteUrl
 const { resolve, isFallback } = useCatalogName()
 const { term, slotLabel } = useTerm()
-const { build, buildClass, pending, start, swap, revert } = useBuild()
+const { build, buildClass, pending, start, swap, swapMany, revert } = useBuild()
 const { track } = useAnalytics()
 
 /**
@@ -56,7 +56,7 @@ const { data: catalog } = await useAsyncData('build-catalog', async () => {
     // shipped, as `releaseDate` is for the kits below: between them they order
     // every picker, and nothing in the builder renders any of the three.
     queryCollection('parts')
-      .select('id', 'stem', 'names', 'category', 'slots', 'isCarPart', 'isAddOn',
+      .select('id', 'stem', 'names', 'category', 'slots', 'isCarPart', 'isAddOn', 'contents',
         'chassisCompat', 'classLegality', 'specs', 'colours', 'body', 'wheel', 'tire', 'finish', 'fitting',
         'status', 'releaseDate', 'priceJpy', 'thumbnail')
       .all(),
@@ -85,9 +85,9 @@ const { data: catalog } = await useAsyncData('build-catalog', async () => {
     // Tools, cases, stickers and setting gauges reach no picker: `partsForSlot`
     // requires `isCarPart`, and a part slotted `none` fills nothing. Dropping
     // them at prerender rather than shipping and re-filtering in the browser
-    // takes 44 of 382 records out of the payload.
+    // takes 39 of 382 records out of the payload.
     //
-    // The 338 left are then ordered — regular range before limited, newest
+    // The 343 left are then ordered — regular range before limited, newest
     // first within each — and stripped of the three fields that ordered them,
     // on the same reasoning as the kits below: `partsForSlot` re-ranks on
     // legality and add-on alone, both of which it already ships. Shipping the
@@ -123,9 +123,10 @@ const partsById = computed(() =>
  * The categories a first upgrade reaches for, in the order a beginner meets
  * them, for the section under the builder that tells a reader — and a crawler —
  * what the site is (docs/PLAN.md §6 M1b). Its own query rather than a tally
- * over `catalog.parts`: the builder drops parts that fill no slot, and the
- * First Try Parts Sets in `bundle` are exactly those. Five rows reach the
- * payload, not the parts behind them.
+ * over `catalog.parts`, which is filtered to what a picker can offer: it was
+ * the five `bundle` sets that made the difference until they gained slots of
+ * their own (§4.9), and it is every future category with none. Five rows reach
+ * the payload, not the parts behind them.
  */
 const HOME_CATEGORIES = ['roller', 'motor', 'gear', 'wheel-tire-set', 'bundle'] as const satisfies readonly PartCategory[]
 
@@ -361,11 +362,44 @@ function placePending() {
     pending.value = null
     return
   }
+  // A set fills several rows and there is no choice between them to offer, so
+  // it never reaches the slot picker below.
+  if (part.contents) {
+    placeSet(part, 'part_page')
+    cancelPending()
+    return
+  }
   if (ids.length > 1) {
     pendingSlotIds.value = ids
     return
   }
   place(ids[0]!)
+}
+
+/**
+ * A parts set on the car: every row the box fills, in one change
+ * (`setContentsFor`).
+ *
+ * The notice names those rows. This is the one action in the builder that
+ * touches more than the row the reader was looking at, and a set that quietly
+ * replaced the kit's rollers on its way past would read as a bug rather than as
+ * what a First Try set is.
+ */
+function placeSet(part: BuildablePart, source: AnalyticsEvents['part_set_added']['source']) {
+  if (!chassis.value) return
+  const rows = setContentsFor(part, chassis.value)
+  if (!rows.length) return
+
+  swapMany(rows)
+  track('part_set_added', { chassis: chassis.value.id, part: part.id, slots: rows.length, source })
+  notice.value = t('build.addedSet', {
+    part: resolve(part.names).value,
+    slots: rows
+      .flatMap(row => slots.value.find(slot => slot.id === row.slotId) ?? [])
+      .map(slotLabel)
+      .join(t('build.listSeparator'))
+  })
+  goToSlot(rows[0]!.slotId)
 }
 
 function place(slotId: string) {
@@ -524,7 +558,14 @@ const openSlotLabel = computed(() =>
  * that needs one.
  */
 function choose(partId: string) {
-  if (openSlotId.value) {
+  const part = partsById.value.get(partId)
+  // A set is offered in every picker its contents can fill, and fits whole from
+  // any of them: picking a First Try set in the roller list and getting only
+  // its rollers would leave the plates it came with nowhere.
+  if (part?.contents) {
+    placeSet(part, pickerSource.value)
+  }
+  else if (openSlotId.value) {
     swap(openSlotId.value, [partId])
     trackSwap(openSlotId.value, partId, pickerSource.value)
   }

@@ -5,7 +5,7 @@
  * shared/catalog/build.ts, which is why they can be tested without a browser.
  */
 import { newBuild } from '#shared/catalog/build'
-import type { BuildClass, BuildState } from '#shared/catalog/build'
+import type { BuildClass, BuildState, SetRow } from '#shared/catalog/build'
 import type { ChassisId } from '#shared/catalog/schema'
 
 export function useBuild() {
@@ -36,6 +36,21 @@ export function useBuild() {
     build.value = { ...build.value, swaps: { ...build.value.swaps, [slotId]: partIds } }
   }
 
+  /**
+   * Several slots in one change, for a parts set going on the car (`setContentsFor`).
+   *
+   * One write rather than a loop over `swap`, because every one of those
+   * replaces `build.value` and the link, the rule engine and the 3D pane all
+   * watch it: five writes would draw four cars nobody asked to see and put four
+   * half-fitted builds in the browser's history.
+   */
+  function swapMany(rows: SetRow[]) {
+    if (!build.value || !rows.length) return
+    const swaps = { ...build.value.swaps }
+    for (const row of rows) swaps[row.slotId] = row.partIds
+    build.value = { ...build.value, swaps }
+  }
+
   /** Drop the swap so the slot falls back to what the kit or chassis put there. */
   function revert(slotId: string) {
     if (!build.value) return
@@ -44,5 +59,5 @@ export function useBuild() {
     build.value = { ...build.value, swaps }
   }
 
-  return { build, buildClass, pending, start, swap, revert }
+  return { build, buildClass, pending, start, swap, swapMany, revert }
 }

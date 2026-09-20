@@ -19,6 +19,9 @@ import type {
   Chassis, ChassisId, Kit, LabelNames, LoadoutEntry, Part, PartLegality, Slot
 } from './schema.ts'
 
+/** One socket on a chassis, as its profile declares it. */
+export type ChassisSlot = Chassis['slots'][number]
+
 /**
  * Whether this record has a thumbnail, in place of the path to it: the path is
  * derivable from the item number, and 631 copies of a 25-byte string is 1.8 KB
@@ -36,7 +39,7 @@ type HasThumbnail = { hasThumbnail?: boolean }
  * who only wanted to change a motor.
  */
 export type BuildablePart = Pick<Part,
-  'id' | 'names' | 'category' | 'slots' | 'isCarPart' | 'isAddOn' | 'chassisCompat'
+  'id' | 'names' | 'category' | 'slots' | 'isCarPart' | 'isAddOn' | 'contents' | 'chassisCompat'
   | 'classLegality' | 'specs' | 'colours' | 'body'> & HasThumbnail
 
 export type BuildableChassis = Pick<Chassis, 'id' | 'slots' | 'defaultLoadout' | 'motorShaft'>
@@ -178,6 +181,73 @@ export function resolveBuild(
     }
 
     return { ...base, entries: [], swapped: false }
+  })
+}
+
+/**
+ * Slot id -> the slot itself, across however many chassis are handed in.
+ *
+ * Loadouts and set contents are keyed by slot **id** while a part declares slot
+ * **types**, so resolving one to the other always needs a chassis profile — and
+ * the callers holding one are spread across the verifier and the part page.
+ * One chassis gives that chassis' profile; all eight give the union, which is
+ * what a page with no chassis in hand needs. The two profiles agree wherever
+ * they share an id (data/taxonomy/slots.yml), so the union loses nothing.
+ *
+ * Insertion order is the first chassis' own slot order, which is the order the
+ * build list reads, so a caller iterating this gets rows in that order.
+ */
+export function slotsById<S extends Pick<ChassisSlot, 'id' | 'type'>>(
+  chassis: { slots: S[] }[]
+): Map<string, S> {
+  return new Map(chassis.flatMap(entry => entry.slots).map(slot => [slot.id, slot]))
+}
+
+/** One row a parts set fills, and the item numbers it puts there. */
+export type SetRow = { slotId: string; partIds: string[] }
+
+/**
+ * A parts set as this chassis can take it: every row the box fills, in the
+ * chassis' own order, so a notice about it reads top to bottom like the list.
+ *
+ * A set goes on the car whole or not at all. A First Try set is a front plate,
+ * a rear plate, two pairs of rollers and its dampers, and dropping one of those
+ * into a single slot — which is what the ordinary "which slot?" question would
+ * do with it — leaves the reader with a fifth of what they bought and no sign
+ * of the rest (docs/PLAN.md §4.9).
+ *
+ * Empty for a part that is not a set, and for a set on a chassis whose profile
+ * has none of its rows, which `catalog:verify` makes impossible for a chassis
+ * the set is actually sold for.
+ */
+export function setContentsFor(part: BuildablePart, chassis: BuildableChassis): SetRow[] {
+  const contents = part.contents
+  if (!contents) return []
+  return chassis.slots.flatMap((slot) => {
+    const partIds = contents[slot.id]
+    // `maxCount` is the slot's word, not the set's: a link is cut to it too
+    // (reconcileBuild), and the two have to agree about what a row can hold.
+    return partIds?.length ? [{ slotId: slot.id, partIds: partIds.slice(0, slot.maxCount) }] : []
+  })
+}
+
+/**
+ * The same rows for a reader with no chassis in hand — the set's own page,
+ * which can name a slot *type* and has no build to resolve ids against.
+ *
+ * Here rather than in the page for the reason this file's header gives: slot
+ * ids and slot types meet in one place, and a page that built its own map
+ * would be the third copy of that resolution and the one no test can reach.
+ */
+export function setContentRows(
+  part: Pick<BuildablePart, 'contents'>,
+  chassis: { slots: Pick<ChassisSlot, 'id' | 'type'>[] }[]
+): { type: Slot; partIds: string[] }[] {
+  const contents = part.contents
+  if (!contents) return []
+  return [...slotsById(chassis)].flatMap(([slotId, slot]) => {
+    const partIds = contents[slotId]
+    return partIds?.length ? [{ type: slot.type, partIds }] : []
   })
 }
 

@@ -11,8 +11,23 @@ seriesLabel: ミニ四駆グレードアップパーツ
 category: bundle
 categorySource: derived
 slots:
-  - none
+  - front-stay
+  - rear-stay
+  - roller-front
+  - roller-rear
+  - damper
 isCarPart: true
+contents:
+  front-stay:
+    - "15476"
+  rear-stay:
+    - "15476"
+  roller-front:
+    - "15476"
+  roller-rear:
+    - "15476"
+  damper:
+    - "15476"
 chassisCompat:
   include:
     - ma

@@ -853,9 +853,17 @@ button.link {
 }
 
 .part-head,
+.part-set,
 .part-legality,
 .part-specs {
   grid-column: 2;
+}
+
+/* What a parts set fills, on the card that offers it. */
+.part-set {
+  margin: 0.2rem 0 0;
+  font-size: 0.8em;
+  opacity: 0.75;
 }
 
 .part-legality {

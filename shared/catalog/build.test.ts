@@ -3,7 +3,7 @@ import { test } from 'node:test'
 import { partSchema } from './schema.ts'
 import {
   BUILD_CLASSES, counterpartParts, gearRatioOf, isChassisCompatible, newBuild, orderParts, partsForSlot,
-  resolveBuild, rollersPerSideIn, slotIdsFor, swappableSlotTypes
+  resolveBuild, rollersPerSideIn, setContentRows, setContentsFor, slotIdsFor, swappableSlotTypes
 } from './build.ts'
 import type { BuildState } from './build.ts'
 import type { Chassis, Kit, Part } from './schema.ts'
@@ -382,4 +382,53 @@ test('a part that does not go on this chassis maps to no slot at all', () => {
 test('BUILD_CLASSES names every class the schema records a verdict for', () => {
   const keys = Object.keys(partSchema.shape.classLegality.shape).filter(key => key !== 'source' && key !== 'notes')
   assert.deepEqual([...BUILD_CLASSES].sort(), keys.sort())
+})
+
+test('a parts set fills its rows in the chassis\' order, and only rows the chassis has', () => {
+  const set = part({
+    id: '15476',
+    category: 'bundle',
+    slots: ['gear', 'brake'],
+    // `front-stay` is a real slot on a real chassis and not on this one, which
+    // is what a set sold for another chassis looks like from here.
+    contents: { 'brake': ['15300'], 'front-stay': ['15301'], 'gear-set': ['15302'] }
+  })
+  assert.deepEqual(setContentsFor(set, chassis), [
+    { slotId: 'gear-set', partIds: ['15302'] },
+    { slotId: 'brake', partIds: ['15300'] }
+  ])
+})
+
+test('a parts set is cut to what a row holds, like a link is', () => {
+  const set = part({
+    id: '15476',
+    category: 'bundle',
+    slots: ['shaft'],
+    contents: { axle: ['15300', '15301', '15302'] }
+  })
+  assert.deepEqual(setContentsFor(set, chassis), [{ slotId: 'axle', partIds: ['15300', '15301'] }])
+})
+
+test('a part that is not a set fills nothing', () => {
+  assert.deepEqual(setContentsFor(part({ id: '15392', slots: ['damper'] }), chassis), [])
+})
+
+test('a set names its rows by slot type for a page with no chassis, in profile order', () => {
+  const set = part({
+    id: '15476',
+    category: 'bundle',
+    slots: ['gear', 'brake'],
+    contents: { 'brake': ['15300'], 'gear-set': ['15302'] }
+  })
+  // The part page has every chassis rather than one, and reads the union of
+  // their profiles: `gear-set` is a slot id and `gear` is what it can name.
+  assert.deepEqual(setContentRows(set, [chassis]), [
+    { type: 'gear', partIds: ['15302'] },
+    { type: 'brake', partIds: ['15300'] }
+  ])
+})
+
+test('a set naming a slot no chassis profile has contributes no row', () => {
+  const set = part({ id: '15476', category: 'bundle', contents: { 'front-stay': ['15300'] } })
+  assert.deepEqual(setContentRows(set, [chassis]), [])
 })

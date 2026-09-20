@@ -6,7 +6,7 @@ import { readJsonFile, readYamlFile, readYamlFileIfPresent } from './io.ts'
 import { thumbnailIds } from './thumbnails.ts'
 import { thumbnailPath, type ThumbCollection } from '../../shared/catalog/thumbnails.ts'
 import { partSchema, chassisSchema, kitSchema, CHASSIS_IDS, chassisIdFor, KIT_CLEAR } from '../../shared/catalog/schema.ts'
-import type { ChassisId, Kit, KitOverride, LabelNames, Loadout, PartCategory, PartColours, PartOverride, PartSpecs } from '../../shared/catalog/schema.ts'
+import type { ChassisId, Kit, KitOverride, LabelNames, Loadout, PartCategory, PartColours, PartOverride, PartSpecs, Slot } from '../../shared/catalog/schema.ts'
 import { compact, deriveAddOn, deriveCategory, deriveLegality, deriveSlots, deriveSpecs, isPlainObject, normalise } from './taxonomy.ts'
 import { labelFor, neutralLabel } from './labels.ts'
 import { colourOf, coloursIn, isClear } from './colours.ts'
@@ -41,7 +41,34 @@ const fandomParts = readJsonFile<FandomPart[]>('data/raw/fandom-parts.json')
 const overrides = readYamlFileIfPresent<Record<string, PartOverride>>('data/overrides/parts.yml', {})
 const kitOverrides = readYamlFileIfPresent<Record<string, KitOverride>>('data/overrides/kits.yml', {})
 const bodies = loadBodies()
-const slotProfiles = readYamlFile<{ profiles: Record<string, unknown[]> }>('data/taxonomy/slots.yml').profiles
+const slotProfiles = readYamlFile<{
+  profiles: Record<string, ({ id: string, type: Slot } & Record<string, unknown>)[]>
+}>('data/taxonomy/slots.yml').profiles
+
+/**
+ * Slot id -> slot type, across both profiles. A parts set's `contents` say
+ * where each piece goes by slot *id*, while a part declares the slot *types* it
+ * fits, and this is what turns the first into the second (`slotsOf`).
+ *
+ * The two profiles agree wherever they share an id — the drivetrain is the only
+ * structural difference between them (data/taxonomy/slots.yml) — so flattening
+ * them into one map loses nothing.
+ */
+const SLOT_TYPES = new Map(Object.values(slotProfiles).flat().map(slot => [slot.id, slot.type]))
+
+/**
+ * The slot types a parts set's contents fill, in the profile's own order, which
+ * is the order the build list reads and the order the part page prints. Deduped
+ * because two rows can share a type, and empty for a set whose contents name no
+ * slot this site models.
+ */
+function slotsOf(contents: Record<string, string[] | undefined>): Slot[] {
+  const types: Slot[] = []
+  for (const [id, type] of SLOT_TYPES) {
+    if (contents[id]?.length && !types.includes(type)) types.push(type)
+  }
+  return types
+}
 
 const hkById = new Map(hkItems.map(item => [item.id, item]))
 
@@ -306,6 +333,10 @@ function buildPart(item: JpItem<PartGenreCode>) {
     merged.colours = { ...merged.colours, source: 'override' } as PartColours
   }
   if (override.category && !override.slots) merged.slots = deriveSlots(merged.category)
+  // A parts set is offered in exactly the pickers its contents can fill, read
+  // off the contents themselves rather than authored twice (schema.ts). Only an
+  // override can carry them — nothing Tamiya publishes enumerates a box.
+  if (override.contents) merged.slots = slotsOf(override.contents)
   // Read off the merged `fitting`, so an override that changes the row changes
   // the count; the build list prints it and cannot read the plate table (§5.6).
   const perSide = partRollersPerSide(merged)

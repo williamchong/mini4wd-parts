@@ -37,6 +37,12 @@ export type AnalyticsEvents = {
   /** A part went into a slot. `source` is what says whether the 3D pane is
    *  really the selection surface it was built to be (§5.4). */
   part_swap: { chassis: ChassisId, slot: string, part: string, source: 'row' | 'scene' | 'copy' | 'part_page' }
+  /** A parts set went on the car whole (docs/PLAN.md §4.9). Its own event
+   *  rather than one `part_swap` per row: a set is one decision, and counting
+   *  it as five would put a thumb on every swap-per-build number there is.
+   *  `slots` is how many rows it landed on, which is what says whether a set
+   *  is being fitted to the chassis it was made for. */
+  part_set_added: { chassis: ChassisId, part: string, slots: number, source: 'row' | 'scene' | 'part_page' }
   part_revert: { chassis: ChassisId, slot: string }
   /** `method` is the share sheet or the copy button; a closed sheet is not
    *  counted. `ok: false` is the `window.prompt` fallback — no clipboard

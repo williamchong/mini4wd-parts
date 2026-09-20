@@ -12,8 +12,10 @@
  * The add-to-build button deliberately does not decide anything: it hands the
  * item number to the builder and goes there. See `pending` in useBuild.ts.
  */
+import { setContentRows } from '#shared/catalog/build'
 import { fandomArticleUrl, FANDOM_WIKI } from '#shared/catalog/kits'
 import type { BuildClass } from '#shared/catalog/build'
+import type { Part } from '#shared/catalog/schema'
 import type { IconName } from '~/utils/icons'
 
 definePageMeta({ layout: 'content' })
@@ -41,12 +43,44 @@ const id = computed(() => String(route.params.id))
  */
 const STUB = ['id', 'stem', 'names', 'thumbnail'] as const
 
+/**
+ * What a parts set puts on the car, row by row, for the box's own page.
+ *
+ * `setContentRows` resolves the slot ids to the slot types this page can name;
+ * all this adds is the query for the profiles it reads them from and the stub
+ * for each item number. It costs two queries on the 5 part pages that have
+ * contents and nothing on the other 377, and only the rows reach the payload.
+ *
+ * A piece with no separate SKU is the set's own item number (schema.ts), which
+ * matches no stub and the page prints as what it is rather than as a link to
+ * the page the reader is already on.
+ */
+async function setContents(part: Pick<Part, 'id' | 'contents'>) {
+  if (!part.contents) return []
+  const ids = [...new Set(Object.values(part.contents).flat())].filter(entry => entry !== part.id)
+
+  // By `stem`, not by `id`: @nuxt/content overwrites a record's own `id` with
+  // its source path, and `fromContent` is what puts the item number back.
+  const [profiles, contents] = await Promise.all([
+    queryCollection('chassis').select('slots').all(),
+    ids.length
+      ? queryCollection('parts').select(...STUB)
+          .where('stem', 'IN', ids.map(entry => `parts/${entry}`)).all()
+          .then(rows => rows.map(fromContent('parts')))
+      : []
+  ])
+  const stubs = new Map(contents.map(entry => [entry.id, entry]))
+
+  return setContentRows(part, profiles)
+    .map(row => ({ type: row.type, parts: row.partIds.map(entry => stubs.get(entry) ?? null) }))
+}
+
 const { data } = await useAsyncData(() => `part-${id.value}`, async () => {
   // The chassis names do not depend on the part, so they are fetched alongside
   // it rather than in the round that does.
   const [doc, chassis] = await Promise.all([
     queryCollection('parts')
-      .select('id', 'stem', 'names', 'series', 'gupNumber', 'category', 'slots', 'isCarPart',
+      .select('id', 'stem', 'names', 'series', 'gupNumber', 'category', 'slots', 'isCarPart', 'contents',
         'chassisCompat', 'classLegality', 'specs', 'priceJpy', 'releaseDate', 'status',
         'officialUrl', 'hkStoreUrl', 'fandomTitle', 'thumbnail', 'detailThumbnail')
       .where('stem', '=', `parts/${id.value}`)
@@ -56,13 +90,16 @@ const { data } = await useAsyncData(() => `part-${id.value}`, async () => {
   if (!doc) return null
   const part = fromContent('parts')(doc)
 
-  const [family, sameCategory] = await Promise.all([
+  const [family, sameCategory, contents] = await Promise.all([
     // A part with no article has no family, and asking for `=== undefined`
     // would match every other part that has none either.
     part.fandomTitle
       ? queryCollection('parts').select(...STUB).where('fandomTitle', '=', part.fandomTitle).all()
       : Promise.resolve([]),
-    queryCollection('parts').select(...STUB, 'slots').where('category', '=', part.category).all()
+    queryCollection('parts').select(...STUB, 'slots').where('category', '=', part.category).all(),
+    // Nothing here depends on the two above, so a set's rows are fetched in
+    // this round rather than in a third one of their own.
+    setContents(part)
   ])
 
   const variants = family.map(fromContent('parts')).filter(other => other.id !== part.id)
@@ -88,6 +125,7 @@ const { data } = await useAsyncData(() => `part-${id.value}`, async () => {
     part,
     variants,
     related,
+    contents,
     /** For the link out to the category page; the rows themselves stay at 8. */
     categoryTotal: sameCategory.length,
     // Only the chassis this part actually fits, named. The other seven records
@@ -245,7 +283,7 @@ useHead(() => ({
         </p>
 
         <button v-if="buildable" type="button" class="primary" @click="addToBuild">
-          {{ $t('part.addToBuild') }}
+          {{ part.contents ? $t('part.addSetToBuild') : $t('part.addToBuild') }}
         </button>
       </div>
     </header>
@@ -270,6 +308,30 @@ useHead(() => ({
           <a :href="wikiUrl" target="_blank" rel="noopener">Mini 4WD Fandom Wiki</a>
         </template>
       </i18n-t>
+    </section>
+
+    <!-- A set's own section, above the specs, because what is in the box is the
+         whole question a reader opens this page with. -->
+    <section v-if="data!.contents.length" class="part-section">
+      <h2>{{ $t('part.setContents') }}</h2>
+      <p class="part-note">{{ $t('part.setContentsNote') }}</p>
+      <dl class="part-table">
+        <template v-for="row in data!.contents" :key="row.type">
+          <dt>{{ slotTypeLabel(row.type) }}</dt>
+          <dd>
+            <template v-for="(entry, i) in row.parts" :key="entry?.id ?? i">
+              <span v-if="i">{{ $t('build.listSeparator') }}</span>
+              <NuxtLink v-if="entry" :to="localePath(`/parts/${entry.id}`)">
+                {{ resolve(entry.names).value }}
+              </NuxtLink>
+              <!-- A piece the set is the only way to buy: naming it would be
+                   inventing a product, and linking back to this page would go
+                   nowhere. -->
+              <span v-else>{{ $t('part.setOwnPiece') }}</span>
+            </template>
+          </dd>
+        </template>
+      </dl>
     </section>
 
     <section v-if="specs.length" class="part-section">

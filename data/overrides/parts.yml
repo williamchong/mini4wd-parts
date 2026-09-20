@@ -161,6 +161,70 @@
 # several ratios each and stay without one: which is fitted is the racer's call.
 '15236': { specs: { gearRatio: '4.2:1' }, colours: { primary: '#1f2124' } } # ハイスピードカウンターギヤー — tamiya.hk names it 4.2:1
 
+# --- Parts sets ---------------------------------------------------------------
+# What is in the box, row by row, so the builder can fit a set the way it is
+# sold: one purchase that lands on five rows at once (docs/PLAN.md §4.9).
+#
+# `contents` is keyed by slot id and holds item numbers only, because that is
+# all a build can hold. `catalog:generate` reads each set's `slots` back off
+# these keys, so a set is offered in exactly the pickers it can fill and the two
+# are never authored twice.
+#
+# **An item number appears only where Tamiya's own contents sentence names that
+# product.** 15435's page says 「FRPマルチワイドステー､FRPマルチワイドリヤステー…」,
+# which are the names of 15394 and 15430. Everything else in these five boxes is
+# exclusive to it — the chassis-specific FRP plates, the set's own red or orange
+# 13mm low-friction rollers, the 2.5g adjust mass dampers — so the set stands in
+# its own row: it is what you buy to get that piece, and a row naming a part
+# that was never sold separately would send the reader shopping for nothing.
+#
+# Two near misses, checked against Tamiya's own spec block and rejected: 15381
+# 低摩擦プラローラーセット is 16 and 19mm, not the 13mm these ship, and 15392
+# マスダンパーセット is two 4.7g weights, not four 2.5g ones.
+#
+# The colour is the one the pane draws every row the set stands in, read off the
+# product photo: what the set's own rollers and stabiliser caps are moulded in.
+'15435': # ファーストトライ パーツセット — 13mm・19mm rollers, fits MS / Super-II / VS
+  colours: { primary: '#2f5fc4' }
+  contents:
+    front-stay: ['15394']  # FRPマルチワイドステー
+    rear-stay: ['15430']   # FRPマルチワイドリヤステー
+    roller-front: ['15435']
+    roller-rear: ['15435']
+    damper: ['15435']      # マスダンパー＋ボールスタビキャップ
+'15450': # ARシャーシ ファーストトライパーツセット
+  colours: { primary: '#2f9e4f' }
+  contents:
+    front-stay: ['15450']
+    rear-stay: ['15450']
+    roller-front: ['15450']
+    roller-rear: ['15450']
+    damper: ['15450']      # マスダンパー＋スタビポール
+'15476': # MAシャーシ ファーストトライパーツセット
+  colours: { primary: '#f2c230' }
+  contents:
+    front-stay: ['15476']
+    rear-stay: ['15476']
+    roller-front: ['15476']
+    roller-rear: ['15476']
+    damper: ['15476']      # アジャストマスダンパー4個＋スタビポール
+'15514': # FM-Aシャーシ ファーストトライパーツセット
+  colours: { primary: '#d0312d' }
+  contents:
+    front-stay: ['15514']
+    rear-stay: ['15514']
+    roller-front: ['15514']
+    roller-rear: ['15514']
+    damper: ['15514']      # マスダンパー＋スタビポール
+'15526': # VZシャーシ ファーストトライパーツセット
+  colours: { primary: '#ec7a24' }
+  contents:
+    front-stay: ['15526']
+    rear-stay: ['15526']
+    roller-front: ['15526']
+    roller-rear: ['15526']
+    damper: ['15526']      # アジャストマスダンパー(2.5g)4個＋スタビボール
+
 # --- Colours ---------------------------------------------------------------
 # What each part is drawn in (shared/catalog/schema.ts `partColours`). The
 # generator reads a colour from the name, the wiki variant or the material;
@@ -285,11 +349,7 @@
 '15382': { colours: { primary: '#6b7078' } }  # N-03・T-03バンパーレス
 '15384': { colours: { primary: '#726a5e' } }  # バンパーレス LED(赤) — the LED is red, the unit is not
 '15405': { colours: { primary: '#565b62' } }  # フロントアンダーガード
-'15435': { colours: { primary: '#2f5fc4' } }  # ファーストトライ — its rollers
-'15450': { colours: { primary: '#2f9e4f' } }  # AR ファーストトライ
-'15476': { colours: { primary: '#f2c230' } }  # MA ファーストトライ
-'15514': { colours: { primary: '#d0312d' } }  # FM-A ファーストトライ
-'15526': { colours: { primary: '#ec7a24' } }  # VZ ファーストトライ
+# The five ファーストトライ sets carry their colour with their contents, below.
 '15367': { colours: { primary: '#1f2124' } }  # N-02・T-01強化ユニット
 '15374': { colours: { primary: '#8e949b' } }  # MS 軽量センターシャーシ
 '15132': { colours: { primary: '#f2c230' } }  # 超速ギヤー

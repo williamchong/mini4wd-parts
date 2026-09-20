@@ -22,6 +22,8 @@ const props = defineProps<{
 }>()
 
 const { resolve, isFallback } = useCatalogName()
+const { slotTypeLabel } = useTerm()
+const { t } = useI18n()
 
 const name = computed(() => resolve(props.part.names).value)
 const fallback = computed(() => isFallback(props.part.names))
@@ -35,6 +37,18 @@ const specs = computed(() => specRowsFor(props.part, props.slotType))
 const icon = computed<IconName>(() => props.slotType ?? props.part.slots[0] ?? 'none')
 
 const thumb = computed(() => thumbnailSrc('parts', props.part))
+
+/**
+ * The rows a parts set fills, because it is about to fill all of them at once
+ * (docs/PLAN.md §4.9). Nothing else on the card would say so: a First Try set
+ * sits in the roller list looking like one more pair of rollers, and the card
+ * that sold it that way would surprise the reader with four other rows.
+ */
+const setFills = computed(() => props.part.contents
+  ? t('build.setFills', {
+      slots: props.part.slots.map(slotTypeLabel).join(t('build.listSeparator'))
+    })
+  : undefined)
 </script>
 
 <template>
@@ -45,6 +59,8 @@ const thumb = computed(() => thumbnailSrc('parts', props.part))
       <span class="part-name" :class="{ fallback }">{{ name }}</span>
       <span class="part-id">{{ part.id }}</span>
     </div>
+
+    <p v-if="setFills" class="part-set">{{ setFills }}</p>
 
     <p v-if="verdict && verdict.legality !== 'legal'" class="part-legality" :class="`legality-${verdict.legality}`">
       {{ $t(`build.rules.badge.${verdict.legality}`, { class: $t(`part.class.${verdict.buildClass}`) }) }}
