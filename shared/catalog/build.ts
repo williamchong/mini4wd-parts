@@ -336,11 +336,28 @@ export type SlotCandidate = {
 }
 
 /**
- * Newest part first, which is what someone following Tamiya's releases wants
- * and roughly what a shop puts on its new-arrivals shelf.
+ * The catalog's own order: the regular range newest first, then the limited
+ * range newest first. What someone following Tamiya's releases wants, and
+ * roughly what a shop puts on its shelf against its new-arrivals table.
  *
- * The 133 picker-eligible parts with no `releaseDate` sort last rather than
- * first — the same rule `orderKits` applies to the 31 dateless kits (kits.ts).
+ * **`status` outranks the date, and this is where the part picker parts company
+ * with the kit picker.** docs/PLAN.md §6 M1b settled on 2026-09-09 that the kit
+ * picker shows limited kits unranked beside current ones, because a limited kit
+ * is one someone *owns* and has to be able to find. A part picker answers the
+ * other question — what to buy next — and there date order alone read badly:
+ * the MA motor picker led with eight J-CUP and anniversary liveries of three
+ * motors, four years of them, and put all six standard PRO motors below them —
+ * five of the six dateless, a staple Tamiya has always sold carrying no release
+ * date at all. The Torque-Tuned 2 PRO alone is four packings of one ¥462 motor.
+ * The 84 limited parts are still all offered, still searchable and still first
+ * within their own block; only the 254 regular ones now open the list.
+ *
+ * Not-current is one rank rather than three: every picker-eligible part today
+ * is `current` or `limited`, and inventing an order for `discontinued` and
+ * `unknown` would be policy no row exercises. They rank with limited.
+ *
+ * The 133 picker-eligible parts with no `releaseDate` sort last within their
+ * block — the same rule `orderKits` applies to the 31 dateless kits (kits.ts).
  * Tamiya's dated pages only reach back to 2009, so an absent date means an
  * older staple rather than an unreleased item, but there is still nothing to
  * say about where one belongs except that it is not the newest. Price ranks
@@ -353,13 +370,17 @@ export type SlotCandidate = {
  * Dates also run ahead of today, and an item announced for next January heading
  * its picker is correct — it is the newest thing Tamiya has.
  *
- * Runs once at prerender rather than on every picker open, and that is also
- * what lets both sort keys stay out of the payload: `partsForSlot` re-ranks on legality and
- * add-on alone, so neither a date nor a price has to reach the browser to
- * produce this order (see `BuildablePart`).
+ * Runs once at prerender rather than on every picker open, which is also what
+ * lets all three sort keys stay out of the payload: `partsForSlot` re-ranks on
+ * legality and add-on alone, so no status, date or price has to reach the
+ * browser to produce this order (see `BuildablePart`).
  */
-export function orderParts<T extends Pick<Part, 'id' | 'releaseDate' | 'priceJpy'>>(parts: T[]): T[] {
+export function orderParts<T extends Pick<Part, 'id' | 'status' | 'releaseDate' | 'priceJpy'>>(
+  parts: T[]
+): T[] {
   return [...parts].sort((a, b) => {
+    const range = Number(a.status !== 'current') - Number(b.status !== 'current')
+    if (range) return range
     if (a.releaseDate !== b.releaseDate) {
       if (!a.releaseDate) return 1
       if (!b.releaseDate) return -1

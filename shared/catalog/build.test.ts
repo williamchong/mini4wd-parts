@@ -162,6 +162,19 @@ test('the catalog is ordered newest first, and a dateless part sorts last', () =
   assert.deepEqual(ordered.map(p => p.id), ['15528', '15529', '15527', '94842', '15530'])
 })
 
+test('the limited range follows the regular one, however new it is', () => {
+  const ordered = orderParts([
+    part({ id: '95183', status: 'limited', releaseDate: '2026-06-20' }),
+    part({ id: '15375', releaseDate: '2011-07-16' }),
+    part({ id: '15487' }),
+    part({ id: '95159', status: 'limited', releaseDate: '2023-06-17' })
+  ])
+  // A J-CUP livery is years newer than the motor it repackages and still comes
+  // after it, and after the dateless staple as well: the picker opens on what
+  // Tamiya sells all year round (docs/PLAN.md §6 M1b).
+  assert.deepEqual(ordered.map(p => p.id), ['15375', '15487', '95183', '95159'])
+})
+
 test('the picker offers illegal parts rather than hiding them, ranked last', () => {
   // Ordered once as the page orders it, then ranked per class.
   const parts = orderParts([

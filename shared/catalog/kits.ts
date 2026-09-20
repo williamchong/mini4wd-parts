@@ -50,6 +50,11 @@ export function fandomArticleUrl(title: string): string {
  * §6 M1b corrected exactly that instinct, because a limited kit is one someone
  * owns, not one they cannot have.
  *
+ * `orderParts` does rank it, and the difference is the question each picker
+ * answers: this one finds the box already on the reader's shelf, that one
+ * chooses what to buy next, where four years of a motor's J-CUP liveries ahead
+ * of the motor is noise rather than someone's collection (build.ts).
+ *
  * Ties break on `id` so a generate run produces a stable order.
  *
  * Runs once at prerender, not per keystroke, which is also what lets

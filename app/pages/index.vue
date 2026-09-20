@@ -52,13 +52,13 @@ const { data: catalog } = await useAsyncData('build-catalog', async () => {
       .select('id', 'stem', 'names', 'slots', 'defaultLoadout',
         'motorShaft', 'motorPosition', 'releaseYear', 'notes', 'thumbnail')
       .all(),
-    // `releaseDate` and `priceJpy` are selected but deliberately not shipped,
-    // exactly as `releaseDate` is for the kits below: between them they order
-    // every picker, and nothing in the builder renders either one.
+    // `status`, `releaseDate` and `priceJpy` are selected but deliberately not
+    // shipped, as `releaseDate` is for the kits below: between them they order
+    // every picker, and nothing in the builder renders any of the three.
     queryCollection('parts')
       .select('id', 'stem', 'names', 'category', 'slots', 'isCarPart', 'isAddOn',
         'chassisCompat', 'classLegality', 'specs', 'colours', 'body', 'wheel', 'tire', 'finish', 'fitting',
-        'releaseDate', 'priceJpy', 'thumbnail')
+        'status', 'releaseDate', 'priceJpy', 'thumbnail')
       .all(),
     // `releaseDate` is selected but deliberately not shipped: it orders the
     // picker and nothing renders it, so it is dropped again below.
@@ -87,15 +87,20 @@ const { data: catalog } = await useAsyncData('build-catalog', async () => {
     // them at prerender rather than shipping and re-filtering in the browser
     // takes 44 of 382 records out of the payload.
     //
-    // The 338 left are then ordered newest-first and stripped of the two fields
-    // that ordered them, on the same reasoning as the kits below: `partsForSlot`
-    // re-ranks on legality and add-on alone, both of which it already ships.
-    // Shipping the pair instead would cost 2.6 KB gzipped, and since `priceJpy`
-    // used to ship as the picker's only sort key, the route came out 968 bytes
-    // lighter than before this order existed: date ordering refunds payload.
+    // The 338 left are then ordered — regular range before limited, newest
+    // first within each — and stripped of the three fields that ordered them,
+    // on the same reasoning as the kits below: `partsForSlot` re-ranks on
+    // legality and add-on alone, both of which it already ships. Shipping the
+    // three instead would cost 2.8 KB gzipped, and since `priceJpy` used to
+    // ship as the picker's only sort key, the route came out 1,043 bytes
+    // lighter than before this order existed. Grouping by status and date is
+    // not itself what saves them — it scatters records that id order kept
+    // adjacent, and gzip does slightly worse on the result. Moving the keys
+    // out of the payload refunds more than the new order costs.
     parts: orderParts(parts.map(fromContent('parts'))
       .filter(part => part.isCarPart && part.slots.some(slot => slot !== 'none')))
-      .map(({ releaseDate: _releaseDate, priceJpy: _priceJpy, ...part }) => flagThumbnail(part)),
+      .map(({ status: _status, releaseDate: _releaseDate, priceJpy: _priceJpy, ...part }) =>
+        flagThumbnail(part)),
     // Ordered here rather than in the picker, and then stripped of the field
     // that ordered it. Sorting once at prerender beats re-sorting on every
     // keystroke, and it lets `releaseDate` — which nothing renders — stay out
