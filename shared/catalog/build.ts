@@ -37,7 +37,7 @@ type HasThumbnail = { hasThumbnail?: boolean }
  */
 export type BuildablePart = Pick<Part,
   'id' | 'names' | 'category' | 'slots' | 'isCarPart' | 'isAddOn' | 'chassisCompat'
-  | 'classLegality' | 'specs' | 'colours' | 'body' | 'priceJpy'> & HasThumbnail
+  | 'classLegality' | 'specs' | 'colours' | 'body'> & HasThumbnail
 
 export type BuildableChassis = Pick<Chassis, 'id' | 'slots' | 'defaultLoadout' | 'motorShaft'>
 
@@ -336,11 +336,54 @@ export type SlotCandidate = {
 }
 
 /**
+ * Newest part first, which is what someone following Tamiya's releases wants
+ * and roughly what a shop puts on its new-arrivals shelf.
+ *
+ * The 133 picker-eligible parts with no `releaseDate` sort last rather than
+ * first — the same rule `orderKits` applies to the 31 dateless kits (kits.ts).
+ * Tamiya's dated pages only reach back to 2009, so an absent date means an
+ * older staple rather than an unreleased item, but there is still nothing to
+ * say about where one belongs except that it is not the newest. Price ranks
+ * that block, which is the order the whole picker used to have, and `id` ranks
+ * what price leaves tied.
+ *
+ * Some dates are a month (`2026-11`) because that is all Tamiya gives. Compared
+ * as strings those land at the foot of their own month, which is where reading
+ * them as the 1st would have put them anyway, so nothing has to parse a date.
+ * Dates also run ahead of today, and an item announced for next January heading
+ * its picker is correct — it is the newest thing Tamiya has.
+ *
+ * Runs once at prerender rather than on every picker open, and that is also
+ * what lets both sort keys stay out of the payload: `partsForSlot` re-ranks on legality and
+ * add-on alone, so neither a date nor a price has to reach the browser to
+ * produce this order (see `BuildablePart`).
+ */
+export function orderParts<T extends Pick<Part, 'id' | 'releaseDate' | 'priceJpy'>>(parts: T[]): T[] {
+  return [...parts].sort((a, b) => {
+    if (a.releaseDate !== b.releaseDate) {
+      if (!a.releaseDate) return 1
+      if (!b.releaseDate) return -1
+      return b.releaseDate.localeCompare(a.releaseDate)
+    }
+    // Tamiya prices every current item, but discontinued ones can lack a price;
+    // those sort last rather than as if they were free.
+    return (a.priceJpy ?? Infinity) - (b.priceJpy ?? Infinity)
+      || a.id.localeCompare(b.id)
+  })
+}
+
+/**
  * What the user may put in a slot. Class legality is returned rather than
  * filtered on: a beginner learns more from a Sprint Dash marked "Open only"
- * than from one that silently does not appear. Ordering is a sensible default
- * — the thing the slot is named for before its add-ons, then usable first,
- * then cheapest — and the picker is free to re-sort.
+ * than from one that silently does not appear.
+ *
+ * Two ranks and no third: the thing the slot is named for before its add-ons,
+ * then usable before illegal. Within a rank the caller's order survives, because
+ * Array.prototype.sort is stable, so a caller that wants an order hands one in:
+ * the builder hands the newest-first catalog `orderParts` made at prerender,
+ * which is what the reader scrolls, and the picker is still free to re-sort.
+ * `catalog:verify` hands the YAML in filename order and is right not to care —
+ * it only asks whether every candidate for a slot is an add-on.
  *
  * Add-ons rank below every part rather than being filtered out, because they
  * do fill the slot and a link may carry one. Ranked on price alone, the three
@@ -363,11 +406,7 @@ export function partsForSlot(
   const rank = { legal: 0, unknown: 1, illegal: 2 }
   return candidates.sort((a, b) =>
     Number(a.part.isAddOn ?? false) - Number(b.part.isAddOn ?? false)
-    || rank[a.legality] - rank[b.legality]
-    // Tamiya prices every current item, but discontinued ones can lack a price;
-    // those sort last rather than as if they were free.
-    || (a.part.priceJpy ?? Infinity) - (b.part.priceJpy ?? Infinity)
-    || a.part.id.localeCompare(b.part.id))
+    || rank[a.legality] - rank[b.legality])
 }
 
 /**

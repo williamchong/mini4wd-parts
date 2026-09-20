@@ -2,8 +2,8 @@ import assert from 'node:assert/strict'
 import { test } from 'node:test'
 import { partSchema } from './schema.ts'
 import {
-  BUILD_CLASSES, counterpartParts, gearRatioOf, isChassisCompatible, newBuild, partsForSlot, resolveBuild,
-  rollersPerSideIn, slotIdsFor, swappableSlotTypes
+  BUILD_CLASSES, counterpartParts, gearRatioOf, isChassisCompatible, newBuild, orderParts, partsForSlot,
+  resolveBuild, rollersPerSideIn, slotIdsFor, swappableSlotTypes
 } from './build.ts'
 import type { BuildState } from './build.ts'
 import type { Chassis, Kit, Part } from './schema.ts'
@@ -149,41 +149,56 @@ test('a part maps to slot ids through its slot types', () => {
   assert.deepEqual(slotIdsFor(axle, chassis), ['axle'])
 })
 
-test('the picker offers illegal parts rather than hiding them, ranked last', () => {
-  const parts = [
-    part({ id: '15486', slots: ['motor'], priceJpy: 660,
-      classLegality: { open: 'legal', stockBmax: 'illegal', junior: 'legal', source: 'derived' } }),
-    part({ id: '15484', slots: ['motor'], priceJpy: 550 }),
-    part({ id: '15487', slots: ['motor'] }),
-    part({ id: '15200', slots: ['roller-front'], priceJpy: 100 }),
-    part({ id: '69942', slots: ['motor'], priceJpy: 1, isCarPart: false })
-  ]
-
-  const stock = partsForSlot(parts, 'motor', chassis, 'stockBmax')
-  // Cheapest legal first, then the priceless one, then the Open-only motor.
-  assert.deepEqual(stock.map(c => c.part.id), ['15484', '15487', '15486'])
-  assert.equal(stock.at(-1)?.legality, 'illegal')
-
-  // Same parts under Open: the ranking is by price alone.
-  assert.deepEqual(partsForSlot(parts, 'motor', chassis, 'open').map(c => c.part.id),
-    ['15484', '15486', '15487'])
+test('the catalog is ordered newest first, and a dateless part sorts last', () => {
+  const ordered = orderParts([
+    part({ id: '15530', priceJpy: 550 }),
+    part({ id: '15529', releaseDate: '2026-11' }),
+    part({ id: '15528', releaseDate: '2026-11-21' }),
+    part({ id: '94842', priceJpy: 220 }),
+    part({ id: '15527', releaseDate: '2009-09-12' })
+  ])
+  // A month-only date sits at the foot of its own month, and the two parts
+  // Tamiya prints no date for fall below every dated one, cheapest first.
+  assert.deepEqual(ordered.map(p => p.id), ['15528', '15529', '15527', '94842', '15530'])
 })
 
-test('add-ons follow the parts they go with, however cheap', () => {
-  const parts = [
-    part({ id: '94792', slots: ['roller-front'], isAddOn: true, priceJpy: 110 }),
-    part({ id: '15437', slots: ['roller-front'], priceJpy: 770 }),
-    part({ id: '15381', slots: ['roller-front'], priceJpy: 220 }),
-    part({ id: '15180', slots: ['roller-front'], isAddOn: true, priceJpy: 550 })
-  ]
+test('the picker offers illegal parts rather than hiding them, ranked last', () => {
+  // Ordered once as the page orders it, then ranked per class.
+  const parts = orderParts([
+    part({ id: '15486', slots: ['motor'], releaseDate: '2024-03-16',
+      classLegality: { open: 'legal', stockBmax: 'illegal', junior: 'legal', source: 'derived' } }),
+    part({ id: '15484', slots: ['motor'], releaseDate: '2023-11-18' }),
+    part({ id: '15487', slots: ['motor'], releaseDate: '2025-06-21' }),
+    part({ id: '15200', slots: ['roller-front'], releaseDate: '2026-01-10' }),
+    part({ id: '69942', slots: ['motor'], releaseDate: '2026-08-01', isCarPart: false })
+  ])
+
+  const stock = partsForSlot(parts, 'motor', chassis, 'stockBmax')
+  // Newest legal first, then the Open-only motor however new it is.
+  assert.deepEqual(stock.map(c => c.part.id), ['15487', '15484', '15486'])
+  assert.equal(stock.at(-1)?.legality, 'illegal')
+
+  // Same parts under Open, where nothing is illegal: the catalog's own order.
+  assert.deepEqual(partsForSlot(parts, 'motor', chassis, 'open').map(c => c.part.id),
+    ['15487', '15486', '15484'])
+})
+
+test('add-ons follow the parts they go with, however new', () => {
+  const parts = orderParts([
+    part({ id: '94792', slots: ['roller-front'], isAddOn: true, releaseDate: '2026-04-11' }),
+    part({ id: '15437', slots: ['roller-front'], releaseDate: '2019-05-25' }),
+    part({ id: '15381', slots: ['roller-front'], releaseDate: '2014-08-30' }),
+    part({ id: '15180', slots: ['roller-front'], isAddOn: true, releaseDate: '2010-02-06' })
+  ])
   assert.deepEqual(partsForSlot(parts, 'roller-front', chassis, 'open').map(c => c.part.id),
-    ['15381', '15437', '94792', '15180'])
+    ['15437', '15381', '94792', '15180'])
 
   // The add-ons stay one block at the foot, below even an illegal part, so the
   // picker's divider has a single place to go.
-  parts[1] = { ...parts[1]!, classLegality: { ...parts[1]!.classLegality, junior: 'illegal' } }
-  parts[0] = { ...parts[0]!, classLegality: { ...parts[0]!.classLegality, junior: 'illegal' } }
-  assert.deepEqual(partsForSlot(parts, 'roller-front', chassis, 'junior').map(c => c.part.id),
+  const junior = parts.map(entry => (entry.id === '15437' || entry.id === '94792'
+    ? { ...entry, classLegality: { ...entry.classLegality, junior: 'illegal' as const } }
+    : entry))
+  assert.deepEqual(partsForSlot(junior, 'roller-front', chassis, 'junior').map(c => c.part.id),
     ['15381', '15437', '15180', '94792'])
 })
 
@@ -216,13 +231,15 @@ test('"none" is not a slot anything can be swapped into', () => {
 })
 
 test('a single-shaft motor is not offered for a double-shaft chassis', () => {
-  const parts = [
+  // Three motors Tamiya prints no release date for, so the catalog order these
+  // arrive in is the price one `orderParts` falls back to.
+  const parts = orderParts([
     part({ id: '94380', slots: ['motor'], priceJpy: 165, specs: { motorShaft: 'single' } }),
     part({ id: '15487', slots: ['motor'], priceJpy: 462, specs: { motorShaft: 'double' } }),
     // Tamiya does not print a shaft type for every motor; an unrecorded one is
     // offered rather than hidden.
     part({ id: '15400', slots: ['motor'], priceJpy: 400 })
-  ]
+  ])
 
   assert.deepEqual(partsForSlot(parts, 'motor', chassis, 'open').map(c => c.part.id),
     ['15400', '15487'])
