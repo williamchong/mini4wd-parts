@@ -3103,6 +3103,7 @@
     "priceJpy": 1320,
     "priceJpyExTax": 1200,
     "releaseDateRaw": "2014年 5月31日(土)発売",
+    "releaseDate": "2014-05-31",
     "chassisCodes": [
       "ma"
     ],
@@ -3124,6 +3125,7 @@
     "priceJpy": 1100,
     "priceJpyExTax": 1000,
     "releaseDateRaw": "2014年 7月12日(土)発売",
+    "releaseDate": "2014-07-12",
     "chassisCodes": [
       "ma"
     ],
@@ -5195,6 +5197,7 @@
     "priceJpy": 1430,
     "priceJpyExTax": 1300,
     "releaseDateRaw": "2014年 7月12日(土)発売",
+    "releaseDate": "2014-07-12",
     "chassisCodes": [
       "super2"
     ],
@@ -6247,6 +6250,7 @@
     "priceJpy": 990,
     "priceJpyExTax": 900,
     "releaseDateRaw": "2014年 4月12日(土)発売",
+    "releaseDate": "2014-04-12",
     "chassisCodes": [
       "superXX"
     ],
@@ -6309,6 +6313,7 @@
     "priceJpy": 1320,
     "priceJpyExTax": 1200,
     "releaseDateRaw": "2015年 6月6日(土)発売",
+    "releaseDate": "2015-06-06",
     "chassisCodes": [
       "ar"
     ],

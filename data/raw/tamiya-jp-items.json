@@ -5703,6 +5703,7 @@
     "priceJpy": 616,
     "priceJpyExTax": 560,
     "releaseDateRaw": "2014年 5月31日(土)発売",
+    "releaseDate": "2014-05-31",
     "chassisCodes": [
       "type3",
       "type4",
@@ -5762,6 +5763,7 @@
     "priceJpy": 506,
     "priceJpyExTax": 460,
     "releaseDateRaw": "2014年 6月14日(土)発売",
+    "releaseDate": "2014-06-14",
     "chassisCodes": [
       "type3",
       "type4",
@@ -5799,6 +5801,7 @@
     "priceJpy": 572,
     "priceJpyExTax": 520,
     "releaseDateRaw": "2014年 7月19日(土)発売",
+    "releaseDate": "2014-07-19",
     "chassisCodes": [
       "super2",
       "superX",
@@ -8890,6 +8893,7 @@
     "priceJpy": 726,
     "priceJpyExTax": 660,
     "releaseDateRaw": "2014年 1月18日(土)発売",
+    "releaseDate": "2014-01-18",
     "chassisCodes": [],
     "imageUrl": "https://d7z22c0gz59ng.cloudfront.net/japan_contents/img/usr/item/9/95012/95012_1.jpg",
     "officialUrl": "https://www.tamiya.com/japan/products/95012/index.html",
@@ -8907,6 +8911,7 @@
     "priceJpy": 396,
     "priceJpyExTax": 360,
     "releaseDateRaw": "2014年 6月14日(土)発売",
+    "releaseDate": "2014-06-14",
     "chassisCodes": [
       "ar"
     ],
@@ -8926,6 +8931,7 @@
     "priceJpy": 396,
     "priceJpyExTax": 360,
     "releaseDateRaw": "2014年 6月14日(土)発売",
+    "releaseDate": "2014-06-14",
     "chassisCodes": [
       "super2",
       "superXX",
@@ -8949,6 +8955,7 @@
     "priceJpy": 396,
     "priceJpyExTax": 360,
     "releaseDateRaw": "2014年 9月20日(土)発売",
+    "releaseDate": "2014-09-20",
     "chassisCodes": [
       "ar"
     ],
@@ -8968,6 +8975,7 @@
     "priceJpy": 396,
     "priceJpyExTax": 360,
     "releaseDateRaw": "2014年 9月20日(土)発売",
+    "releaseDate": "2014-09-20",
     "chassisCodes": [
       "super2",
       "superXX",
@@ -8992,6 +9000,7 @@
     "priceJpy": 484,
     "priceJpyExTax": 440,
     "releaseDateRaw": "2014年 9月24日(水)発売",
+    "releaseDate": "2014-09-24",
     "chassisCodes": [
       "ar",
       "ma"
@@ -9012,6 +9021,7 @@
     "priceJpy": 484,
     "priceJpyExTax": 440,
     "releaseDateRaw": "2014年 9月24日(水)発売",
+    "releaseDate": "2014-09-24",
     "chassisCodes": [
       "super2",
       "ar",

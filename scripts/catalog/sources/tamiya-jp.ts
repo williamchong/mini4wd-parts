@@ -141,13 +141,20 @@ function bracketSection($: cheerio.CheerioAPI, heading: string): string | undefi
 /**
  * "2026年2月21日(土)ごろ発売" -> 2026-02-21; "2025年10月発売" -> 2025-10.
  * Tamiya also prints re-release history for kits; we take the first date.
+ *
+ * The spaces are not decoration. Pages written in 2014–15 read "2014年 5月31日
+ * (土)発売", and without `\s*` after each unit the whole line parsed as no date
+ * at all — 15 items, ten of them parts, silently undated while Tamiya prints
+ * the day on the page. A date that fails to parse looks exactly like a date
+ * Tamiya never published, which is why nothing caught it until the builder
+ * started ordering on release.
  */
 function parseReleaseDate(raw: string): string | undefined {
-  const full = /(\d{4})年(\d{1,2})月(\d{1,2})日/.exec(raw)
+  const full = /(\d{4})年\s*(\d{1,2})月\s*(\d{1,2})日/.exec(raw)
   if (full) {
     return `${full[1]}-${full[2]!.padStart(2, '0')}-${full[3]!.padStart(2, '0')}`
   }
-  const month = /(\d{4})年(\d{1,2})月/.exec(raw)
+  const month = /(\d{4})年\s*(\d{1,2})月/.exec(raw)
   return month ? `${month[1]}-${month[2]!.padStart(2, '0')}` : undefined
 }
 

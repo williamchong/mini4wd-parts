@@ -49,6 +49,14 @@ test('detail page yields names, price, date, chassis tags and spec text', () => 
   assert.equal('description' in item, false)
 })
 
+test('a 2014-era release line with a space after the year still parses', () => {
+  // Tamiya's pages from 2014-15 write the day padded: "2014年 5月31日(土)発売",
+  // and 15 items are dated this way.
+  const html = fixture('detail-page.html').replace('2026年2月21日(土)ごろ発売', '2014年 5月31日(土)発売')
+  const item = parseDetail(html, { id: '15549', genre: '303010', seriesLabel: '', listName: '' })
+  assert.equal(item.releaseDate, '2014-05-31')
+})
+
 test('detail page without a release line leaves the date empty', () => {
   const html = fixture('detail-page.html').replace('2026年2月21日(土)ごろ発売', '')
   const item = parseDetail(html, { id: '15549', genre: '303010', seriesLabel: '', listName: '' })
