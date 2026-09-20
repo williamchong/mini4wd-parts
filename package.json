@@ -12,6 +12,7 @@
     "scrape": "node scripts/catalog/scrape.ts",
     "catalog:generate": "node scripts/catalog/generate.ts",
     "catalog:thumbs": "node scripts/catalog/thumbs.ts",
+    "catalog:og": "node scripts/catalog/og.ts",
     "catalog:report": "node scripts/catalog/report.ts",
     "catalog:bodies": "node scripts/catalog/body-sheet.ts",
     "catalog:crossref": "node scripts/catalog/crossref.ts",

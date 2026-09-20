@@ -65,6 +65,7 @@ npm run typecheck    # scripts/ + app/ 型別檢查 type checks
 npm run scrape             # 更新 data/raw/（有節流與快取 throttled, cached）
 npm run catalog:generate   # data/ → content/
 npm run catalog:thumbs     # 產生縮圖 product thumbnails
+npm run catalog:og         # 產生分享卡圖 1200x630 share cards, into public/og/
 npm run catalog:bodies     # 車殼輪廓對照圖 body shells beside their box art, into .cache/
 npm run catalog:verify     # 驗證 content/ validate the committed YAML
 npm run catalog:report     # 列出需人手處理的項目 what still needs a human
@@ -81,6 +82,7 @@ CI 在部署前會執行 `npm test`、`npm run typecheck` 及 `npm run catalog:v
 以下不在上述授權範圍內 Not covered by either licence:
 
 - `public/thumbs/` 的產品縮圖版權屬田宮所有。The product thumbnails in `public/thumbs/` are © TAMIYA.
+- `public/og/` 的分享卡圖版面與文字由本站產生，當中嵌入的產品縮圖版權屬田宮所有。The share cards in `public/og/` are our own layout and wording, but the product thumbnail placed in each one is © TAMIYA.
 - 取自 Mini 4WD Fandom Wiki 的套件內容及零件系列（`loadoutSourceTitle`、`fandomTitle`）沿用該 Wiki 的 [CC BY-SA](https://www.fandom.com/licensing) 條款。Kit contents and part families taken from the Mini 4WD Fandom Wiki (`loadoutSourceTitle`, `fandomTitle`) stay under the wiki's own [CC BY-SA](https://www.fandom.com/licensing) terms.
 - `data/raw/` 為第三方網站的抓取快取。`data/raw/` is a scrape cache of third-party sites.
 - 「ミニ四駆 / Mini 4WD」及田宮商標。The "Mini 4WD" name and TAMIYA trademarks.

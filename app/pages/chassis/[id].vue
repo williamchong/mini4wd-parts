@@ -12,6 +12,7 @@
  * second, worse category page; as counts per category it is ~25 links that
  * each land somewhere already built.
  */
+import { ogCardPath } from '#shared/catalog/og'
 import type { ChassisId, PartCategory } from '#shared/catalog/schema'
 
 definePageMeta({ layout: 'content' })
@@ -178,7 +179,7 @@ useHead(() => ({
     { name: 'description', content: description.value },
     { property: 'og:title', content: title.value },
     { property: 'og:description', content: description.value },
-    ...(chassis.value.detailThumbnail ? thumbnailShareMeta(`${siteUrl}${chassis.value.detailThumbnail}`) : [])
+    ...cardShareMeta(`${siteUrl}${ogCardPath('chassis', locale.value, id.value)}`)
   ]
 }))
 </script>

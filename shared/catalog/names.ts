@@ -18,6 +18,16 @@ export type Names = Part['names']
 
 export type NameLocale = 'zh-Hant' | 'en'
 
+/**
+ * The locales the site renders, as values rather than a type — `ORDER` below is
+ * keyed by exactly this set, and so is every per-locale asset the pipeline
+ * writes. The i18n module has its own list in nuxt.config.ts because it needs
+ * the file names and display names too; this is the one the catalog scripts and
+ * `catalog:verify` share, so a card written for one locale cannot be checked
+ * against a different list.
+ */
+export const NAME_LOCALES: readonly NameLocale[] = ['zh-Hant', 'en']
+
 export type Wording = 'hk' | 'tw'
 
 const ORDER: Record<NameLocale, Record<Wording, (keyof Names)[]>> = {

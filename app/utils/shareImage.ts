@@ -18,3 +18,15 @@ export function thumbnailShareMeta(detailUrl: string) {
     { name: 'twitter:card', content: 'summary' }
   ]
 }
+
+/**
+ * The share tags for a record with a generated 1200x630 card (`catalog:og`).
+ *
+ * Unlike `thumbnailShareMeta` this adds rather than downgrades: the size is
+ * already what the site default declares, so only the image URL changes and
+ * the large card in nuxt.config.ts stands. Every chassis has a card, so there
+ * is no absent case to fall back from — `catalog:verify` is what guarantees it.
+ */
+export function cardShareMeta(cardUrl: string) {
+  return [{ property: 'og:image', content: cardUrl }]
+}

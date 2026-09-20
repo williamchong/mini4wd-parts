@@ -1,8 +1,10 @@
 import { existsSync } from 'node:fs'
 import type { TypeOf, ZodTypeAny } from 'zod'
 import { readYamlDir } from './io.ts'
-import { thumbnailFile } from './thumbnails.ts'
+import { ogCardFile, thumbnailFile } from './thumbnails.ts'
 import { thumbnailPath, type ThumbCollection, type ThumbVariant } from '../../shared/catalog/thumbnails.ts'
+import { ogCardPath } from '../../shared/catalog/og.ts'
+import { NAME_LOCALES } from '../../shared/catalog/names.ts'
 import { partSchema, chassisSchema, kitSchema } from '../../shared/catalog/schema.ts'
 import type { Chassis, Loadout, Slot } from '../../shared/catalog/schema.ts'
 import { newBuild, partsForSlot, resolveBuild } from '../../shared/catalog/build.ts'
@@ -115,6 +117,21 @@ function checkThumbnail(
   }
 }
 
+/**
+ * Unlike a thumbnail, a share card is not optional and not recorded on the
+ * record: the path is derived (shared/catalog/og.ts), so nothing but this
+ * check stands between a new chassis and a page whose `og:image` is a 404 that
+ * no visitor and no build step would ever notice.
+ */
+function checkOgCard(id: string) {
+  for (const locale of NAME_LOCALES) {
+    if (!existsSync(ogCardFile('chassis', locale, id))) {
+      errors.push(`chassis/${id}: share card ${ogCardPath('chassis', locale, id)}`
+        + ' does not exist — run npm run catalog:og')
+    }
+  }
+}
+
 for (const part of parts) {
   checkThumbnail('parts', part.id, part.thumbnail)
   checkThumbnail('parts', part.id, part.detailThumbnail, 'detail')
@@ -160,6 +177,7 @@ for (const entry of chassis) {
   checkLoadout(`chassis/${entry.id} defaultLoadout`, entry.defaultLoadout, entry)
   checkThumbnail('chassis', entry.id, entry.thumbnail)
   checkThumbnail('chassis', entry.id, entry.detailThumbnail, 'detail')
+  checkOgCard(entry.id)
   checkStock(`chassis/${entry.id}`, entry)
   checkAddOns(entry)
 }
