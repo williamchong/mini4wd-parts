@@ -32,10 +32,10 @@
 # every bare one on a single-shaft chassis. `catalog:verify` checks the part
 # fits the slot but not that the shaft fits the chassis, so this pairing was
 # checked by hand against each kit's chassis (docs/PLAN.md §4.8).
+#
+# Eleven of the fifteen are here; the four on a bundle pack are in Bundle packs
+# below, beside the rest of what that box holds.
 
-'18647': { stockLoadout: { motor: [{ partId: '15487', source: override }] } }  # MA   Torque-Tuned 2 PRO
-'18706': { stockLoadout: { motor: [{ partId: '15485', source: override }] } }  # AR   Rev-Tuned 2
-'18710': { stockLoadout: { motor: [{ partId: '15486', source: override }] } }  # FM-A Atomic-Tuned 2
 '95281': { stockLoadout: { motor: [{ partId: '15488', source: override }] }, colours: { body: '#1f2124' } }  # MA   Rev-Tuned 2 PRO
 '95302': { stockLoadout: { motor: [{ partId: '15487', source: override }] } }  # MA   Torque-Tuned 2 PRO
 '95303': { stockLoadout: { motor: [{ partId: '15487', source: override }] } }  # MA   Torque-Tuned 2 PRO
@@ -45,9 +45,89 @@
 '95414': { stockLoadout: { motor: [{ partId: '15487', source: override }] } }  # MA   Torque-Tuned 2 PRO
 '95422': { stockLoadout: { motor: [{ partId: '15487', source: override }] } }  # MA   Torque-Tuned 2 PRO
 '95480': { stockLoadout: { motor: [{ partId: '15487', source: override }] } }  # MA   Torque-Tuned 2 PRO
-'95598': { stockLoadout: { motor: [{ partId: '15455', source: override }] } }  # VZ   Light-Dash Motor
 '95616': { stockLoadout: { motor: [{ partId: '15488', source: override }] }, colours: { body: '#1f2124' } }  # MA   Rev-Tuned 2 PRO
 '95621': { stockLoadout: { motor: [{ partId: '15484', source: override }] }, colours: { body: '#9bcf3f' } }  # FM-A Torque-Tuned 2
+
+# --- Bundle packs -----------------------------------------------------------
+#
+# The five boxes that hold a car *and* the tune-up parts to race it: three
+# ミニ四駆スターターパック and two アドバンスパック. The wiki's Technical Info List
+# describes the car and nothing else, so no plate, brake or mass damper in the
+# box reaches the builder unless it is named here — and those are what the box
+# is bought for.
+#
+# The contents are Tamiya's own product copy on the item page (18706: レブチューン2
+# モーターをはじめ、スーパーハードタイヤ(ブラック)、ブレーキセット、サイドマスダンパー
+# セット、FRPプレート(フロント･リヤ)); the wiki's prose says which product each of
+# those names is. Three things the two sources agree are in the box are still
+# left out, so their absence is not read as an oversight:
+#
+#   * the black super-hard low-profile tires, which Tamiya sells only inside a
+#     wheel-and-tire set, so there is no item number for the tires alone — those
+#     rows keep the kit's own label;
+#   * the stabiliser balls, aluminium spacers, roller stoppers, nuts and washers,
+#     which are hardware no slot in the graph stands for;
+#   * 18647's フロントアンダーガード (15405), which bolts to the same front bumper as
+#     its FRP plate, and `front-stay` holds one part.
+#
+# The three starter packs share their plates and brake: 15451, 15452 and 15458
+# are sold for the AR chassis and Tamiya lists all three as fitting MA and FM-A
+# too, which is why the same numbers sit on a Blast Arrow and a Rowdy Bull.
+
+# Starter packs. Each is a car, a tuned motor, the same two FRP plates and
+# brake set, and one mass damper of its own.
+'18647':  # スターターパックMA パワータイプ (ブラストアロー)
+  stockLoadout:
+    motor: [{ partId: '15487', source: override }]            # トルクチューン2モーターPRO
+    front-stay: [{ partId: '15451', source: override }]       # ARシャーシ FRPフロントワイドステー
+    rear-stay: [{ partId: '15452', source: override }]        # ARシャーシ FRPリヤワイドステー
+    brake: [{ partId: '15458', source: override }]            # ARシャーシ ブレーキセット
+    # Tamiya says マスダンパー; the wiki counts two cylinder weights, which is
+    # what 15392 is — two 4.7g weights and the long screws to hang them on.
+    damper: [{ partId: '15392', source: override }]           # マスダンパーセット
+'18706':  # スターターパックAR スピードタイプ (エアロ アバンテ)
+  stockLoadout:
+    motor: [{ partId: '15485', source: override }]            # レブチューン2モーター
+    front-stay: [{ partId: '15451', source: override }]
+    rear-stay: [{ partId: '15452', source: override }]
+    brake: [{ partId: '15458', source: override }]
+    damper: [{ partId: '15459', source: override }]           # ARシャーシ サイドマスダンパーセット
+'18710':  # スターターパックFM-A バランスタイプ (ラウディーブル)
+  stockLoadout:
+    motor: [{ partId: '15486', source: override }]            # アトミックチューン2モーター
+    front-stay: [{ partId: '15451', source: override }]
+    rear-stay: [{ partId: '15452', source: override }]
+    brake: [{ partId: '15458', source: override }]
+    # Tamiya names マスダンパースクエアショート and the wiki measures the blocks at
+    # 6×6×14mm, which is 15515 — first sold on its own in 2023, six years after
+    # this box, but the same part and the only way to buy one.
+    damper: [{ partId: '15515', source: override }]           # マスダンパー スクエア ショート (6x6x14mm)
+
+# Advanced packs. No brake set in either; both go deeper into the drivetrain
+# than a starter pack does.
+'18662':  # アバンテMk.III ネロ アドバンスパック (MSシャーシ)
+  # No wiki article reaches this box, so its parts are Tamiya's own sentence:
+  # ライトダッシュモーターPRO、FRP製の前後ワイドステー、ハイスピードEXギヤ、マスダンパー.
+  # It is also the one motor here the wiki does not name, so the PRO pairing the
+  # Motors section relies on was checked by hand: 15402 is double-shaft, MS takes
+  # a double-shaft motor. The brake sponge under the front plate in the product
+  # photo is not in that sentence, so no brake row is claimed for it.
+  stockLoadout:
+    motor: [{ partId: '15402', source: override }]            # ライトダッシュモーターPRO
+    gear-set: [{ partId: '15429', source: override }]         # MSシャーシ用ハイスピードEXギヤセット(3.7:1)
+    front-stay: [{ partId: '15451', source: override }]
+    rear-stay: [{ partId: '15452', source: override }]
+    damper: [{ partId: '15392', source: override }]
+  colours: { body: '#1f2124', wheel: '#d0312d', tire: '#1f2124' }
+'95598':  # ネオVQS アドバンスパック (VZシャーシ)
+  stockLoadout:
+    motor: [{ partId: '15455', source: override }]            # ライトダッシュモーター
+    gear-set: [{ partId: '15462', source: override }]         # カーボン強化ギヤ G13・8Tピニオンセット
+    counter-gear: [{ partId: '15434', source: override }]     # ハイスピードEXカウンターギヤセット(3.7:1)
+    propeller-shaft: [{ partId: '15205', source: override }]  # 1.4mm中空軽量プロペラシャフト
+    front-stay: [{ partId: '15451', source: override }]
+    rear-stay: [{ partId: '15518', source: override }]        # FRPリヤブレーキステーセット
+    damper: [{ partId: '15459', source: override }]
 
 # --- Colours ---------------------------------------------------------------
 #
@@ -55,9 +135,9 @@
 # loadout. These entries set them where that row cannot, checked against the
 # box art; 95281, 95616 and 95621 carry theirs in their motor entries above.
 
-# No wiki row covers these kits.
+# No wiki row covers these kits. 18662's are in Bundle packs above, where its
+# entry already stands.
 '18656': { colours: { body: '#1f2124', wheel: '#1f2124', tire: '#1f2124' } }  # ロボレース デボット2.0
-'18662': { colours: { body: '#1f2124', wheel: '#d0312d', tire: '#1f2124' } }  # アバンテMk.III ネロ アドバンスパック
 '18664': { colours: { body: '#5fe84a', wheel: '#1f2124', tire: '#1f2124' } }  # ティクシヴ
 '18709': { colours: { body: '#5fb3a8', wheel: '#eef0f2', tire: '#1f2124' } }  # バロンビエント
 '19427': { colours: { body: '#2f5fc4', wheel: '#f2c230', tire: '#1f2124' } }  # ディオスパーダ GPA

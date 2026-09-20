@@ -20,12 +20,20 @@ stockLoadout:
         zh-HK: 1/32 迷你四驅車 Avante Mk.III Nero (MS底盤) 進階套裝
       source: tamiya
   gear-set:
-    - label:
-        ja: 3.7:1
-        en: 3.7:1
-        zh-HK: 3.7:1
-        zh-TW: 3.7:1
-      source: tamiya
+    - partId: "15429"
+      source: override
+  motor:
+    - partId: "15402"
+      source: override
+  front-stay:
+    - partId: "15451"
+      source: override
+  rear-stay:
+    - partId: "15452"
+      source: override
+  damper:
+    - partId: "15392"
+      source: override
 loadoutSource: chassis
 colours:
   body: "#1f2124"

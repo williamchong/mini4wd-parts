@@ -46,6 +46,18 @@ stockLoadout:
         zh-HK: 3.5:1
         zh-TW: 3.5:1
       source: fandom
+  front-stay:
+    - partId: "15451"
+      source: override
+  rear-stay:
+    - partId: "15452"
+      source: override
+  brake:
+    - partId: "15458"
+      source: override
+  damper:
+    - partId: "15459"
+      source: override
 loadoutSource: fandom
 loadoutSourceTitle: Mini 4WD Starter Pack AR Speed Spec
 colours:

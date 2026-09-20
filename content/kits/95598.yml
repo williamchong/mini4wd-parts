@@ -42,12 +42,23 @@ stockLoadout:
     - partId: "15455"
       source: override
   gear-set:
-    - label:
-        ja: 3.7:1
-        en: 3.7:1
-        zh-HK: 3.7:1
-        zh-TW: 3.7:1
-      source: tamiya
+    - partId: "15462"
+      source: override
+  counter-gear:
+    - partId: "15434"
+      source: override
+  propeller-shaft:
+    - partId: "15205"
+      source: override
+  front-stay:
+    - partId: "15451"
+      source: override
+  rear-stay:
+    - partId: "15518"
+      source: override
+  damper:
+    - partId: "15459"
+      source: override
 loadoutSource: fandom
 loadoutSourceTitle: Neo-VQS Advanced Pack
 colours:
