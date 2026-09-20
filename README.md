@@ -15,10 +15,11 @@ A Traditional-Chinese-first site where beginners browse Tamiya Mini 4WD parts, a
 ## 目前功能 What Works Today
 
 - **組車器（首頁）Builder on the home page** — 由 305 款套件或 8 款淨底盤開始，逐個插槽更換零件，零件選單已按插槽、底盤相容性及摩打軸型過濾。Start from one of 305 kits or 8 bare chassis. Swap parts slot by slot, and each picker only lists parts that fit the slot, the chassis and the motor shaft type.
-- **3D 預覽 3D pane** — MA 底盤以代理方塊顯示，可點擊車身開啟該插槽的零件選單。On MA, the car is drawn as proxy boxes, and tapping one opens that slot's picker.
+- **3D 預覽 3D pane** — 8 款底盤、車殼及車上每一件零件，都按各自的資料在瀏覽器即時生成形狀，點擊車身即可開啟該插槽的零件選單。All 8 chassis, the body shell and every fitted part are generated in the browser from their own catalog record, and tapping one opens that slot's picker.
 - **可分享連結 Shareable link** — 組裝內容保存在網址中，重新整理不會遺失，複製連結即可分享。The build is kept in the URL, so a reload restores it and copying the link shares it.
 - **零件資料庫 Parts database** — 382 件零件，各有獨立頁面（規格、相容底盤、賽制合法性、同系列款式），並按 29 個分類瀏覽。382 parts, each with its own page (specs, compatible chassis, class legality, variants), browsable in 29 categories.
 - **底盤頁 Chassis pages** — 8 款底盤的規格、標準配置及使用該底盤的套件，可一鍵在組車器開啟。Specs, stock loadout and the kits on each of the 8 chassis, each kit opening straight in the builder.
+- **新手指南 Guides** — `/guides` 的第一篇是〈新手入門：從入門套裝開始〉，另附田宮官方教學連結。`/guides` opens with the first guide, *Getting started: begin with a Starter Pack*, alongside links to Tamiya's own official guides.
 - 麵包屑導覽、`BreadcrumbList` / `Product` JSON-LD、sitemap。Breadcrumbs, `BreadcrumbList` / `Product` JSON-LD and a sitemap.
 
 ## 路線圖 Roadmap
@@ -26,13 +27,15 @@ A Traditional-Chinese-first site where beginners browse Tamiya Mini 4WD parts, a
 | # | 功能 Feature | 里程碑 Milestone | 狀態 Status |
 |---|---|---|---|
 | F1 | 零件資料庫（底盤、套件、改裝零件），含底盤相容性與賽制合法性 Parts database with chassis compatibility and class legality | M1 | ✅ 零件頁、分類、底盤頁 Part, category and chassis pages |
-| F3 | 組車器：由套件或淨底盤開始，顯示相容性警告 Builder from a kit or bare chassis, with compatibility warnings | M1 | 🚧 組車器已上線，規則引擎未完成 Builder live, rule engine pending |
-| F7 | 3D 模型：即時更新，並可點擊車身選零件 3D car that updates live and is the surface you tap to pick parts | M1 | 🚧 MA 代理方塊，模型製作中 MA proxy boxes, meshes pending |
+| F3 | 組車器：由套件或淨底盤開始，顯示相容性警告 Builder from a kit or bare chassis, with compatibility warnings | M1 | ✅ 組車器與規則引擎（三級提示、可選賽制）已上線 Builder and rule engine live, with a class selector |
+| F7 | 3D 模型：即時更新，並可點擊車身選零件 3D car that updates live and is the surface you tap to pick parts | M1 | ✅ 8 款底盤、每款車殼與每件零件的形狀、材質與光影 All 8 chassis, a shell per kit, a shape per part, with materials and lighting |
 | F4 | 可分享的組裝 Shareable builds | M1 → M2 → M3 | 🚧 網址連結已完成；短連結、預覽圖待 M2 URL links done; short links and preview cards in M2 |
-| F2 | 教學與賽制名詞解釋 Tutorials and class glossary (Open / Stock / B-MAX) | M2 | ⏳ |
+| F2 | 教學與賽制名詞解釋 Tutorials and class glossary (Open / Stock / B-MAX) | M2 | 🚧 首篇指南已上線 First guide live |
 | F6 | 零件與組裝評分、熱門度 Ratings and popularity | M2 | ⏳ |
 | F5 | 新手精靈 / 零件推薦 Beginner wizard and recommender | M4 | ⏳ |
 | F8 | 帳號、車庫、留言、社群資料貢獻 Accounts, garages, comments, contributions | M4 | ⏳ |
+
+M1 已於 2026-09-20 完成，目前進行 M2。M1 closed on 2026-09-20; M2 is in progress.
 
 完整的產品與技術規劃請見 See the full product and technical plan: [`docs/PLAN.md`](docs/PLAN.md)。研究筆記 Research notes: [`docs/research/`](docs/research/)。
 
