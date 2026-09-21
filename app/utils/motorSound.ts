@@ -6,7 +6,7 @@
  * wrong three ways: it could not follow the spin-up, it could not coast
  * down with the wheels, and it could not change pitch when the reader swaps
  * a Torque-Tuned for a Hyper-Dash. Six oscillators and a shelf of noise cost
- * 949 bytes gzipped and follow all three for free, because every frequency
+ * 983 bytes gzipped and follow all three for free, because every frequency
  * here is a multiple of one number — the motor's turns per second.
  *
  * What a 130-size can actually puts in the air, and what each layer is here:
@@ -50,10 +50,10 @@
  * without meaning to, so the levels were first solved to the same
  * **A-weighted** RMS the previous tuning had, not the same peak. Taking the
  * rush down afterwards took most of that level with it, because the rush was
- * most of it — and `PEAK` was deliberately left where it was rather than
- * raised to put it back. The pane now runs about 13 dB under where it has
- * ever been, which is the point: this is a motor that plays without being
- * asked for, so it has to be quiet enough to be welcome.
+ * most of it — and `PEAK` only recovered part of the difference, rising
+ * 5.7 dB against the rush's 27 dB fall. The pane ends up about 13 dB under
+ * where it has ever been, which is the point: this is a motor that plays
+ * without being asked for, so it has to be quiet enough to be welcome.
  *
  * Every number below was fitted against `getFrequencyResponse` on the real
  * nodes rather than against the textbook formulas, which matters more than it
@@ -72,14 +72,15 @@ const POLES = 3
 /**
  * Master gain at full speed. A web page is not a race track — and an early
  * pass at 0.16 was so far under the rest of the page that the switch read as
- * broken on a laptop speaker, which is what put this at 0.32.
+ * broken on a laptop speaker, which is what once put this at 0.32.
  *
- * It has stayed here while `RUSH_LEVEL` came down around it, so the pane is
- * now about 13 dB quieter than it has ever been — quieter, in A-weighted
- * terms, than the 0.16 that once read as broken. That is not an oversight:
- * it is the level the owner listened at and chose (2026-09-22), on the same
- * pass that let the sound play without being asked for, and the two go
- * together. If the motor ever reads as broken rather than as quiet, this is
+ * It has nearly doubled since, and the pane still came out quieter: this is
+ * 5.7 dB up while `RUSH_LEVEL` went 27 dB down around it, netting about 13 dB
+ * of A-weighted quiet — under even that 0.16. It had to rise at all because
+ * the rush was most of the output, so taking the rush away took the level
+ * with it. This is the level the owner listened at and chose (2026-09-22), on
+ * the same pass that let the sound play without being asked for, and the two
+ * go together. If the motor ever reads as broken rather than as quiet, this is
  * the first number to look at. The loudest sample reaches 0.14 of full scale.
  */
 const PEAK = 0.62
@@ -228,6 +229,14 @@ export function createMotorSound(teeth: number) {
   let ceiling = 0
   let tones: { osc: OscillatorNode; order: number }[] = []
   let idle: ReturnType<typeof setTimeout> | undefined
+  /**
+   * Whether the fade to silence has already been asked for. `set()` runs every
+   * frame while the car is on, and a reader who silences a running car leaves
+   * it running — so without this the same target would be re-issued sixty
+   * times a second, for as long as they leave it spinning, at a `currentTime`
+   * frozen by the suspend a quarter-second in.
+   */
+  let silenced = false
   /** No Web Audio in this browser, or it refused a context. Stay silent for good. */
   let refused = false
 
@@ -235,7 +244,12 @@ export function createMotorSound(teeth: number) {
   function open(): AudioContext | null {
     if (ctx || refused) return ctx
     try {
-      ctx = new AudioContext()
+      // `playback`, not the default `interactive`: the fastest thing here
+      // moves over `FOLLOW_S` and the spin-up takes 0.4 s, so the platform is
+      // welcome to take a larger buffer and wake the audio thread far less
+      // often. The tens of milliseconds it costs cannot be heard against that
+      // ramp, and the saving is now everyone's — the sound plays by default.
+      ctx = new AudioContext({ latencyHint: 'playback' })
     }
     catch {
       refused = true
@@ -336,7 +350,12 @@ export function createMotorSound(teeth: number) {
       const now = context.currentTime
 
       if (load < SILENT) {
-        master.gain.setTargetAtTime(0, now, FOLLOW_S)
+        // Asked for once, not once a frame: the gain is already on its way to
+        // zero, and asking again changes nothing anyone can hear.
+        if (!silenced) {
+          master.gain.setTargetAtTime(0, now, FOLLOW_S)
+          silenced = true
+        }
         // An idle context keeps a device's audio hardware awake, and the car
         // is switched off far longer than it is on.
         if (idle === undefined && context.state === 'running') {
@@ -345,6 +364,7 @@ export function createMotorSound(teeth: number) {
         return
       }
 
+      silenced = false
       clearTimeout(idle)
       idle = undefined
       if (context.state === 'suspended') context.resume().catch(() => {})
