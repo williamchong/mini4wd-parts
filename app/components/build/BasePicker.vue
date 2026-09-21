@@ -55,9 +55,9 @@ const door = ref<'kit' | 'chassis'>('kit')
           { label: $t('build.door.chassis'), value: 'chassis' }
         ]"
       />
-      </template>
+    </template>
 
-      <template #body>
+    <template #body>
       <!-- The whole record, not an id: the chassis and the kit are read off
            one object, so a build whose chassis and kit disagree is
            unrepresentable through the UI. -->
@@ -72,6 +72,6 @@ const door = ref<'kit' | 'chassis'>('kit')
         :chassis="chassis"
         @select="(id: ChassisId) => emit('select', id)"
       />
-      </template>
+    </template>
   </UModal>
 </template>

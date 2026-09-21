@@ -33,12 +33,11 @@ const clean = computed(() => !props.findings.some(f => f.severity !== 'note'))
 
 <template>
   <section class="build-findings">
-    <!-- Only while the class can change a finding: a toggle whose every
-         position gives the same answer asks the reader a question for nothing. -->
-    <!-- One choice among three, which is a radio group and never was a row of
-         toggle buttons: only one class can be in force, and the buttons were
-         spelling that out with `aria-pressed` on each rather than letting the
-         grouping say it once. Arrow keys move between the classes now. -->
+    <!-- One choice among three, and only while the class can change a finding:
+         a question whose every answer gives the same verdict is one asked for
+         nothing. A radio group rather than a row of toggle buttons, because
+         only one class can be in force and the grouping says that once
+         instead of each button restating it through `aria-pressed`. -->
     <URadioGroup
       v-if="classDecides"
       v-model="buildClass"

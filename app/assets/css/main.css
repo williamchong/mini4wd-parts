@@ -106,7 +106,9 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  /* The same stack `--font-sans` gives Nuxt UI's components, named once so the
+     page and the components cannot drift apart. */
+  font-family: var(--font-sans);
   min-height: 100vh;
   margin: 0;
   background-color: var(--ui-bg-muted);
@@ -907,21 +909,22 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
-/* Putting the part on a car is the one thing this page asks for, so its
-   button wears the builder's colours (.builder-cta, .build-share-actions) at
-   the size of a page action rather than of a form control. */
-/* Full width of the hero column: the part page has one action and this is it
-   (the button itself is a UButton). */
+/* Putting the part on a car is the one thing this page asks for, so its button
+   is a page action rather than a form control. The size and the colours are
+   the UButton's; what is left here is the space above it and the one thing the
+   component has no prop for — see below. */
 .part-cta {
   margin-top: 0.25rem;
 }
 
-
-/* On a phone the hero text column is the whole screen, and a full-width bar
-   is what a reader scrolling past the photo actually lands on. */
+/* On a phone the hero text column is the whole screen, and a full-width bar is
+   what a reader scrolling past the photo actually lands on. Deliberately not
+   the `block` prop, which is `w-full` at every width and would make a
+   desktop-wide bar out of a button. */
 @media (max-width: 34rem) {
   .part-cta {
     width: 100%;
+    justify-content: center;
   }
 }
 
