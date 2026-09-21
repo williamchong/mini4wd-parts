@@ -1031,6 +1031,16 @@ The same pair belongs on the **AR FRP wide rear stay** (15451/15452's `wide-rear
 
 **Both posters were recaptured**, since the empty MA gained its upper rear pair: 38 KB for 16:9 and 17 KB for 4:3, up from 35 and 16. The socket set is no longer identical across the eight chassis, so the §5.5 tap measurements carry over only for the four rollers they were taken on. **Not done:** whether the ME, released after both, also ships six — its record does not say, and no photo we hold shows its rear stay.
 
+#### The motor is synthesised, not sampled (owner, 2026-09-21)
+
+開動 already spun the wheels; it now makes the noise as well, and the same rule that settled the shapes settles the sound: **nothing baked**. A loop of a real can would be tens of KB and would still be wrong three ways — it cannot follow the spin-up, it cannot coast down with the wheels, and it cannot change when the reader swaps a motor. `app/utils/motorSound.ts` is four filters, six oscillators and a band of noise, **934 B gzipped on its own** and inside the existing 3D chunk, driven by the spin envelope `tickSpin` already keeps. It plays by default; `scene-muted` in `localStorage` is the way out, and `scene_mute` is what will say whether default-on was right (`muted` is a new GA4 dimension to register by hand, §4.1).
+
+**It is built from a measurement, not from taste.** The owner captured the spectrum of a running car off video, and two earlier cuts had it backwards: a real one is a haystack, not a chord — broadband energy humped across 1–3 kHz with the tones standing only about 10 dB over their own neighbourhood, a shoulder near 200 Hz some 13 dB down, and a knee falling at about 24 dB an octave. Tuned against it, every band from 150 Hz to 6 kHz sits within a few dB of the capture. The levels in `LAYERS` are that capture read as decibels under its own peak, which is why they look arbitrary and are not.
+
+**The one thing the capture must not be taken literally on is where the knee sits.** Pinned at the absolute 4 kHz it was measured at, the filter ate the very difference the catalog exists to give: 44% more rpm moved the spectral centroid 4%. Quoted against the mesh frequency instead (`REF_MESH_HZ`) the whole haystack rides with the motor, and a Hyper-Dash now reads 27% brighter than a Torque-Tuned — a beginner can hear which motor they picked. Free speed comes from the middle of the `motorRpmMin`/`motorRpmMax` range on 31 of 33 motors; 94380, the FA-130 every kit ships with, publishes none, so a stock car runs on the 13,000 written in the module.
+
+**What it cost, and what it may not do:** the context is built inside the click that asks for it, or Safari refuses it; it is suspended a quarter-second after the car falls silent, so a switched-off pane costs no audio hardware; and it is silenced both when the pane scrolls off screen and when the tab hides, because neither delivers an animation frame and a motor nobody can see is worse than one nobody asked for. **Not done:** a phone check — this was tuned on a laptop, and the 200 Hz shoulder is the band a phone speaker cannot reproduce at all.
+
 ---
 
 ## 6. Roadmap

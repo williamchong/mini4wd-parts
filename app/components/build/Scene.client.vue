@@ -73,6 +73,8 @@ const emit = defineEmits<{
   select: [slotId: string]
   /** The reader switched the car on. */
   power: []
+  /** …and turned its sound off, or back on. */
+  mute: [muted: boolean]
   /** The first frame is on the canvas; whatever stood in for it can go. */
   ready: []
 }>()
@@ -451,6 +453,8 @@ const shapes = new Map<string, Silhouette>([['default', DEFAULT_SILHOUETTE]])
 
 let cleanup: (() => void) | undefined
 let resetCamera = () => {}
+/** Granted inside the click that switches the car on; see `togglePower`. */
+let startMotor = () => {}
 
 /**
  * The shell lifted off the chassis: the assembled car is what a reader
@@ -492,6 +496,70 @@ const STOPPED_RPS = 0.02
 const MAX_STEP_S = 0.1
 /** How far the switch slider moves toward the nose when the car is on. */
 const SWITCH_TRAVEL_MM = 4
+
+/**
+ * The motor heard as well as seen (`app/utils/motorSound.ts`). It plays on
+ * 開動 by default, because the sound of the thing running is half of what the
+ * switch is for; the toggle beside it is the way out, remembered per browser
+ * the way the race class is on the page. Storage can be absent or throw, and
+ * the pane works the same without it.
+ */
+const muted = ref(false)
+const MUTE_KEY = 'scene-muted'
+onMounted(() => {
+  try {
+    muted.value = localStorage.getItem(MUTE_KEY) === '1'
+  }
+  catch {}
+})
+
+/**
+ * Teeth on the pinion the motor drives: what puts the whine two octaves and a
+ * bit above the buzz. A PRO chassis' double-shaft motor carries a 6-tooth
+ * pinion at each end; a single-shaft one drives the counter gear through 8.
+ * Fixed for the pane's life, since the page remounts it per chassis.
+ */
+const pinionTeeth = layoutFor(props.chassis).motor.across ? 8 : 6
+
+/**
+ * The free speed of the motor actually fitted, which is what the sound is
+ * built out of — a Hyper-Dash is audibly not a Torque-Tuned. Tamiya prints a
+ * range per motor, so the middle of it stands for the motor. 94380, the
+ * FA-130 every kit ships with, prints none and neither does an empty slot;
+ * 13,000 is where a stock can sits, beside the 13,500 of the Torque-Tuned 2
+ * that does print one.
+ */
+const STOCK_RPM = 13000
+const motorRpm = computed(() => {
+  const { motorRpmMin: min, motorRpmMax: max } = specsOf(props.slots.find(slot => slot.id === 'motor')) ?? {}
+  return min && max ? (min + max) / 2 : min ?? max ?? STOCK_RPM
+})
+
+/**
+ * The switch. Flipping `powered` would be the whole of it for the picture,
+ * but an `AudioContext` is granted only inside the gesture that asked for it:
+ * a watcher on `powered` runs a microtask later, which Safari has already
+ * declined by then.
+ */
+function togglePower() {
+  powered.value = !powered.value
+  if (powered.value && !muted.value) startMotor()
+}
+
+function toggleMute() {
+  muted.value = !muted.value
+  // Unmuting is the first gesture the context may ever see: the reader who
+  // muted on their last visit switched this car on to silence.
+  if (!muted.value && powered.value) startMotor()
+  emit('mute', muted.value)
+  // Written here rather than from a watcher on `muted`, because this is the
+  // only thing that ever changes it: a watcher also fired on the read-back
+  // above, putting the restored value straight back where it came from.
+  try {
+    localStorage.setItem(MUTE_KEY, muted.value ? '1' : '0')
+  }
+  catch {}
+}
 
 /**
  * The chassis pieces a kit moulds in its own colours: which of the kit's
@@ -885,6 +953,14 @@ onMounted(() => {
   let turned = 0
   let lastSpin = 0
   let onScreen = true
+  const motor = createMotorSound(pinionTeeth)
+  startMotor = motor.start
+  /**
+   * What the motor is doing, which is not what the wheels are drawn doing:
+   * `SPIN_RPS` is a lie told to the eye so the pinion does not strobe, so the
+   * sound takes the envelope out of it and puts the real rpm back in.
+   */
+  const heard = () => muted.value || !onScreen || document.hidden ? 0 : speed / SPIN_RPS
   function tickSpin() {
     const now = performance.now()
     const step = lastSpin ? Math.min((now - lastSpin) / 1000, MAX_STEP_S) : 0
@@ -893,6 +969,12 @@ onMounted(() => {
     if (!on && speed < STOPPED_RPS) speed = 0
     turned += speed * step * Math.PI * 2
     for (const { object, axis, rate } of spinners) object.rotation[axis] = turned * rate
+    // Unconditional on purpose, and it must stay that way: the frame that
+    // stops the car is the same frame that forces `speed` to 0 above, so a
+    // guard like `if (on || speed)` here would skip the one call that fades
+    // the sound out and schedules the suspend — leaving a motor running under
+    // an audible floor for as long as the page is open.
+    motor.set(heard(), motorRpm.value)
     lastSpin = (on || speed) && onScreen ? now : 0
     if (lastSpin) requestRender()
   }
@@ -1259,9 +1341,21 @@ onMounted(() => {
 
   const visibility = new IntersectionObserver(([entry]) => {
     onScreen = !!entry?.isIntersecting
+    // Coming back asks for a frame, which puts the sound back with the
+    // picture. Going away gets none — so the motor is silenced here, or a car
+    // left running would follow the reader down the page.
     if (onScreen) requestRender()
+    else motor.set(0, motorRpm.value)
   })
   visibility.observe(element)
+
+  // The same hole one level up: a hidden tab runs no animation frame at all,
+  // and a motor nobody can see is the one thing worse than one nobody asked for.
+  const onTabChange = () => {
+    if (document.hidden) motor.set(0, motorRpm.value)
+    else requestRender()
+  }
+  document.addEventListener('visibilitychange', onTabChange)
 
   populate()
   // The desktop tier is loaded alongside the compile, and the first frame
@@ -1312,6 +1406,8 @@ onMounted(() => {
     stopPower()
     resize.disconnect()
     visibility.disconnect()
+    document.removeEventListener('visibilitychange', onTabChange)
+    motor.stop()
     for (const [type, handler] of listeners) element.removeEventListener(type, handler)
     controls.dispose()
     // dispose() drops the caches but keeps the GL context; the canvas is
@@ -1350,8 +1446,11 @@ onBeforeUnmount(() => cleanup?.())
     <button type="button" class="scene-lift" :aria-pressed="lifted" @click="lifted = !lifted">
       {{ $t(lifted ? 'build.scene.fitBody' : 'build.scene.liftBody') }}
     </button>
-    <button type="button" class="scene-power" :aria-pressed="powered" @click="powered = !powered">
+    <button type="button" class="scene-power" :aria-pressed="powered" @click="togglePower()">
       {{ $t(powered ? 'build.scene.powerOff' : 'build.scene.powerOn') }}
+    </button>
+    <button type="button" class="scene-mute" :aria-pressed="muted" @click="toggleMute()">
+      {{ $t(muted ? 'build.scene.unmute' : 'build.scene.mute') }}
     </button>
   </div>
 </template>

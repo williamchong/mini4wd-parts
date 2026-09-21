@@ -84,6 +84,8 @@
       "fitBody": "Fit the body",
       "powerOn": "Switch on",
       "powerOff": "Switch off",
+      "mute": "Mute",
+      "unmute": "Unmute",
       "hint": "Tap a part on the car to change it. Drag to rotate, pinch or scroll to zoom.",
       "hintEmpty": "Choose the kit or chassis you have first, then swap parts one by one."
     },

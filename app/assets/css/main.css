@@ -271,7 +271,8 @@ button.link {
 
 .scene-reset,
 .scene-lift,
-.scene-power {
+.scene-power,
+.scene-mute {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
@@ -295,8 +296,16 @@ button.link {
   bottom: 0.5rem;
 }
 
+.scene-mute {
+  top: auto;
+  right: auto;
+  bottom: 0.5rem;
+  left: 0.5rem;
+}
+
 .scene-lift[aria-pressed="true"],
-.scene-power[aria-pressed="true"] {
+.scene-power[aria-pressed="true"],
+.scene-mute[aria-pressed="true"] {
   background: #2c3e50;
   color: #fff;
   border-color: #2c3e50;

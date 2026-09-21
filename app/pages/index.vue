@@ -518,6 +518,13 @@ function onSceneReady() {
 function onScenePower() {
   if (shownChassis.value) track('scene_power', { chassis: shownChassis.value.id })
 }
+/**
+ * The motor plays by default, so the only evidence that it should keep doing
+ * so is how many readers reach for the toggle — and whether they reach back.
+ */
+function onSceneMute(muted: boolean) {
+  if (shownChassis.value) track('scene_mute', { chassis: shownChassis.value.id, muted })
+}
 const showPoster = computed(() => shownChassis.value?.id === PLACEHOLDER_CHASSIS && !hasBuild.value && !sceneReady.value)
 
 /**
@@ -775,6 +782,7 @@ useHead(() => ({
         @select="pick"
         @ready="onSceneReady"
         @power="onScenePower"
+        @mute="onSceneMute"
       />
     </div>
     <p class="scene-hint">
