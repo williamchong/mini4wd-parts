@@ -73,11 +73,15 @@ useHead(() => ({
     class="breadcrumbs"
   >
     <!--
-      The separator as a character, not the default icon. It is the only icon
-      on /parts, /chassis and the chassis pages, and rendering it through
-      UIcon pulls Iconify's runtime onto routes that have nothing else from
-      Nuxt UI on them. A `›` costs nothing and is what the hand-written trail
-      used before this component replaced it.
+      The separator as a character, not the default icon — which is also what
+      the hand-written trail used before this component replaced it.
+
+      It does *not* save the Iconify runtime, though that was the hope:
+      `UBreadcrumb` imports `UIcon` statically, so the runtime loads on these
+      routes whether or not an icon renders (measured 2026-09-22 — the built
+      HTML for /parts, /chassis/ma and a part page is byte-identical either
+      way). What it saves is the icon out of the client bundle and a DOM node
+      per crumb.
     -->
     <template #separator>
       <span aria-hidden="true">›</span>

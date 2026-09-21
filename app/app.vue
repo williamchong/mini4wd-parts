@@ -68,14 +68,18 @@ useHead(() => ({
     No `UApp` anywhere on this site, deliberately, and the absence is load
     bearing. It is Nuxt UI's provider root, and the usual advice is to wrap
     everything in it — which here would put its provider tree on all 1,713
-    prerendered routes at 40.7 KB gz a page. The builder held it alone for a
-    while, at 10.5 KB gz on the one route that matters most.
+    prerendered routes at 40.7 KB gz a page.
     `UModal` is declarative: it renders its own Reka dialog root and wants no
     provider. Verified 2026-09-22 with it gone — all three pickers still open,
     trap focus, lock the body, close on Escape and hand focus back to the
     button that opened them, with nothing on the console.
     `UApp` is what a toast, `useOverlay` or a tooltip would need. Nothing here
     uses one; the first thing that does brings it back, on its own route.
+    It is also what would carry a locale to Nuxt UI's own strings, so the
+    close button on the builder's three dialogs is labelled "Close" rather
+    than 關閉. `:close` takes `ButtonProps` and not arbitrary attributes, so
+    the fix is a `#close` slot at those three call sites, or `UApp` back with
+    a `:locale` — neither worth 10.5 KB gz for one `aria-label` today.
   -->
   <NuxtLayout>
     <NuxtPage />

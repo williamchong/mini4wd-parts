@@ -68,11 +68,14 @@
  * from @nuxt/content and its own rules set a colour and a rule under a
  * heading, never a size, because the browser already had an answer.
  *
- * So that half is reverted here. `revert` rolls the property back to the
- * user-agent value, which is exactly what these rules meant when they were
- * written, and being in `@layer base` it loses to every component rule in this
- * file and to every Tailwind utility — including the prose components', which
- * still style the guides and /about.
+ * So that half is handed back here, all of it by `revert` bar one property —
+ * `revert` rolls a property back to the user-agent value, which is exactly
+ * what these rules meant when they were written. (The exception is the colour
+ * of a bare link, which stopped wanting the browser's answer once the page
+ * could be dark; the rule says so where it sits.) Being in `@layer base`, all
+ * of it loses to every component rule in this file and to every Tailwind
+ * utility — including the prose components', which still style the guides and
+ * /about.
  */
 @layer base {
   h1, h2, h3, h4, h5, h6 {

@@ -41,10 +41,53 @@ const categoryRoutes = [...new Set(partFiles.map(name =>
 
 const catalogRoutes = [...partRoutes, ...categoryRoutes, ...chassisRoutes]
 
+/**
+ * The icons that have to survive into the client bundle: the ones a template
+ * names, plus the dialog's close button, which is Nuxt UI's by way of its
+ * default icon map and renders only once a dialog is open — so no prerendered
+ * page contains it and no grep of `app/` finds it.
+ *
+ * The breadcrumb separator is deliberately absent: `Breadcrumbs.vue` fills
+ * UBreadcrumb's `#separator` slot, and the component's `<UIcon>` is the
+ * fallback *inside* that slot, so it never renders.
+ */
+const CLIENT_ICONS = [
+  'lucide:share-2',
+  'lucide:link',
+  'lucide:check',
+  'lucide:search',
+  'lucide:x'
+]
+
 export default defineNuxtConfig({
   compatibilityDate: '2026-09-08',
   devtools: { enabled: true },
-  modules: ['@nuxt/content', '@nuxtjs/i18n', '@nuxtjs/sitemap', '@nuxt/scripts', '@nuxt/ui'],
+  modules: [
+    '@nuxt/content',
+    '@nuxtjs/i18n',
+    '@nuxtjs/sitemap',
+    '@nuxt/scripts',
+    '@nuxt/ui',
+
+    /**
+     * Prune the client icon bundle down to what the site renders.
+     *
+     * @nuxt/ui adds **every value of its default `ui.icons` map** — all 45,
+     * the names for its calendar, its command palette, its auth form — through
+     * this same hook, unconditionally (`node_modules/@nuxt/ui/dist/module.mjs`,
+     * `nuxt.hook('icon:clientBundleIcons', …)`). Neither `clientBundle.scan`
+     * nor `clientBundle.icons` touches that: listing ours *adds* to the set and
+     * nothing takes UI's away, so a build with an explicit five-icon list still
+     * reported `45 icons with 11.02KB`. Only a hook registered after the module
+     * can remove them, which is what this inline module is for and why it is
+     * last in this array rather than a `hooks:` entry (those run too early).
+     */
+    (_options, nuxt) => {
+      nuxt.hook('icon:clientBundleIcons', (icons: Set<string>) => {
+        for (const name of icons) if (!CLIENT_ICONS.includes(name)) icons.delete(name)
+      })
+    }
+  ],
 
   // The sitemap module's own notion of the site's origin. Same value as
   // `runtimeConfig.public.siteUrl`, which the pages use for absolute og:image
@@ -322,11 +365,8 @@ export default defineNuxtConfig({
    * hydration — the dialog's close button, and the tick the copy button swaps
    * in.
    *
-   * Listed rather than scanned. `scan: true` read 45 icons off Nuxt UI's
-   * default `ui.icons` map — the names for its calendar, its command palette,
-   * its auth form, none of which this site renders — and put all of them in
-   * every one of the 1,713 pages. Measured 2026-09-22: 1,802 B gz of icon data
-   * against 353 B for the six that are really used.
+   * Listed rather than scanned, and pruned as well as listed — see the inline
+   * module in `modules` above for why listing alone does nothing.
    */
   icon: {
     provider: 'none',
@@ -337,17 +377,7 @@ export default defineNuxtConfig({
     fallbackToApi: false,
     clientBundle: {
       scan: false,
-      icons: [
-        'lucide:share-2',
-        'lucide:link',
-        'lucide:check',
-        'lucide:search',
-        // UModal's close button and UBreadcrumb's separator: ours by way of
-        // Nuxt UI's defaults rather than written in a template, so a scan
-        // would find them and a grep of `app/` would not.
-        'lucide:x',
-        'lucide:chevron-right'
-      ]
+      icons: CLIENT_ICONS
     }
   }
 })
