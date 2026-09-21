@@ -153,26 +153,28 @@ useHead(() => ({
          reader has already met it in the builder. -->
     <ul class="chassis-chips">
       <li>
-        <button
-          type="button"
+        <UButton
+          size="xs"
+          :color="!selected ? 'primary' : 'neutral'"
+          :variant="!selected ? 'solid' : 'outline'"
           :aria-pressed="!selected"
-          :class="{ active: !selected }"
           @click="select('')"
         >
           {{ $t('build.chassisAll') }}
           <span class="chip-count">{{ data!.parts.length }}</span>
-        </button>
+        </UButton>
       </li>
       <li v-for="chip in chips" :key="chip.id">
-        <button
-          type="button"
+        <UButton
+          size="xs"
+          :color="selected === chip.id ? 'primary' : 'neutral'"
+          :variant="selected === chip.id ? 'solid' : 'outline'"
           :aria-pressed="selected === chip.id"
-          :class="{ active: selected === chip.id }"
           @click="select(chip.id)"
         >
           {{ chip.name }}
           <span class="chip-count">{{ chip.count }}</span>
-        </button>
+        </UButton>
       </li>
     </ul>
 
