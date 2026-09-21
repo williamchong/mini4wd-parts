@@ -282,9 +282,9 @@ useHead(() => ({
           </UBadge>
         </p>
 
-        <button v-if="buildable" type="button" class="part-cta" @click="addToBuild">
+        <UButton v-if="buildable" size="lg" block class="part-cta" @click="addToBuild">
           {{ part.contents ? $t('part.addSetToBuild') : $t('part.addToBuild') }}
-        </button>
+        </UButton>
       </div>
     </header>
 

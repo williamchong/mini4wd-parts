@@ -91,7 +91,15 @@
     padding-inline-start: revert;
   }
 
-  a {
+  /*
+   * `:not([class])` matters. Every anchor Nuxt UI renders carries classes —
+   * a prose link, a heading's own anchor, a UButton rendered as a link — and
+   * reverting those to the user-agent blue puts the underlined heading anchors
+   * back that Preflight had just fixed. The site's own bare `<a>` (the part
+   * page's 相關連結 list is the one that matters) has no class and still wants
+   * the browser's answer.
+   */
+  a:not([class]) {
     color: revert;
     text-decoration: revert;
   }
@@ -101,7 +109,7 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   min-height: 100vh;
   margin: 0;
-  background-color: #f5f5f5;
+  background-color: var(--ui-bg-muted);
 }
 
 /* Content pages styling */
@@ -112,19 +120,19 @@ body {
 }
 
 .content-container h1 {
-  color: #333;
-  border-bottom: 2px solid #333;
+  color: var(--ui-text-highlighted);
+  border-bottom: 2px solid var(--ui-text-highlighted);
   padding-bottom: 0.5rem;
 }
 
 .content-container h2 {
-  color: #555;
+  color: var(--ui-text-toned);
   margin-top: 2rem;
 }
 
 .content-container p {
   line-height: 1.6;
-  color: #444;
+  color: var(--ui-text);
 }
 
 .content-container img {
@@ -139,13 +147,17 @@ body {
   flex-wrap: wrap;
   align-items: center;
   gap: 0.75rem 1.5rem;
-  background: #333;
-  color: white;
+  /* A fixed step on the site's own scale, not a semantic token. The bar is
+     dark chrome in both modes, and every token that reads as "dark" — whether
+     `text-highlighted` or `bg-inverted` — is defined *relative to the page*
+     and turns light the moment the page does. */
+  background: var(--color-chassis-900);
+  color: var(--color-chassis-50);
   padding: 0.75rem 2rem;
 }
 
 .nav a {
-  color: white;
+  color: var(--color-chassis-50);
   text-decoration: none;
 }
 
@@ -211,10 +223,12 @@ body {
 
 .locale-menu > summary:hover,
 .locale-menu[open] > summary {
-  border-color: white;
+  border-color: var(--color-chassis-50);
 }
 
 .locale-menu-list {
+  /* Its own plate, because it opens off the dark bar onto the page. */
+  color: var(--ui-text);
   position: absolute;
   right: 0;
   z-index: 10;
@@ -222,8 +236,8 @@ body {
   margin: 0.35rem 0 0;
   padding: 0.25rem;
   list-style: none;
-  color: #333;
-  background: white;
+  color: var(--ui-text);
+  background: var(--ui-bg);
   border-radius: 6px;
   box-shadow: 0 6px 18px rgb(0 0 0 / 0.25);
 }
@@ -238,7 +252,7 @@ body {
 }
 
 .locale-menu-list a:hover {
-  background: #f0f0f0;
+  background: var(--ui-bg-elevated);
   text-decoration: none;
 }
 
@@ -318,7 +332,7 @@ body {
   aspect-ratio: 4 / 3;
   margin: 1rem 0 0.25rem;
   border-radius: 8px;
-  background: #e9edf1;
+  background: var(--color-chassis-100);
   overflow: hidden;
 }
 
@@ -380,7 +394,7 @@ body {
 
 .scene-hint {
   font-size: 0.9em;
-  color: #666;
+  color: var(--ui-text-muted);
   margin: 0 0 1rem;
 }
 
@@ -427,15 +441,15 @@ body {
   padding: 0.9rem 1rem;
   font: inherit;
   text-align: start;
-  background: #fff;
-  border: 1px solid #d8dee4;
+  background: var(--ui-bg);
+  border: 1px solid var(--ui-border-accented);
   border-radius: 6px;
   cursor: pointer;
 }
 
 .chassis-list button:hover,
 .starter-picks button:hover {
-  border-color: #8a99a8;
+  border-color: var(--color-chassis-400);
 }
 
 .chassis-thumb {
@@ -493,14 +507,14 @@ body {
   padding: 0.6rem;
   font: inherit;
   text-align: start;
-  background: #fff;
-  border: 1px solid #d8dee4;
+  background: var(--ui-bg);
+  border: 1px solid var(--ui-border-accented);
   border-radius: 6px;
   cursor: pointer;
 }
 
 .kit-list button:hover {
-  border-color: #8a99a8;
+  border-color: var(--color-chassis-400);
 }
 
 /* Skips layout and paint for rows below the fold, and stops the browser
@@ -522,7 +536,7 @@ body {
   flex: none;
   width: 100%;
   aspect-ratio: 4 / 3;
-  background: #eef2f5;
+  background: var(--color-chassis-100);
   border-radius: 4px;
   object-fit: contain;
 }
@@ -530,7 +544,7 @@ body {
 .catalog-thumb.is-icon {
   display: grid;
   place-items: center;
-  color: #76889a;
+  color: var(--ui-text-dimmed);
 }
 
 /* Two thirds of the box: a drawn glyph is mostly whitespace, so matching a
@@ -579,7 +593,7 @@ body {
 .slot-list {
   padding: 0;
   list-style: none;
-  border-top: 1px solid #e3e8ec;
+  border-top: 1px solid var(--ui-border);
 }
 
 .slot-row {
@@ -590,12 +604,12 @@ body {
      text's baseline down and took the label and the buttons with it. */
   align-items: start;
   padding: 0.7rem 0.25rem;
-  border-bottom: 1px solid #e3e8ec;
+  border-bottom: 1px solid var(--ui-border);
 }
 
 .more-slots > summary {
   padding: 0.7rem 0.25rem;
-  border-bottom: 1px solid #e3e8ec;
+  border-bottom: 1px solid var(--ui-border);
   cursor: pointer;
   opacity: 0.8;
 }
@@ -605,7 +619,7 @@ body {
 }
 
 .slot-row.swapped {
-  background: #f6faf6;
+  background: var(--ui-color-success-50);
 }
 
 .slot-label {
@@ -741,17 +755,17 @@ body {
   text-align: start;
   background: none;
   border: none;
-  border-top: 1px solid #eef1f4;
+  border-top: 1px solid var(--ui-border);
   cursor: pointer;
 }
 
 .picker-list button:hover {
-  background: #f6f8fa;
+  background: var(--color-chassis-50);
 }
 
 .picker-divider {
   padding: 0.9rem 0.5rem 0.4rem;
-  border-top: 1px solid #d8dee4;
+  border-top: 1px solid var(--ui-border-accented);
 }
 
 .picker-divider h3 {
@@ -861,6 +875,11 @@ body {
 .part-photo {
   width: 320px;
   max-width: 100%;
+  /* Every Tamiya product photo is shot on white, so the picture supplies its
+     own light ground and needs one under it that does not go dark with the
+     page — the same plate `.catalog-thumb` gives a row. */
+  background: var(--color-chassis-100);
+  border-radius: 6px;
 }
 
 .part-hero-text {
@@ -880,7 +899,7 @@ body {
   gap: 0.25rem 0.75rem;
   margin: 0;
   font-size: 0.85em;
-  color: #555;
+  color: var(--ui-text-toned);
 }
 
 .part-facts {
@@ -891,24 +910,12 @@ body {
 /* Putting the part on a car is the one thing this page asks for, so its
    button wears the builder's colours (.builder-cta, .build-share-actions) at
    the size of a page action rather than of a form control. */
+/* Full width of the hero column: the part page has one action and this is it
+   (the button itself is a UButton). */
 .part-cta {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 2.75rem;
-  padding: 0 1.25rem;
-  font: inherit;
-  font-weight: 600;
-  color: #fff;
-  background: #2c3e50;
-  border: 1px solid #2c3e50;
-  border-radius: 6px;
-  cursor: pointer;
+  margin-top: 0.25rem;
 }
 
-.part-cta:hover {
-  filter: brightness(1.1);
-}
 
 /* On a phone the hero text column is the whole screen, and a full-width bar
    is what a reader scrolling past the photo actually lands on. */
@@ -920,7 +927,7 @@ body {
 
 .part-section h2 {
   font-size: 1.05rem;
-  border-bottom: 1px solid #e3e8ec;
+  border-bottom: 1px solid var(--ui-border);
   padding-bottom: 0.3rem;
 }
 
@@ -934,7 +941,7 @@ body {
 }
 
 .part-table dt {
-  color: #555;
+  color: var(--ui-text-toned);
   font-size: 0.9em;
 }
 
@@ -950,7 +957,7 @@ body {
 .part-note {
   margin: 0.5rem 0;
   font-size: 0.85em;
-  color: #555;
+  color: var(--ui-text-toned);
 }
 
 .chip-row {
@@ -965,8 +972,8 @@ body {
 .chip {
   padding: 0.3rem 0.7rem;
   font-size: 0.85em;
-  background: #fff;
-  border: 1px solid #d8dee4;
+  background: var(--ui-bg);
+  border: 1px solid var(--ui-border-accented);
   border-radius: 999px;
 }
 
@@ -992,13 +999,13 @@ body {
   padding: 0.5rem;
   color: inherit;
   text-decoration: none;
-  background: #fff;
-  border: 1px solid #e3e8ec;
+  background: var(--ui-bg);
+  border: 1px solid var(--ui-border);
   border-radius: 6px;
 }
 
 .part-link-list a:hover {
-  border-color: #b9c4cd;
+  border-color: var(--color-chassis-400);
 }
 
 .part-link-name {
@@ -1018,8 +1025,8 @@ body {
   margin: 0 0 0.75rem;
   padding: 0.6rem 0.8rem;
   font-size: 0.9em;
-  background: #eef5ec;
-  border: 1px solid #cfe0ca;
+  background: var(--ui-color-success-50);
+  border: 1px solid var(--ui-color-success-200);
   border-radius: 4px;
 }
 
@@ -1045,7 +1052,7 @@ body {
 
 .findings-ok {
   margin: 0.6rem 0 0;
-  color: #3d6b35;
+  color: var(--ui-color-success-700);
 }
 
 .findings-list {
@@ -1123,7 +1130,7 @@ body {
    as the page going on after the tool rather than as another tool. */
 .home-about {
   margin-top: 2.5rem;
-  border-top: 1px solid #e3e8ec;
+  border-top: 1px solid var(--ui-border);
 }
 
 /* Under the builder's 1.25rem <h1>, not over it: the browser's 1.5em would
@@ -1135,7 +1142,7 @@ body {
 .home-about h3 {
   margin: 1.25rem 0 0.25rem;
   font-size: 1rem;
-  color: #333;
+  color: var(--ui-text-highlighted);
 }
 
 .home-about h3 + p {
@@ -1168,7 +1175,7 @@ body {
 .home-steps {
   padding-left: 1.4rem;
   line-height: 1.6;
-  color: #444;
+  color: var(--ui-text);
 }
 
 .home-steps li + li {
@@ -1183,28 +1190,12 @@ body {
   margin: 2rem 0 0;
 }
 
-.builder-cta a {
-  display: inline-flex;
-  align-items: center;
-  min-height: 2.75rem;
-  padding: 0 1.25rem;
-  font-weight: 600;
-  color: #fff;
-  text-decoration: none;
-  background: #2c3e50;
-  border: 1px solid #2c3e50;
-  border-radius: 6px;
-}
-
-.builder-cta a:hover {
-  filter: brightness(1.1);
-}
 
 /* --------------------------------------------------------------- browse */
 
 .browse-intro {
   margin: 0.25rem 0 1.5rem;
-  color: #444;
+  color: var(--ui-text);
   line-height: 1.6;
 }
 
@@ -1230,20 +1221,20 @@ body {
   padding: 0.7rem 0.8rem;
   color: inherit;
   text-decoration: none;
-  background: #fff;
-  border: 1px solid #e3e8ec;
+  background: var(--ui-bg);
+  border: 1px solid var(--ui-border);
   border-radius: 6px;
 }
 
 .category-grid a:hover {
-  border-color: #b9c4cd;
+  border-color: var(--color-chassis-400);
 }
 
 /* The glyph sizes itself to its box everywhere else, and here there is no box. */
 .category-grid .slot-icon {
   width: 1.5rem;
   height: 1.5rem;
-  color: #55606b;
+  color: var(--ui-text-muted);
 }
 
 /* Everything else about it is .chip-count, which it is worn beside. */
@@ -1254,7 +1245,7 @@ body {
 .browse-filter-label {
   margin: 1.5rem 0 0;
   font-size: 0.9rem;
-  color: #555;
+  color: var(--ui-text-toned);
 }
 
 /* A heading that also links out — "same category" with "see all 49" beside it. */
@@ -1281,14 +1272,14 @@ a.chip {
 }
 
 a.chip:hover {
-  border-color: #b9c4cd;
+  border-color: var(--color-chassis-400);
 }
 
 /* -------------------------------------------------------- chassis page */
 
 .chassis-notes {
   margin: 0.75rem 0 0;
-  color: #444;
+  color: var(--ui-text);
   line-height: 1.6;
 }
 

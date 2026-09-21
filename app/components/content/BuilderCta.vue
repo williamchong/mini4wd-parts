@@ -10,8 +10,8 @@ const localePath = useLocalePath()
 
 <template>
   <p class="builder-cta">
-    <NuxtLink :to="localePath('/')">
+    <UButton size="lg" :to="localePath('/')">
       <slot mdc-unwrap="p" />
-    </NuxtLink>
+    </UButton>
   </p>
 </template>

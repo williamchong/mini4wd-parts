@@ -276,16 +276,20 @@ export default defineNuxtConfig({
   /**
    * Nuxt UI's own dependencies, held to what a prerendered site can serve.
    *
-   * `colorMode` and `fonts` are the module's documented switches for the two
-   * modules it would otherwise register on our behalf. @nuxtjs/color-mode is
-   * off because the stylesheet's every colour is a literal written for white,
-   * and a dark class toggling over it would only be wrong; it comes back with
-   * the tokens. @nuxt/fonts is off because the stack is the system one
+   * `fonts` is the module's documented switch for @nuxt/fonts, which it would
+   * otherwise register on our behalf. Off because the stack is the system one
    * (`--font-sans` in main.css) — there is nothing to download, and the module
    * would go looking at build time.
+   *
+   * `colorMode` is left on, which is to say dark mode is on and follows the
+   * system. It was held off until main.css stopped naming colours and started
+   * naming roles; with that done the page follows by itself. Two things do not
+   * and are pinned instead: the header, which is dark chrome in both modes
+   * rather than a surface, and the plate under a product photo, because every
+   * Tamiya photo is shot on white and needs a light ground whatever the page
+   * is doing.
    */
   ui: {
-    colorMode: false,
     fonts: false
   },
 
