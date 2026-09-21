@@ -155,8 +155,7 @@ useHead(() => ({
       <li>
         <UButton
           size="xs"
-          :color="!selected ? 'primary' : 'neutral'"
-          :variant="!selected ? 'solid' : 'outline'"
+          v-bind="emphasis(!selected)"
           :aria-pressed="!selected"
           @click="select('')"
         >
@@ -167,8 +166,7 @@ useHead(() => ({
       <li v-for="chip in chips" :key="chip.id">
         <UButton
           size="xs"
-          :color="selected === chip.id ? 'primary' : 'neutral'"
-          :variant="selected === chip.id ? 'solid' : 'outline'"
+          v-bind="emphasis(selected === chip.id)"
           :aria-pressed="selected === chip.id"
           @click="select(chip.id)"
         >

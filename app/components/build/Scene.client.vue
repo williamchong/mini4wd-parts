@@ -1462,8 +1462,7 @@ onBeforeUnmount(() => cleanup?.())
     </UButton>
     <UButton
       size="xs"
-      :color="lifted ? 'primary' : 'neutral'"
-      :variant="lifted ? 'solid' : 'outline'"
+      v-bind="emphasis(lifted)"
       class="scene-lift"
       :aria-pressed="lifted"
       @click="lifted = !lifted"
@@ -1472,8 +1471,7 @@ onBeforeUnmount(() => cleanup?.())
     </UButton>
     <UButton
       size="xs"
-      :color="powered ? 'primary' : 'neutral'"
-      :variant="powered ? 'solid' : 'outline'"
+      v-bind="emphasis(powered)"
       class="scene-power"
       :aria-pressed="powered"
       @click="togglePower()"
@@ -1482,8 +1480,7 @@ onBeforeUnmount(() => cleanup?.())
     </UButton>
     <UButton
       size="xs"
-      :color="muted ? 'primary' : 'neutral'"
-      :variant="muted ? 'solid' : 'outline'"
+      v-bind="emphasis(muted)"
       class="scene-mute"
       :aria-pressed="muted"
       @click="toggleMute()"

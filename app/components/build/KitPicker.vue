@@ -96,8 +96,7 @@ const visible = computed(() => matches.value.slice(0, shown.value).map(kit => ({
       <li>
         <UButton
           size="xs"
-          :color="chassisFilter === null ? 'primary' : 'neutral'"
-          :variant="chassisFilter === null ? 'solid' : 'outline'"
+          v-bind="emphasis(chassisFilter === null)"
           :aria-pressed="chassisFilter === null"
           @click="chassisFilter = null"
         >
@@ -108,8 +107,7 @@ const visible = computed(() => matches.value.slice(0, shown.value).map(kit => ({
       <li v-for="chip in chips" :key="chip.id">
         <UButton
           size="xs"
-          :color="chassisFilter === chip.id ? 'primary' : 'neutral'"
-          :variant="chassisFilter === chip.id ? 'solid' : 'outline'"
+          v-bind="emphasis(chassisFilter === chip.id)"
           :aria-pressed="chassisFilter === chip.id"
           @click="chassisFilter = chip.id"
         >

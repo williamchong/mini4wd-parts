@@ -815,8 +815,7 @@ useHead(() => ({
                carries the same change to a reader who cannot see it. -->
           <UButton
             :icon="copied ? 'i-lucide-check' : 'i-lucide-link'"
-            :color="canShare ? 'neutral' : 'primary'"
-            :variant="canShare ? 'outline' : 'solid'"
+            v-bind="emphasis(!canShare)"
             aria-live="polite"
             @click="copyLink"
           >
@@ -873,8 +872,7 @@ useHead(() => ({
                  it is one row's action among many. -->
             <UButton
               size="xs"
-              :color="hasBuild ? 'neutral' : 'primary'"
-              :variant="hasBuild ? 'outline' : 'solid'"
+              v-bind="emphasis(!hasBuild)"
               @click="baseOpen = true"
             >
               {{ hasBuild ? $t('build.swap') : $t('build.pickBase') }}
