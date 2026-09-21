@@ -290,7 +290,22 @@ export default defineNuxtConfig({
    * is doing.
    */
   ui: {
-    fonts: false
+    fonts: false,
+
+    /**
+     * The four colour aliases this site actually names, down from the seven
+     * Nuxt UI generates by default. `secondary` and `info` are used nowhere —
+     * `emphasis` and `severityColor` reach for primary, warning and error, and
+     * main.css reaches for the success scale on the findings box and a swapped
+     * row — and every unused alias is another four variants in every component
+     * theme and another 230-odd selectors in the stylesheet.
+     *
+     * `neutral` is not in this list because it is not one of these aliases; it
+     * is set separately in app.config.ts and always generated.
+     */
+    theme: {
+      colors: ['primary', 'success', 'warning', 'error']
+    }
   },
 
   /**
@@ -303,8 +318,15 @@ export default defineNuxtConfig({
    * The server bundle is left at its default (`local`, which it reports on
    * `nuxt prepare`) rather than turned off, because every route here is
    * prerendered: the icon has to be in the HTML the build writes, not painted
-   * in afterwards. `clientBundle.scan` covers the ones that appear only after
-   * hydration.
+   * in afterwards. The client bundle covers the ones that only appear after
+   * hydration — the dialog's close button, and the tick the copy button swaps
+   * in.
+   *
+   * Listed rather than scanned. `scan: true` read 45 icons off Nuxt UI's
+   * default `ui.icons` map — the names for its calendar, its command palette,
+   * its auth form, none of which this site renders — and put all of them in
+   * every one of the 1,713 pages. Measured 2026-09-22: 1,802 B gz of icon data
+   * against 353 B for the six that are really used.
    */
   icon: {
     provider: 'none',
@@ -313,6 +335,19 @@ export default defineNuxtConfig({
     // that are all bundled locally. Measured 2026-09-22 by grepping the built
     // chunk out of .output/public; off, the chunk does not ship.
     fallbackToApi: false,
-    clientBundle: { scan: true }
+    clientBundle: {
+      scan: false,
+      icons: [
+        'lucide:share-2',
+        'lucide:link',
+        'lucide:check',
+        'lucide:search',
+        // UModal's close button and UBreadcrumb's separator: ours by way of
+        // Nuxt UI's defaults rather than written in a template, so a scan
+        // would find them and a grep of `app/` would not.
+        'lucide:x',
+        'lucide:chevron-right'
+      ]
+    }
   }
 })

@@ -25,6 +25,14 @@ useReturnFocus()
 
 /** Kit first, because most beginners arrive holding a box. */
 const door = ref<'kit' | 'chassis'>('kit')
+
+const { t } = useI18n()
+
+/** Built once: an inline array hands UTabs a new identity on every render. */
+const doors = computed(() => [
+  { label: t('build.door.kit'), value: 'kit' },
+  { label: t('build.door.chassis'), value: 'chassis' }
+])
 </script>
 
 <template>
@@ -50,10 +58,7 @@ const door = ref<'kit' | 'chassis'>('kit')
       <UTabs
         v-model="door"
         :content="false"
-        :items="[
-          { label: $t('build.door.kit'), value: 'kit' },
-          { label: $t('build.door.chassis'), value: 'chassis' }
-        ]"
+        :items="doors"
       />
     </template>
 

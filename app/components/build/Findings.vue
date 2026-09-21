@@ -27,8 +27,13 @@ const buildClass = defineModel<BuildClass>('buildClass', { required: true })
 const emit = defineEmits<{ go: [slotId: string] }>()
 
 const { term } = useTerm()
+const { t } = useI18n()
 
 const clean = computed(() => !props.findings.some(f => f.severity !== 'note'))
+
+/** Built once rather than per render: the panel redraws on every slot change. */
+const classItems = computed(() =>
+  BUILD_CLASSES.map(cls => ({ label: t(`part.class.${cls}`), value: cls })))
 </script>
 
 <template>
@@ -43,7 +48,7 @@ const clean = computed(() => !props.findings.some(f => f.severity !== 'note'))
       v-model="buildClass"
       orientation="horizontal"
       :legend="$t('build.rules.class')"
-      :items="BUILD_CLASSES.map(cls => ({ label: $t(`part.class.${cls}`), value: cls }))"
+      :items="classItems"
       class="findings-class"
     />
 

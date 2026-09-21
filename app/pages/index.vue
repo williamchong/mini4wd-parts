@@ -759,147 +759,161 @@ useHead(() => ({
 </script>
 
 <template>
-  <!--
-    Nuxt UI's provider root sits on this route rather than on app.vue: the
-    three pickers below are the only overlays on the site, and hoisting the
-    providers to every page cost 40.7 KB gz on routes that have none
-    (measured 2026-09-22; the note in app/app.vue).
-  -->
-  <UApp>
-    <div class="build">
-      <!-- 3D first, the list beneath it (§5.4), and both always on screen. The
-           frame reserves the pane's space before the three chunk arrives, so the
-           list does not jump when the canvas appears. Keyed by chassis so a
-           different socket table gets a fresh scene rather than a patched one. -->
-      <div class="scene-frame">
-        <picture v-if="showPoster" class="scene-poster">
-          <source media="(min-width: 640px)" srcset="/images/scene-poster-16x9.webp">
-          <img src="/images/scene-poster-4x3.webp" alt="" width="712" height="534">
-        </picture>
-        <LazyBuildScene
-          v-if="shownChassis && hydrated"
-          :key="shownChassis.id"
-          :chassis="shownChassis.id"
-          :kit-body="kit?.body ?? null"
-          :kit-colours="kit?.colours ?? null"
-          :kit-body-finish="kit?.bodyFinish ?? null"
-          :slots="slots"
-          :parts="partsById"
-          :open-slot-id="openSlotId"
-          @select="pick"
-          @ready="onSceneReady"
-          @power="onScenePower"
-          @mute="onSceneMute"
-        />
-      </div>
-      <p class="scene-hint">
-        {{ hasBuild ? $t('build.scene.hint') : $t('build.scene.hintEmpty') }}
-      </p>
+  <div class="build">
+    <!-- 3D first, the list beneath it (§5.4), and both always on screen. The
+         frame reserves the pane's space before the three chunk arrives, so the
+         list does not jump when the canvas appears. Keyed by chassis so a
+         different socket table gets a fresh scene rather than a patched one. -->
+    <div class="scene-frame">
+      <picture v-if="showPoster" class="scene-poster">
+        <source media="(min-width: 640px)" srcset="/images/scene-poster-16x9.webp">
+        <img src="/images/scene-poster-4x3.webp" alt="" width="712" height="534">
+      </picture>
+      <LazyBuildScene
+        v-if="shownChassis && hydrated"
+        :key="shownChassis.id"
+        :chassis="shownChassis.id"
+        :kit-body="kit?.body ?? null"
+        :kit-colours="kit?.colours ?? null"
+        :kit-body-finish="kit?.bodyFinish ?? null"
+        :slots="slots"
+        :parts="partsById"
+        :open-slot-id="openSlotId"
+        @select="pick"
+        @ready="onSceneReady"
+        @power="onScenePower"
+        @mute="onSceneMute"
+      />
+    </div>
+    <p class="scene-hint">
+      {{ hasBuild ? $t('build.scene.hint') : $t('build.scene.hintEmpty') }}
+    </p>
 
-      <!-- The link is the build's only save and its only way to reach anyone
-           else, so it gets real buttons beside the title rather than a text
-           link. The share sheet leads where the browser has one; copying stays
-           for desktop and for pasting into a forum. -->
-      <div class="build-list-header">
-        <h1 class="build-list-title">{{ $t('build.title') }}</h1>
-        <div v-if="hasBuild" class="build-share-actions">
+    <!-- The link is the build's only save and its only way to reach anyone
+         else, so it gets real buttons beside the title rather than a text
+         link. The share sheet leads where the browser has one; copying stays
+         for desktop and for pasting into a forum. -->
+    <div class="build-list-header">
+      <h1 class="build-list-title">{{ $t('build.title') }}</h1>
+      <div v-if="hasBuild" class="build-share-actions">
+        <UButton
+          v-if="canShare"
+          icon="i-lucide-share-2"
+          @click="shareLink(buildName)"
+        >
+          {{ $t('build.share.send') }}
+        </UButton>
+        <!-- Copy is the primary action only where there is no share sheet to
+             be secondary to. The tick is the whole feedback: `aria-live`
+             carries the same change to a reader who cannot see it. -->
+        <UButton
+          :icon="copied ? 'i-lucide-check' : 'i-lucide-link'"
+          v-bind="emphasis(!canShare)"
+          aria-live="polite"
+          @click="copyLink"
+        >
+          {{ copied ? $t('build.share.copied') : $t('build.share.copy') }}
+        </UButton>
+      </div>
+    </div>
+
+    <BuildFindings
+      v-model:build-class="buildClass"
+      :findings="findings"
+      :has-build="hasBuild"
+      :class-decides="buildClassDecides"
+      :class-label="classLabel"
+      @go="goToSlot"
+    />
+
+    <p v-if="notice" class="build-notice" aria-live="polite">
+      <span>{{ notice }}</span>
+      <UButton variant="link" color="neutral" size="xs" @click="notice = ''">{{ $t('build.dismiss') }}</UButton>
+    </p>
+
+    <ul class="slot-list">
+      <!-- What the car is built on. Once a kit is chosen it is the build's
+           identity, but the chassis stays on screen: the slot profile comes
+           from it, and a beginner who picked a box by its art needs to learn
+           which chassis is inside. -->
+      <li class="slot-row base-row">
+        <div class="slot-label">{{ $t('build.base') }}</div>
+        <div class="slot-entries base-entry">
+          <!-- The chassis, kit or no kit: the first line names the box and the
+               second names the chassis, and this is the one of the two a
+               beginner has never seen. -->
+          <CatalogThumb class="base-thumb" :src="baseThumb" icon="chassis" />
+          <div class="base-text">
+            <template v-if="hasBuild && chassis">
+              <p class="slot-entry" :class="{ fallback: kit && isFallback(kit.names) }">
+                {{ kit ? resolve(kit.names).value : resolve(chassis.names).value }}
+              </p>
+              <p class="build-subtitle">
+                <span>{{ kit ? resolve(chassis.names).value : $t('build.bareChassis') }}</span>
+                <span v-if="gearRatio">{{ gearRatio }}</span>
+                <UBadge v-if="kit?.status === 'limited'" color="warning" variant="subtle" size="sm">
+                  {{ $t('build.kitStatus.limited') }}
+                </UBadge>
+              </p>
+            </template>
+            <p v-else class="slot-empty">{{ $t('build.noBase') }}</p>
+          </div>
+        </div>
+        <div class="slot-actions">
+          <!-- Solid while the bench is empty, because then it is the only
+               thing on the page to do; an outline once there is a car, where
+               it is one row's action among many. -->
           <UButton
-            v-if="canShare"
-            icon="i-lucide-share-2"
-            @click="shareLink(buildName)"
+            size="xs"
+            v-bind="emphasis(!hasBuild)"
+            @click="baseOpen = true"
           >
-            {{ $t('build.share.send') }}
-          </UButton>
-          <!-- Copy is the primary action only where there is no share sheet to
-               be secondary to. The tick is the whole feedback: `aria-live`
-               carries the same change to a reader who cannot see it. -->
-          <UButton
-            :icon="copied ? 'i-lucide-check' : 'i-lucide-link'"
-            v-bind="emphasis(!canShare)"
-            aria-live="polite"
-            @click="copyLink"
-          >
-            {{ copied ? $t('build.share.copied') : $t('build.share.copy') }}
+            {{ hasBuild ? $t('build.swap') : $t('build.pickBase') }}
           </UButton>
         </div>
-      </div>
+        <!-- The boxes the starter guide recommends, one tap from a car, for a
+             reader who has none yet. Only while the bench is empty: once a
+             base is chosen this row is the car's, and Swap is the way out. -->
+        <div v-if="!hasBuild && starterKits.length" class="starter-picks">
+          <p class="starter-heading">
+            {{ $t('build.starter.heading') }}
+            <NuxtLink :to="localePath('/guides/starter')">{{ $t('build.starter.guide') }}</NuxtLink>
+          </p>
+          <ul>
+            <li v-for="entry in starterKits" :key="entry.id">
+              <button type="button" @click="chooseBase(entry.chassis, entry.id, 'starter')">
+                <CatalogThumb :src="thumbnailSrc('kits', entry)" icon="body" />
+                <span class="starter-name">{{ $t(`build.starter.spec.${entry.id}`) }}</span>
+                <span class="part-id">{{ entry.id }}</span>
+              </button>
+            </li>
+          </ul>
+        </div>
+      </li>
 
-      <BuildFindings
-        v-model:build-class="buildClass"
-        :findings="findings"
-        :has-build="hasBuild"
-        :class-decides="buildClassDecides"
-        :class-label="classLabel"
-        @go="goToSlot"
+      <BuildSlotRow
+        v-for="slot in mainSlots"
+        :key="slot.id"
+        :slot="slot"
+        :parts-by-id="partsById"
+        :swappable="hasBuild"
+        :stock-thumb="stockThumbFor(slot)"
+        :copy-from="copies.get(slot.id)?.from"
+        :findings="findingsBySlot.get(slot.id)"
+        :rollers-per-side="rollersPerSide.get(slot.id)"
+        @open="openFromRow(slot.id)"
+        @revert="revertSlot(slot.id)"
+        @copy="copy(slot.id)"
       />
+    </ul>
 
-      <p v-if="notice" class="build-notice" aria-live="polite">
-        <span>{{ notice }}</span>
-        <UButton variant="link" color="neutral" size="xs" @click="notice = ''">{{ $t('build.dismiss') }}</UButton>
-      </p>
-
+    <details v-if="moreSlots.length" class="more-slots" :open="moreOpen" @toggle="onMoreToggle">
+      <summary>
+        {{ moreSummary }}
+      </summary>
       <ul class="slot-list">
-        <!-- What the car is built on. Once a kit is chosen it is the build's
-             identity, but the chassis stays on screen: the slot profile comes
-             from it, and a beginner who picked a box by its art needs to learn
-             which chassis is inside. -->
-        <li class="slot-row base-row">
-          <div class="slot-label">{{ $t('build.base') }}</div>
-          <div class="slot-entries base-entry">
-            <!-- The chassis, kit or no kit: the first line names the box and the
-                 second names the chassis, and this is the one of the two a
-                 beginner has never seen. -->
-            <CatalogThumb class="base-thumb" :src="baseThumb" icon="chassis" />
-            <div class="base-text">
-              <template v-if="hasBuild && chassis">
-                <p class="slot-entry" :class="{ fallback: kit && isFallback(kit.names) }">
-                  {{ kit ? resolve(kit.names).value : resolve(chassis.names).value }}
-                </p>
-                <p class="build-subtitle">
-                  <span>{{ kit ? resolve(chassis.names).value : $t('build.bareChassis') }}</span>
-                  <span v-if="gearRatio">{{ gearRatio }}</span>
-                  <UBadge v-if="kit?.status === 'limited'" color="warning" variant="subtle" size="sm">
-                    {{ $t('build.kitStatus.limited') }}
-                  </UBadge>
-                </p>
-              </template>
-              <p v-else class="slot-empty">{{ $t('build.noBase') }}</p>
-            </div>
-          </div>
-          <div class="slot-actions">
-            <!-- Solid while the bench is empty, because then it is the only
-                 thing on the page to do; an outline once there is a car, where
-                 it is one row's action among many. -->
-            <UButton
-              size="xs"
-              v-bind="emphasis(!hasBuild)"
-              @click="baseOpen = true"
-            >
-              {{ hasBuild ? $t('build.swap') : $t('build.pickBase') }}
-            </UButton>
-          </div>
-          <!-- The boxes the starter guide recommends, one tap from a car, for a
-               reader who has none yet. Only while the bench is empty: once a
-               base is chosen this row is the car's, and Swap is the way out. -->
-          <div v-if="!hasBuild && starterKits.length" class="starter-picks">
-            <p class="starter-heading">
-              {{ $t('build.starter.heading') }}
-              <NuxtLink :to="localePath('/guides/starter')">{{ $t('build.starter.guide') }}</NuxtLink>
-            </p>
-            <ul>
-              <li v-for="entry in starterKits" :key="entry.id">
-                <button type="button" @click="chooseBase(entry.chassis, entry.id, 'starter')">
-                  <CatalogThumb :src="thumbnailSrc('kits', entry)" icon="body" />
-                  <span class="starter-name">{{ $t(`build.starter.spec.${entry.id}`) }}</span>
-                  <span class="part-id">{{ entry.id }}</span>
-                </button>
-              </li>
-            </ul>
-          </div>
-        </li>
-
         <BuildSlotRow
-          v-for="slot in mainSlots"
+          v-for="slot in moreSlots"
           :key="slot.id"
           :slot="slot"
           :parts-by-id="partsById"
@@ -913,97 +927,75 @@ useHead(() => ({
           @copy="copy(slot.id)"
         />
       </ul>
+    </details>
 
-      <details v-if="moreSlots.length" class="more-slots" :open="moreOpen" @toggle="onMoreToggle">
-        <summary>
-          {{ moreSummary }}
-        </summary>
-        <ul class="slot-list">
-          <BuildSlotRow
-            v-for="slot in moreSlots"
-            :key="slot.id"
-            :slot="slot"
-            :parts-by-id="partsById"
-            :swappable="hasBuild"
-            :stock-thumb="stockThumbFor(slot)"
-            :copy-from="copies.get(slot.id)?.from"
-            :findings="findingsBySlot.get(slot.id)"
-            :rollers-per-side="rollersPerSide.get(slot.id)"
-            @open="openFromRow(slot.id)"
-            @revert="revertSlot(slot.id)"
-            @copy="copy(slot.id)"
-          />
-        </ul>
-      </details>
+    <!-- Sits with the slot list it credits rather than in a page footer, so
+         the attribution travels with the content it covers. -->
+    <BuildKitCredit v-if="kit" :kit="kit" />
 
-      <!-- Sits with the slot list it credits rather than in a page footer, so
-           the attribution travels with the content it covers. -->
-      <BuildKitCredit v-if="kit" :kit="kit" />
+    <!-- The pictures are ours to serve but not ours to own: thumbnails we
+         generated from Tamiya's product photos (docs/PLAN.md §6 M1b). Credited
+         on the page that shows them, list and pickers alike, rather than only
+         on a site-wide attribution page. -->
+    <!-- What the site is, for a reader who scrolls past the builder and for a
+         crawler, which only ever sees the empty one: the build lives in the
+         hash. Below the builder so the first screen stays the builder, and
+         open rather than collapsed (docs/PLAN.md §6 M1b). Above the credit,
+         which covers the chassis pictures here too. -->
+    <section class="home-about">
+      <h2>{{ $t('home.title') }}</h2>
+      <p>{{ $t('home.intro') }}</p>
+      <h3>{{ $t('home.steps.title') }}</h3>
+      <ol class="home-steps">
+        <li>{{ $t('home.steps.pick') }}</li>
+        <li>{{ $t('home.steps.swap') }}</li>
+        <li>{{ $t('home.steps.check') }}</li>
+      </ol>
 
-      <!-- The pictures are ours to serve but not ours to own: thumbnails we
-           generated from Tamiya's product photos (docs/PLAN.md §6 M1b). Credited
-           on the page that shows them, list and pickers alike, rather than only
-           on a site-wide attribution page. -->
-      <!-- What the site is, for a reader who scrolls past the builder and for a
-           crawler, which only ever sees the empty one: the build lives in the
-           hash. Below the builder so the first screen stays the builder, and
-           open rather than collapsed (docs/PLAN.md §6 M1b). Above the credit,
-           which covers the chassis pictures here too. -->
-      <section class="home-about">
-        <h2>{{ $t('home.title') }}</h2>
-        <p>{{ $t('home.intro') }}</p>
-        <h3>{{ $t('home.steps.title') }}</h3>
-        <ol class="home-steps">
-          <li>{{ $t('home.steps.pick') }}</li>
-          <li>{{ $t('home.steps.swap') }}</li>
-          <li>{{ $t('home.steps.check') }}</li>
-        </ol>
+      <h2>{{ $t('home.chassis.title') }}</h2>
+      <p>{{ $t('home.chassis.intro') }}</p>
+      <ChassisLinkList :chassis="homeChassis" />
 
-        <h2>{{ $t('home.chassis.title') }}</h2>
-        <p>{{ $t('home.chassis.intro') }}</p>
-        <ChassisLinkList :chassis="homeChassis" />
+      <h2>{{ $t('home.parts.title') }}</h2>
+      <p>{{ $t('home.parts.intro') }}</p>
+      <CategoryLinkGrid :categories="homeCategories" />
+      <p>
+        <NuxtLink :to="localePath('/parts')">{{ $t('home.parts.all') }}</NuxtLink>
+      </p>
 
-        <h2>{{ $t('home.parts.title') }}</h2>
-        <p>{{ $t('home.parts.intro') }}</p>
-        <CategoryLinkGrid :categories="homeCategories" />
-        <p>
-          <NuxtLink :to="localePath('/parts')">{{ $t('home.parts.all') }}</NuxtLink>
-        </p>
+      <h2>{{ $t('home.faq.title') }}</h2>
+      <template v-for="key in FAQ" :key="key">
+        <h3>{{ $t(`home.faq.${key}.q`) }}</h3>
+        <p>{{ $t(`home.faq.${key}.a`) }}</p>
+      </template>
+    </section>
 
-        <h2>{{ $t('home.faq.title') }}</h2>
-        <template v-for="key in FAQ" :key="key">
-          <h3>{{ $t(`home.faq.${key}.q`) }}</h3>
-          <p>{{ $t(`home.faq.${key}.a`) }}</p>
-        </template>
-      </section>
+    <ImageCredit />
 
-      <ImageCredit />
+    <LazyBuildBasePicker
+      v-if="baseOpen"
+      :kits="catalog?.kits ?? []"
+      :chassis="catalog?.chassis ?? []"
+      @select="chooseBase"
+      @close="closeBase"
+    />
 
-      <LazyBuildBasePicker
-        v-if="baseOpen"
-        :kits="catalog?.kits ?? []"
-        :chassis="catalog?.chassis ?? []"
-        @select="chooseBase"
-        @close="closeBase"
-      />
+    <LazyBuildSlotPicker
+      v-if="pendingSlots.length"
+      :slots="pendingSlots"
+      :part-name="pendingName"
+      @select="place"
+      @close="cancelPending"
+    />
 
-      <LazyBuildSlotPicker
-        v-if="pendingSlots.length"
-        :slots="pendingSlots"
-        :part-name="pendingName"
-        @select="place"
-        @close="cancelPending"
-      />
-
-      <LazyBuildPartPicker
-        v-if="openSlot"
-        :candidates="candidates"
-        :slot-type="openSlot.type"
-        :slot-label="openSlotLabel"
-        :build-class="buildClass"
-        @select="choose"
-        @close="openSlotId = null"
-      />
-    </div>
-  </UApp>
+    <LazyBuildPartPicker
+      v-if="openSlot"
+      :candidates="candidates"
+      :slot-type="openSlot.type"
+      :slot-label="openSlotLabel"
+      :build-class="buildClass"
+      @select="choose"
+      @close="openSlotId = null"
+    />
+  </div>
 </template>
