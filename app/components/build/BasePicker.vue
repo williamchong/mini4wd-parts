@@ -38,28 +38,23 @@ const door = ref<'kit' | 'chassis'>('kit')
          asked, and putting them beside the title would make it a subtitle of
          a question it is really the answer to. -->
     <template #header>
-      <!-- Deliberately not role="tablist"/"tab": that pattern promises
-           roving-tabindex and arrow-key selection, which these plain buttons
-           do not implement. Two toggle buttons is what this actually is, so
-           `aria-pressed` says so — the same treatment the chassis chips use. -->
-      <div class="picker-header door-toggle">
-        <button
-          type="button"
-          :aria-pressed="door === 'kit'"
-          :class="{ active: door === 'kit' }"
-          @click="door = 'kit'"
-        >
-          {{ $t('build.door.kit') }}
-        </button>
-        <button
-          type="button"
-          :aria-pressed="door === 'chassis'"
-          :class="{ active: door === 'chassis' }"
-          @click="door = 'chassis'"
-        >
-          {{ $t('build.door.chassis') }}
-        </button>
-      </div>
+      <!--
+        A real tablist at last. These two were `aria-pressed` toggle buttons
+        with a comment saying they were deliberately not tabs, because the tab
+        pattern promises roving tabindex and arrow-key selection and two plain
+        buttons implement neither. `UTabs` implements both, so the promise can
+        be made. `:content="false"` because the panels are the body below —
+        which door is open decides what the dialog is showing, not what sits
+        under a strip inside it.
+      -->
+      <UTabs
+        v-model="door"
+        :content="false"
+        :items="[
+          { label: $t('build.door.kit'), value: 'kit' },
+          { label: $t('build.door.chassis'), value: 'chassis' }
+        ]"
+      />
       </template>
 
       <template #body>

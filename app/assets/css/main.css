@@ -454,31 +454,6 @@ body {
 
 /* Kit picker */
 
-.door-toggle {
-  display: inline-flex;
-  margin-bottom: 1.25rem;
-  border: 1px solid #d8dee4;
-  border-radius: 6px;
-  overflow: hidden;
-}
-
-.door-toggle button {
-  padding: 0.5rem 1rem;
-  font: inherit;
-  background: #fff;
-  border: none;
-  cursor: pointer;
-}
-
-.door-toggle button + button {
-  border-inline-start: 1px solid #d8dee4;
-}
-
-.door-toggle button.active {
-  background: #2c3e50;
-  color: #fff;
-}
-
 .chassis-chips {
   display: flex;
   flex-wrap: wrap;
@@ -488,23 +463,10 @@ body {
   list-style: none;
 }
 
+/* A chip is a pill, which is the one thing the button component does not offer
+   as a variant. */
 .chassis-chips button {
-  display: flex;
-  gap: 0.35rem;
-  align-items: baseline;
-  padding: 0.3rem 0.7rem;
-  font: inherit;
-  font-size: 0.85em;
-  background: #fff;
-  border: 1px solid #d8dee4;
   border-radius: 999px;
-  cursor: pointer;
-}
-
-.chassis-chips button.active {
-  background: #2c3e50;
-  border-color: #2c3e50;
-  color: #fff;
 }
 
 .chip-count {
@@ -753,12 +715,6 @@ body {
 /* Part picker */
 
 /* The kit and chassis dialog: a grid of photo rows rather than one column. */
-/* In the dialog header the toggle is the header, so it carries no gap of its
-   own; everywhere else it sits above a list and needs one. */
-.picker-header .door-toggle {
-  margin-bottom: 0;
-}
-
 .picker-search {
   display: block;
   margin: 0 0 0.5rem;
@@ -1085,14 +1041,6 @@ body {
   flex-wrap: wrap;
   gap: 0.5rem 0.75rem;
   align-items: center;
-}
-
-.findings-class .door-toggle {
-  margin-bottom: 0;
-}
-
-.findings-class .door-toggle button {
-  padding: 0.35rem 0.75rem;
 }
 
 .findings-ok {

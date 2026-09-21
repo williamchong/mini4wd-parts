@@ -35,23 +35,18 @@ const clean = computed(() => !props.findings.some(f => f.severity !== 'note'))
   <section class="build-findings">
     <!-- Only while the class can change a finding: a toggle whose every
          position gives the same answer asks the reader a question for nothing. -->
-    <div v-if="classDecides" class="findings-class">
-      <span>{{ $t('build.rules.class') }}</span>
-      <!-- Toggle buttons with aria-pressed, the same treatment as the base
-           picker's two doors, for the same reason. -->
-      <div class="door-toggle">
-        <button
-          v-for="cls in BUILD_CLASSES"
-          :key="cls"
-          type="button"
-          :aria-pressed="buildClass === cls"
-          :class="{ active: buildClass === cls }"
-          @click="buildClass = cls"
-        >
-          {{ $t(`part.class.${cls}`) }}
-        </button>
-      </div>
-    </div>
+    <!-- One choice among three, which is a radio group and never was a row of
+         toggle buttons: only one class can be in force, and the buttons were
+         spelling that out with `aria-pressed` on each rather than letting the
+         grouping say it once. Arrow keys move between the classes now. -->
+    <URadioGroup
+      v-if="classDecides"
+      v-model="buildClass"
+      orientation="horizontal"
+      :legend="$t('build.rules.class')"
+      :items="BUILD_CLASSES.map(cls => ({ label: $t(`part.class.${cls}`), value: cls }))"
+      class="findings-class"
+    />
 
     <template v-if="hasBuild">
       <p v-if="clean" class="findings-ok">

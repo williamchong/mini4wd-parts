@@ -88,28 +88,34 @@ const visible = computed(() => matches.value.slice(0, shown.value).map(kit => ({
       :placeholder="$t('build.searchKits')"
     />
 
+    <!-- Filters, so they stay buttons carrying `aria-pressed` rather than
+         becoming tabs: picking one narrows the list below, it does not swap
+         the panel. The count keeps its tabular figures so the row of chips
+         does not jitter as the numbers change. -->
     <ul class="chassis-chips">
       <li>
-        <button
-          type="button"
+        <UButton
+          size="xs"
+          :color="chassisFilter === null ? 'primary' : 'neutral'"
+          :variant="chassisFilter === null ? 'solid' : 'outline'"
           :aria-pressed="chassisFilter === null"
-          :class="{ active: chassisFilter === null }"
           @click="chassisFilter = null"
         >
           {{ $t('build.chassisAll') }}
           <span class="chip-count">{{ kits.length }}</span>
-        </button>
+        </UButton>
       </li>
       <li v-for="chip in chips" :key="chip.id">
-        <button
-          type="button"
+        <UButton
+          size="xs"
+          :color="chassisFilter === chip.id ? 'primary' : 'neutral'"
+          :variant="chassisFilter === chip.id ? 'solid' : 'outline'"
           :aria-pressed="chassisFilter === chip.id"
-          :class="{ active: chassisFilter === chip.id }"
           @click="chassisFilter = chip.id"
         >
           {{ chip.label }}
           <span class="chip-count">{{ chip.count }}</span>
-        </button>
+        </UButton>
       </li>
     </ul>
 
