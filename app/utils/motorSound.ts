@@ -5,8 +5,8 @@
  * A recording of a real can motor would be tens of KB and would still be
  * wrong three ways: it could not follow the spin-up, it could not coast
  * down with the wheels, and it could not change pitch when the reader swaps
- * a Torque-Tuned for a Hyper-Dash. Six oscillators and a band of noise cost
- * 934 bytes gzipped and follow all three for free, because every frequency
+ * a Torque-Tuned for a Hyper-Dash. Six oscillators and a shelf of noise cost
+ * 930 bytes gzipped and follow all three for free, because every frequency
  * here is a multiple of one number — the motor's turns per second.
  *
  * What a 130-size can actually puts in the air, and what each layer is here:
@@ -17,18 +17,38 @@
  * | the body of it     | 3-pole commutation, 3× a turn   | order `POLES`     |
  * | the piercing "eee" | pinion teeth passing the crown  | order `teeth`, ×2 |
  * | and the top of it  | that mesh's own harmonics       | orders ×2 and ×3  |
- * | the rush under it  | brushes and bearings            | bandpassed noise  |
+ * | the rush over it   | brushes, bearings, the track    | tilted noise      |
  *
  * **The noise is the loudest layer, and that is the whole shape of it.** A
- * spectrum taken off a running car (owner, 2026-09-21) is a haystack, not a
- * chord: broadband energy humped across 1–3 kHz over a hard knee, with the
- * tones standing only about 10 dB above their own neighbourhood and a
- * shoulder near 200 Hz some 13 dB below the peak. Two earlier cuts had it
- * backwards — loud oscillators over a thin band of noise — and read as a
- * synthesiser playing a chord, which is what an organ sounds like and not
- * what a motor does. So the levels below are noise first and tones as spikes
- * on top of it, and every band from 150 Hz to 6 kHz now sits within a few dB
- * of that capture.
+ * spectrum taken off a running car is a haystack, not a chord — and the
+ * second capture (owner, 2026-09-21, replacing the first one taken the same
+ * day) is a far brighter haystack than the first: its grass climbs about
+ * 30 dB from 1.5 kHz to a peak at 8 kHz and falls away again above 9, the
+ * shoulder below 1 kHz sits some 29 dB under that peak, and the four peaks
+ * that stand clear of the grass do so by 9 to 23 dB. The first capture read
+ * the other way round — humped at 1–3 kHz over a 4 kHz knee, with only 13 dB
+ * between the 200 Hz shoulder and the peak — and what came out of it was a
+ * buzz, where a car on a track is mostly hiss. So the rush is no longer a
+ * band sitting around the mesh: it is flat noise with everything under
+ * 3.3 kHz taken off it. Rendered and measured back, the graph below sits
+ * 1.8 dB RMS from that capture across 100 Hz–12 kHz, and its own hump tops
+ * out at 7989 Hz against the capture's 8000.
+ *
+ * Two things in that capture are the recording and not the car, so nothing
+ * here models them: a cliff at 13 kHz, which is the lossy codec the system
+ * audio came through, and the exact depth of 10–12 kHz, which that cliff
+ * drags down with it.
+ *
+ * Moving that much energy up two octaves is a good way to make a pane louder
+ * without meaning to, so the levels were re-solved to the same **A-weighted**
+ * RMS the previous tuning had, not the same peak. Unweighted it is 1.9 dB
+ * hotter, which is the tilt, not a level change.
+ *
+ * Every number below was fitted against `getFrequencyResponse` on the real
+ * nodes rather than against the textbook formulas, which matters more than it
+ * sounds: **for `lowpass` and `highpass` the Web Audio `Q` is in decibels of
+ * resonance, not a filter Q.** Fitting against a linear Q put the corner an
+ * octave wrong and cost 5 dB across the band the whine sits in.
  *
  * Nothing here is allowed to be loud, and nothing here may start on its own:
  * `start()` must be called from the click that switched the car on, or Safari
@@ -46,32 +66,49 @@ const POLES = 3
 const PEAK = 0.32
 
 /**
- * Where the captured spectrum falls off a cliff. Two Butterworth poles here
- * put 5 kHz 8 dB down and 8 kHz 20 dB down, which is what the capture reads;
- * one pole at any corner left the top two octaves hissing.
+ * Where the captured spectrum turns over. The hump's own top lands a little
+ * under it, at 7989 Hz against the capture's 8000, because the climb below
+ * and the fall above meet there — there is no plateau in it to place.
  */
-const KNEE_HZ = 4000
+const KNEE_HZ = 9000
 
 /**
  * The mesh frequency the capture was taken at, near enough — a stock can
- * through a 6-tooth pinion. `KNEE_HZ` and `RUSH_HZ` are both quoted against
+ * through a 6-tooth pinion. `KNEE_HZ` and `RUSH_TILT_HZ` are quoted against
  * it, and both ride up and down with the motor in the car rather than sitting
- * at absolute hertz: pinned, a 4 kHz knee filtered away the very difference
+ * at absolute hertz: pinned, the knee filtered away the very difference
  * between a Torque-Tuned and a Hyper-Dash that the catalog is here to give —
  * 44% more rpm moved the spectral centroid 4%. Riding, the whole haystack
  * shifts together and keeps the shape measured above. `load` is in it too, so
  * the spin-up brightens as it rises, the way a real one does.
+ *
+ * The second capture leaves it where the first one put it: its strongest
+ * narrow whine reads at about 1.5 kHz, which is 1300 to the accuracy a log
+ * frequency axis can be read off a screenshot, and moving the anchor would
+ * silently rescale every shaped frequency above.
  */
 const REF_MESH_HZ = 1300
 
 /**
- * The centre and width of the rush. A low Q on purpose: this is the haystack
- * the tones sit on, so it wants to be a hump across 1–3 kHz rather than a band.
+ * The rush is flat noise with its bottom taken off — one low shelf, this far
+ * down below this corner, under the knee above — and not a band. A bandpass
+ * cannot draw the captured shape at all: its skirts fall 6 dB an octave on
+ * both sides, where the capture wants a 30 dB climb over 1.5–8 kHz standing
+ * on a floor that is flat from 1 kHz down. Fitted against the same capture,
+ * the shelf lands at 2.1 dB RMS and the bandpass that shipped before it at 43.
+ *
+ * A shelf's transition is wide — an octave below the corner this one is at
+ * −24.7 dB, still 4 dB short of the bottom of its own cut — and that width
+ * is doing the work, because the capture's climb takes two and a half
+ * octaves.
  */
-const RUSH_HZ = 1500
-const RUSH_Q = 0.42
-/** …and its level, which is why it is the layer doing the work. */
-const RUSH_LEVEL = 1.9
+const RUSH_TILT_HZ = 3300
+const RUSH_TILT_DB = -29
+/**
+ * …and its level, which is why it is the layer doing the work: the rush
+ * carries 22 dB more of the output than all six oscillators put together.
+ */
+const RUSH_LEVEL = 2.35
 
 /**
  * How quickly a parameter follows `set`. A time constant rather than a ramp,
@@ -107,26 +144,46 @@ export type MotorSound = ReturnType<typeof createMotorSound>
  */
 export function createMotorSound(teeth: number) {
   const LAYERS: readonly Layer[] = [
-    // Levels read straight off the capture, as decibels under its own peak:
-    // about 13 under at the armature's turn, 4 at the commutation, level at
-    // the mesh, and 6 under again by its third harmonic. They are spikes on
-    // the hump, not voices in a chord.
-    { order: 1, level: 0.035, type: 'sawtooth', detune: 0, wobble: false },
-    { order: POLES, level: 0.075, type: 'sawtooth', detune: 0, wobble: false },
-    { order: teeth, level: 0.10, type: 'triangle', detune: 0, wobble: true },
+    // Levels solved from the capture, each one set so its spike stands as far
+    // over the grass beside it as the capture's does — 6 dB at the armature's
+    // turn, 20 at the commutation, 20 across the pair at the mesh, 8 at its
+    // second harmonic and 14 at its third. They are spikes on the hump, not
+    // voices in a chord, and the numbers look small because the shelf has
+    // already taken 29 dB off the hump under them.
+    //
+    // The first and fourth sit under the 9 dB the capture's faintest peak
+    // stands at, because the capture shows no peak at those two frequencies
+    // at all: they are held down in the grass on purpose.
+    //
+    // The capture's own peaks fall at roughly 500 Hz, 1.5 kHz, 4.2 kHz and
+    // 8 kHz, and the top two are not harmonics of one series — which is the
+    // argument for leaving the top of the spectrum to the rush rather than
+    // adding oscillators to chase peaks that no gear in the car explains.
+    { order: 1, level: 0.0047, type: 'sawtooth', detune: 0, wobble: false },
+    { order: POLES, level: 0.024, type: 'sawtooth', detune: 0, wobble: false },
+    { order: teeth, level: 0.021, type: 'triangle', detune: 0, wobble: true },
     // Nine cents apart, so the two whines beat a few times a second the way a
     // real pinion and crown do. In tune they were one synthesiser tone.
-    { order: teeth, level: 0.075, type: 'triangle', detune: 9, wobble: true },
-    { order: teeth * 2, level: 0.095, type: 'triangle', detune: 0, wobble: true },
-    { order: teeth * 3, level: 0.05, type: 'triangle', detune: -7, wobble: true }
+    { order: teeth, level: 0.018, type: 'triangle', detune: 9, wobble: true },
+    { order: teeth * 2, level: 0.016, type: 'triangle', detune: 0, wobble: true },
+    { order: teeth * 3, level: 0.068, type: 'triangle', detune: -7, wobble: true }
   ]
 
   let ctx: AudioContext | null = null
   /** Set once `ctx` is, and only read through it. */
   let master: GainNode
   let knee: BiquadFilterNode[] = []
-  let noiseBand: BiquadFilterNode
+  let noiseTilt: BiquadFilterNode
   let noiseGain: GainNode
+  /**
+   * How far up the two shaped corners are allowed to ride, which cannot be a
+   * constant: a corner above Nyquist is not an error, it is silently pinned
+   * there — and a lowpass pinned at Nyquist passes everything, while this
+   * shelf pinned there cuts the whole band by `RUSH_TILT_DB`. A headset in
+   * call mode opens the context at 16 kHz, where a fixed 16000 would do both
+   * at once and leave a thin, quiet motor. Read off the rate we actually got.
+   */
+  let ceiling = 0
   let tones: { osc: OscillatorNode; order: number }[] = []
   let idle: ReturnType<typeof setTimeout> | undefined
   /** No Web Audio in this browser, or it refused a context. Stay silent for good. */
@@ -145,24 +202,28 @@ export function createMotorSound(teeth: number) {
 
     master = ctx.createGain()
     master.gain.value = 0
+    ceiling = ctx.sampleRate * 0.45
 
     // Two lowpasses rather than one, because the knee in the captured spectrum
     // falls at about 24 dB an octave and a single biquad manages 12. Below,
-    // one highpass under the armature's own turn: it keeps the 200 Hz shoulder
-    // the capture shows while dropping the rumble beneath it, which is boom on
-    // a laptop and nothing at all on a phone, and which slides toward DC as
-    // the car coasts down.
+    // one highpass at the foot of the shoulder rather than under it: 100 Hz
+    // comes through 1.5 dB down and 60 Hz 11 dB down, which is about how the
+    // capture itself falls away below the shoulder. What goes with it is the
+    // rumble beneath that — boom on a laptop, nothing at all on a phone, and
+    // sliding toward DC anyway as the car coasts down.
     knee = [ctx.createBiquadFilter(), ctx.createBiquadFilter()]
     for (const filter of knee) {
       filter.type = 'lowpass'
       filter.frequency.value = KNEE_HZ
-      // Butterworth. The 1 a biquad defaults to puts a 2 dB bump right on the
-      // corner, which is where the mesh harmonics sit.
+      // Decibels of resonance, not a filter Q — see the note at the top —
+      // so this is 0.7 dB of lift right on the corner, which is where the
+      // mesh harmonics sit, and the 1 a biquad defaults to is barely more.
+      // Neither is audible; what shapes the top is the pair, not the Q.
       filter.Q.value = Math.SQRT1_2
     }
     const highpass = ctx.createBiquadFilter()
     highpass.type = 'highpass'
-    highpass.frequency.value = 180
+    highpass.frequency.value = 120
     master.connect(knee[0]!).connect(knee[1]!).connect(highpass).connect(ctx.destination)
 
     // One slow wobble, shared: a real motor never holds a pitch exactly, and
@@ -187,21 +248,21 @@ export function createMotorSound(teeth: number) {
       tones.push({ osc, order: layer.order })
     }
 
-    // A second of white noise on loop, humped where the capture humps. This is
-    // the difference between a motor and a chord, and it carries more of the
-    // level than every oscillator above put together.
+    // A second of white noise on loop, tilted the way the capture tilts. This
+    // is the difference between a motor and a chord, and it carries more of
+    // the level than every oscillator above put together.
     const noise = ctx.createBufferSource()
     const buffer = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate)
     const channel = buffer.getChannelData(0)
     for (let i = 0; i < channel.length; i++) channel[i] = Math.random() * 2 - 1
     noise.buffer = buffer
     noise.loop = true
-    noiseBand = ctx.createBiquadFilter()
-    noiseBand.type = 'bandpass'
-    noiseBand.Q.value = RUSH_Q
+    noiseTilt = ctx.createBiquadFilter()
+    noiseTilt.type = 'lowshelf'
+    noiseTilt.gain.value = RUSH_TILT_DB
     noiseGain = ctx.createGain()
     noiseGain.gain.value = 0
-    noise.connect(noiseBand).connect(noiseGain).connect(master)
+    noise.connect(noiseTilt).connect(noiseGain).connect(master)
     noise.start()
 
     return ctx
@@ -251,8 +312,9 @@ export function createMotorSound(teeth: number) {
       // 1 at the speed the capture was taken at, and what the shaped
       // frequencies are quoted in.
       const scale = (rev * teeth) / REF_MESH_HZ
-      for (const filter of knee) filter.frequency.setTargetAtTime(clamp(KNEE_HZ * scale, 300, 12000), now, FOLLOW_S)
-      noiseBand.frequency.setTargetAtTime(clamp(RUSH_HZ * scale, 200, 9000), now, FOLLOW_S)
+      const kneeHz = clamp(KNEE_HZ * scale, 800, Math.min(16000, ceiling))
+      for (const filter of knee) filter.frequency.setTargetAtTime(kneeHz, now, FOLLOW_S)
+      noiseTilt.frequency.setTargetAtTime(clamp(RUSH_TILT_HZ * scale, 400, Math.min(9000, ceiling)), now, FOLLOW_S)
       // Squared against the master below it: the rush is what comes up as the
       // car reaches speed, rather than being there through the whole spin-up.
       noiseGain.gain.setTargetAtTime(RUSH_LEVEL * load, now, FOLLOW_S)
