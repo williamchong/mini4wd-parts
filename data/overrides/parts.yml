@@ -225,6 +225,31 @@
     roller-rear: ['15526']
     damper: ['15526']      # アジャストマスダンパー(2.5g)4個＋スタビボール
 
+# The two side mass damper sets are not a `bundle`, but they are sold the same
+# way: Tamiya's spec block for 15459 reads 「FRP製サイドプレート×2､マスダンパー×4､
+# スタビポール×4」 and 15490's 「FRPプレート2枚とマスダンパースクエア…2個」, so each
+# box is two rows — the weights, and the side stays they hang from. The AR
+# starter pack's own photo shows those plates bolted along both flanks. The
+# plates have no SKU of their own, so the set stands in that row as a First Try
+# set does, and `slots` follows the keys, which is also what puts them in the
+# side-stay picker.
+#
+# These two are the mass dampers that are not drawn brass. Standing in two rows,
+# each has one colour for both, and the FRP side plate is a slab down the whole
+# flank where the weights hanging off it are small blocks — brass read as a gold
+# plank on the car. The weights keep their metal finish, which is what tells
+# them from the plate.
+'15459': # ARシャーシ サイドマスダンパーセット
+  colours: { primary: '#3a3d42' }
+  contents:
+    damper: ['15459']
+    side-stay: ['15459']
+'15490': # MAシャーシ サイドマスダンパーセット
+  colours: { primary: '#3a3d42' }
+  contents:
+    damper: ['15490']
+    side-stay: ['15490']
+
 # --- Colours ---------------------------------------------------------------
 # What each part is drawn in (shared/catalog/schema.ts `partColours`). The
 # generator reads a colour from the name, the wiki variant or the material;
@@ -241,9 +266,8 @@
 '15401': { colours: { primary: '#c9a24a' } }  # マスダンパーセット(ヘビー)
 '15427': { colours: { primary: '#c9a24a' } }  # マスダンパー スクエア 6×6
 '15428': { colours: { primary: '#c9a24a' } }  # マスダンパー スクエア 8×8
-'15459': { colours: { primary: '#c9a24a' } }  # ARシャーシ サイドマスダンパー
+# 15459 and 15490 are in their own entries above, where their contents are.
 '15478': { colours: { primary: '#c9a24a' } }  # ボールリンクマスダンパー
-'15490': { colours: { primary: '#c9a24a' } }  # MAシャーシ サイドマスダンパー
 '15501': { colours: { primary: '#c9a24a' } }  # スリムマスダンパー
 '15515': { colours: { primary: '#c9a24a' } }  # スクエア ショート 6x6
 '15517': { colours: { primary: '#c9a24a' } }  # スクエア ショート 8x8

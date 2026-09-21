@@ -91,7 +91,10 @@
     front-stay: [{ partId: '15451', source: override }]
     rear-stay: [{ partId: '15452', source: override }]
     brake: [{ partId: '15458', source: override }]
+    # The same set fills two rows: its four weights and the two FRP side plates
+    # they hang from, both on the car in Tamiya's photo of this box.
     damper: [{ partId: '15459', source: override }]           # ARシャーシ サイドマスダンパーセット
+    side-stay: [{ partId: '15459', source: override }]
 '18710':  # スターターパックFM-A バランスタイプ (ラウディーブル)
   stockLoadout:
     motor: [{ partId: '15486', source: override }]            # アトミックチューン2モーター
@@ -128,7 +131,14 @@
     propeller-shaft: [{ partId: '15205', source: override }]  # 1.4mm中空軽量プロペラシャフト
     front-stay: [{ partId: '15451', source: override }]
     rear-stay: [{ partId: '15518', source: override }]        # FRPリヤブレーキステーセット
-    damper: [{ partId: '15459', source: override }]
+    # The wiki calls this box's weights the AR side mass damper set, and the
+    # photo says otherwise: they are rounded blocks bolted to the VZ's own side
+    # stays, not that set's bowl and cylinder weights on its FRP side plates,
+    # which are nowhere on the car. Tamiya's own copy says only マスダンパー, so
+    # the row says that and names no item number.
+    damper:
+      - label: { ja: マスダンパー, en: Mass damper, zh-HK: 制震器 }
+        source: override
   # Its A parts are clear yellow; the six 13mm rollers in the box are black.
   colours: { roller: '#1f2124' }
 

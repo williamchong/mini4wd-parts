@@ -11,8 +11,14 @@ seriesLabel: ミニ四駆グレードアップパーツ
 category: mass-damper
 categorySource: derived
 slots:
+  - side-stay
   - damper
 isCarPart: true
+contents:
+  damper:
+    - "15490"
+  side-stay:
+    - "15490"
 chassisCompat:
   include:
     - ma
@@ -27,7 +33,7 @@ classLegality:
   source: derived
 specs: {}
 colours:
-  primary: "#c9a24a"
+  primary: "#3a3d42"
   source: override
 priceJpy: 682
 priceJpyExTax: 620

@@ -58,6 +58,9 @@ stockLoadout:
   damper:
     - partId: "15459"
       source: override
+  side-stay:
+    - partId: "15459"
+      source: override
 loadoutSource: fandom
 loadoutSourceTitle: Mini 4WD Starter Pack AR Speed Spec
 colours:

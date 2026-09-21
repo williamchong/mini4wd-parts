@@ -57,7 +57,10 @@ stockLoadout:
     - partId: "15518"
       source: override
   damper:
-    - partId: "15459"
+    - label:
+        ja: マスダンパー
+        en: Mass damper
+        zh-HK: 制震器
       source: override
 loadoutSource: fandom
 loadoutSourceTitle: Neo-VQS Advanced Pack
