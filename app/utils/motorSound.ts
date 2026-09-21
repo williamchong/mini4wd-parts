@@ -6,7 +6,7 @@
  * wrong three ways: it could not follow the spin-up, it could not coast
  * down with the wheels, and it could not change pitch when the reader swaps
  * a Torque-Tuned for a Hyper-Dash. Six oscillators and a shelf of noise cost
- * 930 bytes gzipped and follow all three for free, because every frequency
+ * 949 bytes gzipped and follow all three for free, because every frequency
  * here is a multiple of one number — the motor's turns per second.
  *
  * What a 130-size can actually puts in the air, and what each layer is here:
@@ -17,9 +17,9 @@
  * | the body of it     | 3-pole commutation, 3× a turn   | order `POLES`     |
  * | the piercing "eee" | pinion teeth passing the crown  | order `teeth`, ×2 |
  * | and the top of it  | that mesh's own harmonics       | orders ×2 and ×3  |
- * | the rush over it   | brushes, bearings, the track    | tilted noise      |
+ * | the rush under it  | brushes, bearings, the track    | tilted noise      |
  *
- * **The noise is the loudest layer, and that is the whole shape of it.** A
+ * **The shape of the rush is measured; how much of it there is, is not.** A
  * spectrum taken off a running car is a haystack, not a chord — and the
  * second capture (owner, 2026-09-21, replacing the first one taken the same
  * day) is a far brighter haystack than the first: its grass climbs about
@@ -30,9 +30,16 @@
  * between the 200 Hz shoulder and the peak — and what came out of it was a
  * buzz, where a car on a track is mostly hiss. So the rush is no longer a
  * band sitting around the mesh: it is flat noise with everything under
- * 3.3 kHz taken off it. Rendered and measured back, the graph below sits
- * 1.8 dB RMS from that capture across 100 Hz–12 kHz, and its own hump tops
- * out at 7989 Hz against the capture's 8000.
+ * 3.3 kHz taken off it. Rendered and measured back, that shape sits 1.8 dB
+ * RMS from the capture across 100 Hz–12 kHz, and its hump tops out at
+ * 7989 Hz against the capture's 8000.
+ *
+ * Its level is the owner's ear and not the capture — see `RUSH_LEVEL`. Set
+ * where the capture reads, the pane made a wind noise; what ships is 27 dB
+ * under that, which leaves the rush about 5 dB *below* the six oscillators
+ * rather than 22 dB above them. The measurement settles what the noise
+ * sounds like, and a person settles how much of it belongs in a pane that
+ * somebody is reading a parts list next to.
  *
  * Two things in that capture are the recording and not the car, so nothing
  * here models them: a cliff at 13 kHz, which is the lossy codec the system
@@ -40,9 +47,12 @@
  * drags down with it.
  *
  * Moving that much energy up two octaves is a good way to make a pane louder
- * without meaning to, so the levels were re-solved to the same **A-weighted**
- * RMS the previous tuning had, not the same peak. Unweighted it is 1.9 dB
- * hotter, which is the tilt, not a level change.
+ * without meaning to, so the levels were first solved to the same
+ * **A-weighted** RMS the previous tuning had, not the same peak. Taking the
+ * rush down afterwards took most of that level with it, because the rush was
+ * most of it — so `PEAK` carries the difference and the pane comes out at the
+ * A-weighted level it has had all along. What the owner changed is the
+ * balance between the two layers, not the volume of the pair.
  *
  * Every number below was fitted against `getFrequencyResponse` on the real
  * nodes rather than against the textbook formulas, which matters more than it
@@ -62,8 +72,15 @@ const POLES = 3
  * Master gain at full speed. A web page is not a race track — but the first
  * pass at 0.16 was so far under the rest of the page that the switch read as
  * broken on a laptop speaker.
+ *
+ * It is above 1 now, and only because everything under it got small: the rush
+ * used to carry most of the output and no longer does. This is what puts the
+ * pane back at the A-weighted level it has had since that first pass. Nothing
+ * clips — the loudest sample reaches 0.54 of full scale, because six
+ * oscillators and a little noise have nothing like the crest factor the old
+ * noise-led mix did.
  */
-const PEAK = 0.32
+const PEAK = 3
 
 /**
  * Where the captured spectrum turns over. The hump's own top lands a little
@@ -105,10 +122,27 @@ const REF_MESH_HZ = 1300
 const RUSH_TILT_HZ = 3300
 const RUSH_TILT_DB = -29
 /**
- * …and its level, which is why it is the layer doing the work: the rush
- * carries 22 dB more of the output than all six oscillators put together.
+ * …and its level, which is the one number here deliberately **not** set to
+ * what the capture reads. Matched to it — 2.35, where the rush carried 22 dB
+ * more of the output than all six oscillators together — the pane made a wind
+ * noise rather than a motor one. This is 27 dB under that, which puts the
+ * rush about 5 dB *below* the tones instead of 22 above, and it was chosen by
+ * ear against the capture rather than derived (owner, 2026-09-22; an interim
+ * 8.8 dB cut the day before was still too airy).
+ *
+ * Steady unmodulated broadband noise is the sound of moving air, and that is
+ * what a lot of it over everything pitched will always be. The capture also
+ * has a reason to overstate it that its peaks do not share: a microphone at a
+ * track records the air around it, the room, and its own hiss as smooth grass
+ * across the top of the band, while a peak at a gear mesh can only have come
+ * from the car. So the peaks are believed and the grass is discounted, here
+ * heavily.
+ *
+ * This is the knob to reach for if the pane ever sounds airy, or too dry —
+ * every other number in this file is anchored to something measured, and
+ * moving one of those means going back to the capture.
  */
-const RUSH_LEVEL = 2.35
+const RUSH_LEVEL = 0.10
 
 /**
  * How quickly a parameter follows `set`. A time constant rather than a ramp,
@@ -144,12 +178,18 @@ export type MotorSound = ReturnType<typeof createMotorSound>
  */
 export function createMotorSound(teeth: number) {
   const LAYERS: readonly Layer[] = [
-    // Levels solved from the capture, each one set so its spike stands as far
+    // Levels solved from the capture, each one set so its spike stood as far
     // over the grass beside it as the capture's does — 6 dB at the armature's
     // turn, 20 at the commutation, 20 across the pair at the mesh, 8 at its
     // second harmonic and 14 at its third. They are spikes on the hump, not
     // voices in a chord, and the numbers look small because the shelf has
     // already taken 29 dB off the hump under them.
+    //
+    // `RUSH_LEVEL` has since come down 27 dB with none of these moving, so
+    // each one now stands far clearer of the grass than the capture shows —
+    // the grass is barely there. The figures above are what they were solved
+    // against; what these levels actually hold is the ratios between them,
+    // and those are still the capture's.
     //
     // The first and fourth sit under the 9 dB the capture's faintest peak
     // stands at, because the capture shows no peak at those two frequencies
@@ -248,9 +288,9 @@ export function createMotorSound(teeth: number) {
       tones.push({ osc, order: layer.order })
     }
 
-    // A second of white noise on loop, tilted the way the capture tilts. This
-    // is the difference between a motor and a chord, and it carries more of
-    // the level than every oscillator above put together.
+    // A second of white noise on loop, tilted the way the capture tilts. It
+    // sits under the oscillators rather than over them now (see `RUSH_LEVEL`),
+    // but it is still what keeps the six of them from reading as a chord.
     const noise = ctx.createBufferSource()
     const buffer = ctx.createBuffer(1, ctx.sampleRate, ctx.sampleRate)
     const channel = buffer.getChannelData(0)
