@@ -29,6 +29,12 @@ const siteUrl = useRuntimeConfig().public.siteUrl
  */
 const items = computed(() => [{ to: '/', label: t('breadcrumb.home') }, ...props.trail])
 
+/** The trail as the component wants it: localised links, the last one bare. */
+const crumbs = computed(() => items.value.map(item => ({
+  label: item.label,
+  ...(item.to ? { to: localePath(item.to) } : {})
+})))
+
 useHead(() => ({
   script: [{
     // Keyed because a page may carry a second ld+json block of its own — the
@@ -53,12 +59,17 @@ useHead(() => ({
 </script>
 
 <template>
-  <nav class="breadcrumbs" :aria-label="$t('breadcrumb.label')">
-    <ol>
-      <li v-for="item in items" :key="item.label">
-        <NuxtLink v-if="item.to" :to="localePath(item.to)">{{ item.label }}</NuxtLink>
-        <span v-else aria-current="page">{{ item.label }}</span>
-      </li>
-    </ol>
-  </nav>
+  <!--
+    `UBreadcrumb` draws the trail and marks the last crumb `aria-current`; the
+    `BreadcrumbList` above is still ours, because the hierarchy it declares is
+    the thing this component exists for and no markup can carry it.
+
+    A crumb with no `to` is the page being read — the component renders it as
+    text rather than a link, which is the same rule the hand-written list had.
+  -->
+  <UBreadcrumb
+    :items="crumbs"
+    :aria-label="$t('breadcrumb.label')"
+    class="breadcrumbs"
+  />
 </template>
