@@ -50,9 +50,10 @@
  * without meaning to, so the levels were first solved to the same
  * **A-weighted** RMS the previous tuning had, not the same peak. Taking the
  * rush down afterwards took most of that level with it, because the rush was
- * most of it — so `PEAK` carries the difference and the pane comes out at the
- * A-weighted level it has had all along. What the owner changed is the
- * balance between the two layers, not the volume of the pair.
+ * most of it — and `PEAK` was deliberately left where it was rather than
+ * raised to put it back. The pane now runs about 13 dB under where it has
+ * ever been, which is the point: this is a motor that plays without being
+ * asked for, so it has to be quiet enough to be welcome.
  *
  * Every number below was fitted against `getFrequencyResponse` on the real
  * nodes rather than against the textbook formulas, which matters more than it
@@ -69,18 +70,19 @@
 const POLES = 3
 
 /**
- * Master gain at full speed. A web page is not a race track — but the first
+ * Master gain at full speed. A web page is not a race track — and an early
  * pass at 0.16 was so far under the rest of the page that the switch read as
- * broken on a laptop speaker.
+ * broken on a laptop speaker, which is what put this at 0.32.
  *
- * It is above 1 now, and only because everything under it got small: the rush
- * used to carry most of the output and no longer does. This is what puts the
- * pane back at the A-weighted level it has had since that first pass. Nothing
- * clips — the loudest sample reaches 0.54 of full scale, because six
- * oscillators and a little noise have nothing like the crest factor the old
- * noise-led mix did.
+ * It has stayed here while `RUSH_LEVEL` came down around it, so the pane is
+ * now about 13 dB quieter than it has ever been — quieter, in A-weighted
+ * terms, than the 0.16 that once read as broken. That is not an oversight:
+ * it is the level the owner listened at and chose (2026-09-22), on the same
+ * pass that let the sound play without being asked for, and the two go
+ * together. If the motor ever reads as broken rather than as quiet, this is
+ * the first number to look at. The loudest sample reaches 0.14 of full scale.
  */
-const PEAK = 3
+const PEAK = 0.62
 
 /**
  * Where the captured spectrum turns over. The hump's own top lands a little

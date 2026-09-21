@@ -498,23 +498,27 @@ const MAX_STEP_S = 0.1
 const SWITCH_TRAVEL_MM = 4
 
 /**
- * The motor heard as well as seen (`app/utils/motorSound.ts`), but **off
- * until asked for** (owner, 2026-09-21, reversing the default-on it shipped
- * with the same day): the sound is still being tuned, and a page that makes a
- * noise nobody asked for spends a reader's goodwill on a version we are not
- * finished with. 開動 stays silent until the toggle beside it is pressed, and
- * that choice is remembered per browser the way the race class is on the page.
+ * The motor heard as well as seen (`app/utils/motorSound.ts`), and **on by
+ * default** (owner, 2026-09-22) — which is where it started, before it was
+ * hushed on 2026-09-21 for being a sound still being tuned. The tuning is
+ * settled now, and what settled it left the motor about 13 dB quieter than
+ * any version before it, which is the half of this that matters: a noise
+ * nobody asked for is only welcome if it is quiet. 開動 now makes one, and
+ * the toggle beside it stops it, remembered per browser the way the race
+ * class is on the page.
  *
- * The stored value is read as "anything but an explicit no means muted", so
- * the default survives a reader who has never touched the toggle while an
- * earlier '0' — written before the default flipped — still means they want it.
- * Storage can be absent or throw, and the pane works the same without it.
+ * The stored value is read as "only an explicit yes means muted", which keeps
+ * all three groups of readers on what they last said: one who has never
+ * touched the toggle gets the new default, a '1' from one who switched the
+ * sound off still silences it, and the '0' written under the old default
+ * still means what it meant — that they wanted to hear it. Storage can be
+ * absent or throw, and the pane works the same without it.
  */
-const muted = ref(true)
+const muted = ref(false)
 const MUTE_KEY = 'scene-muted'
 onMounted(() => {
   try {
-    muted.value = localStorage.getItem(MUTE_KEY) !== '0'
+    muted.value = localStorage.getItem(MUTE_KEY) === '1'
   }
   catch {}
 })
