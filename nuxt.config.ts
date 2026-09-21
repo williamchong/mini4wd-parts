@@ -44,7 +44,7 @@ const catalogRoutes = [...partRoutes, ...categoryRoutes, ...chassisRoutes]
 export default defineNuxtConfig({
   compatibilityDate: '2026-09-08',
   devtools: { enabled: true },
-  modules: ['@nuxt/content', '@nuxtjs/i18n', '@nuxtjs/sitemap', '@nuxt/scripts'],
+  modules: ['@nuxt/content', '@nuxtjs/i18n', '@nuxtjs/sitemap', '@nuxt/scripts', '@nuxt/ui'],
 
   // The sitemap module's own notion of the site's origin. Same value as
   // `runtimeConfig.public.siteUrl`, which the pages use for absolute og:image
@@ -271,5 +271,44 @@ export default defineNuxtConfig({
     }
   },
 
-  css: ['~/assets/css/main.css']
+  css: ['~/assets/css/main.css'],
+
+  /**
+   * Nuxt UI's own dependencies, held to what a prerendered site can serve.
+   *
+   * `colorMode` and `fonts` are the module's documented switches for the two
+   * modules it would otherwise register on our behalf. @nuxtjs/color-mode is
+   * off because the stylesheet's every colour is a literal written for white,
+   * and a dark class toggling over it would only be wrong; it comes back with
+   * the tokens. @nuxt/fonts is off because the stack is the system one
+   * (`--font-sans` in main.css) — there is nothing to download, and the module
+   * would go looking at build time.
+   */
+  ui: {
+    colorMode: false,
+    fonts: false
+  },
+
+  /**
+   * `provider: 'none'` is what keeps the Iconify API out of the build and out
+   * of the page: with it unset, a name @nuxt/icon cannot resolve locally is
+   * fetched at runtime, which would put back a third-party request per page of
+   * exactly the kind the site dropped with model-viewer (docs/PLAN.md §5.5).
+   * The names all resolve from @iconify-json/lucide, installed as a dependency.
+   *
+   * The server bundle is left at its default (`local`, which it reports on
+   * `nuxt prepare`) rather than turned off, because every route here is
+   * prerendered: the icon has to be in the HTML the build writes, not painted
+   * in afterwards. `clientBundle.scan` covers the ones that appear only after
+   * hydration.
+   */
+  icon: {
+    provider: 'none',
+    // `provider: 'none'` alone leaves `fallbackToApi` on, and the prerendered
+    // home page then modulepreloads 41 KB of Iconify's API client for names
+    // that are all bundled locally. Measured 2026-09-22 by grepping the built
+    // chunk out of .output/public; off, the chunk does not ship.
+    fallbackToApi: false,
+    clientBundle: { scan: true }
+  }
 })

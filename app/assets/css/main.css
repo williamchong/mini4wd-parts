@@ -1,3 +1,36 @@
+/**
+ * Tailwind without Preflight, which is the documented way to bring it into a
+ * stylesheet that already exists: `@import "tailwindcss"` pulls the reset in
+ * too, and this site's rules are written over browser defaults rather than
+ * over a reset. Measured 2026-09-22 with it on: `h1..h6 { font-size: inherit }`
+ * flattens every heading on the guides and /about, and `ol, ul { list-style:
+ * none }` takes the bullets out of the prose — both of which are @nuxt/content
+ * pages styled by element, not by class (`.content-container h1`).
+ *
+ * Preflight comes back with the prose components that replace those rules; it
+ * is not a thing to live with half-applied in the meantime.
+ */
+@layer theme, base, components, utilities;
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/utilities.css" layer(utilities);
+@import "@nuxt/ui";
+
+/**
+ * The site's own rules follow the imports above and therefore win at equal
+ * specificity, which is what lets Nuxt UI land without moving a pixel. They are
+ * deleted component by component as each one is replaced, not all at once.
+ */
+
+/**
+ * The system stack, kept. Nuxt UI's default theme names a web font, and the
+ * site is read in Traditional Chinese: a stack that does not reach the
+ * platform's own CJK face changes how every glyph on the page renders, and
+ * @nuxt/fonts would fetch it at build time besides.
+ */
+@theme {
+  --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   min-height: 100vh;

@@ -64,6 +64,14 @@ useHead(() => ({
 </script>
 
 <template>
+  <!--
+    No `UApp` here, deliberately. It is Nuxt UI's provider root — the outlet
+    every overlay and toast teleports into — and wrapping the whole site in it
+    puts its provider tree on all 1,713 prerendered routes. Measured
+    2026-09-22: that costs 40.7 KB gz of JavaScript on a part page, which has
+    no overlay on it and never will. The builder is the one route with
+    dialogs, so it wraps itself (app/pages/index.vue).
+  -->
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>
