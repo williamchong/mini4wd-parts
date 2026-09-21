@@ -752,57 +752,16 @@ body {
 
 /* Part picker */
 
-.picker-backdrop {
-  position: fixed;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  background: rgb(0 0 0 / 45%);
-}
-
-.picker {
-  display: flex;
-  flex-direction: column;
-  width: min(38rem, 100%);
-  max-height: 85vh;
-  padding: 1.25rem;
-  background: #fff;
-  border-radius: 8px;
-}
-
-.picker-head {
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-}
-
 /* The kit and chassis dialog: a grid of photo rows rather than one column. */
-.picker-wide {
-  width: min(60rem, 100%);
-}
-
-.picker-wide .door-toggle {
+/* In the dialog header the toggle is the header, so it carries no gap of its
+   own; everywhere else it sits above a list and needs one. */
+.picker-header .door-toggle {
   margin-bottom: 0;
 }
 
-.picker-body {
-  overflow-y: auto;
-}
-
-.picker-head h2 {
-  margin: 0;
-  font-size: 1.1rem;
-}
-
 .picker-search {
-  font: inherit;
-  padding: 0.5rem 0.7rem;
-  margin: 0.75rem 0 0.5rem;
-  border: 1px solid #d8dee4;
-  border-radius: 4px;
+  display: block;
+  margin: 0 0 0.5rem;
 }
 
 .picker-count {

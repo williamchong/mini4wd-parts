@@ -80,12 +80,13 @@ const visible = computed(() => matches.value.slice(0, shown.value).map(kit => ({
   <section class="kit-picker">
     <h2>{{ $t('build.pickKit') }}</h2>
 
-    <input
+    <UInput
       v-model="query"
       type="search"
+      icon="i-lucide-search"
       class="picker-search"
       :placeholder="$t('build.searchKits')"
-    >
+    />
 
     <ul class="chassis-chips">
       <li>

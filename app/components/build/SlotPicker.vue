@@ -17,18 +17,21 @@ defineProps<{
 
 const emit = defineEmits<{ select: [string]; close: [] }>()
 
+// The parent unmounts this on `close`, so the dialog restores focus itself.
+useReturnFocus()
+
 const { slotLabel } = useTerm()
 </script>
 
 <template>
-  <div class="picker-backdrop" @click.self="emit('close')">
-    <div class="picker slot-picker" role="dialog" aria-modal="true">
-      <header class="picker-head">
-        <h2>{{ $t('build.pickSlot', { part: partName }) }}</h2>
-        <UButton variant="link" color="neutral" size="xs" @click="emit('close')">{{ $t('build.close') }}</UButton>
-      </header>
-
-      <ul class="picker-list">
+  <UModal
+    open
+    :title="$t('build.pickSlot', { part: partName })"
+    :ui="{ content: 'max-w-lg max-h-[85vh]', body: 'overflow-y-auto' }"
+    @update:open="value => { if (!value) emit('close') }"
+  >
+    <template #body>
+      <ul class="picker-list slot-picker">
         <li v-for="slot in slots" :key="slot.id">
           <button type="button" @click="emit('select', slot.id)">
             <span class="slot-label">{{ slotLabel(slot) }}</span>
@@ -40,6 +43,6 @@ const { slotLabel } = useTerm()
           </button>
         </li>
       </ul>
-    </div>
-  </div>
+    </template>
+  </UModal>
 </template>

@@ -18,6 +18,9 @@ const props = defineProps<{
 
 const emit = defineEmits<{ select: [string]; close: [] }>()
 
+// The parent unmounts this on `close`, so the dialog restores focus itself.
+useReturnFocus()
+
 const localePath = useLocalePath()
 const query = ref('')
 
@@ -32,19 +35,28 @@ const firstAddOn = computed(() => matches.value.findIndex(({ part }) => part.isA
 </script>
 
 <template>
-  <div class="picker-backdrop" @click.self="emit('close')">
-    <div class="picker" role="dialog" aria-modal="true">
-      <header class="picker-head">
-        <h2>{{ $t('build.pickPart', { slot: slotLabel }) }}</h2>
-        <UButton variant="link" color="neutral" size="xs" @click="emit('close')">{{ $t('build.close') }}</UButton>
-      </header>
-
-      <input
+  <!--
+    The parent mounts this component only while a slot is open, so the dialog
+    is open for its whole life and closing it is closing the parent's state —
+    `update:open` is the one way out, and it covers Escape, the backdrop and
+    the X alike. What this replaced was a plain div with `role="dialog"` and a
+    click handler: no focus trap, no scroll lock, and nothing to send focus
+    back to the row that opened it.
+  -->
+  <UModal
+    open
+    :title="$t('build.pickPart', { slot: slotLabel })"
+    :ui="{ content: 'max-w-2xl max-h-[85vh]', body: 'overflow-y-auto' }"
+    @update:open="value => { if (!value) emit('close') }"
+  >
+    <template #body>
+      <UInput
         v-model="query"
         type="search"
-        class="picker-search"
+        icon="i-lucide-search"
         :placeholder="$t('build.searchParts')"
-      >
+        class="picker-search"
+      />
 
       <p class="picker-count">{{ $t('build.candidates', { count: matches.length }) }}</p>
 
@@ -78,6 +90,6 @@ const firstAddOn = computed(() => matches.value.findIndex(({ part }) => part.isA
           </li>
         </template>
       </ul>
-    </div>
-  </div>
+    </template>
+  </UModal>
 </template>
