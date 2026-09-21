@@ -498,17 +498,23 @@ const MAX_STEP_S = 0.1
 const SWITCH_TRAVEL_MM = 4
 
 /**
- * The motor heard as well as seen (`app/utils/motorSound.ts`). It plays on
- * 開動 by default, because the sound of the thing running is half of what the
- * switch is for; the toggle beside it is the way out, remembered per browser
- * the way the race class is on the page. Storage can be absent or throw, and
- * the pane works the same without it.
+ * The motor heard as well as seen (`app/utils/motorSound.ts`), but **off
+ * until asked for** (owner, 2026-09-21, reversing the default-on it shipped
+ * with the same day): the sound is still being tuned, and a page that makes a
+ * noise nobody asked for spends a reader's goodwill on a version we are not
+ * finished with. 開動 stays silent until the toggle beside it is pressed, and
+ * that choice is remembered per browser the way the race class is on the page.
+ *
+ * The stored value is read as "anything but an explicit no means muted", so
+ * the default survives a reader who has never touched the toggle while an
+ * earlier '0' — written before the default flipped — still means they want it.
+ * Storage can be absent or throw, and the pane works the same without it.
  */
-const muted = ref(false)
+const muted = ref(true)
 const MUTE_KEY = 'scene-muted'
 onMounted(() => {
   try {
-    muted.value = localStorage.getItem(MUTE_KEY) === '1'
+    muted.value = localStorage.getItem(MUTE_KEY) !== '0'
   }
   catch {}
 })

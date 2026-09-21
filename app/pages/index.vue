@@ -519,8 +519,9 @@ function onScenePower() {
   if (shownChassis.value) track('scene_power', { chassis: shownChassis.value.id })
 }
 /**
- * The motor plays by default, so the only evidence that it should keep doing
- * so is how many readers reach for the toggle — and whether they reach back.
+ * The motor is muted until asked for, so this counts the readers who go
+ * looking for it — which is what says whether it is worth turning on by
+ * default once the tuning is settled.
  */
 function onSceneMute(muted: boolean) {
   if (shownChassis.value) track('scene_mute', { chassis: shownChassis.value.id, muted })
