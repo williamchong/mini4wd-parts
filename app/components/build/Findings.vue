@@ -59,10 +59,12 @@ const clean = computed(() => !props.findings.some(f => f.severity !== 'note'))
       </p>
       <ul v-if="findings.length" class="findings-list" aria-live="polite">
         <li v-for="(finding, i) in findings" :key="i" :class="`finding-${finding.severity}`">
-          <span class="finding-severity">{{ $t(`build.rules.severity.${finding.severity}`) }}</span>
-          <button v-if="finding.slotId" type="button" class="link" @click="emit('go', finding.slotId)">
+          <UBadge :color="severityColor(finding.severity)" variant="subtle" size="sm">
+            {{ $t(`build.rules.severity.${finding.severity}`) }}
+          </UBadge>
+          <UButton v-if="finding.slotId" variant="link" color="neutral" size="xs" @click="emit('go', finding.slotId)">
             {{ finding.text }}
-          </button>
+          </UButton>
           <span v-else>{{ finding.text }}</span>
         </li>
       </ul>

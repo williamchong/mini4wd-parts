@@ -128,23 +128,25 @@ const visible = computed(() => matches.value.slice(0, shown.value).map(kit => ({
               <span v-if="row.kit.gearRatio">{{ row.kit.gearRatio }}</span>
               <!-- `current` is the default and badging it would bury the one
                    that matters. -->
-              <span v-if="row.kit.status === 'limited'" class="kit-status">
+              <UBadge v-if="row.kit.status === 'limited'" color="warning" variant="subtle" size="sm">
                 {{ $t('build.kitStatus.limited') }}
-              </span>
+              </UBadge>
             </span>
           </span>
         </button>
       </li>
     </ul>
 
-    <button
+    <UButton
       v-if="matches.length > shown"
-      type="button"
-      class="show-more"
+      block
+      color="neutral"
+      variant="outline"
+      class="mt-3"
       @click="shown += PAGE"
     >
       {{ $t('build.showMore', { count: matches.length - shown }) }}
-    </button>
+    </UButton>
 
     <!-- The gear ratio on 295 of these rows is wiki-derived. Bare facts are not
          copyrightable and 305 per-row credits would be absurd, so the picker

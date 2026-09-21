@@ -112,21 +112,23 @@ const rows = computed(() => props.slot.entries.map((entry) => {
         class="slot-finding"
         :class="`finding-${finding.severity}`"
       >
-        <span class="finding-severity">{{ $t(`build.rules.severity.${finding.severity}`) }}</span>
+        <UBadge :color="severityColor(finding.severity)" variant="subtle" size="sm">
+          {{ $t(`build.rules.severity.${finding.severity}`) }}
+        </UBadge>
         <span>{{ finding.text }}</span>
       </p>
     </div>
 
     <div v-if="swappable" class="slot-actions">
-      <button type="button" @click="emit('open')">
+      <UButton size="xs" color="neutral" variant="outline" @click="emit('open')">
         {{ $t('build.swap') }}
-      </button>
-      <button v-if="copyFrom" type="button" class="link" @click="emit('copy')">
+      </UButton>
+      <UButton v-if="copyFrom" variant="link" color="neutral" size="xs" @click="emit('copy')">
         {{ $t('build.copyFrom', { slot: copyLabel }) }}
-      </button>
-      <button v-if="slot.swapped" type="button" class="link" @click="emit('revert')">
+      </UButton>
+      <UButton v-if="slot.swapped" variant="link" color="neutral" size="xs" @click="emit('revert')">
         {{ $t('build.revert') }}
-      </button>
+      </UButton>
     </div>
   </li>
 </template>

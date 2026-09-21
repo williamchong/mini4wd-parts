@@ -1450,17 +1450,45 @@ onBeforeUnmount(() => cleanup?.())
          children presentational, which would hide the button below it. The
          list is the keyboard and screen-reader path (§5.4). -->
     <canvas ref="canvas" role="img" :aria-label="$t('build.scene.label')" />
-    <button type="button" class="scene-reset" @click="resetCamera()">
+    <!--
+      The three toggles read their pressed state off `aria-pressed` and paint
+      themselves from it, which is the same thing the markup said before and
+      keeps one source of truth for "is this on". Where they sit over the
+      canvas is still main.css's business: a corner is a position, not a
+      variant.
+    -->
+    <UButton size="xs" color="neutral" variant="outline" class="scene-reset" @click="resetCamera()">
       {{ $t('build.scene.resetCamera') }}
-    </button>
-    <button type="button" class="scene-lift" :aria-pressed="lifted" @click="lifted = !lifted">
+    </UButton>
+    <UButton
+      size="xs"
+      :color="lifted ? 'primary' : 'neutral'"
+      :variant="lifted ? 'solid' : 'outline'"
+      class="scene-lift"
+      :aria-pressed="lifted"
+      @click="lifted = !lifted"
+    >
       {{ $t(lifted ? 'build.scene.fitBody' : 'build.scene.liftBody') }}
-    </button>
-    <button type="button" class="scene-power" :aria-pressed="powered" @click="togglePower()">
+    </UButton>
+    <UButton
+      size="xs"
+      :color="powered ? 'primary' : 'neutral'"
+      :variant="powered ? 'solid' : 'outline'"
+      class="scene-power"
+      :aria-pressed="powered"
+      @click="togglePower()"
+    >
       {{ $t(powered ? 'build.scene.powerOff' : 'build.scene.powerOn') }}
-    </button>
-    <button type="button" class="scene-mute" :aria-pressed="muted" @click="toggleMute()">
+    </UButton>
+    <UButton
+      size="xs"
+      :color="muted ? 'primary' : 'neutral'"
+      :variant="muted ? 'solid' : 'outline'"
+      class="scene-mute"
+      :aria-pressed="muted"
+      @click="toggleMute()"
+    >
       {{ $t(muted ? 'build.scene.unmute' : 'build.scene.mute') }}
-    </button>
+    </UButton>
   </div>
 </template>

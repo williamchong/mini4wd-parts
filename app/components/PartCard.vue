@@ -62,9 +62,15 @@ const setFills = computed(() => props.part.contents
 
     <p v-if="setFills" class="part-set">{{ setFills }}</p>
 
-    <p v-if="verdict && verdict.legality !== 'legal'" class="part-legality" :class="`legality-${verdict.legality}`">
+    <UBadge
+      v-if="verdict && verdict.legality !== 'legal'"
+      :color="verdict.legality === 'illegal' ? 'error' : 'neutral'"
+      variant="subtle"
+      size="sm"
+      class="part-legality"
+    >
       {{ $t(`build.rules.badge.${verdict.legality}`, { class: $t(`part.class.${verdict.buildClass}`) }) }}
-    </p>
+    </UBadge>
 
     <dl v-if="specs.length" class="part-specs">
       <template v-for="spec in specs" :key="spec.key">

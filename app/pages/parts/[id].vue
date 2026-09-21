@@ -277,9 +277,9 @@ useHead(() => ({
         <p class="part-facts">
           <span v-if="part.priceJpy">¥{{ part.priceJpy }}</span>
           <span v-if="part.releaseDate">{{ part.releaseDate }}</span>
-          <span v-if="part.status === 'limited'" class="kit-status">
+          <UBadge v-if="part.status === 'limited'" color="warning" variant="subtle" size="sm">
             {{ $t('part.status.limited') }}
-          </span>
+          </UBadge>
         </p>
 
         <button v-if="buildable" type="button" class="part-cta" @click="addToBuild">

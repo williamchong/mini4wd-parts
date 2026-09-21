@@ -16,8 +16,41 @@
  * platform's own CJK face changes how every glyph on the page renders, and
  * @nuxt/fonts would fetch it at build time besides.
  */
-@theme {
+/**
+ * `static`, not a plain `@theme`: Tailwind drops theme variables no utility in
+ * the source mentions, and nothing here writes `bg-chassis-500` — the scale is
+ * read at one remove, through the `primary` alias in app.config.ts, which
+ * Tailwind cannot see. Without `static` every `bg-primary` on the site
+ * resolves to nothing and a solid button comes out white on white.
+ */
+@theme static {
   --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+
+  /**
+   * The site's own blue-grey, written as a scale so Nuxt UI can use it.
+   *
+   * `500` is #2c3e50, which is the colour every solid button, pressed toggle
+   * and active chip on the site is already painted — a `UButton` has to come
+   * out of the box wearing it or the swap would be a redesign. The lighter end
+   * is the ramp the stylesheet had all along without knowing it: #d8dee4 is
+   * the border on every card and picker row, #9fb2c4 the secondary button's,
+   * #8a99a8 the hover, #eef2f5 the empty thumbnail's ground.
+   *
+   * Above 500 is darker than anything the site uses today; it exists because a
+   * colour alias needs a full scale, and because the hover and active states
+   * Nuxt UI derives have to come from somewhere.
+   */
+  --color-chassis-50: #f4f7f9;
+  --color-chassis-100: #eef2f5;
+  --color-chassis-200: #d8dee4;
+  --color-chassis-300: #9fb2c4;
+  --color-chassis-400: #8a99a8;
+  --color-chassis-500: #2c3e50;
+  --color-chassis-600: #273747;
+  --color-chassis-700: #21303e;
+  --color-chassis-800: #1b2733;
+  --color-chassis-900: #151e27;
+  --color-chassis-950: #0e141a;
 }
 
 /**
@@ -278,24 +311,6 @@ body {
   letter-spacing: 0.03em;
 }
 
-.kit-status {
-  padding: 0 0.35rem;
-  font-size: 0.9em;
-  background: #f3e7d0;
-  border-radius: 3px;
-  opacity: 1;
-}
-
-button.link {
-  font: inherit;
-  padding: 0;
-  color: inherit;
-  background: none;
-  border: none;
-  text-decoration: underline;
-  cursor: pointer;
-}
-
 /* 3D pane (docs/PLAN.md §5.5). The frame owns the size so the space exists
    before the client-only scene chunk has loaded. */
 .scene-frame {
@@ -335,6 +350,8 @@ button.link {
   cursor: grab;
 }
 
+/* A corner over the canvas is a position, not a variant: how these look is
+   the button component's, where they sit is still ours. */
 .scene-reset,
 .scene-lift,
 .scene-power,
@@ -342,14 +359,6 @@ button.link {
   position: absolute;
   top: 0.5rem;
   right: 0.5rem;
-  font: inherit;
-  font-size: 0.85em;
-  padding: 0.2rem 0.6rem;
-  color: #2c3e50;
-  background: rgb(255 255 255 / 85%);
-  border: 1px solid #c8ced4;
-  border-radius: 4px;
-  cursor: pointer;
 }
 
 .scene-lift {
@@ -367,14 +376,6 @@ button.link {
   right: auto;
   bottom: 0.5rem;
   left: 0.5rem;
-}
-
-.scene-lift[aria-pressed="true"],
-.scene-power[aria-pressed="true"],
-.scene-mute[aria-pressed="true"] {
-  background: #2c3e50;
-  color: #fff;
-  border-color: #2c3e50;
 }
 
 .scene-hint {
@@ -404,46 +405,6 @@ button.link {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-}
-
-.build-share-actions button {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  min-height: 2.25rem;
-  padding: 0 0.85rem;
-  font: inherit;
-  font-size: 0.9rem;
-  font-weight: 600;
-  white-space: nowrap;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.build-share-actions button.primary {
-  color: #fff;
-  background: #2c3e50;
-  border: 1px solid #2c3e50;
-}
-
-.build-share-actions button.secondary {
-  color: #2c3e50;
-  background: #fff;
-  border: 1px solid #9fb2c4;
-}
-
-.build-share-actions button:hover {
-  filter: brightness(1.1);
-}
-
-.build-share-actions svg {
-  width: 1em;
-  height: 1em;
-  fill: none;
-  stroke: currentcolor;
-  stroke-width: 2;
-  stroke-linecap: round;
-  stroke-linejoin: round;
 }
 
 /* Chassis picker */
@@ -586,22 +547,6 @@ button.link {
 .kit-list > li {
   content-visibility: auto;
   contain-intrinsic-size: auto 5.5rem;
-}
-
-.show-more {
-  display: block;
-  width: 100%;
-  margin-top: 0.75rem;
-  padding: 0.6rem;
-  font: inherit;
-  background: #fff;
-  border: 1px solid #d8dee4;
-  border-radius: 6px;
-  cursor: pointer;
-}
-
-.show-more:hover {
-  border-color: #8a99a8;
 }
 
 /* Catalog pictures: our own 160x120 thumbnail of Tamiya's product photo, or the
@@ -756,15 +701,6 @@ button.link {
 
 .base-row .build-subtitle {
   margin: 0.15rem 0 0;
-}
-
-.slot-actions button.primary {
-  padding: 0.35rem 0.9rem;
-  color: #fff;
-  background: #2c3e50;
-  border: 1px solid #2c3e50;
-  border-radius: 4px;
-  cursor: pointer;
 }
 
 /* The empty base row's Starter Packs: under the entry column, and three across
@@ -943,7 +879,8 @@ button.link {
 
 .part-legality {
   margin: 0.2rem 0 0;
-  font-size: 0.85em;
+  /* Placement only — the badge brings its own colour and type size. */
+  justify-self: start;
 }
 
 .part-head {
@@ -1090,14 +1027,6 @@ button.link {
   margin: 0;
 }
 
-.legality-illegal {
-  color: #b23c2e;
-}
-
-.legality-unknown {
-  opacity: 0.6;
-}
-
 .part-intro {
   margin: 0.5rem 0;
   line-height: 1.7;
@@ -1227,24 +1156,6 @@ button.link {
 
 .findings-list .link {
   text-align: start;
-}
-
-.finding-severity {
-  flex: none;
-  padding: 0 0.35rem;
-  font-size: 0.85em;
-  border-radius: 3px;
-  background: #eef1f4;
-}
-
-.finding-error .finding-severity {
-  color: #fff;
-  background: #b23c2e;
-}
-
-.finding-warning .finding-severity {
-  color: #4a3500;
-  background: #f5d77a;
 }
 
 .findings-unchecked {

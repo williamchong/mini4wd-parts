@@ -25,7 +25,7 @@ const { slotLabel } = useTerm()
     <div class="picker slot-picker" role="dialog" aria-modal="true">
       <header class="picker-head">
         <h2>{{ $t('build.pickSlot', { part: partName }) }}</h2>
-        <button type="button" class="link" @click="emit('close')">{{ $t('build.close') }}</button>
+        <UButton variant="link" color="neutral" size="xs" @click="emit('close')">{{ $t('build.close') }}</UButton>
       </header>
 
       <ul class="picker-list">

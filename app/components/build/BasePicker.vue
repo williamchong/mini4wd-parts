@@ -50,7 +50,7 @@ const door = ref<'kit' | 'chassis'>('kit')
             {{ $t('build.door.chassis') }}
           </button>
         </div>
-        <button type="button" class="link" @click="emit('close')">{{ $t('build.close') }}</button>
+        <UButton variant="link" color="neutral" size="xs" @click="emit('close')">{{ $t('build.close') }}</UButton>
       </header>
 
       <div class="picker-body">

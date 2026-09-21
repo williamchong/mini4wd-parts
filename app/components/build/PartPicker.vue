@@ -36,7 +36,7 @@ const firstAddOn = computed(() => matches.value.findIndex(({ part }) => part.isA
     <div class="picker" role="dialog" aria-modal="true">
       <header class="picker-head">
         <h2>{{ $t('build.pickPart', { slot: slotLabel }) }}</h2>
-        <button type="button" class="link" @click="emit('close')">{{ $t('build.close') }}</button>
+        <UButton variant="link" color="neutral" size="xs" @click="emit('close')">{{ $t('build.close') }}</UButton>
       </header>
 
       <input
@@ -66,9 +66,15 @@ const firstAddOn = computed(() => matches.value.findIndex(({ part }) => part.isA
             <!-- Beside the button, never inside it: an anchor nested in a button
                  is invalid, and the two do different things — one fills the slot,
                  one leaves the builder to read about the part. -->
-            <NuxtLink class="link picker-details" :to="localePath(`/parts/${candidate.part.id}`)">
+            <UButton
+              variant="link"
+              color="neutral"
+              size="xs"
+              class="picker-details"
+              :to="localePath(`/parts/${candidate.part.id}`)"
+            >
               {{ $t('build.details') }}
-            </NuxtLink>
+            </UButton>
           </li>
         </template>
       </ul>

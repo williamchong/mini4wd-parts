@@ -803,23 +803,25 @@ useHead(() => ({
       <div class="build-list-header">
         <h1 class="build-list-title">{{ $t('build.title') }}</h1>
         <div v-if="hasBuild" class="build-share-actions">
-          <button v-if="canShare" type="button" class="primary" @click="shareLink(buildName)">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <circle cx="18" cy="5" r="3" /><circle cx="6" cy="12" r="3" /><circle cx="18" cy="19" r="3" />
-              <path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4" />
-            </svg>
+          <UButton
+            v-if="canShare"
+            icon="i-lucide-share-2"
+            @click="shareLink(buildName)"
+          >
             {{ $t('build.share.send') }}
-          </button>
-          <button type="button" :class="canShare ? 'secondary' : 'primary'" aria-live="polite" @click="copyLink">
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path v-if="copied" d="m5 12.5 4.5 4.5L19 7.5" />
-              <template v-else>
-                <path d="M10 13a5 5 0 0 0 7.5.5l3-3a5 5 0 0 0-7-7l-1.7 1.7" />
-                <path d="M14 11a5 5 0 0 0-7.5-.5l-3 3a5 5 0 0 0 7 7l1.7-1.7" />
-              </template>
-            </svg>
+          </UButton>
+          <!-- Copy is the primary action only where there is no share sheet to
+               be secondary to. The tick is the whole feedback: `aria-live`
+               carries the same change to a reader who cannot see it. -->
+          <UButton
+            :icon="copied ? 'i-lucide-check' : 'i-lucide-link'"
+            :color="canShare ? 'neutral' : 'primary'"
+            :variant="canShare ? 'outline' : 'solid'"
+            aria-live="polite"
+            @click="copyLink"
+          >
             {{ copied ? $t('build.share.copied') : $t('build.share.copy') }}
-          </button>
+          </UButton>
         </div>
       </div>
 
@@ -834,7 +836,7 @@ useHead(() => ({
 
       <p v-if="notice" class="build-notice" aria-live="polite">
         <span>{{ notice }}</span>
-        <button type="button" class="link" @click="notice = ''">{{ $t('build.dismiss') }}</button>
+        <UButton variant="link" color="neutral" size="xs" @click="notice = ''">{{ $t('build.dismiss') }}</UButton>
       </p>
 
       <ul class="slot-list">
@@ -857,18 +859,26 @@ useHead(() => ({
                 <p class="build-subtitle">
                   <span>{{ kit ? resolve(chassis.names).value : $t('build.bareChassis') }}</span>
                   <span v-if="gearRatio">{{ gearRatio }}</span>
-                  <span v-if="kit?.status === 'limited'" class="kit-status">
+                  <UBadge v-if="kit?.status === 'limited'" color="warning" variant="subtle" size="sm">
                     {{ $t('build.kitStatus.limited') }}
-                  </span>
+                  </UBadge>
                 </p>
               </template>
               <p v-else class="slot-empty">{{ $t('build.noBase') }}</p>
             </div>
           </div>
           <div class="slot-actions">
-            <button type="button" :class="{ primary: !hasBuild }" @click="baseOpen = true">
+            <!-- Solid while the bench is empty, because then it is the only
+                 thing on the page to do; an outline once there is a car, where
+                 it is one row's action among many. -->
+            <UButton
+              size="xs"
+              :color="hasBuild ? 'neutral' : 'primary'"
+              :variant="hasBuild ? 'outline' : 'solid'"
+              @click="baseOpen = true"
+            >
               {{ hasBuild ? $t('build.swap') : $t('build.pickBase') }}
-            </button>
+            </UButton>
           </div>
           <!-- The boxes the starter guide recommends, one tap from a car, for a
                reader who has none yet. Only while the bench is empty: once a
