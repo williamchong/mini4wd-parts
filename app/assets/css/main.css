@@ -970,6 +970,36 @@ button.link {
   font-variant-numeric: tabular-nums;
 }
 
+/* Putting the part on a car is the one thing this page asks for, so its
+   button wears the builder's colours (.builder-cta, .build-share-actions) at
+   the size of a page action rather than of a form control. */
+.part-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.75rem;
+  padding: 0 1.25rem;
+  font: inherit;
+  font-weight: 600;
+  color: #fff;
+  background: #2c3e50;
+  border: 1px solid #2c3e50;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.part-cta:hover {
+  filter: brightness(1.1);
+}
+
+/* On a phone the hero text column is the whole screen, and a full-width bar
+   is what a reader scrolling past the photo actually lands on. */
+@media (max-width: 34rem) {
+  .part-cta {
+    width: 100%;
+  }
+}
+
 .part-section h2 {
   font-size: 1.05rem;
   border-bottom: 1px solid #e3e8ec;

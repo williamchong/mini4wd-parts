@@ -282,7 +282,7 @@ useHead(() => ({
           </span>
         </p>
 
-        <button v-if="buildable" type="button" class="primary" @click="addToBuild">
+        <button v-if="buildable" type="button" class="part-cta" @click="addToBuild">
           {{ part.contents ? $t('part.addSetToBuild') : $t('part.addToBuild') }}
         </button>
       </div>
