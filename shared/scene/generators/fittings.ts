@@ -18,6 +18,7 @@ import { cylinder, Triangles, wound } from './mesh.ts'
 import type { Point2 } from './mesh.ts'
 import { teeth } from './parts.ts'
 import type { Paint, PaintFinish } from './parts.ts'
+import { UPPER_ROLLER_MM } from '../fittings.ts'
 import type {
   AxleShape, BearingShape, BrakeShape, ChassisUnitShape, DamperShape, PlateShape, PropellerShape, RollerShape
 } from '../fittings.ts'
@@ -179,9 +180,13 @@ export function plate(shape: PlateShape, thicknessMm: number, towardNose: 1 | -1
   for (const deck of shape.layers ?? []) layer(g.body, deck.pieces, side, towardNose, deck.y, deck.y + thicknessMm)
   const upper = shape.layers?.find(deck => deck.y > top)
   for (const [x, z, tiers] of shape.holes ?? []) {
-    if (tiers !== 2 || !upper) continue
-    // A post inboard of each upper roller, from the plate up to its deck.
-    for (const sign of side ? [1] : [-1, 1]) g.steel.revolve(cylinder(1.2, top, upper.y), 6, 'y', [sign * (x - 6), 0, z * towardNose])
+    if (tiers !== 2) continue
+    // With an upper deck, a post inboard of each upper roller carries it. With
+    // none, the pair is stacked on one screw through the hole, so that is what
+    // stands there — up through both rollers, and proud of the upper one.
+    const [r, from, to] = upper ? [1.2, top, upper.y] : [1.1, 1, top + UPPER_ROLLER_MM + 3]
+    const inboard = upper ? 6 : 0
+    for (const sign of side ? [1] : [-1, 1]) g.steel.revolve(cylinder(r, from, to), 6, 'y', [sign * (x - inboard), 0, z * towardNose])
   }
   const sprung = shape.layers?.[0]
   for (const [x, z] of shape.springs ?? []) {

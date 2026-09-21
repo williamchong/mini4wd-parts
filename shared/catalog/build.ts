@@ -42,7 +42,7 @@ export type BuildablePart = Pick<Part,
   'id' | 'names' | 'category' | 'slots' | 'isCarPart' | 'isAddOn' | 'contents' | 'chassisCompat'
   | 'classLegality' | 'specs' | 'colours' | 'body'> & HasThumbnail
 
-export type BuildableChassis = Pick<Chassis, 'id' | 'slots' | 'defaultLoadout' | 'motorShaft'>
+export type BuildableChassis = Pick<Chassis, 'id' | 'slots' | 'defaultLoadout' | 'motorShaft' | 'rearRollersPerSide'>
 
 export type BuildableKit = Pick<Kit, 'stockLoadout'>
 
@@ -316,19 +316,27 @@ const ROLLER_STAY: Partial<Record<Slot, Slot>> = { 'roller-front': 'front-stay',
  * The roller slots holding more than one roller each side, and how many. The
  * slot names one part, but a double-roller stay carries an upper and a lower
  * pair, and the pane draws all four; without the count the list would say
- * two. An empty roller slot has none to count, and a stock stay is moulded
- * plastic with no record, so it keeps the one per side its posts hold.
+ * two. An empty roller slot has none to count.
+ *
+ * The plate in that end's stay slot says the count where it is the one placing
+ * the rollers. Where it is not — no plate, or one that bolts on over the
+ * bumper — they stay on the chassis' own posts, and the rear posts of the AR
+ * and the MA hold a pair: a roller over the stay and one under it, the "six
+ * rollers" those two ship with. Both counts are written by `catalog:generate`
+ * from shared/scene, which this cannot import (§5.6).
  */
 export function rollersPerSideIn(
   slots: ResolvedSlot[],
-  partsById: ReadonlyMap<string, Pick<Part, 'specs'>>
+  partsById: ReadonlyMap<string, Pick<Part, 'specs'>>,
+  chassis?: Pick<Chassis, 'rearRollersPerSide'>
 ): Map<string, number> {
   const counts = new Map<string, number>()
   for (const slot of slots) {
     const stayType = ROLLER_STAY[slot.type]
     if (!stayType || !slot.entries.length) continue
     const stay = slots.find(s => s.type === stayType)?.entries[0]?.partId
-    const perSide = stay && partsById.get(stay)?.specs.rollersPerSide
+    const onPosts = slot.type === 'roller-rear' ? chassis?.rearRollersPerSide : undefined
+    const perSide = (stay ? partsById.get(stay)?.specs.rollersPerSide : undefined) ?? onPosts
     if (perSide && perSide > 1) counts.set(slot.id, perSide)
   }
   return counts

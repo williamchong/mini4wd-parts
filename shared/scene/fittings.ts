@@ -180,9 +180,12 @@ export const PLATES: Record<string, PlateShape> = {
     pieces: [TONGUE, [[18, -4], [32, 0], [32, 10], [18, 10]], [[32, 0], [44, 2], [47, 6], [44, 11], [32, 10]]],
     thicknessMm: 1.5, holes: [[43, 6]]
   },
+  // Two rollers each side, one over the plate and one under it on the same
+  // screw: the AR ships six rollers and this plate is where its rear four go,
+  // which is how Tamiya builds it on the box of the AR starter pack.
   'wide-rear-ar': {
     pieces: [[[0, -14], [26, -14], [32, 0], [32, 10], [0, 10]], [[32, 0], [44, 2], [47, 6], [44, 11], [32, 10]]],
-    thicknessMm: 1.5, holes: [[43, 6]]
+    thicknessMm: 1.5, holes: [[43, 6, 2]]
   },
   // An upper and a lower roller each side; the upper deck stands on posts.
   'rear-double-roller': {
@@ -266,9 +269,19 @@ export function rollersPerSide(fitting: string | undefined): number {
   return plate.holes.reduce((n, [, , tiers = 1]) => n + tiers, 0)
 }
 
-/** A part's count as its record carries it: its plate's, if it goes in an end's stay slot. */
-export const partRollersPerSide = (part: { slots: readonly string[]; fitting?: string }): number =>
-  part.slots.includes('front-stay') || part.slots.includes('rear-stay') ? rollersPerSide(part.fitting) : 1
+/**
+ * A part's count as its record carries it, or `undefined` where the part does
+ * not place the rollers at all — anything but an end plate, and an end plate
+ * that bolts on over the bumper. They then stay on the chassis' own posts,
+ * whose count is on the chassis record (`stockRollersPerSide` in sockets.ts),
+ * so the record has to tell "one per side on this plate" from "not this
+ * plate's to say".
+ */
+export function partRollersPerSide(part: { slots: readonly string[]; fitting?: string }): number | undefined {
+  const onAnEnd = part.slots.includes('front-stay') || part.slots.includes('rear-stay')
+  const plate = part.fitting ? PLATES[part.fitting] : undefined
+  return onAnEnd && plate?.holes && !plate.side ? rollersPerSide(part.fitting) : undefined
+}
 
 /**
  * Where a damper-slot part mounts. `end`: across the car at the front or

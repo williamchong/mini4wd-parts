@@ -395,10 +395,10 @@ test('every authored bumper and wing is convex pieces, and carries the roller po
   for (const [id, outline] of Object.entries(OUTLINES) as [ChassisId, ChassisOutlines][]) {
     const { rollers } = layoutFor(id)
     const ends = [['front', outline.front, rollers.front], ['rear', outline.rear, rollers.rear]] as const
-    for (const [end, pieces, post] of ends) {
+    for (const [end, pieces, [x, z]] of ends) {
       if (!pieces) continue
       for (const piece of pieces) assert.equal(new Set(turns(piece)).size, 1, `${id} ${end}: ${JSON.stringify(piece)} is convex`)
-      assert.ok(inside(pieces, post), `${id} ${end}: the post at ${post} stands on the bumper`)
+      assert.ok(inside(pieces, [x, z]), `${id} ${end}: the post at ${x},${z} stands on the bumper`)
     }
     if (outline.wings) {
       for (const piece of outline.wings) assert.equal(new Set(turns(piece)).size, 1, `${id} wing ${JSON.stringify(piece)} is convex`)

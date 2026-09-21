@@ -329,8 +329,8 @@ for (const part of parts) {
   // The list prints this count and the pane draws the plate row's, so a row
   // edited without a regenerate would have the two disagree.
   const perSide = partRollersPerSide(part)
-  if ((part.specs.rollersPerSide ?? 1) !== perSide) {
-    errors.push(`${label}: records ${part.specs.rollersPerSide ?? 1} roller(s) per side, its plate row "${part.fitting}" carries ${perSide} — run catalog:generate`)
+  if (part.specs.rollersPerSide !== perSide) {
+    errors.push(`${label}: records ${part.specs.rollersPerSide ?? 'no'} roller(s) per side, its plate row "${part.fitting}" carries ${perSide ?? 'none'} — run catalog:generate`)
   }
 }
 

@@ -184,7 +184,11 @@ export const partSpecs = z.object({
   rollerType: z.enum(['plastic', 'aluminium', 'bearing', 'other']).optional(),
   plateThicknessMm: z.number().optional(),
   plateMaterial: z.enum(['frp', 'carbon', 'aluminium', 'other']).optional(),
-  /** On a stay whose plate carries more than one roller each side: a double-roller stay's 2 (§5.6). */
+  /**
+   * Rollers each side on this plate, where the plate is the one placing them:
+   * a double-roller stay's 2, a plain wide stay's 1 (§5.6). Absent means the
+   * part does not place them, and the chassis' own posts do.
+   */
   rollersPerSide: z.number().optional(),
   gearRatio: z.string().optional(),
   motorShaft: z.enum(['single', 'double']).optional(),
@@ -452,6 +456,15 @@ export const chassisSchema = z.object({
   weightG: z.number().optional(),
   status: z.enum(['current', 'rerelease', 'discontinued']),
   notes: z.string().optional(),
+  /**
+   * Rollers each side on this chassis' own rear posts, where it ships more
+   * than one: AR and MA carry a roller above the stay and one under it, which
+   * is the "six rollers" their notes claim. Written by `catalog:generate` from
+   * the scene's layout table, the way a plate's count is written onto its part
+   * record, because the build list prints it and cannot import that table
+   * (shared/scene/sockets.ts). The front posts hold one on all eight.
+   */
+  rearRollersPerSide: z.number().optional(),
   /**
    * Our downscale of Tamiya's chassis photo. A chassis is not a catalogue item,
    * so the only place Tamiya pictures one is the chassis select page.

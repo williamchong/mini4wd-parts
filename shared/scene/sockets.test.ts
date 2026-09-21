@@ -3,7 +3,7 @@ import { readFileSync } from 'node:fs'
 import { test } from 'node:test'
 import { parse } from 'yaml'
 import { CHASSIS_IDS } from '../catalog/chassis.ts'
-import { layoutFor, socketsFor } from './sockets.ts'
+import { layoutFor, socketsFor, stockRollersPerSide } from './sockets.ts'
 import { DAMPERS, HALF_WIDTH_MM, LARGEST_ROLLER_MM, PLATES, rollersPerSide, UPPER_ROLLER_MM } from './fittings.ts'
 
 /**
@@ -34,9 +34,24 @@ test('every socket names a slot the chassis has, and socket names are unique', (
 test('every chassis shows the same slots, plus the counter gear and propeller shaft where the motor lies across, so the tap measurements carry over', () => {
   const ma = new Set(socketsFor('ma').map(s => s.name))
   for (const id of CHASSIS_IDS) {
-    const expected = layoutFor(id).motor.across ? new Set([...ma, 'counter-gear', 'propeller-shaft']) : ma
+    const expected = new Set(ma)
+    // MA is one of the two chassis whose rear posts carry a stacked pair, so
+    // its own set holds the upper tier; one that ships four rollers has none.
+    if (stockRollersPerSide(id) === 1) for (const name of ['roller-rear-l-2', 'roller-rear-r-2']) expected.delete(name)
+    if (layoutFor(id).motor.across) for (const name of ['counter-gear', 'propeller-shaft']) expected.add(name)
     assert.deepEqual(new Set(socketsFor(id).map(s => s.name)), expected, id)
   }
+})
+
+test('the two chassis that ship six rollers draw a rear pair on each side, and the rest one', () => {
+  for (const id of CHASSIS_IDS) {
+    const rear = socketsFor(id).filter(s => s.slotId === 'roller-rear' && s.position[0] < 0)
+    assert.equal(rear.length, stockRollersPerSide(id), id)
+    if (rear.length === 2) assert.equal(rear[1]!.position[1] - rear[0]!.position[1], UPPER_ROLLER_MM, `${id} upper tier`)
+    // The front bumper holds one each side on all eight.
+    assert.equal(socketsFor(id).filter(s => s.slotId === 'roller-front' && s.position[0] < 0).length, 1, id)
+  }
+  assert.deepEqual(CHASSIS_IDS.filter(id => stockRollersPerSide(id) === 2), ['ma', 'ar'])
 })
 
 test('a mirrored slot gets -l and -r sockets at mirrored x', () => {
@@ -93,7 +108,9 @@ test('every end plate puts as many rollers on each side as rollersPerSide says',
     for (const [plateId, plate] of Object.entries(PLATES)) {
       if (plate.side) continue
       const left = socketsFor(id, { plates: { 'rear-stay': plate } }).filter(s => s.slotId === 'roller-rear' && s.position[0] < 0)
-      assert.equal(left.length, rollersPerSide(plateId), `${id} ${plateId}`)
+      // A plate with holes says the count; one that bolts over the bumper
+      // leaves the rollers on the chassis' own posts, so that end keeps theirs.
+      assert.equal(left.length, plate.holes ? rollersPerSide(plateId) : stockRollersPerSide(id), `${id} ${plateId}`)
     }
   }
   assert.equal(rollersPerSide('rear-double-roller'), 2)

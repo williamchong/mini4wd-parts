@@ -49,7 +49,7 @@ const { track } = useAnalytics()
 const { data: catalog } = await useAsyncData('build-catalog', async () => {
   const [chassis, parts, kits] = await Promise.all([
     queryCollection('chassis')
-      .select('id', 'stem', 'names', 'slots', 'defaultLoadout',
+      .select('id', 'stem', 'names', 'slots', 'defaultLoadout', 'rearRollersPerSide',
         'motorShaft', 'motorPosition', 'releaseYear', 'notes', 'thumbnail')
       .all(),
     // `status`, `releaseDate` and `priceJpy` are selected but deliberately not
@@ -233,7 +233,7 @@ const slots = computed<ResolvedSlot[]>(() => {
 const gearRatio = computed(() =>
   hasBuild.value ? gearRatioOf(slots.value, partsById.value, kit.value) : undefined)
 
-const rollersPerSide = computed(() => rollersPerSideIn(slots.value, partsById.value))
+const rollersPerSide = computed(() => rollersPerSideIn(slots.value, partsById.value, shownChassis.value))
 
 const swappable = computed(() =>
   shownChassis.value

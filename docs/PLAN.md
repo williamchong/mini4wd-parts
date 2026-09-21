@@ -1021,6 +1021,16 @@ The rim is a uniform, and the hook is the same function on every material, chass
 
 **Done when:** from the home view, a stock kit's aluminium rollers, plated or moulded wheels and glossy shell are told apart by how they catch the light, not only by their colour; the car sits on a soft shadow; the 3D chunk is at most about 154 KB gz without the desktop tier; `scene_ready` p90 on phones has not moved by more than the threshold in phase 6; and the posters match the first frame.
 
+#### Six rollers, not four (2026-09-21)
+
+The AR and the MA carry **two rollers on each rear post** — one over the stay and one under it on the same screw — which is the "six rollers" both chassis records already claimed in their notes, and which Tamiya's photo of a bare Aero Avante and of a stock Blast Arrow both show. The pane drew one, so a reader counting rollers against the box found two missing. The roller post in `LAYOUTS` (shared/scene/sockets.ts) now carries a tier count as its third number, `rollers()` reads it as the default hole, and the chassis generator lengthens that post to carry the upper roller. Only AR and MA take it: the FM-A's photo shows a single rear roller, and no other chassis record claims six.
+
+The same pair belongs on the **AR FRP wide rear stay** (15451/15452's `wide-rear-ar` row), where the AR starter pack puts it, so a 2-tier hole with no upper deck now draws the screw through both rollers rather than a post up to a deck that is not there.
+
+**The count the list prints follows the same cascade as the pane:** a plate that places the rollers says how many (`rollersPerSide` on the part record, now written for every such plate rather than only for a double-roller stay, so "one per side on this plate" can be told from "not this plate's to say"), and with no such plate it is the chassis' own `rearRollersPerSide`. Both are written by `catalog:generate` from shared/scene, which `shared/catalog/build.ts` cannot import (§5.6). **A stock roller is also drawn in the kit's A parts** — the sprue it is moulded on — instead of the stock grey: the wiki records an A-parts colour for nearly every kit and a roller colour for none, and `data/overrides/kits.yml` overrides the two kits whose rollers are not their A parts.
+
+**Both posters were recaptured**, since the empty MA gained its upper rear pair: 38 KB for 16:9 and 17 KB for 4:3, up from 35 and 16. The socket set is no longer identical across the eight chassis, so the §5.5 tap measurements carry over only for the four rollers they were taken on. **Not done:** whether the ME, released after both, also ships six — its record does not say, and no photo we hold shows its rear stay.
+
 ---
 
 ## 6. Roadmap

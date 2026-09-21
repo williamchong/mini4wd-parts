@@ -25,7 +25,8 @@ classLegality:
   stockBmax: legal
   junior: legal
   source: derived
-specs: {}
+specs:
+  rollersPerSide: 1
 colours:
   primary: "#d0312d"
   source: derived

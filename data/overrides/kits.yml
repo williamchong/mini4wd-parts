@@ -118,7 +118,8 @@
     front-stay: [{ partId: '15451', source: override }]
     rear-stay: [{ partId: '15452', source: override }]
     damper: [{ partId: '15392', source: override }]
-  colours: { body: '#1f2124', wheel: '#d0312d', tire: '#1f2124' }
+  # No wiki row, so no A-parts colour for the rollers to fall back to.
+  colours: { body: '#1f2124', wheel: '#d0312d', tire: '#1f2124', roller: '#d0312d' }
 '95598':  # ネオVQS アドバンスパック (VZシャーシ)
   stockLoadout:
     motor: [{ partId: '15455', source: override }]            # ライトダッシュモーター
@@ -128,6 +129,8 @@
     front-stay: [{ partId: '15451', source: override }]
     rear-stay: [{ partId: '15518', source: override }]        # FRPリヤブレーキステーセット
     damper: [{ partId: '15459', source: override }]
+  # Its A parts are clear yellow; the six 13mm rollers in the box are black.
+  colours: { roller: '#1f2124' }
 
 # --- Colours ---------------------------------------------------------------
 #
@@ -180,6 +183,7 @@
 '95143': { colours: { body: '#7cc0ec', clear: [] } }  # デュアルリッジJr. J-CUP 2021
 '95703': { colours: { body: '#2440a8', clear: [] } }  # ゼンペラー3 ポリカ
 
-# Rollers. The wiki has no roller colour field, so a kit's moulded rollers are
-# drawn in the stock tint unless an entry here reads them off the box art.
+# Rollers. The wiki has no roller colour field. A kit's moulded rollers are
+# drawn in its A parts, the sprue they come on, unless an entry here reads a
+# different colour off the box art.
 '18635': { colours: { roller: '#3d63d8' } }  # ブラストアロー — blue plastic rollers

@@ -15,6 +15,7 @@
  */
 import type { BufferGeometry } from 'three'
 import type { ChassisId } from '../../catalog/chassis.ts'
+import { UPPER_ROLLER_MM } from '../fittings.ts'
 import { AXLE_Y, layoutFor } from '../sockets.ts'
 import type { Layout } from '../sockets.ts'
 import { cylinder, Triangles, wound } from './mesh.ts'
@@ -255,14 +256,19 @@ class Chassis {
     }
   }
 
-  /** A short cylinder up from each bumper to each roller, where the layout puts the roller. */
+  /**
+   * A short cylinder up from each bumper to each roller, where the layout puts
+   * the roller — long enough to carry the upper one too where that end's posts
+   * hold two, since the screw a stacked pair shares runs the height of both.
+   */
   posts() {
-    const { front, rear, side } = this.layout.rollers
-    const at = (into: Triangles, x: number, z: number) => into.revolve(cylinder(2, 4, 13), 8, 'y', [x, 0, z])
+    const { front: [frontX, frontZ, frontTiers = 1], rear: [rearX, rearZ, rearTiers = 1], side } = this.layout.rollers
+    const at = (into: Triangles, x: number, z: number, tiers: number) =>
+      into.revolve(cylinder(2, 4, 13 + (tiers - 1) * UPPER_ROLLER_MM), 8, 'y', [x, 0, z])
     for (const sign of [-1, 1]) {
-      at(this.bumpers[1], sign * front[0], front[1])
-      at(this.bumpers[-1], sign * rear[0], -rear[1])
-      at(this.frame, sign * side, 0)
+      at(this.bumpers[1], sign * frontX, frontZ, frontTiers)
+      at(this.bumpers[-1], sign * rearX, -rearZ, rearTiers)
+      at(this.frame, sign * side, 0, 1)
     }
   }
 

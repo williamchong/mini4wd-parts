@@ -923,6 +923,12 @@ onMounted(() => {
    * it. A kit's own moulded body, wheels and tires have no item number and
    * take the kit's recorded colours, as long as the slot is still the kit's.
    * Then the category's natural colour.
+   *
+   * A stock roller falls back to the kit's A parts, because that is the sprue
+   * it is moulded on: the wiki records an A-parts colour for almost every kit
+   * and a roller colour for none, so without this every kit's rollers were the
+   * stock grey while its chassis was painted correctly around them. A kit
+   * whose rollers are not its A parts overrides it in data/overrides/kits.yml.
    */
   function tintFor(kind: ProxyKind, slot: ResolvedSlot, entry = 0): number {
     const part = coloursOf(slot, entry)
@@ -930,7 +936,8 @@ onMounted(() => {
     if (own) return hexColour(own)
     if (slot.swapped) return STOCK_TINT[kind]
     const kit = props.kitColours
-    const moulded = kind === 'body' || kind === 'wheel' || kind === 'tire' || kind === 'roller' ? kit?.[kind] : undefined
+    const moulded = kind === 'roller' ? kit?.roller ?? kit?.aParts
+      : kind === 'body' || kind === 'wheel' || kind === 'tire' ? kit?.[kind] : undefined
     return hexColour(moulded) ?? STOCK_TINT[kind]
   }
 

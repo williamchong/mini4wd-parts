@@ -39,6 +39,7 @@ colours:
   body: "#1f2124"
   wheel: "#d0312d"
   tire: "#1f2124"
+  roller: "#d0312d"
   source: override
 body: avante-mk3
 priceJpy: 3300

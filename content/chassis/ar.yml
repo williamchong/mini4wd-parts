@@ -16,6 +16,7 @@ treadRearMm: 67
 weightG: 123.5
 status: current
 notes: 田宮第一款原廠就配有六個導輪的底盤。電池位置低、車底封閉，不必拆開車身就能更換摩打和電池，保養方便。
+rearRollersPerSide: 2
 thumbnail: /thumbs/chassis/ar.webp
 detailThumbnail: /thumbs/chassis-detail/ar.webp
 slots:

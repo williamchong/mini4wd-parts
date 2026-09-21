@@ -16,6 +16,7 @@ treadRearMm: 59.5
 weightG: 125.9
 status: current
 notes: 一體成形的單片式車架，剛性高、組裝簡單，原廠就配有六個導輪，是最常推薦給新手的雙軸底盤。
+rearRollersPerSide: 2
 thumbnail: /thumbs/chassis/ma.webp
 detailThumbnail: /thumbs/chassis-detail/ma.webp
 slots:

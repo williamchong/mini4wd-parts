@@ -65,12 +65,13 @@ colours:
   body: "#2a2c30"
   wheel: "#f2c230"
   tire: "#1f2124"
+  roller: "#1f2124"
   chassis: "#1f2124"
   aParts: "#f7d778"
   clear:
     - body
     - aParts
-  source: scraped
+  source: override
 body: neo-vqs-advanced-pack
 priceJpy: 3080
 priceJpyExTax: 2800

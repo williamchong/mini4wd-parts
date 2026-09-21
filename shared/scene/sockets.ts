@@ -70,6 +70,16 @@ export type Fit = {
 }
 
 /**
+ * A pair of roller posts: x and |z|, and how many rollers each post carries —
+ * 2 where the chassis ships one above its stay and one under it. AR and MA are
+ * the two that do, which is the "six rollers" their records claim
+ * (data/chassis/{ar,ma}.yml, read off Tamiya's own photo of each); every other
+ * chassis ships four. A plate in that end's stay slot replaces this with its
+ * own holes, so this is the bare chassis' count.
+ */
+export type Post = readonly [x: number, z: number, tiers?: 1 | 2]
+
+/**
  * The dozen numbers a chassis' sockets are laid out from. The chassis
  * generator reads the same layout, which is what keeps posts under rollers
  * and the motor bay under the motor without a second table.
@@ -78,8 +88,8 @@ export type Layout = {
   wheelbaseMm: number
   treadFrontMm: number
   treadRearMm: number
-  /** Roller post centres: x and |z| for the front and rear pairs, x for the side pair at z = 0. */
-  rollers: { front: readonly [x: number, z: number]; rear: readonly [x: number, z: number]; side: number }
+  /** Roller post centres: the front and rear posts, and x for the side pair at z = 0. */
+  rollers: { front: Post; rear: Post; side: number }
   /** How far out (|z|) the front and rear stays sit on their bumpers. */
   stayZ: number
   /** The side stays' x, on the side guards. */
@@ -124,8 +134,8 @@ const single = (
  * numbered, and all of them open the same picker.
  */
 function rollers(slotId: string, towardNose: 1 | -1, l: Layout, plate?: PlateShape): SceneSocket[] {
-  const [postX, postZ] = towardNose > 0 ? l.rollers.front : l.rollers.rear
-  const holes: readonly Hole[] = plate?.holes ?? [[postX, postZ - l.stayZ]]
+  const [postX, postZ, postTiers = 1] = towardNose > 0 ? l.rollers.front : l.rollers.rear
+  const holes: readonly Hole[] = plate?.holes ?? [[postX, postZ - l.stayZ, postTiers]]
   const found: SceneSocket[] = []
   for (const [x, z, tiers = 1] of holes) {
     for (let tier = 0; tier < tiers; tier++) {
@@ -222,7 +232,7 @@ const REAR_MOTOR = { position: [0, 13, -27], across: true } as const
 const LAYOUTS: Record<ChassisId, Layout> = {
   ma: {
     wheelbaseMm: 80, treadFrontMm: 59.5, treadRearMm: 59.5,
-    rollers: { front: [37, 78], rear: [37, 78], side: 42 }, stayZ: 72, sideStayX: 38, motor: MID_MOTOR
+    rollers: { front: [37, 78], rear: [37, 78, 2], side: 42 }, stayZ: 72, sideStayX: 38, motor: MID_MOTOR
   },
   ms: {
     wheelbaseMm: 80, treadFrontMm: 67, treadRearMm: 69,
@@ -234,7 +244,7 @@ const LAYOUTS: Record<ChassisId, Layout> = {
   },
   ar: {
     wheelbaseMm: 82, treadFrontMm: 67, treadRearMm: 67,
-    rollers: { front: [41, 80], rear: [41, 80], side: 45 }, stayZ: 74, sideStayX: 40, motor: REAR_MOTOR
+    rollers: { front: [41, 80], rear: [41, 80, 2], side: 45 }, stayZ: 74, sideStayX: 40, motor: REAR_MOTOR
   },
   'fm-a': {
     wheelbaseMm: 83, treadFrontMm: 59.5, treadRearMm: 59.5,
@@ -256,6 +266,14 @@ const LAYOUTS: Record<ChassisId, Layout> = {
 }
 
 export const layoutFor = (chassis: ChassisId): Layout => LAYOUTS[chassis]
+
+/**
+ * How many rollers this chassis' own rear posts hold on each side, before any
+ * plate. `catalog:generate` writes it onto the chassis record, the way a
+ * plate's count is written onto its part record, because the build list prints
+ * the count and cannot import this table (shared/scene/fittings.ts).
+ */
+export const stockRollersPerSide = (chassis: ChassisId): number => LAYOUTS[chassis].rollers.rear[2] ?? 1
 
 const SOCKETS = new Map<ChassisId, readonly SceneSocket[]>()
 
