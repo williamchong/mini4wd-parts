@@ -18,7 +18,7 @@ import { cylinder, Triangles, wound } from './mesh.ts'
 import type { Point2 } from './mesh.ts'
 import { teeth } from './parts.ts'
 import type { Paint, PaintFinish } from './parts.ts'
-import { UPPER_ROLLER_MM } from '../fittings.ts'
+import { ROLLER_TOP_MM, UPPER_ROLLER_MM } from '../fittings.ts'
 import type {
   AxleShape, BearingShape, BrakeShape, ChassisUnitShape, DamperShape, PlateShape, PropellerShape, RollerShape
 } from '../fittings.ts'
@@ -81,6 +81,13 @@ function sealedBearing(g: Groups, ring: Triangles, radius: number, h: number) {
   g.steel.revolve(raceProfile(inner, h), 10, 'y')
 }
 
+/** `steps` + 1 points round a circle in a revolve's profile, from one angle to another. */
+const arc = (x: number, y: number, r: number, from: number, to: number, steps = 3): Point2[] =>
+  Array.from({ length: steps + 1 }, (_, i) => {
+    const a = from + ((to - from) * i) / steps
+    return [x + r * Math.cos(a), y + r * Math.sin(a)] as const
+  })
+
 /**
  * A roller at `mm` across, turning about y on its screw: one tier or two, a
  * taper, a moulded roller's rounded rim, a ring round the outside, spokes
@@ -107,11 +114,7 @@ export function roller(shape: RollerShape, mm: number): BufferGeometry {
     const rim = r - round
     const dish = Math.min(0.5, h * 0.25)
     const hub = Math.max(bore + 0.8, r * 0.35)
-    const arc = (y: number, from: number, to: number): Point2[] => Array.from({ length: 4 }, (_, i) => {
-      const a = from + ((to - from) * i) / 3
-      return [rim + round * Math.cos(a), y + round * Math.sin(a)] as const
-    })
-    const outside = [...arc(-h + round, -Math.PI / 2, 0), ...arc(h - round, 0, Math.PI / 2)]
+    const outside = [...arc(rim, -h + round, round, -Math.PI / 2, 0), ...arc(rim, h - round, round, 0, Math.PI / 2)]
       // A rim rounded the full height meets itself at the equator: one point, not a zero-length side.
       .filter((p, k, all) => k === 0 || Math.hypot(p[0] - all[k - 1]![0], p[1] - all[k - 1]![1]) > 1e-6)
     g.body.revolve([
@@ -184,7 +187,7 @@ export function plate(shape: PlateShape, thicknessMm: number, towardNose: 1 | -1
     // With an upper deck, a post inboard of each upper roller carries it. With
     // none, the pair is stacked on one screw through the hole, so that is what
     // stands there — up through both rollers, and proud of the upper one.
-    const [r, from, to] = upper ? [1.2, top, upper.y] : [1.1, 1, top + UPPER_ROLLER_MM + 3]
+    const [r, from, to] = upper ? [1.2, top, upper.y] : [1.1, 1, top + UPPER_ROLLER_MM + ROLLER_TOP_MM]
     const inboard = upper ? 6 : 0
     for (const sign of side ? [1] : [-1, 1]) g.steel.revolve(cylinder(r, from, to), 6, 'y', [sign * (x - inboard), 0, z * towardNose])
   }
@@ -257,11 +260,7 @@ export function damper(shape: DamperShape, span = 0): BufferGeometry {
       // A ball on a short neck, screwed onto the top of a roller's screw; `span` is the bare screw under it.
       const r = w / 2
       const neck = h - w
-      const ball: Point2[] = Array.from({ length: 7 }, (_, i) => {
-        const a = -Math.PI / 3 + (Math.PI * 5 / 6) * i / 6
-        return [r * Math.cos(a), neck + r + r * Math.sin(a)] as const
-      })
-      g.body.revolve([[0, 0], [r * 0.55, 0], [r * 0.55, neck], ...ball], 12, 'y')
+      g.body.revolve([[0, 0], [r * 0.55, 0], [r * 0.55, neck], ...arc(0, neck + r, r, -Math.PI / 3, Math.PI / 2, 6)], 12, 'y')
       if (span > 0) g.steel.revolve(cylinder(1, -span, 0), 6, 'y')
       break
     }

@@ -336,7 +336,8 @@ const HIT: Record<Exclude<Solid, Hidden>, (shape: Shape) => BufferGeometry> = {
   stay: () => new BoxGeometry(60, 8, 22),
   'side-stay': () => new BoxGeometry(22, 8, 40),
   brake: () => new BoxGeometry(40, 8, 16),
-  damper: () => new BoxGeometry(18, 14, 12)
+  // A ball capping a roller is inside that roller's sphere, so its own volume hugs it (see `proxyAt`).
+  damper: shape => damperRow(shape.fitting).mount === 'roller' ? new SphereGeometry(5, 8, 6).translate(0, 4, 0) : new BoxGeometry(18, 14, 12)
 }
 
 /**
@@ -436,7 +437,7 @@ const TAP_SLOP_PX = 6
  * steel pins. `finish` overrides the kind's own material for a part whose
  * material is the product — a plated or aluminium wheel against a moulded one.
  */
-type ProxyData = { slotId: string; state: ProxyState; kind: ProxyKind; tint: number; finish?: Finish; paints?: readonly parts.Paint[] }
+type ProxyData = { slotId: string; state: ProxyState; kind: ProxyKind; tint: number; finish?: Finish; paints?: readonly parts.Paint[]; capsRoller?: boolean }
 
 /**
  * The body shells, one lazily imported JSON file each, generated from
@@ -1128,8 +1129,9 @@ onMounted(() => {
       } else if (isHidden(kind)) {
         group.add(...visibles)
       } else {
-        // Only a round part's size and a gear's end change its hit volume.
-        const hitShape: Shape = { mm: ROUND.has(kind) ? mm : 0, id: '', silhouette: '', towardNose: GEARS.has(kind) ? shape.towardNose : 0, fitting: '', span: 0 }
+        // Only a round part's size, a gear's end and a ball on a roller change its hit volume.
+        data.capsRoller = kind === 'damper' && damperRow(fitting).mount === 'roller'
+        const hitShape: Shape = { mm: ROUND.has(kind) ? mm : 0, id: '', silhouette: '', towardNose: GEARS.has(kind) ? shape.towardNose : 0, fitting: data.capsRoller ? fitting : '', span: 0 }
         const hit = new Mesh(geometry(HIT, kind, hitShape, `h:${shapeKey(kind, hitShape)}`))
         hit.visible = false
         hit.userData = data
@@ -1164,7 +1166,17 @@ onMounted(() => {
       -((clientY - rect.top) / rect.height) * 2 + 1
     )
     raycaster.setFromCamera(pointer, camera)
-    const along = raycaster.intersectObjects(hits, false).map(hit => hit.object.userData as ProxyData)
+    const found = raycaster.intersectObjects(hits, false)
+    const along = found.map(hit => hit.object.userData as ProxyData)
+    // A stabiliser ball rests on its roller, inside the generous sphere that
+    // roller takes taps with, so the nearest hit is never the ball. It wins
+    // where the ray reaches it before leaving that sphere — not a ball at the
+    // far end of the car that happens to lie behind this roller.
+    if (along[0]?.kind === 'roller') {
+      const reach = found[0]!.distance + 2 * rollerRow(DEFAULT_ROLLER).mm
+      const ball = found.findIndex(hit => (hit.object.userData as ProxyData).capsRoller && hit.distance < reach)
+      if (ball > 0) return along[ball]!
+    }
     // A lifted shell fades so it hides nothing, so it must not take the taps
     // aimed at what it uncovered either: it wins only where nothing else is.
     // Seated, it is on the car and the nearest hit, clear or not.

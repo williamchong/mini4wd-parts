@@ -121,6 +121,8 @@ export type Hole = readonly [x: number, z: number, tiers?: 1 | 2]
 
 /** How far above the lower roller an upper one sits (the deck carrying it is a `layer`). */
 export const UPPER_ROLLER_MM = 12
+/** From a roller's socket up to where its screw stands proud of it: the head, or whatever caps it. */
+export const ROLLER_TOP_MM = 3
 
 export type PlateShape = {
   /** Convex outlines of the right half, mirrored in x. */

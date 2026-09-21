@@ -34,7 +34,7 @@
  * `socketsFor` takes what is fitted.
  */
 import type { ChassisId } from '../catalog/chassis.ts'
-import { UPPER_ROLLER_MM } from './fittings.ts'
+import { ROLLER_TOP_MM, UPPER_ROLLER_MM } from './fittings.ts'
 import type { Hole, Mount, PlateShape } from './fittings.ts'
 
 /** The proxy shape drawn in a socket until a part has a generator. */
@@ -106,8 +106,6 @@ const STAY_Y = 8
 const DAMPER_Y = 18
 /** On top of a stay or bumper, where a stabiliser stands. */
 const CORNER_Y = 10.5
-/** From a roller's socket to its top face, where the screw comes out of it. */
-const ROLLER_TOP_MM = 3
 /**
  * Where a stabiliser ball sits: on the 30 mm screw through an end's outer
  * roller, which is just over a two-tier stack. Over a single roller the same
@@ -162,13 +160,16 @@ function rollers(slotId: string, towardNose: 1 | -1, l: Layout, plate?: PlateSha
   return found
 }
 
+/** An end's outer roller: how far out and along it is, and the height of the top one of its stack. */
+type Corner = { x: number, z: number, top: number }
+
 /**
  * The damper slot's sockets: one per entry, at the mount its row names, each
  * end or corner used once before any is used twice, the rear first — where a
  * first mass damper goes. An empty slot outlines a damper at each end, as it
  * always has, so the poster and the tap measurements stand.
  */
-function dampers(l: Layout, mounts: readonly Mount[] | undefined, corners: Record<1 | -1, readonly [number, number, number]>): SceneSocket[] {
+function dampers(l: Layout, mounts: readonly Mount[] | undefined, corners: Record<1 | -1, Corner>): SceneSocket[] {
   const end = (towardNose: 1 | -1): readonly [number, number, number] => [0, DAMPER_Y, towardNose * (l.stayZ - 10)]
   if (!mounts?.length) return [single('damper', 'damper', end(1), 'damper-1'), single('damper', 'damper', end(-1), 'damper-2')]
   const used = { end: 0, side: 0, corner: 0, roller: 0 }
@@ -176,7 +177,7 @@ function dampers(l: Layout, mounts: readonly Mount[] | undefined, corners: Recor
     const towardNose = used[mount]++ % 2 ? 1 : -1
     const name = `damper-${entry + 1}`
     if (mount === 'end') return [{ ...single('damper', 'damper', end(towardNose), name), entry }]
-    const [x, z, top] = corners[towardNose]
+    const { x, z, top } = corners[towardNose]
     const at: readonly [number, number, number] = mount === 'side'
       ? [l.sideStayX + 2, 12, towardNose * 20]
       : mount === 'roller' ? [x, BALL_Y, towardNose * z] : [x - 12, CORNER_Y, towardNose * (z - 4)]
@@ -193,9 +194,9 @@ function sockets(l: Layout, fit: Fit): SceneSocket[] {
   const frontRollers = rollers('roller-front', 1, l, plates['front-stay'])
   const rearRollers = rollers('roller-rear', -1, l, plates['rear-stay'])
   // Where a stabiliser stands at each end: by that end's outer roller, the top one of a stack.
-  const outer = (found: SceneSocket[]) => {
+  const outer = (found: SceneSocket[]): Corner => {
     const [x, y, z] = found.reduce((a, b) => b.position[0] > a.position[0] || (b.position[0] === a.position[0] && b.position[1] > a.position[1]) ? b : a).position
-    return [x, Math.abs(z), y] as const
+    return { x, z: Math.abs(z), top: y }
   }
   const corners = { 1: outer(frontRollers), [-1]: outer(rearRollers) } as const
   const brakeZ = plates['rear-stay']?.brakeZ
