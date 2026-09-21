@@ -258,8 +258,18 @@ function partIn(slot: ResolvedSlot | undefined, entry = 0) {
 }
 const specsOf = (slot: ResolvedSlot | undefined, entry = 0): PartSpecs | undefined => partIn(slot, entry)?.specs
 const coloursOf = (slot: ResolvedSlot | undefined, entry = 0): PartColours | undefined => partIn(slot, entry)?.colours
-/** The fittings row a part names, or '' for a kit's moulding or a part with none: its table's default. */
-const fittingIn = (slot: ResolvedSlot | undefined, entry = 0) => partIn(slot, entry)?.fitting ?? ''
+/**
+ * The fittings row a part names, or '' for a kit's moulding or a part with
+ * none: its table's default. A damper entry with no item number names its own
+ * row in `shape` — a starter pack's stabiliser balls, which Tamiya sells in no
+ * bag of their own. Only the damper slot reads it: a wheel's or tire's `shape`
+ * is a key of another table.
+ */
+function fittingIn(slot: ResolvedSlot | undefined, entry = 0): string {
+  const own = slot?.entries[entry]
+  if (own?.partId) return partIn(slot, entry)?.fitting ?? ''
+  return (slot?.type === 'damper' && own?.shape) || ''
+}
 
 /**
  * The size of what is not a wheel or a tire; those are their row's diameter.
@@ -937,7 +947,7 @@ onMounted(() => {
     if (slot.swapped) return STOCK_TINT[kind]
     const kit = props.kitColours
     const moulded = kind === 'roller' ? kit?.roller ?? kit?.aParts
-      : kind === 'body' || kind === 'wheel' || kind === 'tire' ? kit?.[kind] : undefined
+      : kind === 'body' || kind === 'wheel' || kind === 'tire' || kind === 'damper' ? kit?.[kind] : undefined
     return hexColour(moulded) ?? STOCK_TINT[kind]
   }
 

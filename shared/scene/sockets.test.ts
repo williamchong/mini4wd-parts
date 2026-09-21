@@ -130,6 +130,9 @@ test('each damper-slot part has a socket at its own mount, the rear first', () =
   const [left, right] = [four[2]!, four[3]!]
   assert.equal(left.position[0], -right.position[0])
   assert.ok(right.position[0] > 20 && right.position[2] < -60, 'a corner pair stands at the rear rollers')
+  // A starter pack: its mass damper, then four stabiliser balls, a pair at each end.
+  const pack = ma({ dampers: ['end', 'corner', 'corner'] })
+  assert.deepEqual(pack.map(s => [s.entry, Math.sign(s.position[2])]), [[0, -1], [1, -1], [1, -1], [2, 1], [2, 1]])
 })
 
 test('every tire socket sits on a wheel socket named by swapping the word', () => {

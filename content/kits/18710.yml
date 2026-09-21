@@ -58,17 +58,30 @@ stockLoadout:
   damper:
     - partId: "15515"
       source: override
+    - label:
+        ja: ボールスタビキャップ
+        en: Stabiliser balls
+        zh-HK: 防傾圓球
+      shape: ball-cap
+      source: override
+    - label:
+        ja: ボールスタビキャップ
+        en: Stabiliser balls
+        zh-HK: 防傾圓球
+      shape: ball-cap
+      source: override
 loadoutSource: fandom
 loadoutSourceTitle: Mini 4WD Starter Pack FM-A Balanced Spec
 colours:
   body: "#4a4d52"
   wheel: "#c9ced6"
   tire: "#1f2124"
+  damper: "#1f2124"
   chassis: "#1f2124"
   aParts: "#b9bec4"
   clear:
     - body
-  source: scraped
+  source: override
 body: rowdy-bull
 priceJpy: 2750
 priceJpyExTax: 2500

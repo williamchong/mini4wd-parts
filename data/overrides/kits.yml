@@ -65,10 +65,18 @@
 #   * the black super-hard low-profile tires, which Tamiya sells only inside a
 #     wheel-and-tire set, so there is no item number for the tires alone — those
 #     rows keep the kit's own label;
-#   * the stabiliser balls, aluminium spacers, roller stoppers, nuts and washers,
-#     which are hardware no slot in the graph stands for;
+#   * the aluminium spacers, roller stoppers, nuts and washers, which go wherever
+#     a setup puts them, so the pane has no place to draw them (PLAN.md §5.6);
 #   * 18647's フロントアンダーガード (15405), which bolts to the same front bumper as
 #     its FRP plate, and `front-stay` holds one part.
+#
+# The starter packs' stabiliser balls are in. Tamiya sells them in no bag of their
+# own — the wiki files them under the ボールスタビキャップ article, but no product
+# copy names 15385 or 15386 — so each is a label that names its own `DAMPERS`
+# row where a part's record would, moulded in the kit's `colours.damper`. A row is a mirrored pair at one
+# end's outer roller, the rear first: two rows are the four balls the MA and
+# FM-A boxes hold. The AR box holds six, and the pane has a corner at each end
+# and nowhere for a third pair, so it draws four of them.
 #
 # The three starter packs share their plates and brake: 15451, 15452 and 15458
 # are sold for the AR chassis and Tamiya lists all three as fitting MA and FM-A
@@ -84,7 +92,11 @@
     brake: [{ partId: '15458', source: override }]            # ARシャーシ ブレーキセット
     # Tamiya says マスダンパー; the wiki counts two cylinder weights, which is
     # what 15392 is — two 4.7g weights and the long screws to hang them on.
-    damper: [{ partId: '15392', source: override }]           # マスダンパーセット
+    damper:
+      - { partId: '15392', source: override }                 # マスダンパーセット
+      - { label: { ja: ボールスタビキャップ, en: Stabiliser balls, zh-HK: 防傾圓球 }, shape: ball-cap, source: override }
+      - { label: { ja: ボールスタビキャップ, en: Stabiliser balls, zh-HK: 防傾圓球 }, shape: ball-cap, source: override }
+  colours: { damper: '#d0312d' }                                # red balls
 '18706':  # スターターパックAR スピードタイプ (エアロ アバンテ)
   stockLoadout:
     motor: [{ partId: '15485', source: override }]            # レブチューン2モーター
@@ -93,8 +105,12 @@
     brake: [{ partId: '15458', source: override }]
     # The same set fills two rows: its four weights and the two FRP side plates
     # they hang from, both on the car in Tamiya's photo of this box.
-    damper: [{ partId: '15459', source: override }]           # ARシャーシ サイドマスダンパーセット
+    damper:
+      - { partId: '15459', source: override }                 # ARシャーシ サイドマスダンパーセット
+      - { label: { ja: ボールスタビキャップ, en: Stabiliser balls, zh-HK: 防傾圓球 }, shape: ball-cap, source: override }
+      - { label: { ja: ボールスタビキャップ, en: Stabiliser balls, zh-HK: 防傾圓球 }, shape: ball-cap, source: override }
     side-stay: [{ partId: '15459', source: override }]
+  colours: { damper: '#3d63d8' }                                # blue balls
 '18710':  # スターターパックFM-A バランスタイプ (ラウディーブル)
   stockLoadout:
     motor: [{ partId: '15486', source: override }]            # アトミックチューン2モーター
@@ -104,7 +120,11 @@
     # Tamiya names マスダンパースクエアショート and the wiki measures the blocks at
     # 6×6×14mm, which is 15515 — first sold on its own in 2023, six years after
     # this box, but the same part and the only way to buy one.
-    damper: [{ partId: '15515', source: override }]           # マスダンパー スクエア ショート (6x6x14mm)
+    damper:
+      - { partId: '15515', source: override }                 # マスダンパー スクエア ショート (6x6x14mm)
+      - { label: { ja: ボールスタビキャップ, en: Stabiliser balls, zh-HK: 防傾圓球 }, shape: ball-cap, source: override }
+      - { label: { ja: ボールスタビキャップ, en: Stabiliser balls, zh-HK: 防傾圓球 }, shape: ball-cap, source: override }
+  colours: { damper: '#1f2124' }                                # black balls
 
 # Advanced packs. No brake set in either; both go deeper into the drivetrain
 # than a starter pack does.

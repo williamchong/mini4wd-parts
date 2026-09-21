@@ -58,6 +58,18 @@ stockLoadout:
   damper:
     - partId: "15459"
       source: override
+    - label:
+        ja: ボールスタビキャップ
+        en: Stabiliser balls
+        zh-HK: 防傾圓球
+      shape: ball-cap
+      source: override
+    - label:
+        ja: ボールスタビキャップ
+        en: Stabiliser balls
+        zh-HK: 防傾圓球
+      shape: ball-cap
+      source: override
   side-stay:
     - partId: "15459"
       source: override
@@ -67,9 +79,10 @@ colours:
   body: "#2f5fc4"
   wheel: "#2f5fc4"
   tire: "#1f2124"
+  damper: "#3d63d8"
   chassis: "#1f2124"
   aParts: "#2f5fc4"
-  source: scraped
+  source: override
 body: aero-avante
 priceJpy: 2750
 priceJpyExTax: 2500

@@ -13,7 +13,7 @@ import { bodyForKit, bodyProblems, loadBodies, silhouetteOf } from './bodies.ts'
 import { entryShapeId, TIRES, WHEELS } from '../../shared/scene/wheels.ts'
 import { printedTireMm } from './wheels.ts'
 import { FITTING_CATEGORIES } from './fittings.ts'
-import { FITTING_TABLES, partRollersPerSide } from '../../shared/scene/fittings.ts'
+import { DAMPERS, FITTING_TABLES, partRollersPerSide } from '../../shared/scene/fittings.ts'
 import { readJsonFile } from './io.ts'
 import { ROOT } from './fetch.ts'
 import { join } from 'node:path'
@@ -82,6 +82,13 @@ function checkLoadout(label: string, entries: Loadout, host: Chassis) {
         if (!shape) errors.push(`${label}: ${slotId} names no shape for the 3D pane`)
         else if (!Object.hasOwn(table, shape)) errors.push(`${label}: ${slotId} draws "${shape}", which shared/scene/wheels.ts does not define`)
       }
+      // A damper entry nobody sells names its own row, where a part's
+      // `fitting` would: a typo draws the default weight and says nothing.
+      if (type === 'damper' && !entry.partId && entry.shape && !Object.hasOwn(DAMPERS, entry.shape)) {
+        errors.push(`${label}: ${slotId} draws "${entry.shape}", which is not a DAMPERS row of shared/scene/fittings.ts`)
+      }
+      // The pane reads a catalog part's shape off its record and never the entry's.
+      if (entry.partId && entry.shape) errors.push(`${label}: ${slotId} names part ${entry.partId} and a shape of its own, which nothing draws`)
       if (!entry.partId) continue
       const slots = partSlots.get(entry.partId)
       if (!slots) {

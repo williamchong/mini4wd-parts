@@ -430,6 +430,11 @@ export const loadoutEntry = z.object({
    * the slug beside the label would be the same string twice in every
    * visitor's payload; "Kit standard wheels" names no shape, which is what
    * this field is for and what the 13 kits no wiki row reaches fall back to.
+   *
+   * For a damper entry, the `DAMPERS` row in shared/scene/fittings.ts, and
+   * there a kit override does set it: a catalog part names its row in
+   * `fitting`, and a piece with no item number — a starter pack's stabiliser
+   * balls — has no record to carry one.
    */
   shape: z.string().optional(),
   source: z.enum(['fandom', 'tamiya', 'chassis', 'override'])
@@ -554,6 +559,12 @@ export const kitSchema = z.object({
     tire: hex.optional(),
     /** Only from data/overrides/kits.yml: the wiki has no roller colour field. */
     roller: hex.optional(),
+    /**
+     * Only from data/overrides/kits.yml: what the box's damper-slot pieces
+     * with no item number are moulded in — a starter pack's stabiliser balls.
+     * A catalog part's colour is its own record's.
+     */
+    damper: hex.optional(),
     /**
      * The chassis as this box moulds it: the frame (`Chassis frame`, or an MS
      * chassis' centre unit), an MS chassis' nose and tail units where they

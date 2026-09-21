@@ -121,7 +121,7 @@ export type EntryOrigin = 'chassis' | 'kit' | 'user'
 export type ResolvedEntry = {
   partId?: string
   label?: LabelNames
-  /** Which wheel or tire shape the 3D pane draws for a stock entry (§5.6). */
+  /** Which wheel, tire or damper shape the 3D pane draws for a stock entry (§5.6). */
   shape?: string
   origin: EntryOrigin
 }

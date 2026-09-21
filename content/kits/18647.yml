@@ -58,15 +58,28 @@ stockLoadout:
   damper:
     - partId: "15392"
       source: override
+    - label:
+        ja: ボールスタビキャップ
+        en: Stabiliser balls
+        zh-HK: 防傾圓球
+      shape: ball-cap
+      source: override
+    - label:
+        ja: ボールスタビキャップ
+        en: Stabiliser balls
+        zh-HK: 防傾圓球
+      shape: ball-cap
+      source: override
 loadoutSource: fandom
 loadoutSourceTitle: Mini 4WD Starter Pack MA Power Spec
 colours:
   body: "#eef0f2"
   wheel: "#ec7a24"
   tire: "#1f2124"
+  damper: "#d0312d"
   chassis: "#1f2124"
   aParts: "#d0312d"
-  source: scraped
+  source: override
 body: blast-arrow
 priceJpy: 2750
 priceJpyExTax: 2500
