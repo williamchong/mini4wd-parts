@@ -71,5 +71,16 @@ useHead(() => ({
     :items="crumbs"
     :aria-label="$t('breadcrumb.label')"
     class="breadcrumbs"
-  />
+  >
+    <!--
+      The separator as a character, not the default icon. It is the only icon
+      on /parts, /chassis and the chassis pages, and rendering it through
+      UIcon pulls Iconify's runtime onto routes that have nothing else from
+      Nuxt UI on them. A `›` costs nothing and is what the hand-written trail
+      used before this component replaced it.
+    -->
+    <template #separator>
+      <span aria-hidden="true">›</span>
+    </template>
+  </UBreadcrumb>
 </template>
