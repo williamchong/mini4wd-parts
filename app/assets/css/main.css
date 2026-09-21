@@ -92,15 +92,20 @@
   }
 
   /*
-   * `:not([class])` matters. Every anchor Nuxt UI renders carries classes —
-   * a prose link, a heading's own anchor, a UButton rendered as a link — and
-   * reverting those to the user-agent blue puts the underlined heading anchors
-   * back that Preflight had just fixed. The site's own bare `<a>` (the part
-   * page's 相關連結 list is the one that matters) has no class and still wants
-   * the browser's answer.
+   * `:not([class])` matters. Every anchor Nuxt UI renders carries classes — a
+   * prose link, a heading's own anchor, a UButton rendered as a link — and
+   * restyling those puts back the underlined blue heading anchors that taking
+   * Preflight whole had just fixed. What is left is the site's own bare `<a>`:
+   * the part page's 相關連結 list and the note under its intro.
+   *
+   * The underline reverts to the browser's; the colour does not. These were
+   * the last user-agent blue on the site, which was fine until the page could
+   * be dark — #0000EE on a dark ground is the worst contrast anywhere here,
+   * and its visited purple is worse. `--ui-primary` reads as a link in both
+   * modes because it moves with them.
    */
   a:not([class]) {
-    color: revert;
+    color: var(--ui-primary);
     text-decoration: revert;
   }
 }
