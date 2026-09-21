@@ -186,7 +186,7 @@ const VISIBLE: Record<Exclude<Solid, Train>, (shape: Shape) => BufferGeometry> =
   stay: shape => fittings.plate(plateRow('stay', shape.fitting), shape.mm, shape.towardNose || 1),
   'side-stay': shape => fittings.plate(plateRow('side-stay', shape.fitting), shape.mm, 1),
   brake: shape => fittings.brake(row(BRAKES, shape.fitting, DEFAULT_BRAKE)),
-  damper: shape => fittings.damper(damperRow(shape.fitting)),
+  damper: shape => fittings.damper(damperRow(shape.fitting), shape.span),
   axle: shape => fittings.axle(row(AXLES, shape.fitting, DEFAULT_AXLE), shape.span),
   bearing: shape => fittings.bearing(row(BEARINGS, shape.fitting, DEFAULT_BEARING)),
   'propeller-shaft': shape => fittings.propellerShaft(row(PROPELLERS, shape.fitting, DEFAULT_PROPELLER), shape.span),

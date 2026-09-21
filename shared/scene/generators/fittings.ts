@@ -211,7 +211,7 @@ function spring(into: Triangles, [x, y, z]: readonly [number, number, number], r
  * a bracket; at a side or a corner the socket is already one of a mirrored
  * pair, so the part is drawn once.
  */
-export function damper(shape: DamperShape): BufferGeometry {
+export function damper(shape: DamperShape, span = 0): BufferGeometry {
   const g = groups()
   const { w, h, d } = shape
   const pair = shape.mount === 'end' ? [-13, 13] : [0]
@@ -253,9 +253,18 @@ export function damper(shape: DamperShape): BufferGeometry {
       g.steel.revolve(cylinder(1.2, 0, h * 0.6), 6, 'y')
       g.body.revolve([[0, h * 0.5], [w / 2, h * 0.5], [w / 2, h * 0.8], [w / 2 - 1, h], [0, h]], 14, 'y')
       break
-    case 'cap':
-      g.body.revolve([[0, 0], [w / 2, 0], [w / 2 * 0.85, h * 0.55], [w / 4, h], [0, h]], 12, 'y')
+    case 'cap': {
+      // A ball on a short neck, screwed onto the top of a roller's screw; `span` is the bare screw under it.
+      const r = w / 2
+      const neck = h - w
+      const ball: Point2[] = Array.from({ length: 7 }, (_, i) => {
+        const a = -Math.PI / 3 + (Math.PI * 5 / 6) * i / 6
+        return [r * Math.cos(a), neck + r + r * Math.sin(a)] as const
+      })
+      g.body.revolve([[0, 0], [r * 0.55, 0], [r * 0.55, neck], ...ball], 12, 'y')
+      if (span > 0) g.steel.revolve(cylinder(1, -span, 0), 6, 'y')
       break
+    }
     case 'tube':
       g.body.revolve(cylinder(w / 2, 0, h), 12, 'y')
       g.steel.revolve(cylinder(1, h, h + 1.5), 6, 'y')

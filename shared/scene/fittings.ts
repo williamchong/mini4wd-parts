@@ -287,9 +287,10 @@ export function partRollersPerSide(part: { slots: readonly string[]; fitting?: s
  * Where a damper-slot part mounts. `end`: across the car at the front or
  * rear, where a mass damper's bracket bolts; `side`: on the side guards, a
  * mirrored pair; `corner`: at the outer roller of an end, a mirrored pair,
- * where stabilisers stand.
+ * where stabilisers stand; `roller`: on top of that roller's own screw, a
+ * mirrored pair, where a stabiliser ball caps it.
  */
-export type Mount = 'end' | 'side' | 'corner'
+export type Mount = 'end' | 'side' | 'corner' | 'roller'
 
 /**
  * One damper-slot part. `form` is what the generator builds; `w`, `h` and `d`
@@ -327,7 +328,7 @@ export const DAMPERS: Record<string, DamperShape> = {
   'stabilizer-pole': { mount: 'corner', form: 'pole', w: 5, h: 22, d: 5 },
   'stabilizer-head': { mount: 'corner', form: 'head', w: 11, h: 7, d: 11 },
   'stabilizer-head-17': { mount: 'corner', form: 'head', w: 17, h: 7, d: 17 },
-  'ball-cap': { mount: 'corner', form: 'cap', w: 8, h: 6, d: 8 },
+  'ball-cap': { mount: 'roller', form: 'cap', w: 6, h: 7, d: 6 },
   'hi-mount-tube': { mount: 'corner', form: 'tube', w: 9, h: 12, d: 9 },
   // A sliding damper in the damper slot is its spring pair; the spring sets are the springs alone.
   'springs': SPRINGS,
