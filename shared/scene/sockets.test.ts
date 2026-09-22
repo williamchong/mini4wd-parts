@@ -4,8 +4,7 @@ import { test } from 'node:test'
 import { parse } from 'yaml'
 import { CHASSIS_IDS } from '../catalog/chassis.ts'
 import { layoutFor, socketsFor, stockRollersPerSide } from './sockets.ts'
-import { DAMPERS, HALF_WIDTH_MM, LARGEST_ROLLER_MM, PLATES, rollersPerSide, UPPER_ROLLER_MM } from './fittings.ts'
-import { MOUNTS } from '../catalog/schema.ts'
+import { damperAt, DAMPERS, HALF_WIDTH_MM, LARGEST_ROLLER_MM, PLATES, rollersPerSide, UPPER_ROLLER_MM, WEIGHT_MOUNTS } from './fittings.ts'
 
 /**
  * The slots every chassis has (data/taxonomy/slots.yml: `standard` adds only
@@ -211,23 +210,28 @@ test('MA\'s sockets are where the posters and tap measurements were taken', () =
 })
 
 /**
- * A loadout may name a mount for a weight sold bare, and `schema.ts` restates
- * the list rather than importing it so that module keeps its runtime imports.
- * `satisfies` there catches a value that is not a Mount; this catches the other
- * direction, a Mount added to the table and never offered to a loadout.
+ * A loadout may only move a weight Tamiya sells bare, and only to a place a
+ * weight bolts to. The two lists are authored apart — `anywhere` marks the
+ * product, `WEIGHT_MOUNTS` the places — so a row flagged `anywhere` whose own
+ * mount is not among them would be one the schema cannot express, and the
+ * override would silently keep the row's answer.
  */
-test('every mount a damper can have is one a loadout can name', () => {
-  const inUse = [...new Set(Object.values(DAMPERS).map(shape => shape.mount))].sort()
-  assert.deepEqual(inUse, [...MOUNTS].sort(), 'shared/catalog/schema.ts MOUNTS is out of step with DAMPERS')
+test('a weight the build may place already sits where a weight can go', () => {
+  for (const [id, shape] of Object.entries(DAMPERS)) {
+    if (!shape.anywhere) continue
+    assert.ok((WEIGHT_MOUNTS as readonly string[]).includes(shape.mount), `${id} is anywhere but mounts at ${shape.mount}`)
+  }
 })
 
 /**
- * The mount is the build's to choose only where Tamiya sells the weight bare;
- * a set that ships its own plate carries the answer, which is what lets
- * `catalog:verify` reject an override on one. Pinned because the split is
- * read off product names, and a new row is easy to add without deciding.
+ * `damperAt` is what keeps the socket and the shape telling the same story.
+ * Reading the row for one and the override for the other drew 18710's blocks
+ * as a 34 mm cross-car bracket at each side guard — right place, wrong shape,
+ * and 57 mm out on a car that may be 52.5.
  */
-test('only the weights sold bare are the build\'s to place', () => {
-  const anywhere = Object.entries(DAMPERS).filter(([, shape]) => shape.anywhere).map(([id]) => id).sort()
-  assert.deepEqual(anywhere, ['adjustable', 'balance-weight', 'block-6-14', 'block-6-32', 'block-8-14', 'block-8-32'])
+test('an overridden weight is drawn as the mount it was moved to', () => {
+  const row = DAMPERS['block-6-14']!
+  assert.equal(damperAt(row, 'side').mount, 'side', 'the override wins')
+  assert.equal(damperAt(row, undefined).mount, row.mount, 'and nothing changes without one')
+  assert.equal(damperAt(row, 'side').d, row.d, 'the weight itself is untouched')
 })

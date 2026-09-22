@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { CHASSIS_IDS } from './chassis.ts'
 import type { ChassisId } from './chassis.ts'
-import type { Mount } from '../scene/fittings.ts'
+import { WEIGHT_MOUNTS } from '../scene/fittings.ts'
 
 /**
  * Catalog schemas, shared by `content.config.ts` (build-time validation of the
@@ -416,13 +416,6 @@ export const partSchema = z.object({
  */
 export const labelNames = partNames.partial()
 
-/**
- * The damper mounts a loadout may name. Restated rather than imported so this
- * module keeps its runtime imports; `satisfies` catches a value that is not a
- * Mount, and shared/scene/sockets.test.ts catches a Mount missing from here.
- */
-export const MOUNTS = ['end', 'side', 'corner', 'roller'] as const satisfies readonly Mount[]
-
 export const loadoutEntry = z.object({
   partId: z.string().optional(),
   /** Shown when there is no catalog part to link to. */
@@ -446,17 +439,20 @@ export const loadoutEntry = z.object({
    */
   shape: z.string().optional(),
   /**
-   * For a damper entry, where this build put the weight: a `Mount` of
-   * shared/scene/fittings.ts. Only for a weight Tamiya sells bare, whose
-   * `DAMPERS` row is `anywhere` — a マスダンパー スクエア goes wherever the
-   * builder bolts it, so no one answer belongs on the part record. A set that
-   * ships its own plate already knows, and `catalog:verify` rejects this there.
+   * For a damper entry, where this build put the weight. Only for a weight
+   * Tamiya sells bare, whose `DAMPERS` row is `anywhere` — a マスダンパー
+   * スクエア goes wherever the builder bolts it, so no one answer belongs on
+   * the part record. A set that ships its own plate already knows, and
+   * `catalog:verify` rejects this there.
+   *
+   * `WEIGHT_MOUNTS`, not every `Mount`: a corner and a roller are where a
+   * stabiliser goes, and a weight bolts to neither.
    *
    * Unlike `shape`, this rides alongside a `partId` rather than standing in
    * for one: the part still says what the weight looks like, the kit only says
    * where its photo shows it (§4.2).
    */
-  mount: z.enum(MOUNTS).optional(),
+  mount: z.enum(WEIGHT_MOUNTS).optional(),
   source: z.enum(['fandom', 'tamiya', 'chassis', 'override'])
 }).refine(entry => entry.partId !== undefined || entry.label !== undefined, {
   message: 'needs a partId or a label'

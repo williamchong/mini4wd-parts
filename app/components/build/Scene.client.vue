@@ -33,9 +33,10 @@ import type { ChassisRole } from '#shared/scene/generators/chassis'
 import * as parts from '#shared/scene/generators/parts'
 import * as fittings from '#shared/scene/generators/fittings'
 import {
-  AXLES, BEARINGS, BRAKES, CHASSIS_UNITS, DAMPERS, DEFAULT_AXLE, DEFAULT_BEARING, DEFAULT_BRAKE, DEFAULT_DAMPER,
-  DEFAULT_PLATE, DEFAULT_PROPELLER, DEFAULT_ROLLER, DEFAULT_SIDE_PLATE, PLATES, PROPELLERS, ROLLERS
+  AXLES, BEARINGS, BRAKES, CHASSIS_UNITS, damperAt, DAMPERS, DEFAULT_AXLE, DEFAULT_BEARING, DEFAULT_BRAKE,
+  DEFAULT_DAMPER, DEFAULT_PLATE, DEFAULT_PROPELLER, DEFAULT_ROLLER, DEFAULT_SIDE_PLATE, PLATES, PROPELLERS, ROLLERS
 } from '#shared/scene/fittings'
+import type { Mount } from '#shared/scene/fittings'
 import { DEFAULT_TIRE, DEFAULT_WHEEL, entryShapeId, TIRES, WHEELS } from '#shared/scene/wheels'
 import type { TireShape, WheelShape } from '#shared/scene/wheels'
 import { cylinder, Triangles } from '#shared/scene/generators/mesh'
@@ -114,8 +115,10 @@ type Shape = {
   fitting: string
   /** A shaft's length, from its socket. */
   span: number
+  /** Where this build put a weight sold bare, where it said (schema.ts `mount`). */
+  mount?: Mount
 }
-const shapeKey = (kind: ProxyKind, s: Shape) => `${kind}:${s.mm}:${s.id}:${s.silhouette}:${s.towardNose}:${s.fitting}:${s.span}`
+const shapeKey = (kind: ProxyKind, s: Shape) => `${kind}:${s.mm}:${s.id}:${s.silhouette}:${s.towardNose}:${s.fitting}:${s.span}:${s.mount ?? ''}`
 
 /**
  * A wheel or tire as the numbers its generator actually reads, not as the row
@@ -188,7 +191,7 @@ const VISIBLE: Record<Exclude<Solid, Train>, (shape: Shape) => BufferGeometry> =
   stay: shape => fittings.plate(plateRow('stay', shape.fitting), shape.mm, shape.towardNose || 1),
   'side-stay': shape => fittings.plate(plateRow('side-stay', shape.fitting), shape.mm, 1),
   brake: shape => fittings.brake(row(BRAKES, shape.fitting, DEFAULT_BRAKE)),
-  damper: shape => fittings.damper(damperRow(shape.fitting), shape.span),
+  damper: shape => fittings.damper(damperAt(damperRow(shape.fitting), shape.mount), shape.span),
   axle: shape => fittings.axle(row(AXLES, shape.fitting, DEFAULT_AXLE), shape.span),
   bearing: shape => fittings.bearing(row(BEARINGS, shape.fitting, DEFAULT_BEARING)),
   'propeller-shaft': shape => fittings.propellerShaft(row(PROPELLERS, shape.fitting, DEFAULT_PROPELLER), shape.span),
@@ -303,8 +306,8 @@ function fitOf(bySlot: ReadonlyMap<string, ResolvedSlot>): Fit {
   }
   const damper = bySlot.get('damper')
   // A weight sold bare goes where the build says; everything else carries its
-  // own answer, which `catalog:verify` is what keeps true (schema.ts `mount`).
-  return { plates, dampers: damper?.entries.map((own, entry) => own.mount ?? damperRow(fittingIn(damper, entry)).mount) }
+  // own answer, which `catalog:verify` keeps true (schema.ts `mount`).
+  return { plates, dampers: damper?.entries.map((own, entry) => damperAt(damperRow(fittingIn(damper, entry)), own.mount).mount) }
 }
 
 /**
@@ -341,7 +344,7 @@ const HIT: Record<Exclude<Solid, Hidden>, (shape: Shape) => BufferGeometry> = {
   'side-stay': () => new BoxGeometry(22, 8, 40),
   brake: () => new BoxGeometry(40, 8, 16),
   // A ball capping a roller is inside that roller's sphere, so its own volume hugs it (see `proxyAt`).
-  damper: shape => damperRow(shape.fitting).mount === 'roller' ? new SphereGeometry(5, 8, 6).translate(0, 4, 0) : new BoxGeometry(18, 14, 12)
+  damper: shape => damperAt(damperRow(shape.fitting), shape.mount).mount === 'roller' ? new SphereGeometry(5, 8, 6).translate(0, 4, 0) : new BoxGeometry(18, 14, 12)
 }
 
 /**
@@ -1200,7 +1203,8 @@ onMounted(() => {
         silhouette: shell?.id ?? '',
         towardNose: TOWARD_NOSE.has(socket.kind) ? (socket.position[2] < 0 ? -1 : 1) : 0,
         fitting,
-        span: socket.span ?? 0
+        span: socket.span ?? 0,
+        mount: socket.kind === 'damper' ? slot.entries[entry]?.mount : undefined
       }
       const tint = tintFor(socket.kind, slot, entry)
       const finish = finishFor(socket.kind, slot)
@@ -1252,7 +1256,7 @@ onMounted(() => {
         group.add(...visibles)
       } else {
         // Only a round part's size, a gear's end and a ball on a roller change its hit volume.
-        data.capsRoller = kind === 'damper' && damperRow(fitting).mount === 'roller'
+        data.capsRoller = kind === 'damper' && damperAt(damperRow(fitting), shape.mount).mount === 'roller'
         const hitShape: Shape = { mm: ROUND.has(kind) ? mm : 0, id: '', silhouette: '', towardNose: GEARS.has(kind) ? shape.towardNose : 0, fitting: data.capsRoller ? fitting : '', span: 0 }
         const hit = new Mesh(geometry(HIT, kind, hitShape, `h:${shapeKey(kind, hitShape)}`))
         hit.visible = false
