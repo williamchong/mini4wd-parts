@@ -71,7 +71,8 @@ const props = defineProps<{
 }>()
 
 const emit = defineEmits<{
-  select: [slotId: string]
+  /** `entry` is which of the slot's parts was tapped, where each has a socket of its own (the dampers). */
+  select: [slotId: string, entry?: number]
   /** The reader switched the car on. */
   power: []
   /** …and turned its sound off, or back on. */
@@ -444,7 +445,7 @@ const TAP_SLOP_PX = 6
  * steel pins. `finish` overrides the kind's own material for a part whose
  * material is the product — a plated or aluminium wheel against a moulded one.
  */
-type ProxyData = { slotId: string; state: ProxyState; kind: ProxyKind; tint: number; finish?: Finish; paints?: readonly parts.Paint[]; capsRoller?: boolean }
+type ProxyData = { slotId: string; entry?: number; state: ProxyState; kind: ProxyKind; tint: number; finish?: Finish; paints?: readonly parts.Paint[]; capsRoller?: boolean }
 
 /**
  * The body shells, one lazily imported JSON file each, generated from
@@ -1209,6 +1210,9 @@ onMounted(() => {
       const tint = tintFor(socket.kind, slot, entry)
       const finish = finishFor(socket.kind, slot)
       const data: ProxyData = { slotId: socket.slotId, state, kind: socket.kind, tint, finish }
+      // Only a filled damper socket stands for one part of its slot; the empty
+      // outlines and every other socket stand for the whole slot.
+      if (socket.entry !== undefined && state !== 'empty') data.entry = socket.entry
       if (socket.kind === 'body') seatedOpacity = clearFor(slot) ? CLEAR_OPACITY : 1
       if (socket.kind === 'motor') data.paints = motorPaintsFor(slot, tint)
       if (GEARS.has(socket.kind)) data.paints = parts.gearPaints(tint)
@@ -1330,7 +1334,7 @@ onMounted(() => {
     // changed from its row in the list. Tapping the biggest thing on the car
     // to open a picker would make the picker the thing that keeps opening.
     if (proxy?.kind === 'body') lifted.value = !lifted.value
-    else if (proxy) emit('select', proxy.slotId)
+    else if (proxy) emit('select', proxy.slotId, proxy.entry)
   }
 
   // Hover is a mouse affordance; a finger has nothing to hover with.

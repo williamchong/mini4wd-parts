@@ -58,17 +58,9 @@ stockLoadout:
   damper:
     - partId: "15392"
       source: override
-    - label:
-        ja: ボールスタビキャップ
-        en: Stabiliser balls
-        zh-HK: 防傾圓球
-      shape: ball-cap
+    - partId: "15386"
       source: override
-    - label:
-        ja: ボールスタビキャップ
-        en: Stabiliser balls
-        zh-HK: 防傾圓球
-      shape: ball-cap
+    - partId: "15386"
       source: override
 loadoutSource: fandom
 loadoutSourceTitle: Mini 4WD Starter Pack MA Power Spec

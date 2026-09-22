@@ -6,6 +6,7 @@
  * Revert undoes. `stockThumb` is the one exception, and it reads `origin` for
  * the reason given there.
  */
+import { canAddTo, stacks } from '#shared/catalog/build'
 import { thumbnailSrc } from '#shared/catalog/thumbnails'
 import type { BuildablePart, ResolvedSlot } from '#shared/catalog/build'
 import type { Finding } from '#shared/catalog/rules'
@@ -33,7 +34,7 @@ const props = defineProps<{
   rollersPerSide?: number
 }>()
 
-const emit = defineEmits<{ open: []; revert: []; copy: [] }>()
+const emit = defineEmits<{ open: []; revert: []; copy: []; add: []; remove: [index: number] }>()
 
 const { label: resolveLabel } = useCatalogName()
 const { slotLabel } = useTerm()
@@ -42,6 +43,14 @@ const localePath = useLocalePath()
 // Regional wording applies to slot names too, so 摩打 / 馬達 follows the
 // toggle rather than being frozen into the message file.
 const label = computed(() => slotLabel(props.slot))
+
+/**
+ * A slot that holds several different parts gets two more controls than one
+ * that holds a single part: Add while it has room, and a remove on each entry.
+ * Swap still replaces the whole slot, the same as on every other row.
+ */
+const stacking = computed(() => props.swappable && stacks(props.slot))
+const canAdd = computed(() => props.swappable && canAddTo(props.slot))
 
 const copyLabel = computed(() =>
   props.copyFrom ? slotLabel(props.copyFrom) : '')
@@ -100,6 +109,15 @@ const rows = computed(() => props.slot.entries.map((entry) => {
         <CatalogThumb class="entry-thumb" :src="row.thumbnail" :icon="slot.type" />
         <NuxtLink v-if="row.partId" :to="localePath(`/parts/${row.partId}`)">{{ row.text }}</NuxtLink>
         <span v-else>{{ row.text }}</span>
+        <UButton
+          v-if="stacking"
+          icon="i-lucide-x"
+          variant="ghost"
+          color="neutral"
+          size="xs"
+          :aria-label="$t('build.remove', { part: row.text })"
+          @click="emit('remove', i)"
+        />
       </p>
       <p v-if="rollersPerSide" class="slot-note">
         {{ $t('build.rollersPerSide', { n: rollersPerSide }) }}
@@ -122,6 +140,9 @@ const rows = computed(() => props.slot.entries.map((entry) => {
     <div v-if="swappable" class="slot-actions">
       <UButton size="xs" color="neutral" variant="outline" @click="emit('open')">
         {{ $t('build.swap') }}
+      </UButton>
+      <UButton v-if="canAdd" size="xs" color="neutral" variant="outline" @click="emit('add')">
+        {{ $t('build.add') }}
       </UButton>
       <UButton v-if="copyFrom" variant="link" color="neutral" size="xs" @click="emit('copy')">
         {{ $t('build.copyFrom', { slot: copyLabel }) }}

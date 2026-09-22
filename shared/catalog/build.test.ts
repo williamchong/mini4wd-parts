@@ -4,8 +4,9 @@ import { test } from 'node:test'
 import { parse } from 'yaml'
 import { partSchema } from './schema.ts'
 import {
-  BUILD_CLASSES, counterpartParts, gearRatioOf, isChassisCompatible, newBuild, orderParts, partsForSlot,
-  resolveBuild, rollersPerSideIn, setContentRows, setContentsFor, slotIdsFor, swappableSlotTypes
+  addedTo, BUILD_CLASSES, canAddTo, counterpartParts, gearRatioOf, isChassisCompatible, newBuild, orderParts, partsForSlot,
+  removedFrom, replacedIn, resolveBuild, rollersPerSideIn, setContentRows, setContentsFor, slotIdsFor, stacks,
+  swappableSlotTypes
 } from './build.ts'
 import type { BuildState } from './build.ts'
 import type { Chassis, Kit, Part } from './schema.ts'
@@ -299,6 +300,33 @@ test('a wheel or tire row can copy the other end only when that changes it', () 
   assert.equal(counterpartParts(front, [front, rearOnly], parts), undefined)
   // Only wheels and tires have a counterpart.
   assert.equal(counterpartParts(wheel('motor', []), [front], parts), undefined)
+})
+
+test('a stacking slot takes one more part, loses one, or swaps one, and says what stock it left', () => {
+  const damper = (entries: { partId?: string }[]) => ({
+    id: 'damper', type: 'damper' as const, maxCount: 3, mirror: false, required: false,
+    entries: entries.map(e => ({ ...e, label: e.partId ? undefined : { en: 'Stock ball' }, origin: 'kit' as const })),
+    swapped: false
+  })
+  assert.equal(stacks(damper([])), true)
+  // Two rollers are one part per side, not a stack.
+  assert.equal(stacks({ maxCount: 2, mirror: true }), false)
+  assert.equal(stacks({ maxCount: 1, mirror: false }), false)
+  // Nothing to go beside in an empty slot, and no room in a full one.
+  assert.equal(canAddTo(damper([])), false)
+  assert.equal(canAddTo(damper([{ partId: '15392' }])), true)
+  assert.equal(canAddTo(damper([{ partId: '15392' }, {}, {}])), false)
+
+  const stock = damper([{ partId: '15392' }, {}])
+  // A label has no item number for the swap to hold.
+  assert.deepEqual(addedTo(stock, '15386'), { partIds: ['15392', '15386'], dropped: 1 })
+  assert.deepEqual(replacedIn(stock, 0, '15515'), { partIds: ['15515'], dropped: 1 })
+  assert.deepEqual(removedFrom(stock, 1), { partIds: ['15392'], dropped: 0 })
+  // The same part twice is two entries: a pair of balls, one at each end.
+  const full = damper([{ partId: '15386' }, { partId: '15386' }, { partId: '15392' }])
+  assert.deepEqual(replacedIn(full, 1, '15385').partIds, ['15386', '15385', '15392'])
+  // A full slot stays at its `maxCount`, as a link would be cut to it.
+  assert.deepEqual(addedTo(full, '15515').partIds, ['15386', '15386', '15392'])
 })
 
 test('the gear ratio is the kit\'s until a gear slot is swapped, then only the swapped parts\'', () => {

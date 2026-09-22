@@ -43,6 +43,13 @@ export type AnalyticsEvents = {
    *  `slots` is how many rows it landed on, which is what says whether a set
    *  is being fitted to the chassis it was made for. */
   part_set_added: { chassis: ChassisId, part: string, slots: number, source: 'row' | 'scene' | 'part_page' }
+  /** A part went into a slot that holds several (the dampers, brakes,
+   *  fasteners), beside what was there rather than instead of it. Its own
+   *  event so `part_swap` keeps meaning a replacement. */
+  part_add: { chassis: ChassisId, slot: string, part: string, source: 'row' | 'scene' | 'part_page' }
+  /** One entry taken out of such a slot. No `part` for a stock piece with no
+   *  item number. */
+  part_remove: { chassis: ChassisId, slot: string, part?: string }
   part_revert: { chassis: ChassisId, slot: string }
   /** `method` is the share sheet or the copy button; a closed sheet is not
    *  counted. `ok: false` is the `window.prompt` fallback — no clipboard

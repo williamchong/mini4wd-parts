@@ -254,6 +254,59 @@ export function setContentRows(
   })
 }
 
+/**
+ * Whether a slot holds several different parts at once — the dampers, brakes,
+ * fasteners and chassis units a real car stacks — rather than one part the
+ * reader swaps for another. A mirrored slot's count is one part per side, so a
+ * pair of rollers is not a stack however many it holds.
+ */
+export const stacks = (slot: Pick<ResolvedSlot, 'maxCount' | 'mirror'>): boolean =>
+  slot.maxCount > 1 && !slot.mirror
+
+/**
+ * Whether a part can go on beside what a slot holds: a stack with something in
+ * it and room for one more. An empty slot has nothing to go beside, so filling
+ * it is an ordinary swap.
+ */
+export const canAddTo = (slot: Pick<ResolvedSlot, 'maxCount' | 'mirror' | 'entries'>): boolean =>
+  stacks(slot) && slot.entries.length > 0 && slot.entries.length < slot.maxCount
+
+/**
+ * A stacking slot after one edit, as the swap that holds it: the item numbers
+ * it keeps, and how many stock entries it had to leave behind.
+ *
+ * A swap holds item numbers and nothing else (docs/PLAN.md §4.9), so a stock
+ * entry that is only a label — moulded plastic Tamiya never sold — cannot come
+ * along once the reader touches the slot. It is counted rather than silently
+ * lost, so the builder can say so. A kit's `mount` and `shape` stay behind for
+ * the same reason; a part carries its own row, and the pane draws that.
+ */
+export type SlotEdit = { partIds: string[]; dropped: number }
+
+function edited(slot: ResolvedSlot, at: number | undefined, partId?: string): SlotEdit {
+  const partIds: string[] = []
+  let dropped = 0
+  slot.entries.forEach((entry, i) => {
+    if (i === at) {
+      if (partId) partIds.push(partId)
+    }
+    else if (entry.partId) partIds.push(entry.partId)
+    else dropped++
+  })
+  if (at === undefined && partId) partIds.push(partId)
+  return { partIds: partIds.slice(0, slot.maxCount), dropped }
+}
+
+/** One more part in a stacking slot, after what is already there. */
+export const addedTo = (slot: ResolvedSlot, partId: string): SlotEdit => edited(slot, undefined, partId)
+
+/** One entry of a stacking slot swapped for another part, the rest kept. */
+export const replacedIn = (slot: ResolvedSlot, index: number, partId: string): SlotEdit =>
+  edited(slot, index, partId)
+
+/** One entry taken out of a stacking slot, the rest kept. */
+export const removedFrom = (slot: ResolvedSlot, index: number): SlotEdit => edited(slot, index)
+
 const COUNTERPART: Partial<Record<Slot, Slot>> = {
   'wheel-front': 'wheel-rear',
   'wheel-rear': 'wheel-front',

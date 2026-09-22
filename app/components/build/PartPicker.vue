@@ -13,6 +13,8 @@ const props = defineProps<{
   candidates: SlotCandidate[]
   slotType: Slot
   slotLabel: string
+  /** The choice goes beside what the slot holds rather than replacing it. */
+  adding?: boolean
   buildClass: BuildClass
 }>()
 
@@ -45,7 +47,7 @@ const firstAddOn = computed(() => matches.value.findIndex(({ part }) => part.isA
   -->
   <UModal
     open
-    :title="$t('build.pickPart', { slot: slotLabel })"
+    :title="$t(adding ? 'build.pickPartAdd' : 'build.pickPart', { slot: slotLabel })"
     :ui="{ content: 'max-w-2xl max-h-[85vh]', body: 'overflow-y-auto' }"
     @update:open="value => { if (!value) emit('close') }"
   >

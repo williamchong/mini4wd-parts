@@ -12,14 +12,14 @@
  * model is tested without a browser and this file stays about presentation.
  */
 import {
-  counterpartParts, gearRatioOf, isBuildClass, orderParts, partsForSlot, resolveBuild, rollersPerSideIn,
-  setContentsFor, slotIdsFor, swappableSlotTypes
+  addedTo, canAddTo, counterpartParts, gearRatioOf, isBuildClass, orderParts, partsForSlot, removedFrom, replacedIn,
+  resolveBuild, rollersPerSideIn, setContentsFor, slotIdsFor, stacks, swappableSlotTypes
 } from '#shared/catalog/build'
 import { byChassisOrder } from '#shared/catalog/chassis'
 import { STARTER_PACKS, orderKits } from '#shared/catalog/kits'
 import { checkBuild, classDecides } from '#shared/catalog/rules'
 import { flagThumbnail, thumbnailSrc } from '#shared/catalog/thumbnails'
-import type { BuildablePart, ResolvedSlot } from '#shared/catalog/build'
+import type { BuildablePart, ResolvedSlot, SlotEdit } from '#shared/catalog/build'
 import type { Finding } from '#shared/catalog/rules'
 import type { ChassisId, PartCategory, Slot } from '#shared/catalog/schema'
 import type { AnalyticsEvents } from '~/composables/useAnalytics'
@@ -405,13 +405,21 @@ function placeSet(part: BuildablePart, source: AnalyticsEvents['part_set_added']
 function place(slotId: string) {
   const id = pending.value
   if (!id) return
-  swap(slotId, [id])
-  trackSwap(slotId, id, 'part_page')
   const slot = slots.value.find(s => s.id === slotId)
-  notice.value = t('build.added', {
-    part: pendingName.value,
-    slot: slot ? slotLabel(slot) : slotId
-  })
+  // A damper from its own page goes on beside the ones already fitted, the
+  // way it would on the car; a motor replaces the motor.
+  if (slot && canAddTo(slot)) {
+    fitEdit(slot, addedTo(slot, id), id)
+    trackAdd(slotId, id, 'part_page')
+  }
+  else {
+    swap(slotId, [id])
+    trackSwap(slotId, id, 'part_page')
+    notice.value = t('build.added', {
+      part: pendingName.value,
+      slot: slot ? slotLabel(slot) : slotId
+    })
+  }
   cancelPending()
   // The row is often below the 3D pane, so the change would otherwise happen
   // off screen.
@@ -457,9 +465,42 @@ function trackSwap(slotId: string, partId: string, source: AnalyticsEvents['part
  */
 const pickerSource = ref<'row' | 'scene'>('row')
 
-function openFromRow(slotId: string) {
+/**
+ * What the open picker's choice does to a stacking slot (`stacks`): `add` puts
+ * it beside what is there, a number replaces that one entry — a tapped damper
+ * on the car — and undefined replaces the whole slot, as on every other row.
+ */
+const pickerAt = ref<'add' | number>()
+
+function openFromRow(slotId: string, at?: 'add') {
   pickerSource.value = 'row'
+  pickerAt.value = at
   openSlotId.value = slotId
+}
+
+/**
+ * One edit to a stacking slot, on the car and in words. The notice is the
+ * point: stock pieces with no item number cannot ride along in a swap, and
+ * one that vanished from the list without a word would read as a bug.
+ * `added` is the part put on beside the rest, which the notice names.
+ */
+function fitEdit(slot: ResolvedSlot, edit: SlotEdit, added?: string) {
+  swap(slot.id, edit.partIds)
+  const part = added ? partsById.value.get(added) : undefined
+  // The lost stock pieces outrank the confirmation: the new part is on the
+  // row in plain sight, the missing ones are not.
+  if (edit.dropped) notice.value = t('build.droppedStock', { slot: slotLabel(slot) })
+  else if (part) notice.value = t('build.addedTo', { part: resolve(part.names).value, slot: slotLabel(slot) })
+}
+
+function trackAdd(slotId: string, partId: string, source: AnalyticsEvents['part_add']['source']) {
+  if (chassis.value) track('part_add', { chassis: chassis.value.id, slot: slotId, part: partId, source })
+}
+
+function removeEntry(slot: ResolvedSlot, index: number) {
+  const partId = slot.entries[index]?.partId
+  fitEdit(slot, removedFrom(slot, index))
+  if (chassis.value) track('part_remove', { chassis: chassis.value.id, slot: slot.id, part: partId })
 }
 
 function revertSlot(slotId: string) {
@@ -532,7 +573,7 @@ const showPoster = computed(() => shownChassis.value?.id === PLACEHOLDER_CHASSIS
  * same guard: a slot no catalog part can fill has nothing to pick from. On the
  * placeholder car there is nothing to swap yet, so a tap asks for the kit.
  */
-function pick(slotId: string) {
+function pick(slotId: string, entry?: number) {
   // Counted before the guard: a tap on the placeholder car is still someone
   // trying to use the pane as the selection surface, and it is the reader most
   // worth knowing about — they have not started a build yet.
@@ -546,6 +587,8 @@ function pick(slotId: string) {
   const slot = slots.value.find(s => s.id === slotId)
   if (slot && swappable.value.has(slot.type)) {
     pickerSource.value = 'scene'
+    // A tap on one damper changes that one; the rest of the slot stays.
+    pickerAt.value = stacks(slot) ? entry : undefined
     openSlotId.value = slotId
   }
 }
@@ -559,24 +602,43 @@ const openSlotLabel = computed(() =>
   openSlot.value ? slotLabel(openSlot.value) : '')
 
 /**
- * A selection puts one of the part in the slot. How many packets a mirrored or
- * multi-count slot actually needs is a question for the totals, which land with
- * the rule engine — guessing it here would put four bearing packets in a build
- * that needs one.
+ * A selection puts one of the part in the slot: in place of what was there,
+ * beside the rest of a stacking slot opened to add, or in place of the one
+ * damper tapped on the car (`pickerAt`). How many packets a mirrored or
+ * multi-count slot actually needs is a question for the totals, which land
+ * with the rule engine — guessing it here would put four bearing packets in a
+ * build that needs one.
  */
 function choose(partId: string) {
   const part = partsById.value.get(partId)
   // A set is offered in every picker its contents can fill, and fits whole from
   // any of them: picking a First Try set in the roller list and getting only
   // its rollers would leave the plates it came with nowhere.
+  const slot = openSlot.value
+  const at = pickerAt.value
   if (part?.contents) {
     placeSet(part, pickerSource.value)
   }
-  else if (openSlotId.value) {
-    swap(openSlotId.value, [partId])
-    trackSwap(openSlotId.value, partId, pickerSource.value)
+  else if (slot && at === 'add') {
+    fitEdit(slot, addedTo(slot, partId), partId)
+    trackAdd(slot.id, partId, pickerSource.value)
   }
+  else if (slot && typeof at === 'number') {
+    fitEdit(slot, replacedIn(slot, at, partId))
+    trackSwap(slot.id, partId, pickerSource.value)
+  }
+  else if (slot) {
+    swap(slot.id, [partId])
+    trackSwap(slot.id, partId, pickerSource.value)
+  }
+  closePicker()
+}
+
+function closePicker() {
   openSlotId.value = null
+  // Every way in sets it again, but a stale `add` or entry index must not be
+  // what the next way in finds if one ever forgets.
+  pickerAt.value = undefined
 }
 
 /**
@@ -902,6 +964,8 @@ useHead(() => ({
         :findings="findingsBySlot.get(slot.id)"
         :rollers-per-side="rollersPerSide.get(slot.id)"
         @open="openFromRow(slot.id)"
+        @add="openFromRow(slot.id, 'add')"
+        @remove="index => removeEntry(slot, index)"
         @revert="revertSlot(slot.id)"
         @copy="copy(slot.id)"
       />
@@ -923,6 +987,8 @@ useHead(() => ({
           :findings="findingsBySlot.get(slot.id)"
           :rollers-per-side="rollersPerSide.get(slot.id)"
           @open="openFromRow(slot.id)"
+          @add="openFromRow(slot.id, 'add')"
+          @remove="index => removeEntry(slot, index)"
           @revert="revertSlot(slot.id)"
           @copy="copy(slot.id)"
         />
@@ -993,9 +1059,10 @@ useHead(() => ({
       :candidates="candidates"
       :slot-type="openSlot.type"
       :slot-label="openSlotLabel"
+      :adding="pickerAt === 'add'"
       :build-class="buildClass"
       @select="choose"
-      @close="openSlotId = null"
+      @close="closePicker"
     />
   </div>
 </template>

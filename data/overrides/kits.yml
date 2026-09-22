@@ -78,6 +78,11 @@
 # FM-A boxes hold. The AR box holds six, and the pane has a corner at each end
 # and nowhere for a third pair, so it draws four of them.
 #
+# 18647's are the exception (owner, 2026-09-23): its red balls match 15386's in
+# the box photo, so its rows name that part — which is also what lets them stay
+# on the car when a reader adds another damper, since a swap holds item numbers
+# and a label has none to carry.
+#
 # The three starter packs share their plates and brake: 15451, 15452 and 15458
 # are sold for the AR chassis and Tamiya lists all three as fitting MA and FM-A
 # too, which is why the same numbers sit on a Blast Arrow and a Rowdy Bull.
@@ -94,8 +99,8 @@
     # what 15392 is — two 4.7g weights and the long screws to hang them on.
     damper:
       - { partId: '15392', source: override }                 # マスダンパーセット
-      - { label: { ja: ボールスタビキャップ, en: Stabiliser balls, zh-HK: 防傾圓球 }, shape: ball-cap, source: override }
-      - { label: { ja: ボールスタビキャップ, en: Stabiliser balls, zh-HK: 防傾圓球 }, shape: ball-cap, source: override }
+      - { partId: '15386', source: override }                 # ボールスタビキャップ (ブライト)
+      - { partId: '15386', source: override }
   colours: { damper: '#d0312d' }                                # red balls
 '18706':  # スターターパックAR スピードタイプ (エアロ アバンテ)
   stockLoadout:

@@ -7,6 +7,7 @@
  * would put a beginner's first pair of rollers somewhere they did not ask for.
  * One candidate is applied without asking (`placePending` in pages/index.vue).
  */
+import { canAddTo } from '#shared/catalog/build'
 import type { ResolvedSlot } from '#shared/catalog/build'
 
 defineProps<{
@@ -21,6 +22,14 @@ const emit = defineEmits<{ select: [string]; close: [] }>()
 useReturnFocus()
 
 const { slotLabel } = useTerm()
+const { t } = useI18n()
+
+/** What choosing this slot does to what is already in it. */
+function outcome(slot: ResolvedSlot) {
+  if (!slot.entries.length) return t('build.empty')
+  if (canAddTo(slot)) return t('build.addsBeside')
+  return t('build.replaces')
+}
 </script>
 
 <template>
@@ -38,7 +47,7 @@ const { slotLabel } = useTerm()
             <!-- Whether the slot is free, so replacing what the kit put there
                  is a decision rather than a surprise. -->
             <span class="slot-empty">
-              {{ slot.entries.length ? $t('build.replaces') : $t('build.empty') }}
+              {{ outcome(slot) }}
             </span>
           </button>
         </li>
