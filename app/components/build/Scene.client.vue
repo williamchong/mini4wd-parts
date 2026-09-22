@@ -477,12 +477,32 @@ const CLEAR_OPACITY = 0.65
 /**
  * The car switched on (docs/PLAN.md §5.6): the axles ease up to `SPIN_RPS`
  * and every wheel, tire and gear turns with them at its own rate; switched
- * off, they coast to a stop. Slow on purpose: the 6-tooth PRO pinion turns
- * 3.3 times for each axle turn, and at 0.6 it moves under 30° a frame even at
- * 30 fps, below where its 60° tooth pitch starts to strobe backwards.
+ * off, they coast to a stop.
+ *
+ * 2.4 is what the *wheels* do, and the finest rim in the catalog sets it: a
+ * 12-spoke face has a 30° pitch, so it aliases above 15° a frame, and 2.4 rps
+ * is 14.4° a frame at 60 fps. Every other rim has room to spare, and the 5-
+ * and 6-spoke faces that are most of the catalog stay clear even at 30 fps —
+ * the 6-spoke by 1.2°, which is the margin to check before nudging this up.
+ * It was 0.6 until 2026-09-22, when the car was visibly slower than the motor
+ * it could be heard running (owner).
+ *
+ * The gear train cannot come with it — see `GEAR_RATE`. At this speed the
+ * 6-tooth PRO pinion would turn 47° a frame at 60 fps against a 60° tooth
+ * pitch, well past where it runs visibly backwards, so it keeps the speed it
+ * has always had. The cost is that a gear on an axle now turns slower than
+ * the wheel on the same axle. That is only there to be found with the shell
+ * lifted and the chassis looked into; a pinion strobing backwards would be
+ * there to be seen every time.
  */
 const powered = ref(false)
-const SPIN_RPS = 0.6
+const SPIN_RPS = 2.4
+/**
+ * What a gear in the train turns for one turn of `SPIN_RPS`, on top of its
+ * own ratio: exactly the factor that holds the train at the 0.6 rps axle
+ * speed it was drawn against, so nothing in it strobes.
+ */
+const GEAR_RATE = 0.25
 /**
  * Time constants of the ease: a motor spins up faster than a car coasts
  * down. With the stop below, a coast from full speed takes ln(30) × 0.5 ≈
@@ -490,8 +510,14 @@ const SPIN_RPS = 0.6
  */
 const SPIN_UP_S = 0.4
 const COAST_S = 0.5
-/** Below this a coasting car has stopped, and the pane stops drawing. */
-const STOPPED_RPS = 0.02
+/**
+ * Below this a coasting car has stopped, and the pane stops drawing. It rides
+ * with `SPIN_RPS` at a thirtieth of it, which is what keeps the ln(30) above
+ * true — pinned at 0.02 a four-times-faster car would coast 2.39 s instead of
+ * 1.70, 41% longer, and would snap to a stop from a quick flick of the switch
+ * at a different point than it used to.
+ */
+const STOPPED_RPS = SPIN_RPS / 30
 /** The longest step one frame may take, so a tab coming back does not jump. */
 const MAX_STEP_S = 0.1
 /** How far the switch slider moves toward the nose when the car is on. */
@@ -966,9 +992,11 @@ onMounted(() => {
   const motor = createMotorSound(pinionTeeth)
   startMotor = motor.start
   /**
-   * What the motor is doing, which is not what the wheels are drawn doing:
-   * `SPIN_RPS` is a lie told to the eye so the pinion does not strobe, so the
-   * sound takes the envelope out of it and puts the real rpm back in.
+   * What the motor is doing, which is not what the wheels are drawn doing: an
+   * axle at speed turns some 66 times a second and `SPIN_RPS` draws 2.4, so
+   * the sound takes the envelope out of it and puts the real rpm back in.
+   * (The anti-strobe lie is `GEAR_RATE`'s now, not this one's.) Dividing by
+   * `SPIN_RPS` is what makes that envelope 0–1 whatever `SPIN_RPS` becomes.
    */
   const heard = () => muted.value || !onScreen || document.hidden ? 0 : speed / SPIN_RPS
   function tickSpin() {
@@ -1195,7 +1223,7 @@ onMounted(() => {
       else if (isTrain(kind)) visibles = train(kind, shape, `t:${key}`).map(rotor => {
         const mesh = new Mesh(rotor.geometry, paint)
         mesh.position.set(...rotor.pivot)
-        if (rotor.rate) spinners.push({ object: mesh, axis: rotor.axis, rate: rotor.rate })
+        if (rotor.rate) spinners.push({ object: mesh, axis: rotor.axis, rate: rotor.rate * GEAR_RATE })
         return mesh
       })
       else visibles = [new Mesh(geometry(VISIBLE, kind, shape, `v:${key}`), paint)]

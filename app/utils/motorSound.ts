@@ -207,8 +207,8 @@ const RUSH_LEVEL = 0.047
  * ripple is a spike and a slump, not a swell, and because a sine puts one
  * sideband pair either side of each whine while a sawtooth puts a run of them
  * — which is the rasp. They all land on exact multiples of the armature's
- * turn, as they do on a real motor; the pitch `wobble` is what keeps that from
- * reading as a single synthesised timbre.
+ * turn, as they do on a real motor; the speed wander (`WOBBLE`) is what keeps
+ * that from reading as a single synthesised timbre.
  *
  * Only the whine is pulsed. Modulating the armature buzz and the commutation
  * tone as well would be modulating 650 Hz at 650 Hz, which is not roughness,
@@ -218,6 +218,24 @@ const RUSH_LEVEL = 0.047
  * reach for if the motor sounds too smooth (up) or starts to warble (down).
  */
 const COMMUTATION_AM = 0.35
+
+/**
+ * The speed wander, as LFO rate in hertz against depth in cents.
+ *
+ * A motor never holds its speed exactly, and one this small holds it far
+ * worse than anything that has earned the word machinery: a 130-size armature
+ * weighs a few grams, so there is almost no inertia to carry it through a
+ * rough patch of commutation or a tight spot in the gears. Steadiness is a
+ * property of mass. Held to the 7 cents this used to be, the pane sounded
+ * like plant equipment heard through a wall (owner, 2026-09-22) — everything
+ * in it being an exact multiple of one unwavering number.
+ *
+ * Two of them rather than one, at a ratio that does not come back round, on
+ * the same argument as the nine cents between the two mesh layers: one LFO is
+ * a vibrato and reads as an effect, two that never line up read as a thing
+ * not holding still.
+ */
+const WOBBLE: readonly (readonly [hz: number, cents: number])[] = [[6.5, 11], [11.3, 7]]
 
 /**
  * How quickly a parameter follows `set`. A time constant rather than a ramp,
@@ -242,9 +260,10 @@ type Layer = {
   /** Cents off its order, so a pair of them beat against each other. */
   detune: number
   /**
-   * Whether this layer is part of the gear whine — which is both what the
-   * slow wobble bends and what the commutation pulses. The armature buzz and
-   * the commutation tone are neither: they are the thing doing the pulsing.
+   * Whether this layer is part of the gear whine, which is what the
+   * commutation pulses. The armature buzz and the commutation tone are not:
+   * they are the thing doing the pulsing. The speed wander is not keyed to
+   * this — see `WOBBLE`, which reaches everything.
    */
   whine: boolean
 }
@@ -367,14 +386,22 @@ export function createMotorSound(teeth: number) {
     highpass.frequency.value = 120
     master.connect(knee[0]!).connect(knee[1]!).connect(highpass).connect(ctx.destination)
 
-    // One slow wobble, shared: a real motor never holds a pitch exactly, and
-    // without this the whine is audibly a test tone.
-    const wobble = ctx.createOscillator()
-    wobble.frequency.value = 6.5
-    const wobbleDepth = ctx.createGain()
-    wobbleDepth.gain.value = 7
-    wobble.connect(wobbleDepth)
-    wobble.start()
+    // The speed wander (`WOBBLE`), summed onto one bus and fanned out from
+    // there. It reaches every layer and the commutation pulse, not just the
+    // whine, and that is the whole point: a speed fluctuation is one number
+    // moving, so every order moves with it by the same *fraction* — which is
+    // what a cent is. Bending one voice was a synthesiser effect; bending all
+    // of them together, by the same cents, is a light rotor hunting.
+    const wander = ctx.createGain()
+    wander.gain.value = 1
+    for (const [hz, cents] of WOBBLE) {
+      const lfo = ctx.createOscillator()
+      lfo.frequency.value = hz
+      const depth = ctx.createGain()
+      depth.gain.value = cents
+      lfo.connect(depth).connect(wander)
+      lfo.start()
+    }
 
     // …and one fast one, on the gears' amplitude rather than their pitch. The
     // whine runs through a gain the commutation opens and closes three times a
@@ -391,6 +418,7 @@ export function createMotorSound(teeth: number) {
     whineBus.gain.value = 1
     pulse.connect(pulseDepth).connect(whineBus.gain)
     whineBus.connect(master)
+    wander.connect(pulse.detune)
     pulse.start()
 
     for (const layer of LAYERS) {
@@ -398,7 +426,7 @@ export function createMotorSound(teeth: number) {
       osc.type = layer.type
       osc.frequency.value = 0
       osc.detune.value = layer.detune
-      if (layer.whine) wobbleDepth.connect(osc.detune)
+      wander.connect(osc.detune)
       const gain = ctx.createGain()
       gain.gain.value = layer.level
       osc.connect(gain).connect(layer.whine ? whineBus : master)
