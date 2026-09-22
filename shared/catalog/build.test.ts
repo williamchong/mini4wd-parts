@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict'
+import { readFileSync } from 'node:fs'
 import { test } from 'node:test'
+import { parse } from 'yaml'
 import { partSchema } from './schema.ts'
 import {
   BUILD_CLASSES, counterpartParts, gearRatioOf, isChassisCompatible, newBuild, orderParts, partsForSlot,
@@ -431,4 +433,29 @@ test('a set names its rows by slot type for a page with no chassis, in profile o
 test('a set naming a slot no chassis profile has contributes no row', () => {
   const set = part({ id: '15476', category: 'bundle', contents: { 'front-stay': ['15300'] } })
   assert.deepEqual(setContentRows(set, [chassis]), [])
+})
+
+/**
+ * `slotsById` unions the profiles and says the union loses nothing; `SLOT_TYPES`
+ * in catalog:generate flattens them on the same promise. Both state it in prose
+ * and neither was tested, so a slot renamed in one profile alone would keep the
+ * union looking complete — including to `taxonomySlotIds` in share.test.ts,
+ * which reads it to decide whether a shared link's slot still exists.
+ *
+ * PRO chassis (MS/MA/ME) drive both axles from a central double-shaft motor, so
+ * the drivetrain is the whole of the difference between the two profiles.
+ */
+test('the slot profiles differ by the drivetrain alone, so flattening them loses nothing', () => {
+  const profiles = parse(readFileSync(new URL('../../data/taxonomy/slots.yml', import.meta.url), 'utf8'))
+    .profiles as Record<string, Array<{ id: string } & Record<string, unknown>>>
+  const byId = (name: string) => new Map((profiles[name] ?? []).map(slot => [slot.id, slot]))
+  const standard = byId('standard')
+  const pro = byId('pro')
+
+  assert.ok(standard.size && pro.size, 'both profiles are read')
+  assert.deepEqual([...standard.keys()].filter(id => !pro.has(id)), ['counter-gear', 'propeller-shaft'])
+  assert.deepEqual([...pro.keys()].filter(id => !standard.has(id)), [])
+  for (const [id, slot] of pro) {
+    assert.deepEqual(slot, standard.get(id), `slot ${id} is authored differently in the two profiles`)
+  }
 })

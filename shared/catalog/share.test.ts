@@ -93,6 +93,21 @@ test('the tables cover every chassis and every slot the catalog has', () => {
   }
 })
 
+/** SHARE_CHASSIS as it stood on 2026-09-22, pinned like PINNED_SLOTS below. */
+const PINNED_CHASSIS = ['ma', 'ms', 'me', 'ar', 'fm-a', 'vz', 'super-2', 'vs']
+
+/**
+ * Byte 1 of every link is a position in SHARE_CHASSIS, so it needs the same pin
+ * the slots have. The check above compares the two tables sorted and so says
+ * nothing about order, and `CHASSIS_IDS` is no safeguard either: chassis.ts
+ * documents it as the display order the chip row and the filters read, which is
+ * an invitation to reorder it, and the two lists are identical today.
+ */
+test('the order of SHARE_CHASSIS is pinned, so reordering the display order cannot re-point a link', () => {
+  assert.deepEqual(SHARE_CHASSIS.slice(0, PINNED_CHASSIS.length), PINNED_CHASSIS)
+  assert.equal(PINNED_CHASSIS.length, 8)
+})
+
 /**
  * SHARE_SLOTS as it stood on 2026-09-22, when the first links were in the
  * wild. Formatted like the list in share.ts so the two diff against each other
