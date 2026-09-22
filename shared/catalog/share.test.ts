@@ -80,12 +80,59 @@ test('a kit with five swaps stays short enough to paste anywhere', () => {
   assert.equal(hash.length, 41)
 })
 
+/** Every slot id the chassis profiles use, across all of them. */
+const taxonomySlotIds = () => new Set(Object.values(
+  parse(readFileSync(new URL('../../data/taxonomy/slots.yml', import.meta.url), 'utf8'))
+    .profiles as Record<string, Array<{ id: string }>>
+).flat().map(slot => slot.id))
+
 test('the tables cover every chassis and every slot the catalog has', () => {
   assert.deepEqual([...SHARE_CHASSIS].sort(), [...CHASSIS_IDS].sort())
-  const profiles = parse(readFileSync(new URL('../../data/taxonomy/slots.yml', import.meta.url), 'utf8'))
-    .profiles as Record<string, Array<{ id: string }>>
-  for (const slot of Object.values(profiles).flat()) {
-    assert.ok(SHARE_SLOTS.includes(slot.id), `slot ${slot.id} is missing from SHARE_SLOTS`)
+  for (const id of taxonomySlotIds()) {
+    assert.ok(SHARE_SLOTS.includes(id), `slot ${id} is missing from SHARE_SLOTS`)
+  }
+})
+
+/**
+ * SHARE_SLOTS as it stood on 2026-09-22, when the first links were in the
+ * wild. Formatted like the list in share.ts so the two diff against each other
+ * by eye. Ids and their positions only: a slot's `type` and `maxCount` are
+ * catalog facts, and `reconcileBuild` trims a link against them by design.
+ */
+const PINNED_SLOTS = [
+  'body', 'motor', 'gear-set', 'counter-gear', 'propeller-shaft', 'terminal', 'switch',
+  'axle', 'bearing', 'wheel-front', 'wheel-rear', 'tire-front', 'tire-rear', 'front-stay',
+  'rear-stay', 'side-stay', 'roller-front', 'roller-rear', 'roller-side', 'brake', 'damper',
+  'fastener', 'gear-cover', 'chassis-unit'
+]
+
+/**
+ * The coverage test is containment only, which a rename passes. This pins the
+ * positions: appending stays free, and renaming, reordering or removing one of
+ * these fails here rather than re-pointing every link already shared.
+ *
+ * A slot that must be renamed keeps its entry and its index — the entry is a
+ * wire format, not the taxonomy — and `reconcileBuild` maps the old id on.
+ */
+test('the order of SHARE_SLOTS is pinned, so a rename fails here rather than in shared links', () => {
+  assert.deepEqual(SHARE_SLOTS.slice(0, PINNED_SLOTS.length), PINNED_SLOTS)
+  // Editing both lists in step would satisfy the comparison above, since one
+  // commit owns them both. The count is a third thing such an edit has to get
+  // past, and a legitimate append never moves it.
+  assert.equal(PINNED_SLOTS.length, 24)
+})
+
+/**
+ * The other half of a rename, and the quiet one: leave the positions alone and
+ * append the new id. The pin above holds and the coverage test is satisfied,
+ * while every link already shared names a slot no chassis has any more. So a
+ * pinned id must still be a slot, not merely still be in the list.
+ */
+test('a pinned slot is still in the taxonomy, so renaming one by appending fails too', () => {
+  const taxonomy = taxonomySlotIds()
+  for (const id of PINNED_SLOTS) {
+    assert.ok(taxonomy.has(id),
+      `slot ${id} was renamed or retired, but links still name it: map it in reconcileBuild`)
   }
 })
 
