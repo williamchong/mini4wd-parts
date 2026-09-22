@@ -228,8 +228,20 @@ export function damper(shape: DamperShape, span = 0): BufferGeometry {
       }
       break
     case 'blocks':
-      for (const x of pair) g.body.boxAt(w, h, d, x, 0, 0)
+      for (const x of pair) {
+        g.body.boxAt(w, h, d, x, 0, 0)
+        // The screws the weight slides up when the car lands, standing proud so
+        // it has somewhere to go. A side block is bolted along the car through
+        // two, as Tamiya's photo of 18710 shows; at an end the bracket is only
+        // the 6 mm deep bar below, so its one screw goes through that.
+        const screws = shape.mount === 'end' ? [0] : [-(d / 2 - 3), d / 2 - 3]
+        for (const z of screws) g.steel.revolve(cylinder(1, -h / 2 - 1.5, h / 2 + 4), 6, 'y', [x, 0, z])
+      }
       if (pair.length > 1) g.trim.box(-17, -h / 2 - 1.5, -3, 17, -h / 2, 3)
+      break
+    case 'sheet':
+      // Adhesive lead, stuck under a guard rather than screwed to it.
+      g.body.boxAt(w, h, d, 0, 0, 0)
       break
     case 'plate-weight':
       // A carbon plate across the end, a ball-connected block hanging under each side.

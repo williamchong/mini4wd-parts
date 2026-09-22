@@ -178,7 +178,7 @@ const plateRow = (kind: 'stay' | 'side-stay', id: string) => {
 }
 const damperRow = (id: string) => row(DAMPERS, id, DEFAULT_DAMPER)
 /** The damper-slot forms that are a metal weight; the rest are moulded stabilisers and springs' plastic. */
-const WEIGHTS: ReadonlySet<string> = new Set(['weights', 'blocks', 'stack', 'plate-weight'])
+const WEIGHTS: ReadonlySet<string> = new Set(['weights', 'blocks', 'sheet', 'stack', 'plate-weight'])
 
 const VISIBLE: Record<Exclude<Solid, Train>, (shape: Shape) => BufferGeometry> = {
   motor: () => parts.motor(shafts()),

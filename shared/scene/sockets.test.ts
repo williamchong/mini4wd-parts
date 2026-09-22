@@ -203,7 +203,7 @@ test('MA\'s sockets are where the posters and tap measurements were taken', () =
   assert.deepEqual(at('roller-side-r'), [42, 12, 0])
   assert.deepEqual(at('front-stay'), [0, 8, 72])
   assert.deepEqual(at('brake-1'), [0, 4, -68])
-  assert.deepEqual(at('damper-1'), [0, 18, 62])
+  assert.deepEqual(at('damper-1'), [0, 15, 62])
   assert.deepEqual(at('side-stay-r'), [38, 8, 0])
   assert.deepEqual(at('motor'), [0, 18, 0])
   assert.deepEqual(at('body'), [0, 32, 0])

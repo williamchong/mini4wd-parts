@@ -103,7 +103,15 @@ export const AXLE_Y = 12
 export const BODY_Y = 32
 const ROLLER_Y = 12
 const STAY_Y = 8
-const DAMPER_Y = 18
+/**
+ * Where an end-mounted damper sits. The generator draws the bracket under the
+ * weight — a Tamiya mass damper rests on its plate and flies up the screw on
+ * landing — so this is the weight's centre, not the bracket's underside: the
+ * surface CORNER_Y already names (10.5), the bracket (1.5) and half a 6 mm
+ * weight. One height serves every end shape, so a thicker weight or a 2 mm
+ * plate sits a millimetre out, within this file's plausible-not-measured rule.
+ */
+const DAMPER_Y = 15
 /** On top of a stay or bumper, where a stabiliser stands. */
 const CORNER_Y = 10.5
 /**
@@ -173,13 +181,17 @@ function dampers(l: Layout, mounts: readonly Mount[] | undefined, corners: Recor
   const end = (towardNose: 1 | -1): readonly [number, number, number] => [0, DAMPER_Y, towardNose * (l.stayZ - 10)]
   if (!mounts?.length) return [single('damper', 'damper', end(1), 'damper-1'), single('damper', 'damper', end(-1), 'damper-2')]
   const used = { end: 0, side: 0, corner: 0, roller: 0 }
+  // A lone side weight goes on the slotted pad the guards carry at z = 0, which
+  // is what that pad is for. Two or more step fore and aft of it instead: at
+  // the depths these come in, both on the pad would run into each other.
+  const sideStep = mounts.filter(mount => mount === 'side').length > 1 ? 20 : 0
   return mounts.flatMap((mount, entry): SceneSocket[] => {
     const towardNose = used[mount]++ % 2 ? 1 : -1
     const name = `damper-${entry + 1}`
     if (mount === 'end') return [{ ...single('damper', 'damper', end(towardNose), name), entry }]
     const { x, z, top } = corners[towardNose]
     const at: readonly [number, number, number] = mount === 'side'
-      ? [l.sideStayX + 2, 12, towardNose * 20]
+      ? [l.sideStayX + 2, 12, sideStep ? towardNose * sideStep : 0]
       : mount === 'roller' ? [x, BALL_Y, towardNose * z] : [x - 12, CORNER_Y, towardNose * (z - 4)]
     const span = mount === 'roller' ? BALL_Y - top - ROLLER_TOP_MM : undefined
     return mirrored('damper', 'damper', at).map(socket => ({ ...socket, name: socket.name.replace('damper', name), entry, span }))
