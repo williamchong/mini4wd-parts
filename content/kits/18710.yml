@@ -57,6 +57,7 @@ stockLoadout:
       source: override
   damper:
     - partId: "15515"
+      mount: side
       source: override
     - label:
         ja: ボールスタビキャップ

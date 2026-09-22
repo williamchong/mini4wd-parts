@@ -5,6 +5,7 @@ import { parse } from 'yaml'
 import { CHASSIS_IDS } from '../catalog/chassis.ts'
 import { layoutFor, socketsFor, stockRollersPerSide } from './sockets.ts'
 import { DAMPERS, HALF_WIDTH_MM, LARGEST_ROLLER_MM, PLATES, rollersPerSide, UPPER_ROLLER_MM } from './fittings.ts'
+import { MOUNTS } from '../catalog/schema.ts'
 
 /**
  * The slots every chassis has (data/taxonomy/slots.yml: `standard` adds only
@@ -207,4 +208,26 @@ test('MA\'s sockets are where the posters and tap measurements were taken', () =
   assert.deepEqual(at('side-stay-r'), [38, 8, 0])
   assert.deepEqual(at('motor'), [0, 18, 0])
   assert.deepEqual(at('body'), [0, 32, 0])
+})
+
+/**
+ * A loadout may name a mount for a weight sold bare, and `schema.ts` restates
+ * the list rather than importing it so that module keeps its runtime imports.
+ * `satisfies` there catches a value that is not a Mount; this catches the other
+ * direction, a Mount added to the table and never offered to a loadout.
+ */
+test('every mount a damper can have is one a loadout can name', () => {
+  const inUse = [...new Set(Object.values(DAMPERS).map(shape => shape.mount))].sort()
+  assert.deepEqual(inUse, [...MOUNTS].sort(), 'shared/catalog/schema.ts MOUNTS is out of step with DAMPERS')
+})
+
+/**
+ * The mount is the build's to choose only where Tamiya sells the weight bare;
+ * a set that ships its own plate carries the answer, which is what lets
+ * `catalog:verify` reject an override on one. Pinned because the split is
+ * read off product names, and a new row is easy to add without deciding.
+ */
+test('only the weights sold bare are the build\'s to place', () => {
+  const anywhere = Object.entries(DAMPERS).filter(([, shape]) => shape.anywhere).map(([id]) => id).sort()
+  assert.deepEqual(anywhere, ['adjustable', 'balance-weight', 'block-6-14', 'block-6-32', 'block-8-14', 'block-8-32'])
 })

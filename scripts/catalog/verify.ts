@@ -89,6 +89,19 @@ function checkLoadout(label: string, entries: Loadout, host: Chassis) {
       }
       // The pane reads a catalog part's shape off its record and never the entry's.
       if (entry.partId && entry.shape) errors.push(`${label}: ${slotId} names part ${entry.partId} and a shape of its own, which nothing draws`)
+      // `mount` is the exception, and only for a weight sold bare: the part
+      // still draws itself, the loadout only says where the box put it. On a
+      // set that ships its own plate the answer is the product's, so an
+      // override there is either a no-op or a lie about the part.
+      if (entry.mount) {
+        if (type !== 'damper') errors.push(`${label}: ${slotId} names a mount, which only a damper entry has`)
+        else if (!entry.partId) errors.push(`${label}: ${slotId} names a mount with no part; name the DAMPERS row in "shape" instead`)
+        else {
+          const row = DAMPERS[partsById.get(entry.partId)?.fitting ?? '']
+          if (!row) errors.push(`${label}: ${slotId} names a mount, but part ${entry.partId} has no DAMPERS row to mount`)
+          else if (!row.anywhere) errors.push(`${label}: ${slotId} mounts part ${entry.partId} itself, but that one is only sold on its own plate — drop the mount`)
+        }
+      }
       if (!entry.partId) continue
       const slots = partSlots.get(entry.partId)
       if (!slots) {

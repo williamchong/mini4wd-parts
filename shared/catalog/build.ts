@@ -18,6 +18,7 @@
 import type {
   Chassis, ChassisId, Kit, LabelNames, LoadoutEntry, Part, PartLegality, Slot
 } from './schema.ts'
+import type { Mount } from '../scene/fittings.ts'
 
 /** One socket on a chassis, as its profile declares it. */
 export type ChassisSlot = Chassis['slots'][number]
@@ -123,6 +124,8 @@ export type ResolvedEntry = {
   label?: LabelNames
   /** Which wheel, tire or damper shape the 3D pane draws for a stock entry (§5.6). */
   shape?: string
+  /** Where a stock entry's weight went, for the ones sold bare (§4.2). */
+  mount?: Mount
   origin: EntryOrigin
 }
 
@@ -138,7 +141,7 @@ export type ResolvedSlot = {
 }
 
 const fromLoadout = (entries: LoadoutEntry[], origin: EntryOrigin): ResolvedEntry[] =>
-  entries.map(entry => ({ partId: entry.partId, label: entry.label, shape: entry.shape, origin }))
+  entries.map(entry => ({ partId: entry.partId, label: entry.label, shape: entry.shape, mount: entry.mount, origin }))
 
 /**
  * The chassis' slot list is authoritative: a loadout key naming a slot the

@@ -302,7 +302,9 @@ function fitOf(bySlot: ReadonlyMap<string, ResolvedSlot>): Fit {
     if (plate?.holes || plate?.brakeZ !== undefined) plates[slotId] = plate
   }
   const damper = bySlot.get('damper')
-  return { plates, dampers: damper?.entries.map((_, entry) => damperRow(fittingIn(damper, entry)).mount) }
+  // A weight sold bare goes where the build says; everything else carries its
+  // own answer, which `catalog:verify` is what keeps true (schema.ts `mount`).
+  return { plates, dampers: damper?.entries.map((own, entry) => own.mount ?? damperRow(fittingIn(damper, entry)).mount) }
 }
 
 /**

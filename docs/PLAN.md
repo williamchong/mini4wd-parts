@@ -167,6 +167,10 @@ MVP can stay on GitHub Pages: everything in M1 is static, the 3D view included �
 
 **rules**: declarative JSON (see 4.3). **guides**: Markdown per locale. **profiles**: wizard weight vectors.
 
+**Where a mass damper goes is the build's, not always the part's** (owner, 2026-09-22). A damper-slot product falls in two kinds, and the product name is what tells them apart. One kind carries its location as a fact about itself: it ships its own plate (`ボールリンクマスダンパー（カーボンプレート）`) or names its chassis and position (`ARシャーシ サイドマスダンパーセット`, `フロントワイドスライドダンパー`). The other is a bare weight the builder bolts wherever the setup wants it — `マスダンパー スクエア`, the adjustable discs, and `マルチセッティングウェイト`, whose own name says so.
+
+Those are `anywhere: true` in `DAMPERS` (shared/scene/fittings.ts), and only they may take a `mount` on a loadout entry: the part record still says what the weight looks like, the kit says where its box photo puts it. `catalog:verify` rejects a `mount` on any other row, so the override cannot quietly contradict a product that already knows. This is the one field that rides *alongside* a `partId` rather than standing in for one — `shape` still may not, because a catalog part's geometry is wholly its own (§4.7). Today one kit needs it: 18710, whose 15515 blocks sit on the side guards.
+
 **D1 tables**: `builds(id, short_id, chassis_id, parts_json, class, title, locale, thumb_key, created_at, view_count)`, `votes(build_id, voter_hash, value, UNIQUE)`, `part_votes(part_id, voter_hash, value)`, `build_stats` (materialised).
 
 A compact `catalog.json` (ids, names, category, slots, compat, key specs) is shipped to the client so the builder and rule engine run without database reads.

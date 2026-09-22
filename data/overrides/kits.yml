@@ -121,7 +121,9 @@
     # 6×6×14mm, which is 15515 — first sold on its own in 2023, six years after
     # this box, but the same part and the only way to buy one.
     damper:
-      - { partId: '15515', source: override }                 # マスダンパー スクエア ショート (6x6x14mm)
+      # Bare blocks, so the box's own photo is what says where they went:
+      # one each side on the guards, not a pair across an end.
+      - { partId: '15515', mount: side, source: override }   # マスダンパー スクエア ショート (6x6x14mm)
       - { label: { ja: ボールスタビキャップ, en: Stabiliser balls, zh-HK: 防傾圓球 }, shape: ball-cap, source: override }
       - { label: { ja: ボールスタビキャップ, en: Stabiliser balls, zh-HK: 防傾圓球 }, shape: ball-cap, source: override }
   colours: { damper: '#1f2124' }                                # black balls

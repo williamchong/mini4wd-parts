@@ -301,6 +301,14 @@ export type Mount = 'end' | 'side' | 'corner' | 'roller'
  */
 export type DamperShape = {
   mount: Mount
+  /**
+   * Set where Tamiya sells the weight bare — マスダンパー スクエア, the
+   * adjustable discs, マルチセッティングウェイト — so where it goes is the
+   * builder's choice and `mount` is only the common one. A set that ships its
+   * own plate, or names its chassis and side, carries its mount as a fact
+   * about the product, and a loadout entry may not override that (§4.2).
+   */
+  anywhere?: true
   form: 'weights' | 'blocks' | 'sheet' | 'stack' | 'plate-weight' | 'pole' | 'head' | 'cap' | 'tube' | 'springs'
   w: number
   h: number
@@ -315,18 +323,16 @@ export const DAMPERS: Record<string, DamperShape> = {
   'mass-damper': { mount: 'end', form: 'weights', w: 9, h: 6, d: 9 },
   'mass-damper-heavy': { mount: 'end', form: 'weights', w: 11, h: 8, d: 11 },
   'slimline': { mount: 'end', form: 'blocks', w: 6, h: 4, d: 20 },
-  'block-6-32': { mount: 'end', form: 'blocks', w: 6, h: 6, d: 32 },
-  'block-8-32': { mount: 'end', form: 'blocks', w: 8, h: 8, d: 32 },
-  // Sold as a pair and mounted as one, a block each side: that is what
-  // Tamiya's own photo of 18710, the only box that ships it, shows.
-  'block-6-14': { mount: 'side', form: 'blocks', w: 6, h: 6, d: 14 },
-  'block-8-14': { mount: 'end', form: 'blocks', w: 8, h: 8, d: 14 },
+  'block-6-32': { mount: 'end', form: 'blocks', anywhere: true, w: 6, h: 6, d: 32 },
+  'block-8-32': { mount: 'end', form: 'blocks', anywhere: true, w: 8, h: 8, d: 32 },
+  'block-6-14': { mount: 'end', form: 'blocks', anywhere: true, w: 6, h: 6, d: 14 },
+  'block-8-14': { mount: 'end', form: 'blocks', anywhere: true, w: 8, h: 8, d: 14 },
   // Ball-connector blocks hang from a carbon plate across the end.
   'ball-block': { mount: 'end', form: 'plate-weight', w: 8, h: 8, d: 20 },
-  'adjustable': { mount: 'end', form: 'stack', w: 10, h: 7, d: 10 },
+  'adjustable': { mount: 'end', form: 'stack', anywhere: true, w: 10, h: 7, d: 10 },
   'side-mass-damper': { mount: 'side', form: 'blocks', w: 6, h: 7, d: 24 },
   // Thin plates of lead under the side guards.
-  'balance-weight': { mount: 'side', form: 'sheet', w: 8, h: 2, d: 26 },
+  'balance-weight': { mount: 'side', form: 'sheet', anywhere: true, w: 8, h: 2, d: 26 },
   // Stabilisers stand at the corners and ride the fence above the rollers.
   // A pole is a steel rod with a ball on top; `w` is the ball.
   'stabilizer-pole': { mount: 'corner', form: 'pole', w: 5, h: 22, d: 5 },
