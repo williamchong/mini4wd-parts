@@ -629,7 +629,9 @@ body {
 }
 
 .slot-row.swapped {
-  background: var(--ui-color-success-50);
+  /* Mixed into the page's own ground rather than a fixed light step, so the
+     tint darkens with the page and the row's text stays readable in dark mode. */
+  background: color-mix(in oklab, var(--ui-success) 10%, var(--ui-bg));
 }
 
 .slot-label {
@@ -1036,8 +1038,8 @@ body {
   margin: 0 0 0.75rem;
   padding: 0.6rem 0.8rem;
   font-size: 0.9em;
-  background: var(--ui-color-success-50);
-  border: 1px solid var(--ui-color-success-200);
+  background: color-mix(in oklab, var(--ui-success) 10%, var(--ui-bg));
+  border: 1px solid color-mix(in oklab, var(--ui-success) 35%, var(--ui-bg));
   border-radius: 4px;
 }
 
