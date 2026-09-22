@@ -1,7 +1,8 @@
-# Blast Arrow (MA, 2013): a Le Mans prototype. Two front fender pods with
-# headlights either side of a low pointed nose, a bubble cabin behind the
-# middle with an intake hump behind it, rear fenders cut open over the wheels,
-# and a wide rear wing on two pylons.
+# Blast Arrow (MA, 2013): a Le Mans prototype. Two tall bullet pods over the
+# front wheels, headlights in their noses, either side of a low flat splitter
+# and a raised centre nose; a bubble canopy just ahead of the middle with a
+# wide intake hoop behind it; rear fenders standing up over the wheels, cut
+# open beneath; and a wide rear wing on two pylons at the tail.
 name: Blast Arrow
 reference: '18635'
 titles: [Blast Arrow]
@@ -9,23 +10,34 @@ titles: [Blast Arrow]
 kits: ['18647']
 # z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
 hull:
-  - [-70, 37, 5, 30, 11]
-  - [-56, 38, 7, 30, 14]
-  - [-40, 38, 8, 28, 16, 9, 22]
-  - [-26, 36, 8, 24, 16, 11, 28]
-  - [-12, 32, 7, 20, 15, 12, 29]
-  - [4, 26, 6, 17, 13, 11, 22]
-  - [20, 20, 5, 14, 11]
-  - [44, 14, 4, 9, 8]
-  - [68, 6, 2, 3, 4]
+  - [-70, 34, 5, 28, 10]
+  - [-56, 37, 7, 30, 12, 10, 16]
+  - [-24, 37, 8, 30, 13, 12, 21]
+  - [-8, 33, 8, 26, 14, 15, 27]
+  - [4, 26, 7, 21, 14, 11, 29]
+  - [18, 22, 6, 18, 13, 8, 24]
+  - [30, 21, 3, 13, 13]
+  - [50, 21, 2, 10, 9]
+  - [68, 20, 1, 8, 4]
 arches: [0, 15]
 pods:
+  # Bullet pods over the front wheels, headlights in their noses.
   - x: 29
     # z, halfWidth, top, bottom
     stations:
-      - [14, 7, 10, 2]
-      - [26, 9, 15, 1]
-      - [40, 9, 16, 1]
-      - [54, 8, 13, 2]
-      - [64, 5, 7, 4]
-wing: { z: -64, halfWidth: 34, height: 32, chord: 12, pylons: 14 }
+      - [8, 5, 10, 4]
+      - [20, 9, 16, 1]
+      - [36, 10, 19, 0]
+      - [52, 10, 18, 1]
+      - [62, 8, 14, 3]
+      - [68, 4, 9, 5]
+  # Rear fenders standing on the deck over the arches.
+  - x: 30
+    stations:
+      - [-66, 6, 16, 8]
+      - [-56, 8, 22, 9]
+      - [-40, 9, 25, 10]
+      - [-22, 9, 24, 9]
+      - [-8, 7, 19, 8]
+      - [4, 4, 13, 7]
+wing: { z: -64, halfWidth: 34, height: 32, chord: 12, pylons: 12 }
