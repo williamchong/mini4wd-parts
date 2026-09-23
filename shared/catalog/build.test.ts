@@ -4,7 +4,7 @@ import { test } from 'node:test'
 import { parse } from 'yaml'
 import { partSchema } from './schema.ts'
 import {
-  addedTo, BUILD_CLASSES, canAddTo, counterpartParts, gearRatioOf, isChassisCompatible, newBuild, orderParts, partsForSlot,
+  addedTo, BUILD_CLASSES, canAddTo, counterpartParts, gearRatioOf, goesOnCar, isChassisCompatible, newBuild, orderParts, partsForSlot,
   removedFrom, replacedIn, resolveBuild, rollersPerSideIn, setContentRows, setContentsFor, slotIdsFor, stacks,
   swappableSlotTypes
 } from './build.ts'
@@ -486,4 +486,10 @@ test('the slot profiles differ by the drivetrain alone, so flattening them loses
   for (const [id, slot] of pro) {
     assert.deepEqual(slot, standard.get(id), `slot ${id} is authored differently in the two profiles`)
   }
+})
+
+test('a part goes on a car only if it is a car part with a real slot', () => {
+  assert.equal(goesOnCar(part({ id: 'a', isCarPart: true, slots: ['motor'] })), true)
+  assert.equal(goesOnCar(part({ id: 'b', isCarPart: false, slots: ['motor'] })), false)
+  assert.equal(goesOnCar(part({ id: 'c', isCarPart: true, slots: ['none'] })), false)
 })

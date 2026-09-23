@@ -41,6 +41,14 @@ The **MA Power Spec (Blast Arrow)** is the first car most racers suggest to a be
 - It adds front and rear FRP plates, a brake, square mass dampers and super-hard tires.
 - The catch: the propeller shaft has to sit just right for the car to run smoothly, so it takes more care to build than the MA. Owners report no screwdriver in the box, so have one ready.
 
+## Already have a standard kit: add a Basic Tune-Up Parts Set
+
+If you already own a standard kit, or the car you like has no Starter Pack, Tamiya's [Basic Tune-Up Parts Sets](/en/parts/category/bundle/) put the first upgrades most cars get in one box: front and rear plates, front and rear rollers and mass dampers. The MA, AR, FM-A and VZ each have their own set, and one more fits the Super-II, VS and a few others, so check that the set suits your chassis before you buy:
+
+:part-links{ids="15476 15450 15514 15526 15435"}
+
+Press “Add the whole set” to fit the whole box onto the car in the builder and see where each piece goes.
+
 ## What else you need
 
 - **Two AA batteries**, which are not in the box. Alkaline cells are fine to start; if you race often, rechargeable NiMH cells and a charger pay for themselves.

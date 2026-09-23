@@ -12,7 +12,7 @@
  * model is tested without a browser and this file stays about presentation.
  */
 import {
-  addedTo, canAddTo, counterpartParts, gearRatioOf, isBuildClass, orderParts, partsForSlot, removedFrom, replacedIn,
+  addedTo, canAddTo, counterpartParts, gearRatioOf, goesOnCar, isBuildClass, orderParts, partsForSlot, removedFrom, replacedIn,
   resolveBuild, rollersPerSideIn, setContentsFor, slotIdsFor, stacks, swappableSlotTypes
 } from '#shared/catalog/build'
 import { byChassisOrder } from '#shared/catalog/chassis'
@@ -82,9 +82,8 @@ const { data: catalog } = await useAsyncData('build-catalog', async () => {
   const chassisIds = new Set(known.map(c => c.id))
   return {
     chassis: known,
-    // Tools, cases, stickers and setting gauges reach no picker: `partsForSlot`
-    // requires `isCarPart`, and a part slotted `none` fills nothing. Dropping
-    // them at prerender rather than shipping and re-filtering in the browser
+    // Tools, cases, stickers and setting gauges reach no picker (`goesOnCar`).
+    // Dropping them at prerender rather than shipping and re-filtering in the browser
     // takes 39 of 382 records out of the payload.
     //
     // The 343 left are then ordered — regular range before limited, newest
@@ -98,7 +97,7 @@ const { data: catalog } = await useAsyncData('build-catalog', async () => {
     // adjacent, and gzip does slightly worse on the result. Moving the keys
     // out of the payload refunds more than the new order costs.
     parts: orderParts(parts.map(fromContent('parts'))
-      .filter(part => part.isCarPart && part.slots.some(slot => slot !== 'none')))
+      .filter(goesOnCar))
       .map(({ status: _status, releaseDate: _releaseDate, priceJpy: _priceJpy, ...part }) =>
         flagThumbnail(part)),
     // Ordered here rather than in the picker, and then stripped of the field

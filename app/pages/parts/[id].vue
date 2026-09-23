@@ -9,10 +9,10 @@
  * front of a reader who wanted a roller's diameter, and `specsRaw` is Tamiya's
  * own prose, which we store to parse and may not republish (CLAUDE.md).
  *
- * The add-to-build button deliberately does not decide anything: it hands the
- * item number to the builder and goes there. See `pending` in useBuild.ts.
+ * The add-to-build button deliberately does not decide anything: see
+ * useAddToBuild.ts.
  */
-import { setContentRows } from '#shared/catalog/build'
+import { goesOnCar, setContentRows } from '#shared/catalog/build'
 import { fandomArticleUrl, FANDOM_WIKI } from '#shared/catalog/kits'
 import type { BuildClass } from '#shared/catalog/build'
 import type { Part } from '#shared/catalog/schema'
@@ -25,8 +25,6 @@ const { t } = useI18n()
 const localePath = useLocalePath()
 const { resolve, isFallback } = useCatalogName()
 const { term, slotTypeLabel, categoryIntro } = useTerm()
-const { pending } = useBuild()
-const { track } = useAnalytics()
 const siteUrl = useRuntimeConfig().public.siteUrl
 
 const id = computed(() => String(route.params.id))
@@ -180,21 +178,9 @@ const otherNames = computed(() => {
 const wikiUrl = computed(() =>
   part.value.fandomTitle ? fandomArticleUrl(part.value.fandomTitle) : undefined)
 
-/**
- * A tool, a sticker or a setting gauge goes on no car, and neither does a part
- * whose only slot is `none` — the same two tests the builder applies before a
- * part reaches a picker.
- */
-const buildable = computed(() =>
-  part.value.isCarPart && part.value.slots.some(slot => slot !== 'none'))
+const { addToBuild } = useAddToBuild()
 
-function addToBuild() {
-  // The head of a two-page funnel: the builder answers with `part_swap` when
-  // the part lands, or `part_no_slot` when nothing on that chassis takes it.
-  track('part_to_builder', { part: part.value.id, category: part.value.category })
-  pending.value = part.value.id
-  return navigateTo(localePath('/'))
-}
+const buildable = computed(() => goesOnCar(part.value))
 
 const title = computed(() => `${name.value}（${part.value.id}）— ${t('site.title')}`)
 
@@ -282,7 +268,7 @@ useHead(() => ({
           </UBadge>
         </p>
 
-        <UButton v-if="buildable" size="lg" class="part-cta" @click="addToBuild">
+        <UButton v-if="buildable" size="lg" class="part-cta" @click="addToBuild(part)">
           {{ part.contents ? $t('part.addSetToBuild') : $t('part.addToBuild') }}
         </UButton>
       </div>

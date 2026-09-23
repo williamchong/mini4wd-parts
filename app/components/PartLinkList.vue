@@ -42,6 +42,8 @@ const linkTo = (entry: Entry) =>
         </span>
         <span class="part-id">{{ entry.id }}</span>
       </NuxtLink>
+      <!-- Beside the link, never inside it: a button cannot live in an anchor. -->
+      <slot name="action" :entry="entry" />
     </li>
   </ul>
 </template>

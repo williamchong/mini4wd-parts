@@ -413,6 +413,16 @@ export function isChassisCompatible(
 }
 
 /**
+ * Whether a part goes on a car at all. A tool, a case, a sticker or a setting
+ * gauge does not, and neither does a part whose only slot is `none`. The
+ * builder drops the rest from its catalog on this, and a page only offers to
+ * add a part that passes it, so a button can never lead to a part the builder
+ * has never heard of.
+ */
+export const goesOnCar = (part: Pick<Part, 'isCarPart' | 'slots'>): boolean =>
+  part.isCarPart && part.slots.some(slot => slot !== 'none')
+
+/**
  * The slot ids on this chassis a part can occupy — its type matches the socket
  * *and* it physically goes on this chassis (`fits`, below).
  *

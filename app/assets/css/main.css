@@ -1021,6 +1021,18 @@ body {
   border-color: var(--color-chassis-400);
 }
 
+/* A row with a button under its card (a guide's `:part-links`): the card
+   stretches so the buttons in one grid row line up whatever the name's length. */
+.part-link-list li {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.part-link-list li > a {
+  flex: 1;
+}
+
 .part-link-name {
   display: block;
   margin: 0.4rem 0 0.1rem;
