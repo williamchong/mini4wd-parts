@@ -10,16 +10,14 @@
  * focus, traps none, and returns it itself when closed before the picker
  * ever mounts.
  */
+import { onKeyStroke } from '@vueuse/core'
+
 defineProps<{ error?: Error }>()
 const emit = defineEmits<{ close: [] }>()
 
 useReturnFocus()
 
-function onKey(event: KeyboardEvent) {
-  if (event.key === 'Escape') emit('close')
-}
-onMounted(() => window.addEventListener('keydown', onKey))
-onBeforeUnmount(() => window.removeEventListener('keydown', onKey))
+onKeyStroke('Escape', () => emit('close'))
 
 function reload() {
   location.reload()

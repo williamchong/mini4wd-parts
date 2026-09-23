@@ -11,6 +11,7 @@
  * only a change of state, and pushing an entry per swap would turn the back
  * button into an undo that leaves the reader stuck on the page.
  */
+import { refAutoReset } from '@vueuse/core'
 import { encodeBuild, parseBuild, reconcileBuild, wasTrimmed } from '#shared/catalog/share'
 import type { BuildState } from '#shared/catalog/build'
 import type { ShareCatalog } from '#shared/catalog/share'
@@ -22,7 +23,7 @@ export function useBuildLink(catalog: () => ShareCatalog | undefined) {
   const route = useRoute()
   const { build } = useBuild()
   const { track } = useAnalytics()
-  const copied = ref(false)
+  const copied = refAutoReset(false, COPIED_MS)
   /**
    * The last link opened lost something on the way in — a part no longer in
    * the catalog, a kit on another chassis. The rule engine says so; the page
@@ -111,8 +112,6 @@ export function useBuildLink(catalog: () => ShareCatalog | undefined) {
   // only ever fires in the browser.
   watch(build, writeHash)
 
-  let timer: ReturnType<typeof setTimeout> | undefined
-
   function urlFor(state: BuildState | null) {
     const hash = linkFor(state)
     return hash && `${location.origin}${location.pathname}${location.search}${hash}`
@@ -147,8 +146,6 @@ export function useBuildLink(catalog: () => ShareCatalog | undefined) {
     }
     trackShare('copy', true)
     copied.value = true
-    clearTimeout(timer)
-    timer = setTimeout(() => { copied.value = false }, COPIED_MS)
   }
 
   /**
@@ -171,8 +168,6 @@ export function useBuildLink(catalog: () => ShareCatalog | undefined) {
     }
     trackShare('share', true)
   }
-
-  onBeforeUnmount(() => clearTimeout(timer))
 
   return { canShare, copied, copyLink, linkTrimmed, shareLink }
 }
