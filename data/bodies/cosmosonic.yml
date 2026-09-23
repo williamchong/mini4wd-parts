@@ -1,32 +1,39 @@
-# Cosmosonic (FM-A, Retsu Seiba's car): a wide full-bodied racer with a very
-# low splitter nose carrying canard plates, a dark canopy set over the middle,
-# flared haunches, and a tall rear wing standing between two upswept fins.
+# Cosmosonic (FM-A, Retsu Seiba's car): a narrow centre body on a very low
+# splitter nose, between big fenders over the front wheels that run
+# forward to pointed tips; a dark canopy set over the middle; and two upswept
+# fins over the open rear wheels carrying a wide wing at the tail.
 name: Cosmosonic
 reference: '19454'
 titles: [Cosmosonic]
 # z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
 hull:
-  - [-62, 28, 8, 22, 13]
-  - [-48, 33, 10, 27, 17]
-  - [-32, 36, 11, 29, 19, 18, 23]
-  - [-12, 37, 11, 30, 19, 19, 26]
-  - [6, 36, 10, 29, 18, 16, 22]
-  - [24, 35, 9, 28, 16, 10, 18]
-  - [42, 34, 8, 27, 14]
-  - [58, 28, 6, 21, 10]
-  - [70, 16, 4, 11, 6]
-arches: 16
+  - [-62, 20, 7, 15, 11]
+  - [-48, 22, 8, 17, 13]
+  - [-30, 22, 9, 17, 15, 12, 21]
+  - [-12, 22, 9, 17, 15, 13, 24]
+  - [4, 21, 9, 16, 14, 11, 20]
+  - [20, 20, 7, 15, 11]
+  - [42, 18, 5, 13, 8]
+  - [60, 15, 3, 11, 5]
+  - [70, 12, 2, 9, 3]
 pods:
-  # The upswept fins either side of the wing posts.
-  - x: 30
+  # Big fenders over the front wheels, running forward to pointed tips.
+  - x: 29
+    # z, halfWidth, top, bottom
     stations:
-      - [-56, 4, 22, 13]
-      - [-42, 5, 25, 13]
-      - [-26, 4, 20, 13]
-  # The canard plates on the nose shoulders.
-  - x: 30
+      - [0, 5, 12, 6]
+      - [16, 8, 18, 5]
+      - [34, 9, 21, 5]
+      - [52, 9, 19, 5]
+      - [64, 8, 15, 2]
+      - [70, 5, 10, 4]
+  # The upswept fins over the rear wheels that carry the wing.
+  - x: 26
     stations:
-      - [46, 3, 14, 9]
-      - [60, 4, 16, 9]
-      - [68, 3, 13, 9]
-wing: { z: -50, halfWidth: 28, height: 29, chord: 15, pylons: 20 }
+      - [-64, 4, 28, 12]
+      - [-48, 5, 27, 11]
+      - [-30, 5, 22, 10]
+      - [-14, 4, 16, 9]
+      - [-2, 2, 11, 9]
+# The wing's end plates stand on the fins.
+wing: { z: -58, halfWidth: 30, height: 29, chord: 14 }

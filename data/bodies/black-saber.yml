@@ -1,8 +1,8 @@
 # Black Saber (Super-II, the premium re-release): a Saber-family prototype,
-# shorter and wider than Sonic Saber. A broad flat nose with four headlights
-# under a wide cowl, a long narrow gold canopy running most of the roof,
-# fenders cut open over all four wheels, and a tall two-plate wing on twin
-# pylons above a short tail.
+# shorter and wider than Sonic Saber. Two rounded fender crowns over the front
+# wheels carry the headlights either side of a low scooped centre nose; a long
+# narrow gold canopy runs most of the roof, fenders are cut open over all four
+# wheels, and a tall two-plate wing stands on twin pylons above a short tail.
 name: Black Saber
 reference: '95451'
 titles: [Black Saber]
@@ -13,9 +13,19 @@ hull:
   - [-36, 36, 11, 29, 21, 14, 25]
   - [-18, 34, 10, 27, 19, 13, 28]
   - [0, 33, 10, 26, 17, 12, 26]
-  - [16, 34, 9, 27, 14, 8, 20]
-  - [34, 36, 8, 29, 12]
-  - [52, 32, 6, 24, 10]
-  - [64, 20, 4, 13, 8]
+  - [16, 32, 9, 25, 13, 8, 19]
+  - [34, 30, 7, 22, 10]
+  - [52, 26, 5, 19, 8]
+  - [64, 18, 3, 12, 6]
 arches: 15
+pods:
+  # The fender crowns over the front wheels, headlights in their noses.
+  - x: 28
+    # z, halfWidth, top, bottom
+    stations:
+      - [4, 5, 13, 7]
+      - [18, 8, 18, 4]
+      - [36, 10, 21, 3]
+      - [52, 9, 19, 3]
+      - [63, 6, 13, 4]
 wing: { z: -54, halfWidth: 34, height: 35, chord: 14, pylons: 18 }

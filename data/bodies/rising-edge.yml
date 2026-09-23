@@ -1,7 +1,7 @@
 # Rising Edge (MS, 2014): a wide full-bodied prototype. A long pointed nose
 # with slim headlights along the fenders, a low canopy sunk into the middle of
-# the deck, stepped blades running back along each shoulder, cut-out fenders
-# over the wheels, and a raised fin carrying a wing over the tail.
+# the deck, cut-out fenders over the wheels, and two tall blades rising from
+# the shoulders to high tips over the tail, with no wing between them.
 name: Rising Edge
 reference: '18633'
 titles: [Rising Edge]
@@ -18,11 +18,12 @@ hull:
   - [68, 22, 5, 16, 8]
 arches: 16
 pods:
-  # The stepped blades along the shoulders, standing proud of the deck.
+  # The two blades rising along the shoulders to tall tips over the tail.
   # z, halfWidth, top, bottom
-  - x: 26
+  - x: 25
     stations:
-      - [-46, 3, 27, 18]
-      - [-20, 4, 30, 19]
-      - [8, 3, 24, 17]
-wing: { z: -52, halfWidth: 24, height: 32, chord: 12 }
+      - [-60, 3, 34, 24]
+      - [-50, 5, 34, 18]
+      - [-30, 5, 29, 18]
+      - [-10, 4, 24, 18]
+      - [6, 3, 21, 17]

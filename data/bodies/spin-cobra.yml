@@ -19,8 +19,17 @@ hull:
   - [66, 20, 4, 13, 7]
 arches: 15
 pods:
-  # The twin fins standing at the rear corners.
+  # The bulbous fender crowns either side of the centre nose, headlights in
+  # their noses.
   # z, halfWidth, top, bottom
+  - x: 23
+    stations:
+      - [12, 6, 13, 6]
+      - [26, 10, 18, 4]
+      - [44, 11, 19, 3]
+      - [58, 9, 15, 3]
+      - [66, 5, 10, 4]
+  # The twin fins standing at the rear corners.
   - x: 27
     stations:
       - [-58, 2, 25, 12]

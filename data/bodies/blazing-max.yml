@@ -17,9 +17,12 @@ hull:
   - [68, 13, 4, 10, 5]
 pods:
   # The twin fins standing at the rear corners.
-  - x: 22
+  - x: 24
+    # z, halfWidth, top, bottom
     stations:
-      - [-54, 2, 24, 14]
-      - [-42, 3, 26, 14]
-      - [-28, 2, 20, 15]
-wing: { z: -46, halfWidth: 25, height: 24, chord: 13, pylons: 14 }
+      - [-60, 3, 24, 12]
+      - [-50, 4, 29, 12]
+      - [-36, 4, 27, 13]
+      - [-20, 3, 21, 14]
+      - [-8, 2, 17, 14]
+wing: { z: -48, halfWidth: 24, height: 26, chord: 13, pylons: 14 }

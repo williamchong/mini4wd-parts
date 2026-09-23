@@ -1,26 +1,45 @@
-# Tridagger WX (AR, 2018): a long low wedge. A broad flat nose deck of louvred
-# vents that reaches far forward to a pointed tip, fenders cut open over all
-# four wheels, a small blue canopy set in the middle, and a swept dorsal fin
-# standing on the rear deck behind it.
+# Tridagger WX (AR, 2018): a long low wedge. Two boxy fender blocks over the
+# front wheels, vented across their faces, either side of a sunken nose; a
+# small blue canopy in the middle; a swept dorsal fin standing on the rear deck
+# behind it; and furred haunches over the rear wheels.
 name: Tridagger WX
 reference: '19449'
 titles: [Tridagger WX]
 # z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
 hull:
   - [-62, 27, 8, 21, 13]
-  - [-46, 33, 10, 26, 16]
-  - [-30, 36, 11, 29, 18]
-  - [-14, 35, 11, 28, 18, 20, 25]
-  - [2, 34, 11, 27, 17, 20, 26]
-  - [18, 35, 10, 28, 16, 14, 20]
-  - [34, 36, 9, 30, 14]
-  - [52, 33, 7, 27, 11]
-  - [68, 22, 5, 17, 7]
+  - [-46, 32, 10, 25, 15]
+  - [-30, 32, 11, 25, 16, 14, 21]
+  - [-14, 31, 11, 24, 16, 16, 26]
+  - [2, 29, 10, 22, 15, 15, 27]
+  - [18, 26, 9, 19, 13, 10, 20]
+  - [34, 22, 7, 14, 11]
+  - [52, 20, 5, 12, 9]
+  - [68, 14, 3, 8, 5]
 arches: 15
 pods:
+  # Boxy fender blocks over the front wheels, vents on their faces, either
+  # side of the sunken nose.
+  - x: 27
+    # z, halfWidth, top, bottom
+    stations:
+      - [10, 7, 13, 5]
+      - [22, 10, 20, 2]
+      - [40, 10, 22, 1]
+      - [56, 10, 21, 2]
+      - [68, 8, 16, 3]
+  # Rear haunches standing over the rear wheels.
+  - x: 29
+    stations:
+      - [-64, 5, 16, 8]
+      - [-52, 8, 22, 9]
+      - [-36, 8, 23, 9]
+      - [-20, 6, 18, 9]
+      - [-8, 3, 12, 8]
   # The dorsal fin, standing on the rear deck behind the canopy.
   - x: 0
     stations:
-      - [-38, 3, 22, 16]
-      - [-28, 3, 29, 17]
-      - [-18, 3, 26, 18]
+      - [-40, 2, 18, 14]
+      - [-30, 3, 31, 15]
+      - [-22, 3, 34, 16]
+      - [-14, 2, 28, 18]

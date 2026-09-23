@@ -1,26 +1,33 @@
 # Dash-001 Great Emperor (Super-II, 1991): the Emperor grown into an F1 shape —
-# a narrow pointed nose between broad front wings, a tall dark spine running
-# from the cockpit back to a boxed tail cowl, and a wide wing high over the
-# rear axle.
+# a narrow pointed nose over a broad front wing, open front wheels, sidepods
+# behind them, a tall dark spine running from the cockpit back to a boxed tail
+# cowl, and a wide wing high over the rear axle.
 name: Dash-001 Great Emperor
 reference: '18075'
 titles: [Dash-001 Great Emperor]
 # z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
 hull:
-  - [-64, 24, 8, 19, 13]
-  - [-50, 28, 10, 22, 17, 12, 27]
-  - [-34, 31, 11, 24, 16, 14, 31]
-  - [-14, 32, 12, 25, 15, 14, 32]
-  - [4, 31, 12, 24, 14, 13, 28]
-  - [22, 31, 10, 24, 13, 9, 21]
-  - [40, 34, 8, 27, 11]
-  - [56, 26, 6, 20, 9]
-  - [68, 13, 4, 9, 7]
-arches: 15
+  - [-64, 22, 8, 17, 13]
+  - [-50, 24, 10, 19, 17, 12, 27]
+  - [-34, 25, 11, 20, 17, 14, 31]
+  - [-14, 27, 12, 21, 16, 14, 32]
+  - [4, 26, 12, 20, 15, 13, 28]
+  - [20, 22, 10, 17, 13, 9, 20]
+  - [34, 12, 7, 9, 11]
+  - [50, 10, 6, 7, 9]
+  - [62, 10, 5, 7, 7]
+  - [70, 9, 3, 6, 5]
 pods:
   # The raised ridge along the nose, carrying the racing number.
   - x: 5
+    # z, halfWidth, top, bottom
     stations:
-      - [38, 5, 18, 11]
-      - [56, 4, 14, 9]
+      - [38, 5, 18, 9]
+      - [56, 4, 14, 7]
+  # The front wing across the nose, ahead of the open front wheels.
+  - x: 17
+    stations:
+      - [54, 11, 6, 2]
+      - [62, 11, 8, 2]
+      - [70, 10, 6, 2]
 wing: { z: -46, halfWidth: 27, height: 36, chord: 13, pylons: 22 }

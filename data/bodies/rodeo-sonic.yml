@@ -18,11 +18,14 @@ hull:
   - [68, 22, 5, 16, 8]
 arches: 15
 pods:
-  # The curved blades along the roof shoulders, either side of the cabin.
+  # The curved blades along the shoulders, rising from the front fenders
+  # past the cabin to carry the wing.
   # z, halfWidth, top, bottom
-  - x: 24
+  - x: 25
     stations:
-      - [-40, 3, 25, 17]
-      - [-16, 4, 27, 17]
-      - [10, 3, 22, 15]
+      - [-60, 4, 30, 14]
+      - [-46, 5, 31, 15]
+      - [-26, 5, 27, 16]
+      - [-6, 4, 22, 15]
+      - [14, 3, 18, 14]
 wing: { z: -54, halfWidth: 30, height: 31, chord: 16 }

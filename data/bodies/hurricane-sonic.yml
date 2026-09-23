@@ -1,27 +1,39 @@
-# Hurricane Sonic (AR re-release of the 1996 car): a full-bodied racer with a
-# long low nose over covered front wheels, twin intake nacelles either side of
-# a small dark canopy, flared rear fenders, and a very wide two-tier rear wing
-# set high over the tail.
+# Hurricane Sonic (AR re-release of the 1996 car): a full-bodied racer. Two
+# tall fender pods over the front wheels with a low sunken nose scoop between
+# them, a small dark canopy in the middle, twin intake nacelles either side of
+# it rising back to a very wide two-tier wing set high over the tail.
 name: Hurricane Sonic
 reference: '19441'
 titles: [Hurricane Sonic]
 # z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
 hull:
-  - [-60, 28, 9, 22, 14]
-  - [-46, 34, 11, 28, 17]
-  - [-28, 36, 11, 29, 18, 16, 21]
-  - [-8, 35, 11, 28, 17, 18, 24]
-  - [10, 34, 10, 27, 16, 16, 22]
-  - [28, 34, 10, 27, 13]
-  - [46, 32, 8, 25, 11]
-  - [60, 25, 6, 18, 8]
-  - [68, 15, 4, 11, 5]
-arches: 16
+  - [-62, 28, 9, 22, 14]
+  - [-46, 33, 11, 26, 16]
+  - [-28, 34, 11, 26, 17, 14, 22]
+  - [-8, 32, 11, 24, 16, 15, 26]
+  - [10, 29, 10, 21, 15, 12, 22]
+  - [26, 24, 9, 16, 12]
+  - [46, 23, 7, 14, 8]
+  - [60, 21, 5, 12, 6]
+  - [68, 16, 3, 8, 4]
+arches: [0, 16]
 pods:
-  # The intake nacelles that run either side of the canopy, back to the wing.
-  - x: 22
+  # Tall fender pods over the front wheels, a sunken nose scoop between them.
+  - x: 28
+    # z, halfWidth, top, bottom
     stations:
-      - [-30, 6, 24, 17]
-      - [-12, 7, 25, 17]
-      - [8, 6, 22, 16]
-wing: { z: -48, halfWidth: 30, height: 26, chord: 18, pylons: 18 }
+      - [14, 5, 12, 6]
+      - [26, 8, 18, 2]
+      - [40, 9, 21, 1]
+      - [54, 9, 19, 1]
+      - [64, 7, 14, 2]
+      - [69, 4, 9, 4]
+  # The intake nacelles either side of the canopy, rising back to the wing.
+  - x: 23
+    stations:
+      - [-60, 7, 22, 10]
+      - [-46, 8, 26, 10]
+      - [-28, 8, 25, 12]
+      - [-10, 7, 21, 13]
+      - [4, 5, 16, 12]
+wing: { z: -52, halfWidth: 32, height: 27, chord: 18, pylons: 22 }

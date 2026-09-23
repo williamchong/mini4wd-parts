@@ -1,27 +1,44 @@
-# Spin-Viper (VS, 1998): a wide body split by an open engine bay. Big fenders
-# over all four wheels, a low cowl with headlight panels each side of the nose,
-# the motor left exposed in the middle, and two tall fins rising and leaning
-# back out of the centre of the car.
+# Spin-Viper (VS, 1998): a wide body split by an open engine bay. Tall rounded
+# fenders over the front wheels with headlight panels in their noses, lower
+# ones over the rear, the motor left exposed down a low middle, a small screen
+# ahead of it, and two tall fins rising and leaning back out of the centre of
+# the car.
 name: Spin-Viper
 reference: '19429'
 titles: [Spin-Viper]
 # z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
 hull:
-  - [-62, 28, 8, 22, 12]
-  - [-46, 33, 9, 26, 15]
-  - [-30, 35, 10, 28, 16, 17, 20]
-  - [-12, 35, 10, 28, 16, 16, 19]
-  - [6, 34, 9, 27, 14]
-  - [24, 34, 9, 27, 14, 14, 17]
-  - [42, 34, 8, 26, 13]
-  - [58, 29, 6, 22, 10]
+  - [-62, 28, 8, 22, 11]
+  - [-46, 33, 9, 26, 13]
+  - [-32, 34, 9, 26, 13, 10, 17]
+  - [-14, 34, 9, 26, 12, 10, 18]
+  - [2, 33, 8, 25, 11]
+  - [24, 33, 8, 25, 11]
+  - [42, 33, 8, 25, 11]
+  - [58, 29, 6, 22, 9]
   - [68, 18, 4, 12, 6]
 arches: 15
 pods:
-  # The twin fins standing out of the middle of the car, leaning back.
-  - x: 21
+  # The tall rounded fenders over the front wheels.
+  - x: 27
     # z, halfWidth, top, bottom
     stations:
-      - [-28, 3, 21, 13]
-      - [-12, 4, 25, 12]
-      - [4, 3, 22, 11]
+      - [12, 5, 12, 7]
+      - [26, 8, 18, 5]
+      - [42, 9, 20, 5]
+      - [56, 8, 16, 4]
+      - [66, 5, 10, 4]
+  # The lower fenders over the rear wheels.
+  - x: 28
+    stations:
+      - [-62, 5, 13, 8]
+      - [-50, 7, 17, 8]
+      - [-34, 7, 17, 8]
+      - [-22, 5, 13, 8]
+  # The twin fins standing out of the middle of the car, leaning back.
+  - x: 10
+    stations:
+      - [-42, 2, 25, 16]
+      - [-32, 3, 25, 12]
+      - [-12, 3, 19, 10]
+      - [8, 2, 13, 9]

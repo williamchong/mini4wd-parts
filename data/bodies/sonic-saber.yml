@@ -1,21 +1,40 @@
 # Sonic Saber (Super-II re-release of the fully-cowled 1995 car): a Le Mans
-# prototype. A low pointed nose between two rounded fender crowns carrying big
-# headlights, a small dark canopy just behind the middle, a louvred engine
-# cover over the tail, fenders cut open over all four wheels, and a wide wing
-# on twin pylons above the tail.
+# prototype. A low pointed nose between two tall rounded fender crowns over
+# the front wheels carrying big headlights, a small dark canopy over the
+# middle, rear fenders rising over the arches, and a wide wing on twin pylons
+# above the tail.
 name: Sonic Saber
 reference: '19432'
 titles: [Sonic Saber]
 # z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
 hull:
   - [-66, 29, 7, 23, 12]
-  - [-54, 33, 9, 26, 17]
-  - [-40, 35, 10, 28, 20, 13, 24]
-  - [-22, 34, 10, 27, 18, 15, 28]
-  - [-4, 33, 10, 26, 17, 15, 27]
-  - [14, 33, 9, 26, 14, 10, 19]
-  - [34, 35, 8, 28, 12]
-  - [54, 31, 6, 23, 10]
-  - [68, 17, 4, 11, 7]
-arches: 15
-wing: { z: -58, halfWidth: 32, height: 30, chord: 13, pylons: 16 }
+  - [-54, 33, 9, 26, 15]
+  - [-40, 33, 10, 26, 16, 14, 20]
+  - [-22, 32, 10, 25, 16, 15, 26]
+  - [-4, 30, 10, 23, 16, 15, 28]
+  - [14, 27, 9, 20, 14, 10, 20]
+  - [30, 22, 7, 16, 12]
+  - [50, 20, 5, 14, 9]
+  - [68, 16, 3, 10, 5]
+arches: [0, 15]
+pods:
+  # Rounded fender crowns over the front wheels, headlights in their noses.
+  - x: 28
+    # z, halfWidth, top, bottom
+    stations:
+      - [8, 5, 11, 5]
+      - [20, 9, 18, 1]
+      - [38, 10, 21, 0]
+      - [54, 10, 19, 1]
+      - [64, 7, 14, 3]
+      - [69, 3, 8, 5]
+  # Rear fenders rising over the arches towards the wing.
+  - x: 30
+    stations:
+      - [-66, 5, 20, 8]
+      - [-54, 7, 24, 9]
+      - [-38, 8, 23, 9]
+      - [-22, 7, 18, 8]
+      - [-10, 4, 12, 7]
+wing: { z: -58, halfWidth: 33, height: 32, chord: 13, pylons: 16 }

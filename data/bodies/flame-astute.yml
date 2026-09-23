@@ -1,27 +1,31 @@
-# Flame Astute (AR, 2015): a wide full-bodied racer that covers all four
-# wheels. A low flat nose with winglets at its corners, a small canopy set
-# just behind the middle, a raised engine deck, and a high rear wing on two
-# pylons with swept end plates.
+# Flame Astute (AR, 2015): a formula car between four exposed wheels. A
+# narrow pointed nose with a wide front wing and end plates ahead of the front
+# wheels, a small canopy just ahead of the middle, sidepods and an engine
+# cover behind it, and a high rear wing on two pylons with swept end plates.
 name: Flame Astute
 reference: '18705'
 titles: [Flame Astute]
 # z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
 hull:
-  - [-62, 26, 8, 20, 12]
-  - [-50, 32, 10, 26, 16]
-  - [-34, 36, 11, 29, 19, 18, 23]
-  - [-16, 36, 11, 29, 18, 19, 24]
-  - [2, 35, 11, 28, 17, 17, 22]
-  - [20, 34, 10, 27, 15]
-  - [40, 32, 9, 25, 12]
-  - [56, 26, 6, 19, 9]
-  - [68, 16, 4, 11, 6]
-arches: 16
+  - [-62, 18, 8, 14, 12]
+  - [-50, 22, 9, 17, 14]
+  - [-34, 24, 9, 19, 15, 10, 19]
+  - [-16, 24, 9, 19, 14, 12, 22]
+  - [2, 23, 9, 18, 13, 12, 24]
+  - [16, 20, 8, 15, 11, 8, 18]
+  - [30, 14, 6, 10, 9]
+  - [50, 11, 5, 8, 7]
+  - [68, 8, 3, 5, 4]
 pods:
-  # The winglets standing on the front fender corners.
-  - x: 30
+  # The front wing, spanning ahead of the front wheels.
+  - x: 19
+    # z, halfWidth, top, bottom
     stations:
-      - [38, 4, 16, 10]
-      - [52, 5, 18, 9]
-      - [62, 4, 14, 8]
+      - [56, 13, 4, 2]
+      - [67, 13, 4, 2]
+  # The front wing's end plates.
+  - x: 32
+    stations:
+      - [54, 1.5, 10, 1]
+      - [68, 1.5, 8, 1]
 wing: { z: -50, halfWidth: 26, height: 27, chord: 13, pylons: 19 }

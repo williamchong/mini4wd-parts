@@ -1,20 +1,38 @@
-# Exflowly (MS, 2010): a 1970s Le Mans prototype. A long low rounded nose with
-# the headlights let into it, a bubble canopy over the middle, fenders that
-# cover all four wheels with round cut-outs, and a flat high tail deck ending
-# in an upturned spoiler lip.
+# Exflowly (MS, 2010): a 1970s Le Mans prototype. A long low bonnet between
+# rounded front fenders with the headlights let into them, a bubble canopy
+# just behind the middle, swollen rear fenders either side of a flat high tail
+# deck ending in an upturned spoiler lip. The wheels show through round cut-outs.
 name: Exflowly
 reference: '18612'
 titles: [Exflowly]
 # z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
 hull:
-  - [-66, 32, 10, 27, 20]
-  - [-52, 34, 11, 29, 20, 24, 21]
-  - [-36, 35, 12, 30, 19, 22, 23]
-  - [-16, 35, 12, 29, 17, 20, 24]
-  - [2, 34, 11, 28, 15, 16, 21]
-  - [20, 34, 10, 28, 13]
-  - [38, 33, 9, 27, 11]
-  - [56, 30, 7, 25, 10]
-  - [68, 24, 5, 19, 8]
+  - [-66, 32, 10, 26, 17]
+  - [-50, 34, 11, 26, 18]
+  - [-30, 35, 12, 26, 18, 18, 21]
+  - [-12, 35, 12, 25, 17, 20, 25]
+  - [6, 34, 11, 24, 15, 16, 22]
+  - [20, 34, 10, 22, 13]
+  - [38, 33, 9, 22, 11]
+  - [56, 30, 7, 21, 10]
+  - [68, 24, 5, 17, 7]
 arches: 15
+pods:
+  # Rounded front fenders standing above the low bonnet, headlights in their noses.
+  - x: 27
+    # z, halfWidth, top, bottom
+    stations:
+      - [14, 6, 14, 8]
+      - [28, 9, 18, 7]
+      - [44, 9, 19, 7]
+      - [58, 8, 16, 6]
+      - [68, 5, 11, 5]
+  # Rear fenders swelling over the rear wheels beside the tail deck.
+  - x: 27
+    stations:
+      - [-66, 6, 19, 10]
+      - [-52, 9, 22, 8]
+      - [-34, 9, 22, 8]
+      - [-18, 7, 19, 9]
+      - [-6, 4, 15, 10]
 wing: { z: -62, halfWidth: 30, height: 25, chord: 10 }

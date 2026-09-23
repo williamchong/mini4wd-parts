@@ -1,7 +1,8 @@
 # Diospada (AR, 2015): a Le Mans prototype shape whose signature is the rear
 # — two tall buttresses rise from the back fenders and carry a long flat roof
-# plate right over the rear wheels. Ahead of it a low pointed nose, covered
-# front wheels and an open carbon-rimmed cockpit.
+# plate right over the rear wheels. Ahead of it two rounded fender crowns over
+# the front wheels, headlights in their noses, either side of a low sunken
+# centre nose, and an open carbon-rimmed cockpit.
 name: Diospada
 reference: '19443'
 titles: [Diospada]
@@ -10,14 +11,23 @@ hull:
   - [-56, 22, 8, 17, 11]
   - [-40, 26, 9, 21, 14]
   - [-24, 30, 10, 24, 16, 14, 20]
-  - [-6, 33, 11, 27, 17, 17, 23]
-  - [12, 34, 10, 27, 15, 15, 20]
-  - [30, 33, 9, 26, 12]
-  - [48, 31, 8, 24, 10]
-  - [60, 24, 6, 17, 7]
-  - [68, 14, 4, 10, 5]
-arches: 17
+  - [-6, 32, 11, 26, 16, 16, 23]
+  - [12, 30, 9, 24, 13, 12, 19]
+  - [30, 26, 7, 20, 10]
+  - [48, 24, 6, 18, 8]
+  - [60, 20, 4, 14, 6]
+  - [68, 12, 3, 8, 4]
+arches: [0, 17]
 pods:
+  # The fender crowns over the front wheels, headlights in their noses.
+  - x: 27
+    # z, halfWidth, top, bottom
+    stations:
+      - [6, 5, 12, 6]
+      - [20, 8, 17, 3]
+      - [38, 9, 19, 2]
+      - [54, 9, 17, 2]
+      - [65, 6, 11, 3]
   # The buttresses that hold the rear plate up over the back wheels.
   - x: 31
     stations:

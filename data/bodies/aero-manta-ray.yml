@@ -1,20 +1,34 @@
-# Aero Manta Ray (AR, 2015): a manta, flat and very wide. The shell spreads into
-# wings either side of a raised central spine that runs from the pointed nose
-# back to the tail, the flanks are cut away over the wheels, and a broad wing
-# stands on two pylons at the back.
+# Aero Manta Ray (AR, 2015): a narrow, raised body running between four exposed
+# wheels. Pointed fins at the corners of the nose, a long blue canopy from the
+# front axle to the middle with open side intakes behind it, flanks that sweep
+# up at the rear quarters, and a curved wing on two close swan-neck pylons.
 name: Aero Manta Ray
 reference: '18703'
 titles: [Aero Manta Ray]
 # z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
 hull:
-  - [-58, 24, 6, 19, 11]
-  - [-44, 30, 7, 24, 13, 13, 17]
-  - [-26, 36, 8, 29, 15, 15, 21]
-  - [-6, 40, 8, 32, 15, 14, 22]
-  - [12, 39, 8, 31, 14, 12, 20]
-  - [30, 35, 7, 28, 12, 9, 16]
-  - [46, 28, 6, 22, 10]
-  - [60, 20, 4, 15, 7]
+  - [-58, 20, 8, 16, 13]
+  - [-44, 24, 9, 19, 15, 10, 18]
+  - [-26, 25, 10, 20, 16, 12, 20]
+  - [-8, 25, 10, 20, 16, 14, 23]
+  - [10, 25, 9, 20, 15, 13, 24]
+  - [28, 23, 8, 18, 13, 9, 18]
+  - [46, 21, 6, 16, 10]
+  - [60, 18, 4, 13, 7]
   - [70, 10, 3, 7, 4]
-arches: 13
-wing: { z: -50, halfWidth: 30, height: 32, chord: 16, pylons: 18 }
+pods:
+  # The pointed fins at the corners of the nose.
+  - x: 19
+    # z, halfWidth, top, bottom
+    stations:
+      - [42, 3, 12, 7]
+      - [58, 4, 11, 3]
+      - [70, 2, 7, 4]
+  # The rear quarters sweeping up either side of the tail.
+  - x: 22
+    stations:
+      - [-56, 3, 16, 9]
+      - [-44, 5, 22, 10]
+      - [-28, 5, 21, 10]
+      - [-14, 3, 16, 10]
+wing: { z: -50, halfWidth: 30, height: 32, chord: 16, pylons: 6 }

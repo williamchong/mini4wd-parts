@@ -1,6 +1,7 @@
-# Thunder Shot Jr. (VS re-release of the 1988 car): a low wedge between the
-# wheels with a dark bubble canopy set well forward, then a tall boxy engine
-# cowl standing up behind it and a flap across the top of the tail.
+# Thunder Shot Jr. (VS re-release of the 1988 car): a short body between the
+# wheels that stops behind the front axle, leaving the front bumper bare. A
+# dark bubble canopy at its front, then a tall boxy engine cowl standing up
+# behind it and a flap across the top of the tail.
 name: Thunder Shot Jr.
 reference: '18059'
 # z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
@@ -8,14 +9,13 @@ titles: [Thunder Shot Jr.]
 # The clear and spare body sets Tamiya sells for this car.
 parts: ['15502']
 hull:
-  - [-58, 22, 14, 18, 24]
-  - [-46, 24, 14, 20, 26]
-  - [-30, 25, 12, 21, 25, 16, 27]
-  - [-14, 25, 10, 21, 17, 15, 24]
-  - [2, 24, 9, 20, 14, 13, 22]
-  - [20, 23, 8, 19, 12]
-  - [40, 21, 6, 17, 9]
-  - [58, 16, 4, 12, 6]
-  - [68, 9, 2, 6, 3]
+  - [-58, 22, 14, 18, 27]
+  - [-44, 24, 14, 20, 28]
+  - [-28, 25, 13, 21, 26]
+  - [-14, 25, 11, 21, 17, 17, 24]
+  - [2, 25, 10, 21, 14, 16, 22]
+  - [16, 24, 9, 20, 12, 13, 18]
+  - [28, 22, 7, 18, 9]
+  - [36, 18, 4, 14, 5]
 # The flap across the top of the cowl, its end plates reaching down to it.
-wing: { z: -50, halfWidth: 24, height: 30, chord: 14 }
+wing: { z: -52, halfWidth: 24, height: 31, chord: 12 }

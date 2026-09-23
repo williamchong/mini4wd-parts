@@ -1,27 +1,35 @@
-# Buster-Sonic (AR re-release of the 1997 car): Beat-Magnum's rival. Rounded
-# pointed front fenders reaching well ahead of the wheels, a low white body
-# with a small dark canopy, upswept rear quarter fins, and a broad wing on
-# short pylons over the tail.
+# Buster-Sonic (AR re-release of the 1997 car): Beat-Magnum's rival. A low
+# white body running between its wheels, with two tall rounded fender pods
+# standing over the front wheels and reaching well ahead of them either side
+# of a lower centre nose; a small dark canopy over the middle, upswept rear
+# quarter fins, and a broad wing on short pylons over the tail.
 name: Buster-Sonic
 reference: '19445'
 titles: [Buster-Sonic]
 # z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
 hull:
-  - [-58, 27, 9, 21, 14]
-  - [-44, 32, 10, 26, 17]
-  - [-28, 35, 11, 28, 18, 16, 21]
-  - [-8, 35, 11, 28, 17, 18, 23]
-  - [10, 34, 10, 27, 16, 16, 21]
-  - [28, 34, 10, 27, 13]
-  - [48, 32, 8, 25, 11]
-  - [62, 24, 6, 17, 8]
-  - [68, 14, 4, 10, 5]
-arches: 16
+  - [-58, 24, 9, 19, 14]
+  - [-44, 26, 10, 21, 16]
+  - [-28, 26, 11, 21, 17, 14, 21]
+  - [-8, 26, 11, 21, 17, 16, 24]
+  - [10, 25, 10, 20, 15, 13, 20]
+  - [28, 21, 8, 16, 11]
+  - [48, 17, 6, 12, 8]
+  - [66, 11, 4, 7, 5]
 pods:
-  # The rear quarter fins standing over the back wheels.
-  - x: 31
+  # The rounded fender pods over the front wheels, reaching ahead of them.
+  - x: 27
+    # z, halfWidth, top, bottom
     stations:
-      - [-40, 5, 25, 14]
-      - [-24, 6, 27, 14]
-      - [-12, 5, 22, 14]
+      - [16, 4, 12, 8]
+      - [28, 7, 18, 11]
+      - [44, 9, 20, 6]
+      - [58, 8, 18, 3]
+      - [68, 5, 11, 4]
+  # The rear quarter fins standing over the back wheels.
+  - x: 29
+    stations:
+      - [-40, 5, 25, 12]
+      - [-24, 6, 27, 12]
+      - [-12, 5, 22, 12]
 wing: { z: -48, halfWidth: 28, height: 30, chord: 16, pylons: 15 }

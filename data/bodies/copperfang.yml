@@ -1,34 +1,35 @@
-# Copperfang (FM-A, 2019): a full-bodied road racer that covers its wheels. A
-# sharp low nose with two forward fangs either side of the grille, a hood scoop,
-# a small tinted canopy over the middle, and a tall swept rear wing standing on
-# pylons above a short fastback tail.
+# Copperfang (FM-A, 2019): a curvy racer that runs between its wheels. A
+# broad nose with two fangs dropping from its corners, a raised centre hood
+# with a scoop, a tinted bubble canopy over the middle, a pinched waist, and a
+# tall swept rear wing standing on pylons above a short tail.
 name: Copperfang
 reference: '18715'
 titles: [Copperfang]
 # z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
 hull:
-  - [-64, 28, 9, 22, 13]
-  - [-52, 32, 10, 26, 15]
-  - [-38, 35, 11, 28, 17, 18, 20]
-  - [-20, 36, 12, 29, 18, 20, 22]
-  - [-2, 36, 12, 29, 18, 19, 22]
-  - [16, 35, 11, 28, 17, 12, 19]
-  - [32, 34, 10, 27, 14]
-  - [48, 32, 9, 25, 11]
-  - [60, 27, 7, 20, 8]
-  - [68, 18, 5, 13, 5]
-arches: 16
+  - [-64, 20, 8, 15, 12]
+  - [-52, 24, 10, 19, 15]
+  - [-38, 26, 11, 21, 17, 14, 20]
+  - [-20, 26, 12, 21, 18, 17, 24]
+  - [-2, 25, 12, 20, 17, 16, 23]
+  - [14, 25, 11, 20, 16, 10, 18]
+  - [30, 25, 10, 20, 15]
+  - [46, 24, 9, 19, 13]
+  - [60, 22, 7, 17, 10]
+  - [68, 17, 5, 13, 6]
 pods:
-  # The two fangs, low and jutting forward either side of the nose.
-  - x: 28
+  # The two fangs, dropping from the corners of the nose.
+  - x: 22
+    # z, halfWidth, top, bottom
     stations:
-      - [46, 5, 9, 3]
-      - [58, 5, 8, 2]
-      - [66, 4, 7, 2]
-  # The raised centre hood between them.
-  - x: 8
+      - [44, 3, 12, 2]
+      - [58, 3, 11, 1]
+      - [66, 3, 9, 1]
+  # The raised centre hood with its scoop.
+  - x: 7
     stations:
-      - [10, 6, 20, 15]
-      - [26, 6, 19, 13]
-      - [38, 5, 17, 12]
-wing: { z: -52, halfWidth: 26, height: 24, chord: 14, pylons: 14 }
+      - [10, 7, 19, 12]
+      - [26, 7, 19, 12]
+      - [40, 6, 17, 11]
+      - [50, 4, 14, 10]
+wing: { z: -54, halfWidth: 26, height: 27, chord: 14, pylons: 10 }

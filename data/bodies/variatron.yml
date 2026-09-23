@@ -1,24 +1,33 @@
-# Variatron (VS, 1997): a wide low cowl with fenders sweeping over the front
-# wheels, pointed tips either side of the nose, a raised spine with a bubble
-# over the middle, and two swept fins standing at the tail.
+# Variatron (VS, 1997): a slim body running between open wheels. A low
+# rounded nose with the bubble dome in its middle and pointed tips at its
+# corners, a raised spine running back over the motor, and two tall swept
+# fins standing up off the tail.
 name: Variatron
 reference: '19204'
 titles: [Variatron]
 # z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
 hull:
-  - [-56, 26, 8, 20, 14]
-  - [-40, 30, 9, 24, 16]
-  - [-22, 31, 10, 25, 18, 14, 22]
-  - [-2, 32, 10, 26, 18, 15, 24]
-  - [18, 33, 10, 27, 17, 14, 20]
-  - [36, 33, 9, 27, 15]
-  - [52, 28, 7, 22, 11]
-  - [64, 18, 5, 13, 7]
-arches: [17, 0]
+  - [-58, 16, 7, 12, 11]
+  - [-42, 18, 8, 14, 13]
+  - [-24, 18, 9, 14, 14, 9, 19]
+  - [-6, 19, 9, 15, 14, 10, 21]
+  - [14, 20, 9, 16, 13, 10, 19]
+  - [30, 23, 8, 19, 11, 8, 16]
+  - [44, 24, 7, 20, 9, 7, 15]
+  - [56, 23, 5, 18, 7]
+  - [64, 18, 4, 14, 5]
 pods:
-  # The swept fins over the rear wheels.
-  - x: 25
+  # The pointed tips either side of the nose, just inside the front wheels.
+  - x: 22
+    # z, halfWidth, top, bottom
     stations:
-      - [-56, 3, 25, 12]
-      - [-42, 5, 25, 12]
-      - [-26, 4, 17, 12]
+      - [40, 3, 8, 4]
+      - [52, 4, 10, 4]
+      - [64, 2, 8, 5]
+  # The two swept fins standing up off the tail.
+  - x: 17
+    stations:
+      - [-62, 3, 25, 16]
+      - [-48, 4, 24, 12]
+      - [-30, 4, 19, 11]
+      - [-14, 3, 14, 10]

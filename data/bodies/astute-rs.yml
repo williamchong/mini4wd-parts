@@ -1,7 +1,7 @@
-# Astute RS (Super-II): a Racer Mini 4WD wedge that runs between its wheels.
-# A low chiselled nose over the exposed front springs, a dark canopy set back
-# over the middle, flared haunches over the rear wheels, and a broad wing on
-# twin pylons standing clear of the tail.
+# Astute RS (Super-II): a Racer Mini 4WD that runs between its wheels. A
+# narrow chiselled nose with the front springs exposed either side of it, a
+# tall dark canopy over the middle, flared haunches over the rear wheels, and
+# a broad wing on twin pylons standing clear of the tail.
 name: Astute RS
 reference: '18077'
 titles: [Astute Jr.]
@@ -10,14 +10,15 @@ parts: ['15494']
 # z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
 hull:
   - [-56, 22, 9, 18, 15]
-  - [-42, 25, 10, 20, 19]
-  - [-28, 26, 11, 21, 22, 13, 26]
-  - [-10, 26, 11, 21, 21, 16, 26]
-  - [8, 25, 10, 20, 19, 13, 22]
-  - [26, 24, 9, 19, 15]
-  - [44, 22, 8, 17, 11]
-  - [58, 18, 6, 14, 8]
-  - [68, 12, 4, 9, 4]
+  - [-42, 25, 10, 20, 18]
+  - [-28, 25, 11, 20, 19, 14, 24]
+  - [-12, 24, 11, 19, 18, 15, 28]
+  - [4, 22, 10, 17, 16, 13, 26]
+  - [18, 19, 9, 15, 13, 8, 18]
+  - [34, 16, 8, 12, 11]
+  - [50, 14, 7, 11, 9]
+  - [62, 13, 6, 10, 7]
+  - [68, 11, 4, 8, 4]
 pods:
   # Haunches flaring over the rear wheels.
   - x: 28

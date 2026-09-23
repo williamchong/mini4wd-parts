@@ -1,7 +1,8 @@
-# Baron Viento (FM-A, 2019 Japan Cup): a 1930s hot rod. Wide black fenders over
-# all four wheels, a tall upright radiator grille standing proud of a long low
-# hood, two round headlights on stalks beside it, and a small cabin under a
-# soft top set well back over a short rounded tail.
+# Baron Viento (FM-A, 2019 Japan Cup): a 1930s hot rod. Separate pontoon
+# fenders over all four wheels, the front pair sweeping back into running
+# boards, a tall upright radiator grille standing proud of a long narrow hood
+# between them, two round headlights on stalks beside it, and a small cabin
+# under a soft top set well back over a short rounded tail.
 name: Baron Viento
 reference: '95120'
 titles: [Baron Viento]
@@ -9,20 +10,39 @@ titles: [Baron Viento]
 kits: ['18709']
 # z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
 hull:
-  - [-62, 28, 8, 22, 14]
-  - [-52, 32, 10, 26, 17]
-  - [-40, 35, 11, 28, 19, 20, 27]
-  - [-28, 36, 12, 29, 20, 21, 34]
-  - [-10, 36, 12, 29, 20, 20, 33]
-  - [2, 35, 12, 28, 20, 14, 24]
-  - [18, 34, 11, 27, 19]
-  - [36, 33, 11, 26, 19]
-  - [50, 30, 10, 14, 24]
-  - [62, 25, 9, 10, 22]
-arches: 16
+  - [-62, 24, 8, 19, 13]
+  - [-50, 28, 10, 22, 17]
+  - [-38, 28, 11, 23, 19, 18, 27]
+  - [-26, 28, 12, 23, 20, 20, 34]
+  - [-8, 28, 12, 23, 20, 19, 33]
+  - [4, 26, 12, 21, 20, 13, 24]
+  - [18, 20, 11, 16, 19]
+  - [42, 18, 11, 14, 20]
+  - [52, 16, 10, 12, 26]
+  - [62, 14, 9, 10, 25]
+arches: [0, 16]
 pods:
-  # The headlights on their stalks, either side of the grille.
-  - x: 19
+  # The front fenders, long pontoons swept down from the headlights to the
+  # running boards.
+  # z, halfWidth, top, bottom
+  - x: 29
     stations:
-      - [42, 3, 30, 22]
-      - [50, 3, 30, 22]
+      - [0, 5, 7, 3]
+      - [14, 7, 13, 5]
+      - [28, 9, 21, 8]
+      - [42, 9, 24, 9]
+      - [56, 8, 20, 8]
+      - [64, 5, 13, 8]
+  # The rear fenders over the back wheels.
+  - x: 29
+    stations:
+      - [-62, 5, 11, 7]
+      - [-54, 8, 18, 8]
+      - [-40, 9, 22, 9]
+      - [-28, 8, 17, 6]
+      - [-18, 5, 8, 3]
+  # The headlights on their stalks, either side of the grille.
+  - x: 18
+    stations:
+      - [44, 3, 30, 22]
+      - [52, 3, 30, 22]

@@ -1,8 +1,8 @@
 # Vanguard Sonic (Super-II re-release of the 1997 V1 machine): a fully-cowled
-# racer built around a raised centre spine. The spine runs from a blunt twin
-# fender nose back into a dark bubble canopy and on over the tail, with the
-# fender crowns and their headlights sitting either side of it. Fenders cut
-# open over all four wheels, and a swept wing on tall twin pylons.
+# racer built around a raised centre spine. The spine runs from a V between two
+# rounded fender crowns, headlights in their noses, back into a dark bubble
+# canopy and on over the tail. Fenders cut open over the rear wheels, and a
+# swept wing on tall twin pylons.
 name: Vanguard Sonic
 reference: '19435'
 titles: [Vanguard Sonic]
@@ -13,9 +13,19 @@ hull:
   - [-38, 34, 10, 27, 19, 12, 24]
   - [-20, 33, 10, 26, 18, 14, 29]
   - [-2, 32, 10, 25, 16, 12, 27]
-  - [16, 32, 9, 25, 13, 8, 22]
-  - [36, 34, 8, 27, 11, 6, 17]
-  - [56, 30, 6, 23, 9, 4, 13]
-  - [66, 22, 4, 15, 8]
-arches: 15
+  - [16, 29, 9, 22, 13, 8, 22]
+  - [36, 24, 6, 18, 10, 6, 17]
+  - [56, 20, 5, 15, 8, 4, 13]
+  - [66, 14, 4, 10, 7]
+arches: [0, 15]
+pods:
+  # The fender crowns over the front wheels, headlights in their noses.
+  - x: 26
+    # z, halfWidth, top, bottom
+    stations:
+      - [6, 6, 13, 6]
+      - [20, 9, 19, 3]
+      - [38, 10, 21, 2]
+      - [54, 9, 19, 2]
+      - [64, 6, 13, 3]
 wing: { z: -56, halfWidth: 33, height: 30, chord: 14, pylons: 18 }

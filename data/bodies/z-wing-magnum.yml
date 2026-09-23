@@ -1,7 +1,8 @@
-# Z Wing Magnum (AR, 2018): a sharp silver wedge. A pointed nose over wide
-# sculpted front fenders, a low dark canopy in the middle, twin fins standing
-# on the tail, and the car's tallest thing by far — a broad rear wing carried
-# clear of the deck on two posts.
+# Z Wing Magnum (AR, 2018): a sharp silver wedge. A pointed V nose sunk
+# between two wide sculpted front fenders, headlights in their noses, a low
+# dark canopy in the middle, twin fins standing on the tail, and the car's
+# tallest thing by far — a broad rear wing carried clear of the deck on two
+# posts.
 name: Z Wing Magnum
 reference: '19442'
 titles: [Z Wing Magnum]
@@ -11,13 +12,22 @@ hull:
   - [-46, 33, 9, 26, 16]
   - [-28, 35, 10, 28, 17, 18, 21]
   - [-10, 35, 10, 28, 17, 18, 21]
-  - [6, 35, 10, 28, 16, 16, 19]
-  - [22, 36, 9, 30, 14]
-  - [40, 36, 8, 30, 13]
-  - [56, 32, 6, 26, 10]
-  - [68, 20, 4, 15, 6]
-arches: 16
+  - [6, 33, 10, 26, 15, 14, 19]
+  - [22, 28, 8, 22, 12]
+  - [40, 24, 6, 18, 9]
+  - [56, 20, 5, 15, 7]
+  - [68, 14, 3, 9, 5]
+arches: [0, 16]
 pods:
+  # The wide front fenders over the wheels, headlights in their noses.
+  - x: 27
+    # z, halfWidth, top, bottom
+    stations:
+      - [6, 6, 13, 7]
+      - [20, 9, 17, 4]
+      - [38, 10, 18, 3]
+      - [54, 9, 16, 3]
+      - [64, 6, 11, 4]
   # The twin fins either side of the tail, flanking the wing posts.
   - x: 24
     stations:

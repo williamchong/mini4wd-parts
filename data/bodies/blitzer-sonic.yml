@@ -1,28 +1,38 @@
-# Blitzer-Sonic (VS, 1996): a low full-cowl racer. A narrow pointed nose with
-# flat canards at its corners, wide fenders cut open over all four wheels, a
-# dark canopy set just behind the middle, and a broad two-tier rear wing on
-# pylons over the tail.
+# Blitzer-Sonic (VS, 1996): a low racer with a narrow centre body. A pointed
+# nose between wedge fenders over the front wheels, a dark canopy set just
+# behind the middle, tall rear fenders standing over the rear wheels, and a
+# broad wing carried on their tips over the tail.
 name: Blitzer-Sonic
 reference: '19614'
 titles: [Blitzer-Sonic]
 # z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
 hull:
-  - [-62, 24, 7, 19, 11]
-  - [-48, 30, 8, 24, 13]
-  - [-32, 34, 9, 27, 14, 16, 18]
-  - [-14, 35, 9, 28, 14, 18, 19]
-  - [2, 34, 9, 27, 13, 17, 18]
-  - [20, 33, 8, 26, 12, 12, 14]
-  - [40, 33, 7, 26, 11]
-  - [56, 29, 6, 22, 9]
-  - [68, 17, 4, 11, 5]
-arches: 15
+  - [-62, 20, 6, 15, 10]
+  - [-48, 21, 7, 16, 12]
+  - [-32, 21, 8, 16, 13, 12, 17]
+  - [-14, 21, 8, 16, 13, 13, 19]
+  - [2, 20, 8, 15, 13, 11, 16]
+  - [18, 18, 7, 14, 11]
+  - [40, 16, 6, 12, 9]
+  - [58, 14, 4, 10, 6]
+  - [68, 10, 3, 7, 4]
 pods:
-  # Flat canards either side of the nose, over the front fenders.
-  - x: 36
+  # Wedge fenders over the front wheels, either side of the narrow nose.
+  - x: 29
     # z, halfWidth, top, bottom
     stations:
-      - [36, 6, 12, 4]
-      - [52, 7, 11, 3]
-      - [64, 5, 8, 3]
-wing: { z: -52, halfWidth: 29, height: 21, chord: 13, pylons: 12 }
+      - [12, 4, 8, 4]
+      - [26, 7, 14, 2]
+      - [42, 8, 17, 2]
+      - [56, 7, 14, 3]
+      - [66, 4, 8, 4]
+  # Rear fenders standing over the wheels and rising to carry the wing.
+  - x: 30
+    stations:
+      - [-64, 6, 20, 8]
+      - [-50, 8, 20, 8]
+      - [-34, 8, 18, 8]
+      - [-18, 7, 14, 6]
+      - [-4, 4, 9, 5]
+# The wing's end plates stand on the rear fenders.
+wing: { z: -58, halfWidth: 32, height: 22, chord: 12 }

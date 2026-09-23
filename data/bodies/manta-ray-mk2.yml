@@ -1,7 +1,8 @@
 # Manta Ray Mk.II (MS, 2005 reissue): a low silver arrow that runs between the
 # wheels — a long pointed nose with flat manta wings spread either side of it,
-# a slim smoked canopy on the centre line, and twin tail fins carrying a wide
-# rear wing over the back axle.
+# a slim smoked canopy on the centre line, and two tall swept tail fins
+# standing apart over the back axle, each tipped with its own small winglet
+# and no wing between them.
 name: Manta Ray Mk.II
 reference: '18615'
 titles: [Manta Ray Mk.II]
@@ -19,16 +20,16 @@ hull:
   - [58, 17, 6, 12, 7]
   - [68, 10, 3, 7, 5]
 pods:
-  # The twin tail fins the wing sits between.
-  - x: 20
+  # The two tall tail fins, their tips swept back into winglets.
+  - x: 19
     stations:
-      - [-52, 3, 30, 14]
-      - [-38, 4, 30, 14]
-      - [-26, 3, 22, 14]
+      - [-58, 5, 32, 22]
+      - [-48, 5, 33, 14]
+      - [-36, 4, 28, 14]
+      - [-22, 3, 20, 13]
   # The manta wings, flat plates spread alongside the nose.
   - x: 27
     stations:
       - [16, 7, 12, 8]
       - [36, 9, 13, 8]
       - [52, 6, 12, 8]
-wing: { z: -46, halfWidth: 26, height: 32, chord: 14, pylons: 14 }

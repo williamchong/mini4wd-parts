@@ -1,7 +1,8 @@
 # Liberty Emperor (VS, 1996): an Emperor that runs between its wheels. A
 # narrow tapered nose, a big blue teardrop canopy dome down the centre line,
-# twin blade fins standing on the flanks ahead of the cabin, and a very large
-# wing over the tail on deep end plates that reach down to the deck.
+# twin blade fins sweeping up the rear flanks behind the cabin to the wing
+# tips, and a very large wing over the tail on deep end plates that reach down
+# to the deck.
 name: Liberty Emperor
 reference: '19514'
 titles: [Liberty Emperor]
@@ -17,10 +18,11 @@ hull:
   - [58, 20, 8, 15, 11]
   - [68, 13, 5, 9, 6]
 pods:
-  # The blade fins standing on the flanks ahead of the cabin.
-  - x: 25
+  # The blade fins sweeping up the rear flanks to the wing tips.
+  - x: 23
     stations:
-      - [18, 3, 26, 14]
-      - [32, 3.5, 28, 13]
-      - [46, 3, 22, 12]
+      - [-52, 3, 34, 14]
+      - [-38, 3.5, 32, 15]
+      - [-22, 3, 26, 16]
+      - [-8, 2, 21, 16]
 wing: { z: -46, halfWidth: 26, height: 34, chord: 16 }

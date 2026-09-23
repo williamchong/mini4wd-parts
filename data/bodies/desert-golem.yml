@@ -1,19 +1,35 @@
-# Desert-Golem (VS, 1996): a wide, heavy-shouldered full body. A rounded snout
-# carrying a bank of five headlights, bulging fenders over all four wheels, a
-# domed canopy over the middle, and a humped engine cover falling away to a
-# short tail. No wing.
+# Desert-Golem (VS, 1996): a narrow body between exposed wheels under a big
+# ribbed dome canopy. A snout carrying a bank of five headlights, square front
+# fenders reaching out ahead of the front wheels, the dome over the middle,
+# and a tall tread-covered pod standing over each rear wheel. No wing.
 name: Desert-Golem
 reference: '19610'
 titles: [Desert-Golem]
 # z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
 hull:
-  - [-64, 29, 8, 23, 12]
-  - [-50, 34, 9, 27, 15, 16, 18]
-  - [-34, 36, 10, 29, 16, 19, 22]
-  - [-16, 37, 10, 30, 16, 20, 24]
-  - [2, 36, 10, 29, 15, 19, 23]
-  - [20, 35, 9, 28, 14, 14, 18]
-  - [40, 34, 8, 27, 13]
-  - [56, 30, 6, 23, 11]
-  - [68, 20, 4, 14, 7]
-arches: 15
+  - [-64, 22, 8, 17, 11]
+  - [-50, 24, 8, 19, 12, 10, 16]
+  - [-34, 25, 9, 20, 12, 15, 22]
+  - [-14, 25, 9, 21, 12, 17, 25]
+  - [6, 25, 9, 21, 12, 16, 24]
+  - [24, 24, 9, 20, 12, 11, 18]
+  - [42, 24, 8, 19, 11]
+  - [58, 24, 6, 19, 10]
+  - [68, 18, 4, 13, 7]
+pods:
+  # The square front fenders reaching out ahead of the front wheels.
+  - x: 29
+    # z, halfWidth, top, bottom
+    stations:
+      - [44, 5, 12, 7]
+      - [54, 8, 16, 3]
+      - [64, 8, 14, 2]
+      - [70, 5, 9, 3]
+  # The tread-covered pods standing over the rear wheels.
+  - x: 31
+    stations:
+      - [-66, 5, 18, 9]
+      - [-58, 6, 22, 10]
+      - [-40, 6, 22, 11]
+      - [-24, 5, 18, 10]
+      - [-16, 3, 12, 9]

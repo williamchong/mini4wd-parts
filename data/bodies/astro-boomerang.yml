@@ -1,28 +1,29 @@
-# Astro-Boomerang (Super-II, clear body special): a low wide aero wedge. A
-# split pointed nose with a swept fin either side, a long bubble canopy set
-# low in the middle, wide flanks sweeping past the wheels, and a flat tail
-# flap sitting straight on the deck over the rear axle.
+# Astro-Boomerang (Super-II, clear body special): a narrow aero racer that
+# runs between its wheels, all four left open. A low split pointed nose with a
+# small pod either side of it, a bubble canopy in the middle, and the car's
+# signature — a broad flat hoop standing high over the rear half, its side
+# plates reaching down to the flanks.
 name: Astro-Boomerang
 reference: '95279'
 titles: [Astro-Boomerang]
 # z, halfWidth, shoulder, halfDeck, deck[, halfTop, height]
 hull:
-  - [-62, 24, 8, 19, 13]
-  - [-48, 28, 10, 23, 16]
-  - [-34, 30, 10, 25, 17, 16, 22]
-  - [-16, 30, 10, 25, 16, 18, 25]
-  - [2, 29, 9, 24, 15, 14, 21]
-  - [20, 28, 9, 23, 13]
-  - [38, 26, 8, 21, 10]
-  - [54, 22, 6, 17, 7]
-  - [68, 14, 4, 10, 4]
+  - [-62, 20, 8, 16, 12]
+  - [-48, 23, 9, 19, 14]
+  - [-34, 24, 10, 20, 15, 12, 20]
+  - [-16, 24, 10, 20, 15, 14, 24]
+  - [2, 23, 9, 19, 14, 11, 20]
+  - [20, 22, 8, 18, 12]
+  - [38, 20, 7, 16, 9]
+  - [54, 18, 5, 14, 6]
+  - [68, 12, 3, 8, 3]
 pods:
-  # The swept fins either side of the nose.
-  - x: 26
+  # The small pods either side of the nose, inside the front wheels.
+  - x: 17
     # z, halfWidth, top, bottom
     stations:
-      - [34, 4, 15, 4]
-      - [52, 5, 19, 4]
-      - [66, 4, 12, 4]
-# The tail flap, its end plates reaching down to the deck.
-wing: { z: -52, halfWidth: 26, height: 25, chord: 14 }
+      - [40, 4, 11, 3]
+      - [54, 5, 14, 2]
+      - [66, 4, 9, 3]
+# The hoop over the rear half, its side plates reaching down to the deck.
+wing: { z: -26, halfWidth: 25, height: 27, chord: 18 }
