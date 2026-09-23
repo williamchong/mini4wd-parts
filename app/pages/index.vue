@@ -531,7 +531,11 @@ onMounted(() => {
 // rebuilds it and it emits `ready` again. Without this the second car would
 // report how long the reader had been on the page, not how long it took to
 // draw — and `pre` flush puts this before the remount.
-watch(() => shownChassis.value?.id, () => { sceneMountedAt = performance.now() })
+// It also starts on a blank canvas, so whatever stands in for it comes back.
+watch(() => shownChassis.value?.id, () => {
+  sceneMountedAt = performance.now()
+  sceneReady.value = false
+})
 
 /**
  * The poster is a screenshot of the empty MA scene at the home view, one per
@@ -566,6 +570,13 @@ function onSceneMute(muted: boolean) {
   if (shownChassis.value) track('scene_mute', { chassis: shownChassis.value.id, muted })
 }
 const showPoster = computed(() => shownChassis.value?.id === PLACEHOLDER_CHASSIS && !hasBuild.value && !sceneReady.value)
+/**
+ * The poster is a still of the very car the pane will draw, so on its own it
+ * reads as a finished picture that ignores every tap. This says the real one
+ * is on its way. Server-rendered like the poster, and shown over a shared
+ * build's empty frame too, which waits on the same chunk with no picture.
+ */
+const showSceneLoading = computed(() => !!shownChassis.value && !sceneReady.value)
 
 /**
  * A tap on the car opens the same picker as the row's Swap button, with the
@@ -836,6 +847,9 @@ useHead(() => ({
         <source media="(min-width: 640px)" srcset="/images/scene-poster-16x9.webp">
         <img src="/images/scene-poster-4x3.webp" alt="" width="712" height="534">
       </picture>
+      <p v-if="showSceneLoading" class="scene-loading" role="status">
+        {{ $t('build.scene.loading') }}
+      </p>
       <LazyBuildScene
         v-if="shownChassis && hydrated"
         :key="shownChassis.id"

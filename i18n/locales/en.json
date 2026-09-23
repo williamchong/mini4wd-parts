@@ -81,6 +81,7 @@
       "rear": "Rear motor"
     },
     "scene": {
+      "loading": "Loading the 3D preview…",
       "label": "3D preview of the build. Tap a part on the car to change it; the list below is the keyboard and screen-reader path.",
       "resetCamera": "Reset view",
       "liftBody": "Lift the body",
