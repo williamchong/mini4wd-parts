@@ -641,6 +641,12 @@ function closePicker() {
   pickerAt.value = undefined
 }
 
+// The three dialogs load on first open. `lazyPicker` is what shows the tap was
+// heard while a chunk is in flight, and says so when it never arrives.
+const BasePicker = lazyPicker(() => import('~/components/build/BasePicker.vue'), closeBase)
+const SlotPicker = lazyPicker(() => import('~/components/build/SlotPicker.vue'), cancelPending)
+const PartPicker = lazyPicker(() => import('~/components/build/PartPicker.vue'), closePicker)
+
 /**
  * The rule engine's findings, each with its words resolved once here — the page
  * is what holds the names, slots and chassis a message interpolates — and shown
@@ -1038,7 +1044,7 @@ useHead(() => ({
 
     <ImageCredit />
 
-    <LazyBuildBasePicker
+    <BasePicker
       v-if="baseOpen"
       :kits="catalog?.kits ?? []"
       :chassis="catalog?.chassis ?? []"
@@ -1046,7 +1052,7 @@ useHead(() => ({
       @close="closeBase"
     />
 
-    <LazyBuildSlotPicker
+    <SlotPicker
       v-if="pendingSlots.length"
       :slots="pendingSlots"
       :part-name="pendingName"
@@ -1054,7 +1060,7 @@ useHead(() => ({
       @close="cancelPending"
     />
 
-    <LazyBuildPartPicker
+    <PartPicker
       v-if="openSlot"
       :candidates="candidates"
       :slot-type="openSlot.type"

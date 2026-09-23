@@ -81,6 +81,13 @@ useHead(() => ({
     the fix is a `#close` slot at those three call sites, or `UApp` back with
     a `:locale` — neither worth 10.5 KB gz for one `aria-label` today.
   -->
+  <!-- A bar across the top while a navigation waits on its page chunk or
+       payload; it stays hidden under 200 ms. A chunk that fails outright is
+       Nuxt's to handle: it reloads straight into the page being opened.
+       A fixed light step, because it runs across the header, which is pinned
+       dark in both modes. -->
+  <NuxtLoadingIndicator color="var(--color-chassis-300)" error-color="var(--ui-error)" />
+  <BootNotice />
   <NuxtLayout>
     <NuxtPage />
   </NuxtLayout>

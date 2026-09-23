@@ -403,5 +403,11 @@
       "rerelease": "Re-release",
       "discontinued": "Discontinued"
     }
+  },
+  "loading": {
+    "pending": "Loading…",
+    "pageFailed": "The page did not finish loading, so its buttons will not work yet.",
+    "reload": "Reload",
+    "pickerFailed": "The list could not be loaded. Reload the page — your build is kept."
   }
 }

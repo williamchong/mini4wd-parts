@@ -1303,3 +1303,83 @@ a.chip:hover {
   padding: 0;
   list-style: none;
 }
+
+/* ------------------------------------------------------------ loading */
+
+/* BootNotice.vue: invisible for 1.5 s, so a page whose scripts arrive in
+   time never shows it, then a pill at the foot of the screen until hydration
+   removes it. `data-boot-failed` on <html> swaps its words for the failure. */
+.boot-notice {
+  position: fixed;
+  inset-inline: 1rem;
+  bottom: 1rem;
+  z-index: 50;
+  margin-inline: auto;
+  width: fit-content;
+  max-width: calc(100% - 2rem);
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  background: var(--ui-bg-inverted);
+  color: var(--ui-text-inverted);
+  font-size: 0.875rem;
+  opacity: 0;
+  animation: boot-notice-in 0.2s 1.5s forwards;
+}
+
+@keyframes boot-notice-in {
+  to { opacity: 1; }
+}
+
+.boot-notice-failed {
+  display: none;
+}
+
+html[data-boot-failed] .boot-notice {
+  animation-delay: 0s;
+}
+
+html[data-boot-failed] .boot-notice-loading {
+  display: none;
+}
+
+html[data-boot-failed] .boot-notice-failed {
+  display: inline;
+}
+
+.boot-notice button {
+  margin-inline-start: 0.5rem;
+  text-decoration: underline;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+/* PickerPending.vue: where a picker's dialog will be, dimmed like one. */
+.picker-pending {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: color-mix(in oklab, var(--ui-bg-elevated) 75%, transparent);
+}
+
+.picker-pending-card {
+  max-width: 24rem;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius);
+  background: var(--ui-bg);
+  box-shadow: 0 8px 24px rgb(0 0 0 / 0.15);
+}
+
+.picker-pending-card p {
+  margin: 0;
+}
+
+.picker-pending-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+}

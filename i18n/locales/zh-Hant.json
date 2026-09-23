@@ -415,5 +415,11 @@
       "rerelease": "復刻",
       "discontinued": "停產"
     }
+  },
+  "loading": {
+    "pending": "載入中…",
+    "pageFailed": "頁面未能完整載入，部分功能暫時無法使用。",
+    "reload": "重新載入",
+    "pickerFailed": "選項未能載入。重新載入頁面即可再試，你的組合不會遺失。"
   }
 }
