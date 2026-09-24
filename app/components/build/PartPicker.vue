@@ -16,9 +16,17 @@ const props = defineProps<{
   /** The choice goes beside what the slot holds rather than replacing it. */
   adding?: boolean
   buildClass: BuildClass
+  /**
+   * For the body slot: the chassis' name and how many kits are built on it.
+   * The shells the 3D pane draws for 176 cars come in kit boxes that Tamiya
+   * never sold on their own, so they can never be rows here, and a reader who
+   * started from a bare chassis finds between three and a dozen spare bodies.
+   * This names the way to the rest: a kit on the same chassis.
+   */
+  kitHint?: { chassis: string; count: number }
 }>()
 
-const emit = defineEmits<{ select: [string]; close: [] }>()
+const emit = defineEmits<{ select: [string]; close: []; kits: [] }>()
 
 // The parent unmounts this on `close`, so the dialog restores focus itself.
 useReturnFocus()
@@ -52,6 +60,13 @@ const firstAddOn = computed(() => matches.value.findIndex(({ part }) => part.isA
     @update:open="value => { if (!value) emit('close') }"
   >
     <template #body>
+      <div v-if="kitHint" class="picker-kit-hint">
+        <p>{{ $t('build.bodyKitHint', kitHint) }}</p>
+        <UButton size="sm" color="neutral" variant="outline" @click="emit('kits')">
+          {{ $t('build.bodyKitHintAction', { chassis: kitHint.chassis }) }}
+        </UButton>
+      </div>
+
       <UInput
         v-model="query"
         type="search"

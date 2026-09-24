@@ -56,6 +56,8 @@
     "imageCreditTamiya": "TAMIYA's",
     "pickPart": "Choose {slot}",
     "pickPartAdd": "Add to {slot}",
+    "bodyKitHint": "Want a kit's own body? Switch to one of the {count} {chassis} kits. Your swapped parts will reset.",
+    "bodyKitHintAction": "Choose a {chassis} kit",
     "searchParts": "Search by name or item number",
     "candidates": "{count} parts fit",
     "addOns": "Add-ons and spares",

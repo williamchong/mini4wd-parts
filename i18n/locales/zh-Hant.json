@@ -56,6 +56,8 @@
     "imageCreditTamiya": "田宮（TAMIYA）",
     "pickPart": "選擇{slot}",
     "pickPartAdd": "加入{slot}",
+    "bodyKitHint": "想要套件原裝的車殼？請改選{chassis}的套件（共 {count} 款），已更換的零件會重設。",
+    "bodyKitHintAction": "改選{chassis}的套件",
     "searchParts": "搜尋名稱或編號",
     "candidates": "共 {count} 件可用零件",
     "addOns": "搭配用及補充零件",

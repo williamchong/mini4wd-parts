@@ -16,6 +16,8 @@ type ChassisCard = Pick<Chassis,
 defineProps<{
   kits: PickableKit[]
   chassis: ChassisCard[]
+  /** Open on the kit door already narrowed to this chassis. */
+  kitChassis?: ChassisId | null
 }>()
 
 const emit = defineEmits<{ select: [chassis: ChassisId, kit?: string]; close: [] }>()
@@ -70,6 +72,7 @@ const doors = computed(() => [
         v-if="door === 'kit'"
         :kits="kits"
         :chassis="chassis"
+        :initial-chassis="kitChassis ?? null"
         @select="(k: PickableKit) => emit('select', k.chassis, k.id)"
       />
       <BuildChassisPicker

@@ -801,6 +801,19 @@ body {
   opacity: 0.7;
 }
 
+/* The body picker's pointer to the kits: what the list cannot hold, said above it. */
+.picker-kit-hint {
+  margin: 0 0 0.75rem;
+  padding: 0.6rem 0.75rem;
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius);
+  font-size: 0.9em;
+}
+
+.picker-kit-hint p {
+  margin: 0 0 0.5rem;
+}
+
 .picker-list {
   padding: 0;
   margin: 0;

@@ -21,6 +21,8 @@ const props = defineProps<{
   /** Already ordered at prerender; this component never re-sorts. */
   kits: PickableKit[]
   chassis: ChassisChip[]
+  /** The chip already pressed on open, for a reader sent here from the body picker. */
+  initialChassis?: ChassisId | null
 }>()
 
 const emit = defineEmits<{ select: [PickableKit] }>()
@@ -28,7 +30,7 @@ const emit = defineEmits<{ select: [PickableKit] }>()
 const { resolve, isFallback } = useCatalogName()
 
 const query = ref('')
-const chassisFilter = ref<ChassisId | null>(null)
+const chassisFilter = ref<ChassisId | null>(props.initialChassis ?? null)
 
 const chassisNames = computed(() =>
   new Map(props.chassis.map(c => [c.id, resolve(c.names).value])))

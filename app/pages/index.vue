@@ -277,6 +277,8 @@ function onMoreToggle(event: Event) {
 }
 
 const baseOpen = ref(false)
+/** The chassis the kit door opens narrowed to, when the body picker sent the reader there. */
+const baseKitChassis = ref<ChassisId | null>(null)
 
 /**
  * The Starter Packs the empty base row offers as one-tap starts, in the guide's
@@ -297,6 +299,7 @@ function chooseBase(chassisId: ChassisId, kitId?: string, entry?: 'starter') {
   if (first) track('build_start', { chassis: chassisId, kit: kitId, entry: entry ?? (kitId ? 'kit' : 'chassis') })
   linkTrimmed.value = false
   baseOpen.value = false
+  baseKitChassis.value = null
   // A reader who arrived from a part page with nothing on the bench had to
   // answer this question first; now their part can land.
   placePending()
@@ -310,6 +313,7 @@ function chooseBase(chassisId: ChassisId, kitId?: string, entry?: 'starter') {
  */
 function closeBase() {
   baseOpen.value = false
+  baseKitChassis.value = null
   cancelPending()
 }
 
@@ -610,6 +614,31 @@ const candidates = computed(() =>
 
 const openSlotLabel = computed(() =>
   openSlot.value ? slotLabel(openSlot.value) : '')
+
+/**
+ * The body picker's pointer to the kits on this chassis, whose shells it cannot
+ * list (`kitHint` in PartPicker). None where no kit is built on the chassis.
+ */
+const bodyKitHint = computed(() => {
+  if (openSlot.value?.type !== 'body' || !chassis.value) return undefined
+  const id = chassis.value.id
+  const count = homeChassis.value.find(entry => entry.id === id)?.kitCount
+  return count ? { chassis: resolve(chassis.value.names).value, count } : undefined
+})
+
+/**
+ * The base row's Swap, opened on the kit door and narrowed to this chassis.
+ * A tick apart so the part picker has unmounted and handed focus back to its
+ * row first: `useReturnFocus` in the base picker records whatever holds focus
+ * when it mounts, and a button inside a dialog about to vanish is no place to
+ * return a reader to.
+ */
+async function openKitsForBody() {
+  baseKitChassis.value = chassis.value?.id ?? null
+  closePicker()
+  await nextTick()
+  baseOpen.value = true
+}
 
 /**
  * A selection puts one of the part in the slot: in place of what was there,
@@ -1061,6 +1090,7 @@ useHead(() => ({
       v-if="baseOpen"
       :kits="catalog?.kits ?? []"
       :chassis="catalog?.chassis ?? []"
+      :kit-chassis="baseKitChassis"
       @select="chooseBase"
       @close="closeBase"
     />
@@ -1080,8 +1110,10 @@ useHead(() => ({
       :slot-label="openSlotLabel"
       :adding="pickerAt === 'add'"
       :build-class="buildClass"
+      :kit-hint="bodyKitHint"
       @select="choose"
       @close="closePicker"
+      @kits="openKitsForBody"
     />
   </div>
 </template>
