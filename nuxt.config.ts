@@ -173,8 +173,8 @@ export default defineNuxtConfig({
     prerender: {
       crawlLinks: true,
       routes: [
-        '/', '/about/', '/guides/', '/guides/starter/', '/parts/', '/chassis/', '/build/',
-        '/en/', '/en/about/', '/en/guides/', '/en/guides/starter/', '/en/parts/', '/en/chassis/', '/en/build/',
+        '/', '/about/', '/guides/', '/guides/starter/', '/guides/chassis/', '/parts/', '/chassis/', '/build/',
+        '/en/', '/en/about/', '/en/guides/', '/en/guides/starter/', '/en/guides/chassis/', '/en/parts/', '/en/chassis/', '/en/build/',
         ...catalogRoutes,
         ...catalogRoutes.map(route => `/en${route}`)
       ]
