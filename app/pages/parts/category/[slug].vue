@@ -12,6 +12,7 @@
  * header to keep it out of the index; as component state alone it would not
  * survive a reload or a paste. A hash is neither indexed nor lost.
  */
+import { fitsAnyChassis } from '#shared/catalog/build'
 import { byChassisOrder, isChassisId } from '#shared/catalog/chassis'
 import type { ChassisId } from '#shared/catalog/chassis'
 import type { PartCategory } from '#shared/catalog/schema'
@@ -38,10 +39,11 @@ const { data } = await useAsyncData(() => `category-${slug.value}`, async () => 
 
   const parts = docs.map(fromContent('parts')).map(({ slots: _slots, chassisCompat, ...stub }) => ({
     ...stub,
-    // Only the include list reaches the wire: `other` names chassis outside v1
-    // scope, which no chip here can select, and `source` is provenance for the
-    // part's own page.
-    chassis: chassisCompat.include
+    // Only the include list reaches the wire, and whether the part fits any
+    // chassis: `other` names chassis outside v1 scope, which no chip here can
+    // select, and `source` is provenance for the part's own page.
+    chassis: chassisCompat.include,
+    anyChassis: fitsAnyChassis(chassisCompat)
   }))
 
   return {
@@ -85,12 +87,11 @@ onMounted(() => {
 })
 
 /**
- * An empty include list is a part that is not chassis-specific — washers,
- * spacers, AO spares — so it fits whatever is selected. It never means "fits
- * nothing", which is the one misreading the schema comment exists to prevent.
+ * A part that is not chassis-specific — washers, spacers, AO spares — fits
+ * whatever is selected; any other fits the chassis Tamiya lists it for.
  */
-const fits = (include: ChassisId[], chassis: ChassisId) =>
-  !include.length || include.includes(chassis)
+const fits = (part: { chassis: ChassisId[], anyChassis: boolean }, chassis: ChassisId) =>
+  part.anyChassis || part.chassis.includes(chassis)
 
 function select(id: ChassisId | '') {
   selected.value = id
@@ -107,13 +108,13 @@ function select(id: ChassisId | '') {
 const chips = computed(() => (data.value?.chassis ?? []).map(entry => ({
   id: entry.id,
   name: resolve(entry.names).value,
-  count: (data.value?.parts ?? []).filter(part => fits(part.chassis, entry.id)).length
+  count: (data.value?.parts ?? []).filter(part => fits(part, entry.id)).length
 })))
 
 const shown = computed(() => {
   const chassis = selected.value
   if (!chassis) return data.value?.parts ?? []
-  return (data.value?.parts ?? []).filter(part => fits(part.chassis, chassis))
+  return (data.value?.parts ?? []).filter(part => fits(part, chassis))
 })
 
 const counts = computed(() => ({ category: label.value, count: data.value?.parts.length ?? 0 }))

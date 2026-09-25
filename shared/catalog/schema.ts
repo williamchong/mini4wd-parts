@@ -299,9 +299,11 @@ export const partSchema = z.object({
 
   chassisCompat: z.object({
     /**
-     * Chassis Tamiya lists for this part. An EMPTY list means the part is not
-     * chassis-specific (washers, spacers, AO spares) and the builder should
-     * offer it everywhere — it never means "unknown".
+     * Chassis Tamiya lists for this part. Empty here AND in `other` means the
+     * part is not chassis-specific (washers, spacers, AO spares) and the
+     * builder offers it everywhere — it never means "unknown". Empty here with
+     * `other` filled means Tamiya lists it only for chassis outside v1, and it
+     * fits none of ours (`fitsAnyChassis` in build.ts).
      */
     include: z.array(z.enum(CHASSIS_IDS)),
     /** Chassis Tamiya lists that are out of v1 scope (super1, tz, x...). */

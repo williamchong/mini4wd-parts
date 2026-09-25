@@ -405,17 +405,27 @@ export function rollersPerSideIn(
 }
 
 /**
- * An EMPTY `include` list means the part is not chassis-specific — washers,
- * spacers, AO spares — and the schema is explicit that it never means
- * "unknown". 53 parts are in that state, so reading the list literally would
- * drop every one of them from every picker.
+ * Whether a part is not chassis-specific — washers, spacers, AO spares — which
+ * Tamiya says by listing no chassis at all: both lists empty (33 parts).
+ *
+ * An empty `include` alone is not that. It is also what a part gets when every
+ * chassis Tamiya lists is outside our eight — the 72mm shafts and one-way
+ * wheels for Super X, the EZ tire sets, the Super FM chassis sets (20 parts) —
+ * and offering a Super X shaft on a VZ, which takes 60mm, is the one wrong
+ * answer. Their `other` list is what tells the two apart.
+ */
+export const fitsAnyChassis = (compat: Pick<Part['chassisCompat'], 'include' | 'other'>): boolean =>
+  !compat.include.length && !compat.other.length
+
+/**
+ * An empty `include` list never means "unknown" (schema.ts), so reading it
+ * literally would drop every universal part from every picker.
  */
 export function isChassisCompatible(
   part: Pick<Part, 'chassisCompat'>,
   chassisId: ChassisId
 ): boolean {
-  return part.chassisCompat.include.length === 0
-    || part.chassisCompat.include.includes(chassisId)
+  return fitsAnyChassis(part.chassisCompat) || part.chassisCompat.include.includes(chassisId)
 }
 
 /**

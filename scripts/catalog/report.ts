@@ -2,6 +2,7 @@ import { readJsonFile, readYamlDir, readYamlFileIfPresent } from './io.ts'
 import { list, section } from './print.ts'
 import type { FandomPart } from './sources/fandom.ts'
 import type { Kit, LabelNames, Part, PartOverride } from '../../shared/catalog/schema.ts'
+import { fitsAnyChassis } from '../../shared/catalog/build.ts'
 import { hasTraditionalChineseName } from '../../shared/catalog/names.ts'
 
 /**
@@ -45,10 +46,10 @@ section('Gaps to fix')
 list('  Uncategorised and unreviewed',
   parts.filter(part => part.category === 'other' && !overrides[part.id]?.category).map(label))
 
-// An empty compatibility list means "not chassis-specific" (washers, spacers,
-// AO spares), not "unknown" — the builder treats these as universal.
+// Both compatibility lists empty means "not chassis-specific" (washers,
+// spacers, AO spares), not "unknown" — the builder treats these as universal.
 list('  Car parts with no chassis compatibility (treated as universal)',
-  parts.filter(part => part.isCarPart && part.chassisCompat.include.length === 0).map(label), 4)
+  parts.filter(part => part.isCarPart && fitsAnyChassis(part.chassisCompat)).map(label), 4)
 
 list('  Motors without a legality override',
   parts.filter(part => part.category === 'motor' && part.classLegality.source !== 'override').map(label))

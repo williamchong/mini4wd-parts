@@ -216,6 +216,7 @@
     "compatAll": "所有底盤通用",
     "fits": "適用於 {list}",
     "compatOther": "田宮另外標示：{list}（本站未收錄）",
+    "compatOnlyOther": "田宮只標示適用於 {list}（本站未收錄），本站收錄的底盤都不適用",
     "slots": "安裝位置",
     "classes": "賽制",
     "otherNames": "其他語言的名稱",

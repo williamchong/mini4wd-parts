@@ -216,6 +216,7 @@
     "compatAll": "Fits any chassis",
     "fits": "Fits {list}",
     "compatOther": "TAMIYA also lists: {list} (not covered by this site)",
+    "compatOnlyOther": "TAMIYA lists it only for {list} (not covered by this site), none of the chassis here",
     "slots": "Goes in",
     "classes": "Race classes",
     "otherNames": "Names in other languages",

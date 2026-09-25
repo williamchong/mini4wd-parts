@@ -12,7 +12,7 @@
  * The add-to-build button deliberately does not decide anything: see
  * useAddToBuild.ts.
  */
-import { goesOnCar, setContentRows } from '#shared/catalog/build'
+import { fitsAnyChassis, goesOnCar, setContentRows } from '#shared/catalog/build'
 import { fandomArticleUrl, FANDOM_WIKI } from '#shared/catalog/kits'
 import type { BuildClass } from '#shared/catalog/build'
 import type { Part } from '#shared/catalog/schema'
@@ -332,13 +332,14 @@ useHead(() => ({
 
     <section v-if="buildable" class="part-section">
       <h2>{{ $t('part.compat') }}</h2>
-      <!-- An empty include list means "not chassis-specific" — washers, spacers,
-           AO spares — and never "fits nothing". 53 parts are in that state, and
-           printing an empty chip row for them would say the opposite. -->
-      <p v-if="!part.chassisCompat.include.length" class="part-note">
+      <!-- Both lists empty means "not chassis-specific" — washers, spacers,
+           AO spares — and never "fits nothing"; printing an empty chip row
+           for them would say the opposite. An empty include with `other`
+           filled is a part for chassis outside v1, and says only that. -->
+      <p v-if="fitsAnyChassis(part.chassisCompat)" class="part-note">
         {{ $t('part.compatAll') }}
       </p>
-      <ul v-else class="chip-row">
+      <ul v-else-if="part.chassisCompat.include.length" class="chip-row">
         <li v-for="entry in data!.chassis" :key="entry.id">
           <NuxtLink class="chip" :to="localePath(`/chassis/${entry.id}`)">
             {{ resolve(entry.names).value }}
@@ -346,7 +347,7 @@ useHead(() => ({
         </li>
       </ul>
       <p v-if="part.chassisCompat.other.length" class="part-note">
-        {{ $t('part.compatOther', { list: part.chassisCompat.other.join(', ') }) }}
+        {{ $t(part.chassisCompat.include.length ? 'part.compatOther' : 'part.compatOnlyOther', { list: part.chassisCompat.other.join(', ') }) }}
       </p>
 
       <h2>{{ $t('part.slots') }}</h2>

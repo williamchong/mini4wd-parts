@@ -142,6 +142,11 @@ test('an empty compatibility list means universal, not unknown', () => {
   const arOnly = part({ id: '15512', chassisCompat: { include: ['ar'], other: [], source: 'scraped' } })
   assert.equal(isChassisCompatible(arOnly, 'ar'), true)
   assert.equal(isChassisCompatible(arOnly, 'ma'), false)
+
+  // Listed, but only for chassis outside our eight: not universal, and fits none of them.
+  const superXOnly = part({ id: '15297', chassisCompat: { include: [], other: ['superX', 'superXX'], source: 'scraped' } })
+  assert.equal(isChassisCompatible(superXOnly, 'vz'), false)
+  assert.equal(isChassisCompatible(superXOnly, 'ms'), false)
 })
 
 test('a part maps to slot ids through its slot types', () => {
