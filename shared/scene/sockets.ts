@@ -61,11 +61,16 @@ export type SceneSocket = {
 export type StaySlot = 'front-stay' | 'rear-stay'
 
 /**
- * What is fitted that moves a socket: the plate in each stay slot, and the
- * mount of each entry in the damper slot, in order.
+ * What is fitted that moves a socket: the plate in each stay slot that places
+ * that end's rollers or its brake, how many plates each stay slot stacks, and
+ * the mount of each entry in the damper slot, in order.
  */
+/** What of an end's plates moves a socket: its roller holes, and where its brake sits. */
+export type EndFit = Pick<PlateShape, 'holes' | 'brakeZ'>
+
 export type Fit = {
-  plates?: Partial<Record<StaySlot, PlateShape>>
+  plates?: Partial<Record<StaySlot, EndFit>>
+  stays?: Partial<Record<StaySlot, number>>
   dampers?: readonly Mount[]
 }
 
@@ -103,6 +108,12 @@ export const AXLE_Y = 12
 export const BODY_Y = 32
 const ROLLER_Y = 12
 const STAY_Y = 8
+/**
+ * How far below the one before it each further plate in a stay slot sits: the
+ * second under the bumper, sandwiching it, the third under that — a brake stay
+ * or an anti-snag plate. Plausible, not measured, like the rest of this table.
+ */
+const STACK_STEP_MM = 3
 /**
  * Where an end-mounted damper sits. The generator draws the bracket under the
  * weight — a Tamiya mass damper rests on its plate and flies up the screw on
@@ -149,7 +160,7 @@ const single = (
  * measurements and every test that names it still find it; the rest are
  * numbered, and all of them open the same picker.
  */
-function rollers(slotId: string, towardNose: 1 | -1, l: Layout, plate?: PlateShape): SceneSocket[] {
+function rollers(slotId: string, towardNose: 1 | -1, l: Layout, plate?: EndFit): SceneSocket[] {
   const [postX, postZ, postTiers = 1] = towardNose > 0 ? l.rollers.front : l.rollers.rear
   const holes: readonly Hole[] = plate?.holes ?? [[postX, postZ - l.stayZ, postTiers]]
   const found: SceneSocket[] = []
@@ -166,6 +177,20 @@ function rollers(slotId: string, towardNose: 1 | -1, l: Layout, plate?: PlateSha
     }
   }
   return found
+}
+
+/**
+ * An end's stay sockets: one per plate the slot stacks, each under the one
+ * before. A lone plate keeps the plain name and stands for the whole slot, as
+ * it always has; once there are several, each socket draws its own entry and
+ * a tap on it replaces that one plate, as a tap on one damper does.
+ */
+function stays(slotId: StaySlot, towardNose: 1 | -1, l: Layout, count = 1): SceneSocket[] {
+  const at = (n: number): readonly [number, number, number] => [0, STAY_Y - n * STACK_STEP_MM, towardNose * l.stayZ]
+  if (count < 2) return [single(slotId, 'stay', at(0))]
+  return Array.from({ length: count }, (_, entry) => ({
+    ...single(slotId, 'stay', at(entry), entry ? `${slotId}-${entry + 1}` : slotId), entry
+  }))
 }
 
 /** An end's outer roller: how far out and along it is, and the height of the top one of its stack. */
@@ -224,8 +249,8 @@ function sockets(l: Layout, fit: Fit): SceneSocket[] {
     ...mirrored('wheel-rear', 'wheel', [rear, AXLE_Y, -halfWheelbase], true),
     ...mirrored('tire-front', 'tire', [front, AXLE_Y, halfWheelbase]),
     ...mirrored('tire-rear', 'tire', [rear, AXLE_Y, -halfWheelbase]),
-    single('front-stay', 'stay', [0, STAY_Y, l.stayZ]),
-    single('rear-stay', 'stay', [0, STAY_Y, -l.stayZ]),
+    ...stays('front-stay', 1, l, fit.stays?.['front-stay']),
+    ...stays('rear-stay', -1, l, fit.stays?.['rear-stay']),
     // Turned to face out, since a side stay is authored with x outward.
     ...mirrored('side-stay', 'side-stay', [l.sideStayX, STAY_Y, 0], true),
     ...frontRollers,
@@ -311,7 +336,8 @@ const SOCKETS = new Map<ChassisId, readonly SceneSocket[]>()
  * kept; a fitted set is thirty-odd small objects, rebuilt when the build is.
  */
 export function socketsFor(chassis: ChassisId, fit?: Fit): readonly SceneSocket[] {
-  const bare = !fit || (!fit.dampers?.length && !Object.values(fit.plates ?? {}).some(Boolean))
+  const bare = !fit || (!fit.dampers?.length && !Object.values(fit.plates ?? {}).some(Boolean)
+    && !Object.values(fit.stays ?? {}).some(count => count > 1))
   if (!bare) return sockets(LAYOUTS[chassis], fit)
   let found = SOCKETS.get(chassis)
   if (!found) {

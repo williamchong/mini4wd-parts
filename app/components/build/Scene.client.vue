@@ -36,7 +36,7 @@ import {
   AXLES, BEARINGS, BRAKES, CHASSIS_UNITS, damperAt, DAMPERS, DEFAULT_AXLE, DEFAULT_BEARING, DEFAULT_BRAKE,
   DEFAULT_DAMPER, DEFAULT_PLATE, DEFAULT_PROPELLER, DEFAULT_ROLLER, DEFAULT_SIDE_PLATE, PLATES, PROPELLERS, ROLLERS
 } from '#shared/scene/fittings'
-import type { Mount } from '#shared/scene/fittings'
+import type { Mount, PlateShape } from '#shared/scene/fittings'
 import { DEFAULT_TIRE, DEFAULT_WHEEL, entryShapeId, TIRES, WHEELS } from '#shared/scene/wheels'
 import type { TireShape, WheelShape } from '#shared/scene/wheels'
 import { cylinder, Triangles } from '#shared/scene/generators/mesh'
@@ -291,24 +291,37 @@ function diameterFor(kind: ProxyKind, slot: ResolvedSlot, entry: number, fitting
   }
 }
 
+/** The fittings row of every plate a stay slot stacks, in order. */
+const platesIn = (slot: ResolvedSlot | undefined): PlateShape[] =>
+  slot?.entries.map((_, entry) => plateRow('stay', fittingIn(slot, entry))) ?? []
+
 /**
  * What in the build moves a socket (shared/scene/sockets.ts): an end plate
- * whose row carries roller holes, and where each damper-slot part mounts.
- * Only a plate authored for an end moves that end's rollers; a side row or
- * one with no holes leaves them on the posts, which `socketsFor` does anyway.
+ * whose row carries roller holes, how many plates each end stacks, and where
+ * each damper-slot part mounts. Only a plate authored for an end moves that
+ * end's rollers; a side row or one with no holes leaves them on the posts,
+ * which `socketsFor` does anyway.
+ *
+ * In a stack, the first plate with roller holes places the rollers and the
+ * first with a brake tab places the brake — a roller stay with a brake stay
+ * under it is the ordinary rear of a 3D-course car. `rollersPerSideIn` in
+ * shared/catalog/build.ts counts the rollers by the same rule.
  */
 function fitOf(bySlot: ReadonlyMap<string, ResolvedSlot>): Fit {
   const plates: NonNullable<Fit['plates']> = {}
+  const stays: NonNullable<Fit['stays']> = {}
   for (const slotId of ['front-stay', 'rear-stay'] as const) {
-    const slot = bySlot.get(slotId)
-    const plate = slot?.entries.length ? plateRow('stay', fittingIn(slot)) : undefined
+    const stack = platesIn(bySlot.get(slotId))
+    stays[slotId] = stack.length
+    const rollers = stack.find(plate => plate.holes)
+    const brakeZ = stack.find(plate => plate.brakeZ !== undefined)?.brakeZ
     // Only a plate that moves a socket: any other keeps the chassis' own set, which `socketsFor` keeps.
-    if (plate?.holes || plate?.brakeZ !== undefined) plates[slotId] = plate
+    if (rollers || brakeZ !== undefined) plates[slotId] = { holes: rollers?.holes, brakeZ }
   }
   const damper = bySlot.get('damper')
   // A weight sold bare goes where the build says; everything else carries its
   // own answer, which `catalog:verify` keeps true (schema.ts `mount`).
-  return { plates, dampers: damper?.entries.map((own, entry) => damperAt(damperRow(fittingIn(damper, entry)), own.mount).mount) }
+  return { plates, stays, dampers: damper?.entries.map((own, entry) => damperAt(damperRow(fittingIn(damper, entry)), own.mount).mount) }
 }
 
 /**
@@ -858,9 +871,10 @@ onMounted(() => {
         for (const role of CHASSIS_UNITS[fittingIn(slot, entry)]?.repaint ?? []) own.set(role, colour)
       })
     }
+    // Any plate in the stack that is the bumper takes the moulded one away.
     const bare = {
-      1: !!PLATES[fittingIn(bySlot.get('front-stay'))]?.replacesBumper,
-      [-1]: !!PLATES[fittingIn(bySlot.get('rear-stay'))]?.replacesBumper
+      1: platesIn(bySlot.get('front-stay')).some(plate => plate.replacesBumper),
+      [-1]: platesIn(bySlot.get('rear-stay')).some(plate => plate.replacesBumper)
     }
     for (const mesh of chassis.children) {
       if (!(mesh instanceof Mesh)) continue
@@ -1093,9 +1107,9 @@ onMounted(() => {
    * moulding: a plated, aluminium or carbon wheel, a plated body, a carbon
    * plate or brake stay. A roller's or a weight's metal is its fitting row's.
    */
-  function finishFor(kind: ProxyKind, slot: ResolvedSlot): parts.PaintFinish | undefined {
+  function finishFor(kind: ProxyKind, slot: ResolvedSlot, entry = 0): parts.PaintFinish | undefined {
     if (!SOLD_AS_MATERIAL.has(kind)) return undefined
-    const partId = slot.entries[0]?.partId
+    const partId = slot.entries[entry]?.partId
     const own = partId ? props.parts.get(partId)?.finish : undefined
     if (own) return PART_SURFACE[own]
     // A body is plated by its own record, else by the kit's while the slot is
@@ -1179,8 +1193,9 @@ onMounted(() => {
       // Nor does an empty hidden fitting: an outlined axle inside a wheel is a
       // line nobody reads, and the list says the slot is empty.
       if ((socket.kind === 'body' || isHidden(socket.kind)) && state === 'empty') continue
-      // Each damper-slot part has a socket of its own; a chassis-unit socket
-      // draws the first unit that adds a piece, the rest only repaint.
+      // Each damper-slot part, and each plate of a stacked stay, has a socket
+      // of its own; a chassis-unit socket draws the first unit that adds a
+      // piece, the rest only repaint.
       const entry = socket.kind === 'chassis-unit'
         ? slot.entries.findIndex((_, i) => CHASSIS_UNITS[fittingIn(slot, i)]?.piece)
         : socket.entry ?? 0
@@ -1208,10 +1223,11 @@ onMounted(() => {
         mount: socket.kind === 'damper' ? slot.entries[entry]?.mount : undefined
       }
       const tint = tintFor(socket.kind, slot, entry)
-      const finish = finishFor(socket.kind, slot)
+      const finish = finishFor(socket.kind, slot, entry)
       const data: ProxyData = { slotId: socket.slotId, state, kind: socket.kind, tint, finish }
-      // Only a filled damper socket stands for one part of its slot; the empty
-      // outlines and every other socket stand for the whole slot.
+      // Only a filled damper socket, or one plate of a stack, stands for one
+      // part of its slot; the empty outlines and every other socket stand for
+      // the whole slot.
       if (socket.entry !== undefined && state !== 'empty') data.entry = socket.entry
       if (socket.kind === 'body') seatedOpacity = clearFor(slot) ? CLEAR_OPACITY : 1
       if (socket.kind === 'motor') data.paints = motorPaintsFor(slot, tint)

@@ -36,8 +36,12 @@ profiles:
     - { id: wheel-rear, type: wheel-rear, maxCount: 2, mirror: true, required: true }
     - { id: tire-front, type: tire-front, maxCount: 2, mirror: true, required: true }
     - { id: tire-rear, type: tire-rear, maxCount: 2, mirror: true, required: true }
-    - { id: front-stay, type: front-stay, maxCount: 1 }
-    - { id: rear-stay, type: rear-stay, maxCount: 1 }
+    # Up to three plates on one bumper, bolted through the same holes: a roller
+    # stay, a brake stay under it, an anti-snag or second plate sandwiching the
+    # bumper. That is the ordinary rear of a 3D-course car, B-MAX included
+    # (docs/PLAN.md §6, "Stacked stays").
+    - { id: front-stay, type: front-stay, maxCount: 3 }
+    - { id: rear-stay, type: rear-stay, maxCount: 3 }
     - { id: side-stay, type: side-stay, maxCount: 2, mirror: true }
     - { id: roller-front, type: roller-front, maxCount: 2, mirror: true, required: true }
     - { id: roller-rear, type: roller-rear, maxCount: 2, mirror: true, required: true }
@@ -59,8 +63,8 @@ profiles:
     - { id: wheel-rear, type: wheel-rear, maxCount: 2, mirror: true, required: true }
     - { id: tire-front, type: tire-front, maxCount: 2, mirror: true, required: true }
     - { id: tire-rear, type: tire-rear, maxCount: 2, mirror: true, required: true }
-    - { id: front-stay, type: front-stay, maxCount: 1 }
-    - { id: rear-stay, type: rear-stay, maxCount: 1 }
+    - { id: front-stay, type: front-stay, maxCount: 3 }
+    - { id: rear-stay, type: rear-stay, maxCount: 3 }
     - { id: side-stay, type: side-stay, maxCount: 2, mirror: true }
     - { id: roller-front, type: roller-front, maxCount: 2, mirror: true, required: true }
     - { id: roller-rear, type: roller-rear, maxCount: 2, mirror: true, required: true }

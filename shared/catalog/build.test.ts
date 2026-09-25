@@ -362,8 +362,8 @@ test('the gear ratio is the kit\'s until a gear slot is swapped, then only the s
 test('a roller slot counts the rollers its end\'s stay carries each side, where that is more than one', () => {
   const rollerSlots = [
     ...chassis.slots,
-    { id: 'front-stay', type: 'front-stay' as const, maxCount: 1, mirror: false, required: false },
-    { id: 'rear-stay', type: 'rear-stay' as const, maxCount: 1, mirror: false, required: false },
+    { id: 'front-stay', type: 'front-stay' as const, maxCount: 3, mirror: false, required: false },
+    { id: 'rear-stay', type: 'rear-stay' as const, maxCount: 3, mirror: false, required: false },
     { id: 'roller-front', type: 'roller-front' as const, maxCount: 2, mirror: true, required: true },
     { id: 'roller-rear', type: 'roller-rear' as const, maxCount: 2, mirror: true, required: true }
   ]
@@ -387,6 +387,9 @@ test('a roller slot counts the rollers its end\'s stay carries each side, where 
   // Only the end the double-roller stay is on, and a stock roller counts as much as a swapped one.
   assert.deepEqual(counts({ 'rear-stay': ['15412'] }), { 'roller-rear': 2 })
   assert.deepEqual(counts({ 'front-stay': ['15412'], 'rear-stay': ['15498'] }), { 'roller-front': 2 })
+  // Stacked plates: the one with roller holes places them, wherever it sits in the stack.
+  assert.deepEqual(counts({ 'rear-stay': ['15498', '15412'] }), { 'roller-rear': 2 })
+  assert.deepEqual(counts({ 'rear-stay': ['15498', '15498'] }), {})
   // No rollers in the slot, none to count.
   assert.deepEqual(counts({ 'rear-stay': ['15412'], 'roller-rear': [] }), {})
 })

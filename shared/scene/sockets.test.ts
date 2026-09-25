@@ -4,6 +4,7 @@ import { test } from 'node:test'
 import { parse } from 'yaml'
 import { CHASSIS_IDS } from '../catalog/chassis.ts'
 import { layoutFor, socketsFor, stockRollersPerSide } from './sockets.ts'
+import type { Fit } from './sockets.ts'
 import { damperAt, DAMPERS, HALF_WIDTH_MM, LARGEST_ROLLER_MM, PLATES, rollersPerSide, UPPER_ROLLER_MM, WEIGHT_MOUNTS } from './fittings.ts'
 
 /**
@@ -207,6 +208,23 @@ test('MA\'s sockets are where the posters and tap measurements were taken', () =
   assert.deepEqual(at('side-stay-r'), [38, 8, 0])
   assert.deepEqual(at('motor'), [0, 18, 0])
   assert.deepEqual(at('body'), [0, 32, 0])
+})
+
+test('a stay slot stacking plates draws each under the one before, and each opens its own entry', () => {
+  for (const id of CHASSIS_IDS) {
+    const lone = socketsFor(id).filter(s => s.slotId === 'rear-stay')
+    assert.deepEqual(lone.map(s => [s.name, s.entry]), [['rear-stay', undefined]], `${id} one plate stands for the slot`)
+    const stack = socketsFor(id, { stays: { 'rear-stay': 3 } }).filter(s => s.slotId === 'rear-stay')
+    assert.deepEqual(stack.map(s => [s.name, s.entry]), [['rear-stay', 0], ['rear-stay-2', 1], ['rear-stay-3', 2]], id)
+    // Same place along the car, each lower than the last and still above the ground.
+    assert.ok(stack.every(s => s.position[2] === lone[0]!.position[2]), `${id} z`)
+    assert.ok(stack.every((s, i) => i === 0 || s.position[1] < stack[i - 1]!.position[1]), `${id} y`)
+    assert.ok(stack.at(-1)!.position[1] > 0, `${id} ground`)
+    // The other end, and the rollers, are untouched by a stack alone.
+    const rollers = (fit?: Fit) => socketsFor(id, fit).filter(s => s.slotId === 'roller-rear')
+    assert.deepEqual(rollers({ stays: { 'rear-stay': 3 } }), rollers(), `${id} rollers`)
+    assert.equal(socketsFor(id, { stays: { 'rear-stay': 3 } }).filter(s => s.slotId === 'front-stay').length, 1, id)
+  }
 })
 
 /**

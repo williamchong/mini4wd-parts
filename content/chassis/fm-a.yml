@@ -96,12 +96,12 @@ slots:
     required: true
   - id: front-stay
     type: front-stay
-    maxCount: 1
+    maxCount: 3
     mirror: false
     required: false
   - id: rear-stay
     type: rear-stay
-    maxCount: 1
+    maxCount: 3
     mirror: false
     required: false
   - id: side-stay

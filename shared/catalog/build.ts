@@ -256,9 +256,9 @@ export function setContentRows(
 
 /**
  * Whether a slot holds several different parts at once — the dampers, brakes,
- * fasteners and chassis units a real car stacks — rather than one part the
- * reader swaps for another. A mirrored slot's count is one part per side, so a
- * pair of rollers is not a stack however many it holds.
+ * plates on a bumper, fasteners and chassis units a real car stacks — rather
+ * than one part the reader swaps for another. A mirrored slot's count is one
+ * part per side, so a pair of rollers is not a stack however many it holds.
  */
 export const stacks = (slot: Pick<ResolvedSlot, 'maxCount' | 'mirror'>): boolean =>
   slot.maxCount > 1 && !slot.mirror
@@ -380,6 +380,10 @@ const ROLLER_STAY: Partial<Record<Slot, Slot>> = { 'roller-front': 'front-stay',
  * and the MA hold a pair: a roller over the stay and one under it, the "six
  * rollers" those two ship with. Both counts are written by `catalog:generate`
  * from shared/scene, which this cannot import (§5.6).
+ *
+ * A stay slot can stack plates, and the first one with roller holes is the one
+ * placing the rollers, as the pane draws it (`fitOf` in Scene.client.vue); a
+ * brake stay or a plate over the bumper beside it does not change the count.
  */
 export function rollersPerSideIn(
   slots: ResolvedSlot[],
@@ -390,9 +394,11 @@ export function rollersPerSideIn(
   for (const slot of slots) {
     const stayType = ROLLER_STAY[slot.type]
     if (!stayType || !slot.entries.length) continue
-    const stay = slots.find(s => s.type === stayType)?.entries[0]?.partId
+    const onPlate = slots.find(s => s.type === stayType)?.entries
+      .map(entry => entry.partId ? partsById.get(entry.partId)?.specs.rollersPerSide : undefined)
+      .find(count => count !== undefined)
     const onPosts = slot.type === 'roller-rear' ? chassis?.rearRollersPerSide : undefined
-    const perSide = (stay ? partsById.get(stay)?.specs.rollersPerSide : undefined) ?? onPosts
+    const perSide = onPlate ?? onPosts
     if (perSide && perSide > 1) counts.set(slot.id, perSide)
   }
   return counts

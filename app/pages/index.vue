@@ -601,7 +601,7 @@ function pick(slotId: string, entry?: number) {
   const slot = slots.value.find(s => s.id === slotId)
   if (slot && swappable.value.has(slot.type)) {
     pickerSource.value = 'scene'
-    // A tap on one damper changes that one; the rest of the slot stays.
+    // A tap on one damper, or one plate of a stack, changes that one; the rest of the slot stays.
     pickerAt.value = stacks(slot) ? entry : undefined
     openSlotId.value = slotId
   }
