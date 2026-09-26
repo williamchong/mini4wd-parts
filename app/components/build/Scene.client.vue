@@ -483,6 +483,8 @@ let startMotor = () => {}
  * because every slot is already a row there.
  */
 const lifted = ref(true)
+/** The lift button offers nothing while the body slot is empty: there is no shell to lift. */
+const hasBody = computed(() => !!props.slots.find(slot => slot.type === 'body')?.entries.length)
 const LIFT_MM = 24
 const LIFTED_OPACITY = 0.35
 /**
@@ -1515,6 +1517,7 @@ onBeforeUnmount(() => cleanup?.())
       {{ $t('build.scene.resetCamera') }}
     </UButton>
     <UButton
+      v-if="hasBody"
       size="xs"
       v-bind="emphasis(lifted)"
       class="scene-lift"

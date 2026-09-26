@@ -325,7 +325,7 @@
   },
   "spec": {
     "rollerDiameter": "Diameter",
-    "rollerType": "Material",
+    "rollerType": "Type",
     "plateThickness": "Thickness",
     "plateMaterial": "Material",
     "tireDiameter": "Tire diameter",
@@ -342,7 +342,7 @@
     "roller": {
       "plastic": "Plastic",
       "aluminium": "Aluminium",
-      "bearing": "Ball bearing",
+      "bearing": "Ball-race",
       "other": "Other"
     },
     "material": {

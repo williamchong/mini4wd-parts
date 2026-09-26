@@ -325,7 +325,7 @@
   },
   "spec": {
     "rollerDiameter": "直徑",
-    "rollerType": "材質",
+    "rollerType": "種類",
     "plateThickness": "厚度",
     "plateMaterial": "材質",
     "tireDiameter": "輪胎直徑",
@@ -342,7 +342,7 @@
     "roller": {
       "plastic": "塑膠",
       "aluminium": "鋁合金",
-      "bearing": "軸承",
+      "bearing": "滾珠軸承",
       "other": "其他"
     },
     "material": {
