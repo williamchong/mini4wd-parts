@@ -365,6 +365,34 @@ export function counterpartParts(
   return same ? undefined : { from, partIds }
 }
 
+const COMPANION: Partial<Record<Slot, Slot>> = {
+  'wheel-front': 'tire-front',
+  'tire-front': 'wheel-front',
+  'wheel-rear': 'tire-rear',
+  'tire-rear': 'wheel-rear'
+}
+
+/**
+ * The second row a wheel-and-tire set fills: the tire row beside the wheel
+ * row it was chosen for, or the other way round. One box is both, and a
+ * builder that put it on the rims alone left the tire row reading "stock
+ * tires" on a car that no longer had them, then offered the same box again
+ * in the tire picker. Empty unless every part is such a set and this end
+ * has the companion slot, so a plain wheel or tire touches one row as before.
+ */
+export function companionRows(
+  partIds: string[],
+  slot: Pick<ResolvedSlot, 'type'>,
+  slots: Pick<ResolvedSlot, 'id' | 'type'>[],
+  partsById: ReadonlyMap<string, Pick<Part, 'category'>>
+): SetRow[] {
+  const other = COMPANION[slot.type]
+  if (!other || !partIds.length) return []
+  if (!partIds.every(id => partsById.get(id)?.category === 'wheel-tire-set')) return []
+  const companion = slots.find(s => s.type === other)
+  return companion ? [{ slotId: companion.id, partIds }] : []
+}
+
 /**
  * The car's final gear ratio, or undefined where the catalog cannot say.
  *

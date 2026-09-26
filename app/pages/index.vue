@@ -12,7 +12,7 @@
  * model is tested without a browser and this file stays about presentation.
  */
 import {
-  addedTo, canAddTo, counterpartParts, gearRatioOf, goesOnCar, isBuildClass, orderParts, partsForSlot, removedFrom, replacedIn, setRowsInto,
+  addedTo, canAddTo, companionRows, counterpartParts, gearRatioOf, goesOnCar, isBuildClass, orderParts, partsForSlot, removedFrom, replacedIn, setRowsInto,
   resolveBuild, rollersPerSideIn, setContentsFor, slotIdsFor, stacks, swappableSlotTypes
 } from '#shared/catalog/build'
 import { byChassisOrder } from '#shared/catalog/chassis'
@@ -429,12 +429,13 @@ function place(slotId: string) {
     trackAdd(slotId, id, 'part_page')
   }
   else {
-    swap(slotId, [id])
+    let filled: ResolvedSlot[] = []
+    if (slot) filled = swapWithCompanion(slot, [id])
+    else swap(slotId, [id])
     trackSwap(slotId, id, 'part_page')
-    notice.value = t('build.added', {
-      part: pendingName.value,
-      slot: slot ? slotLabel(slot) : slotId
-    })
+    notice.value = filled.length > 1
+      ? t('build.addedSet', { part: pendingName.value, slots: filled.map(slotLabel).join(t('build.listSeparator')) })
+      : t('build.added', { part: pendingName.value, slot: slot ? slotLabel(slot) : slotId })
   }
   cancelPending()
   // The row is often below the 3D pane, so the change would otherwise happen
@@ -462,8 +463,9 @@ const copies = computed(() => new Map(hasBuild.value
 
 function copy(slotId: string) {
   const parts = copies.value.get(slotId)?.partIds
-  if (!parts) return
-  swap(slotId, parts)
+  const slot = slots.value.find(s => s.id === slotId)
+  if (!parts || !slot) return
+  swapWithCompanion(slot, parts)
   // The counterpart can hold more than one part; the first is what names the
   // swap, so `part` stays one bounded id rather than a composite.
   if (parts[0]) trackSwap(slotId, parts[0], 'copy')
@@ -500,6 +502,21 @@ function openFromRow(slotId: string, at?: 'add') {
  * one that vanished from the list without a word would read as a bug.
  * `added` is the part put on beside the rest, which the notice names.
  */
+/**
+ * One row swapped, and the tire (or wheel) row beside it when the parts are a
+ * wheel-and-tire set (`companionRows`), in one write so the link, the rules
+ * and the pane see one car. Returns the rows it filled, for a notice.
+ */
+function swapWithCompanion(slot: ResolvedSlot, partIds: string[]): ResolvedSlot[] {
+  const companions = companionRows(partIds, slot, slots.value, partsById.value)
+  if (!companions.length) {
+    swap(slot.id, partIds)
+    return [slot]
+  }
+  swapMany([{ slotId: slot.id, partIds }, ...companions])
+  return [slot, ...companions.flatMap(row => slots.value.find(s => s.id === row.slotId) ?? [])]
+}
+
 function fitEdit(slot: ResolvedSlot, edit: SlotEdit, added?: string) {
   swap(slot.id, edit.partIds)
   const part = added ? partsById.value.get(added) : undefined
@@ -680,7 +697,7 @@ function choose(partId: string) {
     trackSwap(slot.id, partId, pickerSource.value)
   }
   else if (slot) {
-    swap(slot.id, [partId])
+    swapWithCompanion(slot, [partId])
     trackSwap(slot.id, partId, pickerSource.value)
   }
   closePicker()

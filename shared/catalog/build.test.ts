@@ -4,7 +4,7 @@ import { test } from 'node:test'
 import { parse } from 'yaml'
 import { partSchema } from './schema.ts'
 import {
-  addedTo, BUILD_CLASSES, canAddTo, counterpartParts, gearRatioOf, goesOnCar, isChassisCompatible, newBuild, orderParts, partsForSlot,
+  addedTo, BUILD_CLASSES, canAddTo, companionRows, counterpartParts, gearRatioOf, goesOnCar, isChassisCompatible, newBuild, orderParts, partsForSlot,
   removedFrom, replacedIn, resolveBuild, rollersPerSideIn, setContentRows, setContentsFor, setRowsInto, slotIdsFor, stacks,
   swappableSlotTypes
 } from './build.ts'
@@ -305,6 +305,23 @@ test('a wheel or tire row can copy the other end only when that changes it', () 
   assert.equal(counterpartParts(front, [front, rearOnly], parts), undefined)
   // Only wheels and tires have a counterpart.
   assert.equal(counterpartParts(wheel('motor', []), [front], parts), undefined)
+})
+
+test('a wheel-and-tire set fills the tire row beside its wheel row, a plain wheel does not', () => {
+  const slot = (id: string) => ({ id, type: id as 'wheel-front' })
+  const rows = [slot('wheel-front'), slot('wheel-rear'), slot('tire-front'), slot('tire-rear')]
+  const parts = new Map([
+    ['15541', { category: 'wheel-tire-set' as const }],
+    ['15001', { category: 'wheel' as const }]
+  ])
+  assert.deepEqual(companionRows(['15541'], slot('wheel-front'), rows, parts), [{ slotId: 'tire-front', partIds: ['15541'] }])
+  assert.deepEqual(companionRows(['15541'], slot('tire-rear'), rows, parts), [{ slotId: 'wheel-rear', partIds: ['15541'] }])
+  assert.deepEqual(companionRows(['15001'], slot('wheel-front'), rows, parts), [])
+  // A set and a plain wheel together are not one box.
+  assert.deepEqual(companionRows(['15541', '15001'], slot('wheel-front'), rows, parts), [])
+  // Only wheels and tires have a companion, and only where the chassis has the slot.
+  assert.deepEqual(companionRows(['15541'], slot('motor'), rows, parts), [])
+  assert.deepEqual(companionRows(['15541'], slot('wheel-front'), [slot('wheel-front')], parts), [])
 })
 
 test('a stacking slot takes one more part, loses one, or swaps one, and says what stock it left', () => {
