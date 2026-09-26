@@ -501,8 +501,8 @@ test('a set added to one stacking row keeps that row and takes every other row w
   // One entry tapped on the car: only that one gives way.
   assert.deepEqual(setRowsInto(rows, damper([{ partId: '15528' }, { partId: '15501' }]), 0).rows[0],
     { slotId: 'damper', partIds: ['15459', '15501'] })
-  // A row the set does not name is untouched, and a slot the set does not fill changes nothing.
-  assert.deepEqual(setRowsInto(rows, { ...damper([{ partId: '15528' }]), id: 'brake', type: 'brake' }, 'add'), { rows, dropped: 0 })
+  // A slot the set does not fill changes nothing.
+  assert.deepEqual(setRowsInto(rows, { ...damper([{ partId: '15528' }]), id: 'brake' }, 'add'), { rows, dropped: 0 })
 })
 
 test('a part that is not a set fills nothing', () => {

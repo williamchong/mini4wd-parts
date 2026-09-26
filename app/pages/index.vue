@@ -19,7 +19,7 @@ import { byChassisOrder } from '#shared/catalog/chassis'
 import { STARTER_PACKS, orderKits } from '#shared/catalog/kits'
 import { checkBuild } from '#shared/catalog/rules'
 import { flagThumbnail, thumbnailSrc } from '#shared/catalog/thumbnails'
-import type { BuildablePart, ResolvedSlot, SlotEdit } from '#shared/catalog/build'
+import type { BuildablePart, ResolvedSlot, SetRow, SlotEdit } from '#shared/catalog/build'
 import type { Finding } from '#shared/catalog/rules'
 import type { ChassisId, PartCategory, Slot } from '#shared/catalog/schema'
 import type { AnalyticsEvents } from '~/composables/useAnalytics'
@@ -410,10 +410,7 @@ function placeSet(
     ? t('build.droppedStock', { slot: slotLabel(into.slot) })
     : t('build.addedSet', {
         part: resolve(part.names).value,
-        slots: rows
-          .flatMap(row => slots.value.find(slot => slot.id === row.slotId) ?? [])
-          .map(slotLabel)
-          .join(t('build.listSeparator'))
+        slots: slotsOfRows(rows).map(slotLabel).join(t('build.listSeparator'))
       })
   goToSlot(rows[0]!.slotId)
 }
@@ -422,20 +419,19 @@ function place(slotId: string) {
   const id = pending.value
   if (!id) return
   const slot = slots.value.find(s => s.id === slotId)
+  if (!slot) return
   // A damper from its own page goes on beside the ones already fitted, the
   // way it would on the car; a motor replaces the motor.
-  if (slot && canAddTo(slot)) {
+  if (canAddTo(slot)) {
     fitEdit(slot, addedTo(slot, id), id)
     trackAdd(slotId, id, 'part_page')
   }
   else {
-    let filled: ResolvedSlot[] = []
-    if (slot) filled = swapWithCompanion(slot, [id])
-    else swap(slotId, [id])
+    const filled = swapWithCompanion(slot, [id])
     trackSwap(slotId, id, 'part_page')
     notice.value = filled.length > 1
       ? t('build.addedSet', { part: pendingName.value, slots: filled.map(slotLabel).join(t('build.listSeparator')) })
-      : t('build.added', { part: pendingName.value, slot: slot ? slotLabel(slot) : slotId })
+      : t('build.added', { part: pendingName.value, slot: slotLabel(slot) })
   }
   cancelPending()
   // The row is often below the 3D pane, so the change would otherwise happen
@@ -496,12 +492,10 @@ function openFromRow(slotId: string, at?: 'add') {
   openSlotId.value = slotId
 }
 
-/**
- * One edit to a stacking slot, on the car and in words. The notice is the
- * point: stock pieces with no item number cannot ride along in a swap, and
- * one that vanished from the list without a word would read as a bug.
- * `added` is the part put on beside the rest, which the notice names.
- */
+/** The rows a set or a companion names, as the list renders them, for a notice. */
+const slotsOfRows = (rows: SetRow[]): ResolvedSlot[] =>
+  rows.flatMap(row => slots.value.find(slot => slot.id === row.slotId) ?? [])
+
 /**
  * One row swapped, and the tire (or wheel) row beside it when the parts are a
  * wheel-and-tire set (`companionRows`), in one write so the link, the rules
@@ -514,9 +508,15 @@ function swapWithCompanion(slot: ResolvedSlot, partIds: string[]): ResolvedSlot[
     return [slot]
   }
   swapMany([{ slotId: slot.id, partIds }, ...companions])
-  return [slot, ...companions.flatMap(row => slots.value.find(s => s.id === row.slotId) ?? [])]
+  return [slot, ...slotsOfRows(companions)]
 }
 
+/**
+ * One edit to a stacking slot, on the car and in words. The notice is the
+ * point: stock pieces with no item number cannot ride along in a swap, and
+ * one that vanished from the list without a word would read as a bug.
+ * `added` is the part put on beside the rest, which the notice names.
+ */
 function fitEdit(slot: ResolvedSlot, edit: SlotEdit, added?: string) {
   swap(slot.id, edit.partIds)
   const part = added ? partsById.value.get(added) : undefined

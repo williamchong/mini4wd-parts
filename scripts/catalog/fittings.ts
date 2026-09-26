@@ -18,7 +18,7 @@
  * same name.
  */
 import { normalise } from './taxonomy.ts'
-import type { PartCategory } from '../../shared/catalog/schema.ts'
+import type { Part, PartCategory } from '../../shared/catalog/schema.ts'
 
 type Rule = readonly [pattern: RegExp, id: string | ((match: RegExpExecArray) => string)]
 
@@ -147,7 +147,7 @@ const RULES: Partial<Record<PartCategory, readonly Rule[]>> = {
 /** The categories a fitting row is read for: every one that draws in a socket this module fills. */
 export const FITTING_CATEGORIES: ReadonlySet<PartCategory> = new Set(Object.keys(RULES) as PartCategory[])
 
-export type StayEnd = 'front' | 'rear' | 'side'
+type StayEnd = NonNullable<Part['stayEnd']>
 
 /**
  * Which end of the car a plate is made for, read off its PLATE row. Every plate
