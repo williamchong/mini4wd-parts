@@ -16,9 +16,7 @@ const props = defineProps<{
   findings: Array<Finding & { text: string }>
   /** False before a base is chosen: there is nothing to check yet. */
   hasBuild: boolean
-  /** Some part in the build is legal in one class and not another. */
-  classDecides: boolean
-  /** The class the findings name, or a word for any race while the class decides nothing. */
+  /** The class the findings are checked against, as the reader sees it named. */
   classLabel: string
 }>()
 
@@ -38,13 +36,16 @@ const classItems = computed(() =>
 
 <template>
   <section class="build-findings">
-    <!-- One choice among three, and only while the class can change a finding:
-         a question whose every answer gives the same verdict is one asked for
-         nothing. A radio group rather than a row of toggle buttons, because
-         only one class can be in force and the grouping says that once
-         instead of each button restating it through `aria-pressed`. -->
+    <!-- One choice among three, from the moment there is a car to check. It
+         used to appear only once a fitted part was legal in one class and not
+         another, but the page's own three steps promise the choice, and a
+         reader building for one class wants the verdict to name it even while
+         every answer is the same (owner, 2026-09-26). A radio group rather than
+         a row of toggle buttons, because only one class can be in force and
+         the grouping says that once instead of each button restating it
+         through `aria-pressed`. -->
     <URadioGroup
-      v-if="classDecides"
+      v-if="hasBuild"
       v-model="buildClass"
       orientation="horizontal"
       :legend="$t('build.rules.class')"

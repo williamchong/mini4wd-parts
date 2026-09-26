@@ -17,7 +17,7 @@ import {
 } from '#shared/catalog/build'
 import { byChassisOrder } from '#shared/catalog/chassis'
 import { STARTER_PACKS, orderKits } from '#shared/catalog/kits'
-import { checkBuild, classDecides } from '#shared/catalog/rules'
+import { checkBuild } from '#shared/catalog/rules'
 import { flagThumbnail, thumbnailSrc } from '#shared/catalog/thumbnails'
 import type { BuildablePart, ResolvedSlot, SlotEdit } from '#shared/catalog/build'
 import type { Finding } from '#shared/catalog/rules'
@@ -732,14 +732,8 @@ const findings = computed(() => {
   }).map(finding => ({ ...finding, text: findingText(finding) }))
 })
 
-/**
- * The class toggle shows only while it can change a finding. Without it, a
- * finding about a part banned or unchecked in every class names no class: the
- * reader never picked one, and the answer would be the same whichever they did.
- */
-const buildClassDecides = computed(() => classDecides(slots.value, partsById.value))
-const classLabel = computed(() =>
-  buildClassDecides.value ? t(`part.class.${buildClass.value}`) : t('build.rules.anyClass'))
+/** The class the findings name; the radio in the findings panel picks it. */
+const classLabel = computed(() => t(`part.class.${buildClass.value}`))
 
 function findingText(finding: Finding) {
   const part = finding.partId ? partsById.value.get(finding.partId) : undefined
@@ -961,7 +955,6 @@ useHead(() => ({
       v-model:build-class="buildClass"
       :findings="findings"
       :has-build="hasBuild"
-      :class-decides="buildClassDecides"
       :class-label="classLabel"
       @go="goToSlot"
     />

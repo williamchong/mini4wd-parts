@@ -1,6 +1,6 @@
 import assert from 'node:assert/strict'
 import { test } from 'node:test'
-import { checkBuild, classDecides } from './rules.ts'
+import { checkBuild } from './rules.ts'
 import type { BuildCheck } from './rules.ts'
 import type { ResolvedSlot } from './build.ts'
 import type { Part, PartLegality } from './schema.ts'
@@ -112,13 +112,4 @@ test('findings sort by severity, then by list order, and a doubled part is repor
 
 test('an item number the catalog does not ship is skipped, not a crash', () => {
   assert.deepEqual(check([...stock, slot('motor', 'motor', ['99999'])]), [])
-})
-
-test('the class decides something only when a part in the build differs between classes', () => {
-  assert.equal(classDecides(stock, partsById), false)
-  // Unknown in every class, and banned in every class: the answer is the same whichever is chosen.
-  assert.equal(classDecides([...stock, slot('damper', 'damper', ['15340'])], partsById), false)
-  assert.equal(classDecides([slot('motor', 'motor', ['15186'])], partsById), false)
-  assert.equal(classDecides([...stock, slot('motor', 'motor', ['15375'])], partsById), true)
-  assert.equal(classDecides([slot('motor', 'motor', ['99999'])], partsById), false)
 })
