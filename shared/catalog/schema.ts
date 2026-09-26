@@ -283,9 +283,10 @@ export const partSchema = z.object({
 
   /**
    * What a parts set puts on the car: slot **id** -> the item numbers that go
-   * in that row. Only the `bundle` category carries one, and the set's own
-   * `slots` are read back off these keys by scripts/catalog/generate.ts, so the
-   * two can never disagree about where a set is offered.
+   * in that row. The `bundle` category carries one, and so do the two side
+   * mass damper sets, which are a side plate and dampers in one box; the set's
+   * own `slots` are read back off these keys by scripts/catalog/generate.ts, so
+   * the two can never disagree about where a set is offered.
    *
    * Item numbers and nothing else, because that is all a build can hold: a slot
    * in `BuildState.swaps` is a list of them, with nowhere to put a loose piece

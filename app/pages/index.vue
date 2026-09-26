@@ -12,7 +12,7 @@
  * model is tested without a browser and this file stays about presentation.
  */
 import {
-  addedTo, canAddTo, counterpartParts, gearRatioOf, goesOnCar, isBuildClass, orderParts, partsForSlot, removedFrom, replacedIn,
+  addedTo, canAddTo, counterpartParts, gearRatioOf, goesOnCar, isBuildClass, orderParts, partsForSlot, removedFrom, replacedIn, setRowsInto,
   resolveBuild, rollersPerSideIn, setContentsFor, slotIdsFor, stacks, swappableSlotTypes
 } from '#shared/catalog/build'
 import { byChassisOrder } from '#shared/catalog/chassis'
@@ -387,21 +387,34 @@ function placePending() {
  * touches more than the row the reader was looking at, and a set that quietly
  * replaced the kit's rollers on its way past would read as a bug rather than as
  * what a First Try set is.
+ *
+ * The one row the reader opened to add to, or whose entry they tapped, is
+ * the exception (`setRowsInto`): there the set goes beside or in place of
+ * what they pointed at, as a single part would, so a side damper set added
+ * to a damper row does not take the other dampers off with it.
  */
-function placeSet(part: BuildablePart, source: AnalyticsEvents['part_set_added']['source']) {
+function placeSet(
+  part: BuildablePart,
+  source: AnalyticsEvents['part_set_added']['source'],
+  into?: { slot: ResolvedSlot; at: 'add' | number }
+) {
   if (!chassis.value) return
-  const rows = setContentsFor(part, chassis.value)
-  if (!rows.length) return
+  const whole = setContentsFor(part, chassis.value)
+  if (!whole.length) return
+  const { rows, dropped } = into ? setRowsInto(whole, into.slot, into.at) : { rows: whole, dropped: 0 }
 
   swapMany(rows)
   track('part_set_added', { chassis: chassis.value.id, part: part.id, slots: rows.length, source })
-  notice.value = t('build.addedSet', {
-    part: resolve(part.names).value,
-    slots: rows
-      .flatMap(row => slots.value.find(slot => slot.id === row.slotId) ?? [])
-      .map(slotLabel)
-      .join(t('build.listSeparator'))
-  })
+  // The lost stock pieces outrank the confirmation, as in `fitEdit`.
+  notice.value = dropped && into
+    ? t('build.droppedStock', { slot: slotLabel(into.slot) })
+    : t('build.addedSet', {
+        part: resolve(part.names).value,
+        slots: rows
+          .flatMap(row => slots.value.find(slot => slot.id === row.slotId) ?? [])
+          .map(slotLabel)
+          .join(t('build.listSeparator'))
+      })
   goToSlot(rows[0]!.slotId)
 }
 
@@ -656,7 +669,7 @@ function choose(partId: string) {
   const slot = openSlot.value
   const at = pickerAt.value
   if (part?.contents) {
-    placeSet(part, pickerSource.value)
+    placeSet(part, pickerSource.value, slot && at !== undefined ? { slot, at } : undefined)
   }
   else if (slot && at === 'add') {
     fitEdit(slot, addedTo(slot, partId), partId)

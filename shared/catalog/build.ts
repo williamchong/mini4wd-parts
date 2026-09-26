@@ -283,29 +283,54 @@ export const canAddTo = (slot: Pick<ResolvedSlot, 'maxCount' | 'mirror' | 'entri
  */
 export type SlotEdit = { partIds: string[]; dropped: number }
 
-function edited(slot: ResolvedSlot, at: number | undefined, partId?: string): SlotEdit {
+function edited(slot: ResolvedSlot, at: number | undefined, added: string[] = []): SlotEdit {
   const partIds: string[] = []
   let dropped = 0
   slot.entries.forEach((entry, i) => {
-    if (i === at) {
-      if (partId) partIds.push(partId)
-    }
+    if (i === at) partIds.push(...added)
     else if (entry.partId) partIds.push(entry.partId)
     else dropped++
   })
-  if (at === undefined && partId) partIds.push(partId)
+  if (at === undefined) partIds.push(...added)
   return { partIds: partIds.slice(0, slot.maxCount), dropped }
 }
 
 /** One more part in a stacking slot, after what is already there. */
-export const addedTo = (slot: ResolvedSlot, partId: string): SlotEdit => edited(slot, undefined, partId)
+export const addedTo = (slot: ResolvedSlot, partId: string): SlotEdit => edited(slot, undefined, [partId])
 
 /** One entry of a stacking slot swapped for another part, the rest kept. */
 export const replacedIn = (slot: ResolvedSlot, index: number, partId: string): SlotEdit =>
-  edited(slot, index, partId)
+  edited(slot, index, [partId])
 
 /** One entry taken out of a stacking slot, the rest kept. */
 export const removedFrom = (slot: ResolvedSlot, index: number): SlotEdit => edited(slot, index)
+
+/**
+ * A set's rows when the reader opened one stacking slot to add to it, or
+ * tapped one of its entries to replace: that row keeps what it holds and
+ * takes the set's pieces beside (or in place of) the one entry, the way a
+ * single part would through `addedTo` and `replacedIn`; every other row is
+ * still the set's word, because a First Try set replacing the kit's rollers
+ * is what a First Try set is. `dropped` counts the label-only stock pieces
+ * the opened row could not keep, for the same notice `fitEdit` shows.
+ *
+ * Without this a side mass damper set added to a damper row wiped the two
+ * dampers already stacked there, and said nothing.
+ */
+export function setRowsInto(
+  rows: SetRow[],
+  slot: ResolvedSlot,
+  at: 'add' | number
+): { rows: SetRow[]; dropped: number } {
+  let dropped = 0
+  const merged = rows.map((row) => {
+    if (row.slotId !== slot.id) return row
+    const edit = edited(slot, at === 'add' ? undefined : at, row.partIds)
+    dropped = edit.dropped
+    return { slotId: row.slotId, partIds: edit.partIds }
+  })
+  return { rows: merged, dropped }
+}
 
 const COUNTERPART: Partial<Record<Slot, Slot>> = {
   'wheel-front': 'wheel-rear',

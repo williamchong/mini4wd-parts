@@ -5,7 +5,7 @@ import { parse } from 'yaml'
 import { partSchema } from './schema.ts'
 import {
   addedTo, BUILD_CLASSES, canAddTo, counterpartParts, gearRatioOf, goesOnCar, isChassisCompatible, newBuild, orderParts, partsForSlot,
-  removedFrom, replacedIn, resolveBuild, rollersPerSideIn, setContentRows, setContentsFor, slotIdsFor, stacks,
+  removedFrom, replacedIn, resolveBuild, rollersPerSideIn, setContentRows, setContentsFor, setRowsInto, slotIdsFor, stacks,
   swappableSlotTypes
 } from './build.ts'
 import type { BuildState } from './build.ts'
@@ -445,6 +445,32 @@ test('a parts set is cut to what a row holds, like a link is', () => {
     contents: { axle: ['15300', '15301', '15302'] }
   })
   assert.deepEqual(setContentsFor(set, chassis), [{ slotId: 'axle', partIds: ['15300', '15301'] }])
+})
+
+test('a set added to one stacking row keeps that row and takes every other row whole', () => {
+  const damper = (entries: { partId?: string }[]) => ({
+    id: 'damper', type: 'damper' as const, maxCount: 4, mirror: false, required: false,
+    entries: entries.map(e => ({ ...e, label: e.partId ? undefined : { en: 'Stock ball' }, origin: 'kit' as const })),
+    swapped: false
+  })
+  // The AR side mass damper set: a side plate and dampers in one box.
+  const rows = [{ slotId: 'damper', partIds: ['15459'] }, { slotId: 'side-stay', partIds: ['15459'] }]
+
+  // Opened to add: the two dampers already there stay, the side plate row is the set's.
+  assert.deepEqual(setRowsInto(rows, damper([{ partId: '15528' }, { partId: '15501' }]), 'add'), {
+    rows: [{ slotId: 'damper', partIds: ['15528', '15501', '15459'] }, { slotId: 'side-stay', partIds: ['15459'] }],
+    dropped: 0
+  })
+  // A stock ball with no item number cannot be kept, and is counted.
+  assert.deepEqual(setRowsInto(rows, damper([{ partId: '15392' }, {}]), 'add'), {
+    rows: [{ slotId: 'damper', partIds: ['15392', '15459'] }, { slotId: 'side-stay', partIds: ['15459'] }],
+    dropped: 1
+  })
+  // One entry tapped on the car: only that one gives way.
+  assert.deepEqual(setRowsInto(rows, damper([{ partId: '15528' }, { partId: '15501' }]), 0).rows[0],
+    { slotId: 'damper', partIds: ['15459', '15501'] })
+  // A row the set does not name is untouched, and a slot the set does not fill changes nothing.
+  assert.deepEqual(setRowsInto(rows, { ...damper([{ partId: '15528' }]), id: 'brake', type: 'brake' }, 'add'), { rows, dropped: 0 })
 })
 
 test('a part that is not a set fills nothing', () => {
