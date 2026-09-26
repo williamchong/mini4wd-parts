@@ -324,6 +324,21 @@ test('a wheel-and-tire set fills the tire row beside its wheel row, a plain whee
   assert.deepEqual(companionRows(['15541'], slot('wheel-front'), [slot('wheel-front')], parts), [])
 })
 
+test('a stay picker puts the plates made for its end first and the other end\'s last', () => {
+  const stays = ['front-stay', 'rear-stay', 'side-stay'] as Part['slots']
+  const plates = [
+    part({ id: '15518', slots: stays, stayEnd: 'rear' }),
+    part({ id: '15193', slots: stays }),
+    part({ id: '15524', slots: stays, stayEnd: 'front' }),
+    // An add-on stays at the foot whichever end it names.
+    part({ id: '10305', slots: stays, stayEnd: 'front', isAddOn: true })
+  ]
+  const stayChassis = { ...chassis, slots: [...chassis.slots, { id: 'front-stay', type: 'front-stay' as const, maxCount: 3, mirror: false, required: false }] }
+  const ids = (slot: 'front-stay' | 'rear-stay') => partsForSlot(plates, slot, stayChassis, 'open').map(c => c.part.id)
+  assert.deepEqual(ids('front-stay'), ['15524', '15193', '15518', '10305'])
+  assert.deepEqual(ids('rear-stay'), ['15518', '15193', '15524', '10305'])
+})
+
 test('a stacking slot takes one more part, loses one, or swaps one, and says what stock it left', () => {
   const damper = (entries: { partId?: string }[]) => ({
     id: 'damper', type: 'damper' as const, maxCount: 3, mirror: false, required: false,

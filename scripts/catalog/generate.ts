@@ -13,7 +13,7 @@ import { colourOf, coloursIn, isClear } from './colours.ts'
 import { bodyForKit, loadBodies, writeBodies } from './bodies.ts'
 import { shapesFor, WHEEL_CATEGORIES } from './wheels.ts'
 import { finishFor } from './finish.ts'
-import { fittingFor } from './fittings.ts'
+import { fittingFor, stayEndOf } from './fittings.ts'
 import { TIRES } from '../../shared/scene/wheels.ts'
 import { partRollersPerSide } from '../../shared/scene/fittings.ts'
 import { stockRollersPerSide } from '../../shared/scene/sockets.ts'
@@ -342,8 +342,10 @@ function buildPart(item: JpItem<PartGenreCode>) {
   // the count; the build list prints it and cannot read the plate table (§5.6).
   const perSide = partRollersPerSide(merged)
   if (perSide !== undefined) merged.specs = { ...merged.specs, rollersPerSide: perSide }
+  // Likewise the end a plate is made for, which ranks it in a stay picker.
+  const stayEnd = stayEndOf(merged.fitting)
 
-  return { record: merged, matched }
+  return { record: stayEnd ? { ...merged, stayEnd } : merged, matched }
 }
 
 /**

@@ -57,7 +57,7 @@ const { data: catalog } = await useAsyncData('build-catalog', async () => {
     // every picker, and nothing in the builder renders any of the three.
     queryCollection('parts')
       .select('id', 'stem', 'names', 'category', 'slots', 'isCarPart', 'isAddOn', 'contents',
-        'chassisCompat', 'classLegality', 'specs', 'colours', 'body', 'wheel', 'tire', 'finish', 'fitting',
+        'chassisCompat', 'classLegality', 'specs', 'colours', 'body', 'wheel', 'tire', 'finish', 'fitting', 'stayEnd',
         'status', 'releaseDate', 'priceJpy', 'thumbnail')
       .all(),
     // `releaseDate` is selected but deliberately not shipped: it orders the

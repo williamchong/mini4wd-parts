@@ -147,6 +147,38 @@ const RULES: Partial<Record<PartCategory, readonly Rule[]>> = {
 /** The categories a fitting row is read for: every one that draws in a socket this module fills. */
 export const FITTING_CATEGORIES: ReadonlySet<PartCategory> = new Set(Object.keys(RULES) as PartCategory[])
 
+export type StayEnd = 'front' | 'rear' | 'side'
+
+/**
+ * Which end of the car a plate is made for, read off its PLATE row. Every plate
+ * declares all three stay slots, because Tamiya's holes let a rear stay hang
+ * off a front bumper, so the slots cannot say; the row can, and the builder
+ * ranks a front plate first in the front picker on it (`partsForSlot`). The
+ * reinforcing and bumper rows name no end and are ranked in the middle.
+ */
+const STAY_ENDS: Readonly<Record<string, StayEnd>> = {
+  'wide-front': 'front',
+  'wide-front-ar': 'front',
+  'wide-front-vz': 'front',
+  'wide-front-cowled': 'front',
+  'multi-roller-front': 'front',
+  'wide-slide-damper-front': 'front',
+  'under-guard': 'front',
+  'steering': 'front',
+  'wide-rear': 'rear',
+  'wide-rear-ar': 'rear',
+  'rear-roller-stay': 'rear',
+  'rear-double-roller': 'rear',
+  'rear-double-roller-3pt': 'rear',
+  'multi-roller-rear': 'rear',
+  'brake-stay': 'rear',
+  'wide-slide-damper-rear': 'rear',
+  'side-extension': 'side'
+}
+
+export const stayEndOf = (fitting: string | undefined): StayEnd | undefined =>
+  fitting === undefined ? undefined : STAY_ENDS[fitting]
+
 /**
  * The row a part draws as, from its category and its names, or nothing for a
  * part no row fits — a Super FM chassis set, the rubber tubing filed under

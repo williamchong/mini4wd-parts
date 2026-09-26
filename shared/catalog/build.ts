@@ -41,7 +41,7 @@ type HasThumbnail = { hasThumbnail?: boolean }
  */
 export type BuildablePart = Pick<Part,
   'id' | 'names' | 'category' | 'slots' | 'isCarPart' | 'isAddOn' | 'contents' | 'chassisCompat'
-  | 'classLegality' | 'specs' | 'colours' | 'body'> & HasThumbnail
+  | 'classLegality' | 'specs' | 'colours' | 'body' | 'stayEnd'> & HasThumbnail
 
 export type BuildableChassis = Pick<Chassis, 'id' | 'slots' | 'defaultLoadout' | 'motorShaft' | 'rearRollersPerSide'>
 
@@ -611,8 +611,11 @@ export function orderParts<T extends Pick<Part, 'id' | 'status' | 'releaseDate' 
  * filtered on: a beginner learns more from a Sprint Dash marked "Open only"
  * than from one that silently does not appear.
  *
- * Two ranks and no third: the thing the slot is named for before its add-ons,
- * then usable before illegal. Within a rank the caller's order survives, because
+ * Three ranks: the thing the slot is named for before its add-ons, then — in
+ * a stay slot — the plates made for this end before the ones that name no
+ * end before the ones made for the other (`stayEnd`; every plate declares all
+ * three stay slots, so without it the front picker opened on rear brake
+ * stays), then usable before illegal. Within a rank the caller's order survives, because
  * Array.prototype.sort is stable, so a caller that wants an order hands one in:
  * the builder hands the newest-first catalog `orderParts` made at prerender,
  * which is what the reader scrolls, and the picker is still free to re-sort.
@@ -638,9 +641,19 @@ export function partsForSlot(
     .map(part => ({ part, legality: part.classLegality[buildClass] }))
 
   const rank = { legal: 0, unknown: 1, illegal: 2 }
+  const end = STAY_END_OF_SLOT[slotType]
+  const endRank = (part: BuildablePart) =>
+    !end || !part.stayEnd ? 1 : part.stayEnd === end ? 0 : 2
   return candidates.sort((a, b) =>
     Number(a.part.isAddOn ?? false) - Number(b.part.isAddOn ?? false)
+    || endRank(a.part) - endRank(b.part)
     || rank[a.legality] - rank[b.legality])
+}
+
+const STAY_END_OF_SLOT: Partial<Record<Slot, NonNullable<Part['stayEnd']>>> = {
+  'front-stay': 'front',
+  'rear-stay': 'rear',
+  'side-stay': 'side'
 }
 
 /**

@@ -391,6 +391,13 @@ export const partSchema = z.object({
    * fittings.ts. Absent on a part that draws its socket's default.
    */
   fitting: z.string().optional(),
+  /**
+   * Which end a plate is made for, read off `fitting` by scripts/catalog/
+   * fittings.ts. Every plate declares all three stay slots, so this is what
+   * puts the front plates first in the front picker. Absent where the row
+   * names no end.
+   */
+  stayEnd: z.enum(['front', 'rear', 'side']).optional(),
 
   /** Free-text 【基本スペック】 from Tamiya, kept for later spec parsing. */
   specsRaw: z.string().optional(),
