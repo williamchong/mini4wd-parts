@@ -834,7 +834,9 @@ body {
 }
 
 .picker-list button:hover {
-  background: var(--color-chassis-50);
+  /* A role token, not a fixed light step: the row's text follows the page's
+     scheme, so its ground has to as well. */
+  background: var(--ui-bg-elevated);
 }
 
 .picker-divider {
