@@ -324,6 +324,12 @@ function buildPart(item: JpItem<PartGenreCode>) {
   const merged = deepMerge(compact(record), override)
   // Any field the override touched is no longer derived — say so in the data.
   if (override.category) merged.categorySource = 'override'
+  if (override.names) {
+    merged.nameSources = {
+      ...merged.nameSources,
+      ...Object.fromEntries(Object.keys(override.names).map(locale => [locale, 'override']))
+    }
+  }
   if (override.classLegality) {
     merged.classLegality = { ...merged.classLegality, source: 'override' }
   }

@@ -1,8 +1,12 @@
 id: "94380"
 names:
   ja: AO-1001 FA-130タイプノーマルモーター
+  en: AO-1001 FA-130 Type Normal Motor
+  zh-HK: AO-1001 FA-130 原裝馬達
 nameSources:
   ja: tamiya.com
+  en: override
+  zh-HK: override
 series: ao
 seriesLabel: ミニ四駆用AOパーツ
 category: motor

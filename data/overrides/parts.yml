@@ -105,7 +105,11 @@
 '95189': { specs: { motorShaft: double }, classLegality: { open: legal, stockBmax: legal, junior: legal }, colours: { primary: '#1f2124', sticker: '#d9c08a' } } # アトミックチューン2 PRO 40周年記念
 
 # --- Kit motor ---------------------------------------------------------------
+# Tamiya's page for the three AO parts below carries no English name and
+# tamiya.hk does not stock them, so every bare-chassis build showed their
+# Japanese names; these are ours (馬達, owner 2026-09-26).
 '94380': # AO-1001 FA-130タイプノーマルモーター — the motor every kit ships with.
+  names: { en: AO-1001 FA-130 Type Normal Motor, zh-HK: AO-1001 FA-130 原裝馬達 }
   specs: { motorShaft: single }
   classLegality: { open: legal, stockBmax: legal, junior: legal }
   colours: { primary: '#eef0f2' }
@@ -120,7 +124,11 @@
 # the very part those three chassis ship with. FM-A needs nothing: AO-1044 is
 # tagged for it.
 '94382': # AO-1004 プロペラシャフトA
+  names: { en: AO-1004 Propeller Shaft A, zh-HK: AO-1004 傳動軸 A }
   chassisCompat: { include: [ar, vz, super-2, vs] }
+  colours: { primary: '#c9ced6' }
+'94383': # AO-1005 プロペラシャフトB
+  names: { en: AO-1005 Propeller Shaft B, zh-HK: AO-1005 傳動軸 B }
   colours: { primary: '#c9ced6' }
 
 # --- Reviewed, genuinely uncategorised ---------------------------------------
@@ -395,7 +403,6 @@
 '15205': { colours: { primary: '#c9ced6' } }  # 1.4mm中空プロペラシャフト
 '15206': { colours: { primary: '#c9ced6' } }  # 2.0mm中空プロペラシャフト
 '15234': { colours: { primary: '#c9ced6' } }  # スーパーX 中空プロペラシャフト
-'94383': { colours: { primary: '#c9ced6' } }  # プロペラシャフトB
 '10307': { colours: { primary: '#c9ced6' } }  # スプリングワッシャー
 '10309': { colours: { primary: '#c9ced6' } }  # ワッシャー小
 '10323': { colours: { primary: '#c9ced6' } }  # 2x8mm トラスビス

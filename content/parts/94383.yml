@@ -1,8 +1,12 @@
 id: "94383"
 names:
   ja: AO-1005 プロペラシャフトB
+  en: AO-1005 Propeller Shaft B
+  zh-HK: AO-1005 傳動軸 B
 nameSources:
   ja: tamiya.com
+  en: override
+  zh-HK: override
 series: ao
 seriesLabel: ミニ四駆用AOパーツ
 category: propeller-shaft

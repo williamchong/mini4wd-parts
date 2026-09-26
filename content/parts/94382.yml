@@ -1,8 +1,12 @@
 id: "94382"
 names:
   ja: AO-1004 プロペラシャフトA
+  en: AO-1004 Propeller Shaft A
+  zh-HK: AO-1004 傳動軸 A
 nameSources:
   ja: tamiya.com
+  en: override
+  zh-HK: override
 series: ao
 seriesLabel: ミニ四駆用AOパーツ
 category: propeller-shaft
