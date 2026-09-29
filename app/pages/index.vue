@@ -606,13 +606,13 @@ function onSceneReady() {
 function onScenePower() {
   if (shownChassis.value) track('scene_power', { chassis: shownChassis.value.id })
 }
+function onSceneExplode() {
+  if (shownChassis.value) track('scene_explode', { chassis: shownChassis.value.id })
+}
 /**
  * The motor plays unasked now, so this counts the readers who reach over and
  * silence it — which is the evidence for whether playing it was welcome.
  */
-function onSceneExplode() {
-  if (shownChassis.value) track('scene_explode', { chassis: shownChassis.value.id })
-}
 function onSceneMute(muted: boolean) {
   if (shownChassis.value) track('scene_mute', { chassis: shownChassis.value.id, muted })
 }
@@ -800,6 +800,17 @@ const reportedRules = useState<Record<string, true>>('reported-rules', () => ({}
 const reportedFor = useState<string | undefined>('reported-rules-build', () => undefined)
 
 /**
+ * The finding the pane flashes: the first one raised since the last recompute
+ * about a slot on the car. Only a change in the same build raises one, since
+ * a new kit's opening findings arrive under the crossfade and would flash half
+ * the car at once.
+ */
+const pulse = ref<{ slotId: string; severity: Finding['severity']; n: number } | null>(null)
+
+/** One finding's identity, for the flash and for the report alike: the rule and the slot it is about. */
+const findingKey = (finding: Finding) => `${finding.rule}:${finding.slotId ?? ''}`
+
+/**
  * The comparison lives *inside* the findings watcher rather than in a watcher
  * of its own. Both would be `pre` jobs on the same component, so Vue runs them
  * in the order reactivity reaches them, not the order they are written — and on
@@ -808,19 +819,11 @@ const reportedFor = useState<string | undefined>('reported-rules-build', () => u
  * the record immediately *after* its events fired, and every build's opening
  * findings went out twice.
  */
-/**
- * The finding the pane flashes: the first one raised since the last recompute
- * about a slot on the car. Only a change in the same build raises one, since
- * a new kit's opening findings arrive under the crossfade and would flash half
- * the car at once.
- */
-const pulse = ref<{ slotId: string; severity: Finding['severity']; n: number } | null>(null)
-
 watch(findings, (list, previous) => {
   const current = build.value ? `${build.value.chassis}:${build.value.kit ?? ''}` : undefined
   if (current === reportedFor.value) {
-    const stood = new Set(previous.map(finding => `${finding.rule}:${finding.slotId ?? ''}`))
-    const raised = list.find(finding => finding.slotId && !stood.has(`${finding.rule}:${finding.slotId}`))
+    const stood = new Set(previous.map(findingKey))
+    const raised = list.find(finding => finding.slotId && !stood.has(findingKey(finding)))
     if (raised?.slotId) pulse.value = { slotId: raised.slotId, severity: raised.severity, n: (pulse.value?.n ?? 0) + 1 }
   }
   // `swap` and `revert` replace `build.value` wholesale, so only a new chassis
@@ -831,7 +834,7 @@ watch(findings, (list, previous) => {
   }
 
   for (const finding of list) {
-    const key = `${finding.rule}:${finding.slotId ?? ''}`
+    const key = findingKey(finding)
     if (reportedRules.value[key]) continue
     reportedRules.value[key] = true
     track('rule_triggered', {

@@ -22,6 +22,7 @@ import type { BufferGeometry, Material } from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { studioEnvironment } from '#shared/scene/studio'
 import { dress } from '#shared/scene/shading'
+import type { Dressing } from '#shared/scene/shading'
 import type { Occlusion } from '#shared/scene/occlusion'
 import { layoutFor, socketsFor } from '#shared/scene/sockets'
 import type { Fit, ProxyKind, SceneSocket } from '#shared/scene/sockets'
@@ -415,13 +416,6 @@ const OCCLUDED = '(min-width: 640px)'
 const OUTLINE_LAYER = 1
 /** How strongly each highlight lights a part's outline (shared/scene/shading.ts). */
 const RIM: Record<Highlight, number> = { none: 0, hover: 0.9, open: 1.6 }
-/**
- * What a finding's flash is coloured, by severity: the reds and ambers of
- * `severityColor`'s badges, as sRGB numbers because the pane cannot read a
- * Tailwind oklch token off the stylesheet. A note is the engine saying
- * something true rather than something wrong, so it flashes in the muted grey.
- */
-const PULSE: Record<Finding['severity'], number> = { error: 0xef4444, warning: 0xf59e0b, note: 0x9ca3af }
 const PULSE_STRENGTH = 0.8
 const PULSE_MS = 600
 /** The kinds a carbon finish is woven sheet on; a carbon wheel is a carbon-filled moulding. */
@@ -509,6 +503,8 @@ let startMotor = () => {}
  * because every slot is already a row there.
  */
 const lifted = ref(true)
+/** The canvas fading out over the old car while a kit change is built; see the kit watcher. */
+const swapping = ref(false)
 /** The explode button offers nothing on the outline car: there is nothing fitted to take apart. */
 const hasBuild = computed(() => props.slots.some(slot => slot.entries.length))
 /** The lift button offers nothing while the body slot is empty: there is no shell to lift. */
@@ -528,6 +524,7 @@ const CENTRE_Y = 15
 function explodeOffset(rest: Vector3, into: Vector3) {
   into.set(rest.x, rest.y - CENTRE_Y, rest.z)
   if (Math.abs(into.x) < 1 && Math.abs(into.z) < 1) return into.set(0, EXPLODE_MM, 0)
+  // Normalised before the floor so 0.3 means the same slant on every part, and again after it.
   into.normalize()
   into.y = Math.max(into.y, 0.3)
   return into.normalize().multiplyScalar(EXPLODE_MM)
@@ -939,15 +936,13 @@ onMounted(() => {
    * with roller holes moves that end's rollers, each damper-slot part has a
    * place of its own (shared/scene/sockets.ts) — so each populate places the
    * groups it needs and drops the rest. A group that stays is only moved if
-   * its socket did: the body's is animated by the lift, and resetting it to
-   * rest mid-lift would jump.
-   */
-  /**
-   * Where a socket group sits is its socket's `rest` plus an `offset` that is
-   * eased toward a `goal` every frame (`tickGroups`): the shell's lift, a
-   * part dropping into its socket, the exploded view. Keeping the offset
-   * apart from the rest is what lets a fit move a socket under a lifted
-   * shell without the shell jumping.
+   * its socket did.
+   *
+   * Where a group sits is its socket's `rest` plus an `offset` that is eased
+   * toward a `goal` every frame (`tickGroups`): the shell's lift, a part
+   * dropping into its socket, the exploded view. Keeping the offset apart
+   * from the rest is what lets a fit move a socket under a lifted shell
+   * without the shell jumping.
    */
   type Placed = { at?: string; was?: string; rest: Vector3; offset: Vector3; goal: Vector3 }
   const placed = (group: Group) => group.userData as Placed
@@ -1031,7 +1026,7 @@ onMounted(() => {
   const bodyGroup = groups.get('body')
   /** What the shell's offset should be: its lift, or the exploded view's larger one. */
   const bodyGoalY = () => exploded.value ? LIFT_MM * EXPLODE_BODY : lifted.value ? LIFT_MM : 0
-  /** Where every group is heading, from the lift and the exploded view; called whenever either changes or the sockets do. */
+  /** Where every group is heading, from the lift and the exploded view. */
   function aimGroups() {
     for (const [name, group] of groups) {
       const { rest, goal } = placed(group)
@@ -1065,6 +1060,14 @@ onMounted(() => {
 
   const EASE = 0.18
   const SETTLED_MM = 0.05
+  /** One frame of `easeToward` on each axis; true when `current` moved. */
+  function easeVector(current: Vector3, target: Vector3) {
+    if (current.equals(target)) return false
+    current.x = easeToward(current.x, target.x, EASE, SETTLED_MM)
+    current.y = easeToward(current.y, target.y, EASE, SETTLED_MM)
+    current.z = easeToward(current.z, target.z, EASE, SETTLED_MM)
+    return true
+  }
 
   /**
    * The camera flying to a slot: the orbit target eases to the mean of the
@@ -1074,6 +1077,7 @@ onMounted(() => {
    */
   const FOCUS_DISTANCE = 1.4
   let flight: { target: Vector3; distance: number } | null = null
+  const bearing = new Vector3()
   function flyTo(slotId: string) {
     const target = new Vector3()
     let count = 0
@@ -1086,17 +1090,22 @@ onMounted(() => {
     if (!count) return
     target.divideScalar(count).add(car.position)
     flight = { target, distance: controls.minDistance * FOCUS_DISTANCE }
+    // Scrolled away, the flight lands at once: the frames would be drawn for
+    // nobody, and the observer asks for one when the pane comes back.
+    if (!onScreen) {
+      bearing.subVectors(camera.position, controls.target).normalize()
+      controls.target.copy(target)
+      camera.position.copy(target).addScaledVector(bearing, flight.distance)
+      flight = null
+    }
     requestRender()
   }
-  const bearing = new Vector3()
   function tickFlight() {
     if (!flight) return
     const at = controls.target
     bearing.subVectors(camera.position, at)
     const distance = easeToward(bearing.length(), flight.distance, EASE, SETTLED_MM)
-    at.x = easeToward(at.x, flight.target.x, EASE, SETTLED_MM)
-    at.y = easeToward(at.y, flight.target.y, EASE, SETTLED_MM)
-    at.z = easeToward(at.z, flight.target.z, EASE, SETTLED_MM)
+    easeVector(at, flight.target)
     camera.position.copy(at).addScaledVector(bearing.normalize(), distance)
     if (at.equals(flight.target) && distance === flight.distance) flight = null
   }
@@ -1106,10 +1115,7 @@ onMounted(() => {
     let moved = false
     for (const group of groups.values()) {
       const { rest, offset, goal } = placed(group)
-      if (offset.equals(goal)) continue
-      offset.x = easeToward(offset.x, goal.x, EASE, SETTLED_MM)
-      offset.y = easeToward(offset.y, goal.y, EASE, SETTLED_MM)
-      offset.z = easeToward(offset.z, goal.z, EASE, SETTLED_MM)
+      if (!easeVector(offset, goal)) continue
       group.position.addVectors(rest, offset)
       moved = true
     }
@@ -1293,16 +1299,19 @@ onMounted(() => {
     return parts.motorPaints({ cap: tint, sticker: hexColour(colours?.sticker), can: hexColour(colours?.can) })
   }
 
-  /** The attach step: for each socket, clear it and add what its slot holds. */
   /**
-   * A part fitted or swapped starts `DROP_MM` above its socket and eases
-   * down into it, so a change in the list is seen landing in the pane. Only a
-   * single change drops: a kit swap (`settling`) lands under the crossfade,
-   * and nothing drops before the first frame, so the car under the poster is
-   * already assembled.
+   * A part fitted or swapped starts this far above its socket and eases down
+   * into it, so a change in the list is seen landing in the pane. Only a
+   * single change drops: a kit swap lands under the crossfade, nothing drops
+   * before the first frame, so the car under the poster is already
+   * assembled, and nothing drops while the pane is scrolled away, where each
+   * eased frame would redraw the shadow map for nobody.
    */
   const DROP_MM = 12
-  function populate(settling = false) {
+  /** The attach step: for each socket, clear it and add what its slot holds. */
+  function populate() {
+    // The meshes a flash was on are about to go; a pulse over none would tick on for nothing.
+    endPulse()
     const bySlot = new Map(props.slots.map(slot => [slot.id, slot]))
     paintChassis(bySlot)
     sockets = socketsFor(props.chassis, fitOf(bySlot))
@@ -1380,7 +1389,7 @@ onMounted(() => {
       const paint = materialsFor(data, highlightFor(socket.slotId))
       const was = `${key}:${state}:${tint}`
       const at = placed(group)
-      if (at.was !== was && drawn && !settling && state !== 'empty') at.offset.y += DROP_MM
+      if (at.was !== was && drawn && onScreen && !swapping.value && state !== 'empty') at.offset.y += DROP_MM
       at.was = was
       // `shell` is set and loaded for every body that reaches here (see above).
       // A gear train is a mesh per rotor, each at its pivot so it can turn in place.
@@ -1462,11 +1471,12 @@ onMounted(() => {
   function startPulse(slotId: string, severity: Finding['severity']) {
     restyle()
     if (!onScreen || reduceMotion) return
-    const colour = new Color(PULSE[severity])
+    const colour = new Color(severityFlash(severity))
     const clones: MeshStandardMaterial[] = []
     const flash = (from: Material) => {
       const clone = (from as MeshStandardMaterial).clone()
-      dress(clone, { weave: !!from.defines?.WEAVE_MM })
+      // Dressed again, since `clone` copies neither the hook nor the rim, and the flash must not lose the open picker's rim.
+      dress(clone, { weave: !!from.defines?.WEAVE_MM }).rim.value = (from.userData.dressing as Dressing).rim.value
       clone.emissive = colour
       clone.emissiveIntensity = PULSE_STRENGTH
       clones.push(clone)
@@ -1636,18 +1646,20 @@ onMounted(() => {
    * arrive mid-fade are read by that one populate, so none is lost.
    */
   const SWAP_MS = 120
-  let shownKit = props.kitId
   let swap = 0
-  const stopSlots = watch(() => props.slots, () => {
-    if (props.kitId === shownKit) return populate()
-    shownKit = props.kitId
-    if (swap) return
-    element.classList.add('scene-swapping')
+  // Before the slots watcher on purpose: the two fire in the same flush, in
+  // the order they were made, and the fade must be under way before the slots
+  // watcher decides whether to build.
+  const stopKit = watch(() => props.kitId, () => {
+    if (swapping.value) return
+    swapping.value = true
     swap = window.setTimeout(() => {
-      swap = 0
-      populate(true)
-      element.classList.remove('scene-swapping')
+      populate()
+      swapping.value = false
     }, drawn && !reduceMotion ? SWAP_MS : 0)
+  })
+  const stopSlots = watch(() => props.slots, () => {
+    if (!swapping.value) populate()
   })
   const stopOpen = watch(() => props.openSlotId, restyle)
   const stopPulse = watch(() => props.pulse, pulse => {
@@ -1689,6 +1701,7 @@ onMounted(() => {
     cancelAnimationFrame(frame)
     clearTimeout(swap)
     controls.removeEventListener('change', requestRender)
+    stopKit()
     stopSlots()
     stopOpen()
     stopPulse()
@@ -1732,7 +1745,7 @@ onBeforeUnmount(() => cleanup?.())
     <!-- role="img" on the canvas, not the wrapper: an img role makes its
          children presentational, which would hide the button below it. The
          list is the keyboard and screen-reader path (§5.4). -->
-    <canvas ref="canvas" role="img" :aria-label="$t('build.scene.label')" />
+    <canvas ref="canvas" role="img" :class="{ 'scene-swapping': swapping }" :aria-label="$t('build.scene.label')" />
     <!--
       The three toggles read their pressed state off `aria-pressed` and paint
       themselves from it, which is the same thing the markup said before and

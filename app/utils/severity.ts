@@ -15,3 +15,17 @@ const SEVERITY_COLOR = {
 } as const satisfies Record<Finding['severity'], string>
 
 export const severityColor = (severity: Finding['severity']) => SEVERITY_COLOR[severity]
+
+/**
+ * The same three severities as sRGB numbers, for the 3D pane's flash on the
+ * part a finding is about: the red and amber of the badges above, which the
+ * pane cannot read off the stylesheet because Tailwind writes them as oklch.
+ * `note` is the muted grey, for the same reason it is neutral above.
+ */
+const SEVERITY_FLASH = {
+  error: 0xef4444,
+  warning: 0xf59e0b,
+  note: 0x9ca3af
+} as const satisfies Record<Finding['severity'], number>
+
+export const severityFlash = (severity: Finding['severity']) => SEVERITY_FLASH[severity]
