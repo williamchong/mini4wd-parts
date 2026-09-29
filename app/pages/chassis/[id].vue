@@ -165,9 +165,8 @@ const kitBuildLink = useKitBuildLink()
 const buildLink = (kit: { id: string }) => kitBuildLink(id.value, kit.id)
 
 /**
- * The page's one action: start a build on the bare chassis. The other door
- * into the builder, beside the kit rows below, and the only one on ME, whose
- * two kits put those rows a screen away.
+ * In the hero rather than only among the kit rows below, because on ME two
+ * kits put those rows a screen away, and a chassis page had no other way in.
  */
 const bareBuildLink = computed(() => kitBuildLink(id.value))
 
