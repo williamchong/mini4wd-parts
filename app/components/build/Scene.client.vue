@@ -14,11 +14,11 @@
  * Nothing here runs during prerender.
  */
 import {
-  BoxGeometry, CylinderGeometry, DirectionalLight, Group, Mesh, Object3D,
+  BoxGeometry, Color, CylinderGeometry, DirectionalLight, Group, Mesh, Object3D,
   MeshPhysicalMaterial, MeshStandardMaterial, NeutralToneMapping, PerspectiveCamera, PlaneGeometry,
   Raycaster, Scene, ShadowMaterial, SphereGeometry, Vector2, Vector3, VSMShadowMap, WebGLRenderer
 } from 'three'
-import type { BufferGeometry } from 'three'
+import type { BufferGeometry, Material } from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
 import { studioEnvironment } from '#shared/scene/studio'
 import { dress } from '#shared/scene/shading'
@@ -41,6 +41,7 @@ import { DEFAULT_TIRE, DEFAULT_WHEEL, entryShapeId, TIRES, WHEELS } from '#share
 import type { TireShape, WheelShape } from '#shared/scene/wheels'
 import { cylinder, Triangles } from '#shared/scene/generators/mesh'
 import type { ResolvedSlot } from '#shared/catalog/build'
+import type { Finding } from '#shared/catalog/rules'
 import type { ChassisId, Kit, KitClear, PartColours, PartFinish, PartSpecs } from '#shared/catalog/schema'
 
 const props = defineProps<{
@@ -70,6 +71,12 @@ const props = defineProps<{
   }>
   /** The slot whose picker is open; its proxy stays lit until it closes. */
   openSlotId: string | null
+  /**
+   * A finding the rule engine just raised about a slot: its part flashes once
+   * in the severity's colour. `n` climbs so the same finding raised again,
+   * after a revert and a re-fit, flashes again.
+   */
+  pulse: { slotId: string; severity: Finding['severity']; n: number } | null
 }>()
 
 const emit = defineEmits<{
@@ -400,6 +407,15 @@ const OCCLUDED = '(min-width: 640px)'
 const OUTLINE_LAYER = 1
 /** How strongly each highlight lights a part's outline (shared/scene/shading.ts). */
 const RIM: Record<Highlight, number> = { none: 0, hover: 0.9, open: 1.6 }
+/**
+ * What a finding's flash is coloured, by severity: the reds and ambers of
+ * `severityColor`'s badges, as sRGB numbers because the pane cannot read a
+ * Tailwind oklch token off the stylesheet. A note is the engine saying
+ * something true rather than something wrong, so it flashes in the muted grey.
+ */
+const PULSE: Record<Finding['severity'], number> = { error: 0xef4444, warning: 0xf59e0b, note: 0x9ca3af }
+const PULSE_STRENGTH = 0.8
+const PULSE_MS = 600
 /** The kinds a carbon finish is woven sheet on; a carbon wheel is a carbon-filled moulding. */
 const PLATE_KINDS: ReadonlySet<ProxyKind> = new Set(['stay', 'side-stay', 'brake'])
 /** The kinds a part record's finish reaches; the catalog records it on no other (scripts/catalog/finish.ts). */
@@ -1084,6 +1100,7 @@ onMounted(() => {
     frame = 0
     controls.update()
     tickGroups()
+    tickPulse()
     tickSpin()
     tickSwitch()
     if (occluder) occluder.render()
@@ -1344,10 +1361,55 @@ onMounted(() => {
 
   /** Re-pick materials after hover or the open slot changed; no re-attach. */
   function restyle() {
+    endPulse()
     for (const visible of proxies) {
       const data = visible.userData as ProxyData
       visible.material = materialsFor(data, highlightFor(data.slotId))
     }
+    requestRender()
+  }
+
+  /**
+   * A finding's flash: the slot's proxies wear a copy of their material with
+   * the severity's colour as emissive, fading from `PULSE_STRENGTH` to nothing
+   * over `PULSE_MS`, then `restyle` hands the cached materials back. Copies,
+   * because a cached material is shared by every proxy of its colour and a
+   * flash on it would light the other wheel too; dressed again, so the copy
+   * compiles to the program the original already has.
+   */
+  let pulsing: { clones: MeshStandardMaterial[]; since: number } | null = null
+  function endPulse() {
+    if (!pulsing) return
+    for (const clone of pulsing.clones) clone.dispose()
+    pulsing = null
+  }
+  function startPulse(slotId: string, severity: Finding['severity']) {
+    restyle()
+    if (!onScreen || reduceMotion) return
+    const colour = new Color(PULSE[severity])
+    const clones: MeshStandardMaterial[] = []
+    const flash = (from: Material) => {
+      const clone = (from as MeshStandardMaterial).clone()
+      dress(clone, { weave: !!from.defines?.WEAVE_MM })
+      clone.emissive = colour
+      clone.emissiveIntensity = PULSE_STRENGTH
+      clones.push(clone)
+      return clone
+    }
+    for (const visible of proxies) {
+      const data = visible.userData as ProxyData
+      if (data.slotId !== slotId || data.state === 'empty' || data.kind === 'body') continue
+      visible.material = Array.isArray(visible.material) ? visible.material.map(flash) : flash(visible.material)
+    }
+    if (!clones.length) return
+    pulsing = { clones, since: performance.now() }
+    requestRender()
+  }
+  function tickPulse() {
+    if (!pulsing) return
+    const progress = (performance.now() - pulsing.since) / PULSE_MS
+    if (progress >= 1) return restyle()
+    for (const clone of pulsing.clones) clone.emissiveIntensity = PULSE_STRENGTH * (1 - progress)
     requestRender()
   }
 
@@ -1512,6 +1574,9 @@ onMounted(() => {
     }, drawn && !reduceMotion ? SWAP_MS : 0)
   })
   const stopOpen = watch(() => props.openSlotId, restyle)
+  const stopPulse = watch(() => props.pulse, pulse => {
+    if (pulse) startPulse(pulse.slotId, pulse.severity)
+  })
   const stopLift = watch(lifted, () => {
     if (bodyGroup) placed(bodyGroup).goal.y = bodyGoalY()
     requestRender()
@@ -1539,6 +1604,8 @@ onMounted(() => {
     controls.removeEventListener('change', requestRender)
     stopSlots()
     stopOpen()
+    stopPulse()
+    endPulse()
     stopLift()
     stopPower()
     resize.disconnect()

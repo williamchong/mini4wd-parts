@@ -795,8 +795,21 @@ const reportedFor = useState<string | undefined>('reported-rules-build', () => u
  * the record immediately *after* its events fired, and every build's opening
  * findings went out twice.
  */
-watch(findings, (list) => {
+/**
+ * The finding the pane flashes: the first one raised since the last recompute
+ * about a slot on the car. Only a change in the same build raises one, since
+ * a new kit's opening findings arrive under the crossfade and would flash half
+ * the car at once.
+ */
+const pulse = ref<{ slotId: string; severity: Finding['severity']; n: number } | null>(null)
+
+watch(findings, (list, previous) => {
   const current = build.value ? `${build.value.chassis}:${build.value.kit ?? ''}` : undefined
+  if (current === reportedFor.value) {
+    const stood = new Set(previous.map(finding => `${finding.rule}:${finding.slotId ?? ''}`))
+    const raised = list.find(finding => finding.slotId && !stood.has(`${finding.rule}:${finding.slotId}`))
+    if (raised?.slotId) pulse.value = { slotId: raised.slotId, severity: raised.severity, n: (pulse.value?.n ?? 0) + 1 }
+  }
   // `swap` and `revert` replace `build.value` wholesale, so only a new chassis
   // or kit is a new build.
   if (current !== reportedFor.value) {
@@ -914,6 +927,7 @@ useHead(() => ({
         :slots="slots"
         :parts="partsById"
         :open-slot-id="openSlotId"
+        :pulse="pulse"
         @select="pick"
         @ready="onSceneReady"
         @power="onScenePower"
