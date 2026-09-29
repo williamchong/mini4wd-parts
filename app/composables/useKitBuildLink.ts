@@ -5,6 +5,9 @@
  * hash is the builder's own share format, so this reuses `encodeBuild` rather
  * than inventing a second entry point — and Google ignores a hash, so these
  * are an affordance and not internal links.
+ *
+ * With no kit it opens the builder on the bare chassis: the same state with
+ * one layer skipped (§4.7), which is what a chassis page's own button wants.
  */
 import { newBuild } from '#shared/catalog/build'
 import { encodeBuild } from '#shared/catalog/share'
@@ -12,6 +15,6 @@ import type { ChassisId } from '#shared/catalog/schema'
 
 export function useKitBuildLink() {
   const localePath = useLocalePath()
-  return (chassis: ChassisId, kitId: string) =>
+  return (chassis: ChassisId, kitId?: string) =>
     ({ path: localePath('/'), hash: `#${encodeBuild(newBuild(chassis, kitId))}` })
 }

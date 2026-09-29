@@ -164,6 +164,13 @@ const notes = computed(() => locale.value === 'en' ? undefined : chassis.value.n
 const kitBuildLink = useKitBuildLink()
 const buildLink = (kit: { id: string }) => kitBuildLink(id.value, kit.id)
 
+/**
+ * The page's one action: start a build on the bare chassis. The other door
+ * into the builder, beside the kit rows below, and the only one on ME, whose
+ * two kits put those rows a screen away.
+ */
+const bareBuildLink = computed(() => kitBuildLink(id.value))
+
 const title = computed(() => `${name.value} — ${t('site.title')}`)
 
 const description = computed(() => t('chassis.pageDescription', {
@@ -210,6 +217,10 @@ useHead(() => ({
         </p>
 
         <p v-if="notes" class="chassis-notes">{{ notes }}</p>
+
+        <UButton size="lg" class="part-cta" :to="bareBuildLink">
+          {{ $t('chassis.startBuild') }}
+        </UButton>
       </div>
     </header>
 

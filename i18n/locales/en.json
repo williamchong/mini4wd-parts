@@ -392,6 +392,7 @@
     "defaultLoadout": "What a bare chassis comes with",
     "loadoutNote": "The parts on the bare runner, before a body or any upgrade, that Tamiya also sells on their own.",
     "loadoutStock": "The other {count} slots hold kit-standard pieces, mostly moulded plastic never sold separately.",
+    "startBuild": "Start a build on this chassis",
     "kits": "Kits on this chassis",
     "kitsNote": "Pick one to start a build from it.",
     "kitsCount": "{count} kits",

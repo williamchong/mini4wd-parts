@@ -404,6 +404,7 @@
     "defaultLoadout": "底盤標準配置",
     "loadoutNote": "底盤（不含車殼）出廠時附帶，而且田宮另有單獨販售的零件。",
     "loadoutStock": "其餘 {count} 個位置是套件原裝零件，大多是沒有單獨販售的塑膠件。",
+    "startBuild": "用純底盤開始組車",
     "kits": "採用這款底盤的套件",
     "kitsNote": "點選任何一款，就能用它開始組車。",
     "kitsCount": "{count} 款套件",
