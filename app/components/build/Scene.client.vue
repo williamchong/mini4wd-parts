@@ -20,6 +20,7 @@ import {
 } from 'three'
 import type { BufferGeometry, Material } from 'three'
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
+import { useMediaQuery } from '@vueuse/core'
 import { studioEnvironment } from '#shared/scene/studio'
 import { dress } from '#shared/scene/shading'
 import type { Dressing } from '#shared/scene/shading'
@@ -502,6 +503,12 @@ let startMotor = () => {}
  * The toggle is in the pane, beside reset, and the list needs no equivalent
  * because every slot is already a row there.
  */
+/**
+ * Whether the reader asked the system for less motion, kept current so the
+ * pane never disagrees with the stylesheet's own `prefers-reduced-motion`
+ * rules, which react the moment the setting changes.
+ */
+const reduceMotion = useMediaQuery('(prefers-reduced-motion: reduce)')
 const lifted = ref(true)
 /** The canvas fading out over the old car while a kit change is built; see the kit watcher. */
 const swapping = ref(false)
@@ -980,7 +987,11 @@ onMounted(() => {
 
   const controls = new OrbitControls(camera, element)
   controls.target.set(0, 15, 0)
-  controls.enableDamping = true
+  // Damping is a released drag coasting to rest: motion after the finger has
+  // stopped, which is what a reader who asked for less motion asked against.
+  const applyDamping = () => { controls.enableDamping = !reduceMotion.value }
+  applyDamping()
+  const stopDamping = watch(reduceMotion, applyDamping)
   controls.enablePan = false
   controls.minDistance = 120
   controls.maxDistance = 600
@@ -1046,14 +1057,13 @@ onMounted(() => {
 
   /**
    * A reader who asked for less motion gets every tween's end state at once:
-   * the lift, a drop-in, the switch slider. Read once, since a preference
-   * changed mid-session is rarer than the cost of asking every frame.
+   * the lift, a drop-in, the switch slider. The car still spins under 開動,
+   * because that is the reader pressing a button whose point is the motion.
    */
-  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches
   /** One frame of an ease toward `target`, requesting the next while it is further off than `within`. */
   function easeToward(current: number, target: number, factor: number, within: number) {
     const remaining = target - current
-    if (reduceMotion || Math.abs(remaining) <= within) return target
+    if (reduceMotion.value || Math.abs(remaining) <= within) return target
     requestRender()
     return current + remaining * factor
   }
@@ -1462,15 +1472,16 @@ onMounted(() => {
    * flash on it would light the other wheel too; dressed again, so the copy
    * compiles to the program the original already has.
    */
-  let pulsing: { clones: MeshStandardMaterial[]; since: number } | null = null
+  let pulsing: { clones: MeshStandardMaterial[]; since: number; hold?: number } | null = null
   function endPulse() {
     if (!pulsing) return
+    clearTimeout(pulsing.hold)
     for (const clone of pulsing.clones) clone.dispose()
     pulsing = null
   }
   function startPulse(slotId: string, severity: Finding['severity']) {
     restyle()
-    if (!onScreen || reduceMotion) return
+    if (!onScreen) return
     const colour = new Color(severityFlash(severity))
     const clones: MeshStandardMaterial[] = []
     const flash = (from: Material) => {
@@ -1488,11 +1499,15 @@ onMounted(() => {
       visible.material = Array.isArray(visible.material) ? visible.material.map(flash) : flash(visible.material)
     }
     if (!clones.length) return
-    pulsing = { clones, since: performance.now() }
+    // Under reduced motion the flash is a hold rather than a fade: the colour
+    // goes on in one frame and off in another `PULSE_MS` later, so the cue
+    // that ties a finding to its part survives without anything animating.
+    const hold = reduceMotion.value ? window.setTimeout(restyle, PULSE_MS) : undefined
+    pulsing = { clones, since: performance.now(), hold }
     requestRender()
   }
   function tickPulse() {
-    if (!pulsing) return
+    if (!pulsing || pulsing.hold !== undefined) return
     const progress = (performance.now() - pulsing.since) / PULSE_MS
     if (progress >= 1) return restyle()
     for (const clone of pulsing.clones) clone.emissiveIntensity = PULSE_STRENGTH * (1 - progress)
@@ -1656,7 +1671,7 @@ onMounted(() => {
     swap = window.setTimeout(() => {
       populate()
       swapping.value = false
-    }, drawn && !reduceMotion ? SWAP_MS : 0)
+    }, drawn && !reduceMotion.value ? SWAP_MS : 0)
   })
   const stopSlots = watch(() => props.slots, () => {
     if (!swapping.value) populate()
@@ -1692,7 +1707,7 @@ onMounted(() => {
     controls.enableDamping = false
     controls.update()
     controls.reset()
-    controls.enableDamping = true
+    applyDamping()
     requestRender()
   }
 
@@ -1701,6 +1716,7 @@ onMounted(() => {
     cancelAnimationFrame(frame)
     clearTimeout(swap)
     controls.removeEventListener('change', requestRender)
+    stopDamping()
     stopKit()
     stopSlots()
     stopOpen()

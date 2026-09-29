@@ -23,6 +23,7 @@ import type { BuildablePart, ResolvedSlot, SetRow, SlotEdit } from '#shared/cata
 import type { Finding } from '#shared/catalog/rules'
 import type { ChassisId, PartCategory, Slot } from '#shared/catalog/schema'
 import type { AnalyticsEvents } from '~/composables/useAnalytics'
+import { useMediaQuery } from '@vueuse/core'
 
 definePageMeta({ layout: 'content' })
 
@@ -439,10 +440,11 @@ function place(slotId: string) {
   scrollToSlot(slotId)
 }
 
+const reduceMotion = useMediaQuery('(prefers-reduced-motion: reduce)')
 /** After the DOM has caught up with whatever just changed, not before. */
 function scrollToSlot(slotId: string) {
   nextTick(() => document.getElementById(`slot-${slotId}`)
-    ?.scrollIntoView({ behavior: 'smooth', block: 'center' }))
+    ?.scrollIntoView({ behavior: reduceMotion.value ? 'auto' : 'smooth', block: 'center' }))
 }
 
 function cancelPending() {
