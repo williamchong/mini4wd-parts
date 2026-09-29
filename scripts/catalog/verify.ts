@@ -214,6 +214,7 @@ for (const kit of kits) {
   }
   checkLoadout(`kits/${kit.id} stockLoadout`, kit.stockLoadout, host)
   checkThumbnail('kits', kit.id, kit.thumbnail)
+  checkThumbnail('kits', kit.id, kit.detailThumbnail, 'detail')
   checkStock(`kits/${kit.id}`, host, kit)
 }
 

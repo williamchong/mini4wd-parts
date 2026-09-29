@@ -627,6 +627,8 @@ export const kitSchema = z.object({
   officialUrl: z.string(),
   officialImage: z.string().optional(),
   thumbnail: z.string().optional(),
+  /** The 320x240 copy a kit page leads with, on the same terms as a part's. */
+  detailThumbnail: z.string().optional(),
   hkStoreUrl: z.string().optional(),
 
   specsRaw: z.string().optional(),

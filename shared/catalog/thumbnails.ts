@@ -17,8 +17,8 @@ export type ThumbCollection = 'parts' | 'kits' | 'chassis'
  * Two sizes of the same photo. `row` (160x120) is what a list, a picker or a
  * build row shows. `detail` (320x240) is what a part page leads with, where a
  * row thumbnail is a postage stamp and upscaling one looks worse than showing
- * it small. Only parts have a detail copy, because parts are the only records
- * with a page of their own (docs/PLAN.md §6 M1b).
+ * it small. Every collection has a detail copy now that parts, chassis and
+ * kits all have a page of their own (docs/PLAN.md §6 M1b, §4.7).
  */
 export type ThumbVariant = 'row' | 'detail'
 

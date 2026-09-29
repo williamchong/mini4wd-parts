@@ -1399,6 +1399,16 @@ a.chip:hover {
   list-style: none;
 }
 
+/* --------------------------------------------------------- kit page */
+
+/* "the chassis' own piece" after an entry: a qualifier, so it reads quieter
+   than the entry it qualifies. */
+.kit-origin {
+  margin-left: 0.5em;
+  font-size: 0.85em;
+  color: var(--ui-text-muted);
+}
+
 /* ------------------------------------------------------------ loading */
 
 /* BootNotice.vue: invisible for 1.5 s, so a page whose scripts arrive in

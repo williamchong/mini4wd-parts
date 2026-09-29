@@ -394,7 +394,7 @@
     "loadoutStock": "The other {count} slots hold kit-standard pieces, mostly moulded plastic never sold separately.",
     "startBuild": "Start a build on this chassis",
     "kits": "Kits on this chassis",
-    "kitsNote": "Pick one to start a build from it.",
+    "kitsNote": "Pick one to see what is in the box and start a build from it.",
     "kitsCount": "{count} kits",
     "compatParts": "Compatible parts",
     "compatNote": "Tamiya lists {count} parts as fitting this chassis, by category:",
@@ -408,6 +408,35 @@
       "current": "Current",
       "rerelease": "Re-release",
       "discontinued": "Discontinued"
+    }
+  },
+  "kit": {
+    "notFound": "No such kit",
+    "description": "{name} ({id}) — Tamiya Mini 4WD {series} kit on the {chassis}. What is in the box, its gear ratio and where to read more.",
+    "seriesNumber": "No.{number}",
+    "gearRatio": "Gear ratio {ratio}",
+    "startBuild": "Start a build from this kit",
+    "loadout": "What is in the box",
+    "loadoutNote": "The kit's stock pieces, slot by slot. Most are moulded plastic never sold separately; the ones with an item number link to their part page.",
+    "fromChassis": "chassis standard",
+    "loadoutChassisNote": "The {count} slots marked “chassis standard” take the {chassis} runner's usual piece; this box adds nothing different there.",
+    "sameChassis": "Other kits on the {chassis}",
+    "seeAllOnChassis": "See all {count}",
+    "series": {
+      "standard": "Mini 4WD Series",
+      "racer": "Racer Mini 4WD",
+      "racer-special": "Racer Mini 4WD Special",
+      "fully-cowled": "Fully Cowled Mini 4WD",
+      "aero": "Aero Mini 4WD",
+      "laser": "Laser Mini 4WD",
+      "rev": "Mini 4WD REV",
+      "pro": "Mini 4WD PRO",
+      "super": "Super Mini 4WD",
+      "mighty": "Mighty Mini 4WD",
+      "real": "Real Mini 4WD",
+      "beginners": "Beginners Mini 4WD",
+      "special": "Special edition",
+      "limited": "Limited edition"
     }
   },
   "loading": {

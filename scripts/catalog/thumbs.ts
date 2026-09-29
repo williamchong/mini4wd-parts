@@ -168,20 +168,25 @@ const partSources = itemSources('data/raw/tamiya-jp-items.json')
 const chassisIds = listYamlIds('content/chassis')
 const chassisSources = new Map(Object.entries(chassisImages))
 
+const kitIds = listYamlIds('content/kits')
+const kitSources = itemSources('data/raw/tamiya-jp-kits.json')
+
 const kinds: Kind[] = [
   { name: 'parts', variant: 'row', ids: partIds, sources: partSources },
-  { name: 'kits', variant: 'row', ids: listYamlIds('content/kits'), sources: itemSources('data/raw/tamiya-jp-kits.json') },
+  { name: 'kits', variant: 'row', ids: kitIds, sources: kitSources },
   { name: 'chassis', variant: 'row', ids: chassisIds, sources: chassisSources },
   // The records with a page of their own, which a picker row is not: a page
   // leads with the photo, and 160x120 there is a postage stamp (docs/PLAN.md
-  // §6 M1b). Chassis joined parts here when they got pages of their own.
+  // §6 M1b). Chassis joined parts here when they got pages of their own, and
+  // kits on 2026-09-29 (§4.7).
   { name: 'parts', variant: 'detail', ids: partIds, sources: partSources },
+  { name: 'kits', variant: 'detail', ids: kitIds, sources: kitSources },
   { name: 'chassis', variant: 'detail', ids: chassisIds, sources: chassisSources }
 ]
 
 console.log('Thumbnails -> public/thumbs'
   + ` (${THUMB_SIZES.row.width}x${THUMB_SIZES.row.height} webp,`
-  + ` parts and chassis also ${THUMB_SIZES.detail.width}x${THUMB_SIZES.detail.height})`)
+  + ` every collection also ${THUMB_SIZES.detail.width}x${THUMB_SIZES.detail.height})`)
 for (const kind of kinds) {
   if (wants(kindLabel(kind))) await fetchKind(kind)
 }

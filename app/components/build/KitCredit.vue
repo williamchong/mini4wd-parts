@@ -5,13 +5,14 @@
  * This is the first surface on the site that renders Fandom-sourced content, so
  * it is the first that has to attribute it. The wiki is CC-BY-SA and the licence
  * wants the work named and its URI given on the page that uses it, not only on a
- * site-wide attribution page (CLAUDE.md, docs/PLAN.md §4.7). Written as its own
- * component so it lifts unchanged into /kits/:id when that page lands.
+ * site-wide attribution page (CLAUDE.md, docs/PLAN.md §4.7). Its own component
+ * because the builder and a kit page both render it.
  */
 import { fandomArticleUrl } from '#shared/catalog/kits'
 import type { PickableKit } from '#shared/catalog/build'
 
-const props = defineProps<{ kit: PickableKit }>()
+// Only the two fields it reads, so a kit page can hand it a trimmed record.
+const props = defineProps<{ kit: Pick<PickableKit, 'loadoutSource' | 'loadoutSourceTitle'> }>()
 
 /**
  * Branch on `loadoutSource`, not on whether a title happens to be present. The

@@ -17,10 +17,10 @@ const props = withDefaults(defineProps<{
   /** The page's own glyph: a family shares a slot, so it shares the fallback. */
   icon: IconName
   /**
-   * Where a row goes, for the callers whose rows are not parts. A chassis page
-   * lists kits, which have no page of their own yet, so it sends them into the
-   * builder instead (docs/PLAN.md §6 M1b). Given the caller's own row, so a
-   * kit's link can read the kit's chassis off it.
+   * Where a row goes, for the callers whose rows are not parts: a chassis page
+   * and a guide list kits, which have pages at `/kits/<id>` (docs/PLAN.md
+   * §4.7). Given the caller's own row rather than just its id, so a caller
+   * can route on any field of it.
    */
   to?: (entry: Entry) => RouteLocationRaw
 }>(), { to: undefined })

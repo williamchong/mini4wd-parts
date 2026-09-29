@@ -406,7 +406,7 @@
     "loadoutStock": "其餘 {count} 個位置是套件原裝零件，大多是沒有單獨販售的塑膠件。",
     "startBuild": "用純底盤開始組車",
     "kits": "採用這款底盤的套件",
-    "kitsNote": "點選任何一款，就能用它開始組車。",
+    "kitsNote": "點選任何一款查看套件內容，並可從該頁開始組車。",
     "kitsCount": "{count} 款套件",
     "compatParts": "適用零件",
     "compatNote": "田宮為這款底盤標示了 {count} 件適用零件，按分類列出如下。",
@@ -420,6 +420,35 @@
       "current": "現行",
       "rerelease": "復刻",
       "discontinued": "停產"
+    }
+  },
+  "kit": {
+    "notFound": "找不到這款套件",
+    "description": "{name}（{id}）— 田宮 {series} 套件，採用{chassis}。包括套件內容、齒輪比和相關連結。",
+    "seriesNumber": "No.{number}",
+    "gearRatio": "齒輪比 {ratio}",
+    "startBuild": "用這款套件開始組車",
+    "loadout": "套件內容",
+    "loadoutNote": "按安裝位置列出套件原裝的零件。大多是沒有單獨販售的塑膠件；有零件編號的會連結到零件頁。",
+    "fromChassis": "底盤標準",
+    "loadoutChassisNote": "標示「底盤標準」的 {count} 個位置沿用{chassis}的標準配置，套件沒有另外附帶不同的零件。",
+    "sameChassis": "同樣採用{chassis}的套件",
+    "seeAllOnChassis": "查看全部 {count} 款",
+    "series": {
+      "standard": "Mini 4WD 系列",
+      "racer": "Racer Mini 4WD 系列",
+      "racer-special": "Racer Mini 4WD 特別版",
+      "fully-cowled": "Fully Cowled Mini 4WD 系列",
+      "aero": "Aero Mini 4WD 系列",
+      "laser": "Laser Mini 4WD 系列",
+      "rev": "Mini 4WD REV 系列",
+      "pro": "Mini 4WD PRO 系列",
+      "super": "Super Mini 4WD 系列",
+      "mighty": "Mighty Mini 4WD 系列",
+      "real": "Real Mini 4WD 系列",
+      "beginners": "Beginners Mini 4WD 系列",
+      "special": "特別企劃",
+      "limited": "限定商品"
     }
   },
   "loading": {

@@ -27,6 +27,10 @@ const partRoutes = partFiles.map(name => `/parts/${name.slice(0, -'.yml'.length)
 const chassisRoutes = ymlNames(new URL('content/chassis', import.meta.url))
   .map(name => `/chassis/${name.slice(0, -'.yml'.length)}/`)
 
+/** One per box (docs/PLAN.md §4.7): flat, like a part, and filed under its chassis by the breadcrumb. */
+const kitRoutes = ymlNames(new URL('content/kits', import.meta.url))
+  .map(name => `/kits/${name.slice(0, -'.yml'.length)}/`)
+
 /**
  * Category pages, from the categories that actually have members — **not** from
  * `PART_CATEGORIES`, three of whose 32 values (`switch`, `battery`,
@@ -39,7 +43,7 @@ const categoryRoutes = [...new Set(partFiles.map(name =>
   .sort()
   .map(category => `/parts/category/${category}/`)
 
-const catalogRoutes = [...partRoutes, ...categoryRoutes, ...chassisRoutes]
+const catalogRoutes = [...partRoutes, ...categoryRoutes, ...chassisRoutes, ...kitRoutes]
 
 /**
  * The icons that have to survive into the client bundle: the ones a template

@@ -15,6 +15,7 @@ import { refAutoReset } from '@vueuse/core'
 import { encodeBuild, parseBuild, reconcileBuild, wasTrimmed } from '#shared/catalog/share'
 import type { BuildState } from '#shared/catalog/build'
 import type { ShareCatalog } from '#shared/catalog/share'
+import { BUILD_FROM_QUERY, KIT_PAGE_ENTRY } from '~/composables/useAnalytics'
 
 const COPIED_MS = 2000
 
@@ -68,7 +69,9 @@ export function useBuildLink(catalog: () => ShareCatalog | undefined) {
         track('build_start', {
           chassis: state.chassis,
           kit: state.kit,
-          entry: 'link',
+          // A kit page's button says so in the query; anything else is a link
+          // someone pasted or was sent.
+          entry: route.query[BUILD_FROM_QUERY] === KIT_PAGE_ENTRY ? KIT_PAGE_ENTRY : 'link',
           trimmed: linkTrimmed.value
         })
       }
@@ -81,12 +84,27 @@ export function useBuildLink(catalog: () => ShareCatalog | undefined) {
     return packed && `#${packed}`
   }
 
+  /**
+   * The address bar's query without the origin flag, which has done its job
+   * once the start is counted and would otherwise be shared on with the build.
+   */
+  function searchWithoutFrom() {
+    const params = new URLSearchParams(location.search)
+    params.delete(BUILD_FROM_QUERY)
+    const search = params.toString()
+    return search ? `?${search}` : ''
+  }
+
   function writeHash(state: BuildState | null) {
     const hash = linkFor(state)
-    if (location.hash === hash) return
+    // The flag is dropped only once a build is on the bench: the first, empty
+    // pass runs before Nuxt restores the hash, and taking the flag out of the
+    // address bar then would take it out from under the read that counts it.
+    const search = state ? searchWithoutFrom() : location.search
+    if (location.hash === hash && location.search === search) return
     // Vue Router keeps its scroll position in `history.state`; replacing it
     // with null would lose that on the next back navigation.
-    history.replaceState(history.state, '', `${location.pathname}${location.search}${hash}`)
+    history.replaceState(history.state, '', `${location.pathname}${search}${hash}`)
   }
 
   /**
@@ -114,7 +132,7 @@ export function useBuildLink(catalog: () => ShareCatalog | undefined) {
 
   function urlFor(state: BuildState | null) {
     const hash = linkFor(state)
-    return hash && `${location.origin}${location.pathname}${location.search}${hash}`
+    return hash && `${location.origin}${location.pathname}${searchWithoutFrom()}${hash}`
   }
 
   // The link itself is never a property: it is unbounded, and one report row

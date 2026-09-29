@@ -88,12 +88,13 @@ const thumbnailFor = (collection: ThumbCollection, id: string) =>
   thumbsByCollection[collection].has(id) ? thumbnailPath(collection, id) : undefined
 
 /** The bigger copy, for the collections whose records have a page of their own. */
-const detailThumbs = {
+const detailThumbs: Record<ThumbCollection, Set<string>> = {
   parts: thumbnailIds('parts', 'detail'),
+  kits: thumbnailIds('kits', 'detail'),
   chassis: thumbnailIds('chassis', 'detail')
 }
 
-const detailThumbnailFor = (collection: 'parts' | 'chassis', id: string) =>
+const detailThumbnailFor = (collection: ThumbCollection, id: string) =>
   detailThumbs[collection].has(id) ? thumbnailPath(collection, id, 'detail') : undefined
 
 /**
@@ -502,6 +503,7 @@ function buildKit(item: JpItem<KitGenreCode>, chassis: ChassisId) {
     officialUrl: item.officialUrl,
     officialImage: item.imageUrl,
     thumbnail: thumbnailFor('kits', item.id),
+    detailThumbnail: detailThumbnailFor('kits', item.id),
     hkStoreUrl: hk?.url,
     specsRaw: item.specsRaw,
     scrapedAt: item.scrapedAt

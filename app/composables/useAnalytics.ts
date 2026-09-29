@@ -24,6 +24,18 @@ import type { RuleId, Severity } from '#shared/catalog/rules'
 import type { PartCategory } from '#shared/catalog/schema'
 
 /**
+ * Which door a build came through. `kit_page` is a kit page's own button, told
+ * apart from a pasted `link` by the query flag `useKitBuildLink` writes and
+ * `useBuildLink` reads; a new value here is a new value of an existing
+ * dimension, not a new dimension to register.
+ */
+export type BuildEntry = 'kit' | 'chassis' | 'link' | 'starter' | 'kit_page'
+
+/** The query key that carries a link's origin, and the one value it takes. */
+export const BUILD_FROM_QUERY = 'from'
+export const KIT_PAGE_ENTRY = 'kit_page' satisfies BuildEntry
+
+/**
  * The events, and what each one carries. Types only — erased before a byte is
  * emitted, which is what lets this import from `shared/` freely (CLAUDE.md:
  * types are free, values drag Zod into the route's bundle).
@@ -33,7 +45,7 @@ export type AnalyticsEvents = {
    *  the 137 KB 3D chunk's fate rests on (docs/PLAN.md §5.5). `starter` is a
    *  Starter Pack tapped in the empty base row rather than found in the kit
    *  picker, kept apart so the shortcut can be judged on its own. */
-  build_start: { chassis: ChassisId, kit?: string, entry: 'kit' | 'chassis' | 'link' | 'starter', trimmed?: boolean }
+  build_start: { chassis: ChassisId, kit?: string, entry: BuildEntry, trimmed?: boolean }
   /** A part went into a slot. `source` is what says whether the 3D pane is
    *  really the selection surface it was built to be (§5.4). */
   part_swap: { chassis: ChassisId, slot: string, part: string, source: 'row' | 'scene' | 'copy' | 'part_page' }

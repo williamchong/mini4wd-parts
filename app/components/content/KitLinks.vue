@@ -1,19 +1,19 @@
 <script setup lang="ts">
 /**
- * Kits named in a guide, as `:kit-links{ids="18647 18706"}`: each row opens
- * the builder on that kit, as a chassis page's kit rows do. The names,
- * pictures and chassis come from the catalog, so the prose never restates a
- * fact the catalog already holds.
+ * Kits named in a guide, as `:kit-links{ids="18647 18706"}`: each row links to
+ * the kit's page, as a chassis page's kit rows do, and the page carries the
+ * button into the builder. The names and pictures come from the catalog, so
+ * the prose never restates a fact the catalog already holds.
  */
 const props = defineProps<{ ids: string }>()
 
-const kitBuildLink = useKitBuildLink()
+const localePath = useLocalePath()
 
 const itemIds = computed(() => props.ids.split(/\s+/).filter(Boolean))
 
 const { data: kits } = await useAsyncData(() => `kit-links-${itemIds.value.join('-')}`, async () => {
   const docs = await queryCollection('kits')
-    .select('id', 'stem', 'names', 'thumbnail', 'chassis')
+    .select('id', 'stem', 'names', 'thumbnail')
     .where('stem', 'IN', itemIds.value.map(id => `kits/${id}`))
     .all()
   const byId = new Map(docs.map(doc => [itemId(doc), fromContent('kits')(doc)]))
@@ -27,6 +27,6 @@ const { data: kits } = await useAsyncData(() => `kit-links-${itemIds.value.join(
     v-if="kits?.length"
     :parts="kits"
     icon="body"
-    :to="kit => kitBuildLink(kit.chassis, kit.id)"
+    :to="kit => localePath(`/kits/${kit.id}`)"
   />
 </template>

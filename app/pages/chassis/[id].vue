@@ -157,17 +157,17 @@ const loadout = computed(() =>
 const notes = computed(() => locale.value === 'en' ? undefined : chassis.value.notes)
 
 /**
- * A kit row opens the builder on that kit, because kit pages do not exist yet
- * and this is the question a chassis page is actually asked: which box on the
- * shelf has one of these in it.
+ * A kit row goes to the kit's page (§4.7), which answers the question a chassis
+ * page is actually asked — which box on the shelf has one of these in it — and
+ * carries the button into the builder itself.
  */
-const kitBuildLink = useKitBuildLink()
-const buildLink = (kit: { id: string }) => kitBuildLink(id.value, kit.id)
+const kitPage = (kit: { id: string }) => localePath(`/kits/${kit.id}`)
 
 /**
  * In the hero rather than only among the kit rows below, because on ME two
  * kits put those rows a screen away, and a chassis page had no other way in.
  */
+const kitBuildLink = useKitBuildLink()
 const bareBuildLink = computed(() => kitBuildLink(id.value))
 
 const title = computed(() => `${name.value} — ${t('site.title')}`)
@@ -287,7 +287,7 @@ useHead(() => ({
       <p class="part-note">
         {{ $t('chassis.kitsCount', { count: data!.kits.length }) }} — {{ $t('chassis.kitsNote') }}
       </p>
-      <PartLinkList :parts="data!.kits" icon="body" :to="buildLink" />
+      <PartLinkList :parts="data!.kits" icon="body" :to="kitPage" />
     </section>
 
     <ImageCredit />
