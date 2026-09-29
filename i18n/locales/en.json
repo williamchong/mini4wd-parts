@@ -88,6 +88,8 @@
       "resetCamera": "Reset view",
       "liftBody": "Lift the body",
       "fitBody": "Fit the body",
+      "explode": "Take apart",
+      "assemble": "Put together",
       "powerOn": "Switch on",
       "powerOff": "Switch off",
       "mute": "Mute",

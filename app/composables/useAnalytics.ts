@@ -66,6 +66,8 @@ export type AnalyticsEvents = {
   scene_tap: { chassis: ChassisId, slot: string, has_build: boolean }
   /** The car switched on in the pane (docs/PLAN.md §5.6). */
   scene_power: { chassis: ChassisId }
+  /** The car taken apart in the pane, the exploded view. */
+  scene_explode: { chassis: ChassisId }
   /** Its motor silenced, or turned back on. The sound plays by default from
    *  2026-09-22, so this is the whole of the evidence for whether that was
    *  welcome. `muted` is a new GA4 custom dimension to register by hand

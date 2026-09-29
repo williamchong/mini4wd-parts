@@ -486,10 +486,20 @@ const pickerSource = ref<'row' | 'scene'>('row')
  */
 const pickerAt = ref<'add' | number>()
 
+/**
+ * The slot the pane's camera flies to: one reached for from the list, not one
+ * tapped on the car, which the reader is looking at already.
+ */
+const focus = ref<{ slotId: string; n: number } | null>(null)
+function focusSlot(slotId: string) {
+  focus.value = { slotId, n: (focus.value?.n ?? 0) + 1 }
+}
+
 function openFromRow(slotId: string, at?: 'add') {
   pickerSource.value = 'row'
   pickerAt.value = at
   openSlotId.value = slotId
+  focusSlot(slotId)
 }
 
 /** The rows a set or a companion names, as the list renders them, for a notice. */
@@ -600,6 +610,9 @@ function onScenePower() {
  * The motor plays unasked now, so this counts the readers who reach over and
  * silence it — which is the evidence for whether playing it was welcome.
  */
+function onSceneExplode() {
+  if (shownChassis.value) track('scene_explode', { chassis: shownChassis.value.id })
+}
 function onSceneMute(muted: boolean) {
   if (shownChassis.value) track('scene_mute', { chassis: shownChassis.value.id, muted })
 }
@@ -834,6 +847,7 @@ watch(findings, (list, previous) => {
 function goToSlot(slotId: string) {
   if (moreSlots.value.some(slot => slot.id === slotId)) moreOpen.value = true
   scrollToSlot(slotId)
+  focusSlot(slotId)
 }
 
 /**
@@ -928,9 +942,11 @@ useHead(() => ({
         :parts="partsById"
         :open-slot-id="openSlotId"
         :pulse="pulse"
+        :focus="focus"
         @select="pick"
         @ready="onSceneReady"
         @power="onScenePower"
+        @explode="onSceneExplode"
         @mute="onSceneMute"
       />
     </div>

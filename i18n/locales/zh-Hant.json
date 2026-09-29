@@ -88,6 +88,8 @@
       "resetCamera": "重設視角",
       "liftBody": "掀開車殼",
       "fitBody": "蓋回車殼",
+      "explode": "分解",
+      "assemble": "組合",
       "powerOn": "開動",
       "powerOff": "停止",
       "mute": "靜音",

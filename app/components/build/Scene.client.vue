@@ -77,6 +77,12 @@ const props = defineProps<{
    * after a revert and a re-fit, flashes again.
    */
   pulse: { slotId: string; severity: Finding['severity']; n: number } | null
+  /**
+   * A slot the reader reached for in the list — a row's picker opened, a
+   * finding followed — so the camera flies to its part. `n` climbs so
+   * reaching for the same slot twice flies twice.
+   */
+  focus: { slotId: string; n: number } | null
 }>()
 
 const emit = defineEmits<{
@@ -84,6 +90,8 @@ const emit = defineEmits<{
   select: [slotId: string, entry?: number]
   /** The reader switched the car on. */
   power: []
+  /** …and took it apart. */
+  explode: []
   /** …and turned its sound off, or back on. */
   mute: [muted: boolean]
   /** The first frame is on the canvas; whatever stood in for it can go. */
@@ -501,10 +509,29 @@ let startMotor = () => {}
  * because every slot is already a row there.
  */
 const lifted = ref(true)
+/** The explode button offers nothing on the outline car: there is nothing fitted to take apart. */
+const hasBuild = computed(() => props.slots.some(slot => slot.entries.length))
 /** The lift button offers nothing while the body slot is empty: there is no shell to lift. */
 const hasBody = computed(() => !!props.slots.find(slot => slot.type === 'body')?.entries.length)
 const LIFT_MM = 24
 const LIFTED_OPACITY = 0.35
+/**
+ * The car taken apart: every part eases out from the car's centre by
+ * `EXPLODE_MM`, the centreline ones straight up, so a beginner sees where each
+ * piece goes. It is the lift generalised from one group to all of them, and
+ * it lifts the shell too, about twice as far, to clear the rising motor.
+ */
+const exploded = ref(false)
+const EXPLODE_MM = 30
+const EXPLODE_BODY = 2.2
+const CENTRE_Y = 15
+function explodeOffset(rest: Vector3, into: Vector3) {
+  into.set(rest.x, rest.y - CENTRE_Y, rest.z)
+  if (Math.abs(into.x) < 1 && Math.abs(into.z) < 1) return into.set(0, EXPLODE_MM, 0)
+  into.normalize()
+  into.y = Math.max(into.y, 0.3)
+  return into.normalize().multiplyScalar(EXPLODE_MM)
+}
 /**
  * A clear or smoked moulding — a clear body, a kit's clear chassis — seated.
  * It is what the plastic is, so it holds on the assembled car too; lifted, a
@@ -1002,13 +1029,23 @@ onMounted(() => {
    * when the controls are coasting at the same time.
    */
   const bodyGroup = groups.get('body')
-  /** What the shell's offset should be: its lift, and later the exploded view's share. */
-  const bodyGoalY = () => lifted.value ? LIFT_MM : 0
+  /** What the shell's offset should be: its lift, or the exploded view's larger one. */
+  const bodyGoalY = () => exploded.value ? LIFT_MM * EXPLODE_BODY : lifted.value ? LIFT_MM : 0
+  /** Where every group is heading, from the lift and the exploded view; called whenever either changes or the sockets do. */
+  function aimGroups() {
+    for (const [name, group] of groups) {
+      const { rest, goal } = placed(group)
+      if (name === 'body') goal.set(0, bodyGoalY(), 0)
+      else if (exploded.value) explodeOffset(rest, goal)
+      else goal.set(0, 0, 0)
+    }
+  }
   // Placed, not eased: the first frame is drawn under the poster, and a shell
   // rising as the poster fades would be a lift nobody asked for.
+  aimGroups()
   if (bodyGroup) {
     const data = placed(bodyGroup)
-    data.goal.y = data.offset.y = bodyGoalY()
+    data.offset.copy(data.goal)
     bodyGroup.position.addVectors(data.rest, data.offset)
   }
 
@@ -1028,6 +1065,43 @@ onMounted(() => {
 
   const EASE = 0.18
   const SETTLED_MM = 0.05
+
+  /**
+   * The camera flying to a slot: the orbit target eases to the mean of the
+   * slot's sockets, the world over, and the camera keeps its bearing while
+   * it closes to `FOCUS_DISTANCE` times the nearest it may come. A drag
+   * cancels it — the reader has taken the view back — and reset clears it.
+   */
+  const FOCUS_DISTANCE = 1.4
+  let flight: { target: Vector3; distance: number } | null = null
+  function flyTo(slotId: string) {
+    const target = new Vector3()
+    let count = 0
+    for (const socket of sockets) {
+      const group = socket.slotId === slotId ? groups.get(socket.name) : undefined
+      if (!group) continue
+      target.add(group.position)
+      count++
+    }
+    if (!count) return
+    target.divideScalar(count).add(car.position)
+    flight = { target, distance: controls.minDistance * FOCUS_DISTANCE }
+    requestRender()
+  }
+  const bearing = new Vector3()
+  function tickFlight() {
+    if (!flight) return
+    const at = controls.target
+    bearing.subVectors(camera.position, at)
+    const distance = easeToward(bearing.length(), flight.distance, EASE, SETTLED_MM)
+    at.x = easeToward(at.x, flight.target.x, EASE, SETTLED_MM)
+    at.y = easeToward(at.y, flight.target.y, EASE, SETTLED_MM)
+    at.z = easeToward(at.z, flight.target.z, EASE, SETTLED_MM)
+    camera.position.copy(at).addScaledVector(bearing.normalize(), distance)
+    if (at.equals(flight.target) && distance === flight.distance) flight = null
+  }
+  controls.addEventListener('start', () => { flight = null })
+
   function tickGroups() {
     let moved = false
     for (const group of groups.values()) {
@@ -1098,6 +1172,7 @@ onMounted(() => {
 
   function tick() {
     frame = 0
+    tickFlight()
     controls.update()
     tickGroups()
     tickPulse()
@@ -1232,6 +1307,7 @@ onMounted(() => {
     paintChassis(bySlot)
     sockets = socketsFor(props.chassis, fitOf(bySlot))
     placeSockets(sockets)
+    aimGroups()
     const rims = new Map<string, WheelShape>()
     const rimAt = (wheelSlotId: string) => {
       let found = rims.get(wheelSlotId)
@@ -1577,9 +1653,19 @@ onMounted(() => {
   const stopPulse = watch(() => props.pulse, pulse => {
     if (pulse) startPulse(pulse.slotId, pulse.severity)
   })
+  const stopFocus = watch(() => props.focus, focus => {
+    if (focus) flyTo(focus.slotId)
+  })
   const stopLift = watch(lifted, () => {
-    if (bodyGroup) placed(bodyGroup).goal.y = bodyGoalY()
+    aimGroups()
     requestRender()
+  })
+  const stopExplode = watch(exploded, on => {
+    // Taking the car apart lifts the shell with it; putting it back leaves the lift as it was.
+    if (on) lifted.value = true
+    aimGroups()
+    requestRender()
+    if (on) emit('explode')
   })
   const stopPower = watch(powered, on => {
     requestRender()
@@ -1590,6 +1676,7 @@ onMounted(() => {
   // reset pressed while the view is still coasting would drift off home.
   // Spending the momentum with damping off first leaves nothing to apply.
   resetCamera = () => {
+    flight = null
     controls.enableDamping = false
     controls.update()
     controls.reset()
@@ -1607,6 +1694,8 @@ onMounted(() => {
     stopPulse()
     endPulse()
     stopLift()
+    stopExplode()
+    stopFocus()
     stopPower()
     resize.disconnect()
     visibility.disconnect()
@@ -1663,6 +1752,16 @@ onBeforeUnmount(() => cleanup?.())
       @click="lifted = !lifted"
     >
       {{ $t(lifted ? 'build.scene.fitBody' : 'build.scene.liftBody') }}
+    </UButton>
+    <UButton
+      v-if="hasBuild"
+      size="xs"
+      v-bind="emphasis(exploded)"
+      class="scene-explode"
+      :aria-pressed="exploded"
+      @click="exploded = !exploded"
+    >
+      {{ $t(exploded ? 'build.scene.assemble' : 'build.scene.explode') }}
     </UButton>
     <UButton
       size="xs"

@@ -439,6 +439,7 @@ body {
    the button component's, where they sit is still ours. */
 .scene-reset,
 .scene-lift,
+.scene-explode,
 .scene-power,
 .scene-mute {
   position: absolute;
@@ -446,9 +447,15 @@ body {
   right: 0.5rem;
 }
 
-.scene-lift {
+.scene-lift,
+.scene-explode {
   right: auto;
   left: 0.5rem;
+}
+
+/* Under the lift button when there is a shell to lift, in its place when there is not. */
+.scene-lift + .scene-explode {
+  top: 2.5rem;
 }
 
 .scene-power {
