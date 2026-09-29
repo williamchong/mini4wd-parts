@@ -910,6 +910,7 @@ useHead(() => ({
         :kit-body="kit?.body ?? null"
         :kit-colours="kit?.colours ?? null"
         :kit-body-finish="kit?.bodyFinish ?? null"
+        :kit-id="kit?.id ?? null"
         :slots="slots"
         :parts="partsById"
         :open-slot-id="openSlotId"

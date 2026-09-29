@@ -51,6 +51,8 @@ const props = defineProps<{
   kitColours: Kit['colours'] | null
   /** Whether that kit's body is plated rather than painted. */
   kitBodyFinish: Kit['bodyFinish'] | null
+  /** Which kit the build started from, so a change of kit can crossfade rather than cut. */
+  kitId: string | null
   slots: ResolvedSlot[]
   /**
    * The catalog by item number, read for the specs that size a proxy, the
@@ -685,7 +687,7 @@ onMounted(() => {
    */
   const shell = new MeshPhysicalMaterial({ roughness: 0.4, metalness: 0, clearcoat: 1, clearcoatRoughness: 0.08, transparent: true })
   const shellRim = dress(shell).rim
-  /** The shell's opacity seated, set by `populate`; `tickBody` fades from it as the shell lifts. */
+  /** The shell's opacity seated, set by `populate`; `tickGroups` fades from it as the shell lifts. */
   let seatedOpacity = 1
   function styleShell(highlight: Highlight, tint: number, finish: Finish) {
     // Plated or painted, it is the one shell material: metalness and roughness
@@ -897,6 +899,15 @@ onMounted(() => {
    * its socket did: the body's is animated by the lift, and resetting it to
    * rest mid-lift would jump.
    */
+  /**
+   * Where a socket group sits is its socket's `rest` plus an `offset` that is
+   * eased toward a `goal` every frame (`tickGroups`): the shell's lift, a
+   * part dropping into its socket, the exploded view. Keeping the offset
+   * apart from the rest is what lets a fit move a socket under a lifted
+   * shell without the shell jumping.
+   */
+  type Placed = { at?: string; was?: string; rest: Vector3; offset: Vector3; goal: Vector3 }
+  const placed = (group: Group) => group.userData as Placed
   const groups = new Map<string, Group>()
   function placeSockets(sockets: readonly SceneSocket[]) {
     const live = new Set(sockets.map(socket => socket.name))
@@ -910,14 +921,17 @@ onMounted(() => {
       if (!group) {
         group = new Group()
         group.name = socket.name
+        group.userData = { rest: new Vector3(), offset: new Vector3(), goal: new Vector3() } satisfies Placed
         groups.set(socket.name, group)
         car.add(group)
       }
       // By value: a fitted socket set is rebuilt each time, its positions new arrays.
       const at = `${socket.position}:${socket.rotateY ?? 0}`
-      if (group.userData.at !== at) {
-        group.userData.at = at
-        group.position.set(...socket.position)
+      const data = placed(group)
+      if (data.at !== at) {
+        data.at = at
+        data.rest.set(...socket.position)
+        group.position.addVectors(data.rest, data.offset)
         group.rotation.y = socket.rotateY ?? 0
       }
     }
@@ -965,35 +979,56 @@ onMounted(() => {
   let drawn = false
 
   /**
-   * The body group eases toward its lifted or seated height, and the shell
-   * fades as it rises so it hides nothing of what it was covering. While it
-   * is still moving, each frame requests the next — through `requestRender`,
-   * whose guard is what stops a frame being scheduled twice when the controls
-   * are coasting at the same time.
+   * Every socket group eases toward its rest plus its goal offset, and the
+   * shell fades as it rises so it hides nothing of what it was covering.
+   * While anything is still moving, each frame requests the next — through
+   * `requestRender`, whose guard is what stops a frame being scheduled twice
+   * when the controls are coasting at the same time.
    */
   const bodyGroup = groups.get('body')
-  const bodyRestY = bodyGroup?.position.y ?? 0
+  /** What the shell's offset should be: its lift, and later the exploded view's share. */
+  const bodyGoalY = () => lifted.value ? LIFT_MM : 0
   // Placed, not eased: the first frame is drawn under the poster, and a shell
   // rising as the poster fades would be a lift nobody asked for.
-  if (bodyGroup && lifted.value) bodyGroup.position.y = bodyRestY + LIFT_MM
+  if (bodyGroup) {
+    const data = placed(bodyGroup)
+    data.goal.y = data.offset.y = bodyGoalY()
+    bodyGroup.position.addVectors(data.rest, data.offset)
+  }
 
+  /**
+   * A reader who asked for less motion gets every tween's end state at once:
+   * the lift, a drop-in, the switch slider. Read once, since a preference
+   * changed mid-session is rarer than the cost of asking every frame.
+   */
+  const reduceMotion = matchMedia('(prefers-reduced-motion: reduce)').matches
   /** One frame of an ease toward `target`, requesting the next while it is further off than `within`. */
   function easeToward(current: number, target: number, factor: number, within: number) {
     const remaining = target - current
-    if (Math.abs(remaining) <= within) return target
+    if (reduceMotion || Math.abs(remaining) <= within) return target
     requestRender()
     return current + remaining * factor
   }
 
-  function tickBody() {
+  const EASE = 0.18
+  const SETTLED_MM = 0.05
+  function tickGroups() {
+    let moved = false
+    for (const group of groups.values()) {
+      const { rest, offset, goal } = placed(group)
+      if (offset.equals(goal)) continue
+      offset.x = easeToward(offset.x, goal.x, EASE, SETTLED_MM)
+      offset.y = easeToward(offset.y, goal.y, EASE, SETTLED_MM)
+      offset.z = easeToward(offset.z, goal.z, EASE, SETTLED_MM)
+      group.position.addVectors(rest, offset)
+      moved = true
+    }
+    if (moved) shadowsChanged()
     if (!bodyGroup) return
-    const from = bodyGroup.position.y
-    bodyGroup.position.y = easeToward(from, bodyRestY + (lifted.value ? LIFT_MM : 0), 0.18, 0.05)
     // Lifted, the shell is there to be seen through, and a shadow the size of
     // the car under a shell that is barely there would say otherwise.
     for (const shellMesh of bodyGroup.children) shellMesh.castShadow = !lifted.value
-    if (bodyGroup.position.y !== from) shadowsChanged()
-    const progress = (bodyGroup.position.y - bodyRestY) / LIFT_MM
+    const progress = Math.min(1, placed(bodyGroup).offset.y / LIFT_MM)
     shell.opacity = seatedOpacity - progress * (seatedOpacity - Math.min(seatedOpacity, LIFTED_OPACITY))
   }
 
@@ -1048,7 +1083,7 @@ onMounted(() => {
   function tick() {
     frame = 0
     controls.update()
-    tickBody()
+    tickGroups()
     tickSpin()
     tickSwitch()
     if (occluder) occluder.render()
@@ -1167,7 +1202,15 @@ onMounted(() => {
   }
 
   /** The attach step: for each socket, clear it and add what its slot holds. */
-  function populate() {
+  /**
+   * A part fitted or swapped starts `DROP_MM` above its socket and eases
+   * down into it, so a change in the list is seen landing in the pane. Only a
+   * single change drops: a kit swap (`settling`) lands under the crossfade,
+   * and nothing drops before the first frame, so the car under the poster is
+   * already assembled.
+   */
+  const DROP_MM = 12
+  function populate(settling = false) {
     const bySlot = new Map(props.slots.map(slot => [slot.id, slot]))
     paintChassis(bySlot)
     sockets = socketsFor(props.chassis, fitOf(bySlot))
@@ -1242,6 +1285,10 @@ onMounted(() => {
       const key = shapeKey(socket.kind, shape)
       const kind = socket.kind
       const paint = materialsFor(data, highlightFor(socket.slotId))
+      const was = `${key}:${state}:${tint}`
+      const at = placed(group)
+      if (at.was !== was && drawn && !settling && state !== 'empty') at.offset.y += DROP_MM
+      at.was = was
       // `shell` is set and loaded for every body that reaches here (see above).
       // A gear train is a mesh per rotor, each at its pivot so it can turn in place.
       let visibles: Mesh[]
@@ -1443,9 +1490,32 @@ onMounted(() => {
     requestRender()
   })
 
-  const stopSlots = watch(() => props.slots, populate)
+  /**
+   * A kit change on the same chassis (a chassis change remounts the pane)
+   * rebuilds most of the car at once, which read as a glitch. The canvas
+   * fades out first, the old car still drawn under it because nothing asks
+   * for a frame, then the new one is built and fades back in. The slots that
+   * arrive mid-fade are read by that one populate, so none is lost.
+   */
+  const SWAP_MS = 120
+  let shownKit = props.kitId
+  let swap = 0
+  const stopSlots = watch(() => props.slots, () => {
+    if (props.kitId === shownKit) return populate()
+    shownKit = props.kitId
+    if (swap) return
+    element.classList.add('scene-swapping')
+    swap = window.setTimeout(() => {
+      swap = 0
+      populate(true)
+      element.classList.remove('scene-swapping')
+    }, drawn && !reduceMotion ? SWAP_MS : 0)
+  })
   const stopOpen = watch(() => props.openSlotId, restyle)
-  const stopLift = watch(lifted, requestRender)
+  const stopLift = watch(lifted, () => {
+    if (bodyGroup) placed(bodyGroup).goal.y = bodyGoalY()
+    requestRender()
+  })
   const stopPower = watch(powered, on => {
     requestRender()
     if (on) emit('power')
@@ -1465,6 +1535,7 @@ onMounted(() => {
   cleanup = () => {
     disposed = true
     cancelAnimationFrame(frame)
+    clearTimeout(swap)
     controls.removeEventListener('change', requestRender)
     stopSlots()
     stopOpen()

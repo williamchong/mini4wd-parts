@@ -421,6 +421,18 @@ body {
 .scene canvas {
   touch-action: none;
   cursor: grab;
+  transition: opacity 120ms ease-out;
+}
+
+/* A kit change fades the old car out before the new one is built (Scene.client.vue). */
+.scene canvas.scene-swapping {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scene canvas {
+    transition: none;
+  }
 }
 
 /* A corner over the canvas is a position, not a variant: how these look is
