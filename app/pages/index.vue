@@ -58,7 +58,7 @@ const { data: catalog } = await useAsyncData('build-catalog', async () => {
     // every picker, and nothing in the builder renders any of the three.
     queryCollection('parts')
       .select('id', 'stem', 'names', 'category', 'slots', 'isCarPart', 'isAddOn', 'contents',
-        'chassisCompat', 'classLegality', 'specs', 'colours', 'body', 'wheel', 'tire', 'finish', 'fitting', 'stayEnd',
+        'chassisCompat', 'classLegality', 'specs', 'colours', 'body', 'smallArches', 'wheel', 'tire', 'finish', 'fitting', 'stayEnd',
         'status', 'releaseDate', 'priceJpy', 'thumbnail')
       .all(),
     // `releaseDate` is selected but deliberately not shipped: it orders the
@@ -66,7 +66,7 @@ const { data: catalog } = await useAsyncData('build-catalog', async () => {
     queryCollection('kits')
       .select('id', 'stem', 'names', 'chassis', 'status', 'gearRatio',
         'releaseDate', 'thumbnail',
-        'loadoutSource', 'loadoutSourceTitle', 'stockLoadout', 'colours', 'body', 'bodyFinish')
+        'loadoutSource', 'loadoutSourceTitle', 'stockLoadout', 'colours', 'body', 'smallArches', 'bodyFinish')
       .all()
   ])
   // Normalise before comparing anything to anything: @nuxt/content overwrites
@@ -742,6 +742,7 @@ const findings = computed(() => {
     slots: slots.value,
     chassis: chassis.value,
     partsById: partsById.value,
+    kit: kit.value,
     buildClass: buildClass.value,
     linkTrimmed: linkTrimmed.value
   }).map(finding => ({ ...finding, text: findingText(finding) }))

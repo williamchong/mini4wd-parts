@@ -34,6 +34,7 @@ colours:
     - body
   source: override
 body: estoura
+smallArches: true
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

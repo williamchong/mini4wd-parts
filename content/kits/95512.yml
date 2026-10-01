@@ -54,6 +54,7 @@ colours:
     - body
   source: scraped
 body: brocken-gigant
+smallArches: true
 priceJpy: 1430
 priceJpyExTax: 1300
 releaseDate: 2026-12

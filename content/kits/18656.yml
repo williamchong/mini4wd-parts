@@ -25,6 +25,7 @@ colours:
   tire: "#1f2124"
   source: override
 body: roborace-devbot-2
+smallArches: true
 priceJpy: 1210
 priceJpyExTax: 1100
 priceHkd: 110

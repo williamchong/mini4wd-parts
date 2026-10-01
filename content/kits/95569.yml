@@ -55,6 +55,7 @@ colours:
   aParts: "#d4a93a"
   source: scraped
 body: elephant-racer
+smallArches: true
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 130

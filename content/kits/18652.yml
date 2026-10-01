@@ -53,6 +53,7 @@ colours:
   aParts: "#1f2124"
   source: override
 body: toyota-ts050-hybrid
+smallArches: true
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 130

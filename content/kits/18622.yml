@@ -53,6 +53,7 @@ colours:
   aParts: "#1f2124"
   source: scraped
 body: rodeo-sonic
+smallArches: true
 priceJpy: 990
 priceJpyExTax: 900
 priceHkd: 90

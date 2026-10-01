@@ -56,6 +56,7 @@ colours:
   aParts: "#d0312d"
   source: scraped
 body: magnum-saber
+smallArches: true
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 100

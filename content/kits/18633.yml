@@ -56,6 +56,7 @@ colours:
   aParts: "#1f2124"
   source: scraped
 body: rising-edge
+smallArches: true
 priceJpy: 1210
 priceJpyExTax: 1100
 priceHkd: 110

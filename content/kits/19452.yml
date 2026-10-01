@@ -56,6 +56,7 @@ colours:
   aParts: "#d0312d"
   source: scraped
 body: brocken-gigant
+smallArches: true
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 120

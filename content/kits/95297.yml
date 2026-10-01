@@ -55,6 +55,7 @@ colours:
   aParts: "#1f2124"
   source: scraped
 body: jolly-joker
+smallArches: true
 priceJpy: 1100
 priceJpyExTax: 1000
 priceHkd: 100

@@ -49,6 +49,7 @@ colours:
   aParts: "#b9bec4"
   source: scraped
 body: silwolf
+smallArches: true
 bodyFinish: plated
 priceJpy: 1210
 priceJpyExTax: 1100

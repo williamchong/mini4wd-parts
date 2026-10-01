@@ -150,6 +150,7 @@
         "motor-shaft": "「{part}」不適用：{chassis}要用{shaft}{motor}。",
         "class-illegal": "「{part}」不能用於{class}。",
         "class-unknown": "尚未確認「{part}」能否用於{class}。",
+        "body-tire-size": "這款車殼原裝配小徑輪胎。配大徑輪胎時，輪拱可能碰到輪胎，請先試裝；有些車殼要修剪輪拱才裝得上。",
         "link-trimmed": "連結中有部分零件已不在目錄內，或不適用於這款底盤，已經略過。"
       },
       "badge": {

@@ -9,7 +9,7 @@ import { partSchema, chassisSchema, kitSchema, CHASSIS_IDS } from '../../shared/
 import type { Chassis, Loadout, Slot } from '../../shared/catalog/schema.ts'
 import { isChassisCompatible, newBuild, partsForSlot, resolveBuild, slotsById } from '../../shared/catalog/build.ts'
 import { checkBuild } from '../../shared/catalog/rules.ts'
-import { bodyForKit, bodyProblems, loadBodies, silhouetteOf } from './bodies.ts'
+import { bodyForKit, bodyProblems, loadBodies, silhouetteOf, smallArchShells } from './bodies.ts'
 import { entryShapeId, TIRES, WHEELS } from '../../shared/scene/wheels.ts'
 import { printedTireMm } from './wheels.ts'
 import { FITTING_CATEGORIES } from './fittings.ts'
@@ -167,7 +167,7 @@ const partsById = new Map(parts.map(part => [part.id, part]))
 
 function checkStock(label: string, host: Chassis, kit?: (typeof kits)[number]) {
   const slots = resolveBuild(host, kit, newBuild(host.id, kit?.id))
-  for (const finding of checkBuild({ slots, chassis: host, partsById, buildClass: 'open' })) {
+  for (const finding of checkBuild({ slots, chassis: host, partsById, kit, buildClass: 'open' })) {
     if (finding.severity !== 'error') continue
     errors.push(`${label}: stock build fails ${finding.rule} on ${finding.slotId}${finding.partId ? ` (part ${finding.partId})` : ''}`)
   }
@@ -223,14 +223,23 @@ for (const kit of kits) {
  * kit and part a body lists exists, every article it matches reaches a kit,
  * content/bodies is what data/bodies generates, and each shell is outward,
  * inside the regulation envelope and in line with its kits' printed size.
+ * `smallArches` is derived from the shells and the loadouts together, so it is
+ * derived again here: a re-authored arch or a corrected tire moves it.
  */
 const bodies = loadBodies()
 errors.push(...bodies.errors)
+const smallArched = smallArchShells(bodies, kits, id => chassisById.get(id)?.defaultLoadout ?? {}, partsById)
+const checkArches = (label: string, record: { body?: string, smallArches?: true }) => {
+  const expected = Boolean(record.body && smallArched.has(record.body))
+  if (Boolean(record.smallArches) !== expected) errors.push(`${label}: smallArches is ${record.smallArches ?? 'unset'}, the shells and loadouts say ${expected} — run npm run catalog:generate`)
+}
 for (const kit of kits) {
   if (kit.body !== bodyForKit(bodies, kit)) errors.push(`kits/${kit.id}: body is ${kit.body ?? 'unset'}, data/bodies says ${bodyForKit(bodies, kit) ?? 'none'} — run npm run catalog:generate`)
+  checkArches(`kits/${kit.id}`, kit)
 }
 for (const part of parts) {
   if (part.body !== bodies.byPart.get(part.id)) errors.push(`parts/${part.id}: body is ${part.body ?? 'unset'}, data/bodies says ${bodies.byPart.get(part.id) ?? 'none'} — run npm run catalog:generate`)
+  checkArches(`parts/${part.id}`, part)
 }
 const kitsById = new Map(kits.map(kit => [kit.id, kit]))
 const titles = new Set(kits.map(kit => kit.loadoutSourceTitle))

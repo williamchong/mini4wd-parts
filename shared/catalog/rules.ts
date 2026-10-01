@@ -22,9 +22,18 @@
  * the build if any of them is outside the 22-35 mm envelope — so a rule here
  * could not fire on a build assembled from this catalog, and the page no
  * longer tells the reader it went unchecked.
+ *
+ * `body-tire-size` (2026-10-02, §4.3) is the one finding that is not a
+ * verdict. A body that covers its wheels has arches cut to the tire it was
+ * boxed with, and a large tire under arches cut for a small one usually
+ * touches them until they are trimmed — usually, because nothing we hold
+ * measures a clearance. So it is a note, it fires only for a body the catalog
+ * marks `smallArches`, and its words say what the box shipped with rather
+ * than that the tire will not fit.
  */
 import { isChassisCompatible, isShaftCompatible } from './build.ts'
-import type { BuildableChassis, BuildablePart, BuildClass, ResolvedSlot } from './build.ts'
+import type { BuildableChassis, BuildablePart, BuildClass, ResolvedEntry, ResolvedSlot } from './build.ts'
+import type { Kit } from './schema.ts'
 
 export type Severity = 'error' | 'warning' | 'note'
 
@@ -34,6 +43,7 @@ export type RuleId =
   | 'motor-shaft'
   | 'class-illegal'
   | 'class-unknown'
+  | 'body-tire-size'
   | 'link-trimmed'
 
 export type Finding = {
@@ -47,7 +57,9 @@ export type Finding = {
 export type BuildCheck = {
   slots: ResolvedSlot[]
   chassis: Pick<BuildableChassis, 'id' | 'motorShaft'>
-  partsById: ReadonlyMap<string, Pick<BuildablePart, 'chassisCompat' | 'classLegality' | 'specs'>>
+  partsById: ReadonlyMap<string, Pick<BuildablePart, 'chassisCompat' | 'classLegality' | 'specs' | 'smallArches'>>
+  /** The kit the build started from, whose body is on the car until the body row is swapped. */
+  kit?: Pick<Kit, 'smallArches'>
   buildClass: BuildClass
   /** The link this build was opened from lost a kit, a slot or a part on the way in. */
   linkTrimmed?: boolean
@@ -56,12 +68,51 @@ export type BuildCheck = {
 const RANK: Record<Severity, number> = { error: 0, warning: 1, note: 2 }
 
 /**
+ * From here up a tire is large diameter (大径): Tamiya's ⌀30 and ⌀31, against
+ * the ⌀24 and ⌀26 it calls small. Sizes are compared as these two classes, not
+ * as millimetres, so a ⌀24 body on ⌀26 tires is not a jump.
+ */
+export const LARGE_TIRE_MM = 30
+
+/**
+ * Whether a tire-row entry is a large-diameter tire. A catalog part records
+ * its diameter. A stock tire is a phrase or a chassis default's shape, and
+ * both name the size in their first word (`Large Avante-Type Slick`,
+ * `large-arched`); reading that word keeps the shape table, which says the
+ * same in millimetres, in the 3D chunk and out of the page. rules.test.ts
+ * holds the word to the table.
+ */
+export function isLargeTire(
+  entry: Pick<ResolvedEntry, 'partId' | 'label' | 'shape'>,
+  partsById: ReadonlyMap<string, Pick<BuildablePart, 'specs'>>
+): boolean {
+  if (entry.partId) return (partsById.get(entry.partId)?.specs.tireDiameterMm ?? 0) >= LARGE_TIRE_MM
+  return /^large\b/i.test(entry.shape ?? entry.label?.en ?? '')
+}
+
+/** The tire rows, whose slot ids and slot types are the same two words. */
+export const TIRE_SLOTS: ReadonlySet<ResolvedSlot['type']> = new Set(['tire-front', 'tire-rear'])
+
+/**
  * Errors first, then warnings, then notes; within a severity, the order of the
  * build list, so the summary reads top to bottom like the rows it points at.
  */
-export function checkBuild({ slots, chassis, partsById, buildClass, linkTrimmed }: BuildCheck): Finding[] {
+export function checkBuild({ slots, chassis, partsById, kit, buildClass, linkTrimmed }: BuildCheck): Finding[] {
   const findings: Finding[] = []
   if (linkTrimmed) findings.push({ rule: 'link-trimmed', severity: 'note' })
+
+  // Once for the car and on the body row, whichever end the large tires are
+  // on: it is the body the reader may have to trim, and two notes saying so
+  // would be one fact twice.
+  const bodySlot = slots.find(slot => slot.type === 'body')
+  const body = bodySlot?.entries[0]
+  const smallArches = body?.partId
+    ? partsById.get(body.partId)?.smallArches
+    : body?.origin === 'kit' && kit?.smallArches
+  if (bodySlot && smallArches && slots.some(slot =>
+    TIRE_SLOTS.has(slot.type) && slot.entries.some(entry => isLargeTire(entry, partsById)))) {
+    findings.push({ rule: 'body-tire-size', severity: 'note', slotId: bodySlot.id })
+  }
 
   for (const slot of slots) {
     if (slot.required && !slot.entries.length) {

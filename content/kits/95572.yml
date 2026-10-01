@@ -55,6 +55,7 @@ colours:
   aParts: "#eef0f2"
   source: override
 body: rayvolf
+smallArches: true
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 130

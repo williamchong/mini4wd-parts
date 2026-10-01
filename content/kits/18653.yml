@@ -53,6 +53,7 @@ colours:
   aParts: "#8fd67a"
   source: scraped
 body: hexagonite
+smallArches: true
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

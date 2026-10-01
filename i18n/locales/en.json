@@ -150,6 +150,7 @@
         "motor-shaft": "{part} does not fit: the {chassis} takes a {shaft} motor.",
         "class-illegal": "{part} is not allowed in {class}.",
         "class-unknown": "Not yet checked whether {part} is allowed in {class}.",
+        "body-tire-size": "This body was sold on small-diameter tires. Its wheel arches may touch large-diameter ones, so test-fit it first; some bodies need the arches trimmed.",
         "link-trimmed": "Some parts in the link are no longer in the catalog or do not fit this chassis, and were left out."
       },
       "badge": {

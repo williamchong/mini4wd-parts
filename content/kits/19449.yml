@@ -53,6 +53,7 @@ colours:
   aParts: "#d0312d"
   source: scraped
 body: tridagger-wx
+smallArches: true
 priceJpy: 1100
 priceJpyExTax: 1000
 priceHkd: 100

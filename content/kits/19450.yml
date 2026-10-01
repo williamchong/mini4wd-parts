@@ -56,6 +56,7 @@ colours:
   aParts: "#565b62"
   source: scraped
 body: spin-cobra
+smallArches: true
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 110

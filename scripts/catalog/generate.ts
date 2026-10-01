@@ -6,11 +6,11 @@ import { readJsonFile, readYamlFile, readYamlFileIfPresent } from './io.ts'
 import { thumbnailIds } from './thumbnails.ts'
 import { thumbnailPath, type ThumbCollection } from '../../shared/catalog/thumbnails.ts'
 import { partSchema, chassisSchema, kitSchema, CHASSIS_IDS, chassisIdFor, KIT_CLEAR } from '../../shared/catalog/schema.ts'
-import type { ChassisId, Kit, KitOverride, LabelNames, Loadout, PartCategory, PartColours, PartOverride, PartSpecs, Slot } from '../../shared/catalog/schema.ts'
+import type { ChassisId, Kit, KitOverride, LabelNames, Loadout, Part, PartCategory, PartColours, PartOverride, PartSpecs, Slot } from '../../shared/catalog/schema.ts'
 import { compact, deriveAddOn, deriveCategory, deriveLegality, deriveSlots, deriveSpecs, isPlainObject, normalise } from './taxonomy.ts'
 import { labelFor, neutralLabel } from './labels.ts'
 import { colourOf, coloursIn, isClear } from './colours.ts'
-import { bodyForKit, loadBodies, writeBodies } from './bodies.ts'
+import { bodyForKit, loadBodies, smallArchShells, writeBodies } from './bodies.ts'
 import { shapesFor, WHEEL_CATEGORIES } from './wheels.ts'
 import { finishFor } from './finish.ts'
 import { fittingFor, stayEndOf } from './fittings.ts'
@@ -529,7 +529,7 @@ async function writeCollection(dir: string, files: Map<string, unknown>) {
 }
 
 const selected = jpItems.filter(selects)
-const partFiles = new Map<string, unknown>()
+const partFiles = new Map<string, Part>()
 const unmatched: string[] = []
 const failures: string[] = []
 
@@ -545,7 +545,7 @@ for (const item of selected) {
   partFiles.set(`${item.id}.yml`, result.data)
 }
 
-const kitFiles = new Map<string, unknown>()
+const kitDrafts: ReturnType<typeof buildKit>[] = []
 const offScopeChassis: string[] = []
 // Distinct from the above: a kit Tamiya tagged with no chassis at all is a
 // scrape problem to look at, not a legacy kit we chose to leave out.
@@ -564,19 +564,38 @@ for (const item of jpKits) {
     continue
   }
 
-  const result = kitSchema.safeParse(buildKit(item, chassis))
+  kitDrafts.push(buildKit(item, chassis))
+}
+
+const chassisSources = new Map(CHASSIS_IDS.map(id => [id,
+  readYamlFile<Record<string, unknown> & { slotProfile: string, defaultLoadout?: Loadout }>(`data/chassis/${id}.yml`)]))
+
+// A shell is judged by every kit that draws it, so the flag waits for all of
+// them, and for the parts, whose diameters a loadout naming a tire would need.
+const smallArched = smallArchShells(bodies, kitDrafts, id => chassisSources.get(id)?.defaultLoadout ?? {},
+  new Map([...partFiles.values()].map(part => [part.id, part])))
+const withArches = <T extends { body?: string }>(record: T) =>
+  record.body && smallArched.has(record.body) ? { ...record, smallArches: true } : record
+
+for (const [name, part] of partFiles) {
+  const flagged = withArches(part)
+  if (flagged !== part) partFiles.set(name, partSchema.parse(flagged))
+}
+
+const kitFiles = new Map<string, unknown>()
+for (const draft of kitDrafts) {
+  const result = kitSchema.safeParse(withArches(draft))
   if (!result.success) {
-    failures.push(`kit ${item.id}: ${result.error.issues.map(i => `${i.path.join('.')} ${i.message}`).join('; ')}`)
+    failures.push(`kit ${draft.id}: ${result.error.issues.map(i => `${i.path.join('.')} ${i.message}`).join('; ')}`)
     continue
   }
-  kitFiles.set(`${item.id}.yml`, result.data)
+  kitFiles.set(`${draft.id}.yml`, result.data)
 }
 
 const selectedIds = new Set(selected.map(item => item.id))
 const chassisFiles = new Map<string, unknown>()
 for (const id of CHASSIS_IDS) {
-  const base = readYamlFile<Record<string, unknown> & { slotProfile: string }>(`data/chassis/${id}.yml`)
-  const { slotProfile, ...rest } = base
+  const { slotProfile, ...rest } = chassisSources.get(id)!
   const perSide = stockRollersPerSide(id)
   const record = {
     ...rest,

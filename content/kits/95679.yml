@@ -24,6 +24,7 @@ colours:
   tire: "#1f2124"
   source: override
 body: year-of-the-snake
+smallArches: true
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

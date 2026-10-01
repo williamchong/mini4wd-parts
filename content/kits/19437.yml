@@ -53,6 +53,7 @@ colours:
   aParts: "#565b62"
   source: scraped
 body: bergkaiser
+smallArches: true
 priceJpy: 1210
 priceJpyExTax: 1100
 priceHkd: 110

@@ -55,6 +55,7 @@ colours:
   aParts: "#eef0f2"
   source: scraped
 body: festa-jaune
+smallArches: true
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

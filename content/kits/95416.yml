@@ -49,6 +49,7 @@ colours:
   aParts: "#2f5fc4"
   source: scraped
 body: heat-edge
+smallArches: true
 bodyFinish: matte-plated
 priceJpy: 1210
 priceJpyExTax: 1100

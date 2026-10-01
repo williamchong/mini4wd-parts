@@ -3,7 +3,8 @@ import { join } from 'node:path'
 import { ROOT } from './fetch.ts'
 import { readYamlDir } from './io.ts'
 import { bodySchema } from '../../shared/catalog/schema.ts'
-import type { BodySource, Kit } from '../../shared/catalog/schema.ts'
+import type { BodySource, ChassisId, Kit, Loadout, Part } from '../../shared/catalog/schema.ts'
+import { isLargeTire, TIRE_SLOTS } from '../../shared/catalog/rules.ts'
 import { bodyGeometry } from '../../shared/scene/generators/body.ts'
 import type { Silhouette } from '../../shared/scene/generators/body.ts'
 import { BODY_Y } from '../../shared/scene/sockets.ts'
@@ -47,6 +48,37 @@ export function loadBodies(): Bodies {
 /** The body a kit draws: listed by item number, else matched by its article. */
 export const bodyForKit = (bodies: Bodies, kit: { id: string; loadoutSourceTitle?: string }) =>
   bodies.byKit.get(kit.id) ?? (kit.loadoutSourceTitle ? bodies.byTitle.get(kit.loadoutSourceTitle) : undefined)
+
+/**
+ * The shells whose wheel arches were cut for small-diameter tires, which is
+ * what `smallArches` on a kit or a body part says (docs/PLAN.md §4.3): the
+ * shell has arches, some kit draws it, and none of those kits is boxed on
+ * large tires. A shell Tamiya ships both ways — Raikiri is on ⌀26 on the MA
+ * and ⌀31 on the MS — takes either by Tamiya's own word, and one that runs
+ * between its wheels has nothing for a tire to touch.
+ *
+ * A kit's tires are its own entry or else its chassis' default, the way
+ * `resolveBuild` reads them, and their size is asked of the rule that will
+ * read this flag, so no stock build can raise the note it feeds.
+ */
+export function smallArchShells(
+  bodies: Bodies,
+  kits: Iterable<Pick<Kit, 'body' | 'chassis' | 'stockLoadout'>>,
+  defaultLoadout: (chassis: ChassisId) => Loadout,
+  partsById: ReadonlyMap<string, Pick<Part, 'specs'>>
+): Set<string> {
+  const onLarge = new Map<string, boolean>()
+  for (const kit of kits) {
+    if (!kit.body) continue
+    const large = [...TIRE_SLOTS].some((slot) => {
+      const own = kit.stockLoadout[slot]
+      return (own?.length ? own : defaultLoadout(kit.chassis)[slot] ?? []).some(entry => isLargeTire(entry, partsById))
+    })
+    onLarge.set(kit.body, onLarge.get(kit.body) || large)
+  }
+  const arched = (id: string) => [bodies.byId.get(id)?.arches ?? 0].flat().some(radius => radius > 0)
+  return new Set([...onLarge].filter(([id, large]) => !large && arched(id)).map(([id]) => id))
+}
 
 /** Just the shape, as the scene loads it: everything that says which kits draw it stays behind. */
 export function silhouetteOf({ name: _name, reference: _reference, titles: _titles, kits: _kits, parts: _parts, ...shape }: BodySource) {

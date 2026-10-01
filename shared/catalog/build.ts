@@ -41,7 +41,7 @@ type HasThumbnail = { hasThumbnail?: boolean }
  */
 export type BuildablePart = Pick<Part,
   'id' | 'names' | 'category' | 'slots' | 'isCarPart' | 'isAddOn' | 'contents' | 'chassisCompat'
-  | 'classLegality' | 'specs' | 'colours' | 'body' | 'stayEnd'> & HasThumbnail
+  | 'classLegality' | 'specs' | 'colours' | 'body' | 'smallArches' | 'stayEnd'> & HasThumbnail
 
 export type BuildableChassis = Pick<Chassis, 'id' | 'slots' | 'defaultLoadout' | 'motorShaft' | 'rearRollersPerSide'>
 
@@ -77,7 +77,7 @@ export type BuildableKit = Pick<Kit, 'stockLoadout'>
  */
 export type PickableKit = Pick<Kit,
   'id' | 'names' | 'chassis' | 'status' | 'gearRatio'
-  | 'loadoutSource' | 'loadoutSourceTitle' | 'stockLoadout' | 'colours' | 'body' | 'bodyFinish'> & HasThumbnail
+  | 'loadoutSource' | 'loadoutSourceTitle' | 'stockLoadout' | 'colours' | 'body' | 'smallArches' | 'bodyFinish'> & HasThumbnail
 
 /**
  * The rulesets a build can be checked against (docs/PLAN.md §2.1).

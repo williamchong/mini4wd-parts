@@ -53,6 +53,7 @@ colours:
   aParts: "#b9bec4"
   source: scraped
 body: mad-laser
+smallArches: true
 priceJpy: 1100
 priceJpyExTax: 1000
 priceHkd: 100

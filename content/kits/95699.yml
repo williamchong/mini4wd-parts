@@ -55,6 +55,7 @@ colours:
   aParts: "#5fe84a"
   source: scraped
 body: k4tasche
+smallArches: true
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 130

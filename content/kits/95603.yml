@@ -55,6 +55,7 @@ colours:
   aParts: "#d0312d"
   source: override
 body: hurricane-sonic
+smallArches: true
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

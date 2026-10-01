@@ -56,6 +56,7 @@ colours:
   aParts: "#2f9e4f"
   source: scraped
 body: sonic-saber
+smallArches: true
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 100

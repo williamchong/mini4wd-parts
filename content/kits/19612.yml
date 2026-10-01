@@ -53,6 +53,7 @@ colours:
   aParts: "#2f9e4f"
   source: scraped
 body: lightning-magnum
+smallArches: true
 priceJpy: 858
 priceJpyExTax: 780
 priceHkd: 78

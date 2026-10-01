@@ -22,6 +22,7 @@ colours:
   tire: "#1f2124"
   source: override
 body: diospada-gpa
+smallArches: true
 priceJpy: 770
 priceJpyExTax: 700
 status: current

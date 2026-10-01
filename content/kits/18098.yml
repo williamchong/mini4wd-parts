@@ -53,6 +53,7 @@ colours:
   aParts: "#d0312d"
   source: scraped
 body: iron-beak
+smallArches: true
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 110

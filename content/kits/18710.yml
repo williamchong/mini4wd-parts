@@ -84,6 +84,7 @@ colours:
     - body
   source: override
 body: rowdy-bull
+smallArches: true
 priceJpy: 2750
 priceJpyExTax: 2500
 priceHkd: 220

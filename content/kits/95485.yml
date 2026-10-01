@@ -53,6 +53,7 @@ colours:
     - body
   source: override
 body: festa-jaune
+smallArches: true
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

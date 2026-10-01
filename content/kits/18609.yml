@@ -53,6 +53,7 @@ colours:
   aParts: "#b9bec4"
   source: override
 body: torcruiser
+smallArches: true
 priceJpy: 792
 priceJpyExTax: 720
 releaseDate: 2005-12

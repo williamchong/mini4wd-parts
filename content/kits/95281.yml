@@ -57,6 +57,7 @@ colours:
     - body
   source: override
 body: racer-gt-no-wing
+smallArches: true
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

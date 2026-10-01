@@ -55,6 +55,7 @@ colours:
   aParts: "#e6f53a"
   source: scraped
 body: ignicion
+smallArches: true
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

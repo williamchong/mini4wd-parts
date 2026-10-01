@@ -56,6 +56,7 @@ colours:
   aParts: "#d0312d"
   source: scraped
 body: vanguard-sonic
+smallArches: true
 priceJpy: 1320
 priceJpyExTax: 1200
 priceHkd: 120

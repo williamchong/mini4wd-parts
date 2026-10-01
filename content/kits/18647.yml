@@ -73,6 +73,7 @@ colours:
   aParts: "#d0312d"
   source: override
 body: blast-arrow
+smallArches: true
 priceJpy: 2750
 priceJpyExTax: 2500
 priceHkd: 220

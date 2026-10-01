@@ -52,6 +52,7 @@ colours:
   aParts: "#eef0f2"
   source: scraped
 body: tri-gale
+smallArches: true
 priceJpy: 1100
 priceJpyExTax: 1000
 priceHkd: 100

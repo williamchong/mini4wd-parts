@@ -55,6 +55,7 @@ colours:
   chassis: "#1f2124"
   source: scraped
 body: raizzan
+smallArches: true
 priceJpy: 1650
 priceJpyExTax: 1500
 priceHkd: 150

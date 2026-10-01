@@ -52,6 +52,7 @@ colours:
   aParts: "#1f2124"
   source: scraped
 body: heat-edge
+smallArches: true
 priceJpy: 1100
 priceJpyExTax: 1000
 releaseDate: 2017-01-21

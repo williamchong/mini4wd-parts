@@ -22,6 +22,7 @@ colours:
   tire: "#1f2124"
   source: override
 body: baron-viento
+smallArches: true
 priceJpy: 1210
 priceJpyExTax: 1100
 priceHkd: 110

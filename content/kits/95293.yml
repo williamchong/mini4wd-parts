@@ -50,6 +50,7 @@ colours:
   aParts: "#b9bec4"
   source: scraped
 body: festa-jaune
+smallArches: true
 priceJpy: 1320
 priceJpyExTax: 1200
 releaseDate: 2016-11-12

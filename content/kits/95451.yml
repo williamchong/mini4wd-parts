@@ -54,6 +54,7 @@ colours:
     - aParts
   source: scraped
 body: black-saber
+smallArches: true
 priceJpy: 1100
 priceJpyExTax: 1000
 priceHkd: 100

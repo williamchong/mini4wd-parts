@@ -57,6 +57,7 @@ colours:
     - body
   source: scraped
 body: racer-gt
+smallArches: true
 priceJpy: 1320
 priceJpyExTax: 1200
 releaseDate: 2016-12-17

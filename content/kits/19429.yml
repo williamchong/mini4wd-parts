@@ -53,6 +53,7 @@ colours:
   aParts: "#1f2124"
   source: scraped
 body: spin-viper
+smallArches: true
 priceJpy: 880
 priceJpyExTax: 800
 status: current

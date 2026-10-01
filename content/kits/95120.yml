@@ -52,6 +52,7 @@ colours:
   aParts: "#eef0f2"
   source: scraped
 body: baron-viento
+smallArches: true
 priceJpy: 1210
 priceJpyExTax: 1100
 priceHkd: 110

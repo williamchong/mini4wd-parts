@@ -56,6 +56,7 @@ colours:
   aParts: "#7a4bb5"
   source: scraped
 body: proto-saber-evolution
+smallArches: true
 priceJpy: 1430
 priceJpyExTax: 1300
 priceHkd: 110

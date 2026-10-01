@@ -57,6 +57,7 @@ colours:
     - body
   source: scraped
 body: iron-beak
+smallArches: true
 priceJpy: 1540
 priceJpyExTax: 1400
 priceHkd: 140

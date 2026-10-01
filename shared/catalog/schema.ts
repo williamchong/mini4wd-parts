@@ -368,6 +368,8 @@ export const partSchema = z.object({
    * sets: the id of a data/bodies file, set there under `parts`.
    */
   body: z.string().optional(),
+  /** As a kit's `smallArches`, for a body sold on its own: read off the kits that ship the same shell. */
+  smallArches: z.literal(true).optional(),
   /**
    * The wheel and tire shapes this part draws in the 3D pane: keys of `WHEELS`
    * and `TIRES` in shared/scene/wheels.ts (§5.6). A wheel-and-tire set fills
@@ -610,6 +612,15 @@ export const kitSchema = z.object({
    * number (docs/PLAN.md §5.6). Absent while the car has no silhouette.
    */
   body: z.string().optional(),
+  /**
+   * The body covers its wheels and has only ever been boxed with small-diameter
+   * tires: its shell has wheel arches, and no kit drawing that shell ships large
+   * ones. The rule engine notes a large tire under such a body, because the
+   * arches were cut to the small one (docs/PLAN.md §4.3). Derived by
+   * `catalog:generate` and only written when true; a statement about what
+   * Tamiya boxed, not a measured clearance.
+   */
+  smallArches: z.literal(true).optional(),
   /**
    * A body sold plated rather than painted, read from the kit's Japanese name
    * (メッキ; the English says "METALLIC", which Tamiya also uses for paint).
