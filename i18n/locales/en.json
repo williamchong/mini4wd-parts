@@ -60,6 +60,7 @@
     "bodyKitHintAction": "Choose a {chassis} kit",
     "searchParts": "Search by name or item number",
     "candidates": "{count} parts fit",
+    "unfitHidden": " ({count} more that don't fit the {chassis} are left out)",
     "addOns": "Add-ons and spares",
     "close": "Close",
     "swap": "Swap",

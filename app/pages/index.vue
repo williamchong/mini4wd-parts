@@ -13,7 +13,7 @@
  */
 import {
   addedTo, canAddTo, companionRows, counterpartParts, gearRatioOf, goesOnCar, isBuildClass, orderParts, partsForSlot, removedFrom, replacedIn, setRowsInto,
-  resolveBuild, rollersPerSideIn, setContentsFor, slotIdsFor, stacks, swappableSlotTypes
+  resolveBuild, rollersPerSideIn, setContentsFor, slotIdsFor, stacks, swappableSlotTypes, unfitCountForSlot
 } from '#shared/catalog/build'
 import { byChassisOrder } from '#shared/catalog/chassis'
 import { STARTER_PACKS, orderKits } from '#shared/catalog/kits'
@@ -657,6 +657,13 @@ const candidates = computed(() =>
     ? partsForSlot(catalog.value?.parts ?? [], openSlot.value.type, chassis.value, buildClass.value)
     : [])
 
+/** The parts the picker hid for not fitting this chassis (`unfitHint` in PartPicker). */
+const unfitHint = computed(() => {
+  if (!openSlot.value || !chassis.value) return undefined
+  const count = unfitCountForSlot(catalog.value?.parts ?? [], openSlot.value.type, chassis.value)
+  return count ? { chassis: resolve(chassis.value.names).value, count } : undefined
+})
+
 const openSlotLabel = computed(() =>
   openSlot.value ? slotLabel(openSlot.value) : '')
 
@@ -1171,6 +1178,7 @@ useHead(() => ({
       :adding="pickerAt === 'add'"
       :build-class="buildClass"
       :kit-hint="bodyKitHint"
+      :unfit-hint="unfitHint"
       @select="choose"
       @close="closePicker"
       @kits="openKitsForBody"

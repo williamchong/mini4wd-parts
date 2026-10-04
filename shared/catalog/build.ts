@@ -606,6 +606,10 @@ export function orderParts<T extends Pick<Part, 'id' | 'status' | 'releaseDate' 
   })
 }
 
+/** A car part of this slot type, chassis aside: what both of the picker's counts start from. */
+const goesInSlot = (part: BuildablePart, slotType: Slot): boolean =>
+  part.isCarPart && part.slots.includes(slotType)
+
 /**
  * What the user may put in a slot. Class legality is returned rather than
  * filtered on: a beginner learns more from a Sprint Dash marked "Open only"
@@ -635,9 +639,7 @@ export function partsForSlot(
   buildClass: BuildClass
 ): SlotCandidate[] {
   const candidates = parts
-    .filter(part => part.isCarPart
-      && part.slots.includes(slotType)
-      && fits(part, slotType, chassis))
+    .filter(part => goesInSlot(part, slotType) && fits(part, slotType, chassis))
     .map(part => ({ part, legality: part.classLegality[buildClass] }))
 
   const rank = { legal: 0, unknown: 1, illegal: 2 }
@@ -648,6 +650,19 @@ export function partsForSlot(
     Number(a.part.isAddOn ?? false) - Number(b.part.isAddOn ?? false)
     || endRank(a.part) - endRank(b.part)
     || rank[a.legality] - rank[b.legality])
+}
+
+/**
+ * How many parts of this slot type `partsForSlot` left out because they do not
+ * fit this chassis. The filtering is the checker's real work, and with nothing
+ * to show for it a reader never learns the picker is doing it.
+ */
+export function unfitCountForSlot(
+  parts: BuildablePart[],
+  slotType: Slot,
+  chassis: BuildableChassis
+): number {
+  return parts.filter(part => goesInSlot(part, slotType) && !fits(part, slotType, chassis)).length
 }
 
 const STAY_END_OF_SLOT: Partial<Record<Slot, NonNullable<Part['stayEnd']>>> = {

@@ -24,6 +24,12 @@ const props = defineProps<{
    * This names the way to the rest: a kit on the same chassis.
    */
   kitHint?: { chassis: string; count: number }
+  /**
+   * How many parts of this slot type were left out for not fitting the
+   * chassis. Said quietly after the count, so a reader learns the list is
+   * already checked without it reading as a warning.
+   */
+  unfitHint?: { chassis: string; count: number }
 }>()
 
 const emit = defineEmits<{ select: [string]; close: []; kits: [] }>()
@@ -75,7 +81,11 @@ const firstAddOn = computed(() => matches.value.findIndex(({ part }) => part.isA
         class="picker-search"
       />
 
-      <p class="picker-count">{{ $t('build.candidates', { count: matches.length }) }}</p>
+      <!-- The hidden count is about the whole slot, not the search, so it goes
+           away while a query narrows the list. -->
+      <p class="picker-count">
+        {{ $t('build.candidates', { count: matches.length }) }}<template v-if="unfitHint && !query">{{ $t('build.unfitHidden', unfitHint) }}</template>
+      </p>
 
       <ul class="picker-list">
         <template v-for="(candidate, i) in matches" :key="candidate.part.id">

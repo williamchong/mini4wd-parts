@@ -6,7 +6,7 @@ import { partSchema } from './schema.ts'
 import {
   addedTo, BUILD_CLASSES, canAddTo, companionRows, counterpartParts, gearRatioOf, goesOnCar, isChassisCompatible, newBuild, orderParts, partsForSlot,
   removedFrom, replacedIn, resolveBuild, rollersPerSideIn, setContentRows, setContentsFor, setRowsInto, slotIdsFor, stacks,
-  swappableSlotTypes
+  swappableSlotTypes, unfitCountForSlot
 } from './build.ts'
 import type { BuildState } from './build.ts'
 import type { Chassis, Kit, Part } from './schema.ts'
@@ -230,6 +230,17 @@ test('the picker drops parts that are not for this chassis, and non-car parts', 
     part({ id: '74023', slots: ['front-stay'], isCarPart: false })
   ]
   assert.deepEqual(partsForSlot(parts, 'front-stay', chassis, 'open').map(c => c.part.id), ['15513'])
+  // The picker says how many it left out for the chassis; a non-car part was
+  // never a candidate, so it is not one of them.
+  assert.equal(unfitCountForSlot(parts, 'front-stay', chassis), 1)
+})
+
+test('a motor dropped for its shaft counts as not fitting', () => {
+  const parts = [
+    part({ id: '94380', slots: ['motor'], specs: { motorShaft: 'single' } }),
+    part({ id: '15487', slots: ['motor'], specs: { motorShaft: 'double' } })
+  ]
+  assert.equal(unfitCountForSlot(parts, 'motor', chassis), 1)
 })
 
 test('a slot no part declares offers no swap', () => {
