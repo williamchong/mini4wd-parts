@@ -321,10 +321,7 @@
       "setting-tool": "調校車子用的工具，例如檢查車長和最大寬度是否合規的量測盒，以及平整的調校板。",
       "motor-mount": "固定{motor}位置的支架，減少{motor}在行駛時移位或震動，讓傳動更穩定。"
     },
-    "seeAllInCategory": "查看全部 {count} 件",
-    "aboutCategory": "關於{category}",
-    "moreInfo": "這款零件的詳細說明，請參閱{official}。",
-    "moreInfoWiki": "這款零件的詳細說明，請參閱{official}或{wiki}。"
+    "seeAllInCategory": "查看全部 {count} 件"
   },
   "spec": {
     "rollerDiameter": "直徑",

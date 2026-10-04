@@ -24,7 +24,7 @@ const route = useRoute()
 const { t } = useI18n()
 const localePath = useLocalePath()
 const { resolve, isFallback } = useCatalogName()
-const { term, slotTypeLabel, categoryIntro } = useTerm()
+const { term, slotTypeLabel } = useTerm()
 const siteUrl = useRuntimeConfig().public.siteUrl
 
 const id = computed(() => String(route.params.id))
@@ -157,7 +157,6 @@ const specs = computed(() => specRowsForPart(part.value))
  */
 const category = computed(() =>
   term(part.value.category, `part.category.${part.value.category}`))
-const intro = computed(() => categoryIntro(part.value.category))
 
 const CLASSES = ['open', 'stockBmax', 'junior'] as const satisfies readonly BuildClass[]
 
@@ -273,28 +272,6 @@ useHead(() => ({
         </UButton>
       </div>
     </header>
-
-    <section v-if="intro" class="part-section">
-      <h2>{{ $t('part.aboutCategory', { category }) }}</h2>
-      <p class="part-intro">{{ intro }}</p>
-      <!-- Our intro is about the category; for this part in particular, send
-           the reader to the sources rather than paraphrasing them (CLAUDE.md:
-           Tamiya's descriptions are not ours to copy). -->
-      <i18n-t
-        v-if="part.officialUrl"
-        :keypath="wikiUrl ? 'part.moreInfoWiki' : 'part.moreInfo'"
-        tag="p"
-        class="part-note"
-        scope="global"
-      >
-        <template #official>
-          <a :href="part.officialUrl" target="_blank" rel="noopener">{{ $t('part.official') }}</a>
-        </template>
-        <template v-if="wikiUrl" #wiki>
-          <a :href="wikiUrl" target="_blank" rel="noopener">Mini 4WD Fandom Wiki</a>
-        </template>
-      </i18n-t>
-    </section>
 
     <!-- A set's own section, above the specs, because what is in the box is the
          whole question a reader opens this page with. -->
