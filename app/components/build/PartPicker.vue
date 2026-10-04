@@ -84,7 +84,7 @@ const firstAddOn = computed(() => matches.value.findIndex(({ part }) => part.isA
       <!-- The hidden count is about the whole slot, not the search, so it goes
            away while a query narrows the list. -->
       <p class="picker-count">
-        {{ $t('build.candidates', { count: matches.length }) }}<template v-if="unfitHint && !query">{{ $t('build.unfitHidden', unfitHint) }}</template>
+        {{ $t('build.candidates', { count: matches.length }) }}<span v-if="unfitHint && !query" class="picker-count-unfit">{{ $t('build.unfitHidden', unfitHint) }}</span>
       </p>
 
       <ul class="picker-list">

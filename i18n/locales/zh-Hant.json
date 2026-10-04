@@ -60,7 +60,7 @@
     "bodyKitHintAction": "改選{chassis}的套件",
     "searchParts": "搜尋名稱或編號",
     "candidates": "共 {count} 件可用零件",
-    "unfitHidden": "（另有 {count} 件不適用於{chassis}，已略去）",
+    "unfitHidden": "（另有 {count} 件不適用於{chassis}）",
     "addOns": "搭配用及補充零件",
     "close": "關閉",
     "swap": "更換",

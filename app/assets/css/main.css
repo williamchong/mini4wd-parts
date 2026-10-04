@@ -820,6 +820,11 @@ body {
   opacity: 0.7;
 }
 
+/* Breaks before the bracket rather than inside it on a narrow phone. */
+.picker-count-unfit {
+  white-space: nowrap;
+}
+
 /* The body picker's pointer to the kits: what the list cannot hold, said above it. */
 .picker-kit-hint {
   margin: 0 0 0.75rem;
