@@ -322,7 +322,14 @@
       "setting-tool": "調校車子用的工具，例如檢查車長和最大寬度是否合規的量測盒，以及平整的調校板。",
       "motor-mount": "固定{motor}位置的支架，減少{motor}在行駛時移位或震動，讓傳動更穩定。"
     },
-    "seeAllInCategory": "查看全部 {count} 件"
+    "seeAllInCategory": "查看全部 {count} 件",
+    "motorTable": {
+      "motor": "馬達",
+      "allClasses": "所有賽制",
+      "allBut": "{cls}除外",
+      "noClass": "公認賽不可用",
+      "separator": "、"
+    }
   },
   "spec": {
     "rollerDiameter": "直徑",

@@ -2,6 +2,7 @@
 
 - [Getting started: begin with a Starter Pack](/en/guides/starter/): which box to buy first, and how the three Starter Packs differ.
 - [Choosing a chassis: the eight current chassis compared](/en/guides/chassis/): double shaft or single, which chassis suits which track, and the kits on each.
+- [Choosing a motor: the fifteen upgrade motors compared](/en/guides/motor/): single and double shaft, what each class allows, and how to read speed and torque.
 
 ## From Tamiya
 

@@ -6,13 +6,13 @@ import { NAME_LOCALES } from './names.ts'
 
 /**
  * A guide names catalog records by id in plain text — `:kit-links`,
- * `:part-links`, `:chassis-links` — and the content components render whatever
+ * `:part-links`, `:chassis-links`, `:motor-table` — and the content components render whatever
  * the catalog returns for those ids, silently dropping any it cannot find. So a
  * typo, or a kit that leaves the catalog, is an empty row rather than an error.
  * This is where it becomes one.
  */
 const root = new URL('../../', import.meta.url)
-const COLLECTION_FOR = { kit: 'kits', part: 'parts', chassis: 'chassis' } as const
+const COLLECTION_FOR = { kit: 'kits', part: 'parts', chassis: 'chassis', motor: 'parts' } as const
 
 const guides = NAME_LOCALES.flatMap(locale =>
   readdirSync(new URL(`content/${locale}/guides/`, root))
@@ -21,7 +21,7 @@ const guides = NAME_LOCALES.flatMap(locale =>
 )
 
 const rows = (text: string) =>
-  [...text.matchAll(/:(kit|part|chassis)-links\{ids="([^"]*)"\}/g)]
+  [...text.matchAll(/:(kit|part|chassis|motor)-(?:links|table)\{ids="([^"]*)"\}/g)]
     .map(([, kind, ids]) => ({
       kind: kind as keyof typeof COLLECTION_FOR,
       ids: ids!.split(/\s+/).filter(Boolean)
@@ -78,5 +78,30 @@ test('the chassis guide lists each kit under the chassis it is built on', () => 
         assert.equal(kit.chassis, chassis, `${locale}: ${id} listed under ${heading}`)
       }
     }
+  }
+})
+
+/**
+ * The motor guide's two tables are the two product lines, and a motor in the
+ * wrong one is a motor a reader buys for a chassis it cannot go in. A table row
+ * is only a link, so every motor in one also has to sit in a `:part-links` row,
+ * which is where the button that puts it on the car is.
+ */
+test('the motor guide keeps each table to one shaft and gives every motor in it a part row', () => {
+  const shaftOf = (id: string) =>
+    (parse(readFileSync(new URL(`content/parts/${id}.yml`, root), 'utf8')) as { specs: { motorShaft?: string } }).specs.motorShaft
+  for (const { locale, text } of guides.filter(guide => guide.file === 'motor.md')) {
+    const named = rows(text)
+    const tables = named.filter(row => row.kind === 'motor')
+    const linked = new Set(named.filter(row => row.kind === 'part').flatMap(row => row.ids))
+    assert.equal(tables.length, 2, `${locale}: one table a shaft`)
+    const shafts = tables.map((table) => {
+      const [first, ...rest] = table.ids.map(shaftOf)
+      assert.ok(first, `${locale}: ${table.ids[0]} has no shaft`)
+      for (const shaft of rest) assert.equal(shaft, first, `${locale}: a table mixes shafts`)
+      for (const id of table.ids) assert.ok(linked.has(id), `${locale}: ${id} is in a table but in no part row`)
+      return first
+    })
+    assert.deepEqual(shafts, ['single', 'double'], `${locale}: single-shaft table first`)
   }
 })

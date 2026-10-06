@@ -1123,6 +1123,54 @@ body {
   line-height: 1.35;
 }
 
+/* A guide's `:motor-table`. It scrolls sideways inside its own box before it
+   pushes the page wider than a phone; the numbers never wrap, the names and
+   the class list do. */
+.motor-table {
+  margin: 0.75rem 0;
+  overflow-x: auto;
+}
+
+.motor-table table {
+  width: 100%;
+  font-size: 0.85em;
+  line-height: 1.35;
+  border-collapse: collapse;
+}
+
+.motor-table th,
+.motor-table td {
+  padding: 0.45rem 0.5rem 0.45rem 0;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--ui-border);
+}
+
+.motor-table thead th {
+  color: var(--ui-text-toned);
+  font-size: 0.9em;
+  font-weight: normal;
+}
+
+.motor-table tbody th {
+  font-weight: normal;
+}
+
+.motor-table-num {
+  white-space: nowrap;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Wide enough for the class phrase on one or two lines: left to itself the
+   column gives all its room to the names and stands its text on end. */
+.motor-table td:last-child {
+  min-width: 5.5em;
+}
+
+.motor-table-out {
+  color: var(--ui-text-toned);
+}
+
 /* Builder: what came back from a part page */
 
 .build-notice {

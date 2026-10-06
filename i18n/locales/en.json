@@ -322,7 +322,14 @@
       "setting-tool": "Tools for setting up the car, such as a checker box for the regulation length and width, and a flat setting board.",
       "motor-mount": "A support that holds the motor in place so it does not shift or vibrate while running, keeping the drive steady."
     },
-    "seeAllInCategory": "See all {count}"
+    "seeAllInCategory": "See all {count}",
+    "motorTable": {
+      "motor": "Motor",
+      "allClasses": "All classes",
+      "allBut": "All but {cls}",
+      "noClass": "Not race-legal",
+      "separator": ", "
+    }
   },
   "spec": {
     "rollerDiameter": "Diameter",
