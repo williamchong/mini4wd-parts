@@ -334,7 +334,7 @@
     "gearRatio": "Gear ratio",
     "motorShaft": "Shaft",
     "motorRpm": "Speed (rpm)",
-    "motorTorque": "Torque (g·cm)",
+    "motorTorque": "Torque (mN·m)",
     "weight": "Weight",
     "shaft": {
       "single": "Single shaft",

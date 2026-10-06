@@ -334,7 +334,7 @@
     "gearRatio": "齒輪比",
     "motorShaft": "軸型",
     "motorRpm": "轉速 (rpm)",
-    "motorTorque": "扭力 (g·cm)",
+    "motorTorque": "扭力 (mN·m)",
     "weight": "重量",
     "shaft": {
       "single": "單軸",
