@@ -22,6 +22,8 @@ This choice decides more than assembly. Double-shaft and single-shaft motors are
 
 Against that, the double-shaft chassis are the simplest to assemble and the hardest to get wrong, and MA is the chassis most often recommended to beginners. Both routes are well trodden. Decide which side you care about more.
 
+For the motors in each line and how to pick one, read [Choosing a motor](/en/guides/motor/).
+
 ## The second question: which kind of track
 
 - **Flat tracks** with no jumps or slopes reward straight-line and cornering speed. A light car has the edge, and rear-motor chassis are the usual choice.
@@ -54,7 +56,7 @@ For: anyone who wants to learn by taking things apart, and anyone who wants sing
 
 ### FM-A: the steady choice for 3D tracks
 
-Single shaft, motor at the front. The forward weight makes landings calmer on tracks with many jumps and slopes, and a skid bar under the nose covers its 2.5 mm of clearance. The propeller shaft has to be fitted accurately for it to run smoothly, so assembly asks more care than MA.
+Single shaft, motor at the front. The forward weight makes landings calmer on tracks with many jumps and slopes, and a skid bar under the nose covers its 2.5 mm of clearance. Many racers run it in Stock Class / B-MAX, one reason being that its gears are easy to reach, swap and maintain. The propeller shaft has to be fitted accurately for it to run smoothly, so assembly asks more care than MA.
 
 For: anyone who mostly runs 3D tracks.
 
@@ -70,7 +72,7 @@ For: anyone chasing speed on flat tracks who is happy to buy the parts separatel
 
 ### MS: the base of the Open-class builds
 
-Double shaft, motor in the middle. The frame splits into nose, centre and tail, with 4 mm of clearance. It is the basis of the "MS flex" suspension conversion common in Open class, but that conversion cuts the frame, which Stock Class and B-MAX do not allow.
+Double shaft, motor in the middle. The frame splits into nose, centre and tail, with 4 mm of clearance. It is the basis of the "MS flex" suspension conversion common in Open class, but that conversion cuts the frame, which Stock Class and B-MAX do not allow. At the Tokyo round of Japan Cup 2026, the Open class winners on 11 and 12 July both ran an MS chassis (Tamiya's event reports, in Japanese: [11 July](https://www.tamiya.com/japan/report/event_report_1690), [12 July](https://www.tamiya.com/japan/report/event_report_1691)).
 
 For: anyone who has already decided on Open class and wants to follow the experienced builders. A beginner can run it in Stock Class as it is; its strengths only show once modified.
 
@@ -94,9 +96,9 @@ For: anyone who likes the re-released cars, or already owns one. There is no nee
 
 ### ME: the newest, with the fewest parts
 
-Double shaft, motor in the middle. Eligible for sanctioned races since January 2026, lighter than MA, with a frame that balances rigidity and flex and bumpers that are separate pieces front and rear. Only two kits exist so far, and Tamiya's list of compatible parts is far shorter than for any other chassis.
+Double shaft, motor in the middle. Eligible for sanctioned races since January 2026, lighter than MA, with a frame that balances rigidity and flex and bumpers that are separate pieces front and rear. Racers were running it in Stock Class / B-MAX soon after release and report that it runs smoothly with little adjustment; some also report a front bumper that breaks easily, and how well it lasts is not yet known. Only two kits exist so far, and Tamiya's list of compatible parts is far shorter than for any other chassis.
 
-For: anyone who wants to try what is new. Not a first chassis until the parts catch up.
+For: anyone who wants to try what is new. It can be a first chassis if you accept the smaller choice of kits and parts for now; MA is the safer pick.
 
 :kit-links{ids="18663 18664"}
 

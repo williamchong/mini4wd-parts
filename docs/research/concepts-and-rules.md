@@ -35,7 +35,7 @@ Sources: [Tamiya EN regulation](https://www.tamiya.com/english/mini4wd/regulatio
 
 **Japan Cup 2026 classes** ([Tamiya JP](https://www.tamiya.com/japan/mini4wd/japancup.html), [Japanese Wikipedia](https://ja.wikipedia.org/wiki/%E3%83%9F%E3%83%8B%E5%9B%9B%E9%A7%86)):
 - ジュニア Junior — elementary grades 4–6; Tune-series motors only (Torque/Rev/Atomic-Tuned 2 or their PRO versions; kit normal).
-- ファミリー Family / トライアル Trial — grade 3 and below (Trial: paid, up to 8 runs/day, same motor list as Junior).
+- ファミリー Family — up to junior-high year 3, may be built together with a parent. トライアル Trial — **high-school age and up** (corrected 2026-10-07 from Tamiya's event guide; this line used to say "grade 3 and below"), same motor list as Junior.
 - オープン Open — any age; full Open motor list above; finals from 2nd run use supplied FDK batteries (J-CUP 2026 special).
 - コンクールデレガンス Concours d'Elegance — judged on design, paint, detailing; also run online.
 - Wikipedia also lists 限定クラス (Limited) and past チャンピオン classes. Japan Cup 2026 course: "UPBEAT MAELSTROM CIRCUIT 2026", ~270 m.

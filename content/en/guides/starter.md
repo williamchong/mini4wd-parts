@@ -59,6 +59,8 @@ Press “Add the whole set” to fit the whole box onto the car in the builder a
 
 Run a full lap on the setup from the box first, then change one part at a time and see which change actually helps. Change several at once and you cannot tell which one did it. Go easy on the brakes at first, too: too much brake and the car crawls.
 
+When you want more pace, the usual next step is the motor. All three Starter Packs come with a Tune motor, and [Choosing a motor](/en/guides/motor/) says which one to move to and why the fastest is the wrong one to buy first.
+
 In the builder you can try a part before you buy it, and see where it goes and whether it fits your chassis.
 
 ::builder-cta
