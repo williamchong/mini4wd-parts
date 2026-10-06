@@ -40,7 +40,7 @@ const { label: resolveLabel } = useCatalogName()
 const { slotLabel } = useTerm()
 const localePath = useLocalePath()
 
-// Regional wording applies to slot names too, so 摩打 / 馬達 follows the
+// Regional wording applies to slot names too, so 剎車 / 煞車 follows the
 // toggle rather than being frozen into the message file.
 const label = computed(() => slotLabel(props.slot))
 

@@ -130,20 +130,20 @@ labels:
   # chassis scope, which `normaliseLabel` folds onto these keys by dropping the
   # trailing "Motor".
   Atomic-Tuned 2:
-    zh-HK: Atomic-Tuned 2 摩打
+    zh-HK: Atomic-Tuned 2 馬達
     zh-TW: Atomic-Tuned 2 馬達
   Rev-Tuned 2:
-    zh-HK: Rev-Tuned 2 摩打
+    zh-HK: Rev-Tuned 2 馬達
     zh-TW: Rev-Tuned 2 馬達
   Rev-Tuned 2 PRO:
-    zh-HK: Rev-Tuned 2 摩打 PRO
+    zh-HK: Rev-Tuned 2 馬達 PRO
     zh-TW: Rev-Tuned 2 馬達 PRO
   Torque-Tuned 2:
-    zh-HK: Torque-Tuned 2 摩打
+    zh-HK: Torque-Tuned 2 馬達
     zh-TW: Torque-Tuned 2 馬達
   Torque-Tuned 2 PRO:
-    zh-HK: Torque-Tuned 2 摩打 PRO
+    zh-HK: Torque-Tuned 2 馬達 PRO
     zh-TW: Torque-Tuned 2 馬達 PRO
   Light-Dash:
-    zh-HK: Light-Dash 摩打
+    zh-HK: Light-Dash 馬達
     zh-TW: Light-Dash 馬達

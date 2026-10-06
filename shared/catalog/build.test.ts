@@ -49,7 +49,7 @@ const chassis: Chassis = {
     { id: 'switch', type: 'switch', maxCount: 1, mirror: false, required: true }
   ],
   defaultLoadout: {
-    motor: [{ label: { 'zh-HK': '原裝雙軸摩打', en: 'Kit standard double-shaft motor' }, source: 'chassis' }],
+    motor: [{ label: { 'zh-HK': '原裝雙軸馬達', en: 'Kit standard double-shaft motor' }, source: 'chassis' }],
     'gear-set': [{ label: { 'zh-HK': '原裝齒輪組' }, source: 'chassis' }],
     switch: [{ label: { 'zh-HK': '原裝電源開關' }, source: 'chassis' }]
   },
@@ -78,7 +78,7 @@ test('a bare chassis build starts stock, fully assembled and owning no parts', (
   const slots = resolveBuild(chassis, undefined, newBuild('ma'))
 
   assert.equal(slots.length, chassis.slots.length)
-  assert.equal(slotById(slots, 'motor').entries[0]?.label?.['zh-HK'], '原裝雙軸摩打')
+  assert.equal(slotById(slots, 'motor').entries[0]?.label?.['zh-HK'], '原裝雙軸馬達')
   assert.equal(slotById(slots, 'motor').entries[0]?.origin, 'chassis')
   // Nothing in a runner's default loadout is a Grade-Up Part, so a fresh build
   // has a shopping list of nothing at all.

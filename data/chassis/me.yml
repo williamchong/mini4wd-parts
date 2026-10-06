@@ -28,7 +28,7 @@ notes: 最新的雙軸底盤，傳動設計兼顧剛性與柔性，2026 年 1 �
 # there is no item number to name here.
 defaultLoadout:
   motor:
-    - label: { zh-HK: 原裝雙軸摩打, zh-TW: 原裝雙軸馬達, en: Kit standard double-shaft motor }
+    - label: { zh-HK: 原裝雙軸馬達, zh-TW: 原裝雙軸馬達, en: Kit standard double-shaft motor }
       source: chassis
   gear-set:
     - label: { zh-HK: 原裝齒輪組, en: Kit standard gears }

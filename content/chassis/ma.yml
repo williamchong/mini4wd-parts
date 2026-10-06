@@ -134,7 +134,7 @@ defaultLoadout:
   motor:
     - label:
         en: Kit standard double-shaft motor
-        zh-HK: 原裝雙軸摩打
+        zh-HK: 原裝雙軸馬達
         zh-TW: 原裝雙軸馬達
       source: chassis
   gear-set:

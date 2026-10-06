@@ -151,8 +151,8 @@ const specs = computed(() => specRowsForPart(part.value))
 
 /**
  * Our own taxonomy, not Tamiya's — almost every item's own label is just
- * "ミニ四駆グレードアップパーツ". Through `term` so that the two categories whose
- * Traditional Chinese wording differs by region, 摩打 and 剎車, follow the
+ * "ミニ四駆グレードアップパーツ". Through `term` so that the category whose
+ * Traditional Chinese wording differs by region, 剎車, follows the
  * reader's toggle like every other term on the site.
  */
 const category = computed(() =>

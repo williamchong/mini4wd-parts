@@ -28,7 +28,7 @@ notes: 車架分成前、中、後三段，是公開組常見的「MS フレキ�
 # there is no item number to name here.
 defaultLoadout:
   motor:
-    - label: { zh-HK: 原裝雙軸摩打, zh-TW: 原裝雙軸馬達, en: Kit standard double-shaft motor }
+    - label: { zh-HK: 原裝雙軸馬達, zh-TW: 原裝雙軸馬達, en: Kit standard double-shaft motor }
       source: chassis
   gear-set:
     - label: { zh-HK: 原裝齒輪組, en: Kit standard gears }

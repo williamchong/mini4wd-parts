@@ -1,6 +1,6 @@
-# 迷你四驅新手入門資訊站 Mini 4WD Beginner's Guide
+# 迷你四驅車新手入門資訊站 Mini 4WD Beginner's Guide
 
-這是一個迷你四驅新手入門資訊站的原始碼庫。
+這是一個迷你四驅車新手入門資訊站的原始碼庫。
 This is the source code repository for the Mini 4WD Beginner's Guide Information Site.
 
 - 網址 URL: https://mini4wd.parts/
@@ -14,7 +14,7 @@ A Traditional-Chinese-first site where beginners browse Tamiya Mini 4WD parts, a
 
 ## 目前功能 What Works Today
 
-- **組車器（首頁）Builder on the home page** — 由 305 款套件或 8 款淨底盤開始，逐個插槽更換零件，零件選單已按插槽、底盤相容性及摩打軸型過濾。Start from one of 305 kits or 8 bare chassis. Swap parts slot by slot, and each picker only lists parts that fit the slot, the chassis and the motor shaft type.
+- **組車器（首頁）Builder on the home page** — 由 305 款套件或 8 款淨底盤開始，逐個插槽更換零件，零件選單已按插槽、底盤相容性及馬達軸型過濾。Start from one of 305 kits or 8 bare chassis. Swap parts slot by slot, and each picker only lists parts that fit the slot, the chassis and the motor shaft type.
 - **3D 預覽 3D pane** — 8 款底盤、車殼及車上每一件零件，都按各自的資料在瀏覽器即時生成形狀，點擊車身即可開啟該插槽的零件選單。All 8 chassis, the body shell and every fitted part are generated in the browser from their own catalog record, and tapping one opens that slot's picker.
 - **可分享連結 Shareable link** — 組裝內容保存在網址中，重新整理不會遺失，複製連結即可分享。The build is kept in the URL, so a reload restores it and copying the link shares it.
 - **零件資料庫 Parts database** — 382 件零件，各有獨立頁面（規格、相容底盤、賽制合法性、同系列款式），並按 29 個分類瀏覽。382 parts, each with its own page (specs, compatible chassis, class legality, variants), browsable in 29 categories.

@@ -230,6 +230,14 @@ function deepMerge<T extends Record<string, unknown>>(base: T, patch: Record<str
   return result as T
 }
 
+/**
+ * A tamiya.hk name in the site's own wording. The site says 馬達 everywhere
+ * (owner, 2026-10-07: it is what most readers search for), and tamiya.hk
+ * prints 摩打, so a motor's name would otherwise be the one place a page
+ * disagrees with its own heading. The scraped name in data/raw is untouched.
+ */
+const siteWording = (name: string | undefined) => name?.replaceAll('摩打', '馬達')
+
 function buildPart(item: JpItem<PartGenreCode>) {
   const override = overrides[item.id] ?? {}
   const hk = hkById.get(item.id)
@@ -251,7 +259,7 @@ function buildPart(item: JpItem<PartGenreCode>) {
   const names = compact({
     ja: item.nameJa,
     en: item.nameEn ?? hk?.nameEn,
-    'zh-HK': hk?.nameZhHk
+    'zh-HK': siteWording(hk?.nameZhHk)
   })
 
   const specs = deriveSpecs(item, category)
@@ -417,7 +425,7 @@ function buildKit(item: JpItem<KitGenreCode>, chassis: ChassisId) {
   const names = compact({
     ja: item.nameJa,
     en: item.nameEn ?? hk?.nameEn,
-    'zh-HK': hk?.nameZhHk
+    'zh-HK': siteWording(hk?.nameZhHk)
   })
 
   const stockLoadout: Loadout = {}
