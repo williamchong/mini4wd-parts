@@ -2,9 +2,11 @@ id: "18664"
 names:
   ja: ティクシヴ（MEシャーシ）
   en: TYXIV (ME CHASSIS)
+  zh-HK: 1/32 SCALE 迷你四驅車PRO系列 TYXIV（ME底盤）
 nameSources:
   ja: tamiya.com
   en: tamiya.com
+  zh-HK: tamiya.hk
 series: pro
 seriesNumber: 64
 seriesLabel: 1/32 ミニ四駆PROシリーズ
@@ -15,6 +17,7 @@ stockLoadout:
     - label:
         ja: ティクシヴ（MEシャーシ）
         en: TYXIV (ME CHASSIS)
+        zh-HK: 1/32 SCALE 迷你四驅車PRO系列 TYXIV（ME底盤）
       source: tamiya
   gear-set:
     - label:
@@ -32,6 +35,7 @@ colours:
 body: tyxiv
 priceJpy: 1650
 priceJpyExTax: 1500
+priceHkd: 150
 releaseDate: 2026-10-24
 releaseDateRaw: 2026年10月24日(土)ごろ発売
 status: current
@@ -39,5 +43,6 @@ officialUrl: https://www.tamiya.com/japan/products/18664/index.html
 officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/18664/18664_1.jpg
 thumbnail: /thumbs/kits/18664.webp
 detailThumbnail: /thumbs/kits-detail/18664.webp
+hkStoreUrl: https://tamiya.hk/product/tamiya-18664-mini4wd-pro-tyxiv/
 specsRaw: ●完成時の全長156mm、全幅97mm、全高33mm(キャノピー装着時)、35mm(ドライバー人形付きコクピット装着時) ●ダブルシャフトモーターつき ●ギヤ比3.5:1 ●接着材を使わずはめ込みとビス止めだけで組み立てられます。 ●スーパーハード小径ローハイトタイヤ(ブラック)を装着 ※硬いタイヤのため、強く押し込んで装着します。
 scrapedAt: 2026-09-16

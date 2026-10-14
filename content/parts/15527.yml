@@ -2,9 +2,11 @@ id: "15527"
 names:
   ja: ステンレス皿ビスセット (6･8･15mm)
   en: STAINLESS STEEL COUNTERSUNK SCREW SET (6/8/15mm)
+  zh-HK: 不銹鋼埋頭螺絲套裝 (6/8/15mm)
 nameSources:
   ja: tamiya.com
   en: tamiya.com
+  zh-HK: tamiya.hk
 series: gup
 gupNumber: 527
 seriesLabel: ミニ四駆グレードアップパーツ
@@ -47,6 +49,7 @@ colours:
   source: derived
 priceJpy: 308
 priceJpyExTax: 280
+priceHkd: 28
 releaseDate: 2020-08-22
 releaseDateRaw: 2020年8月22日(土)発売
 status: current
@@ -54,6 +57,7 @@ officialUrl: https://www.tamiya.com/japan/products/15527/index.html
 officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/15527/15527_1.jpg
 thumbnail: /thumbs/parts/15527.webp
 detailThumbnail: /thumbs/parts-detail/15527.webp
+hkStoreUrl: https://tamiya.hk/product/tamiya-15527-st-steel-csunk-screws-6-8-15mm/
 fandomTitle: Countersunk Screw Set
 specsRaw: 強度の高いステンレス製ビス、3種類、合計30本をセット
 scrapedAt: 2026-09-16

@@ -2,9 +2,11 @@ id: "15552"
 names:
   ja: EZシャーシ 大径タイヤ＆ホイールセット（ワイドトレッド）
   en: LARGE DIA. TIRE & WHEEL SET for EZ CHASSIS (WIDE TREAD)
+  zh-HK: 迷你四驅車升級零件 EZ底盤 大徑輪胎&輪轂套裝（寬輪距）
 nameSources:
   ja: tamiya.com
   en: tamiya.com
+  zh-HK: tamiya.hk
 series: gup
 gupNumber: 552
 seriesLabel: ミニ四駆グレードアップパーツ
@@ -34,6 +36,7 @@ colours:
   source: override
 priceJpy: 440
 priceJpyExTax: 400
+priceHkd: 40
 releaseDate: 2026-10-10
 releaseDateRaw: 2026年10月10日(土)ごろ発売
 status: current
@@ -41,6 +44,7 @@ officialUrl: https://www.tamiya.com/japan/products/15552/index.html
 officialImage: https://d7z22c0gz59ng.cloudfront.net/cms/img/usr/item/1/15552/15552_1.jpg
 thumbnail: /thumbs/parts/15552.webp
 detailThumbnail: /thumbs/parts-detail/15552.webp
+hkStoreUrl: https://tamiya.hk/product/tamiya-15552-ez-chassis-large-dia-tire-wheel-set-wide-tread/
 wheel: large-wide
 tire: large-wide
 specsRaw: タイヤとホイール1台分をセット

@@ -235,8 +235,14 @@ function deepMerge<T extends Record<string, unknown>>(base: T, patch: Record<str
  * (owner, 2026-10-07: it is what most readers search for), and tamiya.hk
  * prints 摩打, so a motor's name would otherwise be the one place a page
  * disagrees with its own heading. The scraped name in data/raw is untouched.
+ *
+ * tamiya.hk also pastes Japanese spellings into a few special-edition names
+ * (迷你四駆特別企画), which no Chinese reader writes or searches for.
  */
-const siteWording = (name: string | undefined) => name?.replaceAll('摩打', '馬達')
+const siteWording = (name: string | undefined) => name
+  ?.replaceAll('摩打', '馬達')
+  .replaceAll('駆', '驅')
+  .replaceAll('企画', '企劃')
 
 function buildPart(item: JpItem<PartGenreCode>) {
   const override = overrides[item.id] ?? {}

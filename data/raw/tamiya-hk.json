@@ -1258,6 +1258,13 @@
     "url": "https://tamiya.hk/product/tamiya-15526-vz-chassis-first-try-parts-set/"
   },
   {
+    "id": "15527",
+    "nameEn": "Stainless Steel Countersunk Screw Set (6/8/15mm)",
+    "nameZhHk": "不銹鋼埋頭螺絲套裝 (6/8/15mm)",
+    "priceHkd": 28,
+    "url": "https://tamiya.hk/product/tamiya-15527-st-steel-csunk-screws-6-8-15mm/"
+  },
+  {
     "id": "15528",
     "nameEn": "HM Tube Stabilizers Black",
     "priceHkd": 24,
@@ -1381,6 +1388,13 @@
     "nameZhHk": "13mm 塑膠導輪 (藍色) 內置滾珠軸承",
     "priceHkd": 74,
     "url": "https://tamiya.hk/product/tamiya-15551-13mm-plastic-rollers-blue-ball-bearing-type/"
+  },
+  {
+    "id": "15552",
+    "nameEn": "LARGE DIA. TIRE & WHEEL SET for EZ CHASSIS (WIDE TREAD)",
+    "nameZhHk": "迷你四驅車升級零件 EZ底盤 大徑輪胎&輪轂套裝（寬輪距）",
+    "priceHkd": 40,
+    "url": "https://tamiya.hk/product/tamiya-15552-ez-chassis-large-dia-tire-wheel-set-wide-tread/"
   },
   {
     "id": "17003",
@@ -2037,6 +2051,13 @@
     "nameZhHk": "1/32 迷你四驅車 雷斬 Raizzan (ME底盤)",
     "priceHkd": 150,
     "url": "https://tamiya.hk/product/tamiya-18663-1-32-mini-4wd-raizzan-me-chassis/"
+  },
+  {
+    "id": "18664",
+    "nameEn": "1/32 SCALE Mini4WD Pro TYXIV (ME CHASSIS)",
+    "nameZhHk": "1/32 SCALE 迷你四驅車PRO系列 TYXIV（ME底盤）",
+    "priceHkd": 150,
+    "url": "https://tamiya.hk/product/tamiya-18664-mini4wd-pro-tyxiv/"
   },
   {
     "id": "18701",
@@ -5152,7 +5173,7 @@
   {
     "id": "95396",
     "nameEn": "1/32 Mini 4WD 19mm Aluminum 5 Spoke Rollers with Plastic Rings (Red)",
-    "priceHkd": 70,
+    "priceHkd": 82,
     "url": "https://tamiya.hk/product/tamiya-95396-19mm-aluminum-5-spoke-rollers-plastic-rings-red-95396/"
   },
   {
@@ -5846,7 +5867,7 @@
     "id": "95514",
     "nameEn": "Mini 4WD HG Maintenance Base (180x210mm)",
     "nameZhHk": "迷你四驅車 HG 維護台座 (180x210mm)",
-    "priceHkd": 130,
+    "priceHkd": 160,
     "url": "https://tamiya.hk/product/tamiya-95514-mini-4wd-hg-maintenance-base-180x210mm/"
   },
   {
@@ -6093,14 +6114,14 @@
     "id": "95555",
     "nameEn": "2mm Aluminum Lock Nut (Purple, 5pcs.)",
     "nameZhHk": "2mm 鋁合金 螺帽 (紫色5個)",
-    "priceHkd": 38,
+    "priceHkd": 50,
     "url": "https://tamiya.hk/product/tamiya-95555-jr-2mm-aluminum-lock-nut/"
   },
   {
     "id": "95556",
     "nameEn": "2mm Aluminum Lock Nut (Orange, 5pcs.)",
     "nameZhHk": "2mm 鋁合金 螺帽 (橙色5個)",
-    "priceHkd": 38,
+    "priceHkd": 50,
     "url": "https://tamiya.hk/product/pre-ordertamiya-95556-2mm-alu-lock-nut-ora5/"
   },
   {
@@ -7065,6 +7086,13 @@
     "url": "https://tamiya.hk/product/tamiya-95706-1-32-mini-4wd-geo-glider-asia-challenge-2026-special-fm-a-chassis/"
   },
   {
+    "id": "95707",
+    "nameEn": "1/32 TRAIL MINI 4WD HALLOWEEN VERSION (EZ CHASSIS)",
+    "nameZhHk": "1/32 TRAIL MINI 4WD 萬聖節版（EZ 底盤）",
+    "priceHkd": 140,
+    "url": "https://tamiya.hk/product/tamiya-95707-trail-mini-4wd-halloween-version-ez-chassis/"
+  },
+  {
     "id": "95708",
     "nameEn": "Small Dia. Low Friction Low-Profile Tires & Carbon Y-Spoke Wheels (Asia Challenge) (TMAC)",
     "nameZhHk": "細徑 低摩擦 薄胎 & 碳纖維強化 Y輻條 輪圈 (亞洲挑戰賽TMAC特別版)",
@@ -7084,6 +7112,13 @@
     "nameZhHk": "Super FM 底盤 熒光色底盤套装（熒光橙・熒光黄）",
     "priceHkd": 60,
     "url": "https://tamiya.hk/product/tamiya-95710-super-fm-chassis-fluorescent-chassis-set-fluorescent-orange-fluorescent-yellow/"
+  },
+  {
+    "id": "95711",
+    "nameEn": "SUPER FM FLUORESCENT-COLOR CHASSIS SET (PINK/GREEN)",
+    "nameZhHk": "迷你四驅特別企画 SUPER FM 螢光配色底盤套裝（粉紅・綠）",
+    "priceHkd": 60,
+    "url": "https://tamiya.hk/product/tamiya-95711-super-fm-fluorescent-chassis-set-pink-green/"
   },
   {
     "id": "95712",
@@ -7126,6 +7161,13 @@
     "nameZhHk": "HG 碳纖維 後置減速片 (1.5mm) 亞洲挑戰賽TMAC特別版",
     "priceHkd": 110,
     "url": "https://tamiya.hk/product/tamiya-95717-hg-carbon-rear-brake-stay-1-5mm-asia-challenge/"
+  },
+  {
+    "id": "95718",
+    "nameEn": "LOW FRICTION HI-MOUNT TUBE STABILIZER SET (WHITE) MINI 4WD STATION",
+    "nameZhHk": "迷你四駆特別企画商品 低摩擦高裝式管狀穩定器套裝（白色）",
+    "priceHkd": 24,
+    "url": "https://tamiya.hk/product/tamiya-95718-low-friction-hi-mount-tube-stabilizer-set-white-mini-4wd-station/"
   },
   {
     "id": "95719",
