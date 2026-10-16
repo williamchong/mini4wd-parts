@@ -15,7 +15,7 @@ import { refAutoReset } from '@vueuse/core'
 import { encodeBuild, parseBuild, reconcileBuild, wasTrimmed } from '#shared/catalog/share'
 import type { BuildState } from '#shared/catalog/build'
 import type { ShareCatalog } from '#shared/catalog/share'
-import { BUILD_FROM_QUERY, KIT_PAGE_ENTRY } from '~/composables/useAnalytics'
+import { BUILD_FROM_QUERY, isPageEntry } from '~/composables/useAnalytics'
 
 const COPIED_MS = 2000
 
@@ -66,12 +66,13 @@ export function useBuildLink(catalog: () => ShareCatalog | undefined) {
       // once after Nuxt restores the deferred hash (see `onMounted` below).
       if (hash !== countedHash.value) {
         countedHash.value = hash
+        const from = route.query[BUILD_FROM_QUERY]
         track('build_start', {
           chassis: state.chassis,
           kit: state.kit,
-          // A kit page's button says so in the query; anything else is a link
-          // someone pasted or was sent.
-          entry: route.query[BUILD_FROM_QUERY] === KIT_PAGE_ENTRY ? KIT_PAGE_ENTRY : 'link',
+          // A kit or chassis page's button says so in the query; anything else
+          // is a link someone pasted or was sent.
+          entry: isPageEntry(from) ? from : 'link',
           trimmed: linkTrimmed.value
         })
       }

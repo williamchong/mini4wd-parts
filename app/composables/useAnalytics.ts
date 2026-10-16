@@ -24,16 +24,22 @@ import type { RuleId, Severity } from '#shared/catalog/rules'
 import type { PartCategory } from '#shared/catalog/schema'
 
 /**
- * Which door a build came through. `kit_page` is a kit page's own button, told
- * apart from a pasted `link` by the query flag `useKitBuildLink` writes and
- * `useBuildLink` reads; a new value here is a new value of an existing
- * dimension, not a new dimension to register.
+ * Which door a build came through. `kit_page` and `chassis_page` are those
+ * pages' own buttons, told apart from a pasted `link` by the query flag
+ * `useKitBuildLink` writes and `useBuildLink` reads; a new value here is a new
+ * value of an existing dimension, not a new dimension to register.
  */
-export type BuildEntry = 'kit' | 'chassis' | 'link' | 'starter' | 'kit_page'
+export type BuildEntry = 'kit' | 'chassis' | 'link' | 'starter' | 'kit_page' | 'chassis_page'
 
-/** The query key that carries a link's origin, and the one value it takes. */
+/** The query key that carries a link's origin, and the values it takes. */
 export const BUILD_FROM_QUERY = 'from'
 export const KIT_PAGE_ENTRY = 'kit_page' satisfies BuildEntry
+export const CHASSIS_PAGE_ENTRY = 'chassis_page' satisfies BuildEntry
+export type PageEntry = typeof KIT_PAGE_ENTRY | typeof CHASSIS_PAGE_ENTRY
+
+/** Only these are read back from the query: anything else is still a `link`. */
+export const isPageEntry = (from: unknown): from is PageEntry =>
+  from === KIT_PAGE_ENTRY || from === CHASSIS_PAGE_ENTRY
 
 /**
  * The events, and what each one carries. Types only — erased before a byte is

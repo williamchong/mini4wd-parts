@@ -14,6 +14,7 @@
  */
 import { ogCardPath } from '#shared/catalog/og'
 import type { ChassisId, PartCategory } from '#shared/catalog/schema'
+import { CHASSIS_PAGE_ENTRY } from '~/composables/useAnalytics'
 
 definePageMeta({ layout: 'content' })
 
@@ -168,7 +169,7 @@ const kitPage = (kit: { id: string }) => localePath(`/kits/${kit.id}`)
  * kits put those rows a screen away, and a chassis page had no other way in.
  */
 const kitBuildLink = useKitBuildLink()
-const bareBuildLink = computed(() => kitBuildLink(id.value))
+const bareBuildLink = computed(() => kitBuildLink(id.value, undefined, CHASSIS_PAGE_ENTRY))
 
 const title = computed(() => `${name.value} — ${t('site.title')}`)
 

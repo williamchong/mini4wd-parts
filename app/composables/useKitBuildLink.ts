@@ -16,11 +16,12 @@
 import { newBuild } from '#shared/catalog/build'
 import { encodeBuild } from '#shared/catalog/share'
 import type { ChassisId } from '#shared/catalog/schema'
-import { BUILD_FROM_QUERY, KIT_PAGE_ENTRY } from '~/composables/useAnalytics'
+import { BUILD_FROM_QUERY } from '~/composables/useAnalytics'
+import type { PageEntry } from '~/composables/useAnalytics'
 
 export function useKitBuildLink() {
   const localePath = useLocalePath()
-  return (chassis: ChassisId, kitId?: string, from?: typeof KIT_PAGE_ENTRY) => ({
+  return (chassis: ChassisId, kitId?: string, from?: PageEntry) => ({
     path: localePath('/'),
     ...(from ? { query: { [BUILD_FROM_QUERY]: from } } : {}),
     hash: `#${encodeBuild(newBuild(chassis, kitId))}`
